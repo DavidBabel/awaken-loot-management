@@ -1,0 +1,8 @@
+overwrite: true
+schema: './schema.gql'
+generates:
+  ./lib/generatedTypes.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'

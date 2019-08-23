@@ -1,0 +1,52 @@
+[
+  {
+    "id": "16831",
+    "text": "Gants cénariens",
+    "class": "Druide"
+  },
+  {
+    "id": "16801",
+    "text": "Gants d'arcaniste",
+    "class": "Mage"
+  },
+  {
+    "id": "16852",
+    "text": "Gants de traqueur de géant",
+    "class": "Chasseur"
+  },
+  {
+    "id": "16811",
+    "text": "Bottes de prophétie",
+    "class": "Prêtre"
+  },
+  {
+    "id": "16824",
+    "text": "Bottes du tueur de la nuit",
+    "class": "Voleur"
+  },
+  {
+    "id": "16803",
+    "text": "Mules de Gangrecoeur",
+    "class": "Démoniste"
+  },
+  {
+    "id": "17077",
+    "text": "Ecraseur cramoisi",
+    "class": ""
+  },
+  {
+    "id": "19145",
+    "text": "Robe du pouvoir volatil",
+    "class": ""
+  },
+  {
+    "id": "18878",
+    "text": "Dague ensorceleuse",
+    "class": ""
+  },
+  {
+    "id": "19147",
+    "text": "Anneau de puissance de sort",
+    "class": ""
+  }
+]
