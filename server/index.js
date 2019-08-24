@@ -25,7 +25,7 @@ app.use(
     process.env.DATABASE_URL || 'postgres://localhost:5432/test',
     'public',
     {
-      // graphqlRoute: '/' + CONFIG.GRAPHQL_ENDPOINT,
+      graphqlRoute: '/' + CONFIG.GRAPHQL_ENDPOINT,
       watchPg: true,
       graphiql: true,
       enhanceGraphiql: true
