@@ -6,9 +6,8 @@
     "build": "next build",
     "start": "next start",
     "loot": "node db/json-to-sql/from-json-to-base.js",
-    "types": "postgraphile -c postgres:///forum_example_postgraphile@xyz/test --no-server --export-schema-graphql schema.gql && graphql-codegen --config gen-types-config.yml && rm schema.gql",
-    "db": "postgraphile -c test --enhance-graphiql",
-    "db-login": "postgraphile -c postgres://forum_example_postgraphile:xyz@localhost:5432/test --enhance-graphiql --token public.jwt_token --default-role forum_example_anonymous --secret keyboard_kitten",
+    "types": "postgraphile -c test --no-server --export-schema-graphql schema.gql && graphql-codegen --config gen-types-config.yml && rm schema.gql && sed -i.bak '1d' lib/generatedTypes.tsx && rm lib/generatedTypes.tsx.bak",
+    "db": "node server/index.js",
     "reset": "cat db/*.sql > db/gen/db.sql && (dropdb test || true) && createdb test && psql test < db/gen/db.sql"
   },
   "dependencies": {

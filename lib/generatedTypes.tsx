@@ -1,4 +1,3 @@
-// import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -96,7 +95,7 @@ export type BossItem = {
   bossByBossId?: Maybe<Boss>,
 };
 
-/**
+/** 
  * A condition to be used against `BossItem` object types. All fields are tested
  * for equality and combined with a logical ‘and.’
  **/
@@ -257,7 +256,7 @@ export type ClassItem = {
   itemByItemId?: Maybe<Item>,
 };
 
-/**
+/** 
  * A condition to be used against `ClassItem` object types. All fields are tested
  * for equality and combined with a logical ‘and.’
  **/
@@ -317,7 +316,7 @@ export enum ClassItemsOrderBy {
 
 /** All input for the create `Boss` mutation. */
 export type CreateBossInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -328,7 +327,7 @@ export type CreateBossInput = {
 
 /** All input for the create `BossItem` mutation. */
 export type CreateBossItemInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -340,7 +339,7 @@ export type CreateBossItemInput = {
 /** The output of our create `BossItem` mutation. */
 export type CreateBossItemPayload = {
   __typename?: 'CreateBossItemPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -366,7 +365,7 @@ export type CreateBossItemPayloadBossItemEdgeArgs = {
 /** The output of our create `Boss` mutation. */
 export type CreateBossPayload = {
   __typename?: 'CreateBossPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -389,7 +388,7 @@ export type CreateBossPayloadBossEdgeArgs = {
 
 /** All input for the create `Class` mutation. */
 export type CreateClassInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -400,7 +399,7 @@ export type CreateClassInput = {
 
 /** All input for the create `ClassItem` mutation. */
 export type CreateClassItemInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -412,7 +411,7 @@ export type CreateClassItemInput = {
 /** The output of our create `ClassItem` mutation. */
 export type CreateClassItemPayload = {
   __typename?: 'CreateClassItemPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -438,7 +437,7 @@ export type CreateClassItemPayloadClassItemEdgeArgs = {
 /** The output of our create `Class` mutation. */
 export type CreateClassPayload = {
   __typename?: 'CreateClassPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -459,7 +458,7 @@ export type CreateClassPayloadClassEdgeArgs = {
 
 /** All input for the create `Donjon` mutation. */
 export type CreateDonjonInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -471,7 +470,7 @@ export type CreateDonjonInput = {
 /** The output of our create `Donjon` mutation. */
 export type CreateDonjonPayload = {
   __typename?: 'CreateDonjonPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -492,7 +491,7 @@ export type CreateDonjonPayloadDonjonEdgeArgs = {
 
 /** All input for the create `Item` mutation. */
 export type CreateItemInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -504,7 +503,7 @@ export type CreateItemInput = {
 /** The output of our create `Item` mutation. */
 export type CreateItemPayload = {
   __typename?: 'CreateItemPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -527,7 +526,7 @@ export type CreateItemPayloadItemEdgeArgs = {
 
 /** All input for the create `Loot` mutation. */
 export type CreateLootInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -539,7 +538,7 @@ export type CreateLootInput = {
 /** The output of our create `Loot` mutation. */
 export type CreateLootPayload = {
   __typename?: 'CreateLootPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -564,7 +563,7 @@ export type CreateLootPayloadLootEdgeArgs = {
 
 /** All input for the create `Merite` mutation. */
 export type CreateMeriteInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -576,7 +575,7 @@ export type CreateMeriteInput = {
 /** The output of our create `Merite` mutation. */
 export type CreateMeritePayload = {
   __typename?: 'CreateMeritePayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -597,7 +596,7 @@ export type CreateMeritePayloadMeriteEdgeArgs = {
 
 /** All input for the create `Player` mutation. */
 export type CreatePlayerInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -608,7 +607,7 @@ export type CreatePlayerInput = {
 
 /** All input for the create `PlayerMerite` mutation. */
 export type CreatePlayerMeriteInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -620,7 +619,7 @@ export type CreatePlayerMeriteInput = {
 /** The output of our create `PlayerMerite` mutation. */
 export type CreatePlayerMeritePayload = {
   __typename?: 'CreatePlayerMeritePayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -646,7 +645,7 @@ export type CreatePlayerMeritePayloadPlayerMeriteEdgeArgs = {
 /** The output of our create `Player` mutation. */
 export type CreatePlayerPayload = {
   __typename?: 'CreatePlayerPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -669,7 +668,7 @@ export type CreatePlayerPayloadPlayerEdgeArgs = {
 
 /** All input for the create `PlayerSlot` mutation. */
 export type CreatePlayerSlotInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -681,7 +680,7 @@ export type CreatePlayerSlotInput = {
 /** The output of our create `PlayerSlot` mutation. */
 export type CreatePlayerSlotPayload = {
   __typename?: 'CreatePlayerSlotPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -706,7 +705,7 @@ export type CreatePlayerSlotPayloadPlayerSlotEdgeArgs = {
 
 /** All input for the create `Raid` mutation. */
 export type CreateRaidInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -718,7 +717,7 @@ export type CreateRaidInput = {
 /** The output of our create `Raid` mutation. */
 export type CreateRaidPayload = {
   __typename?: 'CreateRaidPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -741,7 +740,7 @@ export type CreateRaidPayloadRaidEdgeArgs = {
 
 /** All input for the create `RaidPlayer` mutation. */
 export type CreateRaidPlayerInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -753,7 +752,7 @@ export type CreateRaidPlayerInput = {
 /** The output of our create `RaidPlayer` mutation. */
 export type CreateRaidPlayerPayload = {
   __typename?: 'CreateRaidPlayerPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -778,7 +777,7 @@ export type CreateRaidPlayerPayloadRaidPlayerEdgeArgs = {
 
 /** All input for the create `Slot` mutation. */
 export type CreateSlotInput = {
-  /**
+  /** 
  * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
  **/
@@ -790,7 +789,7 @@ export type CreateSlotInput = {
 /** The output of our create `Slot` mutation. */
 export type CreateSlotPayload = {
   __typename?: 'CreateSlotPayload',
-  /**
+  /** 
  * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
  **/
@@ -1376,7 +1375,7 @@ export type PlayerMerite = {
   playerByPlayerId?: Maybe<Player>,
 };
 
-/**
+/** 
  * A condition to be used against `PlayerMerite` object types. All fields are
  * tested for equality and combined with a logical ‘and.’
  **/
@@ -1475,7 +1474,7 @@ export type PlayerSlot = {
   slotBySlotId?: Maybe<Slot>,
 };
 
-/**
+/** 
  * A condition to be used against `PlayerSlot` object types. All fields are tested
  * for equality and combined with a logical ‘and.’
  **/
@@ -1561,7 +1560,7 @@ export enum PlayersOrderBy {
 /** The root query type which gives access points into the data universe. */
 export type Query = Node & {
   __typename?: 'Query',
-  /**
+  /** 
  * Exposes the root query type nested one level down. This is helpful for Relay 1
    * which can only query top level fields if they are in a particular form.
  **/
@@ -1824,7 +1823,7 @@ export type RaidPlayer = {
   raidByRaidId?: Maybe<Raid>,
 };
 
-/**
+/** 
  * A condition to be used against `RaidPlayer` object types. All fields are tested
  * for equality and combined with a logical ‘and.’
  **/

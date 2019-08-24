@@ -16,5 +16,9 @@ module.exports = function(req, res, next) {
       return next();
     }
   }
-  return res.status(403).send('UNAUTHORIZED');
+  return res.status(403).json({
+    error: {
+      msg: 'UNAUTHORIZED: you are not allowed to perform this action'
+    }
+  });
 };

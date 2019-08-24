@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config.js');
+const CONFIG = require('../config.js');
 
-// TODO query my graphqlserver directly
+// TODO query my graphqlserver directly to gather login / mdp
 /**
  *
  * @param {Express.Request} req
@@ -23,8 +23,8 @@ module.exports = function loginRoute(req, res) {
     res
       .json({
         ...payload,
-        jwt: jwt.sign({ id: 1, role: 'admin' }, config.JWT_SECRET, {
-          expiresIn: config.COOKIE_LIFE
+        jwt: jwt.sign({ id: 1, role: 'admin' }, CONFIG.JWT_SECRET, {
+          expiresIn: CONFIG.COOKIE_LIFE
         })
       })
       .send();

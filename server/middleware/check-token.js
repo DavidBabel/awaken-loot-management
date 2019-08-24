@@ -1,5 +1,5 @@
-var jwt = require('jsonwebtoken');
-var config = require('../config.js');
+const jwt = require('jsonwebtoken');
+const CONFIG = require('../config.js');
 
 /**
  *
@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
     req.headers.hasOwnProperty('authorization')
   ) {
     try {
-      req.user = jwt.verify(req.headers['authorization'], config.JWT_SECRET);
+      req.user = jwt.verify(req.headers['authorization'], CONFIG.JWT_SECRET);
     } catch (err) {
       return res.status(401).json({
         error: {
