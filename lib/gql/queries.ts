@@ -6,6 +6,8 @@ export const ALL_DONJONS = gql`
       edges {
         node {
           name
+          shortName
+          active
           bossesByDonjonId {
             nodes {
               name
@@ -16,6 +18,20 @@ export const ALL_DONJONS = gql`
               }
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+export const ALL_RAIDS = gql`
+  query AllRaids {
+    allRaids {
+      nodes {
+        date
+        id
+        donjonByDonjonId {
+          name
         }
       }
     }

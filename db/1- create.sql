@@ -1,4 +1,5 @@
  -- SAFE BEGIN FOR CONCAT
+SET search_path TO public;
 CREATE TABLE "Classes" (
   "id" SERIAL,
   "color" varchar,
@@ -9,7 +10,7 @@ CREATE TABLE "Players" (
   "id" SERIAL,
   "name" varchar,
   "classId" int,
-  "isAdmin" boolean,
+  "rank" varchar,
   "password" varchar
 );
 CREATE UNIQUE INDEX ON "Players" ("id");

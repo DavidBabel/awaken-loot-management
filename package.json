@@ -6,16 +6,22 @@
     "build": "next build",
     "start": "next start",
     "loot": "node db/json-to-sql/from-json-to-base.js",
-    "types": "postgraphile -c test --no-server --export-schema-graphql schema.gql && graphql-codegen --config gen-types-config.yml && rm schema.gql",
+    "types": "postgraphile -c postgres:///forum_example_postgraphile@xyz/test --no-server --export-schema-graphql schema.gql && graphql-codegen --config gen-types-config.yml && rm schema.gql",
     "db": "postgraphile -c test --enhance-graphiql",
+    "db-login": "postgraphile -c postgres://forum_example_postgraphile:xyz@localhost:5432/test --enhance-graphiql --token public.jwt_token --default-role forum_example_anonymous --secret keyboard_kitten",
     "reset": "cat db/*.sql > db/gen/db.sql && (dropdb test || true) && createdb test && psql test < db/gen/db.sql"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@apollo/react-ssr": "^3.0.1",
     "apollo-boost": "^0.4.4",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "graphql": "^14.5.1",
     "isomorphic-unfetch": "3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "^9.0.4",
     "postgraphile": "^4.4.3",
     "react": "^16.7.0",
@@ -29,10 +35,13 @@
     "@graphql-codegen/typescript-operations": "1.6.1",
     "@graphql-codegen/typescript-react-apollo": "1.6.1",
     "@types/graphql": "^14.5.0",
+    "@types/jest": "^24.0.18",
     "@types/next": "^8.0.6",
     "@types/node": "^12.7.2",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   }
 }

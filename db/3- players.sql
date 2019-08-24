@@ -33,4 +33,4 @@ VALUES
 
 INSERT INTO "Players" ("name", "classId", "isAdmin", "password")
 VALUES
-('Devilhunter', 6, true, 'anything');
+('Devilhunter', 6, 'admin', 'anything');
