@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import CONFIG from '../server/config';
+import md5 from 'md5';
 
-function tryToLogin(username, password, setMessage) {
+function tryToLogin(
+  username: string,
+  password: string,
+  setMessage: React.Dispatch<React.SetStateAction<string>>
+) {
   console.log(`${CONFIG.SERVER_URL}/login`);
   fetch(`${CONFIG.SERVER_URL}/login`, {
     method: 'POST',
@@ -11,7 +16,7 @@ function tryToLogin(username, password, setMessage) {
     },
     body: JSON.stringify({
       username,
-      password
+      password: md5(password)
     })
   })
     .then(response => response.json())
@@ -40,7 +45,7 @@ export default function PageLogin() {
           }
         />
         <input
-          type="text"
+          type="password"
           name="password"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
