@@ -1,15 +1,16 @@
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Classes" ("name", "color")
 VALUES
-('Prêtre',    '#FFFFFF'),
-('Mage',      '#69CCF0'),
-('Démoniste', '#9482C9'),
-('Voleur',    '#FFF569'),
-('Druide',    '#FF7D0A'),
-('Chasseur',  '#ABD473'),
-('Chaman',    '#0070DE'),
-('Guerrier',  '#C79C6E'),
-('Paladin',   '#F58CBA');
+('Prêtre',        '#FFFFFF'),
+('Mage',          '#69CCF0'),
+('Démoniste',     '#9482C9'),
+('Voleur',        '#FFF569'),
+('Druide',        '#FF7D0A'),
+('Chasseur',      '#ABD473'),
+('Chaman',        '#0070DE'),
+('Guerrier Tank', '#C79C6E'),
+('Paladin',       '#F58CBA'),
+('Guerrier DPS',  '#C41F3B');
 
 INSERT INTO
   "Slots" ( "name")
@@ -31,6 +32,6 @@ VALUES
   ('Idole');
 
 
-INSERT INTO "Players" ("name", "classId", "isAdmin", "password")
+INSERT INTO "Players" ("name", "classId", "rank")
 VALUES
-('Devilhunter', 6, 'admin', 'anything');
+('Devilhunter', 6, 'admin');

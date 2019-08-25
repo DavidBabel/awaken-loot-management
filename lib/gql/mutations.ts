@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export const ALL_DONJONS = gql`
+export const CREATE_RAID = gql`
   query AllDonjons {
     allDonjons {
       edges {
@@ -18,20 +18,6 @@ export const ALL_DONJONS = gql`
               }
             }
           }
-        }
-      }
-    }
-  }
-`;
-
-export const ALL_RAIDS = gql`
-  query AllRaids {
-    allRaids {
-      nodes {
-        date
-        id
-        donjonByDonjonId {
-          name
         }
       }
     }

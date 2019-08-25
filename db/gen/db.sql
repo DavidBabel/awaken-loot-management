@@ -1,238 +1,4 @@
-
-begin;
-
-
-create schema forum_example;
-create schema forum_example_private;
-
-create table forum_example.person (
-  id               serial primary key,
-  first_name       text not null check (char_length(first_name) < 80),
-  last_name        text check (char_length(last_name) < 80),
-  about            text,
-  created_at       timestamp default now()
-);
-
-comment on table forum_example.person is 'A user of the forum.';
-comment on column forum_example.person.id is 'The primary unique identifier for the person.';
-comment on column forum_example.person.first_name is 'The person’s first name.';
-comment on column forum_example.person.last_name is 'The person’s last name.';
-comment on column forum_example.person.about is 'A short description about the user, written by the user.';
-comment on column forum_example.person.created_at is 'The time this person was created.';
-
-create type forum_example.post_topic as enum (
-  'discussion',
-  'inspiration',
-  'help',
-  'showcase'
-);
-
-create table forum_example.post (
-  id               serial primary key,
-  author_id        integer not null references forum_example.person(id),
-  headline         text not null check (char_length(headline) < 280),
-  body             text,
-  topic            forum_example.post_topic,
-  created_at       timestamp default now()
-);
-
-comment on table forum_example.post is 'A forum post written by a user.';
-comment on column forum_example.post.id is 'The primary key for the post.';
-comment on column forum_example.post.headline is 'The title written by the user.';
-comment on column forum_example.post.author_id is 'The id of the author user.';
-comment on column forum_example.post.topic is 'The topic this has been posted in.';
-comment on column forum_example.post.body is 'The main body text of our post.';
-comment on column forum_example.post.created_at is 'The time this post was created.';
-
-alter default privileges revoke execute on functions from public;
-
-create function forum_example.person_full_name(person forum_example.person) returns text as $$
-  select person.first_name || ' ' || person.last_name
-$$ language sql stable;
-
-comment on function forum_example.person_full_name(forum_example.person) is 'A person’s full name which is a concatenation of their first and last name.';
-
-create function forum_example.post_summary(
-  post forum_example.post,
-  length int default 50,
-  omission text default '…'
-) returns text as $$
-  select case
-    when post.body is null then null
-    else substr(post.body, 0, length) || omission
-  end
-$$ language sql stable;
-
-comment on function forum_example.post_summary(forum_example.post, int, text) is 'A truncated version of the body for summaries.';
-
-create function forum_example.person_latest_post(person forum_example.person) returns forum_example.post as $$
-  select post.*
-  from forum_example.post as post
-  where post.author_id = person.id
-  order by created_at desc
-  limit 1
-$$ language sql stable;
-
-comment on function forum_example.person_latest_post(forum_example.person) is 'Gets the latest post written by the person.';
-
-create function forum_example.search_posts(search text) returns setof forum_example.post as $$
-  select post.*
-  from forum_example.post as post
-  where post.headline ilike ('%' || search || '%') or post.body ilike ('%' || search || '%')
-$$ language sql stable;
-
-comment on function forum_example.search_posts(text) is 'Returns posts containing a given search term.';
-
-alter table forum_example.person add column updated_at timestamp default now();
-alter table forum_example.post add column updated_at timestamp default now();
-
-create function forum_example_private.set_updated_at() returns trigger as $$
-begin
-  new.updated_at := current_timestamp;
-  return new;
-end;
-$$ language plpgsql;
-
-create trigger person_updated_at before update
-  on forum_example.person
-  for each row
-  execute procedure forum_example_private.set_updated_at();
-
-create trigger post_updated_at before update
-  on forum_example.post
-  for each row
-  execute procedure forum_example_private.set_updated_at();
-
-create table forum_example_private.person_account (
-  person_id        integer primary key references forum_example.person(id) on delete cascade,
-  email            text not null unique check (email ~* '^.+@.+\..+$'),
-  password_hash    text not null
-);
-
-comment on table forum_example_private.person_account is 'Private information about a person’s account.';
-comment on column forum_example_private.person_account.person_id is 'The id of the person associated with this account.';
-comment on column forum_example_private.person_account.email is 'The email address of the person.';
-comment on column forum_example_private.person_account.password_hash is 'An opaque hash of the person’s password.';
-
-create extension if not exists "pgcrypto";
-
-create function forum_example.register_person(
-  first_name text,
-  last_name text,
-  email text,
-  password text
-) returns forum_example.person as $$
-declare
-  person forum_example.person;
-begin
-  insert into forum_example.person (first_name, last_name) values
-    (first_name, last_name)
-    returning * into person;
-
-  insert into forum_example_private.person_account (person_id, email, password_hash) values
-    (person.id, email, crypt(password, gen_salt('bf')));
-
-  return person;
-end;
-$$ language plpgsql strict security definer;
-
-comment on function forum_example.register_person(text, text, text, text) is 'Registers a single user and creates an account in our forum.';
-
--- create role forum_example_postgraphile login password 'xyz';
-
--- create role forum_example_anonymous;
-grant forum_example_anonymous to forum_example_postgraphile;
-
--- create role forum_example_person;
-grant forum_example_person to forum_example_postgraphile;
-
-create type forum_example.jwt_token as (
-  role text,
-  person_id integer
-);
-
-create function forum_example.authenticate(
-  email text,
-  password text
-) returns forum_example.jwt_token as $$
-  select ('forum_example_person', person_id)::forum_example.jwt_token
-    from forum_example_private.person_account
-    where
-      person_account.email = $1
-      and person_account.password_hash = crypt($2, person_account.password_hash);
-$$ language sql strict security definer;
-
-comment on function forum_example.authenticate(text, text) is 'Creates a JWT token that will securely identify a person and give them certain permissions.';
-
-create function forum_example.current_person() returns forum_example.person as $$
-  select *
-  from forum_example.person
-  where id = current_setting('jwt.claims.person_id', true)::integer
-$$ language sql stable;
-
-comment on function forum_example.current_person() is 'Gets the person who was identified by our JWT.';
-
-create function forum_example.change_password(current_password text, new_password text)
-returns boolean as $$
-declare
-  current_person forum_example.person;
-begin
-  current_person := forum_example.current_person();
-  if exists (select 1 from forum_example_private.person_account where person_account.person_id = current_person.id and person_account.password_hash = crypt($1, person_account.password_hash))
-  then
-    update forum_example_private.person_account set password_hash = crypt($2, gen_salt('bf')) where person_account.person_id = current_person.id;
-    return true;
-  else
-    return false;
-  end if;
-end;
-$$ language plpgsql strict security definer;
-
-grant usage on schema forum_example to forum_example_anonymous, forum_example_person;
-
-grant select on table forum_example.person to forum_example_anonymous, forum_example_person;
-grant update, delete on table forum_example.person to forum_example_person;
-
-grant select on table forum_example.post to forum_example_anonymous, forum_example_person;
-grant insert, update, delete on table forum_example.post to forum_example_person;
-grant usage on sequence forum_example.post_id_seq to forum_example_person;
-
-grant execute on function forum_example.person_full_name(forum_example.person) to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.post_summary(forum_example.post, integer, text) to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.person_latest_post(forum_example.person) to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.search_posts(text) to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.authenticate(text, text) to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.current_person() to forum_example_anonymous, forum_example_person;
-grant execute on function forum_example.change_password(text, text) to forum_example_person;
-
-grant execute on function forum_example.register_person(text, text, text, text) to forum_example_anonymous;
-
-alter table forum_example.person enable row level security;
-alter table forum_example.post enable row level security;
-
-create policy select_person on forum_example.person for select
-  using (true);
-
-create policy select_post on forum_example.post for select
-  using (true);
-
-create policy update_person on forum_example.person for update to forum_example_person
-  using (id = current_setting('jwt.claims.person_id', true)::integer);
-
-create policy delete_person on forum_example.person for delete to forum_example_person
-  using (id = current_setting('jwt.claims.person_id', true)::integer);
-
-create policy insert_post on forum_example.post for insert to forum_example_person
-  with check (author_id = current_setting('jwt.claims.person_id', true)::integer);
-
-create policy update_post on forum_example.post for update to forum_example_person
-  using (author_id = current_setting('jwt.claims.person_id', true)::integer);
-
-create policy delete_post on forum_example.post for delete to forum_example_person
-  using (author_id = current_setting('jwt.claims.person_id', true)::integer);
-
-
-commit; -- SAFE BEGIN FOR CONCAT
+ -- SAFE BEGIN FOR CONCAT
 SET search_path TO public;
 CREATE TABLE "Classes" (
   "id" SERIAL,
@@ -240,12 +6,13 @@ CREATE TABLE "Classes" (
   "name" varchar
 );
 CREATE UNIQUE INDEX ON "Classes" ("id");
+-- TODO put this on every tables
+CREATE RULE classes_del_protect AS ON DELETE TO "Classes" DO INSTEAD NOTHING;
 CREATE TABLE "Players" (
   "id" SERIAL,
   "name" varchar,
   "classId" int,
-  "isAdmin" boolean,
-  "password" varchar
+  "rank" varchar
 );
 CREATE UNIQUE INDEX ON "Players" ("id");
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
@@ -274,7 +41,7 @@ CREATE TABLE "Loots" (
     "id" SERIAL,
     "playerId" int,
     "itemId" int,
-    "date" date
+    "raidId" int
   );
 CREATE UNIQUE INDEX ON "Loots" ("id");
 CREATE TABLE "Items" (
@@ -310,6 +77,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 CREATE TABLE "Raids" ("id" SERIAL, "donjonId" int, "date" date);
 CREATE UNIQUE INDEX ON "Raids" ("id");
 ALTER TABLE "Raids" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id");
+ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL,
     "playerId" int,
@@ -333,15 +101,16 @@ ALTER TABLE "BossItem" ADD FOREIGN KEY ("bossId") REFERENCES "Bosses" ("id");
 ALTER TABLE "Bosses" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id"); -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Classes" ("name", "color")
 VALUES
-('Prêtre',    '#FFFFFF'),
-('Mage',      '#69CCF0'),
-('Démoniste', '#9482C9'),
-('Voleur',    '#FFF569'),
-('Druide',    '#FF7D0A'),
-('Chasseur',  '#ABD473'),
-('Chaman',    '#0070DE'),
-('Guerrier',  '#C79C6E'),
-('Paladin',   '#F58CBA');
+('Prêtre',        '#FFFFFF'),
+('Mage',          '#69CCF0'),
+('Démoniste',     '#9482C9'),
+('Voleur',        '#FFF569'),
+('Druide',        '#FF7D0A'),
+('Chasseur',      '#ABD473'),
+('Chaman',        '#0070DE'),
+('Guerrier Tank', '#C79C6E'),
+('Paladin',       '#F58CBA'),
+('Guerrier DPS',  '#C41F3B');
 
 INSERT INTO
   "Slots" ( "name")
@@ -363,9 +132,9 @@ VALUES
   ('Idole');
 
 
-INSERT INTO "Players" ("name", "classId", "isAdmin", "password")
+INSERT INTO "Players" ("name", "classId", "rank")
 VALUES
-('Devilhunter', 6, true, 'anything');
+('Devilhunter', 6, 'admin');
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
@@ -439,7 +208,7 @@ VALUES
 -- SELECT 1 AS "Lucifron";
 INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES
-('Gantelets de puissance',16863,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Gantelets de puissance',16863,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Gants de Gangrecoeur',16805,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Bottes cénariennes',16829,(SELECT id FROM "Classes" WHERE "name"='Druide')),
 ('Collier d‘illumination',17109,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -476,7 +245,7 @@ VALUES
 ('Pantalon de prophétie',16814,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Marque du Frappeur',17069,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Jambières d‘arcaniste',16796,(SELECT id FROM "Classes" WHERE "name"='Mage')),
-('Jambières de puissance',16867,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Jambières de puissance',16867,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Médaillon de Puissance inébranlable',17065,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Pantalon du tueur de la nuit',16822,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
 ('Jambières de traqueur de géant',16847,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
@@ -528,7 +297,7 @@ VALUES
 ('Gants de prophétie',16812,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Bottes de traqueur de géant',16849,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
 ('Gants du tueur de la nuit',16826,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
-('Sandales de puissance',16862,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Sandales de puissance',16862,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Gantelets judiciaires',16860,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
 ('Gantelets Rageterre',16839,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
 ('Dague ensorceleuse',18878,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -568,7 +337,7 @@ VALUES
 ('Déchireur de Gutgore',17071,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Disque Drillborer',17066,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Lame de brutalité',18832,(SELECT id FROM "Classes" WHERE "name"='')),
-('Casque de puissance',16866,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Casque de puissance',16866,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Collerette de prophétie',16813,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Cornes de Gangrecoeur',16808,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Couronne d‘arcaniste',16795,(SELECT id FROM "Classes" WHERE "name"='Mage')),
@@ -681,7 +450,7 @@ INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES
 ('Frappe-ténèbres',17074,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Epaulettes de traqueur de géant',16848,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
-('Espauliers de puissance',16868,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Espauliers de puissance',16868,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Mantelet de prophétie',16816,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Protège-épaules du tueur de la nuit',16823,(SELECT id FROM "Classes" WHERE "name"='Voleur'));
 -- ('Anneau de puissance de sort',19147,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -719,7 +488,7 @@ VALUES
 ('Plastron du tueur de la nuit',16820,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
 ('Robe de Gangrecoeur',16809,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Robe de prophétie',16815,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
-('Cuirasse de puissance',16865,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Cuirasse de puissance',16865,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Lance-grenaille explosif',17072,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Lingot de sulfuron',17203,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Corselet judiciaire',16853,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
@@ -794,7 +563,7 @@ VALUES
 ('Essence de la Flamme pure',18815,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Jambières de Némésis',16930,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Jambières de transcendance',16922,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
-('Jambières de courroux',16962,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Jambières de courroux',16962,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Cape du Voile de brume',17102,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Ceinturon d‘assaut',19137,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Collier du Seigneur du Feu',18814,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -842,13 +611,13 @@ VALUES
 ('Drapé de Saphiron',17078,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Auréole de transcendance',16921,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Cagoule Rougecroc',16908,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
-('Heaume de courroux',16963,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Heaume de courroux',16963,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Collier d‘Eskhandar',18205,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Couronne du jugement',16955,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
 ('Casque des dix tempêtes',16947,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
 ('Eclat de l‘Ecaille',17064,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Porte-mort',17068,(SELECT id FROM "Classes" WHERE "name"='')),
-('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Vis‘kag le Saigneur',17075,(SELECT id FROM "Classes" WHERE "name"=''));
 
 INSERT INTO "BossItem" ("bossId","itemId")
@@ -870,5 +639,28 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=16947)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17064)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17068)),
-((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
+-- ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075));
+ -- SAFE BEGIN FOR CONCAT
+INSERT INTO "Raids" ("donjonId", "date")
+VALUES
+(1, '2019-10-10'),
+(2, '2019-09-09'),
+(2, '2019-11-11');
+
+INSERT INTO "RaidPlayers" ("playerId", "raidId")
+VALUES
+(1, 1),
+(1, 2);
+ -- SAFE BEGIN FOR CONCAT
+
+
+INSERT INTO "ClassItem" ("itemValueForThisClass","itemId","classId")
+VALUES
+(2, (SELECT id FROM "Items" WHERE "wowheadId"=16863), (SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+(5, (SELECT id FROM "Items" WHERE "wowheadId"=16863), (SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'));
+
+INSERT INTO "Loots" ("playerId","itemId","raidId")
+VALUES
+((SELECT id FROM "Players" WHERE "name"='Devilhunter'), (SELECT id FROM "Items" WHERE "wowheadId"=16863), 1),
+((SELECT id FROM "Players" WHERE "name"='Devilhunter'), (SELECT id FROM "Items" WHERE "wowheadId"=16863), 1);

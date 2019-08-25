@@ -95,7 +95,7 @@ function isQuery(query, securityCheck = true) {
     return true;
   }
   availableQueries.forEach(availableQuery => {
-    isQuery = isQuery || query.includes(availableQuery + ' {');
+    isQuery = isQuery || query.includes(availableQuery);
   });
   const isOk = securityCheck ? !isMutation(query, false) : true;
   return isQuery && query.includes('query ') && isOk;
@@ -109,7 +109,7 @@ function isQuery(query, securityCheck = true) {
 function isMutation(query, securityCheck = true) {
   let isMutation = false;
   availableMutations.forEach(availableMutation => {
-    isMutation = isMutation || query.includes(availableMutation + '(');
+    isMutation = isMutation || query.includes(availableMutation);
   });
   const isOk = securityCheck ? !isQuery(query, false) : true;
   return isMutation && query.includes('mutation ') && isOk;

@@ -2,7 +2,7 @@
 -- SELECT 1 AS "Lucifron";
 INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES
-('Gantelets de puissance',16863,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Gantelets de puissance',16863,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Gants de Gangrecoeur',16805,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Bottes cénariennes',16829,(SELECT id FROM "Classes" WHERE "name"='Druide')),
 ('Collier d‘illumination',17109,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -39,7 +39,7 @@ VALUES
 ('Pantalon de prophétie',16814,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Marque du Frappeur',17069,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Jambières d‘arcaniste',16796,(SELECT id FROM "Classes" WHERE "name"='Mage')),
-('Jambières de puissance',16867,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Jambières de puissance',16867,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Médaillon de Puissance inébranlable',17065,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Pantalon du tueur de la nuit',16822,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
 ('Jambières de traqueur de géant',16847,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
@@ -91,7 +91,7 @@ VALUES
 ('Gants de prophétie',16812,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Bottes de traqueur de géant',16849,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
 ('Gants du tueur de la nuit',16826,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
-('Sandales de puissance',16862,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Sandales de puissance',16862,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Gantelets judiciaires',16860,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
 ('Gantelets Rageterre',16839,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
 ('Dague ensorceleuse',18878,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -131,7 +131,7 @@ VALUES
 ('Déchireur de Gutgore',17071,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Disque Drillborer',17066,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Lame de brutalité',18832,(SELECT id FROM "Classes" WHERE "name"='')),
-('Casque de puissance',16866,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Casque de puissance',16866,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Collerette de prophétie',16813,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Cornes de Gangrecoeur',16808,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Couronne d‘arcaniste',16795,(SELECT id FROM "Classes" WHERE "name"='Mage')),
@@ -244,7 +244,7 @@ INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES
 ('Frappe-ténèbres',17074,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Epaulettes de traqueur de géant',16848,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
-('Espauliers de puissance',16868,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Espauliers de puissance',16868,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Mantelet de prophétie',16816,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Protège-épaules du tueur de la nuit',16823,(SELECT id FROM "Classes" WHERE "name"='Voleur'));
 -- ('Anneau de puissance de sort',19147,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -282,7 +282,7 @@ VALUES
 ('Plastron du tueur de la nuit',16820,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
 ('Robe de Gangrecoeur',16809,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Robe de prophétie',16815,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
-('Cuirasse de puissance',16865,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Cuirasse de puissance',16865,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Lance-grenaille explosif',17072,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Lingot de sulfuron',17203,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Corselet judiciaire',16853,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
@@ -357,7 +357,7 @@ VALUES
 ('Essence de la Flamme pure',18815,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Jambières de Némésis',16930,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
 ('Jambières de transcendance',16922,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
-('Jambières de courroux',16962,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Jambières de courroux',16962,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Cape du Voile de brume',17102,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Ceinturon d‘assaut',19137,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Collier du Seigneur du Feu',18814,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -405,13 +405,13 @@ VALUES
 ('Drapé de Saphiron',17078,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Auréole de transcendance',16921,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Cagoule Rougecroc',16908,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
-('Heaume de courroux',16963,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Heaume de courroux',16963,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Collier d‘Eskhandar',18205,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Couronne du jugement',16955,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
 ('Casque des dix tempêtes',16947,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
 ('Eclat de l‘Ecaille',17064,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Porte-mort',17068,(SELECT id FROM "Classes" WHERE "name"='')),
-('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Vis‘kag le Saigneur',17075,(SELECT id FROM "Classes" WHERE "name"=''));
 
 INSERT INTO "BossItem" ("bossId","itemId")
@@ -433,5 +433,5 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=16947)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17064)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17068)),
-((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
+-- ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075));

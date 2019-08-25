@@ -551,6 +551,8 @@ export type CreateLootPayload = {
   playerByPlayerId?: Maybe<Player>,
   /** Reads a single `Item` that is related to this `Loot`. */
   itemByItemId?: Maybe<Item>,
+  /** Reads a single `Raid` that is related to this `Loot`. */
+  raidByRaidId?: Maybe<Raid>,
   /** An edge for our `Loot`. May be used by Relay 1. */
   lootEdge?: Maybe<LootsEdge>,
 };
@@ -1008,11 +1010,13 @@ export type Loot = {
   id: Scalars['Int'],
   playerId?: Maybe<Scalars['Int']>,
   itemId?: Maybe<Scalars['Int']>,
-  date?: Maybe<Scalars['Date']>,
+  raidId?: Maybe<Scalars['Int']>,
   /** Reads a single `Player` that is related to this `Loot`. */
   playerByPlayerId?: Maybe<Player>,
   /** Reads a single `Item` that is related to this `Loot`. */
   itemByItemId?: Maybe<Item>,
+  /** Reads a single `Raid` that is related to this `Loot`. */
+  raidByRaidId?: Maybe<Raid>,
 };
 
 /** A condition to be used against `Loot` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -1023,8 +1027,8 @@ export type LootCondition = {
   playerId?: Maybe<Scalars['Int']>,
   /** Checks for equality with the object’s `itemId` field. */
   itemId?: Maybe<Scalars['Int']>,
-  /** Checks for equality with the object’s `date` field. */
-  date?: Maybe<Scalars['Date']>,
+  /** Checks for equality with the object’s `raidId` field. */
+  raidId?: Maybe<Scalars['Int']>,
 };
 
 /** An input for mutations affecting `Loot` */
@@ -1032,7 +1036,7 @@ export type LootInput = {
   id?: Maybe<Scalars['Int']>,
   playerId?: Maybe<Scalars['Int']>,
   itemId?: Maybe<Scalars['Int']>,
-  date?: Maybe<Scalars['Date']>,
+  raidId?: Maybe<Scalars['Int']>,
 };
 
 /** A connection to a list of `Loot` values. */
@@ -1066,8 +1070,8 @@ export enum LootsOrderBy {
   PlayerIdDesc = 'PLAYER_ID_DESC',
   ItemIdAsc = 'ITEM_ID_ASC',
   ItemIdDesc = 'ITEM_ID_DESC',
-  DateAsc = 'DATE_ASC',
-  DateDesc = 'DATE_DESC'
+  RaidIdAsc = 'RAID_ID_ASC',
+  RaidIdDesc = 'RAID_ID_DESC'
 }
 
 export type Merite = {
@@ -1281,8 +1285,7 @@ export type Player = {
   id: Scalars['Int'],
   name?: Maybe<Scalars['String']>,
   classId?: Maybe<Scalars['Int']>,
-  isAdmin?: Maybe<Scalars['Boolean']>,
-  password?: Maybe<Scalars['String']>,
+  rank?: Maybe<Scalars['String']>,
   /** Reads a single `Class` that is related to this `Player`. */
   classByClassId?: Maybe<Class>,
   /** Reads and enables pagination through a set of `PlayerSlot`. */
@@ -1347,10 +1350,8 @@ export type PlayerCondition = {
   name?: Maybe<Scalars['String']>,
   /** Checks for equality with the object’s `classId` field. */
   classId?: Maybe<Scalars['Int']>,
-  /** Checks for equality with the object’s `isAdmin` field. */
-  isAdmin?: Maybe<Scalars['Boolean']>,
-  /** Checks for equality with the object’s `password` field. */
-  password?: Maybe<Scalars['String']>,
+  /** Checks for equality with the object’s `rank` field. */
+  rank?: Maybe<Scalars['String']>,
 };
 
 /** An input for mutations affecting `Player` */
@@ -1358,8 +1359,7 @@ export type PlayerInput = {
   id?: Maybe<Scalars['Int']>,
   name?: Maybe<Scalars['String']>,
   classId?: Maybe<Scalars['Int']>,
-  isAdmin?: Maybe<Scalars['Boolean']>,
-  password?: Maybe<Scalars['String']>,
+  rank?: Maybe<Scalars['String']>,
 };
 
 export type PlayerMerite = {
@@ -1551,10 +1551,8 @@ export enum PlayersOrderBy {
   NameDesc = 'NAME_DESC',
   ClassIdAsc = 'CLASS_ID_ASC',
   ClassIdDesc = 'CLASS_ID_DESC',
-  IsAdminAsc = 'IS_ADMIN_ASC',
-  IsAdminDesc = 'IS_ADMIN_DESC',
-  PasswordAsc = 'PASSWORD_ASC',
-  PasswordDesc = 'PASSWORD_DESC'
+  RankAsc = 'RANK_ASC',
+  RankDesc = 'RANK_DESC'
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1780,8 +1778,21 @@ export type Raid = {
   date?: Maybe<Scalars['Date']>,
   /** Reads a single `Donjon` that is related to this `Raid`. */
   donjonByDonjonId?: Maybe<Donjon>,
+  /** Reads and enables pagination through a set of `Loot`. */
+  lootsByRaidId: LootsConnection,
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   raidPlayersByRaidId: RaidPlayersConnection,
+};
+
+
+export type RaidLootsByRaidIdArgs = {
+  first?: Maybe<Scalars['Int']>,
+  last?: Maybe<Scalars['Int']>,
+  offset?: Maybe<Scalars['Int']>,
+  before?: Maybe<Scalars['Cursor']>,
+  after?: Maybe<Scalars['Cursor']>,
+  orderBy?: Maybe<Array<LootsOrderBy>>,
+  condition?: Maybe<LootCondition>
 };
 
 

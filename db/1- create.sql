@@ -6,12 +6,13 @@ CREATE TABLE "Classes" (
   "name" varchar
 );
 CREATE UNIQUE INDEX ON "Classes" ("id");
+-- TODO put this on every tables
+CREATE RULE classes_del_protect AS ON DELETE TO "Classes" DO INSTEAD NOTHING;
 CREATE TABLE "Players" (
   "id" SERIAL,
   "name" varchar,
   "classId" int,
-  "rank" varchar,
-  "password" varchar
+  "rank" varchar
 );
 CREATE UNIQUE INDEX ON "Players" ("id");
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
@@ -40,7 +41,7 @@ CREATE TABLE "Loots" (
     "id" SERIAL,
     "playerId" int,
     "itemId" int,
-    "date" date
+    "raidId" int
   );
 CREATE UNIQUE INDEX ON "Loots" ("id");
 CREATE TABLE "Items" (
@@ -76,6 +77,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 CREATE TABLE "Raids" ("id" SERIAL, "donjonId" int, "date" date);
 CREATE UNIQUE INDEX ON "Raids" ("id");
 ALTER TABLE "Raids" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id");
+ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL,
     "playerId" int,
