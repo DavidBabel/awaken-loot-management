@@ -26,6 +26,7 @@ function tryToLogin(
       } else {
         setMessage('LoggedIn');
         localStorage.setItem('auth_token', jwtInfos.jwt);
+        window.location.href = '/';
       }
     });
 }
@@ -36,31 +37,33 @@ export default function PageLogin() {
   const [message, setMessage] = useState('');
   return (
     <>
-      <div>
-        <input
-          type="text"
-          name="login"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setUsername(e.target.value)
-          }
-        />
-        <input
-          type="password"
-          name="password"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
-        />
-      </div>
-      {message}
-      <div>
-        <button
-          disabled={!username || !password}
-          onClick={() => tryToLogin(username, password, setMessage)}
-        >
-          Send
-        </button>
-      </div>
+      <form action="">
+        <div>
+          <input
+            type="text"
+            name="login"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setUsername(e.target.value)
+            }
+          />
+          <input
+            type="password"
+            name="password"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+          />
+        </div>
+        {message}
+        <div>
+          <input
+            type="submit"
+            value="Send"
+            disabled={!username || !password}
+            onClick={() => tryToLogin(username, password, setMessage)}
+          />
+        </div>
+      </form>
     </>
   );
 }

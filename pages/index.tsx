@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import { RaidButton } from '../components/Raid/Raid';
 import { LoadingAndError } from '../components/LoadingAndErrors';
+import { Disconnect } from '../components/Menu/Disconnect';
 // import { getAll } from '../lib/helpers/graphql-helpers';
 
 export default function PageIndex() {
@@ -66,6 +67,7 @@ export default function PageIndex() {
 
   return (
     <>
+      <Disconnect />
       <div>
         <h2>Create new raids</h2>
         {renderDonjons}

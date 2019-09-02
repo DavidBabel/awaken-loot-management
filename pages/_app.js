@@ -3,6 +3,7 @@ import React from 'react';
 import withApolloClient from '../lib/apollo-setup/with-apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { Header } from '../components/page/Header';
+import { Menu } from '../components/Menu/Menu';
 
 class AppWithApollo extends App {
   render() {
@@ -11,7 +12,10 @@ class AppWithApollo extends App {
       <Container>
         <ApolloProvider client={apolloClient}>
           <Header />
-          <Component {...pageProps} />
+          <Menu />
+          <div style={{ marginLeft: 300 }}>
+            <Component {...pageProps} />
+          </div>
         </ApolloProvider>
       </Container>
     );

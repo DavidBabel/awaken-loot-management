@@ -1,4 +1,6 @@
 import { ApolloError } from 'apollo-boost';
+import { useState } from 'react';
+import Link from 'next/link';
 
 interface Props {
   loading: boolean;
@@ -6,7 +8,31 @@ interface Props {
 }
 
 export function LoadingAndError({ loading, error }: Props) {
-  if (error) return <div>{JSON.stringify(error, null, 2)}</div>;
+  const [showError, setShowError] = useState(false);
+
+  if (error) {
+    return (
+      <>
+        <p>
+          An error occured, are you{' '}
+          <Link href="/login">
+            <a>logged in</a>
+          </Link>{' '}
+          ?
+        </p>
+        <button onClick={() => setShowError(!showError)}>
+          {showError ? 'Hide' : 'Show'} error
+        </button>
+        {showError && (
+          <div>
+            <pre>
+              <code>{JSON.stringify(error, null, 2)}</code>
+            </pre>
+          </div>
+        )}
+      </>
+    );
+  }
   if (loading) return <div>Loading</div>;
   return null;
 }
