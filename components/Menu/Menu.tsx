@@ -2,121 +2,130 @@ import React from 'react';
 import {
   ListItem,
   ListItemText,
-  ListItemIcon,
+  // ListItemIcon,
   List,
-  Divider
+  Divider,
+  ListSubheader
 } from '@material-ui/core';
+import Link from 'next/link';
 
 // import { AppVersion } from '../AppVersion';
 
 interface Props {
-  width: number;
+  userRole: number;
 }
 
-export function Menu({ width }: Props) {
+const role = {
+  GUEST: 0,
+  PLAYER: 1,
+  CLASS_MASTER: 2,
+  OFFICER: 3,
+  ADMIN: 4
+};
+
+function resetToken() {
+  localStorage.setItem('auth_token', undefined);
+  window.location.href = '/';
+}
+
+export function Menu({ userRole = 5 }: Props) {
+  const isConnected = userRole > 0;
   return (
-    <div style={{ display: 'inline-block' }}>
-      <div style={{ position: 'fixed', top: 5, left: 5 }}>
-        {/* <MenuIcon onClick={() => setOpen(true)} /> */}
-      </div>
+    <div
+      style={{
+        borderRight: '1px solid #E0E0E0',
+        width: 250,
+        height: '100vh',
+        marginRight: 30
+      }}
+    >
+      {isConnected ? (
+        <>
+          <List>
+            <ListSubheader>Raid management</ListSubheader>
+            {userRole >= role.OFFICER && (
+              <ListItem button>
+                <Link href="/">
+                  <ListItemText primary="Create raid" />
+                </Link>
+              </ListItem>
+            )}
+            <ListItem button>
+              <Link href="/">
+                <ListItemText primary="See raid list" />
+              </Link>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListSubheader>Merit management</ListSubheader>
+            {userRole >= role.OFFICER && (
+              <ListItem button>
+                <Link href="/">
+                  <ListItemText primary="Approve merit for a character" />
+                </Link>
+              </ListItem>
+            )}
+            <ListItem button>
+              <Link href="/">
+                <ListItemText primary="Update your character merit" />
+              </Link>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListSubheader>Player management</ListSubheader>
+            {userRole >= role.OFFICER && (
+              <ListItem button>
+                <Link href="/">
+                  <ListItemText primary="Approve merit for a character" />
+                </Link>
+              </ListItem>
+            )}
+            <ListItem button>
+              <Link href="/">
+                <ListItemText primary="Update your character merit" />
+              </Link>
+            </ListItem>
+          </List>
+          <Divider />
 
-      <div style={{ position: 'fixed', top: 5, left: 5, zIndex: 888888888888 }}>
-        {/* <CloseMenuIcon onClick={() => setOpen(false)} /> */}
-      </div>
-      <List style={{ width: width }}>
-        <h2 style={{ textAlign: 'center', marginTop: 55 }}>Update infos</h2>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // setModalInfoKillVisibility(true);
-          }}
-        >
-          <ListItemIcon>{/* <GridPlus /> */}</ListItemIcon>
-          <ListItemText primary="Add a boss kill ?" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // setModalCreateGuildVisibility(true);
-          }}
-        >
-          <ListItemIcon>{/* <AddGuild /> */}</ListItemIcon>
-          <ListItemText primary="Add your guild" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // setModalCreateServerVisibility(true);
-          }}
-        >
-          <ListItemIcon>{/* <AddServer /> */}</ListItemIcon>
-          <ListItemText primary="Add your Server" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // setModalHelpVisibility(true);
-          }}
-        >
-          <ListItemIcon>{/* <HelpIcon /> */}</ListItemIcon>
-          <ListItemText primary="Help" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // window.open('https://www.paypal.me/devilhunter/2', '_blank');
-          }}
-        >
-          <ListItemIcon>{/* <CoinIcon /> */}</ListItemIcon>
-          {/* <ListItemIcon>
-              <BitcoinIcon />
-            </ListItemIcon> */}
-          <ListItemText primary="Thank me with a 🍺" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => {
-            // setOpen(false);
-            // window.open(
-            //   'https://github.com/DavidBabel/wow-classic-pve/issues/new/choose',
-            //   '_blank'
-            // );
-          }}
-        >
-          <ListItemIcon>{/* <BugIcon /> */}</ListItemIcon>
-          <ListItemText primary="Report a bug" />
-        </ListItem>
-        {/* <AppVersion width={listWidth} /> */}
-      </List>
+          <List>
+            <ListSubheader>Loot management</ListSubheader>
+            {userRole >= role.OFFICER && (
+              <ListItem button>
+                <Link href="/">
+                  <ListItemText primary="Approve merit for a character" />
+                </Link>
+              </ListItem>
+            )}
+            <ListItem button>
+              <Link href="/">
+                <ListItemText primary="Update your character merit" />
+              </Link>
+            </ListItem>
+          </List>
+          <Divider />
 
-      {/* <ModalCreateServer
-        isOpen={isModalCreateServerVisible}
-        onClose={() => setModalCreateServerVisibility(false)}
-      />
-      <ModalCreateGuild
-        serverName={currentServer}
-        isOpen={isModalCreateGuildVisible}
-        onClose={() => setModalCreateGuildVisibility(false)}
-      />
-      <ModalAddKillInfo
-        isOpen={isModalInfoKillVisible}
-        onClose={() => setModalInfoKillVisibility(false)}
-      />
-      <ModalHelp
-        isOpen={isModalHelpVisible}
-        onClose={() => setModalHelpVisibility(false)}
-      /> */}
+          <List>
+            <ListSubheader>Loot management</ListSubheader>
+            {userRole >= role.OFFICER && (
+              <ListItem button onClick={resetToken}>
+                <ListItemText primary="Disconnect" />
+              </ListItem>
+            )}
+          </List>
+        </>
+      ) : (
+        <List>
+          <ListSubheader>please connect</ListSubheader>
+          <ListItem button>
+            <Link href="/login">
+              <ListItemText primary="Login page" />
+            </Link>
+          </ListItem>
+        </List>
+      )}
     </div>
   );
 }
