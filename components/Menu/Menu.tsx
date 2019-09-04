@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ListItem,
   ListItemText,
@@ -8,28 +8,25 @@ import {
   ListSubheader
 } from '@material-ui/core';
 import Link from 'next/link';
+import MemberContext from '../../lib/context/member';
+import { role } from '../../lib/role-level';
 
 // import { AppVersion } from '../AppVersion';
 
-interface Props {
-  userRole: number;
-}
-
-const role = {
-  GUEST: 0,
-  PLAYER: 1,
-  CLASS_MASTER: 2,
-  OFFICER: 3,
-  ADMIN: 4
-};
+// interface Props {
+//   member.level: number;
+// }
 
 function resetToken() {
-  localStorage.setItem('auth_token', undefined);
+  localStorage.setItem('member', '{}');
   window.location.href = '/';
 }
 
-export function Menu({ userRole = 5 }: Props) {
-  const isConnected = userRole > 0;
+export function Menu(/* {}: Props */) {
+  const member = useContext(MemberContext);
+  console.log(member);
+  const isConnected = member.level > 0;
+
   return (
     <div
       style={{
@@ -43,7 +40,7 @@ export function Menu({ userRole = 5 }: Props) {
         <>
           <List>
             <ListSubheader>Raid management</ListSubheader>
-            {userRole >= role.OFFICER && (
+            {member.level >= role.OFFICER && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Create raid" />
@@ -59,7 +56,7 @@ export function Menu({ userRole = 5 }: Props) {
           <Divider />
           <List>
             <ListSubheader>Merit management</ListSubheader>
-            {userRole >= role.OFFICER && (
+            {member.level >= role.OFFICER && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
@@ -75,7 +72,7 @@ export function Menu({ userRole = 5 }: Props) {
           <Divider />
           <List>
             <ListSubheader>Player management</ListSubheader>
-            {userRole >= role.OFFICER && (
+            {member.level >= role.OFFICER && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
@@ -92,7 +89,7 @@ export function Menu({ userRole = 5 }: Props) {
 
           <List>
             <ListSubheader>Loot management</ListSubheader>
-            {userRole >= role.OFFICER && (
+            {member.level >= role.OFFICER && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
@@ -108,12 +105,10 @@ export function Menu({ userRole = 5 }: Props) {
           <Divider />
 
           <List>
-            <ListSubheader>Loot management</ListSubheader>
-            {userRole >= role.OFFICER && (
-              <ListItem button onClick={resetToken}>
-                <ListItemText primary="Disconnect" />
-              </ListItem>
-            )}
+            <ListSubheader>Connected as {member.name}</ListSubheader>
+            <ListItem button onClick={resetToken}>
+              <ListItemText primary="Disconnect" />
+            </ListItem>
           </List>
         </>
       ) : (

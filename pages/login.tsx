@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import CONFIG from '../server/config';
 import md5 from 'md5';
+import jwt from 'jsonwebtoken';
+import { role } from '../lib/role-level';
+interface JwtToken {
+  error: string;
+  jwt: string;
+}
+
+// TODO move this
 
 function tryToLogin(
   username: string,
   password: string,
-  setMessage: React.Dispatch<React.SetStateAction<string>>
+  callback: (jwtInfos: JwtToken) => void
 ) {
-  console.log(`${CONFIG.SERVER_URL}/login`);
   fetch(`${CONFIG.SERVER_URL}/login`, {
     method: 'POST',
     headers: {
@@ -20,15 +27,7 @@ function tryToLogin(
     })
   })
     .then(response => response.json())
-    .then(jwtInfos => {
-      if (jwtInfos.error) {
-        setMessage('NOT WORKING');
-      } else {
-        setMessage('LoggedIn');
-        localStorage.setItem('auth_token', jwtInfos.jwt);
-        window.location.href = '/';
-      }
-    });
+    .then(callback);
 }
 
 export default function PageLogin() {
@@ -37,33 +36,52 @@ export default function PageLogin() {
   const [message, setMessage] = useState('');
   return (
     <>
-      <form action="">
-        <div>
-          <input
-            type="text"
-            name="login"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setUsername(e.target.value)
-            }
-          />
-          <input
-            type="password"
-            name="password"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }
-          />
-        </div>
-        {message}
-        <div>
-          <input
-            type="submit"
-            value="Send"
-            disabled={!username || !password}
-            onClick={() => tryToLogin(username, password, setMessage)}
-          />
-        </div>
-      </form>
+      {/* <form action=""> */}
+      <div>
+        <input
+          type="text"
+          name="login"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setUsername(e.target.value)
+          }
+        />
+        <input
+          type="password"
+          name="password"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
+        />
+      </div>
+      {message}
+      <div>
+        <input
+          type="button"
+          value="Send"
+          disabled={!username || !password}
+          onClick={() =>
+            tryToLogin(username, password, jwtInfos => {
+              if (jwtInfos.error) {
+                setMessage('NOT WORKING');
+              } else {
+                setMessage('LoggedIn');
+                const memberInfos: any = jwt.decode(jwtInfos.jwt);
+                localStorage.setItem(
+                  'member',
+                  JSON.stringify({
+                    name: username,
+                    role: memberInfos.role,
+                    level: role[memberInfos.role] || 0,
+                    token: jwtInfos.jwt
+                  })
+                );
+                window.location.href = '/';
+              }
+            })
+          }
+        />
+      </div>
+      {/* </form> */}
     </>
   );
 }
