@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { role } from '../lib/role-level';
 import { setCookie } from 'nookies';
 import Router from 'next/router';
+
 interface JwtToken {
   error: string;
   jwt: string;
