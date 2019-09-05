@@ -3,6 +3,7 @@ import CONFIG from '../server/config';
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import { role } from '../lib/role-level';
+import { setCookie } from 'nookies';
 interface JwtToken {
   error: string;
   jwt: string;
@@ -66,15 +67,17 @@ export default function PageLogin() {
               } else {
                 setMessage('LoggedIn');
                 const memberInfos: any = jwt.decode(jwtInfos.jwt);
-                localStorage.setItem(
-                  'member',
-                  JSON.stringify({
-                    name: username,
-                    role: memberInfos.role,
-                    level: role[memberInfos.role] || 0,
-                    token: jwtInfos.jwt
-                  })
-                );
+                const payload = JSON.stringify({
+                  name: username,
+                  role: memberInfos.role,
+                  level: role[memberInfos.role] || 0,
+                  token: jwtInfos.jwt
+                });
+                // localStorage.setItem('token', jwtInfos.jwt);
+                setCookie({}, 'member', payload, {
+                  maxAge: 30 * 24 * 60 * 60,
+                  path: '/'
+                });
                 window.location.href = '/';
               }
             })
