@@ -137,6 +137,16 @@ export const ONE_RAID = gql`
   }
 `;
 
+export const CREATE_RAID = gql`
+  mutation CreateRaid($donjonId: String, $donjonId: Int) {
+    createRaid(input: { raid: { date: $date, donjonId: $donjonId } }) {
+      raid {
+        id
+      }
+    }
+  }
+`;
+
 // export const ITEM_LOOT_HISTORY = gql`
 //   query GetItemLootHistory($itemId: Int) {
 //     allLoots(condition: { itemId: $itemId }) {
