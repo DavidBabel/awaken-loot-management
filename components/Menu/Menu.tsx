@@ -43,7 +43,7 @@ export function Menu(/* {}: Props */) {
         <>
           <List>
             <ListSubheader>Raid management</ListSubheader>
-            {member.level >= role.OFFICER && (
+            {member.level >= role.officer && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Create raid" />
@@ -59,7 +59,7 @@ export function Menu(/* {}: Props */) {
           <Divider />
           <List>
             <ListSubheader>Merit management</ListSubheader>
-            {member.level >= role.OFFICER && (
+            {member.level >= role.officer && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
@@ -75,7 +75,7 @@ export function Menu(/* {}: Props */) {
           <Divider />
           <List>
             <ListSubheader>Player management</ListSubheader>
-            {member.level >= role.OFFICER && (
+            {member.level >= role.officer && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
@@ -92,7 +92,7 @@ export function Menu(/* {}: Props */) {
 
           <List>
             <ListSubheader>Loot management</ListSubheader>
-            {member.level >= role.OFFICER && (
+            {member.level >= role.officer && (
               <ListItem button>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />

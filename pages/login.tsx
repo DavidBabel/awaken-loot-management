@@ -4,6 +4,7 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import { role } from '../lib/role-level';
 import { setCookie } from 'nookies';
+import Router from 'next/router';
 interface JwtToken {
   error: string;
   jwt: string;
@@ -78,7 +79,7 @@ export default function PageLogin() {
                   maxAge: 30 * 24 * 60 * 60,
                   path: '/'
                 });
-                window.location.href = '/';
+                Router.push('/');
               }
             })
           }

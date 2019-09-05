@@ -2,11 +2,11 @@
   {
     "username": "Devilhunter",
     "password": "55fc5b709962876903785fd64a6961e5",
-    "role": "ADMIN"
+    "role": "admin"
   },
   {
     "username": "off",
     "password": "55fc5b709962876903785fd64a6961e5",
-    "role": "OFFICER"
+    "role": "officer"
   }
 ]

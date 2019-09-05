@@ -28,11 +28,9 @@ class AppWithApollo extends App {
   // }
 
   render() {
-    const { Component, pageProps, apolloClient /* memberInfos */ } = this.props;
-    // console.log('this.props.memberInfos :');
-    // console.log(this.props.memberInfos);
-    // console.log('component parseCookies() :');
-    // console.log(parseCookies());
+    const { Component, pageProps, apolloClient, memberInfos } = this.props;
+    console.log('memberInfos :');
+    console.log(memberInfos);
     return (
       <ApolloProvider client={apolloClient}>
         <Header />
