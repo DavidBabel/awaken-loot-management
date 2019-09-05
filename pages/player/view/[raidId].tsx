@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Query } from '../../lib/generatedTypes';
+import { Query } from '../../../lib/generatedTypes';
 import { useRouter } from 'next/router';
-import { ONE_RAID } from '../../lib/gql/raid-queries';
-import { LoadingAndError } from '../../components/LoadingAndErrors';
-import { BossCard } from '../../components/BossCard';
+import { ONE_RAID } from '../../../lib/gql/raid-queries';
+import { LoadingAndError } from '../../../components/LoadingAndErrors';
+import { BossCard } from '../../../components/BossCard';
 
 // interface Props {
 //   raidId: number;

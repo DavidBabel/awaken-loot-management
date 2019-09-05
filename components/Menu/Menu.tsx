@@ -11,23 +11,17 @@ import Link from 'next/link';
 import MemberContext from '../../lib/context/member';
 import { role } from '../../lib/role-level';
 import { destroyCookie } from 'nookies';
+import Router from 'next/router';
 
 // import { AppVersion } from '../AppVersion';
 
-// interface Props {
-//   member.level: number;
-// }
-
 function resetToken() {
   destroyCookie({}, 'member');
-  // localStorage.setItem('token', '');
-  window.location.href = '/';
+  Router.push('/');
 }
 
-export function Menu(/* {}: Props */) {
+export function Menu() {
   const member = useContext(MemberContext);
-  console.log('member');
-  console.log(member);
   const isConnected = member.level > 0;
 
   return (

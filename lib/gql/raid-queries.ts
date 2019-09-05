@@ -24,6 +24,30 @@ export const ALL_DONJONS = gql`
   }
 `;
 
+export const ONE_DONJON = gql`
+  query OneDonjon($donjonId: Int) {
+    allDonjons(condition: { id: $donjonId }) {
+      edges {
+        node {
+          name
+          shortName
+          active
+          bossesByDonjonId {
+            nodes {
+              name
+              bossItemsByBossId {
+                nodes {
+                  itemId
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const ALL_RAIDS = gql`
   query AllRaids {
     allRaids(orderBy: DATE_DESC) {
