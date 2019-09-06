@@ -109,7 +109,7 @@ export function Menu() {
         </>
       ) : (
         <List>
-          <ListSubheader>please connect</ListSubheader>
+          <ListSubheader>Please connect</ListSubheader>
           <ListItem button>
             <Link href="/login">
               <ListItemText primary="Login page" />

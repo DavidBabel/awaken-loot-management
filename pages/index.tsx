@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router';
+import { Redirect } from '../components/Redirect';
 
-export default () => {
-  const router = useRouter();
-
-  return <div onClick={() => router.push('/raid')}>click</div>;
-};
+export default class extends Redirect {
+  static to = '/raid';
+}
