@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/react-hooks';
 import { Query } from '../../lib/generatedTypes';
 import { ALL_DONJONS, ALL_RAIDS } from '../../lib/gql/raid-queries';
-import { useRouter } from 'next/router';
-import moment from 'moment';
 import { RaidButton } from '../../components/Raid/Raid';
 import { LoadingAndError } from '../../components/LoadingAndErrors';
+import { Typography } from '@material-ui/core';
+import { CreateRaid } from '../../components/Raid/button';
 
 // import { getAll } from '../lib/helpers/graphql-helpers';
 
@@ -19,7 +19,7 @@ export default function PageIndex() {
     data: dataRaids,
     error: errorRaids
   } = useQuery<Query>(ALL_RAIDS);
-  const router = useRouter();
+  // const router = useRouter();
 
   const loading = loadingDonjons || loadingRaids;
   const error = errorDonjons || errorRaids;
@@ -31,16 +31,17 @@ export default function PageIndex() {
   const donjons = dataDonjons.allDonjons.edges;
   const raids = dataRaids.allRaids.nodes;
 
-  const raidDiffTime =
-    raids[0] &&
-    moment(raids[0].date, 'YYYY-MM-DD').diff(moment()) / (1000 * 60 * 60);
-  const alreadyRaidToday = raidDiffTime > -25 && raidDiffTime < 0;
+  // const raidDiffTime = 0;
+  // raids[0] &&
+  // moment(raids[0].date, 'YYYY-MM-DD').diff(moment()) / (1000 * 60 * 60);
+  // const alreadyRaidToday = raidDiffTime > -25 && raidDiffTime < 0;
 
   const renderDonjons = donjons
     .filter(({ node: donjon }) => donjon.active)
     .map(({ node: donjon }) => {
       return (
-        <div key={donjon.name}>
+        <CreateRaid key={donjon.name} donjon={donjon} />
+        /*     <div key={donjon.name}>
           {donjon.name}
 
           <button
@@ -58,30 +59,26 @@ export default function PageIndex() {
             Create a raid for {donjon.name}
           </button>
 
-          {/* {donjon.bossesByDonjonId.nodes.map((boss: any) => {
-            return <div key={boss.name}> > {boss.name}</div>;
-          })} */}
-        </div>
+        </div> */
       );
     });
 
   return (
     <>
+      <Typography variant="h3" gutterBottom>
+        Create new raid
+      </Typography>
       <div>
-        <h2>Create new raids</h2>
+        <h2></h2>
         {renderDonjons}
       </div>
 
-      <div>
-        <h2>Last raids</h2>
-        {raids.map(raid => {
-          return (
-            <div key={`raid-${raid.id}`}>
-              <RaidButton {...raid}>{JSON.stringify(raid)}</RaidButton>
-            </div>
-          );
-        })}
-      </div>
+      <Typography variant="h3" gutterBottom>
+        Last raids
+      </Typography>
+      {raids.map(raid => {
+        return <RaidButton key={`raid-${raid.id}`} {...raid}></RaidButton>;
+      })}
     </>
   );
 }

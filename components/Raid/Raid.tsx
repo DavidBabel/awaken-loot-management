@@ -1,5 +1,4 @@
 import { Raid } from '../../lib/generatedTypes';
-// import Router from 'next/router';
 import Link from 'next/link';
 
 export function RaidButton({ date, id, donjonByDonjonId: { name } }: Raid) {
