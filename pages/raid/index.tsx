@@ -45,7 +45,7 @@ export default function PageIndex() {
 
           <button
             onClick={() => {
-              const redir = () => router.push('/createRaid', {});
+              const redir = () => router.push(`/raid/create/${donjon.id}`);
               if (alreadyRaidToday) {
                 if (confirm('You already raid today, create a new one ?')) {
                   redir();

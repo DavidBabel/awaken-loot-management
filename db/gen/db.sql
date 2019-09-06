@@ -33,7 +33,7 @@ CREATE TABLE "PlayerMerite" (
     "id" SERIAL,
     "meriteId" int,
     "playerId" int,
-    "date" date,
+    "date" varchar,
     "active" boolean
   );
 CREATE UNIQUE INDEX ON "PlayerMerite" ("id");
@@ -74,7 +74,7 @@ CREATE TABLE "Donjons" (
     "active" boolean
   );
 CREATE UNIQUE INDEX ON "Donjons" ("id");
-CREATE TABLE "Raids" ("id" SERIAL, "donjonId" int, "date" date);
+CREATE TABLE "Raids" ("id" SERIAL, "donjonId" int, "date" varchar);
 CREATE UNIQUE INDEX ON "Raids" ("id");
 ALTER TABLE "Raids" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");

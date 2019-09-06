@@ -13,7 +13,7 @@ interface Variables {
   raidId: number;
 }
 
-export default function PageRaidView(/* { raidId }: Props */) {
+export default function PageRaidEdit(/* { raidId }: Props */) {
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
 

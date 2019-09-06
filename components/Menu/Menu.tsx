@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import {
   ListItem,
   ListItemText,
-  // ListItemIcon,
   List,
   Divider,
   ListSubheader
@@ -39,13 +38,13 @@ export function Menu() {
             <ListSubheader>Raid management</ListSubheader>
             {member.level >= role.officer && (
               <ListItem button>
-                <Link href="/">
-                  <ListItemText primary="Create raid" />
+                <Link href="/raid">
+                  <ListItemText primary="Raids Dashboard" />
                 </Link>
               </ListItem>
             )}
             <ListItem button>
-              <Link href="/">
+              <Link href="/raid/list">
                 <ListItemText primary="See raid list" />
               </Link>
             </ListItem>

@@ -1,3 +1,4 @@
+import 'date-fns';
 import App from 'next/app';
 import React from 'react';
 import withApolloClient from '../lib/apollo-setup/with-apollo-client';
@@ -8,7 +9,7 @@ import MemberContext from '../lib/context/member';
 
 class AppWithApollo extends App {
   render() {
-    const { Component, pageProps, apolloClient, memberInfos } = this.props;
+    const { Component, pageProps, apolloClient, memberInfos = {} } = this.props;
     return (
       <ApolloProvider client={apolloClient}>
         <Header />

@@ -5,6 +5,7 @@ export const ALL_DONJONS = gql`
     allDonjons {
       edges {
         node {
+          id
           name
           shortName
           active
@@ -138,7 +139,7 @@ export const ONE_RAID = gql`
 `;
 
 export const CREATE_RAID = gql`
-  mutation CreateRaid($donjonId: String, $donjonId: Int) {
+  mutation CreateRaid($date: String, $donjonId: Int) {
     createRaid(input: { raid: { date: $date, donjonId: $donjonId } }) {
       raid {
         id
