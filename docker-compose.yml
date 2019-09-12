@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  postgresContainer:
+    image: postgres
+    restart: always
+    # volumes_from:
+    #   - data
+    # volumes:
+    #   - ./db/gen/db.sql:/docker-entrypoint-initdb.d/seed.sql
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ''
+
+  adminerContainer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
