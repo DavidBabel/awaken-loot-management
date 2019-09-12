@@ -14,6 +14,8 @@ La seule chose qui est sure c'est qu'il faut les utilitaires de ligne de command
 - createdb
 - psql
 
+Les fichiers SQL de base de données sont dans db et doivent être ajoutés dans l'ordre
+
 ## quickstart
 
 Ensuite c'est hyper classique :
@@ -25,11 +27,11 @@ yarn install
 # on initialise la database
 yarn reset
 
-# on lance le serveur postgraphile
-yarn db
-
-# on lance le serveur next.js
+# on lance le serveur next.js avec postgraphile
 yarn dev
+
+# et pour fabriquer les requêtes GraphQL, on lance graphiQL
+yarn gqp
 ```
 
 Et tout devrait être disponible sur http://localhost:3000

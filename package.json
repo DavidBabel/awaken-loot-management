@@ -9,8 +9,8 @@
     "types": "bin/generate-types.sh",
     "gql": "node server/graphiql-dev.js",
     "gqlw": "nodemon server/graphiql-dev.js",
-    "db": "bin/reset-db.sh",
-    "exec": "docker exec -it postgresContainer"
+    "reset": "bin/reset-db.sh",
+    "exec": "docker exec -it awaken-loot-management_postgresContainer_1"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.0",
