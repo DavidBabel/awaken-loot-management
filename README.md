@@ -2,12 +2,24 @@
 
 ## dependances
 
+### environnement
+
 Le Programme fonctionne avec node > 12 https://nodejs.org/en/
+Il utilise `yarn` pour la gestion des dépendances (et non npm)
+Pour l'installer utiliser la commande `npm install -g yarn`
+Ensuite pour installer les dépendances, les sauvegarder et les mettre à jour :
+
+```bash
+yarn add mon_paquet
+yarn add -D mon_paquet_de_dev
+```
+
+### dependances externes
 
 La seule chose nécessaire en plus pour que ca fonctionne en local est d'installer PostgreSql 11.
 Ca se trouve ici : https://www.postgresql.org/download/
 
-Il faut absoluement que les utilitaires de ligne de commande postgres soient dans votre PATH à savoir :
+Il faut absolument que les utilitaires de ligne de commande postgres soient dans votre PATH à savoir :
 
 - dropdb
 - createdb

@@ -1,22 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import {
   ListItem,
   ListItemText,
   List,
   Divider,
   ListSubheader
-} from '@material-ui/core';
-import Link from 'next/link';
-import MemberContext from '../../lib/context/member';
-import { role } from '../../lib/role-level';
-import { destroyCookie } from 'nookies';
-import Router from 'next/router';
+} from "@material-ui/core";
+import Link from "next/link";
+import MemberContext from "../../lib/context/member";
+import { role } from "../../lib/role-level";
+import { destroyCookie } from "nookies";
+import Router from "next/router";
 
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
-  destroyCookie({}, 'member');
-  Router.push('/');
+  destroyCookie({}, "member");
+  Router.push("/");
 }
 
 export function Menu() {
@@ -26,12 +26,11 @@ export function Menu() {
   return (
     <div
       style={{
-        borderRight: '1px solid #E0E0E0',
-        width: 250,
-        height: '100vh',
+        borderRight: "1px solid #E0E0E0",
+        width: "20%",
+        height: "100vh",
         marginRight: 30
-      }}
-    >
+      }}>
       {isConnected ? (
         <>
           <List>

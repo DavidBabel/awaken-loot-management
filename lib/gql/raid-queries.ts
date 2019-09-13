@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 export const ALL_DONJONS = gql`
   query AllDonjons {
@@ -78,6 +78,8 @@ export const ONE_RAID = gql`
       nodes {
         date
         donjonByDonjonId {
+          name
+          shortName
           bossesByDonjonId {
             nodes {
               name

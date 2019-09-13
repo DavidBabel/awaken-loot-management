@@ -1,5 +1,4 @@
-[
-  {
+[{
     "username": "Devilhunter",
     "password": "55fc5b709962876903785fd64a6961e5",
     "role": "admin"
@@ -7,6 +6,10 @@
   {
     "username": "off",
     "password": "55fc5b709962876903785fd64a6961e5",
+    "role": "officer"
+  }, {
+    "username": "test",
+    "password": "098f6bcd4621d373cade4e832627b4f6",
     "role": "officer"
   }
 ]
