@@ -1,4 +1,5 @@
 // @ts-check
+require('dotenv').config();
 
 const { postgraphile } = require('postgraphile');
 const checkRoleMiddleware = require('./middleware/check-role');
