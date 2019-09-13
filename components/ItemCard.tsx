@@ -1,8 +1,15 @@
-import { useState } from 'react';
-import { Item } from '../lib/generatedTypes';
-import { ClassItemCard } from './ClassItemCard';
-import { LootCard } from './LootCard';
-import { ListCards } from './ListCards';
+import { useState } from "react";
+import { Item } from "../lib/generatedTypes";
+import { ClassItemCard } from "./ClassItemCard";
+import { LootCard } from "./LootCard";
+import { ListCards } from "./ListCards";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Collapse from "@material-ui/core/Collapse";
+import Divider from "@material-ui/core/Divider";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 
 interface Props extends Item {
   boss: string;
@@ -19,6 +26,36 @@ export function ItemCard({
   const [showClasses, setShowClasses] = useState(false);
   const toggleShowClasses = () => setShowClasses(!showClasses);
 
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        width: "100%",
+        maxWidth: 360,
+        backgroundColor: "#ebebeb",
+        padding: 0
+      },
+      nested: {
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "wrap",
+        padding: 0,
+        margin: 0
+      },
+      classes: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        borderBottom: "solid 1px #b5b3b3"
+      },
+      loots: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        borderBottom: "solid 1px #b5b3b3"
+      }
+    })
+  );
+  const styleClasses = useStyles("");
   const countLootByClass = {};
   const lootList = loots.map(loot => {
     const {
@@ -31,31 +68,49 @@ export function ItemCard({
   });
 
   return (
-    <div>
-      <a
-        onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-          e.preventDefault();
-          toggleShowClasses();
-        }}
-        href={`https://fr.classic.wowhead.com/item=${wowheadId}`}
-      >
-        {name}
-      </a>
-      {showClasses && (
-        <ListCards
-          display={classes.map(classe => (
-            <ClassItemCard
-              {...classe}
-              countLootByClass={countLootByClass}
-              key={boss + wowheadId + classe.id}
-            />
-          ))}
-          or={<div>No class assigned</div>}
-        />
-      )}
-      {showClasses && (
-        <ListCards display={lootList} or={<div>Never looted</div>} />
-      )}
-    </div>
+    <List component="nav" className={styleClasses.root}>
+      <ListItem button onClick={toggleShowClasses}>
+        <a
+          style={{
+            textDecoration: "none",
+            marginRight: "10px"
+          }}
+          onClick={e => {
+            e.preventDefault();
+          }}
+          href={`https://fr.classic.wowhead.com/item=${wowheadId}`}>
+          {name}
+        </a>
+        {showClasses ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Divider />
+      <Collapse in={showClasses} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={styleClasses.nested}>
+            <ListItem className={styleClasses.classes}>
+              {showClasses && (
+                <ListCards
+                  display={classes.map(classe => (
+                    <ClassItemCard
+                      {...classe}
+                      countLootByClass={countLootByClass}
+                      key={boss + wowheadId + classe.id}
+                    />
+                  ))}
+                  or={<div>No class assigned</div>}
+                />
+              )}
+            </ListItem>
+            <Divider />
+            <ListItem className={styleClasses.loots}>
+              {showClasses && (
+                <ListCards display={lootList} or={<div>Never looted</div>} />
+              )}
+            </ListItem>
+          </ListItem>
+          <Divider />
+        </List>
+      </Collapse>
+    </List>
   );
 }

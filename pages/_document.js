@@ -1,6 +1,6 @@
-import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/styles';
+import React from "react";
+import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheets } from "@material-ui/styles";
 
 class DocumentWithStyles extends Document {
   render() {
@@ -17,7 +17,7 @@ class DocumentWithStyles extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
         </Head>
-        <body>
+        <body style={{ backgroundColor: "#F5F5F5" }}>
           <Main />
           <NextScript />
         </body>

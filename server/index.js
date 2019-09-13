@@ -1,31 +1,32 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
-const { postgraphile } = require('postgraphile');
-const checkRoleMiddleware = require('./middleware/check-role');
-const checkTokenMiddleware = require('./middleware/check-token');
-const loginControler = require('./controlers/login');
+const { postgraphile } = require("postgraphile");
+const checkRoleMiddleware = require("./middleware/check-role");
+const checkTokenMiddleware = require("./middleware/check-token");
+const loginControler = require("./controlers/login");
 
-const CONFIG = require('./config');
+const CONFIG = require("./config");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.post('/login', loginControler);
+app.post("/login", loginControler);
 
 app.use(`/${CONFIG.GRAPHQL_ENDPOINT}`, checkTokenMiddleware);
 app.use(`/${CONFIG.GRAPHQL_ENDPOINT}`, checkRoleMiddleware);
 
 app.use(
   postgraphile(
-    process.env.DATABASE_URL || 'postgres://localhost:5432/test',
-    'public',
+    process.env.DATABASE_URL ||
+      "postgres://postgres:test@localhost:5432/postgres",
+    "public",
     {
-      graphqlRoute: '/' + CONFIG.GRAPHQL_ENDPOINT,
+      graphqlRoute: "/" + CONFIG.GRAPHQL_ENDPOINT,
       watchPg: true,
       graphiql: true,
       enhanceGraphiql: true
