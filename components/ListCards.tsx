@@ -3,7 +3,7 @@ interface Props {
   or: JSX.Element;
 }
 export function ListCards({ display, or }: Props) {
-  if (display.length == 0) {
+  if (display.length === 0) {
     return <>{or}</>;
   }
   return <>{display}</>;

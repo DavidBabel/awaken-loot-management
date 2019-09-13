@@ -1,13 +1,13 @@
 // import { useState } from "react";
 import {
-  makeStyles,
   Card,
+  CardActions,
+  CardContent,
   CardHeader,
   CardMedia,
-  CardContent,
-  CardActions,
+  Fab,
   IconButton,
-  Fab
+  makeStyles
 } from "@material-ui/core";
 import { Add as AddIcon, MoreVert as MoreVertIcon } from "@material-ui/icons";
 
@@ -76,10 +76,10 @@ export function BossCard({
               </div>
             );
           }
-          return <div />;
+          return null;
         })}
       </CardContent>
-      <CardActions disableSpacing className={classes.cardActions}>
+      <CardActions disableSpacing={true} className={classes.cardActions}>
         <Fab size="small" color="primary" aria-label="add">
           <AddIcon />
         </Fab>

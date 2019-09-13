@@ -1,8 +1,8 @@
-import { ClassItem } from "../lib/generatedTypes";
 import Avatar from "@material-ui/core/Avatar";
-import Chip from "@material-ui/core/Chip";
 import Badge from "@material-ui/core/Badge";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import Chip from "@material-ui/core/Chip";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { ClassItem } from "../lib/generatedTypes";
 
 interface Props extends ClassItem {
   countLootByClass: { [className: string]: number };
@@ -22,7 +22,7 @@ export function ClassItemCard({
       },
       chip: {
         margin: theme.spacing(1),
-        color: color,
+        color,
         borderColor: color,
         backgroundColor: "white"
       },
@@ -43,7 +43,8 @@ export function ClassItemCard({
         <Badge
           className={styleClasses.badge}
           badgeContent={countLootByClass[name]}
-          color="primary">
+          color="primary"
+        >
           <Chip
             avatar={
               <Avatar className={styleClasses.avatar}>

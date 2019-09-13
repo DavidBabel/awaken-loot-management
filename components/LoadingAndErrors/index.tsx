@@ -1,6 +1,6 @@
-import { ApolloError } from 'apollo-boost';
-import { useState } from 'react';
-import Link from 'next/link';
+import { ApolloError } from "apollo-boost";
+import Link from "next/link";
+import { useState } from "react";
 
 interface Props {
   loading: boolean;
@@ -14,14 +14,14 @@ export function LoadingAndError({ loading, error }: Props) {
     return (
       <>
         <p>
-          An error occured, are you{' '}
+          An error occured, are you{" "}
           <Link href="/login">
             <a>logged in</a>
-          </Link>{' '}
+          </Link>{" "}
           ?
         </p>
         <button onClick={() => setShowError(!showError)}>
-          {showError ? 'Hide' : 'Show'} error
+          {showError ? "Hide" : "Show"} error
         </button>
         {showError && (
           <div>
@@ -33,6 +33,8 @@ export function LoadingAndError({ loading, error }: Props) {
       </>
     );
   }
-  if (loading) return <div>Loading</div>;
+  if (loading) {
+    return <div>Loading</div>;
+  }
   return null;
 }

@@ -1,15 +1,15 @@
+import Collapse from "@material-ui/core/Collapse";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 import { useState } from "react";
 import { Item } from "../lib/generatedTypes";
 import { ClassItemCard } from "./ClassItemCard";
-import { LootCard } from "./LootCard";
 import { ListCards } from "./ListCards";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Collapse from "@material-ui/core/Collapse";
-import Divider from "@material-ui/core/Divider";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
+import { LootCard } from "./LootCard";
 
 interface Props extends Item {
   boss: string;
@@ -69,7 +69,7 @@ export function ItemCard({
 
   return (
     <List component="nav" className={styleClasses.root}>
-      <ListItem button onClick={toggleShowClasses}>
+      <ListItem button={true} onClick={toggleShowClasses}>
         <a
           style={{
             textDecoration: "none",
@@ -78,15 +78,16 @@ export function ItemCard({
           onClick={e => {
             e.preventDefault();
           }}
-          href={`https://fr.classic.wowhead.com/item=${wowheadId}`}>
+          href={`https://fr.classic.wowhead.com/item=${wowheadId}`}
+        >
           {name}
         </a>
         {showClasses ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Divider />
-      <Collapse in={showClasses} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={styleClasses.nested}>
+      <Collapse in={showClasses} timeout="auto" unmountOnExit={true}>
+        <List component="div" disablePadding={true}>
+          <ListItem button={true} className={styleClasses.nested}>
             <ListItem className={styleClasses.classes}>
               {showClasses && (
                 <ListCards

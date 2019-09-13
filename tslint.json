@@ -12,5 +12,8 @@
     "object-literal-sort-keys": false,
     "prefer-for-of": false,
     "radix": false
+  },
+  "linterOptions": {
+    "exclude": ["bin", "lib/generatedTypes.tsx"]
   }
 }

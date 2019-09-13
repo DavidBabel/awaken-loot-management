@@ -1,5 +1,5 @@
-import { Raid } from '../../lib/generatedTypes';
-import Link from 'next/link';
+import Link from "next/link";
+import { Raid } from "../../lib/generatedTypes";
 
 export function RaidButton({ date, id, donjonByDonjonId: { name } }: Raid) {
   return (

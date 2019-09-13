@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
 import {
+  Divider,
+  List,
   ListItem,
   ListItemText,
-  List,
-  Divider,
   ListSubheader
 } from "@material-ui/core";
 import Link from "next/link";
+import Router from "next/router";
+import { destroyCookie } from "nookies";
+import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { role } from "../../lib/role-level";
-import { destroyCookie } from "nookies";
-import Router from "next/router";
 
 // import { AppVersion } from '../AppVersion';
 
@@ -30,19 +30,20 @@ export function Menu() {
         width: "20%",
         height: "100vh",
         marginRight: 30
-      }}>
+      }}
+    >
       {isConnected ? (
         <>
           <List>
             <ListSubheader>Raid management</ListSubheader>
             {member.level >= role.officer && (
-              <ListItem button>
+              <ListItem button={true}>
                 <Link href="/raid">
                   <ListItemText primary="Raids Dashboard" />
                 </Link>
               </ListItem>
             )}
-            <ListItem button>
+            <ListItem button={true}>
               <Link href="/raid/list">
                 <ListItemText primary="See raid list" />
               </Link>
@@ -52,13 +53,13 @@ export function Menu() {
           <List>
             <ListSubheader>Merit management</ListSubheader>
             {member.level >= role.officer && (
-              <ListItem button>
+              <ListItem button={true}>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
                 </Link>
               </ListItem>
             )}
-            <ListItem button>
+            <ListItem button={true}>
               <Link href="/">
                 <ListItemText primary="Update your character merit" />
               </Link>
@@ -68,13 +69,13 @@ export function Menu() {
           <List>
             <ListSubheader>Player management</ListSubheader>
             {member.level >= role.officer && (
-              <ListItem button>
+              <ListItem button={true}>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
                 </Link>
               </ListItem>
             )}
-            <ListItem button>
+            <ListItem button={true}>
               <Link href="/">
                 <ListItemText primary="Update your character merit" />
               </Link>
@@ -85,13 +86,13 @@ export function Menu() {
           <List>
             <ListSubheader>Loot management</ListSubheader>
             {member.level >= role.officer && (
-              <ListItem button>
+              <ListItem button={true}>
                 <Link href="/">
                   <ListItemText primary="Approve merit for a character" />
                 </Link>
               </ListItem>
             )}
-            <ListItem button>
+            <ListItem button={true}>
               <Link href="/">
                 <ListItemText primary="Update your character merit" />
               </Link>
@@ -101,7 +102,7 @@ export function Menu() {
 
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
-            <ListItem button onClick={resetToken}>
+            <ListItem button={true} onClick={resetToken}>
               <ListItemText primary="Disconnect" />
             </ListItem>
           </List>
@@ -109,7 +110,7 @@ export function Menu() {
       ) : (
         <List>
           <ListSubheader>Please connect</ListSubheader>
-          <ListItem button>
+          <ListItem button={true}>
             <Link href="/login">
               <ListItemText primary="Login page" />
             </Link>

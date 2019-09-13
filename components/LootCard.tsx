@@ -1,6 +1,6 @@
-import { Loot } from "../lib/generatedTypes";
-import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
+import { makeStyles } from "@material-ui/core/styles";
+import { Loot } from "../lib/generatedTypes";
 
 export function LootCard({
   raidByRaidId: { date },

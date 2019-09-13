@@ -1,14 +1,14 @@
 import {
+  Button,
   Card,
   CardActionArea,
-  CardMedia,
-  CardContent,
-  Typography,
   CardActions,
-  Button
-} from '@material-ui/core';
-import { Donjon } from '../../lib/generatedTypes';
-import Link from 'next/link';
+  CardContent,
+  CardMedia,
+  Typography
+} from "@material-ui/core";
+import Link from "next/link";
+import { Donjon } from "../../lib/generatedTypes";
 
 interface Props {
   donjon: Donjon;
@@ -23,7 +23,7 @@ export function CreateRaid({ donjon }: Props) {
           title={donjon.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom={true} variant="h5" component="h2">
             {donjon.name}
           </Typography>
           {/*       <Typography variant="body2" color="textSecondary" component="p">

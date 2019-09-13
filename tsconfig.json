@@ -21,6 +21,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "exclude": ["node_modules", "bin", "_trash", ".next", "img", "server"],
+  "exclude": ["node_modules", "bin", "_trash", ".next", "img"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

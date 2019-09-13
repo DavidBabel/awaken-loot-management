@@ -1,10 +1,10 @@
-import { Component } from 'react';
-import Router from 'next/router';
+import Router from "next/router";
+import { Component } from "react";
 
 export abstract class Redirect extends Component {
-  static to: string;
+  public static to: string;
 
-  static async getInitialProps({ res }) {
+  public static async getInitialProps({ res }) {
     if (res) {
       res.writeHead(302, {
         Location: this.to

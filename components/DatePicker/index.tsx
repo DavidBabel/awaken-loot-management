@@ -1,10 +1,10 @@
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from "@date-io/date-fns";
 import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-import { format as formatDate } from 'date-fns';
-import { Dispatch, SetStateAction } from 'react';
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider
+} from "@material-ui/pickers";
+import { format as formatDate } from "date-fns";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   selectedDate: string;
@@ -12,13 +12,13 @@ interface Props {
 }
 
 export function DatePicker({ selectedDate, setSelectedDate }: Props) {
-  const dateFormat = 'yyyy/MM/dd';
+  const dateFormat = "yyyy/MM/dd";
   const actualDate = selectedDate || formatDate(new Date(), dateFormat);
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
         style={{ marginBottom: -5 }}
-        disableToolbar
+        disableToolbar={true}
         variant="inline"
         format="MM/dd/yyyy"
         margin="normal"
@@ -29,7 +29,7 @@ export function DatePicker({ selectedDate, setSelectedDate }: Props) {
           setSelectedDate(formatDate(newDate, dateFormat));
         }}
         KeyboardButtonProps={{
-          'aria-label': 'change date'
+          "aria-label": "change date"
         }}
       />
     </MuiPickersUtilsProvider>
