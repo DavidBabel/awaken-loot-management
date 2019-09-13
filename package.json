@@ -37,7 +37,8 @@
     "nookies": "^2.0.8",
     "postgraphile": "^4.4.3",
     "react": "^16.7.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "tslint": "^5.20.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.7.0",
