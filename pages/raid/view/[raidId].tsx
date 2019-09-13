@@ -26,6 +26,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
 
   const currentRaid = data.allRaids.nodes[0];
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
+  const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
   return (
     <div
@@ -35,9 +36,16 @@ export default function PageRaidView(/* { raidId }: Props */) {
         margin: "15px",
         alignItems: "flex-start",
         justifyContent: "center"
-      }}>
+      }}
+    >
       {bosses.map(boss => {
-        return <BossCard key={boss.name} {...boss} />;
+        return (
+          <BossCard
+            key={boss.name}
+            {...boss}
+            donjonShortName={donjonShortName}
+          />
+        );
       })}
     </div>
 

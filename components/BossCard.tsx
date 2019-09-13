@@ -1,18 +1,20 @@
 // import { useState } from "react";
+import {
+  makeStyles,
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  IconButton,
+  Fab
+} from "@material-ui/core";
+import { Add as AddIcon, MoreVert as MoreVertIcon } from "@material-ui/icons";
+
 import { Boss } from "../lib/generatedTypes";
 import { ItemCard } from "./ItemCard";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   card: {
     position: "relative",
     width: 400,
@@ -34,13 +36,14 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     margin: "auto"
   }
-}));
+});
 
 export function BossCard({
   id,
   name,
-  bossItemsByBossId: { nodes: loots }
-}: Boss) {
+  bossItemsByBossId: { nodes: loots },
+  donjonShortName
+}: Boss & { donjonShortName: string }) {
   // const [showLoots, setShowLoots] = useState(false);
   // const toogleShowLoots = () => setShowLoots(!showLoots);
 
@@ -59,7 +62,9 @@ export function BossCard({
       />
       <CardMedia
         className={classes.media}
-        image={`/static/${name.replace(/\s/g, "")}.jpg`}
+        image={`/static/img/boss/${donjonShortName}/${name
+          .toLowerCase()
+          .replace(/\s/g, "-")}.jpg`}
         title={name}
       />
       <CardContent className={classes.cardContent}>
