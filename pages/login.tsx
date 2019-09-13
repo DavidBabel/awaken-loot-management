@@ -18,7 +18,7 @@ function tryToLogin(
   password: string,
   callback: (jwtInfos: JwtToken) => void
 ) {
-  fetch(`${CONFIG.SERVER_URL}/login`, {
+  fetch(`${CONFIG.SERVER_URL}/api/login`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
