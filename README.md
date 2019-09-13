@@ -19,7 +19,7 @@ yarn add -D mon_paquet_de_dev
 La seule chose nécessaire en plus pour que ca fonctionne en local est d'installer PostgreSql 11.
 Ca se trouve ici : https://www.postgresql.org/download/
 
-Il faut absoluement que les utilitaires de ligne de commande postgres soient dans votre PATH à savoir :
+Il faut absolument que les utilitaires de ligne de commande postgres soient dans votre PATH à savoir :
 
 - dropdb
 - createdb
