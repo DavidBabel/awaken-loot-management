@@ -1,32 +1,25 @@
-require('dotenv').config();
-const express = require('express');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
+// tslint:disable:no-console
+// @ts-check
 
-const { postgraphile } = require('postgraphile');
+require("dotenv").config();
+
+const express = require("express");
+const { postgraphile } = require("postgraphile");
+const CONFIG = require("./config");
 
 const app = express();
-// app.use(cors());
-// app.use(bodyParser.json());
-// app.use(cookieParser());
 
 app.use(
-  postgraphile(
-    // TODO move to config
-    process.env.DATABASE_URL || 'postgres://localhost:5432/test',
-    'public',
-    {
-      graphqlRoute: '/',
-      watchPg: true,
-      graphiql: true,
-      enhanceGraphiql: true
-    }
-  )
+  postgraphile(CONFIG.DATABASE_URL, "public", {
+    enhanceGraphiql: true,
+    graphiql: true,
+    graphqlRoute: "/",
+    watchPg: true
+  })
 );
 
 const port = 5000;
-const endpoint = 'graphiql';
+const endpoint = "graphiql";
 app.listen(port, () =>
   console.log(
     `You graphiql for dev env is started on port ${port}
