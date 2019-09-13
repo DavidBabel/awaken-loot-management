@@ -60,7 +60,7 @@ export function BossCard({
       <CardMedia
         className={classes.media}
         image={`/static/${name.replace(/\s/g, "")}.jpg`}
-        title="Paella dish"
+        title={name}
       />
       <CardContent className={classes.cardContent}>
         {loots.map(loot => {
