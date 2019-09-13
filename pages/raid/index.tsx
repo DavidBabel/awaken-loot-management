@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/react-hooks';
-import { Query } from '../../lib/generatedTypes';
-import { ALL_DONJONS, ALL_RAIDS } from '../../lib/gql/raid-queries';
-import { RaidButton } from '../../components/Raid/Raid';
-import { LoadingAndError } from '../../components/LoadingAndErrors';
-import { Typography, Container } from '@material-ui/core';
-import { CreateRaid } from '../../components/Raid/button';
+import { useQuery } from "@apollo/react-hooks";
+import { Container, Typography } from "@material-ui/core";
+import { LoadingAndError } from "../../components/LoadingAndErrors";
+import { CreateRaid } from "../../components/Raid/button";
+import { RaidButton } from "../../components/Raid/Raid";
+import { Query } from "../../lib/generatedTypes";
+import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 
 // import { getAll } from '../lib/helpers/graphql-helpers';
 
@@ -38,7 +38,7 @@ export default function PageIndex() {
 
   return (
     <Container>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" gutterBottom={true}>
         Create new raid
       </Typography>
       {donjons
@@ -47,11 +47,11 @@ export default function PageIndex() {
           <CreateRaid key={donjon.name} donjon={donjon} />
         ))}
 
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" gutterBottom={true}>
         Last raids
       </Typography>
       {raids.map(raid => {
-        return <RaidButton key={`raid-${raid.id}`} {...raid}></RaidButton>;
+        return <RaidButton key={`raid-${raid.id}`} {...raid} />;
       })}
     </Container>
   );

@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import CONFIG from '../server/config';
-import md5 from 'md5';
-import jwt from 'jsonwebtoken';
-import { role } from '../lib/role-level';
-import { setCookie } from 'nookies';
-import Router from 'next/router';
-
+import jwt from "jsonwebtoken";
+import md5 from "md5";
+import Router from "next/router";
+import { setCookie } from "nookies";
+import { useState } from "react";
+import { role } from "../lib/role-level";
+import CONFIG from "../server/config";
 interface JwtToken {
   error: string;
   jwt: string;
@@ -19,10 +18,10 @@ function tryToLogin(
   callback: (jwtInfos: JwtToken) => void
 ) {
   fetch(`${CONFIG.SERVER_URL}/api/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       username,
@@ -34,9 +33,9 @@ function tryToLogin(
 }
 
 export default function PageLogin() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   return (
     <>
       {/* <form action=""> */}
@@ -65,9 +64,9 @@ export default function PageLogin() {
           onClick={() =>
             tryToLogin(username, password, jwtInfos => {
               if (jwtInfos.error) {
-                setMessage('NOT WORKING');
+                setMessage("NOT WORKING");
               } else {
-                setMessage('LoggedIn');
+                setMessage("LoggedIn");
                 const memberInfos: any = jwt.decode(jwtInfos.jwt);
                 const payload = JSON.stringify({
                   name: username,
@@ -76,11 +75,11 @@ export default function PageLogin() {
                   token: jwtInfos.jwt
                 });
                 // localStorage.setItem('token', jwtInfos.jwt);
-                setCookie({}, 'member', payload, {
+                setCookie({}, "member", payload, {
                   maxAge: 30 * 24 * 60 * 60,
-                  path: '/'
+                  path: "/"
                 });
-                Router.push('/');
+                Router.push("/");
               }
             })
           }

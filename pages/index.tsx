@@ -1,5 +1,5 @@
-import { Redirect } from '../components/Redirect';
+import { Redirect } from "../components/Redirect";
 
 export default class extends Redirect {
-  static to = '/raid';
+  public static to = "/raid";
 }

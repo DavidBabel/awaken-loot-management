@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { Query, Mutation } from '../../../lib/generatedTypes';
-import { ONE_DONJON, CREATE_RAID } from '../../../lib/gql/raid-queries';
-import { LoadingAndError } from '../../../components/LoadingAndErrors';
-import { useState } from 'react';
-import { DatePicker } from '../../../components/DatePicker';
-import { Button, Typography, Avatar, Grid } from '@material-ui/core';
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Avatar, Button, Grid, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { DatePicker } from "../../../components/DatePicker";
+import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import { Mutation, Query } from "../../../lib/generatedTypes";
+import { CREATE_RAID, ONE_DONJON } from "../../../lib/gql/raid-queries";
 
 interface QueryVariables {
   donjonId: number;
@@ -35,7 +35,7 @@ export default function PageCreateRaid() {
   const loading = loadingDonjon || loadingCreateRaid;
   const error = errorDonjon || errorCreateRaid;
 
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   if (loading || error) {
@@ -45,30 +45,30 @@ export default function PageCreateRaid() {
   return (
     <>
       <Typography>Create a raid for</Typography>
-      <Grid container>
-        <Grid item>
+      <Grid container={true}>
+        <Grid item={true}>
           <Avatar
             alt={currentDonjon.name}
             src={`/static/images/avatar/${currentDonjon.shortName}.jpg`}
           />
         </Grid>
-        <Grid item>
-          <Typography variant="h2" gutterBottom>
+        <Grid item={true}>
+          <Typography variant="h2" gutterBottom={true}>
             {currentDonjon.name} ({currentDonjon.shortName})
           </Typography>
         </Grid>
       </Grid>
-      <Grid container alignItems="flex-end" spacing={5}>
-        <Grid item>
+      <Grid container={true} alignItems="flex-end" spacing={5}>
+        <Grid item={true}>
           <Typography>Raid date :</Typography>
         </Grid>
-        <Grid item>
+        <Grid item={true}>
           <DatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
         </Grid>
-        <Grid item>
+        <Grid item={true}>
           <Button
             disabled={isButtonDisabled}
             variant="outlined"
