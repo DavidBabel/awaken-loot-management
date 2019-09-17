@@ -2,13 +2,12 @@
   "name": "awaken-loot-management",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server/run.js",
+    "dev": "node server/start.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server/run.js",
+    "start": "NODE_ENV=production node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
     "types": "bin/generate-types.sh",
     "gql": "node server/graphiql-dev.js",
-    "gqlw": "nodemon server/graphiql-dev.js",
     "reset": "bin/reset-db.sh",
     "lint": "tslint --project ."
   },
