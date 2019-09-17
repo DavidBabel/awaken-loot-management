@@ -48,7 +48,7 @@ CREATE TABLE "Merite" (
   "name" varchar,
   "comment" varchar DEFAULT '',
   "value" int,
-  "active" boolean
+  "active" boolean DEFAULT true
 );
 comment on table "Merite" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Merite" ("id");
@@ -59,7 +59,7 @@ CREATE TABLE "PlayerMerite" (
   "meriteId" int,
   "playerId" int,
   "date" varchar,
-  "active" boolean
+  "active" boolean DEFAULT false
 );
 comment on table "PlayerMerite" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerite" ("id");
@@ -70,7 +70,7 @@ CREATE TABLE "Loots" (
   "playerId" int,
   "itemId" int,
   "raidId" int,
-  "active" boolean
+  "active" boolean DEFAULT true
 );
 comment on table "Loots" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Loots" ("id");
@@ -118,7 +118,7 @@ CREATE TABLE "Donjons" (
   "id" SERIAL,
   "name" varchar,
   "shortName" varchar,
-  "active" boolean
+  "active" boolean DEFAULT false
 );
 comment on table "Donjons" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Donjons" ("id");

@@ -48,7 +48,7 @@ CREATE TABLE "Merite" (
   "name" varchar,
   "comment" varchar DEFAULT '',
   "value" int,
-  "active" boolean
+  "active" boolean DEFAULT true
 );
 comment on table "Merite" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Merite" ("id");
@@ -59,7 +59,7 @@ CREATE TABLE "PlayerMerite" (
   "meriteId" int,
   "playerId" int,
   "date" varchar,
-  "active" boolean
+  "active" boolean DEFAULT false
 );
 comment on table "PlayerMerite" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerite" ("id");
@@ -70,7 +70,7 @@ CREATE TABLE "Loots" (
   "playerId" int,
   "itemId" int,
   "raidId" int,
-  "active" boolean
+  "active" boolean DEFAULT true
 );
 comment on table "Loots" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Loots" ("id");
@@ -118,7 +118,7 @@ CREATE TABLE "Donjons" (
   "id" SERIAL,
   "name" varchar,
   "shortName" varchar,
-  "active" boolean
+  "active" boolean DEFAULT false
 );
 comment on table "Donjons" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Donjons" ("id");
@@ -705,11 +705,6 @@ VALUES
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Merite" ("value", "categorie", "name", "comment")
 VALUES
-(-25, 'Malus', 'J‘ai mal saisie un mérite et je me suis fait chopper', ''),
-(-10, 'Malus', 'Je suis arriver en retard en raid', ''),
-(-10, 'Malus', 'J‘ai fais wipe le raid', ''),
--- (-10, 'Malus', 'J‘ai fais wipe le raid', ''),
-
 
 (10, 'Enchantement', 'Casque', 'libram ou ZG'),
 (15, 'Enchantement', 'Epaulettes', 'exalté ZG ou +5 all resist'),
@@ -857,8 +852,13 @@ VALUES
 (15, 'Merite de Classe', 'Chaman : Jouer au mouseover', ''),
 (15, 'Merite de Classe', 'Chamélio : Avoir sa Crépuscule', ''),
 (15, 'Merite de Classe', 'Guerrier DD : Avoir un stuff avec 380+ def', ''),
-(15, 'Merite de Classe', 'Guerrier tank : Avoir 200+ RF unbuff', '')
+(15, 'Merite de Classe', 'Guerrier tank : Avoir 200+ RF unbuff', ''),
 
+
+(-25, 'Malus', 'J‘ai mal saisie un mérite et je me suis fait chopper', ''),
+(-10, 'Malus', 'Je suis arriver en retard en raid', ''),
+(-10, 'Malus', 'J‘ai fais wipe le raid', '')
+-- (-10, 'Malus', 'J‘ai fais wipe le raid', ''),
 ;
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Raids" ("donjonId", "date")
