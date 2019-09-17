@@ -1,34 +1,34 @@
 const availableQueries = [
-  'allBossItems',
-  'allBosses',
-  'allClassItems',
-  'allClasses',
-  'allDonjons',
-  'allItems',
-  'allLoots',
-  'allMerites',
-  'allPlayerMerites',
-  'allPlayerSlots',
-  'allPlayers',
-  'allRaidPlayers',
-  'allRaids',
-  'allSlots'
+  "allBossItems",
+  "allBosses",
+  "allClassItems",
+  "allClasses",
+  "allDonjons",
+  "allItems",
+  "allLoots",
+  "allMerits",
+  "allPlayerMerits",
+  "allPlayerSlots",
+  "allPlayers",
+  "allRaidPlayers",
+  "allRaids",
+  "allSlots"
 ];
 const availableMutations = [
-  'createBoss',
-  'createBossItem',
-  'createClass',
-  'createClassItem',
-  'createDonjon',
-  'createItem',
-  'createLoot',
-  'createMerite',
-  'createPlayer',
-  'createPlayerMerite',
-  'createPlayerSlot',
-  'createRaid',
-  'createRaidPlayer',
-  'createSlot'
+  "createBoss",
+  "createBossItem",
+  "createClass",
+  "createClassItem",
+  "createDonjon",
+  "createItem",
+  "createLoot",
+  "createMerit",
+  "createPlayer",
+  "createPlayerMerit",
+  "createPlayerSlot",
+  "createRaid",
+  "createRaidPlayer",
+  "createSlot"
 ];
 
 const rights = {
@@ -46,9 +46,9 @@ const rights = {
       createDonjon: false,
       createItem: false,
       createLoot: true,
-      createMerite: false,
+      createMerit: false,
       createPlayer: false,
-      createPlayerMerite: true,
+      createPlayerMerit: true,
       createPlayerSlot: true,
       createRaid: true,
       createRaidPlayer: true,
@@ -65,9 +65,9 @@ const rights = {
       createDonjon: false,
       createItem: false,
       createLoot: true,
-      createMerite: false,
+      createMerit: false,
       createPlayer: false,
-      createPlayerMerite: true,
+      createPlayerMerit: true,
       createPlayerSlot: true,
       createRaid: false,
       createRaidPlayer: false,
@@ -98,7 +98,7 @@ function isQuery(query, securityCheck = true) {
     isQuery = isQuery || query.includes(availableQuery);
   });
   const isOk = securityCheck ? !isMutation(query, false) : true;
-  return isQuery && query.includes('query ') && isOk;
+  return isQuery && query.includes("query ") && isOk;
 }
 
 /**
@@ -112,7 +112,7 @@ function isMutation(query, securityCheck = true) {
     isMutation = isMutation || query.includes(availableMutation);
   });
   const isOk = securityCheck ? !isQuery(query, false) : true;
-  return isMutation && query.includes('mutation ') && isOk;
+  return isMutation && query.includes("mutation ") && isOk;
 }
 
 /**
@@ -123,8 +123,8 @@ function getMutation(query) {
   let mutations = [];
   isMutation(query) &&
     availableMutations.forEach(availableMutation => {
-      if (query.includes(availableMutation + '(')) {
-        const toMatch = new RegExp(`(${availableMutation}\())`, 'gm');
+      if (query.includes(availableMutation + "(")) {
+        const toMatch = new RegExp(`(${availableMutation}\())`, "gm");
         const count = (query.match(toMatch) || []).length;
         for (let i = 0; i < count; i++) {
           mutations.push(availableMutation);
@@ -139,7 +139,7 @@ function getMutation(query) {
  * @param {string} query
  */
 function isSchemaIntrospect(query) {
-  return query.includes('query IntrospectionQuery ');
+  return query.includes("query IntrospectionQuery ");
 }
 
 /**
@@ -147,7 +147,7 @@ function isSchemaIntrospect(query) {
  * @param {'admin'|'officer'|'classMaster'|'player'|'guest'} playerLevel
  * @param {string} request
  */
-function checkRights(playerLevel = 'guest', request) {
+function checkRights(playerLevel = "guest", request) {
   const { queries: queriesUserRights, mutations: mutationsUserRights } = rights[
     playerLevel
   ];
@@ -157,7 +157,7 @@ function checkRights(playerLevel = 'guest', request) {
     return false;
   }
   if (isQuery(request) && isMutation(request)) {
-    console.log('should never happend');
+    console.log("should never happend");
     return false;
   }
   if (isQuery(request) && !queriesUserRights) {

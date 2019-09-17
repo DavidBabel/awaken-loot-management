@@ -35,14 +35,14 @@ CREATE TABLE "PlayerSlots" (
   "playerId" int,
   "slotId" int,
   "enchanted" boolean,
-  "scoreMerite" int,
+  "scoreMerit" int,
   "validated" boolean
 );
 comment on table "PlayerSlots" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerSlots" ("id");
 
 
-CREATE TABLE "Merite" (
+CREATE TABLE "Merit" (
   "id" SERIAL,
   "categorie" varchar,
   "name" varchar,
@@ -50,19 +50,19 @@ CREATE TABLE "Merite" (
   "value" int,
   "active" boolean DEFAULT true
 );
-comment on table "Merite" is E'@omit create,update,delete';
-CREATE UNIQUE INDEX ON "Merite" ("id");
+comment on table "Merit" is E'@omit create,update,delete';
+CREATE UNIQUE INDEX ON "Merit" ("id");
 
 
-CREATE TABLE "PlayerMerite" (
+CREATE TABLE "PlayerMerit" (
   "id" SERIAL,
-  "meriteId" int,
+  "meritId" int,
   "playerId" int,
   "date" varchar,
   "active" boolean DEFAULT false
 );
-comment on table "PlayerMerite" is E'@omit delete';
-CREATE UNIQUE INDEX ON "PlayerMerite" ("id");
+comment on table "PlayerMerit" is E'@omit delete';
+CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 
 CREATE TABLE "Loots" (
@@ -150,8 +150,8 @@ ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("slotId") REFERENCES "Slots" ("id");
-ALTER TABLE "PlayerMerite" ADD FOREIGN KEY ("meriteId") REFERENCES "Merite" ("id");
-ALTER TABLE "PlayerMerite" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
+ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
+ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");
 ALTER TABLE "ClassItem" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");

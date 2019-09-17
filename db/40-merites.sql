@@ -1,5 +1,5 @@
  -- SAFE BEGIN FOR CONCAT
-INSERT INTO "Merite" ("value", "categorie", "name", "comment")
+INSERT INTO "Merit" ("value", "categorie", "name", "comment")
 VALUES
 
 (10, 'Enchantement', 'Casque', 'libram ou ZG'),
