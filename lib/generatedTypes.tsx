@@ -10,8 +10,10 @@ export type Scalars = {
   Cursor: any;
 };
 
-export type Boss = {
+export type Boss = Node & {
   __typename?: "Boss";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   donjonId?: Maybe<Scalars["Int"]>;
   name?: Maybe<Scalars["String"]>;
@@ -71,11 +73,15 @@ export enum BossesOrderBy {
   DonjonIdAsc = "DONJON_ID_ASC",
   DonjonIdDesc = "DONJON_ID_DESC",
   NameAsc = "NAME_ASC",
-  NameDesc = "NAME_DESC"
+  NameDesc = "NAME_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type BossItem = {
+export type BossItem = Node & {
   __typename?: "BossItem";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   itemId?: Maybe<Scalars["Int"]>;
   bossId?: Maybe<Scalars["Int"]>;
@@ -128,11 +134,15 @@ export enum BossItemsOrderBy {
   ItemIdAsc = "ITEM_ID_ASC",
   ItemIdDesc = "ITEM_ID_DESC",
   BossIdAsc = "BOSS_ID_ASC",
-  BossIdDesc = "BOSS_ID_DESC"
+  BossIdDesc = "BOSS_ID_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Class = {
+export type Class = Node & {
   __typename?: "Class";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   color?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -214,11 +224,15 @@ export enum ClassesOrderBy {
   ColorAsc = "COLOR_ASC",
   ColorDesc = "COLOR_DESC",
   NameAsc = "NAME_ASC",
-  NameDesc = "NAME_DESC"
+  NameDesc = "NAME_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type ClassItem = {
+export type ClassItem = Node & {
   __typename?: "ClassItem";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   classId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
@@ -246,6 +260,14 @@ export type ClassItemCondition = {
 
 /** An input for mutations affecting `ClassItem` */
 export type ClassItemInput = {
+  id?: Maybe<Scalars["Int"]>;
+  classId?: Maybe<Scalars["Int"]>;
+  itemId?: Maybe<Scalars["Int"]>;
+  itemValueForThisClass?: Maybe<Scalars["Int"]>;
+};
+
+/** Represents an update to a `ClassItem`. Fields that are set will be updated. */
+export type ClassItemPatch = {
   id?: Maybe<Scalars["Int"]>;
   classId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
@@ -284,7 +306,9 @@ export enum ClassItemsOrderBy {
   ItemIdAsc = "ITEM_ID_ASC",
   ItemIdDesc = "ITEM_ID_DESC",
   ItemValueForThisClassAsc = "ITEM_VALUE_FOR_THIS_CLASS_ASC",
-  ItemValueForThisClassDesc = "ITEM_VALUE_FOR_THIS_CLASS_DESC"
+  ItemValueForThisClassDesc = "ITEM_VALUE_FOR_THIS_CLASS_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** All input for the create `ClassItem` mutation. */
@@ -433,6 +457,40 @@ export type CreatePlayerSlotPayloadPlayerSlotEdgeArgs = {
   orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
 };
 
+/** All input for the create `Raid` mutation. */
+export type CreateRaidInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `Raid` to be created by this mutation. */
+  raid: RaidInput;
+};
+
+/** The output of our create `Raid` mutation. */
+export type CreateRaidPayload = {
+  __typename?: "CreateRaidPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `Raid` that was created by this mutation. */
+  raid?: Maybe<Raid>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Donjon` that is related to this `Raid`. */
+  donjonByDonjonId?: Maybe<Donjon>;
+  /** An edge for our `Raid`. May be used by Relay 1. */
+  raidEdge?: Maybe<RaidsEdge>;
+};
+
+/** The output of our create `Raid` mutation. */
+export type CreateRaidPayloadRaidEdgeArgs = {
+  orderBy?: Maybe<Array<RaidsOrderBy>>;
+};
+
 /** All input for the create `RaidPlayer` mutation. */
 export type CreateRaidPlayerInput = {
   /**
@@ -469,8 +527,104 @@ export type CreateRaidPlayerPayloadRaidPlayerEdgeArgs = {
   orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
 };
 
-export type Donjon = {
+/** All input for the `deletePlayerMeritById` mutation. */
+export type DeletePlayerMeritByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  id: Scalars["Int"];
+};
+
+/** All input for the `deletePlayerMerit` mutation. */
+export type DeletePlayerMeritInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `PlayerMerit` to be deleted. */
+  nodeId: Scalars["ID"];
+};
+
+/** The output of our delete `PlayerMerit` mutation. */
+export type DeletePlayerMeritPayload = {
+  __typename?: "DeletePlayerMeritPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `PlayerMerit` that was deleted by this mutation. */
+  playerMerit?: Maybe<PlayerMerit>;
+  deletedPlayerMeritId?: Maybe<Scalars["ID"]>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Merit` that is related to this `PlayerMerit`. */
+  meritByMeritId?: Maybe<Merit>;
+  /** Reads a single `Player` that is related to this `PlayerMerit`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** An edge for our `PlayerMerit`. May be used by Relay 1. */
+  playerMeritEdge?: Maybe<PlayerMeritsEdge>;
+};
+
+/** The output of our delete `PlayerMerit` mutation. */
+export type DeletePlayerMeritPayloadPlayerMeritEdgeArgs = {
+  orderBy?: Maybe<Array<PlayerMeritsOrderBy>>;
+};
+
+/** All input for the `deleteRaidPlayerById` mutation. */
+export type DeleteRaidPlayerByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  id: Scalars["Int"];
+};
+
+/** All input for the `deleteRaidPlayer` mutation. */
+export type DeleteRaidPlayerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `RaidPlayer` to be deleted. */
+  nodeId: Scalars["ID"];
+};
+
+/** The output of our delete `RaidPlayer` mutation. */
+export type DeleteRaidPlayerPayload = {
+  __typename?: "DeleteRaidPlayerPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `RaidPlayer` that was deleted by this mutation. */
+  raidPlayer?: Maybe<RaidPlayer>;
+  deletedRaidPlayerId?: Maybe<Scalars["ID"]>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Player` that is related to this `RaidPlayer`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Raid` that is related to this `RaidPlayer`. */
+  raidByRaidId?: Maybe<Raid>;
+  /** An edge for our `RaidPlayer`. May be used by Relay 1. */
+  raidPlayerEdge?: Maybe<RaidPlayersEdge>;
+};
+
+/** The output of our delete `RaidPlayer` mutation. */
+export type DeleteRaidPlayerPayloadRaidPlayerEdgeArgs = {
+  orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
+};
+
+export type Donjon = Node & {
   __typename?: "Donjon";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   shortName?: Maybe<Scalars["String"]>;
@@ -545,11 +699,15 @@ export enum DonjonsOrderBy {
   ShortNameAsc = "SHORT_NAME_ASC",
   ShortNameDesc = "SHORT_NAME_DESC",
   ActiveAsc = "ACTIVE_ASC",
-  ActiveDesc = "ACTIVE_DESC"
+  ActiveDesc = "ACTIVE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Item = {
+export type Item = Node & {
   __typename?: "Item";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   wowheadId?: Maybe<Scalars["Int"]>;
@@ -638,11 +796,15 @@ export enum ItemsOrderBy {
   WowheadIdAsc = "WOWHEAD_ID_ASC",
   WowheadIdDesc = "WOWHEAD_ID_DESC",
   ClassIdAsc = "CLASS_ID_ASC",
-  ClassIdDesc = "CLASS_ID_DESC"
+  ClassIdDesc = "CLASS_ID_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Loot = {
+export type Loot = Node & {
   __typename?: "Loot";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   playerId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
@@ -672,6 +834,15 @@ export type LootCondition = {
 
 /** An input for mutations affecting `Loot` */
 export type LootInput = {
+  id?: Maybe<Scalars["Int"]>;
+  playerId?: Maybe<Scalars["Int"]>;
+  itemId?: Maybe<Scalars["Int"]>;
+  raidId?: Maybe<Scalars["Int"]>;
+  active?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Represents an update to a `Loot`. Fields that are set will be updated. */
+export type LootPatch = {
   id?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
@@ -713,11 +884,15 @@ export enum LootsOrderBy {
   RaidIdAsc = "RAID_ID_ASC",
   RaidIdDesc = "RAID_ID_DESC",
   ActiveAsc = "ACTIVE_ASC",
-  ActiveDesc = "ACTIVE_DESC"
+  ActiveDesc = "ACTIVE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Merit = {
+export type Merit = Node & {
   __typename?: "Merit";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   categorie?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
@@ -790,7 +965,9 @@ export enum MeritsOrderBy {
   ValueAsc = "VALUE_ASC",
   ValueDesc = "VALUE_DESC",
   ActiveAsc = "ACTIVE_ASC",
-  ActiveDesc = "ACTIVE_DESC"
+  ActiveDesc = "ACTIVE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -806,6 +983,40 @@ export type Mutation = {
   createPlayerSlot?: Maybe<CreatePlayerSlotPayload>;
   /** Creates a single `RaidPlayer`. */
   createRaidPlayer?: Maybe<CreateRaidPlayerPayload>;
+  /** Creates a single `Raid`. */
+  createRaid?: Maybe<CreateRaidPayload>;
+  /** Updates a single `ClassItem` using its globally unique id and a patch. */
+  updateClassItem?: Maybe<UpdateClassItemPayload>;
+  /** Updates a single `ClassItem` using a unique key and a patch. */
+  updateClassItemById?: Maybe<UpdateClassItemPayload>;
+  /** Updates a single `Loot` using its globally unique id and a patch. */
+  updateLoot?: Maybe<UpdateLootPayload>;
+  /** Updates a single `Loot` using a unique key and a patch. */
+  updateLootById?: Maybe<UpdateLootPayload>;
+  /** Updates a single `PlayerMerit` using its globally unique id and a patch. */
+  updatePlayerMerit?: Maybe<UpdatePlayerMeritPayload>;
+  /** Updates a single `PlayerMerit` using a unique key and a patch. */
+  updatePlayerMeritById?: Maybe<UpdatePlayerMeritPayload>;
+  /** Updates a single `PlayerSlot` using its globally unique id and a patch. */
+  updatePlayerSlot?: Maybe<UpdatePlayerSlotPayload>;
+  /** Updates a single `PlayerSlot` using a unique key and a patch. */
+  updatePlayerSlotById?: Maybe<UpdatePlayerSlotPayload>;
+  /** Updates a single `RaidPlayer` using its globally unique id and a patch. */
+  updateRaidPlayer?: Maybe<UpdateRaidPlayerPayload>;
+  /** Updates a single `RaidPlayer` using a unique key and a patch. */
+  updateRaidPlayerById?: Maybe<UpdateRaidPlayerPayload>;
+  /** Updates a single `Raid` using its globally unique id and a patch. */
+  updateRaid?: Maybe<UpdateRaidPayload>;
+  /** Updates a single `Raid` using a unique key and a patch. */
+  updateRaidById?: Maybe<UpdateRaidPayload>;
+  /** Deletes a single `PlayerMerit` using its globally unique id. */
+  deletePlayerMerit?: Maybe<DeletePlayerMeritPayload>;
+  /** Deletes a single `PlayerMerit` using a unique key. */
+  deletePlayerMeritById?: Maybe<DeletePlayerMeritPayload>;
+  /** Deletes a single `RaidPlayer` using its globally unique id. */
+  deleteRaidPlayer?: Maybe<DeleteRaidPlayerPayload>;
+  /** Deletes a single `RaidPlayer` using a unique key. */
+  deleteRaidPlayerById?: Maybe<DeleteRaidPlayerPayload>;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -833,6 +1044,91 @@ export type MutationCreateRaidPlayerArgs = {
   input: CreateRaidPlayerInput;
 };
 
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateRaidArgs = {
+  input: CreateRaidInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateClassItemArgs = {
+  input: UpdateClassItemInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateClassItemByIdArgs = {
+  input: UpdateClassItemByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateLootArgs = {
+  input: UpdateLootInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateLootByIdArgs = {
+  input: UpdateLootByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePlayerMeritArgs = {
+  input: UpdatePlayerMeritInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePlayerMeritByIdArgs = {
+  input: UpdatePlayerMeritByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePlayerSlotArgs = {
+  input: UpdatePlayerSlotInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePlayerSlotByIdArgs = {
+  input: UpdatePlayerSlotByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRaidPlayerArgs = {
+  input: UpdateRaidPlayerInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRaidPlayerByIdArgs = {
+  input: UpdateRaidPlayerByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRaidArgs = {
+  input: UpdateRaidInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateRaidByIdArgs = {
+  input: UpdateRaidByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePlayerMeritArgs = {
+  input: DeletePlayerMeritInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePlayerMeritByIdArgs = {
+  input: DeletePlayerMeritByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRaidPlayerArgs = {
+  input: DeleteRaidPlayerInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteRaidPlayerByIdArgs = {
+  input: DeleteRaidPlayerByIdInput;
+};
+
 /** An object with a globally unique `ID`. */
 export type Node = {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -852,8 +1148,10 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars["Cursor"]>;
 };
 
-export type Player = {
+export type Player = Node & {
   __typename?: "Player";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   classId?: Maybe<Scalars["Int"]>;
@@ -925,13 +1223,15 @@ export type PlayerCondition = {
   active?: Maybe<Scalars["Boolean"]>;
 };
 
-export type PlayerMerit = {
+export type PlayerMerit = Node & {
   __typename?: "PlayerMerit";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   meritId?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   date?: Maybe<Scalars["String"]>;
-  active?: Maybe<Scalars["Boolean"]>;
+  validated?: Maybe<Scalars["Boolean"]>;
   /** Reads a single `Merit` that is related to this `PlayerMerit`. */
   meritByMeritId?: Maybe<Merit>;
   /** Reads a single `Player` that is related to this `PlayerMerit`. */
@@ -951,8 +1251,8 @@ export type PlayerMeritCondition = {
   playerId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `date` field. */
   date?: Maybe<Scalars["String"]>;
-  /** Checks for equality with the object’s `active` field. */
-  active?: Maybe<Scalars["Boolean"]>;
+  /** Checks for equality with the object’s `validated` field. */
+  validated?: Maybe<Scalars["Boolean"]>;
 };
 
 /** An input for mutations affecting `PlayerMerit` */
@@ -961,7 +1261,16 @@ export type PlayerMeritInput = {
   meritId?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   date?: Maybe<Scalars["String"]>;
-  active?: Maybe<Scalars["Boolean"]>;
+  validated?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Represents an update to a `PlayerMerit`. Fields that are set will be updated. */
+export type PlayerMeritPatch = {
+  id?: Maybe<Scalars["Int"]>;
+  meritId?: Maybe<Scalars["Int"]>;
+  playerId?: Maybe<Scalars["Int"]>;
+  date?: Maybe<Scalars["String"]>;
+  validated?: Maybe<Scalars["Boolean"]>;
 };
 
 /** A connection to a list of `PlayerMerit` values. */
@@ -997,8 +1306,10 @@ export enum PlayerMeritsOrderBy {
   PlayerIdDesc = "PLAYER_ID_DESC",
   DateAsc = "DATE_ASC",
   DateDesc = "DATE_DESC",
-  ActiveAsc = "ACTIVE_ASC",
-  ActiveDesc = "ACTIVE_DESC"
+  ValidatedAsc = "VALIDATED_ASC",
+  ValidatedDesc = "VALIDATED_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** A connection to a list of `Player` values. */
@@ -1023,8 +1334,10 @@ export type PlayersEdge = {
   node?: Maybe<Player>;
 };
 
-export type PlayerSlot = {
+export type PlayerSlot = Node & {
   __typename?: "PlayerSlot";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   playerId?: Maybe<Scalars["Int"]>;
   slotId?: Maybe<Scalars["Int"]>;
@@ -1058,6 +1371,16 @@ export type PlayerSlotCondition = {
 
 /** An input for mutations affecting `PlayerSlot` */
 export type PlayerSlotInput = {
+  id?: Maybe<Scalars["Int"]>;
+  playerId?: Maybe<Scalars["Int"]>;
+  slotId?: Maybe<Scalars["Int"]>;
+  enchanted?: Maybe<Scalars["Boolean"]>;
+  scoreMerit?: Maybe<Scalars["Int"]>;
+  validated?: Maybe<Scalars["Boolean"]>;
+};
+
+/** Represents an update to a `PlayerSlot`. Fields that are set will be updated. */
+export type PlayerSlotPatch = {
   id?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   slotId?: Maybe<Scalars["Int"]>;
@@ -1102,7 +1425,9 @@ export enum PlayerSlotsOrderBy {
   ScoreMeritAsc = "SCORE_MERIT_ASC",
   ScoreMeritDesc = "SCORE_MERIT_DESC",
   ValidatedAsc = "VALIDATED_ASC",
-  ValidatedDesc = "VALIDATED_DESC"
+  ValidatedDesc = "VALIDATED_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** Methods to use when ordering `Player`. */
@@ -1117,7 +1442,9 @@ export enum PlayersOrderBy {
   RankAsc = "RANK_ASC",
   RankDesc = "RANK_DESC",
   ActiveAsc = "ACTIVE_ASC",
-  ActiveDesc = "ACTIVE_DESC"
+  ActiveDesc = "ACTIVE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** The root query type which gives access points into the data universe. */
@@ -1160,6 +1487,48 @@ export type Query = Node & {
   allRaids?: Maybe<RaidsConnection>;
   /** Reads and enables pagination through a set of `Slot`. */
   allSlots?: Maybe<SlotsConnection>;
+  bossItemById?: Maybe<BossItem>;
+  bossById?: Maybe<Boss>;
+  classItemById?: Maybe<ClassItem>;
+  classById?: Maybe<Class>;
+  donjonById?: Maybe<Donjon>;
+  itemById?: Maybe<Item>;
+  lootById?: Maybe<Loot>;
+  meritById?: Maybe<Merit>;
+  playerMeritById?: Maybe<PlayerMerit>;
+  playerSlotById?: Maybe<PlayerSlot>;
+  playerById?: Maybe<Player>;
+  raidPlayerById?: Maybe<RaidPlayer>;
+  raidById?: Maybe<Raid>;
+  slotById?: Maybe<Slot>;
+  /** Reads a single `BossItem` using its globally unique `ID`. */
+  bossItem?: Maybe<BossItem>;
+  /** Reads a single `Boss` using its globally unique `ID`. */
+  boss?: Maybe<Boss>;
+  /** Reads a single `ClassItem` using its globally unique `ID`. */
+  classItem?: Maybe<ClassItem>;
+  /** Reads a single `Class` using its globally unique `ID`. */
+  class?: Maybe<Class>;
+  /** Reads a single `Donjon` using its globally unique `ID`. */
+  donjon?: Maybe<Donjon>;
+  /** Reads a single `Item` using its globally unique `ID`. */
+  item?: Maybe<Item>;
+  /** Reads a single `Loot` using its globally unique `ID`. */
+  loot?: Maybe<Loot>;
+  /** Reads a single `Merit` using its globally unique `ID`. */
+  merit?: Maybe<Merit>;
+  /** Reads a single `PlayerMerit` using its globally unique `ID`. */
+  playerMerit?: Maybe<PlayerMerit>;
+  /** Reads a single `PlayerSlot` using its globally unique `ID`. */
+  playerSlot?: Maybe<PlayerSlot>;
+  /** Reads a single `Player` using its globally unique `ID`. */
+  player?: Maybe<Player>;
+  /** Reads a single `RaidPlayer` using its globally unique `ID`. */
+  raidPlayer?: Maybe<RaidPlayer>;
+  /** Reads a single `Raid` using its globally unique `ID`. */
+  raid?: Maybe<Raid>;
+  /** Reads a single `Slot` using its globally unique `ID`. */
+  slot?: Maybe<Slot>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -1321,8 +1690,150 @@ export type QueryAllSlotsArgs = {
   condition?: Maybe<SlotCondition>;
 };
 
-export type Raid = {
+/** The root query type which gives access points into the data universe. */
+export type QueryBossItemByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryBossByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryClassItemByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryClassByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryDonjonByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryItemByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryLootByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryMeritByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerMeritByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerSlotByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRaidPlayerByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRaidByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySlotByIdArgs = {
+  id: Scalars["Int"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryBossItemArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryBossArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryClassItemArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryClassArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryDonjonArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryItemArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryLootArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryMeritArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerMeritArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerSlotArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPlayerArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRaidPlayerArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryRaidArgs = {
+  nodeId: Scalars["ID"];
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySlotArgs = {
+  nodeId: Scalars["ID"];
+};
+
+export type Raid = Node & {
   __typename?: "Raid";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   donjonId?: Maybe<Scalars["Int"]>;
   date?: Maybe<Scalars["String"]>;
@@ -1364,8 +1875,24 @@ export type RaidCondition = {
   date?: Maybe<Scalars["String"]>;
 };
 
-export type RaidPlayer = {
+/** An input for mutations affecting `Raid` */
+export type RaidInput = {
+  id?: Maybe<Scalars["Int"]>;
+  donjonId?: Maybe<Scalars["Int"]>;
+  date?: Maybe<Scalars["String"]>;
+};
+
+/** Represents an update to a `Raid`. Fields that are set will be updated. */
+export type RaidPatch = {
+  id?: Maybe<Scalars["Int"]>;
+  donjonId?: Maybe<Scalars["Int"]>;
+  date?: Maybe<Scalars["String"]>;
+};
+
+export type RaidPlayer = Node & {
   __typename?: "RaidPlayer";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   playerId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
@@ -1390,6 +1917,13 @@ export type RaidPlayerCondition = {
 
 /** An input for mutations affecting `RaidPlayer` */
 export type RaidPlayerInput = {
+  id?: Maybe<Scalars["Int"]>;
+  playerId?: Maybe<Scalars["Int"]>;
+  raidId?: Maybe<Scalars["Int"]>;
+};
+
+/** Represents an update to a `RaidPlayer`. Fields that are set will be updated. */
+export type RaidPlayerPatch = {
   id?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
@@ -1425,7 +1959,9 @@ export enum RaidPlayersOrderBy {
   PlayerIdAsc = "PLAYER_ID_ASC",
   PlayerIdDesc = "PLAYER_ID_DESC",
   RaidIdAsc = "RAID_ID_ASC",
-  RaidIdDesc = "RAID_ID_DESC"
+  RaidIdDesc = "RAID_ID_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
 /** A connection to a list of `Raid` values. */
@@ -1458,11 +1994,15 @@ export enum RaidsOrderBy {
   DonjonIdAsc = "DONJON_ID_ASC",
   DonjonIdDesc = "DONJON_ID_DESC",
   DateAsc = "DATE_ASC",
-  DateDesc = "DATE_DESC"
+  DateDesc = "DATE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Slot = {
+export type Slot = Node & {
   __typename?: "Slot";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
   id: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   /** Reads and enables pagination through a set of `PlayerSlot`. */
@@ -1515,5 +2055,307 @@ export enum SlotsOrderBy {
   IdAsc = "ID_ASC",
   IdDesc = "ID_DESC",
   NameAsc = "NAME_ASC",
-  NameDesc = "NAME_DESC"
+  NameDesc = "NAME_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
+
+/** All input for the `updateClassItemById` mutation. */
+export type UpdateClassItemByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `ClassItem` being updated. */
+  classItemPatch: ClassItemPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updateClassItem` mutation. */
+export type UpdateClassItemInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `ClassItem` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `ClassItem` being updated. */
+  classItemPatch: ClassItemPatch;
+};
+
+/** The output of our update `ClassItem` mutation. */
+export type UpdateClassItemPayload = {
+  __typename?: "UpdateClassItemPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `ClassItem` that was updated by this mutation. */
+  classItem?: Maybe<ClassItem>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Class` that is related to this `ClassItem`. */
+  classByClassId?: Maybe<Class>;
+  /** Reads a single `Item` that is related to this `ClassItem`. */
+  itemByItemId?: Maybe<Item>;
+  /** An edge for our `ClassItem`. May be used by Relay 1. */
+  classItemEdge?: Maybe<ClassItemsEdge>;
+};
+
+/** The output of our update `ClassItem` mutation. */
+export type UpdateClassItemPayloadClassItemEdgeArgs = {
+  orderBy?: Maybe<Array<ClassItemsOrderBy>>;
+};
+
+/** All input for the `updateLootById` mutation. */
+export type UpdateLootByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `Loot` being updated. */
+  lootPatch: LootPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updateLoot` mutation. */
+export type UpdateLootInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `Loot` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `Loot` being updated. */
+  lootPatch: LootPatch;
+};
+
+/** The output of our update `Loot` mutation. */
+export type UpdateLootPayload = {
+  __typename?: "UpdateLootPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `Loot` that was updated by this mutation. */
+  loot?: Maybe<Loot>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Player` that is related to this `Loot`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Item` that is related to this `Loot`. */
+  itemByItemId?: Maybe<Item>;
+  /** Reads a single `Raid` that is related to this `Loot`. */
+  raidByRaidId?: Maybe<Raid>;
+  /** An edge for our `Loot`. May be used by Relay 1. */
+  lootEdge?: Maybe<LootsEdge>;
+};
+
+/** The output of our update `Loot` mutation. */
+export type UpdateLootPayloadLootEdgeArgs = {
+  orderBy?: Maybe<Array<LootsOrderBy>>;
+};
+
+/** All input for the `updatePlayerMeritById` mutation. */
+export type UpdatePlayerMeritByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `PlayerMerit` being updated. */
+  playerMeritPatch: PlayerMeritPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updatePlayerMerit` mutation. */
+export type UpdatePlayerMeritInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `PlayerMerit` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `PlayerMerit` being updated. */
+  playerMeritPatch: PlayerMeritPatch;
+};
+
+/** The output of our update `PlayerMerit` mutation. */
+export type UpdatePlayerMeritPayload = {
+  __typename?: "UpdatePlayerMeritPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `PlayerMerit` that was updated by this mutation. */
+  playerMerit?: Maybe<PlayerMerit>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Merit` that is related to this `PlayerMerit`. */
+  meritByMeritId?: Maybe<Merit>;
+  /** Reads a single `Player` that is related to this `PlayerMerit`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** An edge for our `PlayerMerit`. May be used by Relay 1. */
+  playerMeritEdge?: Maybe<PlayerMeritsEdge>;
+};
+
+/** The output of our update `PlayerMerit` mutation. */
+export type UpdatePlayerMeritPayloadPlayerMeritEdgeArgs = {
+  orderBy?: Maybe<Array<PlayerMeritsOrderBy>>;
+};
+
+/** All input for the `updatePlayerSlotById` mutation. */
+export type UpdatePlayerSlotByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `PlayerSlot` being updated. */
+  playerSlotPatch: PlayerSlotPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updatePlayerSlot` mutation. */
+export type UpdatePlayerSlotInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `PlayerSlot` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `PlayerSlot` being updated. */
+  playerSlotPatch: PlayerSlotPatch;
+};
+
+/** The output of our update `PlayerSlot` mutation. */
+export type UpdatePlayerSlotPayload = {
+  __typename?: "UpdatePlayerSlotPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `PlayerSlot` that was updated by this mutation. */
+  playerSlot?: Maybe<PlayerSlot>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Player` that is related to this `PlayerSlot`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Slot` that is related to this `PlayerSlot`. */
+  slotBySlotId?: Maybe<Slot>;
+  /** An edge for our `PlayerSlot`. May be used by Relay 1. */
+  playerSlotEdge?: Maybe<PlayerSlotsEdge>;
+};
+
+/** The output of our update `PlayerSlot` mutation. */
+export type UpdatePlayerSlotPayloadPlayerSlotEdgeArgs = {
+  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
+};
+
+/** All input for the `updateRaidById` mutation. */
+export type UpdateRaidByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `Raid` being updated. */
+  raidPatch: RaidPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updateRaid` mutation. */
+export type UpdateRaidInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `Raid` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `Raid` being updated. */
+  raidPatch: RaidPatch;
+};
+
+/** The output of our update `Raid` mutation. */
+export type UpdateRaidPayload = {
+  __typename?: "UpdateRaidPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `Raid` that was updated by this mutation. */
+  raid?: Maybe<Raid>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Donjon` that is related to this `Raid`. */
+  donjonByDonjonId?: Maybe<Donjon>;
+  /** An edge for our `Raid`. May be used by Relay 1. */
+  raidEdge?: Maybe<RaidsEdge>;
+};
+
+/** The output of our update `Raid` mutation. */
+export type UpdateRaidPayloadRaidEdgeArgs = {
+  orderBy?: Maybe<Array<RaidsOrderBy>>;
+};
+
+/** All input for the `updateRaidPlayerById` mutation. */
+export type UpdateRaidPlayerByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** An object where the defined keys will be set on the `RaidPlayer` being updated. */
+  raidPlayerPatch: RaidPlayerPatch;
+  id: Scalars["Int"];
+};
+
+/** All input for the `updateRaidPlayer` mutation. */
+export type UpdateRaidPlayerInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The globally unique `ID` which will identify a single `RaidPlayer` to be updated. */
+  nodeId: Scalars["ID"];
+  /** An object where the defined keys will be set on the `RaidPlayer` being updated. */
+  raidPlayerPatch: RaidPlayerPatch;
+};
+
+/** The output of our update `RaidPlayer` mutation. */
+export type UpdateRaidPlayerPayload = {
+  __typename?: "UpdateRaidPlayerPayload";
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   **/
+  clientMutationId?: Maybe<Scalars["String"]>;
+  /** The `RaidPlayer` that was updated by this mutation. */
+  raidPlayer?: Maybe<RaidPlayer>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** Reads a single `Player` that is related to this `RaidPlayer`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Raid` that is related to this `RaidPlayer`. */
+  raidByRaidId?: Maybe<Raid>;
+  /** An edge for our `RaidPlayer`. May be used by Relay 1. */
+  raidPlayerEdge?: Maybe<RaidPlayersEdge>;
+};
+
+/** The output of our update `RaidPlayer` mutation. */
+export type UpdateRaidPlayerPayloadRaidPlayerEdgeArgs = {
+  orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
+};

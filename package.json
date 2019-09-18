@@ -1,14 +1,16 @@
 {
   "name": "awaken-loot-management",
   "version": "1.0.0",
+  "license": "Unlicense",
   "scripts": {
     "dev": "node server/start.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
-    "types": "bin/generate-types.sh",
     "gql": "node server/graphiql-dev.js",
-    "reset": "bin/reset-db.sh",
+    "reset-db": "bin/reset-db.sh",
+    "types": "bin/generate-types.sh",
+    "reset": "yarn reset-db && yarn types",
     "lint": "tslint --project ."
   },
   "dependencies": {

@@ -11,9 +11,10 @@ export const PLAYER_MERIT = gql`
         active
         playerMeritsByMeritId(condition: { playerId: $playerId }) {
           nodes {
-            meritByMeritId {
-              active
-            }
+            id
+            validated
+            date
+            playerId
           }
         }
       }

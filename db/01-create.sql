@@ -2,7 +2,7 @@
 SET search_path TO public;
 
 CREATE TABLE "Classes" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "color" varchar,
   "name" varchar
 );
@@ -12,7 +12,7 @@ CREATE UNIQUE INDEX ON "Classes" ("id");
 
 
 CREATE TABLE "Players" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "classId" int,
   "rank" varchar,
@@ -23,7 +23,7 @@ CREATE UNIQUE INDEX ON "Players" ("id");
 
 
 CREATE TABLE "Slots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar
 );
 comment on table "Slots" is E'@omit create,update,delete';
@@ -31,7 +31,7 @@ CREATE UNIQUE INDEX ON "Slots" ("id");
 
 
 CREATE TABLE "PlayerSlots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "playerId" int,
   "slotId" int,
   "enchanted" boolean,
@@ -43,7 +43,7 @@ CREATE UNIQUE INDEX ON "PlayerSlots" ("id");
 
 
 CREATE TABLE "Merit" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "categorie" varchar,
   "name" varchar,
   "comment" varchar DEFAULT '',
@@ -55,18 +55,18 @@ CREATE UNIQUE INDEX ON "Merit" ("id");
 
 
 CREATE TABLE "PlayerMerit" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "meritId" int,
   "playerId" int,
   "date" varchar,
-  "active" boolean DEFAULT false
+  "validated" boolean DEFAULT false
 );
-comment on table "PlayerMerit" is E'@omit delete';
+-- comment on table "PlayerMerit" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 
 CREATE TABLE "Loots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "playerId" int,
   "itemId" int,
   "raidId" int,
@@ -77,7 +77,7 @@ CREATE UNIQUE INDEX ON "Loots" ("id");
 
 
 CREATE TABLE "Items" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "wowheadId" int,
   "classId" int
@@ -88,7 +88,7 @@ CREATE UNIQUE INDEX ON "Items" ("wowheadId");
 
 
 CREATE TABLE "ClassItem" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "classId" int,
   "itemId" int,
   "itemValueForThisClass" int
@@ -97,7 +97,7 @@ comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
 
 
-CREATE TABLE "BossItem" ("id" SERIAL,
+CREATE TABLE "BossItem" ("id" SERIAL PRIMARY KEY,
   "itemId" int,
   "bossId" int
 );
@@ -106,7 +106,7 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 
 
 CREATE TABLE "Bosses" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "donjonId" int,
   "name" varchar
 );
@@ -115,7 +115,7 @@ CREATE UNIQUE INDEX ON "Bosses" ("id");
 
 
 CREATE TABLE "Donjons" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "shortName" varchar,
   "active" boolean DEFAULT false
@@ -125,16 +125,16 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 
 CREATE TABLE "Raids" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "donjonId" int,
   "date" varchar
 );
-comment on table "Raids" is E'@omit create,update,delete';
+comment on table "Raids" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Raids" ("id");
 
 
 CREATE TABLE "RaidPlayers" (
-    "id" SERIAL,
+    "id" SERIAL PRIMARY KEY,
     "playerId" int,
     "raidId" int
   );

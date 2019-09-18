@@ -14,21 +14,48 @@ const availableQueries = [
   "allRaids",
   "allSlots"
 ];
+// const availableMutations = [
+//   'createBoss',
+//   'createBossItem',
+//   'createClass',
+//   'createClassItem',
+//   'createDonjon',
+//   'createItem',
+//   'createLoot',
+//   'createMerit',
+//   'createPlayer',
+//   'createPlayerMerit',
+//   'createPlayerSlot',
+//   'createRaid',
+//   'createRaidPlayer',
+//   'createSlot'
+// ];
+
+// TODO choose correctly which one to allow / prevent by SQL comments
+// TODO sort this alphabetically to retreive always good one first
 const availableMutations = [
-  "createBoss",
-  "createBossItem",
-  "createClass",
   "createClassItem",
-  "createDonjon",
-  "createItem",
   "createLoot",
-  "createMerit",
-  "createPlayer",
   "createPlayerMerit",
   "createPlayerSlot",
   "createRaid",
   "createRaidPlayer",
-  "createSlot"
+  "deletePlayerMerit",
+  "deletePlayerMeritById",
+  "deleteRaidPlayer",
+  "deleteRaidPlayerById",
+  "updateClassItem",
+  "updateClassItemById",
+  "updateLoot",
+  "updateLootById",
+  "updatePlayerMerit",
+  "updatePlayerMeritById",
+  "updatePlayerSlot",
+  "updatePlayerSlotById",
+  "updateRaid",
+  "updateRaidById",
+  "updateRaidPlayer",
+  "updateRaidPlayerById"
 ];
 
 const rights = {
@@ -148,6 +175,8 @@ function isSchemaIntrospect(query) {
  * @param {string} request
  */
 function checkRights(playerLevel = "guest", request) {
+  // TODO remove this, only for debug
+  return true;
   const { queries: queriesUserRights, mutations: mutationsUserRights } = rights[
     playerLevel
   ];

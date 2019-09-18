@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { MeritLine } from "../../../components/MeritLine";
@@ -9,7 +10,7 @@ interface Variables {
   playerId: number;
 }
 
-export default function PageEditRaid() {
+export default function PageEditPlayer() {
   const router = useRouter();
   const playerId = parseInt(String(router.query.playerId));
 
@@ -24,16 +25,42 @@ export default function PageEditRaid() {
 
   const userMerits = data.allMerits.nodes;
 
+  interface SortedMerits {
+    [key: string]: Merit[];
+  }
+
+  const sortedMerits: SortedMerits = userMerits.reduce(
+    (stack: SortedMerits, next: Merit) => {
+      const categorie = next.categorie;
+      const merit = { ...next };
+      if (!stack[categorie]) {
+        stack[categorie] = [];
+      }
+      stack[categorie].push(merit);
+      return stack;
+    },
+    {}
+  );
+
   return (
     <div>
-      {userMerits.map((userMerit: Merit) => (
-        <MeritLine key={userMerit.name} {...userMerit} />
-      ))}
+      {Object.keys(sortedMerits).map((meritCategorieName: string) => {
+        const currentCategorie = sortedMerits[meritCategorieName];
+        return (
+          <div key={`${meritCategorieName}`}>
+            <Typography gutterBottom={true} variant="h5" component="h2">
+              {meritCategorieName}
+            </Typography>
+            {currentCategorie.map((merit: Merit) => (
+              <MeritLine
+                key={`${merit.name}-${merit.categorie}-merit`}
+                {...merit}
+                playerId={playerId}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
-
-    // <button onClick={() => router.push({ path: '/seeRaid', query: { id } })}>
-    //   <div>{date}</div>
-    //   <div>{name}</div>
-    // </button>
   );
 }
