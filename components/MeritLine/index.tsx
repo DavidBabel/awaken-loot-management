@@ -22,7 +22,7 @@ interface Variables {
 }
 
 export function MeritLine({
-  id,
+  id, // id of merit
   // categorie,
   name,
   // comment,

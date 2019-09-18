@@ -41,6 +41,7 @@ app
         CONFIG.DATABASE_URL || "postgres://localhost:5432/test",
         "public",
         {
+          // classicIds: true,
           externalUrlBase: `/${CONFIG.GRAPHQL_ENDPOINT}`,
           graphqlRoute: "/"
         }
