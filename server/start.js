@@ -38,7 +38,7 @@ app
       checkTokenMiddleware,
       checkRoleMiddleware,
       postgraphile(
-        CONFIG.DATABASE_URL || "postgres://localhost:5432/test",
+        CONFIG.DATABASE_URL || "postgres://postgres:test@localhost:5432/test",
         "public",
         {
           // classicIds: true,
