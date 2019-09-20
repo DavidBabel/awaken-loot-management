@@ -34,11 +34,11 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 function createData(
   name: string,
-  calories: number,
-  fat: number,
-  carbs: number
+  merit: number,
+  totalLoot: number,
+  totalRaid: number
 ) {
-  return { name, calories, fat, carbs };
+  return { name, merit, totalLoot, totalRaid };
 }
 
 const rows = [
@@ -94,11 +94,12 @@ export default function PlayersTable(props) {
               <StyledTableCell className={classes.progressCell} align="center">
                 <ProgressBar
                   classColor={props.classColor}
-                  progress={row.calories}
+                  progress={row.merit}
+                  showed={props.showed}
                 />
               </StyledTableCell>
-              <StyledTableCell align="center">{row.fat}</StyledTableCell>
-              <StyledTableCell align="center">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="center">{row.totalLoot}</StyledTableCell>
+              <StyledTableCell align="center">{row.totalRaid}</StyledTableCell>
               <StyledTableCell align="center">
                 {" "}
                 <Button variant="contained" color="primary">

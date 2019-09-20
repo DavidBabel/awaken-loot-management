@@ -118,28 +118,28 @@ export default function PageIndex() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <PlayersTable classColor={classColors.druide} />
+        <PlayersTable showed={value === 0} classColor={classColors.druide} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <PlayersTable classColor={classColors.chasseur} />
+        <PlayersTable showed={value === 1} classColor={classColors.chasseur} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <PlayersTable classColor={classColors.mage} />
+        <PlayersTable showed={value === 2} classColor={classColors.mage} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <PlayersTable classColor={classColors.pretre} />
+        <PlayersTable showed={value === 3} classColor={classColors.pretre} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <PlayersTable classColor={classColors.voleur} />
+        <PlayersTable showed={value === 4} classColor={classColors.voleur} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <PlayersTable classColor={classColors.chaman} />
+        <PlayersTable showed={value === 5} classColor={classColors.chaman} />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <PlayersTable classColor={classColors.demoniste} />
+        <PlayersTable showed={value === 6} classColor={classColors.demoniste} />
       </TabPanel>
       <TabPanel value={value} index={7}>
-        <PlayersTable classColor={classColors.guerrier} />
+        <PlayersTable showed={value === 7} classColor={classColors.guerrier} />
       </TabPanel>
     </div>
   );

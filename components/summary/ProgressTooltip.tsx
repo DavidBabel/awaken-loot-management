@@ -1,10 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-interface Props {
-  progress: String;
-}
-
 const useStyles = makeStyles({
   tooltip: {
     position: "absolute",
@@ -15,7 +11,7 @@ const useStyles = makeStyles({
     borderRadius: "6px",
     padding: "2px 0",
     zIndex: 1,
-    left: (props: Props) => `calc(${props.progress}% - 25px)`,
+    left: "0%",
     top: "-4px",
     "&::after": {
       content: "''",
@@ -32,9 +28,29 @@ const useStyles = makeStyles({
 
 export default function ProgressTooltip(props) {
   const classes = useStyles(props);
+  const tooltipElem = React.useRef(null);
+  React.useEffect(() => {
+    if (props.showed) {
+      if (tooltipElem.current.animate) {
+        tooltipElem.current.animate(
+          [{ left: "0%" }, { left: `calc(${props.progress}% - 25px)` }],
+          {
+            duration: 1000,
+            iterations: 1,
+            easing: "ease-out",
+            fill: "both"
+          }
+        );
+      } else {
+        tooltipElem.current.style.left = `calc(${props.progress}% - 25px)`;
+      }
+    }
+  });
   return (
     <React.Fragment>
-      <span className={classes.tooltip}>{props.progress}</span>{" "}
+      <span ref={tooltipElem} className={classes.tooltip}>
+        {props.progress}
+      </span>{" "}
     </React.Fragment>
   );
 }

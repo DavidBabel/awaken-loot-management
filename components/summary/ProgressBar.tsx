@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     backgroundColor: "#4D4D4D"
   },
   filler: {
-    width: (props: Props) => `${props.progress}%`,
+    width: "0%",
     backgroundColor: (props: Props) => `${props.classColor}`,
     height: "100%",
     borderRadius: "2px"
@@ -32,12 +32,29 @@ const useStyles = makeStyles({
 
 export default function ProgressBar(props) {
   const classes = useStyles(props);
-
+  const fillerElem = React.useRef(null);
+  React.useEffect(() => {
+    if (props.showed) {
+      if (fillerElem.current.animate) {
+        fillerElem.current.animate(
+          [{ width: "0%" }, { width: `${props.progress}%` }],
+          {
+            duration: 1000,
+            iterations: 1,
+            easing: "ease-out",
+            fill: "both"
+          }
+        );
+      } else {
+        fillerElem.current.style.width = `${props.progress}%`;
+      }
+    }
+  });
   return (
     <div className={classes.container}>
-      <ProgressTooltip progress={props.progress} />
+      <ProgressTooltip showed={props.showed} progress={props.progress} />
       <div className={classes.bar}>
-        <div className={classes.filler}></div>
+        <div ref={fillerElem} className={classes.filler}></div>
       </div>
     </div>
   );
