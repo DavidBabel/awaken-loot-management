@@ -1,4 +1,48 @@
  -- SAFE BEGIN FOR CONCAT
+-- SELECT 1 AS "Trash";
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Ceinture de traqueur de géant',16851,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Brassards de traqueur de géant',16850,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Protège-bras de prophétie',16819,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Ceinturon de prophétie',16817,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Brassards Rageterre',16840,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('Ceinture Rageterre',16838,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('Brassards cénariens',16830,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Ceinture cénarienne',16828,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Ceinture de puissance',16864,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
+('Brassards de puissance',16861,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
+('Ceinture d‘arcaniste',16802,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Manchettes d‘arcaniste',16799,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Brassards de Gangrecoeur',16804,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Ceinture de Gangrecoeur',16806,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Brassards judiciaires',16857,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Ceinture judiciaire',16858,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Bracelets du tueur de la nuit',16825,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Ceinture du tueur de la nuit',16827,(SELECT id FROM "Classes" WHERE "name"='Voleur'));
+
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16851)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16850)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16819)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16817)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16840)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16838)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16830)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16828)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16864)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16861)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16802)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16799)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16804)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16806)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16857)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16858)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16825)),
+((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16827));
+
 -- SELECT 1 AS "Lucifron";
 INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES

@@ -55,13 +55,11 @@ const rights = {
 /**
  *
  * @param {'admin'|'officer'|'classMaster'|'player'|'guest'} playerLevel
+ * @param {number} playerId
  * @param {string} request
  */
 function checkRights(playerLevel = GUEST, request) {
   const parsedRequest = gql(request);
-  // tslint:disable-next-line:no-console
-  // console.log('parsedRequest :');
-  // console.dir(parsedRequest, { depth: null, colors: true, showHidden: false });
 
   const queries = parsedRequest.definitions.map(q =>
     q.selectionSet.selections.map(x => x.name.value)
@@ -74,14 +72,9 @@ function checkRights(playerLevel = GUEST, request) {
   if (!Object.keys(rights).includes(gqlQuery)) {
     throw new Error(`Unknow query ${gqlQuery}`);
   }
-
   return rights[gqlQuery].includes(playerLevel);
 }
 
 module.exports = {
   checkRights
-  // getMutation,
-  // isMutation,
-  // isQuery,
-  // isSchemaIntrospect
 };
