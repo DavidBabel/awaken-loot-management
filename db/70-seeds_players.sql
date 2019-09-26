@@ -60,7 +60,28 @@ VALUES
 ('Skwäsh'       , 1,  'player'),
 ('Kenyâ'        , 7,  'player'),
 ('Zhantla'      , 7,  'player'),
-('Zykxx'        , 7,  'player')
+('Zykxx'        , 7,  'player'),
+('Brebouche'    , 8,  'player'),
+('Krigen'       , 8,  'player'),
+('Lykwette'     , 8,  'player'),
+('Throma'       , 10, 'player'),
+('Alk'          , 6,  'player'),
+('Allyssamyr'   , 2,  'player'),
+('Ikith'        , 2,  'player'),
+('Thorsen'      , 2,  'player'),
+('Wid'          , 2,  'player'),
+('Need'         , 1,  'player'),
+('Callumlolz'   , 4,  'player'),
+('Cocobanjo'    , 4,  'player'),
+('Ez'           , 4,  'player'),
+('Jonasran'     , 4,  'player'),
+('Yx'           , 4,  'player'),
+('Suprême'      , 3,  'player'),
+('Brosko'       , 10, 'player'),
+('Karaelys'     , 1,  'player'),
+('Teimdall'     , 1,  'player'),
+('Trackass'     , 1,  'player'),
+('Gidgud'       , 7,  'player')
 
 
 ;

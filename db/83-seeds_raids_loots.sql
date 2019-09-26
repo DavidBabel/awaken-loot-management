@@ -94,7 +94,102 @@ VALUES
 --   (SELECT id FROM "Items" WHERE "name"=
 --   'loot sulfuron')),
 
+  ;
 
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de traqueur de géant')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kaarr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bracelets du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Callumlolz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Psykøhazard'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de Gangrecoeur')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes Rageterre')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de puissance')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brosko'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame à tranchant d‘obsidienne')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Gidgud'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets Rageterre')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thorsen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ecraseur cramoisi')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque de puissance')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Teimdall'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collerette de prophétie')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Oscuro'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame de brutalité')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Synrj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Spallières cénariennes')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Suprême'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mules de Gangrecoeur')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Traqùs'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de traqueur de géant'))
 
   ;
 

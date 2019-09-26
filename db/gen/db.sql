@@ -136,7 +136,8 @@ CREATE UNIQUE INDEX ON "Raids" ("id");
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL PRIMARY KEY,
     "playerId" int,
-    "raidId" int
+    "raidId" int,
+    "passed" boolean DEFAULT false
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "RaidPlayers" ("id");
@@ -963,7 +964,28 @@ VALUES
 ('Skwäsh'       , 1,  'player'),
 ('Kenyâ'        , 7,  'player'),
 ('Zhantla'      , 7,  'player'),
-('Zykxx'        , 7,  'player')
+('Zykxx'        , 7,  'player'),
+('Brebouche'    , 8,  'player'),
+('Krigen'       , 8,  'player'),
+('Lykwette'     , 8,  'player'),
+('Throma'       , 10, 'player'),
+('Alk'          , 6,  'player'),
+('Allyssamyr'   , 2,  'player'),
+('Ikith'        , 2,  'player'),
+('Thorsen'      , 2,  'player'),
+('Wid'          , 2,  'player'),
+('Need'         , 1,  'player'),
+('Callumlolz'   , 4,  'player'),
+('Cocobanjo'    , 4,  'player'),
+('Ez'           , 4,  'player'),
+('Jonasran'     , 4,  'player'),
+('Yx'           , 4,  'player'),
+('Suprême'      , 3,  'player'),
+('Brosko'       , 10, 'player'),
+('Karaelys'     , 1,  'player'),
+('Teimdall'     , 1,  'player'),
+('Trackass'     , 1,  'player'),
+('Gidgud'       , 7,  'player')
 
 
 ;
@@ -977,10 +999,10 @@ VALUES
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Raids" ("donjonId", "date")
 VALUES
-(1, '2019-09-19'),
-(1, '2019-09-22'),
-(2, '2019-09-24'),
-(1, '2019-09-25');
+(1, '2019-09-19'), -- 1
+(1, '2019-09-22'), -- 2
+(2, '2019-09-24'), -- 3
+(1, '2019-09-25'); -- 4
 
 
 -- MC 2019-09-19
@@ -1030,7 +1052,61 @@ VALUES
 (2, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
 (2, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
 (2, (SELECT id FROM "Players" WHERE "name"='Zhantla')),
-(2, (SELECT id FROM "Players" WHERE "name"='Zykxx')); -- SAFE BEGIN FOR CONCAT
+(2, (SELECT id FROM "Players" WHERE "name"='Zykxx'));
+
+-- MC 2019-09-22
+-- TODO onyxia
+
+
+-- MC full guilde 2019-09-25
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(4, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(4, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(4, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(4, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(4, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(4, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(4, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(4, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(4, (SELECT id FROM "Players" WHERE "name"='Traqùs')),
+(4, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(4, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(4, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(4, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(4, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(4, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(4, (SELECT id FROM "Players" WHERE "name"='Wid')),
+(4, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(4, (SELECT id FROM "Players" WHERE "name"='Need')),
+(4, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(4, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(4, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(4, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(4, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(4, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(4, (SELECT id FROM "Players" WHERE "name"='Lyaxus')),
+(4, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(4, (SELECT id FROM "Players" WHERE "name"='Rektall')),
+(4, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(4, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(4, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(4, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(4, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(4, (SELECT id FROM "Players" WHERE "name"='Synrj')),
+(4, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(4, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(4, (SELECT id FROM "Players" WHERE "name"='Teimdall')),
+(4, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(4, (SELECT id FROM "Players" WHERE "name"='Gidgud')),
+(4, (SELECT id FROM "Players" WHERE "name"='Kenyâ'));
+-- TODO notez ceux qui ont passer leur tour
+-- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
+-- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
+-- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
+-- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
+-- (4, (SELECT id FROM "Players" WHERE "name"=''), true)
+; -- SAFE BEGIN FOR CONCAT
 
 INSERT INTO "Loots" ("raidId", "playerId", "itemId")
 VALUES
@@ -1126,7 +1202,102 @@ VALUES
 --   (SELECT id FROM "Items" WHERE "name"=
 --   'loot sulfuron')),
 
+  ;
 
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de traqueur de géant')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kaarr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bracelets du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Callumlolz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Psykøhazard'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de Gangrecoeur')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes Rageterre')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de puissance')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon du tueur de la nuit')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brosko'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame à tranchant d‘obsidienne')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Gidgud'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets Rageterre')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thorsen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ecraseur cramoisi')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque de puissance')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Teimdall'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collerette de prophétie')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Oscuro'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame de brutalité')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Synrj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Spallières cénariennes')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Suprême'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mules de Gangrecoeur')),
+( 4,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Traqùs'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de traqueur de géant'))
 
   ;
 

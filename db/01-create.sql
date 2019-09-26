@@ -136,7 +136,8 @@ CREATE UNIQUE INDEX ON "Raids" ("id");
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL PRIMARY KEY,
     "playerId" int,
-    "raidId" int
+    "raidId" int,
+    "passed" boolean DEFAULT false
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "RaidPlayers" ("id");

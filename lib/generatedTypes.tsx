@@ -1896,6 +1896,7 @@ export type RaidPlayer = Node & {
   id: Scalars["Int"];
   playerId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
+  passed?: Maybe<Scalars["Boolean"]>;
   /** Reads a single `Player` that is related to this `RaidPlayer`. */
   playerByPlayerId?: Maybe<Player>;
   /** Reads a single `Raid` that is related to this `RaidPlayer`. */
@@ -1913,6 +1914,8 @@ export type RaidPlayerCondition = {
   playerId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `raidId` field. */
   raidId?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `passed` field. */
+  passed?: Maybe<Scalars["Boolean"]>;
 };
 
 /** An input for mutations affecting `RaidPlayer` */
@@ -1920,6 +1923,7 @@ export type RaidPlayerInput = {
   id?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
+  passed?: Maybe<Scalars["Boolean"]>;
 };
 
 /** Represents an update to a `RaidPlayer`. Fields that are set will be updated. */
@@ -1927,6 +1931,7 @@ export type RaidPlayerPatch = {
   id?: Maybe<Scalars["Int"]>;
   playerId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
+  passed?: Maybe<Scalars["Boolean"]>;
 };
 
 /** A connection to a list of `RaidPlayer` values. */
@@ -1960,6 +1965,8 @@ export enum RaidPlayersOrderBy {
   PlayerIdDesc = "PLAYER_ID_DESC",
   RaidIdAsc = "RAID_ID_ASC",
   RaidIdDesc = "RAID_ID_DESC",
+  PassedAsc = "PASSED_ASC",
+  PassedDesc = "PASSED_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
