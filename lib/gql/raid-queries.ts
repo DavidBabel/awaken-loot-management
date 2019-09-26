@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from 'apollo-boost';
 
 export const ALL_DONJONS = gql`
   query AllDonjons {
@@ -103,23 +103,7 @@ export const ONE_RAID = gql`
                         id
                       }
                     }
-                    lootsByItemId(orderBy: RAID_ID_DESC) {
-                      nodes {
-                        id
-                        itemId
-                        playerByPlayerId {
-                          name
-                          classByClassId {
-                            name
-                            color
-                            id
-                          }
-                        }
-                        raidByRaidId {
-                          date
-                        }
-                      }
-                    }
+                    classId
                   }
                 }
               }
@@ -132,6 +116,32 @@ export const ONE_RAID = gql`
               name
               classId
               id
+              classByClassId {
+                color
+                name
+                id
+              }
+              lootsByPlayerId {
+                nodes {
+                  itemByItemId {
+                    name
+                  }
+                  raidByRaidId {
+                    date
+                  }
+                }
+              }
+              raidPlayersByPlayerId {
+                nodes {
+                  passed
+                  raidByRaidId {
+                    date
+                    donjonByDonjonId {
+                      name
+                    }
+                  }
+                }
+              }
             }
           }
         }

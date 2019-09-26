@@ -214,7 +214,7 @@ VALUES
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='7')),
+('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='ZG')),
 ('Lucifron', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
 ('Magmadar', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
 ('Gehennas', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
@@ -290,24 +290,24 @@ VALUES
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16851)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16850)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16819)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16817)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16840)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16838)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16830)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16828)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16864)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16861)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16802)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16799)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16804)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16806)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16857)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16858)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16825)),
-((SELECT id FROM "Bosses" WHERE "name"='Trash' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16827));
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16851)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16850)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16819)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16817)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16840)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16838)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16830)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16828)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16864)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16861)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16802)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16799)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16804)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16806)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16857)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16858)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16825)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16827));
 
 -- SELECT 1 AS "Lucifron";
 INSERT INTO "Items" ("name","wowheadId","classId")
