@@ -45,6 +45,13 @@ export function Menu() {
             )}
           </List>
           <Divider />
+          <List>
+            <ListItem button={true}>
+              <Link href="/summary">
+                <ListItemText primary="Characters summary" />
+              </Link>
+            </ListItem>
+          </List>
 
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
