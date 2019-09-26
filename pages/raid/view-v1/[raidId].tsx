@@ -13,7 +13,7 @@ interface Variables {
   raidId: number;
 }
 
-export default function PageEditRaid(/* { raidId }: Props */) {
+export default function PageRaidView(/* { raidId }: Props */) {
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
 
@@ -29,7 +29,15 @@ export default function PageEditRaid(/* { raidId }: Props */) {
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "15px",
+        alignItems: "flex-start",
+        justifyContent: "center"
+      }}
+    >
       {bosses.map(boss => {
         return (
           <BossCard

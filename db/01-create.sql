@@ -2,7 +2,7 @@
 SET search_path TO public;
 
 CREATE TABLE "Classes" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "color" varchar,
   "name" varchar
 );
@@ -12,10 +12,11 @@ CREATE UNIQUE INDEX ON "Classes" ("id");
 
 
 CREATE TABLE "Players" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "classId" int,
-  "rank" varchar,
+  "role" varchar,
+  "password" varchar,
   "active" boolean DEFAULT true
 );
 comment on table "Players" is E'@omit create,update,delete';
@@ -23,7 +24,7 @@ CREATE UNIQUE INDEX ON "Players" ("id");
 
 
 CREATE TABLE "Slots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar
 );
 comment on table "Slots" is E'@omit create,update,delete';
@@ -31,42 +32,42 @@ CREATE UNIQUE INDEX ON "Slots" ("id");
 
 
 CREATE TABLE "PlayerSlots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "playerId" int,
   "slotId" int,
   "enchanted" boolean,
-  "scoreMerite" int,
+  "scoreMerit" int,
   "validated" boolean
 );
 comment on table "PlayerSlots" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerSlots" ("id");
 
 
-CREATE TABLE "Merite" (
-  "id" SERIAL,
+CREATE TABLE "Merit" (
+  "id" SERIAL PRIMARY KEY,
   "categorie" varchar,
   "name" varchar,
   "comment" varchar DEFAULT '',
   "value" int,
   "active" boolean DEFAULT true
 );
-comment on table "Merite" is E'@omit create,update,delete';
-CREATE UNIQUE INDEX ON "Merite" ("id");
+comment on table "Merit" is E'@omit create,update,delete';
+CREATE UNIQUE INDEX ON "Merit" ("id");
 
 
-CREATE TABLE "PlayerMerite" (
-  "id" SERIAL,
-  "meriteId" int,
+CREATE TABLE "PlayerMerit" (
+  "id" SERIAL PRIMARY KEY,
+  "meritId" int,
   "playerId" int,
   "date" varchar,
-  "active" boolean DEFAULT false
+  "validated" boolean DEFAULT false
 );
-comment on table "PlayerMerite" is E'@omit delete';
-CREATE UNIQUE INDEX ON "PlayerMerite" ("id");
+-- comment on table "PlayerMerit" is E'@omit delete';
+CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 
 CREATE TABLE "Loots" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "playerId" int,
   "itemId" int,
   "raidId" int,
@@ -77,7 +78,7 @@ CREATE UNIQUE INDEX ON "Loots" ("id");
 
 
 CREATE TABLE "Items" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "wowheadId" int,
   "classId" int
@@ -88,7 +89,7 @@ CREATE UNIQUE INDEX ON "Items" ("wowheadId");
 
 
 CREATE TABLE "ClassItem" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "classId" int,
   "itemId" int,
   "itemValueForThisClass" int
@@ -97,7 +98,7 @@ comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
 
 
-CREATE TABLE "BossItem" ("id" SERIAL,
+CREATE TABLE "BossItem" ("id" SERIAL PRIMARY KEY,
   "itemId" int,
   "bossId" int
 );
@@ -106,7 +107,7 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 
 
 CREATE TABLE "Bosses" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "donjonId" int,
   "name" varchar
 );
@@ -115,7 +116,7 @@ CREATE UNIQUE INDEX ON "Bosses" ("id");
 
 
 CREATE TABLE "Donjons" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "shortName" varchar,
   "active" boolean DEFAULT false
@@ -125,18 +126,19 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 
 CREATE TABLE "Raids" (
-  "id" SERIAL,
+  "id" SERIAL PRIMARY KEY,
   "donjonId" int,
   "date" varchar
 );
-comment on table "Raids" is E'@omit create,update,delete';
+comment on table "Raids" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Raids" ("id");
 
 
 CREATE TABLE "RaidPlayers" (
-    "id" SERIAL,
+    "id" SERIAL PRIMARY KEY,
     "playerId" int,
-    "raidId" int
+    "raidId" int,
+    "passed" boolean DEFAULT false
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "RaidPlayers" ("id");
@@ -150,8 +152,8 @@ ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("slotId") REFERENCES "Slots" ("id");
-ALTER TABLE "PlayerMerite" ADD FOREIGN KEY ("meriteId") REFERENCES "Merite" ("id");
-ALTER TABLE "PlayerMerite" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
+ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
+ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");
 ALTER TABLE "ClassItem" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");

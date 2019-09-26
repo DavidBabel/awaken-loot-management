@@ -32,6 +32,3 @@ VALUES
   ('Idole');
 
 
-INSERT INTO "Players" ("name", "classId", "rank")
-VALUES
-('Devilhunter', 6, 'admin');

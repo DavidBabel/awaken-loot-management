@@ -5,7 +5,8 @@ import { useState } from "react";
 import { DatePicker } from "../../../components/DatePicker";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { Mutation, Query } from "../../../lib/generatedTypes";
-import { CREATE_RAID, ONE_DONJON } from "../../../lib/gql/raid-queries";
+import { CREATE_RAID } from "../../../lib/gql/raid-mutations";
+import { ONE_DONJON } from "../../../lib/gql/raid-queries";
 
 interface QueryVariables {
   donjonId: number;

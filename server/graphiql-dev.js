@@ -11,6 +11,7 @@ const app = express();
 
 app.use(
   postgraphile(CONFIG.DATABASE_URL, "public", {
+    // classicIds: true,
     enhanceGraphiql: true,
     graphiql: true,
     graphqlRoute: "/",

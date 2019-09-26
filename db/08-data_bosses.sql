@@ -17,7 +17,7 @@ VALUES
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='7')),
+('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='ZG')),
 ('Lucifron', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
 ('Magmadar', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
 ('Gehennas', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),

@@ -39,14 +39,14 @@ export default {
     allLoots {
     }
   }`,
-  QUERY_MERITES: `
+  QUERY_MERITS: `
   query anyName {
-    allMerites {
+    allMerits {
     }
   }`,
-  QUERY_PLAYERMERITES: `
+  QUERY_PLAYERMERITS: `
   query anyName {
-    allPlayerMerites {
+    allPlayerMerits {
     }
   }`,
   QUERY_PLAYERSLOTS: `
@@ -122,9 +122,9 @@ export default {
       clientMutationId
     }
   }`,
-  MUTATION_MERITE: `
+  MUTATION_MERIT: `
   mutation anyName {
-    createMerite(input: {query}) {
+    createMerit(input: {query}) {
       clientMutationId
     }
   }`,
@@ -134,9 +134,9 @@ export default {
       clientMutationId
     }
   }`,
-  MUTATION_PLAYERMERITE: `
+  MUTATION_PLAYERMERIT: `
   mutation anyName {
-    createPlayerMerite(input: {query}) {
+    createPlayerMerit(input: {query}) {
       clientMutationId
     }
   }`,
