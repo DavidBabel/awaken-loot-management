@@ -64,13 +64,13 @@ function checkRights(playerLevel = GUEST, request) {
   const queries = parsedRequest.definitions.map(q =>
     q.selectionSet.selections.map(x => x.name.value)
   );
-  if (queries.length !== 1 || queries[0].length) {
-    throw new Error("This API only accept one query at a time");
-  }
+  // if (queries.length !== 1 || queries[0].length) {
+  //   throw new Error("This API only accept one query at a time");
+  // }
 
   const gqlQuery = queries[0][0];
   if (!Object.keys(rights).includes(gqlQuery)) {
-    throw new Error(`Unknow query ${gqlQuery}`);
+    throw new Error(`Awaken Unknow query ${gqlQuery}`);
   }
   return rights[gqlQuery].includes(playerLevel);
 }
