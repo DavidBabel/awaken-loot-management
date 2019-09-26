@@ -15,7 +15,8 @@ CREATE TABLE "Players" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "classId" int,
-  "rank" varchar,
+  "role" varchar,
+  "password" varchar,
   "active" boolean DEFAULT true
 );
 comment on table "Players" is E'@omit create,update,delete';
