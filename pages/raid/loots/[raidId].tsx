@@ -1,16 +1,16 @@
-import { useQuery } from '@apollo/react-hooks';
-import { Checkbox } from '@material-ui/core';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useQuery } from "@apollo/react-hooks";
+import { Checkbox } from "@material-ui/core";
+import { useRouter } from "next/router";
+import { useState } from "react";
 // import { BossCard } from '../../../components/BossCard';
-import { LoadingAndError } from '../../../components/LoadingAndErrors';
-import { PlayerCard } from '../../../components/PlayerCard';
-import { BossMenu } from '../../../components/RaidMenu/BossMenu';
-import { RaidMenu } from '../../../components/RaidMenu/RaidMenu';
-import { Player, Query } from '../../../lib/generatedTypes';
-import { ONE_RAID } from '../../../lib/gql/raid-queries';
-import { useToggle } from '../../../lib/hooks/toggle';
-import { raidPlayerByClass } from '../../../lib/utils/sorter';
+import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import { PlayerCard } from "../../../components/PlayerCard";
+import { BossMenu } from "../../../components/RaidMenu/BossMenu";
+import { RaidMenu } from "../../../components/RaidMenu/RaidMenu";
+import { Player, Query } from "../../../lib/generatedTypes";
+import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { useToggle } from "../../../lib/hooks/toggle";
+import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 // interface Props {
 //   raidId: number;
@@ -95,11 +95,11 @@ export default function PageRaidView(/* { raidId }: Props */) {
       <div
         style={{
           // display: 'flex',
-          width: '80%',
-          flexWrap: 'wrap',
-          margin: '15px',
-          alignItems: 'flex-start',
-          justifyContent: 'center'
+          width: "80%",
+          flexWrap: "wrap",
+          margin: "15px",
+          alignItems: "flex-start",
+          justifyContent: "center"
         }}
       >
         {currentItem && (
@@ -107,7 +107,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
             <Checkbox
               checked={shouldDisplayAllClass}
               onClick={toggleShouldDisplayAllClass}
-            />{' '}
+            />{" "}
             Display all classes
             {/* {currentItem} */}
             {playersToDisplay.map(raidPlayer => {

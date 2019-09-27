@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const CONFIG = require('../config.js');
-const { checkLogin } = require('../middleware/auth-helper/check-login');
+const jwt = require("jsonwebtoken");
+const CONFIG = require("../config.js");
+const { checkLogin } = require("../middleware/auth-helper/check-login");
 
 /**
  *
@@ -11,8 +11,8 @@ module.exports = async function loginRoute(req, res) {
   const account = await checkLogin(req.body.username, req.body.password);
   if (req.body && account) {
     const payload = {
-      username: account.name,
-      role: account.role
+      role: account.role,
+      username: account.name
     };
     res
       .json({
@@ -25,7 +25,7 @@ module.exports = async function loginRoute(req, res) {
   } else {
     res.status(401).json({
       error: {
-        message: 'Wrong username or password!'
+        message: "Wrong username or password!"
       }
     });
   }

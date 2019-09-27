@@ -4,19 +4,19 @@ import {
   ListItem,
   ListItemText,
   ListSubheader
-} from '@material-ui/core';
-import Link from 'next/link';
-import Router from 'next/router';
-import { destroyCookie } from 'nookies';
-import React, { useContext } from 'react';
-import MemberContext from '../../lib/context/member';
-import { role } from '../../lib/role-level';
+} from "@material-ui/core";
+import Link from "next/link";
+import Router from "next/router";
+import { destroyCookie } from "nookies";
+import React, { useContext } from "react";
+import MemberContext from "../../lib/context/member";
+import { role } from "../../lib/role-level";
 
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
-  destroyCookie({}, 'member');
-  Router.push('/');
+  destroyCookie({}, "member");
+  Router.push("/");
 }
 
 export function Menu() {
@@ -26,9 +26,9 @@ export function Menu() {
   return (
     <div
       style={{
-        borderRight: '1px solid #E0E0E0',
+        borderRight: "1px solid #E0E0E0",
         width: 400,
-        height: '100vh',
+        height: "90vh",
         marginRight: 30
       }}
     >
