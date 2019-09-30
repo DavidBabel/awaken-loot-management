@@ -47,6 +47,13 @@ export function Menu() {
           <Divider />
           <List>
             <ListItem button={true}>
+              <Link href="/player/list">
+                <ListItemText primary="Player list" />
+              </Link>
+            </ListItem>
+          </List>
+          <List>
+            <ListItem button={true}>
               <Link href="/summary">
                 <ListItemText primary="Characters summary" />
               </Link>
