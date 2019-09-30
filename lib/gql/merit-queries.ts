@@ -21,3 +21,20 @@ export const PLAYER_MERIT = gql`
     }
   }
 `;
+
+export const ALL_MERITS = gql`
+  query AllMerits {
+    allMerits {
+      edges {
+        node {
+          value
+          name
+          id
+          comment
+          categorie
+          active
+        }
+      }
+    }
+  }
+`;

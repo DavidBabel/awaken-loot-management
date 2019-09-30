@@ -39,7 +39,7 @@ export default function ProgressBar(props) {
         fillerElem.current.animate(
           [{ width: "0%" }, { width: `${props.progress}%` }],
           {
-            duration: 1000,
+            duration: 500,
             iterations: 1,
             easing: "ease-out",
             fill: "both"
