@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       overflowX: "auto"
     },
+    hidden: {
+      display: "none"
+    },
     table: {
       minWidth: 650
     },
@@ -27,10 +30,14 @@ function createData(donjonName: string, date: string, raidId: string) {
   return { donjonName, date, raidId };
 }
 
-export default function RaidsTable({ raids }) {
+export default function RaidsTable({ raids, hidden }) {
   const classes = useStyles("");
   if (raids.length === 0) {
-    return <div style={{ padding: "20px" }}>No raid yet!</div>;
+    return (
+      <div className={hidden ? classes.hidden : ""} style={{ padding: "20px" }}>
+        No raid yet!
+      </div>
+    );
   }
   const rows = raids.map(raid =>
     createData(
@@ -40,7 +47,7 @@ export default function RaidsTable({ raids }) {
     )
   );
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>

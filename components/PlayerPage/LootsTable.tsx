@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       overflowX: "auto"
     },
+    hidden: {
+      display: "none"
+    },
     table: {
       minWidth: 650
     },
@@ -32,10 +35,14 @@ function createData(
   return { name, wowheadId, date, raidId };
 }
 
-export default function LootsTable({ loots }) {
+export default function LootsTable({ loots, hidden }) {
   const classes = useStyles("");
   if (loots.length === 0) {
-    return <div style={{ padding: "20px" }}>Nada!</div>;
+    return (
+      <div className={hidden ? classes.hidden : ""} style={{ padding: "20px" }}>
+        Nada!
+      </div>
+    );
   }
   const rows = loots.map(loot =>
     createData(
@@ -46,7 +53,7 @@ export default function LootsTable({ loots }) {
     )
   );
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -60,14 +67,10 @@ export default function LootsTable({ loots }) {
             <TableRow key={row.wowheadId + row.raidId}>
               <TableCell component="th" scope="row">
                 <a
-                  style={{
-                    textDecoration: "none",
-                    marginRight: "10px"
-                  }}
                   onClick={e => {
                     e.preventDefault();
                   }}
-                  href={`https://en.classic.wowhead.com/item=${row.wowheadId}`}
+                  href={`https://fr.classic.wowhead.com/item=${row.wowheadId}`}
                 >
                   {row.name}
                 </a>

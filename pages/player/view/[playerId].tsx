@@ -36,7 +36,7 @@ interface Variables {
 
 export default function PageSeePlayer(/*{ playerId }: Props */) {
   const classes = useStyles("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -74,9 +74,9 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
           <Tab label="Loots" />
           <Tab label="Raids" />
         </Tabs>
-        {value === 0 ? <MeritsTable merits={merits} /> : ""}
-        {value === 1 ? <LootsTable loots={loots} /> : ""}
-        {value === 2 ? <RaidsTable raids={raids} /> : ""}
+        <MeritsTable hidden={value !== 0} merits={merits} />
+        <LootsTable hidden={value !== 1} loots={loots} />
+        <RaidsTable hidden={value !== 2} raids={raids} />
       </Paper>
     </div>
   );

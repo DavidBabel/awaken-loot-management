@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       overflowX: "auto"
     },
+    hidden: {
+      display: "none"
+    },
     table: {
       minWidth: 650
     },
@@ -36,10 +39,14 @@ function createData(
   return { name, categorie, comment, value, validated };
 }
 
-export default function MeritsTable({ merits }) {
+export default function MeritsTable({ merits, hidden }) {
   const classes = useStyles("");
   if (merits.length === 0) {
-    return <div style={{ padding: "20px" }}>No merit!</div>;
+    return (
+      <div className={hidden ? classes.hidden : ""} style={{ padding: "20px" }}>
+        No merit!
+      </div>
+    );
   }
   const rows = merits.map(merit => {
     return createData(
@@ -51,7 +58,7 @@ export default function MeritsTable({ merits }) {
     );
   });
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
