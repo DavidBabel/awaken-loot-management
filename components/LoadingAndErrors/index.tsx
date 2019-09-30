@@ -12,7 +12,7 @@ export function LoadingAndError({ loading, error }: Props) {
 
   if (error) {
     return (
-      <>
+      <div>
         <p>
           An error occured, are you{" "}
           <Link href="/login">
@@ -30,7 +30,7 @@ export function LoadingAndError({ loading, error }: Props) {
             </pre>
           </div>
         )}
-      </>
+      </div>
     );
   }
   if (loading) {
