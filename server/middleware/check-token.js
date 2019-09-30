@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const CONFIG = require('../config.js');
+const jwt = require("jsonwebtoken");
+const CONFIG = require("../config.js");
 
 /**
  *
@@ -9,22 +9,22 @@ const CONFIG = require('../config.js');
  */
 module.exports = function(req, res, next) {
   if (
-    req.hasOwnProperty('headers') &&
-    req.headers.hasOwnProperty('authorization')
+    req.hasOwnProperty("headers") &&
+    req.headers.hasOwnProperty("authorization")
   ) {
     try {
-      req.user = jwt.verify(req.headers['authorization'], CONFIG.JWT_SECRET);
+      req.user = jwt.verify(req.headers.authorization, CONFIG.JWT_SECRET);
     } catch (err) {
       return res.status(401).json({
         error: {
-          msg: 'Failed to authenticate token!'
+          msg: "Failed to authenticate token!"
         }
       });
     }
   } else {
     return res.status(401).json({
       error: {
-        msg: 'No token!'
+        msg: "No token!"
       }
     });
   }

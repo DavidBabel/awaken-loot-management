@@ -74,3 +74,13 @@ Le site devrait être disponible sur http://localhost:3000
 GraphiQl qui sert à écrire les requêtes est disponible à l'adresse : http://localhost:5000/graphiql
 
 Et ya plus qu'à dev :)
+
+## quick script
+
+Le script `db/wowhead-extractsextract_loot_wowhead_in_browser.sql` premet d'extraire un JSON d'une table de loot sur wowhead, il suffit de la copier dans la console.
+
+Pour convertir ce JSON en SQL, il suffit d'executer la commande :
+
+```bash
+yarn loot "Nom du boss" ./db/wowhead-extracts/mc/FichierJsonBuBoss.json
+```

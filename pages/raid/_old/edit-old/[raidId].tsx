@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
-import { BossCard } from "../../../components/BossCard";
-import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import { Query } from "../../../lib/generatedTypes";
-import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { BossCard } from "../../../../components/BossCard";
+import { LoadingAndError } from "../../../../components/LoadingAndErrors";
+import { Query } from "../../../../lib/generatedTypes";
+import { ONE_RAID } from "../../../../lib/gql/raid-queries";
 
 // interface Props {
 //   raidId: number;
@@ -13,7 +13,7 @@ interface Variables {
   raidId: number;
 }
 
-export default function PageRaidView(/* { raidId }: Props */) {
+export default function PageRaidEdit(/* { raidId }: Props */) {
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
 
@@ -29,15 +29,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        margin: "15px",
-        alignItems: "flex-start",
-        justifyContent: "center"
-      }}
-    >
+    <div>
       {bosses.map(boss => {
         return (
           <BossCard

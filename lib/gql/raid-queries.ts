@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 export const ALL_DONJONS = gql`
   query AllDonjons {
@@ -139,6 +139,28 @@ export const ONE_RAID = gql`
                     donjonByDonjonId {
                       name
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+        lootsByRaidId {
+          nodes {
+            itemByItemId {
+              name
+              lootsByItemId {
+                nodes {
+                  playerByPlayerId {
+                    name
+                    classId
+                    classByClassId {
+                      color
+                      name
+                    }
+                  }
+                  itemByItemId {
+                    name
                   }
                 }
               }

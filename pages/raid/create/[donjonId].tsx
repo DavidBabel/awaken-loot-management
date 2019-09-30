@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Avatar, Button, Grid, Typography } from "@material-ui/core";
+import { Avatar, Button, Container, Grid, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { DatePicker } from "../../../components/DatePicker";
@@ -44,7 +44,7 @@ export default function PageCreateRaid() {
   }
   const currentDonjon = donjonData.allDonjons.edges[0].node;
   return (
-    <>
+    <Container>
       <Typography>Create a raid for</Typography>
       <Grid container={true}>
         <Grid item={true}>
@@ -90,6 +90,6 @@ export default function PageCreateRaid() {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Container>
   );
 }

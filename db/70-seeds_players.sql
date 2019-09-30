@@ -14,8 +14,8 @@
 -- 6 - Chasseur
 -- 7 - Chaman
 -- 8 - Guerrier Tank
--- 9 - Paladin
--- 10 - Guerrier DPS
+-- 9 - Guerrier DPS
+-- 10 - Paladin
 
 
 INSERT INTO "Players" ("name", "classId", "role", "password")
@@ -24,10 +24,15 @@ VALUES
 ('Hakken'       , 2,  'officer', null),
 ('Lums'         , 7,  'officer', null),
 ('Shaheem'      , 3,  'officer', null),
+('Nozil'        , 6,  'classMaster', null),
+('Tàel'         , 3,  'classMaster', null),
+('Skwäsh'       , 1,  'classMaster', null),
+('Cocobanjo'    , 4,  'classMaster', null),
+('Krigen'       , 8,  'classMaster', null),
+('Oscuro'       , 9,  'classMaster', null),
+('Paffë'        , 5,  'classMaster', null),
 ('Ticcounet'    , 8,  'player', null),
-('Paffë'        , 5,  'player', null),
 ('Størmfury'    , 5,  'player', null),
-('Nozil'        , 6,  'player', null),
 ('Qweakzor'     , 6,  'player', null),
 ('Traqùs'       , 6,  'player', null),
 ('Adblock'      , 2,  'player', null),
@@ -48,23 +53,19 @@ VALUES
 ('Kresmi'       , 3,  'player', null),
 ('Psykøhazard'  , 3,  'player', null),
 ('Rektall'      , 3,  'player', null),
-('Tàel'         , 3,  'player', null),
 ('Drakenns'     , 8,  'player', null),
-('Oscuro'       , 10, 'player', null),
 ('Sprawl'       , 8,  'player', null),
 ('Beudinio'     , 5,  'player', null),
 ('Synrj'        , 5,  'player', null),
 ('Brk'          , 1,  'player', null),
 ('Lylith'       , 1,  'player', null),
 ('Skau'         , 1,  'player', null),
-('Skwäsh'       , 1,  'player', null),
 ('Kenyâ'        , 7,  'player', null),
 ('Zhantla'      , 7,  'player', null),
 ('Zykxx'        , 7,  'player', null),
 ('Brebouche'    , 8,  'player', null),
-('Krigen'       , 8,  'player', null),
 ('Lykwette'     , 8,  'player', null),
-('Throma'       , 10, 'player', null),
+('Throma'       , 9,  'player', null),
 ('Alk'          , 6,  'player', null),
 ('Allyssamyr'   , 2,  'player', null),
 ('Ikith'        , 2,  'player', null),
@@ -72,16 +73,20 @@ VALUES
 ('Wid'          , 2,  'player', null),
 ('Need'         , 1,  'player', null),
 ('Callumlolz'   , 4,  'player', null),
-('Cocobanjo'    , 4,  'player', null),
 ('Ez'           , 4,  'player', null),
 ('Jonasran'     , 4,  'player', null),
 ('Yx'           , 4,  'player', null),
 ('Suprême'      , 3,  'player', null),
-('Brosko'       , 10, 'player', null),
+('Brosko'       , 9,  'player', null),
 ('Karaelys'     , 1,  'player', null),
 ('Teimdall'     , 1,  'player', null),
 ('Trackass'     , 1,  'player', null),
-('Gidgud'       , 7,  'player', null)
-
+('Gidgud'       , 7,  'player', null),
+('Ragegoriath'  , 8,  'player', null),
+('Abramus'      , 2,  'player', null),
+('Boblemoche'   , 3,  'player', null),
+('Néstor'       , 3,  'player', null),
+('Tephrite'     , 5,  'player', null),
+('Deiv'         , 1,  'player', null)
 
 ;
