@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 // import { BossCard } from '../../../components/BossCard';
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import { LootList } from "../../../components/LootList";
 import { PlayerCard } from "../../../components/PlayerCard";
 import { BossMenu } from "../../../components/RaidMenu/BossMenu";
 import { RaidMenu } from "../../../components/RaidMenu/RaidMenu";
@@ -24,6 +25,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
 
+  const [displayLoots, setDisplayLoots] = useState(false);
   const [shouldDisplayAllClass, toggleShouldDisplayAllClass] = useToggle(false);
   const [currentBossId, setCurrentBossId] = useState<number>();
   const [currentItemId, setCurrentItemId] = useState<number>();
@@ -45,6 +47,8 @@ export default function PageRaidView(/* { raidId }: Props */) {
   }
 
   const currentRaid = data.allRaids.nodes[0];
+  const loots = currentRaid.lootsByRaidId.nodes;
+
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   // const donjonShortName = currentRaid.donjonByDonjonId.shortName;
   const currentBoss = currentBossId
@@ -77,16 +81,20 @@ export default function PageRaidView(/* { raidId }: Props */) {
       <RaidMenu
         raid={currentRaid}
         bosses={bosses}
+        goToLoots={() => setDisplayLoots(true)}
         onBossSelect={newBossId => {
+          setDisplayLoots(false);
           setCurrentItemId(undefined);
           setPlayersToInspect([]);
           setCurrentBossId(newBossId);
         }}
       />
-      {currentBoss && (
+      {displayLoots && <LootList loots={loots} />}
+      {!displayLoots && currentBoss && (
         <BossMenu
           boss={currentBoss}
           onItemSelect={newItemId => {
+            setDisplayLoots(false);
             setPlayersToInspect([]);
             setCurrentItemId(newItemId);
           }}
@@ -102,7 +110,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
           justifyContent: "center"
         }}
       >
-        {currentItem && (
+        {!displayLoots && currentItem && (
           <>
             <Checkbox
               checked={shouldDisplayAllClass}
