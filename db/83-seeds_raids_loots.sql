@@ -7,11 +7,11 @@ VALUES
   'Hakken'),
   (SELECT id FROM "Items" WHERE "name"=
   'Bottes d‘arcaniste')),
--- ( 1,
---   (SELECT id FROM "Players" WHERE "name"=
---   'Jonasran'), -- TODO pseudo exact
---   (SELECT id FROM "Items" WHERE "name"=
---   'Pantalon du tueur de la nuit')),
+( 1,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Jonasran'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon du tueur de la nuit')),
 ( 1,
   (SELECT id FROM "Players" WHERE "name"=
   'Traqùs'),
@@ -34,7 +34,7 @@ VALUES
   'Trembleterre'))
 -- ( 1,
 --   (SELECT id FROM "Players" WHERE "name"=
---   'Bartok'), -- TODO pseudo exact
+--   'Bartok'), -- TODO pseudo exact ou BTO ?
 --   (SELECT id FROM "Items" WHERE "name"=
 --   'Lame à tranchant d‘obsidienne')),
 
@@ -88,12 +88,23 @@ VALUES
   'Titanesque'),
   (SELECT id FROM "Items" WHERE "name"=
   'Lance-grenaille explosif'))
--- ( 2,
+-- ( 2, TODO
 --   (SELECT id FROM "Players" WHERE "name"=
 --   '?????'),
 --   (SELECT id FROM "Items" WHERE "name"=
 --   'loot sulfuron')),
 
+  ;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 3,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Traqùs'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque de traqueur de dragon')),
+-- TODO autres loots sur onyxia ?
   ;
 
 
@@ -193,4 +204,85 @@ VALUES
 
   ;
 
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 5,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Minatrix'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 5,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 5,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Rektall'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Crâne de Némésis')),
+( 5,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque des dix tempêtes')),
+( 5,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Psykøhazard'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'))
+
+  ;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tephrite'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Brassards cénariens')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Espauliers de puissance')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Need'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mantelet de prophétie')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cuirasse de traqueur de géant')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Jonasran'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Plastron du tueur de la nuit')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ikith'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Talisman de pouvoir éphémère')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Feuille ancienne pétrifiée')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Deiv'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Anneau de cautérisation')),
+( 6,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Drague-lave de Finkle')),
+
+
+  ;
 

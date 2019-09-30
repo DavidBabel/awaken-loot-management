@@ -368,21 +368,31 @@ VALUES
 -- SELECT 1 AS "Majordomo Executus";
 INSERT INTO "Items" ("name","wowheadId","classId")
 VALUES
-('Dent de chien du magma',18805,(SELECT id FROM "Classes" WHERE "name"='')),
-('Feuille ancienne pétrifiée',18703,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Anneau de cautérisation',19140,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Cape ignifugée',18811,(SELECT id FROM "Classes" WHERE "name"='')),
+('Dent de chien du magma',18805,(SELECT id FROM "Classes" WHERE "name"='')),
+('Drague-lave de Finkle',18803,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Echarpe des secrets murmurés',18809,(SELECT id FROM "Classes" WHERE "name"='')),
+('Epaulières de garde du feu',19139,(SELECT id FROM "Classes" WHERE "name"='')),
+('Feuille ancienne pétrifiée',18703,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Gants de la flamme hypnotique',18808,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Garde-poignets de vrai vol',18812,(SELECT id FROM "Classes" WHERE "name"='')),
+('Grèves du Coeur du Magma',18806,(SELECT id FROM "Classes" WHERE "name"='')),
 ('L‘Oeil de la divinité',18646,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Spallières de croissance sauvage',18810,(SELECT id FROM "Classes" WHERE "name"=''));
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
-((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18805)),
-((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18703)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=19140)),
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18811)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18805)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18803)),
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18809)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=19139)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18703)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18808)),
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18812)),
+((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18806)),
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18646)),
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18810));
 
@@ -455,6 +465,7 @@ VALUES
 ('Casque des dix tempêtes',16947,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
 ('Eclat de l‘Ecaille',17064,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Porte-mort',17068,(SELECT id FROM "Classes" WHERE "name"='')),
+('Sac à dos en cuir d‘Onyxia',17966,(SELECT id FROM "Classes" WHERE "name"='')),
 -- ('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Vis‘kag le Saigneur',17075,(SELECT id FROM "Classes" WHERE "name"=''));
 

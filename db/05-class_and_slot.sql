@@ -9,8 +9,8 @@ VALUES
 ('Chasseur',      '#ABD473'),
 ('Chaman',        '#0070DE'),
 ('Guerrier Tank', '#C79C6E'),
-('Paladin',       '#F58CBA'),
-('Guerrier DPS',  '#C41F3B');
+('Guerrier DPS',  '#C41F3B'),
+('Paladin',       '#F58CBA');
 
 INSERT INTO
   "Slots" ( "name")
