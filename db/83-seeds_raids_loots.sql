@@ -103,7 +103,7 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Traqùs'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Casque de traqueur de dragon')),
+  'Casque de traqueur de dragon'))
 -- TODO autres loots sur onyxia ?
   ;
 
@@ -281,7 +281,7 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Mergueztguez'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Drague-lave de Finkle')),
+  'Drague-lave de Finkle'))
 
 
   ;
