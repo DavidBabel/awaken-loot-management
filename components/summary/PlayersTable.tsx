@@ -5,6 +5,7 @@ import {
   createStyles,
   makeStyles
 } from "@material-ui/core/styles";
+import Link from "next/link";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -36,18 +37,11 @@ function createData(
   name: string,
   merit: number,
   totalLoot: number,
-  totalRaid: number
+  totalRaid: number,
+  playerId: number
 ) {
-  return { name, merit, totalLoot, totalRaid };
+  return { name, merit, totalLoot, totalRaid, playerId };
 }
-
-const rows = [
-  createData("Devilhunter", 45, 8, 15),
-  createData("Thorsen", 12, 5, 11),
-  createData("Shaheem", 66, 12, 18),
-  createData("Kenya", 80, 28, 25),
-  createData("Nazwen", 28, 7, 11)
-];
 
 interface Props {
   classColor: String;
@@ -68,11 +62,36 @@ const useStyles = makeStyles({
   progressCell: {
     margin: "auto",
     width: "300px"
-  }
+  },
+  link: { "& a": { textDecoration: "none", color: "white" } }
 });
 
 export default function PlayersTable(props) {
   const classes = useStyles(props);
+
+  const rows = props.players.map(player => {
+    let totalMerit = 0;
+    let totalLoot = 0;
+    let totalRaid = player.raidPlayersByPlayerId.nodes.length;
+    player.playerMeritsByPlayerId.nodes.map(merit => {
+      if (merit.validated) {
+        totalMerit += merit.meritByMeritId.value;
+      }
+    });
+    player.lootsByPlayerId.nodes.map(loot => {
+      if (loot.active) {
+        totalLoot += 1;
+      }
+    });
+
+    return createData(
+      player.name,
+      Math.round((totalMerit * 100) / props.maxMeritValue),
+      totalLoot,
+      totalRaid,
+      player.id
+    );
+  });
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -100,11 +119,17 @@ export default function PlayersTable(props) {
               </StyledTableCell>
               <StyledTableCell align="center">{row.totalLoot}</StyledTableCell>
               <StyledTableCell align="center">{row.totalRaid}</StyledTableCell>
-              <StyledTableCell align="center">
-                {" "}
-                <Button variant="contained" color="primary">
-                  Details
-                </Button>
+              <StyledTableCell align="center" className={classes.link}>
+                <Link
+                  href="/player/view/[id]"
+                  as={`/player/view/${row.playerId}`}
+                >
+                  <a>
+                    <Button variant="contained" color="primary">
+                      Details
+                    </Button>
+                  </a>
+                </Link>
               </StyledTableCell>
             </StyledTableRow>
           ))}

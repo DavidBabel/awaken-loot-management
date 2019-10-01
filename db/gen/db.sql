@@ -1411,11 +1411,6 @@ VALUES
   'Sceau de l‘archimagus')),
 ( 4,
   (SELECT id FROM "Players" WHERE "name"=
-  'Mergueztguez'),
-  (SELECT id FROM "Items" WHERE "name"=
-  'Sceau de l‘archimagus')),
-( 4,
-  (SELECT id FROM "Players" WHERE "name"=
   'Synrj'),
   (SELECT id FROM "Items" WHERE "name"=
   'Spallières cénariennes')),

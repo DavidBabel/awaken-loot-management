@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     borderRadius: "6px",
     padding: "2px 0",
     zIndex: 1,
-    left: "0%",
+    left: "calc(0% - 25px)",
     top: "-4px",
     "&::after": {
       content: "''",
@@ -33,9 +33,12 @@ export default function ProgressTooltip(props) {
     if (props.showed) {
       if (tooltipElem.current.animate) {
         tooltipElem.current.animate(
-          [{ left: "0%" }, { left: `calc(${props.progress}% - 25px)` }],
+          [
+            { left: "calc(0% - 25px)" },
+            { left: `calc(${props.progress}% - 25px)` }
+          ],
           {
-            duration: 1000,
+            duration: 500,
             iterations: 1,
             easing: "ease-out",
             fill: "both"
@@ -49,7 +52,7 @@ export default function ProgressTooltip(props) {
   return (
     <React.Fragment>
       <span ref={tooltipElem} className={classes.tooltip}>
-        {props.progress}
+        {props.progress + "%"}
       </span>{" "}
     </React.Fragment>
   );

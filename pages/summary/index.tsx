@@ -7,6 +7,12 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import PlayersTable from "../../components/summary/PlayersTable";
 
+import { useQuery } from "@apollo/react-hooks";
+import { Query } from "../../lib/generatedTypes";
+import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { ALL_MERITS } from "../../lib/gql/merit-queries";
+import { LoadingAndError } from "../../components/LoadingAndErrors";
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;
@@ -16,7 +22,9 @@ interface TabPanelProps {
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
-  return (
+  return value !== index ? (
+    <div></div>
+  ) : (
     <Typography
       component="div"
       role="tabpanel"
@@ -90,11 +98,47 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function PageIndex() {
   const classes = useStyles("");
   const [value, setValue] = React.useState(0);
+  const {
+    loading: loadingPlayers,
+    data: dataPlayers,
+    error: errorPlayers
+  } = useQuery<Query>(ALL_PLAYERS);
+  const {
+    loading: loadingAllMerits,
+    data: dataAllMerits,
+    error: errorAllMerits
+  } = useQuery<Query>(ALL_MERITS);
+
+  const loading = loadingPlayers || loadingAllMerits;
+  const error = errorPlayers || errorAllMerits;
+
+  if (loading || error) {
+    return <LoadingAndError loading={loading} error={error} />;
+  }
+
+  const players = dataPlayers.allPlayers.nodes;
+  const allMerits = dataAllMerits.allMerits.edges;
+  let maxMeritValue = 0;
+  allMerits.map(merit => {
+    if (merit.node.active) {
+      maxMeritValue += merit.node.value;
+    }
+  });
+
+  const pretres = players.filter(player => player.classByClassId.id === 1);
+  const mages = players.filter(player => player.classByClassId.id === 2);
+  const demonistes = players.filter(player => player.classByClassId.id === 3);
+  const voleurs = players.filter(player => player.classByClassId.id === 4);
+  const druides = players.filter(player => player.classByClassId.id === 5);
+  const chasseurs = players.filter(player => player.classByClassId.id === 6);
+  const chamans = players.filter(player => player.classByClassId.id === 7);
+  const guerriers = players.filter(
+    player => player.classByClassId.id === 8 || player.classByClassId.id === 10
+  );
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
-
   return (
     <div className={`${classes.root} ${classes["indicator_" + value]}`}>
       <AppBar position="static" color="default">
@@ -118,28 +162,68 @@ export default function PageIndex() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <PlayersTable showed={value === 0} classColor={classColors.druide} />
+        <PlayersTable
+          showed={value === 0}
+          classColor={classColors.druide}
+          players={druides}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <PlayersTable showed={value === 1} classColor={classColors.chasseur} />
+        <PlayersTable
+          showed={value === 1}
+          classColor={classColors.chasseur}
+          players={chasseurs}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <PlayersTable showed={value === 2} classColor={classColors.mage} />
+        <PlayersTable
+          showed={value === 2}
+          classColor={classColors.mage}
+          players={mages}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <PlayersTable showed={value === 3} classColor={classColors.pretre} />
+        <PlayersTable
+          showed={value === 3}
+          classColor={classColors.pretre}
+          players={pretres}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <PlayersTable showed={value === 4} classColor={classColors.voleur} />
+        <PlayersTable
+          showed={value === 4}
+          classColor={classColors.voleur}
+          players={voleurs}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <PlayersTable showed={value === 5} classColor={classColors.chaman} />
+        <PlayersTable
+          showed={value === 5}
+          classColor={classColors.chaman}
+          players={chamans}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <PlayersTable showed={value === 6} classColor={classColors.demoniste} />
+        <PlayersTable
+          showed={value === 6}
+          classColor={classColors.demoniste}
+          players={demonistes}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
       <TabPanel value={value} index={7}>
-        <PlayersTable showed={value === 7} classColor={classColors.guerrier} />
+        <PlayersTable
+          showed={value === 7}
+          classColor={classColors.guerrier}
+          players={guerriers}
+          maxMeritValue={maxMeritValue}
+        />
       </TabPanel>
     </div>
   );
