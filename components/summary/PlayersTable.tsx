@@ -38,9 +38,19 @@ function createData(
   merit: number,
   totalLoot: number,
   totalRaid: number,
+  lastLootDate: string,
+  lastRaidDate: string,
   playerId: number
 ) {
-  return { name, merit, totalLoot, totalRaid, playerId };
+  return {
+    name,
+    merit,
+    totalLoot,
+    totalRaid,
+    lastLootDate,
+    lastRaidDate,
+    playerId
+  };
 }
 
 interface Props {
@@ -83,12 +93,37 @@ export default function PlayersTable(props) {
         totalLoot += 1;
       }
     });
+    let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
+    if (totalRaid === 0) {
+      lastRaidDate = null;
+    } else {
+      player.raidPlayersByPlayerId.nodes.map(raid => {
+        let currentRaidDate = new Date(raid.raidByRaidId.date);
+        if (currentRaidDate > lastRaidDate) {
+          lastRaidDate = currentRaidDate;
+        }
+      });
+    }
+
+    let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
+    if (totalLoot === 0) {
+      lastLootDate = null;
+    } else {
+      player.lootsByPlayerId.nodes.map(loot => {
+        let currentLootDate = new Date(loot.raidByRaidId.date);
+        if (currentLootDate > lastLootDate) {
+          lastLootDate = currentLootDate;
+        }
+      });
+    }
 
     return createData(
       player.name,
       Math.round((totalMerit * 100) / props.maxMeritValue),
       totalLoot,
       totalRaid,
+      lastLootDate ? lastLootDate.toLocaleDateString("fr-FR") : "Aucun",
+      lastRaidDate ? lastRaidDate.toLocaleDateString("fr-FR") : "Aucun",
       player.id
     );
   });
@@ -101,6 +136,8 @@ export default function PlayersTable(props) {
             <StyledTableCell align="center">Merit</StyledTableCell>
             <StyledTableCell align="center">Total loot</StyledTableCell>
             <StyledTableCell align="center">Total raid</StyledTableCell>
+            <StyledTableCell align="center">Last loot date</StyledTableCell>
+            <StyledTableCell align="center">Last raid date</StyledTableCell>
             <StyledTableCell align="center"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -119,6 +156,13 @@ export default function PlayersTable(props) {
               </StyledTableCell>
               <StyledTableCell align="center">{row.totalLoot}</StyledTableCell>
               <StyledTableCell align="center">{row.totalRaid}</StyledTableCell>
+              <StyledTableCell align="center">
+                {row.lastLootDate}
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                {" "}
+                {row.lastRaidDate}
+              </StyledTableCell>
               <StyledTableCell align="center" className={classes.link}>
                 <Link
                   href="/player/view/[id]"

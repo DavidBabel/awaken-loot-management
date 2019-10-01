@@ -26,19 +26,16 @@ export const ALL_PLAYERS = gql`
         }
         lootsByPlayerId {
           nodes {
-            itemByItemId {
-              name
-              lootsByItemId {
-                nodes {
-                  raidByRaidId {
-                    date
-                  }
-                }
-              }
-            }
             active
+            itemByItemId {
+              wowheadId
+              name
+            }
+            raidByRaidId {
+              date
+              id
+            }
           }
-          totalCount
         }
         raidPlayersByPlayerId {
           nodes {

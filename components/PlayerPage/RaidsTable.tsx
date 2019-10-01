@@ -42,7 +42,7 @@ export default function RaidsTable({ raids, hidden }) {
   const rows = raids.map(raid =>
     createData(
       raid.raidByRaidId.donjonByDonjonId.name,
-      raid.raidByRaidId.date,
+      new Date(raid.raidByRaidId.date).toLocaleDateString("fr-FR"),
       raid.raidId
     )
   );

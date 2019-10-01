@@ -48,7 +48,7 @@ export default function LootsTable({ loots, hidden }) {
     createData(
       loot.itemByItemId.name,
       loot.itemByItemId.wowheadId,
-      loot.raidByRaidId.date,
+      new Date(loot.raidByRaidId.date).toLocaleDateString("fr-FR"),
       loot.raidByRaidId.id
     )
   );

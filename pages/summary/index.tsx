@@ -132,9 +132,10 @@ export default function PageIndex() {
   const druides = players.filter(player => player.classByClassId.id === 5);
   const chasseurs = players.filter(player => player.classByClassId.id === 6);
   const chamans = players.filter(player => player.classByClassId.id === 7);
-  const guerriers = players.filter(
-    player => player.classByClassId.id === 8 || player.classByClassId.id === 10
+  const guerriersTank = players.filter(
+    player => player.classByClassId.id === 8
   );
+  const guerriersDps = players.filter(player => player.classByClassId.id === 9);
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
@@ -158,7 +159,8 @@ export default function PageIndex() {
           <Tab label="Voleur" {...a11yProps(4)} />
           <Tab label="Chaman" {...a11yProps(5)} />
           <Tab label="Démoniste" {...a11yProps(6)} />
-          <Tab label="Guerrier" {...a11yProps(7)} />
+          <Tab label="Guerrier Tank" {...a11yProps(7)} />
+          <Tab label="Guerrier DPS" {...a11yProps(8)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -221,7 +223,15 @@ export default function PageIndex() {
         <PlayersTable
           showed={value === 7}
           classColor={classColors.guerrier}
-          players={guerriers}
+          players={guerriersTank}
+          maxMeritValue={maxMeritValue}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <PlayersTable
+          showed={value === 8}
+          classColor={classColors.guerrier}
+          players={guerriersDps}
           maxMeritValue={maxMeritValue}
         />
       </TabPanel>
