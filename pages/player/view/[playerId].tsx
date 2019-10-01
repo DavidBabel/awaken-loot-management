@@ -15,12 +15,14 @@ import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 
 const useStyles = makeStyles({
   root: {
+    width: "80%",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
     margin: "0px auto"
   },
   tabs: {
+    width: "80%",
     flexGrow: 0,
     height: "48px",
     margin: "10px auto"
