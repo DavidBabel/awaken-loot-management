@@ -281,3 +281,195 @@ VALUES
 
   ;
 
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Hakken'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Qweakzor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tendon de dragon noir adulte')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque des dix tempêtes')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Paffë'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couvre-chef de Stormrage')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Paffë'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Oscuro'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur')),
+( 7,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Oscuro'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur'))
+
+  ;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 8,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture Rageterre'))
+
+  ;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture Rageterre')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Callumlolz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bracelets du tueur de la nuit')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes Rageterre')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Allyssamyr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Robe du pouvoir volatil')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nøwad'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame à tranchant d‘obsidienne')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon du tueur de la nuit')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières Rageterre')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sandales de puissance')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kaarr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants du tueur de la nuit')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Trackass'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Protège-bras de prophétie')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque de traqueur de géant')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Zapikote'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne d‘arcaniste')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Corde de mana enflammé')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tàel'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de Gangrecoeur')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Boblemoche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Solerets du Marcheflammes')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thorsen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants d‘arcaniste')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Karaelys'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes de prophétie')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Cocobanjo'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Karaelys'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinturon de prophétie')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Trackass'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mantelet de prophétie')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Anneau épais en sombrefer')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lance-grenaille explosif')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Cocobanjo'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Plastron du tueur de la nuit')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Synrj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Habit cénarien')),
+( 9,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thorsen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture d‘arcaniste'))
+
+  ;

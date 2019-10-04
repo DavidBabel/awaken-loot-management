@@ -87,6 +87,7 @@ VALUES
 ('Boblemoche'   , 3,  'player', null),
 ('Néstor'       , 3,  'player', null),
 ('Tephrite'     , 5,  'player', null),
-('Deiv'         , 1,  'player', null)
+('Deiv'         , 1,  'player', null),
+('Nøwad'        , 9,  'player', null)
 
 ;

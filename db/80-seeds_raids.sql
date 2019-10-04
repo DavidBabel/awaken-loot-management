@@ -14,7 +14,10 @@ VALUES
 (2, '2019-09-24'), -- 3
 (1, '2019-09-25'), -- 4
 (2, '2019-09-29'), -- 5
-(1, '2019-09-29'); -- 6
+(1, '2019-09-29'), -- 6
+(2, '2019-10-01'), -- 7
+(1, '2019-10-01'), -- 8
+(1, '2019-10-02'); -- 9
 
 
 -- MC 2019-09-19
@@ -112,8 +115,10 @@ VALUES
 (4, (SELECT id FROM "Players" WHERE "name"='Trackass')),
 (4, (SELECT id FROM "Players" WHERE "name"='Gidgud')),
 (4, (SELECT id FROM "Players" WHERE "name"='Kenyâ'));
--- TODO notez ceux qui ont passer leur tour
--- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
+-- INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
+-- VALUES
+-- TODO finir de notez ceux qui ont passer leur tour
+-- (4, (SELECT id FROM "Players" WHERE "name"='Abramus'), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
@@ -208,6 +213,130 @@ VALUES
 (6, (SELECT id FROM "Players" WHERE "name"='Trackass')),
 (6, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
 (6, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'));
--- TODO notez ceux qui ont passer leur tour
--- (4, (SELECT id FROM "Players" WHERE "name"='Traqùs'), true),
+INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
+VALUES
+(6, (SELECT id FROM "Players" WHERE "name"='Traqùs'), true);
+
+
+-- Ony avant les try ragnaros 2019-10-01
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(7, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(7, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(7, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(7, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(7, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(7, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(7, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(7, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(7, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(7, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(7, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(7, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(7, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(7, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(7, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(7, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(7, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(7, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(7, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(7, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(7, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(7, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(7, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(7, (SELECT id FROM "Players" WHERE "name"='Néstor')),
+(7, (SELECT id FROM "Players" WHERE "name"='Rektall')),
+(7, (SELECT id FROM "Players" WHERE "name"='Shaheem')),
+(7, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(7, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(7, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(7, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(7, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(7, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(7, (SELECT id FROM "Players" WHERE "name"='Synrj')),
+(7, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(7, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(7, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(7, (SELECT id FROM "Players" WHERE "name"='Need')),
+(7, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(7, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(7, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(7, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'));
+
+-- try ragnaros 2019-10-01
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(8, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(8, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(8, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(8, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(8, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(8, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(8, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(8, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(8, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(8, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(8, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(8, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(8, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(8, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(8, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(8, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(8, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(8, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(8, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(8, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(8, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(8, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(8, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(8, (SELECT id FROM "Players" WHERE "name"='Néstor')),
+(8, (SELECT id FROM "Players" WHERE "name"='Rektall')),
+(8, (SELECT id FROM "Players" WHERE "name"='Shaheem')),
+(8, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(8, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(8, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(8, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(8, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(8, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(8, (SELECT id FROM "Players" WHERE "name"='Synrj')),
+(8, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(8, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(8, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(8, (SELECT id FROM "Players" WHERE "name"='Need')),
+(8, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(8, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(8, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(8, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'));
+
+
+-- MC 8 bosses 2019-10-02 (pas de raidstats)
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+-- manually entered :
+(9, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(9, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(9, (SELECT id FROM "Players" WHERE "name"='Mergueztguez')),
+(9, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(9, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(9, (SELECT id FROM "Players" WHERE "name"='Nøwad')),
+(9, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(9, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(9, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(9, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(9, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(9, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(9, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(9, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(9, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(9, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(9, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(9, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(9, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(9, (SELECT id FROM "Players" WHERE "name"='Synrj'))
+
+
+-- TODO get screenshot or stream to complete attendees
+
+;
+
 
