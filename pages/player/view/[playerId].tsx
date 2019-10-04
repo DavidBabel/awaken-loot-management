@@ -15,7 +15,7 @@ import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 
 const useStyles = makeStyles({
   root: {
-    width: "80%",
+    width: "calc(100vw - 300px)",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
