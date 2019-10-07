@@ -23,7 +23,7 @@ export function CreateRaid({ donjon }: Props) {
           title={donjon.name}
         />
         <CardContent>
-          <Typography gutterBottom={true} variant="h5" component="h2">
+          <Typography gutterBottom={true} variant="h5" /* component="h2" */>
             {donjon.name}
           </Typography>
           {/*       <Typography variant="body2" color="textSecondary" component="p">
