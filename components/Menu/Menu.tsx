@@ -51,11 +51,14 @@ export function Menu() {
                 <ListItemText primary="Player list" />
               </Link>
             </ListItem>
-          </List>
-          <List>
             <ListItem button={true}>
               <Link href="/summary">
                 <ListItemText primary="Characters summary" />
+              </Link>
+            </ListItem>
+            <ListItem button={true}>
+              <Link href="/attendance">
+                <ListItemText primary="Attendance" />
               </Link>
             </ListItem>
           </List>

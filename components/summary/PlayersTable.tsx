@@ -220,9 +220,9 @@ export default function PlayersTable(props) {
                 Pseudo
                 {orderedBy === "name" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
@@ -241,9 +241,9 @@ export default function PlayersTable(props) {
                 Merit
                 {orderedBy === "merit" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
@@ -261,9 +261,9 @@ export default function PlayersTable(props) {
                 Total Loot
                 {orderedBy === "totalLoot" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
@@ -281,9 +281,9 @@ export default function PlayersTable(props) {
                 Total Raid
                 {orderedBy === "totalRaid" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
@@ -302,9 +302,9 @@ export default function PlayersTable(props) {
                 Last loot
                 {orderedBy === "lastLootDate" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
@@ -323,9 +323,9 @@ export default function PlayersTable(props) {
                 Last raid
                 {orderedBy === "lastRaidDate" ? (
                   orderedDESC ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
                     <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
                   )
                 ) : (
                   ""
