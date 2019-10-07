@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "node server/start.js",
     "build": "next build",
-    "start": "node hello.js",
-    "futur-start": "NODE_ENV=production node server/start.js",
+    "start": "NODE_ENV=production node server/start.js",
     "go": "node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
     "gql": "node server/graphiql-dev.js",
