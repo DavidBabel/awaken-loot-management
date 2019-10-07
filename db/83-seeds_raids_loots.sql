@@ -473,3 +473,89 @@ VALUES
   'Ceinture d‘arcaniste'))
 
   ;
+
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de puissance')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Garde-poignets de vrai vol')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Synrj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cape ignifugée')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skwäsh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'L‘Oeil de la divinité')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de courroux')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capoul'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de Stormrage')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cape du Voile de brume')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Abramus'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier du Seigneur du Feu'))
+;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tendon de dragon noir adulte')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Deiv'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Auréole de transcendance')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cagoule Rougecroc')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Anneau de lien'))
+;
