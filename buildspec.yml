@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       # Install dependencies needed for running tests
-      - yarn install
-      - yarn build
+      # - yarn install
+      # - yarn build
 
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
