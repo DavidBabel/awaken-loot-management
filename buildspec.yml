@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       # Install dependencies needed for running tests
-      # - yarn install
+      - npm install
       - npm run build
 
       # Upgrade AWS CLI to the latest version
