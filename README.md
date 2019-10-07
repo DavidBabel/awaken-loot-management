@@ -69,7 +69,7 @@ yarn dev
 yarn gqp
 ```
 
-Le site devrait être disponible sur http://localhost:3000
+Le site devrait être disponible sur http://localhost:8000
 
 GraphiQl qui sert à écrire les requêtes est disponible à l'adresse : http://localhost:5000/graphiql
 
