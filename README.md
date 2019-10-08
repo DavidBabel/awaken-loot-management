@@ -84,3 +84,5 @@ Pour convertir ce JSON en SQL, il suffit d'executer la commande :
 ```bash
 yarn loot "Nom du boss" ./db/wowhead-extracts/mc/FichierJsonBuBoss.json
 ```
+
+trigger build
