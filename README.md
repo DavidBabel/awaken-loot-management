@@ -34,7 +34,27 @@ Et il suffit ensuite de démarrer le serveur depuis l'utilitaire (postgres.app s
 
 ### Sur Pc Windows
 
-(TODO compléter doc)
+Installer Postgres pour windows: https://www.postgresql.org/download/windows/
+
+Suivre ce tutorial pour installer postgres et configurer les variables d'environement PATH: https://www.supinfo.com/articles/single/977-creer-une-base-donnees-avec-postgresql-windows
+
+Il est important de bien configurer les variables d'environement PATH comme indiqué dans le lien ci dessus pour pouvoir utiliser la commande "psql" dans l'invite de commandes Windows.
+
+Lors de la première utilisation:
+  - Se connecter a l'interface postgres: "-psql -U postgres"
+  - Créer la base de donnée: "CREATE DATABASE test;" (ne pas oublier le ";")
+  - Naviguer jusqu'au fichier "db.sql" dans "db/gen/". 
+      Pour cela, utiliser les commandes: 
+        - "\! cd" pour connaitre le dossier actuel.
+        - "\cd .." pour aller au dossier précedent.
+        - "\cd c:" pour changer de disque dur.
+        - "\cd xxx/xxxx/xxx/xxx/" pour choisir le chemin.
+        - "\i db.sql" pour injecter toutes les données dans la base.
+   - Se connecter a la db: "\c test"
+        
+Lors des autres utilisations:
+  - se connecter a l'interface postgres: "-psql -U postgres"
+  - Se connecter a la db: "\c test"
 
 ## windows
 
