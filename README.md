@@ -5,13 +5,12 @@
 ### environnement
 
 Le Programme fonctionne avec node > 12 https://nodejs.org/en/
-Il utilise `yarn` pour la gestion des dépendances (et non npm)
-Pour l'installer utiliser la commande `npm install -g yarn`
+Il utilise `npm` pour la gestion des dépendances
 Ensuite pour installer les dépendances, les sauvegarder et les mettre à jour :
 
 ```bash
-yarn add mon_paquet
-yarn add -D mon_paquet_de_dev
+npm add mon_paquet
+npm add -D mon_paquet_de_dev
 ```
 
 ### dependances externes
@@ -26,7 +25,7 @@ Il faut absolument que les utilitaires de ligne de commande postgres soient dans
 - psql
 
 Les fichiers SQL de base de données sont dans le dossier `db/` et doivent être ajoutés dans l'ordre
-C'est fait avec la commande `yarn reset` qui va concatener tous les fichiers SQL et les insérer dans la base. Attention! ça vide la base actuelle.
+C'est fait avec la commande `npm run reset` qui va concatener tous les fichiers SQL et les insérer dans la base. Attention! ça vide la base actuelle.
 
 ### Sur mac et linux
 
@@ -57,19 +56,19 @@ Pour le reste c'est hyper classique :
 
 ```bash
 # les dépendences node.js
-yarn install
+npm install
 
 # on initialise la database
-yarn reset
+npm run reset
 
 # on lance le serveur next.js avec postgraphile
-yarn dev
+npm run dev
 
 # et pour fabriquer les requêtes GraphQL, on lance graphiQL sans aucune restriction d'accès
-yarn gqp
+npm run gqp
 ```
 
-Le site devrait être disponible sur http://localhost:3000
+Le site devrait être disponible sur http://localhost:8000
 
 GraphiQl qui sert à écrire les requêtes est disponible à l'adresse : http://localhost:5000/graphiql
 
@@ -82,5 +81,7 @@ Le script `db/wowhead-extractsextract_loot_wowhead_in_browser.sql` premet d'extr
 Pour convertir ce JSON en SQL, il suffit d'executer la commande :
 
 ```bash
-yarn loot "Nom du boss" ./db/wowhead-extracts/mc/FichierJsonBuBoss.json
+npm run loot "Nom du boss" ./db/wowhead-extracts/mc/FichierJsonBuBoss.json
 ```
+
+trigger build

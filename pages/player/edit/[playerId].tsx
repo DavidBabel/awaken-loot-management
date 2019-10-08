@@ -48,7 +48,7 @@ export default function PageEditPlayer() {
         const currentCategorie = sortedMerits[meritCategorieName];
         return (
           <div key={`${meritCategorieName}`}>
-            <Typography gutterBottom={true} variant="h5" component="h2">
+            <Typography gutterBottom={true} variant="h5" /* component="h2" */>
               {meritCategorieName}
             </Typography>
             {currentCategorie.map((merit: Merit) => (

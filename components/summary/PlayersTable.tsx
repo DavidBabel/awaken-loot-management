@@ -1,18 +1,19 @@
 import React from "react";
+
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
 import {
-  withStyles,
-  Theme,
   createStyles,
-  makeStyles
+  makeStyles,
+  Theme,
+  withStyles
 } from "@material-ui/core/styles";
-import Link from "next/link";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
+import Link from "next/link";
 import ProgressBar from "../../components/summary/ProgressBar";
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -82,7 +83,7 @@ export default function PlayersTable(props) {
   const rows = props.players.map(player => {
     let totalMerit = 0;
     let totalLoot = 0;
-    let totalRaid = player.raidPlayersByPlayerId.nodes.length;
+    const totalRaid = player.raidPlayersByPlayerId.nodes.length;
     player.playerMeritsByPlayerId.nodes.map(merit => {
       if (merit.validated) {
         totalMerit += merit.meritByMeritId.value;
@@ -98,7 +99,7 @@ export default function PlayersTable(props) {
       lastRaidDate = null;
     } else {
       player.raidPlayersByPlayerId.nodes.map(raid => {
-        let currentRaidDate = new Date(raid.raidByRaidId.date);
+        const currentRaidDate = new Date(raid.raidByRaidId.date);
         if (currentRaidDate > lastRaidDate) {
           lastRaidDate = currentRaidDate;
         }
@@ -110,7 +111,7 @@ export default function PlayersTable(props) {
       lastLootDate = null;
     } else {
       player.lootsByPlayerId.nodes.map(loot => {
-        let currentLootDate = new Date(loot.raidByRaidId.date);
+        const currentLootDate = new Date(loot.raidByRaidId.date);
         if (currentLootDate > lastLootDate) {
           lastLootDate = currentLootDate;
         }
@@ -138,13 +139,13 @@ export default function PlayersTable(props) {
             <StyledTableCell align="center">Total raid</StyledTableCell>
             <StyledTableCell align="center">Last loot date</StyledTableCell>
             <StyledTableCell align="center">Last raid date</StyledTableCell>
-            <StyledTableCell align="center"></StyledTableCell>
+            <StyledTableCell align="center">.</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
             <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell /* component="th" */ scope="row">
                 {row.name}
               </StyledTableCell>
               <StyledTableCell className={classes.progressCell} align="center">

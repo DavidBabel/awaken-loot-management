@@ -23,26 +23,6 @@ comment on table "Players" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
 
 
-CREATE TABLE "Slots" (
-  "id" SERIAL PRIMARY KEY,
-  "name" varchar
-);
-comment on table "Slots" is E'@omit create,update,delete';
-CREATE UNIQUE INDEX ON "Slots" ("id");
-
-
-CREATE TABLE "PlayerSlots" (
-  "id" SERIAL PRIMARY KEY,
-  "playerId" int,
-  "slotId" int,
-  "enchanted" boolean,
-  "scoreMerit" int,
-  "validated" boolean
-);
-comment on table "PlayerSlots" is E'@omit delete';
-CREATE UNIQUE INDEX ON "PlayerSlots" ("id");
-
-
 CREATE TABLE "Merit" (
   "id" SERIAL PRIMARY KEY,
   "categorie" varchar,
@@ -81,7 +61,8 @@ CREATE TABLE "Items" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "wowheadId" int,
-  "classId" int
+  "classId" int,
+  "phatLoot" boolean DEFAULT false
 );
 comment on table "Items" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Items" ("id");
@@ -150,8 +131,6 @@ ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
-ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
-ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("slotId") REFERENCES "Slots" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");

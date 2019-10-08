@@ -3,9 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
-      # Install dependencies needed for running tests
-      - yarn install
-      - yarn build
-
-      # Upgrade AWS CLI to the latest version
+      - npm install
       - pip install --upgrade awscli
+  build:
+    commands:
+      - npm build
+
+artifacts:
+  files:
+    - "**/*"
+  name: build-artifact-$(date +%Y-%m-%d)

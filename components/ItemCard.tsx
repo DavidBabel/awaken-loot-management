@@ -86,7 +86,7 @@ export function ItemCard({
       </ListItem>
       <Divider />
       <Collapse in={showClasses} timeout="auto" unmountOnExit={true}>
-        <List component="div" disablePadding={true}>
+        <List /* component="div" */ disablePadding={true}>
           <ListItem button={true} className={styleClasses.nested}>
             <ListItem className={styleClasses.classes}>
               {showClasses && (

@@ -1,17 +1,18 @@
 import React from "react";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+
 import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Typography from "@material-ui/core/Typography";
 import PlayersTable from "../../components/summary/PlayersTable";
 
 import { useQuery } from "@apollo/react-hooks";
-import { Query } from "../../lib/generatedTypes";
-import { ALL_PLAYERS } from "../../lib/gql/player-queries";
-import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
+import { Query } from "../../lib/generatedTypes";
+import { ALL_MERITS } from "../../lib/gql/merit-queries";
+import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -23,10 +24,10 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return value !== index ? (
-    <div></div>
+    <div />
   ) : (
     <Typography
-      component="div"
+      // component="div"
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-auto-tabpanel-${index}`}
