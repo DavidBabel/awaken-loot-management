@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node server/start.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server/start.js",
+    "start": "npm run build && NODE_ENV=production pm2 start server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
     "gql": "node server/graphiql-dev.js",
     "reset-db": "bin/reset-db.sh",
@@ -36,6 +36,7 @@
     "next": "^9.1.1",
     "next-routes": "^1.4.2",
     "nookies": "^2.0.8",
+    "pm2": "^3.5.1",
     "postgraphile": "^4.4.4",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
