@@ -12,23 +12,23 @@ VALUES
 ('Guerrier DPS',  '#C41F3B'),
 ('Paladin',       '#F58CBA');
 
-INSERT INTO
-  "Slots" ( "name")
-VALUES
-  ('Main droite'),
-  ('Main gauche'),
-  ('Tête'),
-  ('Cou'),
-  ('Épaules'),
-  ('Dos'),
-  ('Torse'),
-  ('Poignets'),
-  ('Mains'),
-  ('Ceinture'),
-  ('Jambes'),
-  ('Pieds'),
-  ('Doigt'),
-  ('Trinket'),
-  ('Idole');
+-- INSERT INTO
+--   "Slots" ( "name")
+-- VALUES
+--   ('Main droite'),
+--   ('Main gauche'),
+--   ('Tête'),
+--   ('Cou'),
+--   ('Épaules'),
+--   ('Dos'),
+--   ('Torse'),
+--   ('Poignets'),
+--   ('Mains'),
+--   ('Ceinture'),
+--   ('Jambes'),
+--   ('Pieds'),
+--   ('Doigt'),
+--   ('Trinket'),
+--   ('Idole');
 
 

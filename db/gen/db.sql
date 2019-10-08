@@ -23,26 +23,6 @@ comment on table "Players" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
 
 
-CREATE TABLE "Slots" (
-  "id" SERIAL PRIMARY KEY,
-  "name" varchar
-);
-comment on table "Slots" is E'@omit create,update,delete';
-CREATE UNIQUE INDEX ON "Slots" ("id");
-
-
-CREATE TABLE "PlayerSlots" (
-  "id" SERIAL PRIMARY KEY,
-  "playerId" int,
-  "slotId" int,
-  "enchanted" boolean,
-  "scoreMerit" int,
-  "validated" boolean
-);
-comment on table "PlayerSlots" is E'@omit delete';
-CREATE UNIQUE INDEX ON "PlayerSlots" ("id");
-
-
 CREATE TABLE "Merit" (
   "id" SERIAL PRIMARY KEY,
   "categorie" varchar,
@@ -81,7 +61,8 @@ CREATE TABLE "Items" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "wowheadId" int,
-  "classId" int
+  "classId" int,
+  "phatLoot" boolean DEFAULT false
 );
 comment on table "Items" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Items" ("id");
@@ -150,8 +131,6 @@ ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
-ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
-ALTER TABLE "PlayerSlots" ADD FOREIGN KEY ("slotId") REFERENCES "Slots" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
@@ -175,24 +154,24 @@ VALUES
 ('Guerrier DPS',  '#C41F3B'),
 ('Paladin',       '#F58CBA');
 
-INSERT INTO
-  "Slots" ( "name")
-VALUES
-  ('Main droite'),
-  ('Main gauche'),
-  ('Tête'),
-  ('Cou'),
-  ('Épaules'),
-  ('Dos'),
-  ('Torse'),
-  ('Poignets'),
-  ('Mains'),
-  ('Ceinture'),
-  ('Jambes'),
-  ('Pieds'),
-  ('Doigt'),
-  ('Trinket'),
-  ('Idole');
+-- INSERT INTO
+--   "Slots" ( "name")
+-- VALUES
+--   ('Main droite'),
+--   ('Main gauche'),
+--   ('Tête'),
+--   ('Cou'),
+--   ('Épaules'),
+--   ('Dos'),
+--   ('Torse'),
+--   ('Poignets'),
+--   ('Mains'),
+--   ('Ceinture'),
+--   ('Jambes'),
+--   ('Pieds'),
+--   ('Doigt'),
+--   ('Trinket'),
+--   ('Idole');
 
 
  -- SAFE BEGIN FOR CONCAT
@@ -934,77 +913,77 @@ VALUES
 -- 10 - Paladin
 
 
-INSERT INTO "Players" ("name", "classId", "role", "password")
+INSERT INTO "Players" ("name", "classId", "role", "password", "active")
 VALUES
-('Devilhunter'  , 6,  'admin', '55fc5b709962876903785fd64a6961e5'),
-('Hakken'       , 2,  'officer', null),
-('Lums'         , 7,  'officer', null),
-('Shaheem'      , 3,  'officer', null),
-('Nozil'        , 6,  'classMaster', null),
-('Tàel'         , 3,  'classMaster', null),
-('Skwäsh'       , 1,  'classMaster', null),
-('Cocobanjo'    , 4,  'classMaster', null),
-('Krigen'       , 8,  'classMaster', null),
-('Oscuro'       , 9,  'classMaster', null),
-('Paffë'        , 5,  'classMaster', null),
-('Ticcounet'    , 8,  'player', null),
-('Størmfury'    , 5,  'player', null),
-('Qweakzor'     , 6,  'player', null),
-('Traqùs'       , 6,  'player', null),
-('Adblock'      , 2,  'player', null),
-('Elementz'     , 2,  'player', null),
-('Kynosura'     , 2,  'player', null),
-('Minatrix'     , 2,  'player', null),
-('Vòlt'         , 2,  'player', null),
-('Zapikote'     , 3,  'player', null),
-('Hanzaplast'   , 1,  'player', null),
-('Kaarr'        , 4,  'player', null),
-('Nérull'       , 4,  'player', null),
-('Punkhead'     , 4,  'player', null),
-('Titanesque'   , 4,  'player', null),
-('Lyaxus'       , 7,  'player', null),
-('Mergueztguez' , 7,  'player', null),
-('Affligeant'   , 3,  'player', null),
-('Bruh'         , 3,  'player', null),
-('Kresmi'       , 3,  'player', null),
-('Psykøhazard'  , 3,  'player', null),
-('Rektall'      , 3,  'player', null),
-('Drakenns'     , 8,  'player', null),
-('Sprawl'       , 8,  'player', null),
-('Beudinio'     , 5,  'player', null),
-('Synrj'        , 5,  'player', null),
-('Brk'          , 1,  'player', null),
-('Lylith'       , 1,  'player', null),
-('Skau'         , 1,  'player', null),
-('Kenyâ'        , 7,  'player', null),
-('Zhantla'      , 7,  'player', null),
-('Zykxx'        , 7,  'player', null),
-('Brebouche'    , 8,  'player', null),
-('Lykwette'     , 8,  'player', null),
-('Throma'       , 9,  'player', null),
-('Alk'          , 6,  'player', null),
-('Allyssamyr'   , 2,  'player', null),
-('Ikith'        , 2,  'player', null),
-('Thorsen'      , 2,  'player', null),
-('Wid'          , 2,  'player', null),
-('Need'         , 1,  'player', null),
-('Callumlolz'   , 4,  'player', null),
-('Ez'           , 4,  'player', null),
-('Jonasran'     , 4,  'player', null),
-('Yx'           , 4,  'player', null),
-('Suprême'      , 3,  'player', null),
-('Brosko'       , 9,  'player', null),
-('Karaelys'     , 1,  'player', null),
-('Teimdall'     , 1,  'player', null),
-('Trackass'     , 1,  'player', null),
-('Gidgud'       , 7,  'player', null),
-('Ragegoriath'  , 8,  'player', null),
-('Abramus'      , 2,  'player', null),
-('Boblemoche'   , 3,  'player', null),
-('Néstor'       , 3,  'player', null),
-('Tephrite'     , 5,  'player', null),
-('Deiv'         , 1,  'player', null),
-('Nøwad'        , 9,  'player', null)
+('Devilhunter'  , 6,  'admin', '55fc5b709962876903785fd64a6961e5', true),
+('Hakken'       , 2,  'officer', null, true),
+('Lums'         , 7,  'officer', null, true),
+('Shaheem'      , 3,  'officer', null, true),
+('Nozil'        , 6,  'classMaster', null, true),
+('Tàel'         , 3,  'classMaster', null, true),
+('Skwäsh'       , 1,  'classMaster', null, true),
+('Cocobanjo'    , 4,  'classMaster', null, true),
+('Krigen'       , 8,  'classMaster', null, true),
+('Oscuro'       , 9,  'classMaster', null, true),
+('Paffë'        , 5,  'classMaster', null, true),
+('Ticcounet'    , 8,  'player', null, false),
+('Størmfury'    , 5,  'player', null, false),
+('Qweakzor'     , 6,  'player', null, true),
+('Traqùs'       , 6,  'player', null, true),
+('Adblock'      , 2,  'player', null, true),
+('Elementz'     , 2,  'player', null, false),
+('Kynosura'     , 2,  'player', null, true),
+('Minatrix'     , 2,  'player', null, true),
+('Vòlt'         , 2,  'player', null, false),
+('Zapikote'     , 3,  'player', null, true),
+('Hanzaplast'   , 1,  'player', null, false),
+('Kaarr'        , 4,  'player', null, true),
+('Nérull'       , 4,  'player', null, false),
+('Punkhead'     , 4,  'player', null, false),
+('Titanesque'   , 4,  'player', null, false),
+('Lyaxus'       , 7,  'player', null, false),
+('Mergueztguez' , 7,  'player', null, true),
+('Affligeant'   , 3,  'player', null, false),
+('Bruh'         , 3,  'player', null, false),
+('Kresmi'       , 3,  'player', null, false),
+('Psykøhazard'  , 3,  'player', null, true),
+('Rektall'      , 3,  'player', null, true),
+('Drakenns'     , 8,  'player', null, false),
+('Sprawl'       , 8,  'player', null, false),
+('Beudinio'     , 5,  'player', null, false),
+('Synrj'        , 5,  'player', null, true),
+('Brk'          , 1,  'player', null, false),
+('Lylith'       , 1,  'player', null, true),
+('Skau'         , 1,  'player', null, false),
+('Kenyâ'        , 7,  'player', null, true),
+('Zhantla'      , 7,  'player', null, false),
+('Zykxx'        , 7,  'player', null, false),
+('Brebouche'    , 8,  'player', null, true),
+('Lykwette'     , 8,  'player', null, true),
+('Throma'       , 9,  'player', null, true),
+('Alk'          , 6,  'player', null, true),
+('Allyssamyr'   , 2,  'player', null, true),
+('Ikith'        , 2,  'player', null, true),
+('Thorsen'      , 2,  'player', null, true),
+('Wid'          , 2,  'player', null, false),
+('Need'         , 1,  'player', null, true),
+('Callumlolz'   , 4,  'player', null, true),
+('Ez'           , 4,  'player', null, true),
+('Jonasran'     , 4,  'player', null, true),
+('Yx'           , 4,  'player', null, true),
+('Suprême'      , 3,  'player', null, true),
+('Brosko'       , 9,  'player', null, true),
+('Karaelys'     , 1,  'player', null, true),
+('Teimdall'     , 1,  'player', null, true),
+('Trackass'     , 1,  'player', null, true),
+('Gidgud'       , 7,  'player', null, true),
+('Ragegoriath'  , 8,  'player', null, true),
+('Abramus'      , 2,  'player', null, true),
+('Boblemoche'   , 3,  'player', null, true),
+('Néstor'       , 3,  'player', null, true),
+('Tephrite'     , 5,  'player', null, true),
+('Deiv'         , 1,  'player', null, true),
+('Nøwad'        , 9,  'player', null, true)
 
 ;
  -- SAFE BEGIN FOR CONCAT
@@ -1033,7 +1012,9 @@ VALUES
 (1, '2019-09-29'), -- 6
 (2, '2019-10-01'), -- 7
 (1, '2019-10-01'), -- 8
-(1, '2019-10-02'); -- 9
+(1, '2019-10-02'), -- 9
+(1, '2019-10-06'), -- 10
+(2, '2019-10-06'); -- 11
 
 
 -- MC 2019-09-19
@@ -1131,10 +1112,10 @@ VALUES
 (4, (SELECT id FROM "Players" WHERE "name"='Trackass')),
 (4, (SELECT id FROM "Players" WHERE "name"='Gidgud')),
 (4, (SELECT id FROM "Players" WHERE "name"='Kenyâ'));
--- INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
--- VALUES
+INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
+VALUES
+(4, (SELECT id FROM "Players" WHERE "name"='Abramus'), true)
 -- TODO finir de notez ceux qui ont passer leur tour
--- (4, (SELECT id FROM "Players" WHERE "name"='Abramus'), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
@@ -1349,10 +1330,95 @@ VALUES
 (9, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
 (9, (SELECT id FROM "Players" WHERE "name"='Krigen')),
 (9, (SELECT id FROM "Players" WHERE "name"='Synrj'))
-
-
+;
 -- TODO get screenshot or stream to complete attendees
 
+-- MC first down ragna 2019-10-06
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(10, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(10, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(10, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(10, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(10, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(10, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(10, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(10, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(10, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(10, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(10, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(10, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(10, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(10, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(10, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(10, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(10, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(10, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(10, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(10, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(10, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(10, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(10, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(10, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(10, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(10, (SELECT id FROM "Players" WHERE "name"='Nøwad')),
+(10, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(10, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(10, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(10, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(10, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(10, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(10, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(10, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(10, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(10, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(10, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(10, (SELECT id FROM "Players" WHERE "name"='Lums')),
+(10, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'))
+;
+
+-- Onyxia down post ragna 2019-10-06
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(11, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(11, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(11, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(11, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(11, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(11, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(11, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(11, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(11, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(11, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(11, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(11, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(11, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(11, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(11, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(11, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(11, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(11, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(11, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(11, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(11, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(11, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(11, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(11, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(11, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(11, (SELECT id FROM "Players" WHERE "name"='Nøwad')),
+(11, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(11, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(11, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(11, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(11, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(11, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(11, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(11, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(11, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(11, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(11, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(11, (SELECT id FROM "Players" WHERE "name"='Lums')),
+(11, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'))
 ;
 
 
@@ -1830,7 +1896,93 @@ VALUES
   (SELECT id FROM "Items" WHERE "name"=
   'Ceinture d‘arcaniste'))
 
-  ; -- SAFE BEGIN FOR CONCAT
+  ;
+
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de puissance')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Garde-poignets de vrai vol')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Synrj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cape ignifugée')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skwäsh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'L‘Oeil de la divinité')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de courroux')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capoul'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de Stormrage')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cape du Voile de brume')),
+( 10,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Abramus'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier du Seigneur du Feu'))
+;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tendon de dragon noir adulte')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Deiv'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Auréole de transcendance')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cagoule Rougecroc')),
+( 11,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Anneau de lien'))
+; -- SAFE BEGIN FOR CONCAT
 
 
 -- INSERT INTO "ClassItem" ("itemValueForThisClass","itemId","classId")

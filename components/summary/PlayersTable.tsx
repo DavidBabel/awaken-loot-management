@@ -1,21 +1,21 @@
 import React from "react";
-import {
-  withStyles,
-  Theme,
-  createStyles,
-  makeStyles
-} from "@material-ui/core/styles";
 
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  withStyles
+} from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import PlayerTableRow from "../../components/summary/PlayerTableRow";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import PlayerTableRow from "../../components/summary/PlayerTableRow";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -25,7 +25,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
   })
 )(TableCell);
 interface Props {
-  classColor: String;
+  classColor: string;
 }
 const useStyles = makeStyles({
   root: {
@@ -72,7 +72,7 @@ export default function PlayersTable(props) {
   const rowsData = props.players.map(player => {
     let totalMerit = 0;
     let totalLoot = 0;
-    let totalRaid = player.raidPlayersByPlayerId.nodes.length;
+    const totalRaid = player.raidPlayersByPlayerId.nodes.length;
     player.playerMeritsByPlayerId.nodes.map(merit => {
       if (merit.validated) {
         totalMerit += merit.meritByMeritId.value;
@@ -88,7 +88,7 @@ export default function PlayersTable(props) {
       lastRaidDate = null;
     } else {
       player.raidPlayersByPlayerId.nodes.map(raid => {
-        let currentRaidDate = new Date(raid.raidByRaidId.date);
+        const currentRaidDate = new Date(raid.raidByRaidId.date);
         if (currentRaidDate > lastRaidDate) {
           lastRaidDate = currentRaidDate;
         }
@@ -100,13 +100,13 @@ export default function PlayersTable(props) {
       lastLootDate = null;
     } else {
       player.lootsByPlayerId.nodes.map(loot => {
-        let currentLootDate = new Date(loot.raidByRaidId.date);
+        const currentLootDate = new Date(loot.raidByRaidId.date);
         if (currentLootDate > lastLootDate) {
           lastLootDate = currentLootDate;
         }
       });
     }
-    let dateOptions = {
+    const dateOptions = {
       year: "numeric",
       month: "long",
       day: "numeric"
@@ -132,7 +132,7 @@ export default function PlayersTable(props) {
   const [orderedDESC, setOrderedDESC] = React.useState(false);
 
   function orderBy(colName: string) {
-    let newRows = [...rows];
+    const newRows = [...rows];
     let currentlyOrderedDesc = orderedDESC;
     if (colName === orderedBy) {
       currentlyOrderedDesc = !orderedDESC;
@@ -332,7 +332,7 @@ export default function PlayersTable(props) {
                 )}
               </Button>
             </StyledTableCell>
-            <StyledTableCell align="center"></StyledTableCell>
+            <StyledTableCell align="center" />
           </TableRow>
         </TableHead>
         <TableBody>
