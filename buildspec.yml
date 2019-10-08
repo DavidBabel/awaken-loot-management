@@ -3,12 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
-      - yarn install
+      - npm install
       - pip install --upgrade awscli
   build:
     commands:
-      - yarn build
+      - npm run build
 
 artifacts:
   files:
     - "**/*"
+  name: build-artifact-$(date +%Y-%m-%d)
