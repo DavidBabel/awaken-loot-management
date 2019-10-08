@@ -84,4 +84,4 @@ Pour convertir ce JSON en SQL, il suffit d'executer la commande :
 npm run loot "Nom du boss" ./db/wowhead-extracts/mc/FichierJsonBuBoss.json
 ```
 
-trigger build
+trigger buil
