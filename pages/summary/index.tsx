@@ -58,6 +58,9 @@ const classColors = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    width: "calc(100vw - 300px)",
+    height: "calc(100vh - 80px)",
+    overflowY: "scroll",
     backgroundColor: theme.palette.background.paper,
     "& .MuiTabs-indicator": {
       height: "3px"
@@ -117,10 +120,10 @@ export default function PageIndex() {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
-  const players = dataPlayers.allPlayers.nodes;
+  const players = dataPlayers.allPlayers.nodes.filter(p => p.active);
   const allMerits = dataAllMerits.allMerits.edges;
   let maxMeritValue = 0;
-  allMerits.map(merit => {
+  allMerits.forEach(merit => {
     if (merit.node.active) {
       maxMeritValue += merit.node.value;
     }

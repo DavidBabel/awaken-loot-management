@@ -57,6 +57,7 @@ export const ALL_RAIDS = gql`
         id
         donjonByDonjonId {
           name
+          shortName
         }
         raidPlayersByRaidId {
           nodes {
