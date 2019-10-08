@@ -1,11 +1,13 @@
 import React from "react";
-import {
-  withStyles,
-  Theme,
-  createStyles,
-  makeStyles
-} from "@material-ui/core/styles";
 
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  withStyles
+} from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -16,6 +18,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -72,7 +75,7 @@ export default function PlayersTable(props) {
   const rowsData = props.players.map(player => {
     let totalMerit = 0;
     let totalLoot = 0;
-    let totalRaid = player.raidPlayersByPlayerId.nodes.length;
+    const totalRaid = player.raidPlayersByPlayerId.nodes.length;
     player.playerMeritsByPlayerId.nodes.map(merit => {
       if (merit.validated) {
         totalMerit += merit.meritByMeritId.value;
@@ -88,7 +91,7 @@ export default function PlayersTable(props) {
       lastRaidDate = null;
     } else {
       player.raidPlayersByPlayerId.nodes.map(raid => {
-        let currentRaidDate = new Date(raid.raidByRaidId.date);
+        const currentRaidDate = new Date(raid.raidByRaidId.date);
         if (currentRaidDate > lastRaidDate) {
           lastRaidDate = currentRaidDate;
         }
@@ -100,7 +103,7 @@ export default function PlayersTable(props) {
       lastLootDate = null;
     } else {
       player.lootsByPlayerId.nodes.map(loot => {
-        let currentLootDate = new Date(loot.raidByRaidId.date);
+        const currentLootDate = new Date(loot.raidByRaidId.date);
         if (currentLootDate > lastLootDate) {
           lastLootDate = currentLootDate;
         }

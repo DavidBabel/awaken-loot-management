@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+      - pip install --upgrade awscli
+  build:
+    commands:
+      - npm build
+
+artifacts:
+  files:
+    - "**/*"
+  name: build-artifact-$(date +%Y-%m-%d)
