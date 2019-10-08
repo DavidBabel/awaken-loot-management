@@ -41,7 +41,7 @@ Suivre ce tutorial pour installer postgres et configurer les variables d'environ
 Il est important de bien configurer les variables d'environement PATH comme indiqué dans le lien ci dessus pour pouvoir utiliser la commande "psql" dans l'invite de commandes Windows.
 
 Lors de la première utilisation:
-  - Se connecter a l'interface postgres: "-psql -U postgres"
+  - Se connecter a l'interface postgres: "psql -U postgres"
   - Créer la base de donnée: "CREATE DATABASE test;" (ne pas oublier le ";")
   - Naviguer jusqu'au fichier "db.sql" dans "db/gen/". 
       Pour cela, utiliser les commandes: 
