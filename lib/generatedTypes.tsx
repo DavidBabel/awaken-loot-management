@@ -421,42 +421,6 @@ export type CreatePlayerMeritPayloadPlayerMeritEdgeArgs = {
   orderBy?: Maybe<Array<PlayerMeritsOrderBy>>;
 };
 
-/** All input for the create `PlayerSlot` mutation. */
-export type CreatePlayerSlotInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   **/
-  clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `PlayerSlot` to be created by this mutation. */
-  playerSlot: PlayerSlotInput;
-};
-
-/** The output of our create `PlayerSlot` mutation. */
-export type CreatePlayerSlotPayload = {
-  __typename?: "CreatePlayerSlotPayload";
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   **/
-  clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `PlayerSlot` that was created by this mutation. */
-  playerSlot?: Maybe<PlayerSlot>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Player` that is related to this `PlayerSlot`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Slot` that is related to this `PlayerSlot`. */
-  slotBySlotId?: Maybe<Slot>;
-  /** An edge for our `PlayerSlot`. May be used by Relay 1. */
-  playerSlotEdge?: Maybe<PlayerSlotsEdge>;
-};
-
-/** The output of our create `PlayerSlot` mutation. */
-export type CreatePlayerSlotPayloadPlayerSlotEdgeArgs = {
-  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
-};
-
 /** All input for the create `Raid` mutation. */
 export type CreateRaidInput = {
   /**
@@ -712,6 +676,7 @@ export type Item = Node & {
   name?: Maybe<Scalars["String"]>;
   wowheadId?: Maybe<Scalars["Int"]>;
   classId?: Maybe<Scalars["Int"]>;
+  phatLoot?: Maybe<Scalars["Boolean"]>;
   /** Reads a single `Class` that is related to this `Item`. */
   classByClassId?: Maybe<Class>;
   /** Reads and enables pagination through a set of `Loot`. */
@@ -762,6 +727,8 @@ export type ItemCondition = {
   wowheadId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `classId` field. */
   classId?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `phatLoot` field. */
+  phatLoot?: Maybe<Scalars["Boolean"]>;
 };
 
 /** A connection to a list of `Item` values. */
@@ -797,6 +764,8 @@ export enum ItemsOrderBy {
   WowheadIdDesc = "WOWHEAD_ID_DESC",
   ClassIdAsc = "CLASS_ID_ASC",
   ClassIdDesc = "CLASS_ID_DESC",
+  PhatLootAsc = "PHAT_LOOT_ASC",
+  PhatLootDesc = "PHAT_LOOT_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
@@ -979,8 +948,6 @@ export type Mutation = {
   createLoot?: Maybe<CreateLootPayload>;
   /** Creates a single `PlayerMerit`. */
   createPlayerMerit?: Maybe<CreatePlayerMeritPayload>;
-  /** Creates a single `PlayerSlot`. */
-  createPlayerSlot?: Maybe<CreatePlayerSlotPayload>;
   /** Creates a single `RaidPlayer`. */
   createRaidPlayer?: Maybe<CreateRaidPlayerPayload>;
   /** Creates a single `Raid`. */
@@ -997,10 +964,6 @@ export type Mutation = {
   updatePlayerMerit?: Maybe<UpdatePlayerMeritPayload>;
   /** Updates a single `PlayerMerit` using a unique key and a patch. */
   updatePlayerMeritById?: Maybe<UpdatePlayerMeritPayload>;
-  /** Updates a single `PlayerSlot` using its globally unique id and a patch. */
-  updatePlayerSlot?: Maybe<UpdatePlayerSlotPayload>;
-  /** Updates a single `PlayerSlot` using a unique key and a patch. */
-  updatePlayerSlotById?: Maybe<UpdatePlayerSlotPayload>;
   /** Updates a single `RaidPlayer` using its globally unique id and a patch. */
   updateRaidPlayer?: Maybe<UpdateRaidPlayerPayload>;
   /** Updates a single `RaidPlayer` using a unique key and a patch. */
@@ -1032,11 +995,6 @@ export type MutationCreateLootArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreatePlayerMeritArgs = {
   input: CreatePlayerMeritInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreatePlayerSlotArgs = {
-  input: CreatePlayerSlotInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1077,16 +1035,6 @@ export type MutationUpdatePlayerMeritArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdatePlayerMeritByIdArgs = {
   input: UpdatePlayerMeritByIdInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePlayerSlotArgs = {
-  input: UpdatePlayerSlotInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdatePlayerSlotByIdArgs = {
-  input: UpdatePlayerSlotByIdInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1160,24 +1108,12 @@ export type Player = Node & {
   active?: Maybe<Scalars["Boolean"]>;
   /** Reads a single `Class` that is related to this `Player`. */
   classByClassId?: Maybe<Class>;
-  /** Reads and enables pagination through a set of `PlayerSlot`. */
-  playerSlotsByPlayerId: PlayerSlotsConnection;
   /** Reads and enables pagination through a set of `PlayerMerit`. */
   playerMeritsByPlayerId: PlayerMeritsConnection;
   /** Reads and enables pagination through a set of `Loot`. */
   lootsByPlayerId: LootsConnection;
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   raidPlayersByPlayerId: RaidPlayersConnection;
-};
-
-export type PlayerPlayerSlotsByPlayerIdArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
-  condition?: Maybe<PlayerSlotCondition>;
 };
 
 export type PlayerPlayerMeritsByPlayerIdArgs = {
@@ -1337,102 +1273,6 @@ export type PlayersEdge = {
   node?: Maybe<Player>;
 };
 
-export type PlayerSlot = Node & {
-  __typename?: "PlayerSlot";
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars["ID"];
-  id: Scalars["Int"];
-  playerId?: Maybe<Scalars["Int"]>;
-  slotId?: Maybe<Scalars["Int"]>;
-  enchanted?: Maybe<Scalars["Boolean"]>;
-  scoreMerit?: Maybe<Scalars["Int"]>;
-  validated?: Maybe<Scalars["Boolean"]>;
-  /** Reads a single `Player` that is related to this `PlayerSlot`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Slot` that is related to this `PlayerSlot`. */
-  slotBySlotId?: Maybe<Slot>;
-};
-
-/**
- * A condition to be used against `PlayerSlot` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- **/
-export type PlayerSlotCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `playerId` field. */
-  playerId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `slotId` field. */
-  slotId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `enchanted` field. */
-  enchanted?: Maybe<Scalars["Boolean"]>;
-  /** Checks for equality with the object’s `scoreMerit` field. */
-  scoreMerit?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `validated` field. */
-  validated?: Maybe<Scalars["Boolean"]>;
-};
-
-/** An input for mutations affecting `PlayerSlot` */
-export type PlayerSlotInput = {
-  id?: Maybe<Scalars["Int"]>;
-  playerId?: Maybe<Scalars["Int"]>;
-  slotId?: Maybe<Scalars["Int"]>;
-  enchanted?: Maybe<Scalars["Boolean"]>;
-  scoreMerit?: Maybe<Scalars["Int"]>;
-  validated?: Maybe<Scalars["Boolean"]>;
-};
-
-/** Represents an update to a `PlayerSlot`. Fields that are set will be updated. */
-export type PlayerSlotPatch = {
-  id?: Maybe<Scalars["Int"]>;
-  playerId?: Maybe<Scalars["Int"]>;
-  slotId?: Maybe<Scalars["Int"]>;
-  enchanted?: Maybe<Scalars["Boolean"]>;
-  scoreMerit?: Maybe<Scalars["Int"]>;
-  validated?: Maybe<Scalars["Boolean"]>;
-};
-
-/** A connection to a list of `PlayerSlot` values. */
-export type PlayerSlotsConnection = {
-  __typename?: "PlayerSlotsConnection";
-  /** A list of `PlayerSlot` objects. */
-  nodes: Array<Maybe<PlayerSlot>>;
-  /** A list of edges which contains the `PlayerSlot` and cursor to aid in pagination. */
-  edges: Array<PlayerSlotsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `PlayerSlot` you could get from the connection. */
-  totalCount: Scalars["Int"];
-};
-
-/** A `PlayerSlot` edge in the connection. */
-export type PlayerSlotsEdge = {
-  __typename?: "PlayerSlotsEdge";
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars["Cursor"]>;
-  /** The `PlayerSlot` at the end of the edge. */
-  node?: Maybe<PlayerSlot>;
-};
-
-/** Methods to use when ordering `PlayerSlot`. */
-export enum PlayerSlotsOrderBy {
-  Natural = "NATURAL",
-  IdAsc = "ID_ASC",
-  IdDesc = "ID_DESC",
-  PlayerIdAsc = "PLAYER_ID_ASC",
-  PlayerIdDesc = "PLAYER_ID_DESC",
-  SlotIdAsc = "SLOT_ID_ASC",
-  SlotIdDesc = "SLOT_ID_DESC",
-  EnchantedAsc = "ENCHANTED_ASC",
-  EnchantedDesc = "ENCHANTED_DESC",
-  ScoreMeritAsc = "SCORE_MERIT_ASC",
-  ScoreMeritDesc = "SCORE_MERIT_DESC",
-  ValidatedAsc = "VALIDATED_ASC",
-  ValidatedDesc = "VALIDATED_DESC",
-  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
-  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
-}
-
 /** Methods to use when ordering `Player`. */
 export enum PlayersOrderBy {
   Natural = "NATURAL",
@@ -1482,16 +1322,12 @@ export type Query = Node & {
   allMerits?: Maybe<MeritsConnection>;
   /** Reads and enables pagination through a set of `PlayerMerit`. */
   allPlayerMerits?: Maybe<PlayerMeritsConnection>;
-  /** Reads and enables pagination through a set of `PlayerSlot`. */
-  allPlayerSlots?: Maybe<PlayerSlotsConnection>;
   /** Reads and enables pagination through a set of `Player`. */
   allPlayers?: Maybe<PlayersConnection>;
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   allRaidPlayers?: Maybe<RaidPlayersConnection>;
   /** Reads and enables pagination through a set of `Raid`. */
   allRaids?: Maybe<RaidsConnection>;
-  /** Reads and enables pagination through a set of `Slot`. */
-  allSlots?: Maybe<SlotsConnection>;
   bossItemById?: Maybe<BossItem>;
   bossById?: Maybe<Boss>;
   classItemById?: Maybe<ClassItem>;
@@ -1501,11 +1337,9 @@ export type Query = Node & {
   lootById?: Maybe<Loot>;
   meritById?: Maybe<Merit>;
   playerMeritById?: Maybe<PlayerMerit>;
-  playerSlotById?: Maybe<PlayerSlot>;
   playerById?: Maybe<Player>;
   raidPlayerById?: Maybe<RaidPlayer>;
   raidById?: Maybe<Raid>;
-  slotById?: Maybe<Slot>;
   /** Reads a single `BossItem` using its globally unique `ID`. */
   bossItem?: Maybe<BossItem>;
   /** Reads a single `Boss` using its globally unique `ID`. */
@@ -1524,16 +1358,12 @@ export type Query = Node & {
   merit?: Maybe<Merit>;
   /** Reads a single `PlayerMerit` using its globally unique `ID`. */
   playerMerit?: Maybe<PlayerMerit>;
-  /** Reads a single `PlayerSlot` using its globally unique `ID`. */
-  playerSlot?: Maybe<PlayerSlot>;
   /** Reads a single `Player` using its globally unique `ID`. */
   player?: Maybe<Player>;
   /** Reads a single `RaidPlayer` using its globally unique `ID`. */
   raidPlayer?: Maybe<RaidPlayer>;
   /** Reads a single `Raid` using its globally unique `ID`. */
   raid?: Maybe<Raid>;
-  /** Reads a single `Slot` using its globally unique `ID`. */
-  slot?: Maybe<Slot>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -1641,17 +1471,6 @@ export type QueryAllPlayerMeritsArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAllPlayerSlotsArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
-  condition?: Maybe<PlayerSlotCondition>;
-};
-
-/** The root query type which gives access points into the data universe. */
 export type QueryAllPlayersArgs = {
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
@@ -1682,17 +1501,6 @@ export type QueryAllRaidsArgs = {
   after?: Maybe<Scalars["Cursor"]>;
   orderBy?: Maybe<Array<RaidsOrderBy>>;
   condition?: Maybe<RaidCondition>;
-};
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllSlotsArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<SlotsOrderBy>>;
-  condition?: Maybe<SlotCondition>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -1741,11 +1549,6 @@ export type QueryPlayerMeritByIdArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryPlayerSlotByIdArgs = {
-  id: Scalars["Int"];
-};
-
-/** The root query type which gives access points into the data universe. */
 export type QueryPlayerByIdArgs = {
   id: Scalars["Int"];
 };
@@ -1757,11 +1560,6 @@ export type QueryRaidPlayerByIdArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryRaidByIdArgs = {
-  id: Scalars["Int"];
-};
-
-/** The root query type which gives access points into the data universe. */
-export type QuerySlotByIdArgs = {
   id: Scalars["Int"];
 };
 
@@ -1811,11 +1609,6 @@ export type QueryPlayerMeritArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryPlayerSlotArgs = {
-  nodeId: Scalars["ID"];
-};
-
-/** The root query type which gives access points into the data universe. */
 export type QueryPlayerArgs = {
   nodeId: Scalars["ID"];
 };
@@ -1827,11 +1620,6 @@ export type QueryRaidPlayerArgs = {
 
 /** The root query type which gives access points into the data universe. */
 export type QueryRaidArgs = {
-  nodeId: Scalars["ID"];
-};
-
-/** The root query type which gives access points into the data universe. */
-export type QuerySlotArgs = {
   nodeId: Scalars["ID"];
 };
 
@@ -2011,67 +1799,6 @@ export enum RaidsOrderBy {
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type Slot = Node & {
-  __typename?: "Slot";
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars["ID"];
-  id: Scalars["Int"];
-  name?: Maybe<Scalars["String"]>;
-  /** Reads and enables pagination through a set of `PlayerSlot`. */
-  playerSlotsBySlotId: PlayerSlotsConnection;
-};
-
-export type SlotPlayerSlotsBySlotIdArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
-  condition?: Maybe<PlayerSlotCondition>;
-};
-
-/** A condition to be used against `Slot` object types. All fields are tested for equality and combined with a logical ‘and.’ */
-export type SlotCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: Maybe<Scalars["String"]>;
-};
-
-/** A connection to a list of `Slot` values. */
-export type SlotsConnection = {
-  __typename?: "SlotsConnection";
-  /** A list of `Slot` objects. */
-  nodes: Array<Maybe<Slot>>;
-  /** A list of edges which contains the `Slot` and cursor to aid in pagination. */
-  edges: Array<SlotsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Slot` you could get from the connection. */
-  totalCount: Scalars["Int"];
-};
-
-/** A `Slot` edge in the connection. */
-export type SlotsEdge = {
-  __typename?: "SlotsEdge";
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars["Cursor"]>;
-  /** The `Slot` at the end of the edge. */
-  node?: Maybe<Slot>;
-};
-
-/** Methods to use when ordering `Slot`. */
-export enum SlotsOrderBy {
-  Natural = "NATURAL",
-  IdAsc = "ID_ASC",
-  IdDesc = "ID_DESC",
-  NameAsc = "NAME_ASC",
-  NameDesc = "NAME_DESC",
-  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
-  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
-}
-
 /** All input for the `updateClassItemById` mutation. */
 export type UpdateClassItemByIdInput = {
   /**
@@ -2222,56 +1949,6 @@ export type UpdatePlayerMeritPayload = {
 /** The output of our update `PlayerMerit` mutation. */
 export type UpdatePlayerMeritPayloadPlayerMeritEdgeArgs = {
   orderBy?: Maybe<Array<PlayerMeritsOrderBy>>;
-};
-
-/** All input for the `updatePlayerSlotById` mutation. */
-export type UpdatePlayerSlotByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   **/
-  clientMutationId?: Maybe<Scalars["String"]>;
-  /** An object where the defined keys will be set on the `PlayerSlot` being updated. */
-  playerSlotPatch: PlayerSlotPatch;
-  id: Scalars["Int"];
-};
-
-/** All input for the `updatePlayerSlot` mutation. */
-export type UpdatePlayerSlotInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   **/
-  clientMutationId?: Maybe<Scalars["String"]>;
-  /** The globally unique `ID` which will identify a single `PlayerSlot` to be updated. */
-  nodeId: Scalars["ID"];
-  /** An object where the defined keys will be set on the `PlayerSlot` being updated. */
-  playerSlotPatch: PlayerSlotPatch;
-};
-
-/** The output of our update `PlayerSlot` mutation. */
-export type UpdatePlayerSlotPayload = {
-  __typename?: "UpdatePlayerSlotPayload";
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   **/
-  clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `PlayerSlot` that was updated by this mutation. */
-  playerSlot?: Maybe<PlayerSlot>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-  /** Reads a single `Player` that is related to this `PlayerSlot`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Slot` that is related to this `PlayerSlot`. */
-  slotBySlotId?: Maybe<Slot>;
-  /** An edge for our `PlayerSlot`. May be used by Relay 1. */
-  playerSlotEdge?: Maybe<PlayerSlotsEdge>;
-};
-
-/** The output of our update `PlayerSlot` mutation. */
-export type UpdatePlayerSlotPayloadPlayerSlotEdgeArgs = {
-  orderBy?: Maybe<Array<PlayerSlotsOrderBy>>;
 };
 
 /** All input for the `updateRaidById` mutation. */
