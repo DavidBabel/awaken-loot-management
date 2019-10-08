@@ -45,7 +45,7 @@ Lors de la première utilisation:
   2. Créer la base de donnée: "CREATE DATABASE test;" (ne pas oublier le ";")
   3. Naviguer jusqu'au fichier "db.sql" dans "db/gen/". 
       Pour cela, utiliser les commandes: 
-        * "\! cd" pour connaitre le dossier actuel.
+        * "\\! cd" pour connaitre le dossier actuel.
         * "\cd .." pour aller au dossier précedent.
         * "\cd c:" pour changer de disque dur.
         * "\cd xxx/xxxx/xxx/xxx/" pour choisir le chemin.
