@@ -1,7 +1,4 @@
 import React from "react";
-
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import {
   createStyles,
   makeStyles,
@@ -18,7 +15,6 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
