@@ -117,10 +117,10 @@ VALUES
 (4, (SELECT id FROM "Players" WHERE "name"='Trackass')),
 (4, (SELECT id FROM "Players" WHERE "name"='Gidgud')),
 (4, (SELECT id FROM "Players" WHERE "name"='Kenyâ'));
--- INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
--- VALUES
+INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
+VALUES
+(4, (SELECT id FROM "Players" WHERE "name"='Abramus'), true)
 -- TODO finir de notez ceux qui ont passer leur tour
--- (4, (SELECT id FROM "Players" WHERE "name"='Abramus'), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
 -- (4, (SELECT id FROM "Players" WHERE "name"=''), true),
