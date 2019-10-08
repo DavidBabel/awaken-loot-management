@@ -16,6 +16,7 @@ import TableRow from "@material-ui/core/TableRow";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PlayerTableRow from "../../components/summary/PlayerTableRow";
+import { Player } from "../../lib/generatedTypes";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -24,8 +25,12 @@ const StyledTableCell = withStyles((theme: Theme) =>
     }
   })
 )(TableCell);
+
 interface Props {
+  showed: boolean;
   classColor: string;
+  players: Player[];
+  maxMeritValue: number;
 }
 const useStyles = makeStyles({
   root: {
@@ -66,7 +71,8 @@ function createData(
     playerLoots
   };
 }
-export default function PlayersTable(props) {
+
+export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
 
   const rowsData = props.players.map(player => {

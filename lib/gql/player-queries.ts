@@ -11,6 +11,7 @@ export const ALL_PLAYERS = gql`
         }
         id
         name
+        active
         playerMeritsByPlayerId {
           nodes {
             validated

@@ -120,10 +120,10 @@ export default function PageIndex() {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
-  const players = dataPlayers.allPlayers.nodes;
+  const players = dataPlayers.allPlayers.nodes.filter(p => p.active);
   const allMerits = dataAllMerits.allMerits.edges;
   let maxMeritValue = 0;
-  allMerits.map(merit => {
+  allMerits.forEach(merit => {
     if (merit.node.active) {
       maxMeritValue += merit.node.value;
     }
