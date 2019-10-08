@@ -13,8 +13,12 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Link from "next/link";
-import ProgressBar from "../../components/summary/ProgressBar";
+import PlayerTableRow from "../../components/summary/PlayerTableRow";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -23,37 +27,6 @@ const StyledTableCell = withStyles((theme: Theme) =>
     }
   })
 )(TableCell);
-
-const StyledTableRow = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "&:nth-of-type(odd)": {
-        backgroundColor: theme.palette.background.default
-      }
-    }
-  })
-)(TableRow);
-
-function createData(
-  name: string,
-  merit: number,
-  totalLoot: number,
-  totalRaid: number,
-  lastLootDate: string,
-  lastRaidDate: string,
-  playerId: number
-) {
-  return {
-    name,
-    merit,
-    totalLoot,
-    totalRaid,
-    lastLootDate,
-    lastRaidDate,
-    playerId
-  };
-}
-
 interface Props {
   classColor: String;
 }
@@ -70,17 +43,36 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700
   },
-  progressCell: {
-    margin: "auto",
-    width: "300px"
-  },
-  link: { "& a": { textDecoration: "none", color: "white" } }
+  headButton: {
+    fontSize: "12px"
+  }
 });
 
+function createData(
+  name: string,
+  merit: number,
+  totalLoot: number,
+  totalRaid: number,
+  lastLootDate: string,
+  lastRaidDate: string,
+  playerId: number,
+  playerLoots: any
+) {
+  return {
+    name,
+    merit,
+    totalLoot,
+    totalRaid,
+    lastLootDate,
+    lastRaidDate,
+    playerId,
+    playerLoots
+  };
+}
 export default function PlayersTable(props) {
   const classes = useStyles(props);
 
-  const rows = props.players.map(player => {
+  const rowsData = props.players.map(player => {
     let totalMerit = 0;
     let totalLoot = 0;
     const totalRaid = player.raidPlayersByPlayerId.nodes.length;
@@ -117,67 +109,247 @@ export default function PlayersTable(props) {
         }
       });
     }
-
+    let dateOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    };
     return createData(
       player.name,
       Math.round((totalMerit * 100) / props.maxMeritValue),
       totalLoot,
       totalRaid,
-      lastLootDate ? lastLootDate.toLocaleDateString("fr-FR") : "Aucun",
-      lastRaidDate ? lastRaidDate.toLocaleDateString("fr-FR") : "Aucun",
-      player.id
+      lastLootDate
+        ? lastLootDate.toLocaleDateString("en-EN", dateOptions)
+        : "Aucun",
+      lastRaidDate
+        ? lastRaidDate.toLocaleDateString("en-EN", dateOptions)
+        : "Aucun",
+      player.id,
+      player.lootsByPlayerId.nodes
     );
   });
+  rowsData.sort((a, b) => b.merit - a.merit);
+  const [rows, setRows] = React.useState(rowsData);
+  const [orderedBy, setOrderedBy] = React.useState("merit");
+  const [orderedDESC, setOrderedDESC] = React.useState(false);
+
+  function orderBy(colName: string) {
+    let newRows = [...rows];
+    let currentlyOrderedDesc = orderedDESC;
+    if (colName === orderedBy) {
+      currentlyOrderedDesc = !orderedDESC;
+    }
+    if (colName === "merit") {
+      newRows.sort((a, b) =>
+        currentlyOrderedDesc ? a.merit - b.merit : b.merit - a.merit
+      );
+    } else if (colName === "totalRaid") {
+      newRows.sort((a, b) =>
+        currentlyOrderedDesc
+          ? a.totalRaid - b.totalRaid
+          : b.totalRaid - a.totalRaid
+      );
+    } else if (colName === "totalLoot") {
+      newRows.sort((a, b) =>
+        currentlyOrderedDesc
+          ? a.totalLoot - b.totalLoot
+          : b.totalLoot - a.totalLoot
+      );
+    } else if (colName === "name") {
+      newRows.sort((a, b) => {
+        if (a.name > b.name) {
+          return currentlyOrderedDesc ? -1 : 1;
+        }
+        if (b.name > a.name) {
+          return currentlyOrderedDesc ? 1 : -1;
+        }
+        return 0;
+      });
+    } else if (colName === "lastLootDate") {
+      newRows.sort((a, b) => {
+        if (
+          new Date(a.lastLootDate) > new Date(b.lastLootDate) ||
+          a.lastLootDate === "Aucun"
+        ) {
+          return currentlyOrderedDesc ? -1 : 1;
+        }
+        if (
+          new Date(b.lastLootDate) > new Date(a.lastLootDate) ||
+          b.lastLootDate === "Aucun"
+        ) {
+          return currentlyOrderedDesc ? 1 : -1;
+        }
+        return 0;
+      });
+    } else if (colName === "lastRaidDate") {
+      newRows.sort((a, b) => {
+        if (
+          new Date(a.lastRaidDate) > new Date(b.lastRaidDate) ||
+          a.lastRaidDate === "Aucun"
+        ) {
+          return currentlyOrderedDesc ? -1 : 1;
+        }
+        if (
+          new Date(b.lastRaidDate) > new Date(a.lastRaidDate) ||
+          b.lastRaidDate === "Aucun"
+        ) {
+          return currentlyOrderedDesc ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    if (colName === orderedBy) {
+      setOrderedDESC(prevState => !prevState);
+    }
+    setOrderedBy(colName);
+    setRows(newRows);
+  }
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <StyledTableCell align="left">Pseudo</StyledTableCell>
-            <StyledTableCell align="center">Merit</StyledTableCell>
-            <StyledTableCell align="center">Total loot</StyledTableCell>
-            <StyledTableCell align="center">Total raid</StyledTableCell>
-            <StyledTableCell align="center">Last loot date</StyledTableCell>
-            <StyledTableCell align="center">Last raid date</StyledTableCell>
-            <StyledTableCell align="center">.</StyledTableCell>
+            <StyledTableCell align="left">
+              {" "}
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "name" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("name");
+                }}
+              >
+                Pseudo
+                {orderedBy === "name" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              {" "}
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "merit" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("merit");
+                }}
+              >
+                Merit
+                {orderedBy === "merit" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "totalLoot" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("totalLoot");
+                }}
+              >
+                Total Loot
+                {orderedBy === "totalLoot" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "totalRaid" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("totalRaid");
+                }}
+              >
+                Total Raid
+                {orderedBy === "totalRaid" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              {" "}
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "lastLootDate" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("lastLootDate");
+                }}
+              >
+                Last loot
+                {orderedBy === "lastLootDate" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center">
+              {" "}
+              <Button
+                className={classes.headButton}
+                variant={orderedBy === "lastRaidDate" ? "outlined" : "text"}
+                onClick={() => {
+                  orderBy("lastRaidDate");
+                }}
+              >
+                Last raid
+                {orderedBy === "lastRaidDate" ? (
+                  orderedDESC ? (
+                    <KeyboardArrowDownIcon />
+                  ) : (
+                    <KeyboardArrowUpIcon />
+                  )
+                ) : (
+                  ""
+                )}
+              </Button>
+            </StyledTableCell>
+            <StyledTableCell align="center"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell /* component="th" */ scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell className={classes.progressCell} align="center">
-                <ProgressBar
-                  classColor={props.classColor}
-                  progress={row.merit}
-                  showed={props.showed}
-                />
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.totalLoot}</StyledTableCell>
-              <StyledTableCell align="center">{row.totalRaid}</StyledTableCell>
-              <StyledTableCell align="center">
-                {row.lastLootDate}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {" "}
-                {row.lastRaidDate}
-              </StyledTableCell>
-              <StyledTableCell align="center" className={classes.link}>
-                <Link
-                  href="/player/view/[id]"
-                  as={`/player/view/${row.playerId}`}
-                >
-                  <a>
-                    <Button variant="contained" color="primary">
-                      Details
-                    </Button>
-                  </a>
-                </Link>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+          <React.Fragment>
+            {rows.map(row => (
+              <PlayerTableRow
+                key={row.name}
+                rowData={row}
+                classColor={props.classColor}
+                showed={props.showed}
+                lootsData={row.playerLoots}
+              />
+            ))}
+          </React.Fragment>
         </TableBody>
       </Table>
     </Paper>

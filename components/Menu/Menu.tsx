@@ -27,7 +27,7 @@ export function Menu() {
     <div
       style={{
         borderRight: "1px solid #E0E0E0",
-        width: 400,
+        width: "300px",
         height: "90vh",
         marginRight: 30
       }}
@@ -51,11 +51,14 @@ export function Menu() {
                 <ListItemText primary="Player list" />
               </Link>
             </ListItem>
-          </List>
-          <List>
             <ListItem button={true}>
               <Link href="/summary">
                 <ListItemText primary="Characters summary" />
+              </Link>
+            </ListItem>
+            <ListItem button={true}>
+              <Link href="/attendance">
+                <ListItemText primary="Attendance" />
               </Link>
             </ListItem>
           </List>

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   bar: {
     position: "relative",
     height: "10px",
-    width: "300px",
+    width: "200px",
     borderRadius: "4px",
     border: "1px solid transparent",
     backgroundColor: "#4D4D4D"
