@@ -11,7 +11,7 @@
     "gql": "node server/graphiql-dev.js",
     "reset-db": "bin/reset-db.sh",
     "types": "bin/generate-types.sh",
-    "reset": "yarn reset-db && yarn types",
+    "reset": "npm run reset-db && npm run types",
     "lint": "tslint --project ."
   },
   "dependencies": {

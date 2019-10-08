@@ -3,14 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-      - yarn install
+      - npm install
       - pip install --upgrade awscli
-  pre_build:
-    commands:
-      - yarn install --production=true
   build:
     commands:
-      - yarn build
+      - npm build
 
 artifacts:
   files:
