@@ -3,6 +3,7 @@ console.debug({
   DATABASE_URL: process.env.DATABASE_URL,
   GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
   JWT_SECRET: process.env.JWT_SECRET,
+  PORT: process.env.PORT,
   SERVER_URL: process.env.SERVER_URL
 });
 
