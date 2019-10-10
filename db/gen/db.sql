@@ -1,4 +1,7 @@
  -- SAFE BEGIN FOR CONCAT
+DROP SCHEMA public cascade;
+CREATE SCHEMA public;
+
 SET search_path TO public;
 
 CREATE TABLE "Classes" (
