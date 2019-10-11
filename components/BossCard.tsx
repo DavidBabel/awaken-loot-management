@@ -8,33 +8,33 @@ import {
   Fab,
   IconButton,
   makeStyles
-} from "@material-ui/core";
-import { Add as AddIcon, MoreVert as MoreVertIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { Add as AddIcon, MoreVert as MoreVertIcon } from '@material-ui/icons';
 
-import { Boss } from "../lib/generatedTypes";
-import { ItemCard } from "./ItemCard";
+import { Boss } from '../lib/generatedTypes';
+import { ItemCard } from './ItemCard';
 
 const useStyles = makeStyles({
   card: {
-    position: "relative",
+    position: 'relative',
     width: 400,
     minHeight: 400,
-    margin: "10px",
-    backgroundColor: "#dedede",
-    paddingBottom: "40px"
+    margin: '10px',
+    backgroundColor: '#dedede',
+    paddingBottom: '40px'
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: '56.25%' // 16:9
   },
   cardContent: {
-    height: "auto"
+    height: 'auto'
   },
   cardActions: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     right: 0,
-    margin: "auto"
+    margin: 'auto'
   }
 });
 
@@ -47,7 +47,7 @@ export function BossCard({
   // const [showLoots, setShowLoots] = useState(false);
   // const toogleShowLoots = () => setShowLoots(!showLoots);
 
-  const classes = useStyles("");
+  const classes = useStyles('');
 
   return (
     <Card className={classes.card}>
@@ -62,9 +62,9 @@ export function BossCard({
       />
       <CardMedia
         className={classes.media}
-        image={`/static/img/boss/${donjonShortName}/${name
+        image={`/public/img/boss/${donjonShortName}/${name
           .toLowerCase()
-          .replace(/\s/g, "-")}.jpg`}
+          .replace(/\s/g, '-')}.jpg`}
         title={name}
       />
       <CardContent className={classes.cardContent}>
