@@ -6,9 +6,9 @@ import {
   CardContent,
   CardMedia,
   Typography
-} from "@material-ui/core";
-import Link from "next/link";
-import { Donjon } from "../../lib/generatedTypes";
+} from '@material-ui/core';
+import Link from 'next/link';
+import { Donjon } from '../../lib/generatedTypes';
 
 interface Props {
   donjon: Donjon;
@@ -19,7 +19,7 @@ export function CreateRaid({ donjon }: Props) {
     <Card>
       <CardActionArea>
         <CardMedia
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image="/public/images/cards/contemplative-reptile.jpg"
           title={donjon.name}
         />
         <CardContent>

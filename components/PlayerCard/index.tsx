@@ -22,7 +22,7 @@ export function PlayerCard({
       <Checkbox checked={isChecked} />
       <img
         style={{ width: 15 }}
-        src={`/static/img/class/${className}.jpg`}
+        src={`/public/img/class/${className}.jpg`}
         alt={className}
       />
       <span style={{ color }}>{name}</span>

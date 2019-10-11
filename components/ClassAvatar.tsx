@@ -18,7 +18,7 @@ export default function classAvatar({ playerClass }: Props) {
     <Grid container justify="center" alignItems="center">
       <Avatar
         alt={playerClass + "avatar"}
-        src={`/static/img/class/${playerClass}.jpg`}
+        src={`/public/img/class/${playerClass}.jpg`}
         className={classes.avatar}
       />
     </Grid>
