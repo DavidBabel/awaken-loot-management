@@ -2132,3 +2132,5 @@ export type UpdateRaidPlayerPayload = {
 export type UpdateRaidPlayerPayloadRaidPlayerEdgeArgs = {
   orderBy?: Maybe<Array<RaidPlayersOrderBy>>
 };
+
+

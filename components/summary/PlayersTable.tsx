@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PlayerTableRow from "../../components/summary/PlayerTableRow";
 import { Player } from "../../lib/generatedTypes";
+import { byDate } from "../../lib/utils/sorter";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -170,37 +171,9 @@ export default function PlayersTable(props: Props) {
         return 0;
       });
     } else if (colName === "lastLootDate") {
-      newRows.sort((a, b) => {
-        if (
-          new Date(a.lastLootDate) > new Date(b.lastLootDate) ||
-          a.lastLootDate === "Aucun"
-        ) {
-          return currentlyOrderedDesc ? -1 : 1;
-        }
-        if (
-          new Date(b.lastLootDate) > new Date(a.lastLootDate) ||
-          b.lastLootDate === "Aucun"
-        ) {
-          return currentlyOrderedDesc ? 1 : -1;
-        }
-        return 0;
-      });
+      newRows.sort(byDate.bind(null, "lastLootDate", currentlyOrderedDesc));
     } else if (colName === "lastRaidDate") {
-      newRows.sort((a, b) => {
-        if (
-          new Date(a.lastRaidDate) > new Date(b.lastRaidDate) ||
-          a.lastRaidDate === "Aucun"
-        ) {
-          return currentlyOrderedDesc ? -1 : 1;
-        }
-        if (
-          new Date(b.lastRaidDate) > new Date(a.lastRaidDate) ||
-          b.lastRaidDate === "Aucun"
-        ) {
-          return currentlyOrderedDesc ? 1 : -1;
-        }
-        return 0;
-      });
+      newRows.sort(byDate.bind(null, "lastRaidDate", currentlyOrderedDesc));
     }
     if (colName === orderedBy) {
       setOrderedDESC(prevState => !prevState);
@@ -218,20 +191,16 @@ export default function PlayersTable(props: Props) {
               {" "}
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "name" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("name");
                 }}
               >
                 Pseudo
-                {orderedBy === "name" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "name" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
@@ -239,60 +208,48 @@ export default function PlayersTable(props: Props) {
               {" "}
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "merit" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("merit");
                 }}
               >
                 Merit
-                {orderedBy === "merit" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "merit" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
             <StyledTableCell align="center">
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "totalLoot" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("totalLoot");
                 }}
               >
                 Total Loot
-                {orderedBy === "totalLoot" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "totalLoot" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
             <StyledTableCell align="center">
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "totalRaid" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("totalRaid");
                 }}
               >
                 Total Raid
-                {orderedBy === "totalRaid" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "totalRaid" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
@@ -300,20 +257,16 @@ export default function PlayersTable(props: Props) {
               {" "}
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "lastLootDate" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("lastLootDate");
                 }}
               >
                 Last loot
-                {orderedBy === "lastLootDate" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "lastLootDate" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
@@ -321,20 +274,16 @@ export default function PlayersTable(props: Props) {
               {" "}
               <Button
                 className={classes.headButton}
-                variant={orderedBy === "lastRaidDate" ? "outlined" : "text"}
+                variant={"text"}
                 onClick={() => {
                   orderBy("lastRaidDate");
                 }}
               >
                 Last raid
-                {orderedBy === "lastRaidDate" ? (
-                  orderedDESC ? (
-                    <KeyboardArrowDownIcon />
-                  ) : (
-                    <KeyboardArrowUpIcon />
-                  )
+                {orderedBy === "lastRaidDate" && orderedDESC ? (
+                  <KeyboardArrowUpIcon />
                 ) : (
-                  ""
+                  <KeyboardArrowDownIcon />
                 )}
               </Button>
             </StyledTableCell>
