@@ -419,7 +419,9 @@ VALUES
 ('Arrache-moelle',17104,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Fragment de la Flamme',17082,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Fléau de Bonereaver',17076,(SELECT id FROM "Classes" WHERE "name"='')),
-('Jambières des dix tempêtes',16946,(SELECT id FROM "Classes" WHERE "name"='Chaman'));
+('Jambières des dix tempêtes',16946,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+-- manually added
+('Défenseur de Malistar',17106,(SELECT id FROM "Classes" WHERE "name"=''));
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES

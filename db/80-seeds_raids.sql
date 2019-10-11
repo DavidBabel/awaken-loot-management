@@ -19,7 +19,8 @@ VALUES
 (1, '2019-10-01'), -- 8
 (1, '2019-10-02'), -- 9
 (1, '2019-10-06'), -- 10
-(2, '2019-10-06'); -- 11
+(2, '2019-10-06'), -- 11
+(1, '2019-10-09'); -- 12
 
 
 -- MC 2019-09-19
@@ -426,4 +427,52 @@ VALUES
 (11, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'))
 ;
 
+
+-- Full MC - 2019-10-09
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(12, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(12, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(12, (SELECT id FROM "Players" WHERE "name"='Ladj')),
+(12, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(12, (SELECT id FROM "Players" WHERE "name"='Synrj')),
+(12, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(12, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(12, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(12, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(12, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(12, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(12, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(12, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(12, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(12, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(12, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(12, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(12, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(12, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(12, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(12, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(12, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(12, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(12, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(12, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(12, (SELECT id FROM "Players" WHERE "name"='Kusogakî')),
+(12, (SELECT id FROM "Players" WHERE "name"='Nøwad')),
+(12, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(12, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(12, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(12, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(12, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(12, (SELECT id FROM "Players" WHERE "name"='Easìer')),
+(12, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(12, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(12, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(12, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(12, (SELECT id FROM "Players" WHERE "name"='Lums')),
+(12, (SELECT id FROM "Players" WHERE "name"='Mergueztguez')),
+(12, (SELECT id FROM "Players" WHERE "name"='Tad'))
+;
+INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
+VALUES
+(12, (SELECT id FROM "Players" WHERE "name"='Ikith'), true);
 
