@@ -20,6 +20,7 @@
 
 INSERT INTO "Players" ("name", "classId", "role", "password", "active")
 VALUES
+('test'         , 1,  'admin', '098f6bcd4621d373cade4e832627b4f6', true),
 ('Devilhunter'  , 6,  'admin', '55fc5b709962876903785fd64a6961e5', true),
 ('Hakken'       , 2,  'officer', null, true),
 ('Lums'         , 7,  'officer', null, true),
