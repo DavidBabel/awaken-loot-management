@@ -5,7 +5,6 @@ import Box from "@material-ui/core/Box";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
 import PlayersTable from "../../components/summary/PlayersTable";
 
 import { useQuery } from "@apollo/react-hooks";
@@ -26,7 +25,7 @@ function TabPanel(props: TabPanelProps) {
   return value !== index ? (
     <div />
   ) : (
-    <Typography
+    <div
       // component="div"
       role="tabpanel"
       hidden={value !== index}
@@ -35,7 +34,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       <Box p={3}>{children}</Box>
-    </Typography>
+    </div>
   );
 }
 
