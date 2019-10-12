@@ -86,7 +86,24 @@ export default function PlayerTableRow(props) {
       </StyledTableRow>
       {showLootDetail && (
         <StyledTableRow>
-          <StyledTableCell align="center">coucou</StyledTableCell>
+          <StyledTableCell align="center">
+            {props.lootsData.map((l, i) => {
+              // return JSON.stringify(l);
+              return (
+                <div key={`${props.rowData.name}-${l.itemByItemId.name}-${i}`}>
+                  <a
+                    style={{
+                      textDecoration: "none",
+                      marginRight: "10px"
+                    }}
+                    href={`https://fr.classic.wowhead.com/item=${l.itemByItemId.wowheadId}`}
+                  >
+                    {l.itemByItemId.name}
+                  </a>
+                </div>
+              );
+            })}
+          </StyledTableCell>
         </StyledTableRow>
       )}
     </>
