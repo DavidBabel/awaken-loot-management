@@ -86,7 +86,7 @@ type ColumnName =
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
 
-  const rowsData = props.players.map(player => {
+  const rowsData = props.players.map((player: Player) => {
     let maxMerit = 0;
     let totalLoot = 0;
     const totalRaid = player.raidPlayersByPlayerId.nodes.length;
@@ -183,6 +183,9 @@ export default function PlayersTable(props: Props) {
   }
 
   function sortArrow(columnName: string) {
+    if (!columnName) {
+      return "";
+    }
     return orderedBy === columnName && orderedDESC ? (
       <KeyboardArrowUpIcon />
     ) : (
@@ -201,7 +204,9 @@ export default function PlayersTable(props: Props) {
               "Total Loot",
               "Total raid",
               "Last loot",
-              "Last raid"
+              "Last raid",
+              "",
+              ""
             ].map((columnName: ColumnName) => (
               <StyledTableCell key={columnName} align="center">
                 {" "}
@@ -217,7 +222,6 @@ export default function PlayersTable(props: Props) {
                 </Button>
               </StyledTableCell>
             ))}
-            <StyledTableCell align="center" />
           </TableRow>
         </TableHead>
         <TableBody>

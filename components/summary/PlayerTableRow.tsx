@@ -1,15 +1,15 @@
 import React from "react";
+
+import { Button, TableCell, TableRow } from "@material-ui/core";
 import {
-  withStyles,
-  Theme,
   createStyles,
-  makeStyles
+  makeStyles,
+  Theme,
+  withStyles
 } from "@material-ui/core/styles";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-import ProgressBar from "../../components/summary/ProgressBar";
 import Link from "next/link";
-import Button from "@material-ui/core/Button";
+import ProgressBar from "../../components/summary/ProgressBar";
+import { useToggle } from "../../lib/hooks/toggle";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -35,43 +35,60 @@ const useStyles = makeStyles({
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
 export default function PlayerTableRow(props) {
+  const [showLootDetail, toggleShowLootDetail] = useToggle(false);
   const classes = useStyles("");
   return (
-    <StyledTableRow>
-      <StyledTableCell component="th" scope="row">
-        {props.rowData.name}
-      </StyledTableCell>
-      <StyledTableCell className={classes.progressCell} align="center">
-        <ProgressBar
-          classColor={props.classColor}
-          progress={props.rowData.merit}
-          showed={props.showed}
-        />
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.totalLoot}
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.totalRaid}
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.lastLootDate}
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.lastRaidDate}
-      </StyledTableCell>
-      <StyledTableCell align="center" className={classes.link}>
-        <Link
-          href="/player/view/[id]"
-          as={`/player/view/${props.rowData.playerId}`}
-        >
-          <a>
-            <Button variant="contained" color="primary">
-              Details
-            </Button>
-          </a>
-        </Link>
-      </StyledTableCell>
-    </StyledTableRow>
+    <>
+      <StyledTableRow>
+        <StyledTableCell component="th" scope="row">
+          {props.rowData.name}
+        </StyledTableCell>
+        <StyledTableCell className={classes.progressCell} align="center">
+          <ProgressBar
+            classColor={props.classColor}
+            progress={props.rowData.merit}
+            showed={props.showed}
+          />
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {props.rowData.totalLoot}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {props.rowData.totalRaid}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {props.rowData.lastLootDate}
+        </StyledTableCell>
+        <StyledTableCell align="center">
+          {props.rowData.lastRaidDate}
+        </StyledTableCell>
+        <StyledTableCell align="center" className={classes.link}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={toggleShowLootDetail}
+          >
+            Details 1
+          </Button>
+        </StyledTableCell>
+        <StyledTableCell align="center" className={classes.link}>
+          <Link
+            href="/player/view/[id]"
+            as={`/player/view/${props.rowData.playerId}`}
+          >
+            <a>
+              <Button variant="contained" color="primary">
+                Details 2
+              </Button>
+            </a>
+          </Link>
+        </StyledTableCell>
+      </StyledTableRow>
+      {showLootDetail && (
+        <StyledTableRow>
+          <StyledTableCell align="center">coucou</StyledTableCell>
+        </StyledTableRow>
+      )}
+    </>
   );
 }
