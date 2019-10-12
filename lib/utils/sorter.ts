@@ -26,3 +26,7 @@ export function byDate(accessor: string, order: boolean, a: any, b: any) {
   }
   return 0;
 }
+
+export function byValue(accessor: string, order: boolean, a: any, b: any) {
+  return order ? a[accessor] - b[accessor] : b[accessor] - a[accessor];
+}

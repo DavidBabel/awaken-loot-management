@@ -1,23 +1,25 @@
 import React from "react";
 
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from "@material-ui/core";
 import {
   createStyles,
   makeStyles,
   Theme,
   withStyles
 } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import PlayerTableRow from "../../components/summary/PlayerTableRow";
 import { Player } from "../../lib/generatedTypes";
-import { byDate } from "../../lib/utils/sorter";
+import { byDate, byValue } from "../../lib/utils/sorter";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -73,16 +75,24 @@ function createData(
   };
 }
 
+type ColumnName =
+  | "Pseudo"
+  | "Merit"
+  | "Total Loot"
+  | "Total raid"
+  | "Last loot"
+  | "Last raid";
+
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
 
   const rowsData = props.players.map(player => {
-    let totalMerit = 0;
+    let maxMerit = 0;
     let totalLoot = 0;
     const totalRaid = player.raidPlayersByPlayerId.nodes.length;
     player.playerMeritsByPlayerId.nodes.map(merit => {
       if (merit.validated) {
-        totalMerit += merit.meritByMeritId.value;
+        maxMerit += merit.meritByMeritId.value;
       }
     });
     player.lootsByPlayerId.nodes.map(loot => {
@@ -120,7 +130,7 @@ export default function PlayersTable(props: Props) {
     };
     return createData(
       player.name,
-      Math.round((totalMerit * 100) / props.maxMeritValue),
+      Math.round((maxMerit * 100) / props.maxMeritValue),
       totalLoot,
       totalRaid,
       lastLootDate
@@ -135,32 +145,22 @@ export default function PlayersTable(props: Props) {
   });
   rowsData.sort((a, b) => b.merit - a.merit);
   const [rows, setRows] = React.useState(rowsData);
-  const [orderedBy, setOrderedBy] = React.useState("merit");
+  const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Merit");
   const [orderedDESC, setOrderedDESC] = React.useState(false);
 
-  function orderBy(colName: string) {
+  function orderBy(colName: ColumnName) {
     const newRows = [...rows];
     let currentlyOrderedDesc = orderedDESC;
     if (colName === orderedBy) {
       currentlyOrderedDesc = !orderedDESC;
     }
-    if (colName === "merit") {
-      newRows.sort((a, b) =>
-        currentlyOrderedDesc ? a.merit - b.merit : b.merit - a.merit
-      );
-    } else if (colName === "totalRaid") {
-      newRows.sort((a, b) =>
-        currentlyOrderedDesc
-          ? a.totalRaid - b.totalRaid
-          : b.totalRaid - a.totalRaid
-      );
-    } else if (colName === "totalLoot") {
-      newRows.sort((a, b) =>
-        currentlyOrderedDesc
-          ? a.totalLoot - b.totalLoot
-          : b.totalLoot - a.totalLoot
-      );
-    } else if (colName === "name") {
+    if (colName === "Merit") {
+      newRows.sort(byValue.bind(null, "merit", currentlyOrderedDesc));
+    } else if (colName === "Total raid") {
+      newRows.sort(byValue.bind(null, "totalRaid", currentlyOrderedDesc));
+    } else if (colName === "Total Loot") {
+      newRows.sort(byValue.bind(null, "totalLoot", currentlyOrderedDesc));
+    } else if (colName === "Pseudo") {
       newRows.sort((a, b) => {
         if (a.name > b.name) {
           return currentlyOrderedDesc ? -1 : 1;
@@ -170,9 +170,9 @@ export default function PlayersTable(props: Props) {
         }
         return 0;
       });
-    } else if (colName === "lastLootDate") {
+    } else if (colName === "Last loot") {
       newRows.sort(byDate.bind(null, "lastLootDate", currentlyOrderedDesc));
-    } else if (colName === "lastRaidDate") {
+    } else if (colName === "Last raid") {
       newRows.sort(byDate.bind(null, "lastRaidDate", currentlyOrderedDesc));
     }
     if (colName === orderedBy) {
@@ -182,111 +182,41 @@ export default function PlayersTable(props: Props) {
     setRows(newRows);
   }
 
+  function sortArrow(columnName: string) {
+    return orderedBy === columnName && orderedDESC ? (
+      <KeyboardArrowUpIcon />
+    ) : (
+      <KeyboardArrowDownIcon />
+    );
+  }
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <StyledTableCell align="left">
-              {" "}
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("name");
-                }}
-              >
-                Pseudo
-                {orderedBy === "name" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              {" "}
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("merit");
-                }}
-              >
-                Merit
-                {orderedBy === "merit" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("totalLoot");
-                }}
-              >
-                Total Loot
-                {orderedBy === "totalLoot" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("totalRaid");
-                }}
-              >
-                Total Raid
-                {orderedBy === "totalRaid" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              {" "}
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("lastLootDate");
-                }}
-              >
-                Last loot
-                {orderedBy === "lastLootDate" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
-            <StyledTableCell align="center">
-              {" "}
-              <Button
-                className={classes.headButton}
-                variant={"text"}
-                onClick={() => {
-                  orderBy("lastRaidDate");
-                }}
-              >
-                Last raid
-                {orderedBy === "lastRaidDate" && orderedDESC ? (
-                  <KeyboardArrowUpIcon />
-                ) : (
-                  <KeyboardArrowDownIcon />
-                )}
-              </Button>
-            </StyledTableCell>
+            {[
+              "Pseudo",
+              "Merit",
+              "Total Loot",
+              "Last loot",
+              "Last loot",
+              "Last raid"
+            ].map((columnName: ColumnName) => (
+              <StyledTableCell key={columnName} align="center">
+                {" "}
+                <Button
+                  className={classes.headButton}
+                  variant={"text"}
+                  onClick={() => {
+                    orderBy(columnName);
+                  }}
+                >
+                  {columnName}
+                  {sortArrow(columnName)}
+                </Button>
+              </StyledTableCell>
+            ))}
             <StyledTableCell align="center" />
           </TableRow>
         </TableHead>
