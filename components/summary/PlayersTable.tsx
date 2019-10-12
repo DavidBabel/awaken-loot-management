@@ -199,7 +199,7 @@ export default function PlayersTable(props: Props) {
               "Pseudo",
               "Merit",
               "Total Loot",
-              "Last loot",
+              "Total raid",
               "Last loot",
               "Last raid"
             ].map((columnName: ColumnName) => (
