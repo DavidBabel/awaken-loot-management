@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     position: "relative",
     backgroundColor: "#3F51B5",
     color: "white",
+    fontWeight: "bold",
     width: "100%",
     textAlign: "center",
     height: "30px",
@@ -110,7 +111,7 @@ export default function LootWindow(props) {
   return (
     <div className={classes.root} ref={lootWindowElem}>
       <div className={classes.header} ref={headerElem}>
-        {props.playerName}
+        {props.playerName.toUpperCase()}
         <div
           className={classes.cross}
           onClick={() => {

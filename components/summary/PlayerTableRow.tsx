@@ -57,20 +57,24 @@ export default function PlayerTableRow(props) {
       </StyledTableCell>
       <StyledTableCell align="center">
         {props.rowData.totalLoot}
-        <IconButton
-          ref={iconElem}
-          onClick={() => {
-            props.openLootWindow(props.rowData.name, props.lootsData, {
-              top: iconElem.current.getBoundingClientRect().top,
-              left: iconElem.current.getBoundingClientRect().left
-            });
-          }}
-          className={classes.viewIcon}
-          color="primary"
-          aria-label="View loots"
-        >
-          <VisibilityIcon />
-        </IconButton>
+        {props.rowData.totalLoot > 0 ? (
+          <IconButton
+            ref={iconElem}
+            onClick={() => {
+              props.openLootWindow(props.rowData.name, props.lootsData, {
+                top: iconElem.current.getBoundingClientRect().top,
+                left: iconElem.current.getBoundingClientRect().left
+              });
+            }}
+            className={classes.viewIcon}
+            color="primary"
+            aria-label="View loots"
+          >
+            <VisibilityIcon />
+          </IconButton>
+        ) : (
+          ""
+        )}
       </StyledTableCell>
       <StyledTableCell align="center">
         {props.rowData.totalRaid}
