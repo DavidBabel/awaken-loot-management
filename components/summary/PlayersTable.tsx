@@ -160,7 +160,12 @@ export default function PlayersTable(props: Props) {
       });
     }
   }
-
+  function closeLootWindow(playerName: string) {
+    const newWindowsList = lootWindows.filter(
+      lootWindow => lootWindow.playerName !== playerName
+    );
+    setLootWindows(newWindowsList);
+  }
   function orderBy(colName: string) {
     const newRows = [...rows];
     let currentlyOrderedDesc = orderedDESC;
@@ -386,6 +391,7 @@ export default function PlayersTable(props: Props) {
           playerName={lootWindow.playerName}
           lootData={lootWindow.lootData}
           iconClientPos={lootWindow.iconClientPos}
+          closeLootWindow={closeLootWindow}
         />
       ))}
     </Paper>

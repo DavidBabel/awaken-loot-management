@@ -5,6 +5,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import CloseIcon from "@material-ui/icons/Close";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Link from "next/link";
 import React from "react";
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
     zIndex: 2
   },
   header: {
+    position: "relative",
     backgroundColor: "#3F51B5",
     color: "white",
     width: "100%",
@@ -27,6 +29,18 @@ const useStyles = makeStyles({
     lineHeight: "30px",
     cursor: "move",
     borderRadius: "3px 3px 0px 0px"
+  },
+  cross: {
+    position: "absolute",
+    top: "2px",
+    right: "2px",
+    cursor: "pointer",
+    backgroundColor: "#E6E8EB",
+    height: "24px",
+    borderRadius: "50%",
+    "& :hover": {
+      color: "#bf1313"
+    }
   },
   content: {
     padding: "8px"
@@ -83,6 +97,14 @@ export default function LootWindow(props) {
     <div className={classes.root} ref={lootWindowElem}>
       <div className={classes.header} ref={headerElem}>
         {props.playerName}
+        <div
+          className={classes.cross}
+          onClick={() => {
+            props.closeLootWindow(props.playerName);
+          }}
+        >
+          <CloseIcon color="primary" />
+        </div>
       </div>
       <Table className={classes.content} size="small">
         <TableHead>
@@ -113,7 +135,7 @@ export default function LootWindow(props) {
                 >
                   <a>
                     <Button variant="contained" color="primary">
-                      {loot.raidByRaidId.date + " "}
+                      {loot.raidByRaidId.date}
                       <VisibilityIcon />
                     </Button>
                   </a>
