@@ -102,6 +102,12 @@ export default function PageIndex() {
   }
   const allRaids = dataAllRaids.allRaids.nodes;
   const players = dataPlayers.allPlayers.nodes;
+  let raidsNb = 0;
+  allRaids.forEach(raid => {
+    if (raid.raidPlayersByRaidId.nodes.length > 0) {
+      raidsNb++;
+    }
+  });
   players.sort((a, b) => {
     // Ordre alphabetique
     if (a.name > b.name) {
@@ -157,7 +163,12 @@ export default function PageIndex() {
                   </Link>
                 </TableCell>
                 <TableCell className={classes.attPercentage + " perc-cell"}>
-                  %
+                  {player.raidPlayersByPlayerId.nodes.length === 0
+                    ? "0 %"
+                    : `${Math.round(
+                        (player.raidPlayersByPlayerId.nodes.length * 100) /
+                          raidsNb
+                      )} %`}
                 </TableCell>
                 {allRaids.map(raid => {
                   if (raid.raidPlayersByRaidId.nodes.length > 0) {
