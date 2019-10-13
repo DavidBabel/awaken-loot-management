@@ -92,6 +92,20 @@ export default function LootWindow(props) {
     makeDraggable(lootWindowElem.current);
     lootWindowElem.current.style.top = props.iconClientPos.top + "px";
     lootWindowElem.current.style.left = props.iconClientPos.left + 50 + "px";
+    if (lootWindowElem.current.animate) {
+      lootWindowElem.current.animate(
+        [
+          { transform: "scale(0.1)", opacity: 0 },
+          { transform: "scale(1)", opacity: 1 }
+        ],
+        {
+          duration: 250,
+          iterations: 1,
+          easing: "ease-out",
+          fill: "both"
+        }
+      );
+    }
   }, []);
   return (
     <div className={classes.root} ref={lootWindowElem}>
@@ -131,7 +145,7 @@ export default function LootWindow(props) {
               <TableCell className={classes.raidButtonCell}>
                 <Link
                   href="/raid/edit/[id]"
-                  as={`/raid/edit/${loot.raidByRaidId.raidId}`}
+                  as={`/raid/edit/${loot.raidByRaidId.id}`}
                 >
                   <a>
                     <Button variant="contained" color="primary">
