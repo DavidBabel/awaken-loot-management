@@ -105,7 +105,7 @@ export default function LootWindow(props) {
       );
       setTimeout(() => {
         props.closeLootWindow(props.playerName);
-      }, 300);
+      }, 250);
     } else {
       props.closeLootWindow(props.playerName);
     }
