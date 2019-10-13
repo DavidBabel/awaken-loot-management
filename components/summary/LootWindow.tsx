@@ -89,6 +89,27 @@ export default function LootWindow(props) {
       document.onmousemove = null;
     }
   }
+  function closeWindow() {
+    if (lootWindowElem.current.animate) {
+      lootWindowElem.current.animate(
+        [
+          { transform: "scale(1)", opacity: 1 },
+          { transform: "scale(0.1)", opacity: 0 }
+        ],
+        {
+          duration: 250,
+          iterations: 1,
+          easing: "ease-out",
+          fill: "both"
+        }
+      );
+      setTimeout(() => {
+        props.closeLootWindow(props.playerName);
+      }, 300);
+    } else {
+      props.closeLootWindow(props.playerName);
+    }
+  }
   React.useEffect(() => {
     makeDraggable(lootWindowElem.current);
     lootWindowElem.current.style.top = props.iconClientPos.top + "px";
@@ -112,12 +133,7 @@ export default function LootWindow(props) {
     <div className={classes.root} ref={lootWindowElem}>
       <div className={classes.header} ref={headerElem}>
         {props.playerName.toUpperCase()}
-        <div
-          className={classes.cross}
-          onClick={() => {
-            props.closeLootWindow(props.playerName);
-          }}
-        >
+        <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
         </div>
       </div>
