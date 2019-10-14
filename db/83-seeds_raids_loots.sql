@@ -740,3 +740,69 @@ VALUES
   'Couronne de destruction'))
 
 ;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+-- raid devilhunter
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Jonasran'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cagoule Rougecroc')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capriseum'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+-- raid Lums
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skwäsh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Auréole de transcendance')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capoul'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couvre-chef de Stormrage')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ikith'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'))
+;

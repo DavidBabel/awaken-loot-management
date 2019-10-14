@@ -17,7 +17,7 @@ CREATE UNIQUE INDEX ON "Classes" ("id");
 CREATE TABLE "Players" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
-  "classId" int,
+  "classId" int NOT NULL,
   "role" varchar,
   "password" varchar,
   "active" boolean DEFAULT true
@@ -40,8 +40,8 @@ CREATE UNIQUE INDEX ON "Merit" ("id");
 
 CREATE TABLE "PlayerMerit" (
   "id" SERIAL PRIMARY KEY,
-  "meritId" int,
-  "playerId" int,
+  "meritId" int NOT NULL,
+  "playerId" int NOT NULL,
   "date" varchar,
   "validated" boolean DEFAULT false
 );
@@ -51,9 +51,9 @@ CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 CREATE TABLE "Loots" (
   "id" SERIAL PRIMARY KEY,
-  "playerId" int,
-  "itemId" int,
-  "raidId" int,
+  "playerId" int NOT NULL,
+  "itemId" int NOT NULL,
+  "raidId" int NOT NULL,
   "active" boolean DEFAULT true
 );
 comment on table "Loots" is E'@omit delete';
@@ -74,17 +74,18 @@ CREATE UNIQUE INDEX ON "Items" ("wowheadId");
 
 CREATE TABLE "ClassItem" (
   "id" SERIAL PRIMARY KEY,
-  "classId" int,
-  "itemId" int,
+  "classId" int NOT NULL,
+  "itemId" int NOT NULL,
   "itemValueForThisClass" int
 );
 comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
 
 
-CREATE TABLE "BossItem" ("id" SERIAL PRIMARY KEY,
-  "itemId" int,
-  "bossId" int
+CREATE TABLE "BossItem" (
+  "id" SERIAL PRIMARY KEY,
+  "itemId" int NOT NULL,
+  "bossId" int NOT NULL
 );
 comment on table "BossItem" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "BossItem" ("id");
@@ -92,7 +93,7 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 
 CREATE TABLE "Bosses" (
   "id" SERIAL PRIMARY KEY,
-  "donjonId" int,
+  "donjonId" int NOT NULL,
   "name" varchar
 );
 comment on table "Bosses" is E'@omit create,update,delete';
@@ -111,7 +112,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
-  "donjonId" int,
+  "donjonId" int NOT NULL,
   "date" varchar
 );
 comment on table "Raids" is E'@omit delete';
@@ -120,8 +121,8 @@ CREATE UNIQUE INDEX ON "Raids" ("id");
 
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL PRIMARY KEY,
-    "playerId" int,
-    "raidId" int,
+    "playerId" int NOT NULL,
+    "raidId" int NOT NULL,
     "passed" boolean DEFAULT false
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
@@ -924,75 +925,104 @@ VALUES
 ('test'         , 1,  'admin', '098f6bcd4621d373cade4e832627b4f6', true),
 ('Hakken'       , 2,  'officer', null, true),
 ('Lums'         , 7,  'officer', null, true),
-('Shaheem'      , 3,  'officer', null, true),
-('Nozil'        , 6,  'classMaster', null, true),
-('Tàel'         , 3,  'classMaster', null, true),
-('Skwäsh'       , 1,  'classMaster', null, true),
+('Shaheem'      , 3,  'officer', null, false),
 ('Cocobanjo'    , 4,  'classMaster', null, true),
 ('Krigen'       , 8,  'classMaster', null, true),
+('Nozil'        , 6,  'classMaster', null, true),
 ('Oscuro'       , 9,  'classMaster', null, true),
 ('Paffë'        , 5,  'classMaster', null, true),
-('Ticcounet'    , 8,  'player', null, false),
-('Størmfury'    , 5,  'player', null, false),
-('Qweakzor'     , 6,  'player', null, true),
-('Traqùs'       , 6,  'player', null, true),
+('Skwäsh'       , 1,  'classMaster', null, true),
+('Tàel'         , 3,  'classMaster', null, true),
+('Abramus'      , 2,  'player', null, true),
 ('Adblock'      , 2,  'player', null, true),
-('Elementz'     , 2,  'player', null, false),
-('Kynosura'     , 2,  'player', null, true),
-('Minatrix'     , 2,  'player', null, true),
-('Vòlt'         , 2,  'player', null, false),
-('Zapikote'     , 3,  'player', null, true),
-('Hanzaplast'   , 1,  'player', null, false),
-('Kaarr'        , 4,  'player', null, true),
-('Nérull'       , 4,  'player', null, false),
-('Punkhead'     , 4,  'player', null, false),
-('Titanesque'   , 4,  'player', null, false),
-('Lyaxus'       , 7,  'player', null, false),
-('Mergueztguez' , 7,  'player', null, true),
 ('Affligeant'   , 3,  'player', null, false),
-('Bruh'         , 3,  'player', null, false),
-('Kresmi'       , 3,  'player', null, false),
-('Psykøhazard'  , 3,  'player', null, true),
-('Rektall'      , 3,  'player', null, true),
-('Drakenns'     , 8,  'player', null, false),
-('Sprawl'       , 8,  'player', null, false),
-('Beudinio'     , 5,  'player', null, false),
-('Synrj'        , 5,  'player', null, true),
-('Brk'          , 1,  'player', null, false),
-('Lylith'       , 1,  'player', null, true),
-('Skau'         , 1,  'player', null, false),
-('Kenyâ'        , 7,  'player', null, true),
-('Zhantla'      , 7,  'player', null, false),
-('Zykxx'        , 7,  'player', null, false),
-('Brebouche'    , 8,  'player', null, true),
-('Lykwette'     , 8,  'player', null, true),
-('Throma'       , 9,  'player', null, true),
 ('Alk'          , 6,  'player', null, true),
 ('Allyssamyr'   , 2,  'player', null, true),
-('Ikith'        , 2,  'player', null, true),
-('Thorsen'      , 2,  'player', null, true),
-('Wid'          , 2,  'player', null, false),
-('Need'         , 1,  'player', null, true),
-('Callumlolz'   , 4,  'player', null, true),
-('Ez'           , 4,  'player', null, true),
-('Jonasran'     , 4,  'player', null, true),
-('Yx'           , 4,  'player', null, true),
-('Suprême'      , 3,  'player', null, true),
-('Brosko'       , 9,  'player', null, true),
-('Karaelys'     , 1,  'player', null, true),
-('Teimdall'     , 1,  'player', null, true),
-('Trackass'     , 1,  'player', null, true),
-('Gidgud'       , 7,  'player', null, true),
-('Ragegoriath'  , 8,  'player', null, true),
-('Abramus'      , 2,  'player', null, true),
+('Beudinio'     , 5,  'player', null, false),
+('Bobbyz'       , 9,  'player', null, true),
 ('Boblemoche'   , 3,  'player', null, true),
-('Néstor'       , 3,  'player', null, true),
-('Tephrite'     , 5,  'player', null, true),
+('Brebouche'    , 8,  'player', null, true),
+('Brk'          , 1,  'player', null, false),
+('Brosko'       , 9,  'player', null, true),
+('Bruh'         , 3,  'player', null, false),
+('Callumlolz'   , 4,  'player', null, true),
 ('Deiv'         , 1,  'player', null, true),
-('Nøwad'        , 9,  'player', null, true)
-
+('Drakenns'     , 8,  'player', null, false),
+('Elementz'     , 2,  'player', null, false),
+('Ez'           , 4,  'player', null, true),
+('Gidgud'       , 7,  'player', null, true),
+('Hanzaplast'   , 1,  'player', null, false),
+('Ikith'        , 2,  'player', null, true),
+('Jonasran'     , 4,  'player', null, true),
+('Kaarr'        , 4,  'player', null, true),
+('Karaelys'     , 1,  'player', null, true),
+('Kenyâ'        , 7,  'player', null, true),
+('Kresmi'       , 3,  'player', null, false),
+('Kusogakî'     , 9,  'player', null, true),
+('Kynosura'     , 2,  'player', null, true),
+('Ladj'         , 8,  'player', null, true),
+('Lyaxus'       , 7,  'player', null, false),
+('Lykwette'     , 8,  'player', null, true),
+('Lylith'       , 1,  'player', null, true),
+('Mergueztguez' , 7,  'player', null, true),
+('Minatrix'     , 2,  'player', null, true),
+('Need'         , 1,  'player', null, true),
+('Nérull'       , 4,  'player', null, false),
+('Néstor'       , 3,  'player', null, true),
+('Nøwad'        , 9,  'player', null, true),
+('Psykøhazard'  , 3,  'player', null, true),
+('Punkhead'     , 4,  'player', null, false),
+('Qweakzor'     , 6,  'player', null, true),
+('Ragegoriath'  , 8,  'player', null, true),
+('Ràys'         , 4,  'player', null, true),
+('Rektall'      , 3,  'player', null, true),
+('Skau'         , 1,  'player', null, false),
+('Sprawl'       , 8,  'player', null, false),
+('Størmfury'    , 5,  'player', null, false),
+('Suprême'      , 3,  'player', null, true),
+('Synrj'        , 5,  'player', null, true),
+('Tad'          , 7,  'player', null, true),
+('Teimdall'     , 1,  'player', null, true),
+('Tephrite'     , 5,  'player', null, true),
+('Thorsen'      , 2,  'player', null, true),
+('Throma'       , 9,  'player', null, true),
+('Thünberg'     , 7,  'player', null, true),
+('Ticcounet'    , 8,  'player', null, false),
+('Titanesque'   , 4,  'player', null, false),
+('Trackass'     , 1,  'player', null, true),
+('Traqùs'       , 6,  'player', null, true),
+('Vòlt'         , 2,  'player', null, false),
+('Wid'          , 2,  'player', null, false),
+('Xihfu'        , 5,  'player', null, true),
+('Yx'           , 4,  'player', null, true),
+('Zapikote'     , 3,  'player', null, true),
+('Zhantla'      , 7,  'player', null, false),
+('Zykxx'        , 7,  'player', null, false),
+('Zzeus'        , 2,  'player', null, true),
+('Capoul'       , 5,  'player', null, true),
+('Capriseum'    , 2,  'player', null, true),
+('Chibraltar'   , 6,  'player', null, false),
+('Draizon'      , 1,  'player', null, false),
+('Easìer'       , 1,  'player', null, true),
+('Fougasse'     , 8,  'player', null, false),
+('Lusoline'     , 1,  'player', null, false),
+('Malvotis'     , 3,  'player', null, false),
+('Ogrim'        , 1,  'player', null, false),
+('Olv'          , 2,  'player', null, false),
+('Rognor'       , 7,  'player', null, false),
+('Secaly'       , 4,  'player', null, false)
 ;
- -- SAFE BEGIN FOR CONCAT
+
+-- 1 - Prêtre
+-- 2 - Mage
+-- 3 - Démoniste
+-- 4 - Voleur
+-- 5 - Druide
+-- 6 - Chasseur
+-- 7 - Chaman
+-- 8 - Guerrier Tank
+-- 9 - Guerrier DPS
+-- 10 - Paladin -- SAFE BEGIN FOR CONCAT
 INSERT INTO "PlayerMerit" ("meritId", "playerId", "date", "validated")
 VALUES
 (1, 1, '2019-10-10', true),
@@ -1021,7 +1051,8 @@ VALUES
 (1, '2019-10-02'), -- 9
 (1, '2019-10-06'), -- 10
 (2, '2019-10-06'), -- 11
-(1, '2019-10-09'); -- 12
+(1, '2019-10-09'), -- 12
+(2, '2019-10-13'); -- 13
 
 
 -- MC 2019-09-19
@@ -1477,7 +1508,58 @@ INSERT INTO "RaidPlayers" ("raidId", "playerId", "passed")
 VALUES
 (12, (SELECT id FROM "Players" WHERE "name"='Ikith'), true);
 
- -- SAFE BEGIN FOR CONCAT
+
+-- double id onyxia - 2019-10-13
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+-- raid Devilhunter
+(13, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(13, (SELECT id FROM "Players" WHERE "name"='Ladj')),
+(13, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(13, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(13, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(13, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(13, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(13, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(13, (SELECT id FROM "Players" WHERE "name"='Zzeus')),
+(13, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(13, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(13, (SELECT id FROM "Players" WHERE "name"='Ràys')),
+(13, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(13, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(13, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(13, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(13, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(13, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(13, (SELECT id FROM "Players" WHERE "name"='Xihfu')),
+(13, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(13, (SELECT id FROM "Players" WHERE "name"='Easìer')),
+(13, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(13, (SELECT id FROM "Players" WHERE "name"='Tad')),
+(13, (SELECT id FROM "Players" WHERE "name"='Thünberg')),
+-- raid Lums
+(13, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(13, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(13, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(13, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(13, (SELECT id FROM "Players" WHERE "name"='Hakken')),
+(13, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(13, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(13, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(13, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(13, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(13, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(13, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(13, (SELECT id FROM "Players" WHERE "name"='Bobbyz')),
+(13, (SELECT id FROM "Players" WHERE "name"='Kusogakî')),
+(13, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(13, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(13, (SELECT id FROM "Players" WHERE "name"='Synrj')),
+(13, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(13, (SELECT id FROM "Players" WHERE "name"='Skau')),
+(13, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(13, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(13, (SELECT id FROM "Players" WHERE "name"='Lums')); -- SAFE BEGIN FOR CONCAT
 
 INSERT INTO "Loots" ("raidId", "playerId", "itemId")
 VALUES
@@ -2218,6 +2300,72 @@ VALUES
   (SELECT id FROM "Items" WHERE "name"=
   'Couronne de destruction'))
 
+;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+-- raid devilhunter
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Jonasran'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cagoule Rougecroc')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capriseum'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+-- raid Lums
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skwäsh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Auréole de transcendance')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capoul'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couvre-chef de Stormrage')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ikith'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 13,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'))
 ; -- SAFE BEGIN FOR CONCAT
 
 

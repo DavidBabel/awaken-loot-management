@@ -66,7 +66,10 @@ export default function RaidsTable({ raids, hidden }) {
               <TableCell align="right">{row.date}</TableCell>
               <TableCell align="right" className={classes.link}>
                 {" "}
-                <Link href="/raid/edit/[id]" as={`/raid/edit/${row.raidId}`}>
+                <Link
+                  href="/raid/edit/[id]"
+                  as={`/raid/edit/${row.raidId}`} /* a remplacer par /raid/view/[id] */
+                >
                   <a>
                     <Button variant="contained" color="primary">
                       View raid

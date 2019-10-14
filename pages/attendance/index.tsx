@@ -1,17 +1,20 @@
-import React from "react";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import Link from "next/link";
+import Router from "next/router";
+import React from "react";
 
 import { useQuery } from "@apollo/react-hooks";
-import { Query } from "../../lib/generatedTypes";
-import { ALL_RAIDS } from "../../lib/gql/raid-queries";
-import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
+import { Query } from "../../lib/generatedTypes";
+import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { ALL_RAIDS } from "../../lib/gql/raid-queries";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,13 +35,36 @@ const useStyles = makeStyles((theme: Theme) =>
         color: "white"
       },
       "& .MuiTableCell-root": {
-        border: "solid 1px #212121"
+        border: "solid 1px #212121",
+        position: "relative",
+        padding: "5px 5px"
+      },
+      "& td.MuiTableCell-root:not(.perc-cell)": {
+        cursor: "pointer"
+      },
+      "& .MuiTableCell-root:hover .MuiSvgIcon-root": {
+        visibility: "visible",
+        opacity: "1",
+        transition: "opacity 0.2s ease-in-out"
+      },
+      "& .MuiSvgIcon-root": {
+        position: "absolute",
+        height: "100%",
+        width: "24px",
+        top: 0,
+        padding: 0,
+        left: 0,
+        right: 0,
+        margin: "auto",
+        visibility: "hidden",
+        opacity: "0",
+        transition: "opacity 0.3s ease-in-out"
       },
       "& th.MuiTableCell-body": {
         backgroundColor: "#242424"
       }
     },
-    attPerc: {
+    attPercentage: {
       backgroundColor: "#242424",
       color: "white"
     },
@@ -47,6 +73,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     present: {
       backgroundColor: "#106010"
+    },
+    rotation: {
+      backgroundColor: "#b09000"
     }
   })
 );
@@ -73,7 +102,12 @@ export default function PageIndex() {
   }
   const allRaids = dataAllRaids.allRaids.nodes;
   const players = dataPlayers.allPlayers.nodes;
-  console.log(allRaids, players);
+  let raidsNb = 0;
+  allRaids.forEach(raid => {
+    if (raid.raidPlayersByRaidId.nodes.length > 0) {
+      raidsNb++;
+    }
+  });
   players.sort((a, b) => {
     // Ordre alphabetique
     if (a.name > b.name) {
@@ -87,7 +121,7 @@ export default function PageIndex() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Table className={classes.table} size="small" stickyHeader>
+        <Table className={classes.table} size="small" stickyHeader={true}>
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -97,7 +131,7 @@ export default function PageIndex() {
                   return (
                     <TableCell align="center" key={raid.id}>
                       {raid.donjonByDonjonId.shortName}
-                      {<br></br>}
+                      {<br />}
                       {new Date(raid.date).toLocaleDateString("en-EN", {
                         year: "numeric",
                         month: "short",
@@ -113,30 +147,60 @@ export default function PageIndex() {
           <TableBody>
             {players.map(player => (
               <TableRow key={player.name}>
-                <TableCell
-                  style={{ color: player.classByClassId.color }}
-                  component="th"
-                  scope="row"
-                >
-                  {player.name}
+                <TableCell component="th" scope="row">
+                  <Link
+                    href="/player/view/[id]"
+                    as={`/player/view/${player.id}`}
+                  >
+                    <a
+                      style={{
+                        color: player.classByClassId.color,
+                        textDecoration: "none"
+                      }}
+                    >
+                      {player.name}
+                    </a>
+                  </Link>
                 </TableCell>
-                <TableCell className={classes.attPerc}>%</TableCell>
+                <TableCell className={classes.attPercentage + " perc-cell"}>
+                  {player.raidPlayersByPlayerId.nodes.length === 0
+                    ? "0 %"
+                    : `${Math.round(
+                        (player.raidPlayersByPlayerId.nodes.length * 100) /
+                          raidsNb
+                      )} %`}
+                </TableCell>
                 {allRaids.map(raid => {
                   if (raid.raidPlayersByRaidId.nodes.length > 0) {
                     let absent = true;
+                    let enRotation = false;
                     raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
                       if (
                         raidPlayer &&
                         raidPlayer.playerByPlayerId.id === player.id
                       ) {
                         absent = false;
+                        if (raidPlayer.passed) {
+                          enRotation = true;
+                        }
                       }
                     });
                     return (
                       <TableCell
+                        onClick={() => {
+                          Router.push("/raid/edit/" + raid.id); // A remplacer par raid/view/[id] quand la page existera
+                        }}
                         key={player.id + raid.id}
-                        className={absent ? classes.absent : classes.present}
-                      ></TableCell>
+                        className={
+                          absent
+                            ? classes.absent
+                            : enRotation
+                            ? classes.rotation
+                            : classes.present
+                        }
+                      >
+                        <VisibilityIcon />
+                      </TableCell>
                     );
                   }
                   return null;
