@@ -10,8 +10,10 @@ import PlayersTable from "../../components/summary/PlayersTable";
 import { useQuery } from "@apollo/react-hooks";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Query } from "../../lib/generatedTypes";
+import { Loot } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import LootWindow from "../../components/summary/LootWindow";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -101,6 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function PageIndex() {
   const classes = useStyles("");
   const [value, setValue] = React.useState(0);
+  const [lootWindows, setLootWindows] = React.useState([]);
   const {
     loading: loadingPlayers,
     data: dataPlayers,
@@ -140,6 +143,36 @@ export default function PageIndex() {
   );
   const guerriersDps = players.filter(player => player.classByClassId.id === 9);
 
+  interface ElementPosition {
+    top: number;
+    left: number;
+  }
+  function openLootWindow(
+    playerName: string,
+    lootData: Loot,
+    iconClientPos: ElementPosition,
+    classColor: string
+  ) {
+    const nameFound = lootWindows.find(element => {
+      // check si la fenetre correspondant à ce name est deja ouverte
+      return element.playerName === playerName;
+    });
+    if (!nameFound) {
+      setLootWindows(prevState => {
+        return [
+          ...prevState,
+          { playerName, lootData, iconClientPos, classColor }
+        ];
+      });
+    }
+  }
+  function closeLootWindow(playerName: string) {
+    const newWindowsList = lootWindows.filter(
+      lootWindow => lootWindow.playerName !== playerName
+    );
+    setLootWindows(newWindowsList);
+  }
+
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
@@ -172,6 +205,7 @@ export default function PageIndex() {
           classColor={classColors.druide}
           players={druides}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -180,6 +214,7 @@ export default function PageIndex() {
           classColor={classColors.chasseur}
           players={chasseurs}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -188,6 +223,7 @@ export default function PageIndex() {
           classColor={classColors.mage}
           players={mages}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
@@ -196,6 +232,7 @@ export default function PageIndex() {
           classColor={classColors.pretre}
           players={pretres}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={4}>
@@ -204,6 +241,7 @@ export default function PageIndex() {
           classColor={classColors.voleur}
           players={voleurs}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={5}>
@@ -212,6 +250,7 @@ export default function PageIndex() {
           classColor={classColors.chaman}
           players={chamans}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={6}>
@@ -220,6 +259,7 @@ export default function PageIndex() {
           classColor={classColors.demoniste}
           players={demonistes}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={7}>
@@ -228,6 +268,7 @@ export default function PageIndex() {
           classColor={classColors.guerrier}
           players={guerriersTank}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
       <TabPanel value={value} index={8}>
@@ -236,8 +277,19 @@ export default function PageIndex() {
           classColor={classColors.guerrier}
           players={guerriersDps}
           maxMeritValue={maxMeritValue}
+          openLootWindow={openLootWindow}
         />
       </TabPanel>
+      {lootWindows.map(lootWindow => (
+        <LootWindow
+          key={lootWindow.playerName}
+          playerName={lootWindow.playerName}
+          lootData={lootWindow.lootData}
+          iconClientPos={lootWindow.iconClientPos}
+          closeLootWindow={closeLootWindow}
+          classColor={lootWindow.classColor}
+        />
+      ))}
     </div>
   );
 }

@@ -41,30 +41,36 @@ const useStyles = makeStyles({
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
 export default function PlayerTableRow(props) {
+  const { rowData, classColor, showed, openLootWindow, lootData } = props;
   const classes = useStyles("");
   const iconElem = React.useRef(null);
   return (
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
-        {props.rowData.name}
+        {rowData.name}
       </StyledTableCell>
       <StyledTableCell className={classes.progressCell} align="center">
         <ProgressBar
-          classColor={props.classColor}
-          progress={props.rowData.merit}
-          showed={props.showed}
+          classColor={classColor}
+          progress={rowData.merit}
+          showed={showed}
         />
       </StyledTableCell>
       <StyledTableCell align="center">
-        {props.rowData.totalLoot}
-        {props.rowData.totalLoot > 0 ? (
+        {rowData.totalLoot}
+        {rowData.totalLoot > 0 ? (
           <IconButton
             ref={iconElem}
             onClick={() => {
-              props.openLootWindow(props.rowData.name, props.lootsData, {
-                top: iconElem.current.getBoundingClientRect().top,
-                left: iconElem.current.getBoundingClientRect().left
-              });
+              openLootWindow(
+                rowData.name,
+                lootData,
+                {
+                  top: iconElem.current.getBoundingClientRect().top,
+                  left: iconElem.current.getBoundingClientRect().left
+                },
+                classColor
+              );
             }}
             className={classes.viewIcon}
             color="primary"
@@ -76,20 +82,11 @@ export default function PlayerTableRow(props) {
           ""
         )}
       </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.totalRaid}
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.lastLootDate}
-      </StyledTableCell>
-      <StyledTableCell align="center">
-        {props.rowData.lastRaidDate}
-      </StyledTableCell>
+      <StyledTableCell align="center">{rowData.totalRaid}</StyledTableCell>
+      <StyledTableCell align="center">{rowData.lastLootDate}</StyledTableCell>
+      <StyledTableCell align="center">{rowData.lastRaidDate}</StyledTableCell>
       <StyledTableCell align="center" className={classes.link}>
-        <Link
-          href="/player/view/[id]"
-          as={`/player/view/${props.rowData.playerId}`}
-        >
+        <Link href="/player/view/[id]" as={`/player/view/${rowData.playerId}`}>
           <a>
             <Button variant="contained" color="primary">
               Details

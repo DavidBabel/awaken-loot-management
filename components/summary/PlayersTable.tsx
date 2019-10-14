@@ -36,6 +36,7 @@ interface Props {
   classColor: string;
   players: Player[];
   maxMeritValue: number;
+  openLootWindow: any;
 }
 const useStyles = makeStyles({
   root: {
@@ -153,7 +154,6 @@ export default function PlayersTable(props: Props) {
   const [rows, setRows] = React.useState(rowsData);
   const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Merit");
   const [orderedDESC, setOrderedDESC] = React.useState(false);
-  const [lootWindows, setLootWindows] = React.useState([]);
 
   function openLootWindow(
     playerName: string,
@@ -260,22 +260,13 @@ export default function PlayersTable(props: Props) {
                 rowData={row}
                 classColor={props.classColor}
                 showed={props.showed}
-                lootsData={row.playerLoots}
-                openLootWindow={openLootWindow}
+                lootData={row.playerLoots}
+                openLootWindow={props.openLootWindow}
               />
             ))}
           </React.Fragment>
         </TableBody>
       </Table>
-      {lootWindows.map(lootWindow => (
-        <LootWindow
-          key={lootWindow.playerName}
-          playerName={lootWindow.playerName}
-          lootData={lootWindow.lootData}
-          iconClientPos={lootWindow.iconClientPos}
-          closeLootWindow={closeLootWindow}
-        />
-      ))}
     </Paper>
   );
 }

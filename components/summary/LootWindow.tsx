@@ -7,8 +7,22 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import CloseIcon from "@material-ui/icons/Close";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import { Loot } from "../../lib/generatedTypes";
 import Link from "next/link";
 import React from "react";
+
+interface ElementPosition {
+  top: number;
+  left: number;
+}
+interface Props {
+  key: string;
+  playerName: string;
+  lootData: Loot;
+  iconClientPos: ElementPosition;
+  classColor: string;
+  closeLootWindow(playerName: string): any;
+}
 
 const useStyles = makeStyles({
   root: {
@@ -17,12 +31,15 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     border: "solid 1px grey",
     boxShadow: "2px 2px 15px -1px rgba(0,0,0,0.75)",
-    zIndex: 2
+    zIndex: 2,
+    "& .MuiTableCell-head": {
+      backgroundColor: "white"
+    }
   },
   header: {
     position: "relative",
-    backgroundColor: "#3F51B5",
-    color: "white",
+    backgroundColor: (props: Props) => props.classColor,
+    color: "#4D4D4D",
     fontWeight: "bold",
     width: "100%",
     textAlign: "center",
@@ -56,10 +73,10 @@ const useStyles = makeStyles({
   }
 });
 export default function LootWindow(props) {
-  const classes = useStyles("");
+  const classes = useStyles(props);
+  const { closeLootWindow, playerName, iconClientPos, lootData } = props;
   const lootWindowElem = React.useRef(null);
   const headerElem = React.useRef(null);
-
   function makeDraggable(elem: HTMLElement) {
     let pos1 = 0;
     let pos2 = 0;
@@ -104,16 +121,16 @@ export default function LootWindow(props) {
         }
       );
       setTimeout(() => {
-        props.closeLootWindow(props.playerName);
+        closeLootWindow(playerName);
       }, 250);
     } else {
-      props.closeLootWindow(props.playerName);
+      closeLootWindow(playerName);
     }
   }
   React.useEffect(() => {
     makeDraggable(lootWindowElem.current);
-    lootWindowElem.current.style.top = props.iconClientPos.top + "px";
-    lootWindowElem.current.style.left = props.iconClientPos.left + 50 + "px";
+    lootWindowElem.current.style.top = iconClientPos.top + "px";
+    lootWindowElem.current.style.left = iconClientPos.left + 50 + "px";
     if (lootWindowElem.current.animate) {
       lootWindowElem.current.animate(
         [
@@ -132,7 +149,7 @@ export default function LootWindow(props) {
   return (
     <div className={classes.root} ref={lootWindowElem}>
       <div className={classes.header} ref={headerElem}>
-        {props.playerName.toUpperCase()}
+        {playerName.toUpperCase()}
         <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
         </div>
@@ -145,7 +162,7 @@ export default function LootWindow(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.lootData.map(loot => (
+          {lootData.map(loot => (
             <TableRow
               key={loot.raidByRaidId.date + loot.itemByItemId.wowheadId}
             >
