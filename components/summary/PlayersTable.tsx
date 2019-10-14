@@ -15,8 +15,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import PlayerTableRow from "../../components/summary/PlayerTableRow";
 import { Player } from "../../lib/generatedTypes";
+import { Loot } from "../../lib/generatedTypes";
+import LootWindow from "./LootWindow";
+import PlayerTableRow from "./PlayerTableRow";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -70,6 +72,11 @@ function createData(
     playerId,
     playerLoots
   };
+}
+
+interface ElementPosition {
+  top: number;
+  left: number;
 }
 
 export default function PlayersTable(props: Props) {
@@ -136,7 +143,29 @@ export default function PlayersTable(props: Props) {
   const [rows, setRows] = React.useState(rowsData);
   const [orderedBy, setOrderedBy] = React.useState("merit");
   const [orderedDESC, setOrderedDESC] = React.useState(false);
+  const [lootWindows, setLootWindows] = React.useState([]);
 
+  function openLootWindow(
+    playerName: string,
+    lootData: Loot,
+    iconClientPos: ElementPosition
+  ) {
+    const nameFound = lootWindows.find(element => {
+      // check si la fenetre correspondant à ce name est deja ouverte
+      return element.playerName === playerName;
+    });
+    if (!nameFound) {
+      setLootWindows(prevState => {
+        return [...prevState, { playerName, lootData, iconClientPos }];
+      });
+    }
+  }
+  function closeLootWindow(playerName: string) {
+    const newWindowsList = lootWindows.filter(
+      lootWindow => lootWindow.playerName !== playerName
+    );
+    setLootWindows(newWindowsList);
+  }
   function orderBy(colName: string) {
     const newRows = [...rows];
     let currentlyOrderedDesc = orderedDESC;
@@ -350,11 +379,21 @@ export default function PlayersTable(props: Props) {
                 classColor={props.classColor}
                 showed={props.showed}
                 lootsData={row.playerLoots}
+                openLootWindow={openLootWindow}
               />
             ))}
           </React.Fragment>
         </TableBody>
       </Table>
+      {lootWindows.map(lootWindow => (
+        <LootWindow
+          key={lootWindow.playerName}
+          playerName={lootWindow.playerName}
+          lootData={lootWindow.lootData}
+          iconClientPos={lootWindow.iconClientPos}
+          closeLootWindow={closeLootWindow}
+        />
+      ))}
     </Paper>
   );
 }

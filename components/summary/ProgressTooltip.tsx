@@ -1,5 +1,5 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const useStyles = makeStyles({
   tooltip: {
@@ -48,7 +48,7 @@ export default function ProgressTooltip(props) {
         tooltipElem.current.style.left = `calc(${props.progress}% - 25px)`;
       }
     }
-  });
+  }, [props.showed]);
   return (
     <React.Fragment>
       <span ref={tooltipElem} className={classes.tooltip}>

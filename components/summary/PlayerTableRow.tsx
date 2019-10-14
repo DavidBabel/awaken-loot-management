@@ -1,15 +1,18 @@
-import React from "react";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import {
-  withStyles,
-  Theme,
   createStyles,
-  makeStyles
+  makeStyles,
+  Theme,
+  withStyles
 } from "@material-ui/core/styles";
+
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import ProgressBar from "../../components/summary/ProgressBar";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import Link from "next/link";
-import Button from "@material-ui/core/Button";
+import React from "react";
+import ProgressBar from "../../components/summary/ProgressBar";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -32,10 +35,14 @@ const useStyles = makeStyles({
     width: "200px",
     margin: "auto"
   },
+  viewIcon: {
+    marginLeft: "5px"
+  },
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
 export default function PlayerTableRow(props) {
   const classes = useStyles("");
+  const iconElem = React.useRef(null);
   return (
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
@@ -50,6 +57,24 @@ export default function PlayerTableRow(props) {
       </StyledTableCell>
       <StyledTableCell align="center">
         {props.rowData.totalLoot}
+        {props.rowData.totalLoot > 0 ? (
+          <IconButton
+            ref={iconElem}
+            onClick={() => {
+              props.openLootWindow(props.rowData.name, props.lootsData, {
+                top: iconElem.current.getBoundingClientRect().top,
+                left: iconElem.current.getBoundingClientRect().left
+              });
+            }}
+            className={classes.viewIcon}
+            color="primary"
+            aria-label="View loots"
+          >
+            <VisibilityIcon />
+          </IconButton>
+        ) : (
+          ""
+        )}
       </StyledTableCell>
       <StyledTableCell align="center">
         {props.rowData.totalRaid}

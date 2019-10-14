@@ -1,10 +1,10 @@
+import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import ProgressTooltip from "../../components/summary/ProgressTooltip";
-import { makeStyles } from "@material-ui/core/styles";
 
 interface Props {
-  classColor: String;
-  progress: String;
+  classColor: string;
+  progress: string;
 }
 const useStyles = makeStyles({
   container: {
@@ -49,12 +49,12 @@ export default function ProgressBar(props) {
         fillerElem.current.style.width = `${props.progress}%`;
       }
     }
-  });
+  }, [props.showed]);
   return (
     <div className={classes.container}>
       <ProgressTooltip showed={props.showed} progress={props.progress} />
       <div className={classes.bar}>
-        <div ref={fillerElem} className={classes.filler}></div>
+        <div ref={fillerElem} className={classes.filler} />
       </div>
     </div>
   );
