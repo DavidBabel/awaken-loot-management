@@ -61,6 +61,7 @@ export const ALL_RAIDS = gql`
         }
         raidPlayersByRaidId {
           nodes {
+            passed
             playerByPlayerId {
               name
               id
