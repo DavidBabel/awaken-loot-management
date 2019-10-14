@@ -41,7 +41,6 @@ const useStyles = makeStyles({
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
 export default function PlayerTableRow(props) {
-  const [showLootDetail, toggleShowLootDetail] = useToggle(false);
   const classes = useStyles("");
   const iconElem = React.useRef(null);
   return (
