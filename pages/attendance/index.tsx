@@ -125,7 +125,7 @@ export default function PageIndex() {
                   return (
                     <TableCell align="center" key={raid.id}>
                       {raid.donjonByDonjonId.shortName}
-                      {<br />}
+                      <br />
                       {new Date(raid.date).toLocaleDateString("en-EN", {
                         year: "numeric",
                         month: "short",
