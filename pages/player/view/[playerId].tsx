@@ -1,17 +1,17 @@
-import { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import LootsTable from "../../../components/PlayerPage/LootsTable";
+import MeritsTable from "../../../components/PlayerPage/MeritsTable";
+import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 import { Query } from "../../../lib/generatedTypes";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import ClassAvatar from "../../../components/ClassAvatar";
-import MeritsTable from "../../../components/PlayerPage/MeritsTable";
-import LootsTable from "../../../components/PlayerPage/LootsTable";
-import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 
 const useStyles = makeStyles({
   root: {
@@ -70,7 +70,7 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
-          centered
+          centered={true}
         >
           <Tab label="Merits" />
           <Tab label="Loots" />
