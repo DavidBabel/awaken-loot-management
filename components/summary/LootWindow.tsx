@@ -7,9 +7,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import CloseIcon from "@material-ui/icons/Close";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { Loot } from "../../lib/generatedTypes";
 import Link from "next/link";
 import React from "react";
+import { Loot } from "../../lib/generatedTypes";
 
 interface ElementPosition {
   top: number;
