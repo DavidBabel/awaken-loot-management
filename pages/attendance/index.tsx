@@ -12,9 +12,10 @@ import React from "react";
 
 import { useQuery } from "@apollo/react-hooks";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
-import { Query } from "../../lib/generatedTypes";
+import { Player, Query } from "../../lib/generatedTypes";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_RAIDS } from "../../lib/gql/raid-queries";
+import { byValue } from "../../lib/utils/sorter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -101,23 +102,16 @@ export default function PageIndex() {
     return <LoadingAndError loading={loading} error={error} />;
   }
   const allRaids = dataAllRaids.allRaids.nodes;
-  const players = dataPlayers.allPlayers.nodes;
+  const players = dataPlayers.allPlayers.nodes
+    .filter((p: Player) => p.active)
+    .sort(byValue("classId"));
   let raidsNb = 0;
   allRaids.forEach(raid => {
     if (raid.raidPlayersByRaidId.nodes.length > 0) {
       raidsNb++;
     }
   });
-  players.sort((a, b) => {
-    // Ordre alphabetique
-    if (a.name > b.name) {
-      return 1;
-    }
-    if (b.name > a.name) {
-      return -1;
-    }
-    return 0;
-  });
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>

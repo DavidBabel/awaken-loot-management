@@ -156,11 +156,11 @@ export default function PlayersTable(props: Props) {
       currentlyOrderedDesc = !orderedDESC;
     }
     if (colName === "Merit") {
-      newRows.sort(byValue.bind(null, "merit", currentlyOrderedDesc));
+      newRows.sort(byValue("merit", currentlyOrderedDesc));
     } else if (colName === "Total raid") {
-      newRows.sort(byValue.bind(null, "totalRaid", currentlyOrderedDesc));
+      newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
     } else if (colName === "Total Loot") {
-      newRows.sort(byValue.bind(null, "totalLoot", currentlyOrderedDesc));
+      newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
     } else if (colName === "Pseudo") {
       newRows.sort((a, b) => {
         if (a.name > b.name) {
@@ -172,9 +172,9 @@ export default function PlayersTable(props: Props) {
         return 0;
       });
     } else if (colName === "Last loot") {
-      newRows.sort(byDate.bind(null, "lastLootDate", currentlyOrderedDesc));
+      newRows.sort(byDate("lastLootDate", currentlyOrderedDesc));
     } else if (colName === "Last raid") {
-      newRows.sort(byDate.bind(null, "lastRaidDate", currentlyOrderedDesc));
+      newRows.sort(byDate("lastRaidDate", currentlyOrderedDesc));
     }
     if (colName === orderedBy) {
       setOrderedDESC(prevState => !prevState);
