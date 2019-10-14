@@ -17,7 +17,7 @@ CREATE UNIQUE INDEX ON "Classes" ("id");
 CREATE TABLE "Players" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
-  "classId" int,
+  "classId" int NOT NULL,
   "role" varchar,
   "password" varchar,
   "active" boolean DEFAULT true
@@ -40,8 +40,8 @@ CREATE UNIQUE INDEX ON "Merit" ("id");
 
 CREATE TABLE "PlayerMerit" (
   "id" SERIAL PRIMARY KEY,
-  "meritId" int,
-  "playerId" int,
+  "meritId" int NOT NULL,
+  "playerId" int NOT NULL,
   "date" varchar,
   "validated" boolean DEFAULT false
 );
@@ -51,9 +51,9 @@ CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 CREATE TABLE "Loots" (
   "id" SERIAL PRIMARY KEY,
-  "playerId" int,
-  "itemId" int,
-  "raidId" int,
+  "playerId" int NOT NULL,
+  "itemId" int NOT NULL,
+  "raidId" int NOT NULL,
   "active" boolean DEFAULT true
 );
 comment on table "Loots" is E'@omit delete';
@@ -74,17 +74,18 @@ CREATE UNIQUE INDEX ON "Items" ("wowheadId");
 
 CREATE TABLE "ClassItem" (
   "id" SERIAL PRIMARY KEY,
-  "classId" int,
-  "itemId" int,
+  "classId" int NOT NULL,
+  "itemId" int NOT NULL,
   "itemValueForThisClass" int
 );
 comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
 
 
-CREATE TABLE "BossItem" ("id" SERIAL PRIMARY KEY,
-  "itemId" int,
-  "bossId" int
+CREATE TABLE "BossItem" (
+  "id" SERIAL PRIMARY KEY,
+  "itemId" int NOT NULL,
+  "bossId" int NOT NULL
 );
 comment on table "BossItem" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "BossItem" ("id");
@@ -92,7 +93,7 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 
 CREATE TABLE "Bosses" (
   "id" SERIAL PRIMARY KEY,
-  "donjonId" int,
+  "donjonId" int NOT NULL,
   "name" varchar
 );
 comment on table "Bosses" is E'@omit create,update,delete';
@@ -111,7 +112,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
-  "donjonId" int,
+  "donjonId" int NOT NULL,
   "date" varchar
 );
 comment on table "Raids" is E'@omit delete';
@@ -120,8 +121,8 @@ CREATE UNIQUE INDEX ON "Raids" ("id");
 
 CREATE TABLE "RaidPlayers" (
     "id" SERIAL PRIMARY KEY,
-    "playerId" int,
-    "raidId" int,
+    "playerId" int NOT NULL,
+    "raidId" int NOT NULL,
     "passed" boolean DEFAULT false
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
