@@ -18,9 +18,7 @@ import {
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Player } from "../../lib/generatedTypes";
-import { Loot } from "../../lib/generatedTypes";
 import { byDate, byValue } from "../../lib/utils/sorter";
-import LootWindow from "./LootWindow";
 import PlayerTableRow from "./PlayerTableRow";
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -85,10 +83,6 @@ type ColumnName =
   | "Total raid"
   | "Last loot"
   | "Last raid";
-interface ElementPosition {
-  top: number;
-  left: number;
-}
 
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
@@ -155,27 +149,6 @@ export default function PlayersTable(props: Props) {
   const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Merit");
   const [orderedDESC, setOrderedDESC] = React.useState(false);
 
-  function openLootWindow(
-    playerName: string,
-    lootData: Loot,
-    iconClientPos: ElementPosition
-  ) {
-    const nameFound = lootWindows.find(element => {
-      // check si la fenetre correspondant à ce name est deja ouverte
-      return element.playerName === playerName;
-    });
-    if (!nameFound) {
-      setLootWindows(prevState => {
-        return [...prevState, { playerName, lootData, iconClientPos }];
-      });
-    }
-  }
-  function closeLootWindow(playerName: string) {
-    const newWindowsList = lootWindows.filter(
-      lootWindow => lootWindow.playerName !== playerName
-    );
-    setLootWindows(newWindowsList);
-  }
   function orderBy(colName: ColumnName) {
     const newRows = [...rows];
     let currentlyOrderedDesc = orderedDESC;
