@@ -206,7 +206,6 @@ export default function PlayersTable(props: Props) {
               "Total raid",
               "Last loot",
               "Last raid",
-              "",
               ""
             ].map((columnName: ColumnName) => (
               <StyledTableCell key={columnName} align="center">

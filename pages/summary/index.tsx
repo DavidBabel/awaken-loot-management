@@ -9,11 +9,11 @@ import PlayersTable from "../../components/summary/PlayersTable";
 
 import { useQuery } from "@apollo/react-hooks";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
+import LootWindow from "../../components/summary/LootWindow";
 import { Query } from "../../lib/generatedTypes";
 import { Loot } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
-import LootWindow from "../../components/summary/LootWindow";
 
 interface TabPanelProps {
   children?: React.ReactNode;
