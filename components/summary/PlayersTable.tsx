@@ -141,7 +141,15 @@ export default function PlayersTable(props: Props) {
         ? lastRaidDate.toLocaleDateString("en-EN", dateOptions)
         : "Aucun",
       player.id,
-      player.lootsByPlayerId.nodes
+      [...player.lootsByPlayerId.nodes].sort((a: any, b: any) => {
+        if (new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)) {
+          return -1;
+        }
+        if (new Date(b.raidByRaidId.date) > new Date(a.raidByRaidId.date)) {
+          return 1;
+        }
+        return 0;
+      })
     );
   });
   rowsData.sort((a, b) => b.merit - a.merit);
@@ -215,8 +223,7 @@ export default function PlayersTable(props: Props) {
                   variant={"text"}
                   onClick={() => {
                     orderBy(columnName);
-                  }}
-                >
+                  }}>
                   {columnName}
                   {sortArrow(columnName)}
                 </Button>
