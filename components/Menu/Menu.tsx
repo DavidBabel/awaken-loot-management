@@ -26,15 +26,7 @@ export function Menu() {
   const isConnected = member.level > 0;
 
   return (
-    <div
-      style={{
-        borderRight: "1px solid #E0E0E0",
-        minWidth: "300px",
-        width: "300px",
-        height: "90vh",
-        marginRight: 30
-      }}
-    >
+    <div>
       {isConnected ? (
         <>
           <List>
