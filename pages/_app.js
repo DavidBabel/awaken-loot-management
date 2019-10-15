@@ -12,12 +12,13 @@ import MemberContext from "../lib/context/member";
 class AppWithApollo extends App {
   render() {
     const { Component, pageProps, apolloClient, memberInfos = {} } = this.props;
+
     return (
       <ApolloProvider client={apolloClient}>
         <Header />
         <MemberContext.Provider value={memberInfos}>
           <Dashboard>
-            <Component {...pageProps} />
+            <Component {...pageProps} apolloClient={apolloClient} />
           </Dashboard>
           {/* <BottomNav /> */}
         </MemberContext.Provider>

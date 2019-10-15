@@ -2,9 +2,11 @@ import {
   Divider,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
   ListSubheader
 } from "@material-ui/core";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import Link from "next/link";
 import Router from "next/router";
 import { destroyCookie } from "nookies";
@@ -16,7 +18,7 @@ import { role } from "../../lib/role-level";
 
 function resetToken() {
   destroyCookie({}, "member");
-  Router.push("/");
+  Router.push("/login");
 }
 
 export function Menu() {
@@ -48,6 +50,9 @@ export function Menu() {
           <Divider />
           <List>
             <ListItem button={true}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
               <Link href="/player/list">
                 <ListItemText primary="Player list" />
               </Link>

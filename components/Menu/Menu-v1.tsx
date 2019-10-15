@@ -4,19 +4,21 @@ import {
   ListItem,
   ListItemText,
   ListSubheader
-} from '@material-ui/core';
-import Link from 'next/link';
-import Router from 'next/router';
-import { destroyCookie } from 'nookies';
-import React, { useContext } from 'react';
-import MemberContext from '../../lib/context/member';
-import { role } from '../../lib/role-level';
+} from "@material-ui/core";
+import Link from "next/link";
+import Router from "next/router";
+// import { destroyCookie } from "nookies";
+import React, { useContext } from "react";
+import MemberContext from "../../lib/context/member";
+import { role } from "../../lib/role-level";
 
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
-  destroyCookie({}, 'member');
-  Router.push('/');
+  // tslint:disable-next-line:no-console
+  console.log("reseting token ...");
+  // await destroyCookie({}, "member");
+  Router.push("/login");
 }
 
 export function Menu() {
@@ -26,9 +28,9 @@ export function Menu() {
   return (
     <div
       style={{
-        borderRight: '1px solid #E0E0E0',
+        borderRight: "1px solid #E0E0E0",
         width: 300,
-        height: '100vh',
+        height: "100vh",
         marginRight: 30
       }}
     >
