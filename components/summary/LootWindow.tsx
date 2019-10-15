@@ -36,6 +36,10 @@ const useStyles = makeStyles({
       backgroundColor: "white"
     }
   },
+  tableWrapper: {
+    maxHeight: 300,
+    overflow: "auto"
+  },
   header: {
     position: "relative",
     backgroundColor: (props: Props) => props.classColor,
@@ -59,9 +63,6 @@ const useStyles = makeStyles({
     "& :hover": {
       color: "#bf1313"
     }
-  },
-  content: {
-    padding: "8px"
   },
   raidButtonCell: {
     "& a": {
@@ -154,45 +155,47 @@ export default function LootWindow(props) {
           <CloseIcon color="primary" />
         </div>
       </div>
-      <Table className={classes.content} size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell>Raid</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {lootData.map(loot => (
-            <TableRow
-              key={loot.raidByRaidId.date + loot.itemByItemId.wowheadId}
-            >
-              <TableCell>
-                <a
-                  onClick={e => {
-                    e.preventDefault();
-                  }}
-                  href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
-                >
-                  {loot.itemByItemId.name}
-                </a>
-              </TableCell>
-              <TableCell className={classes.raidButtonCell}>
-                <Link
-                  href="/raid/edit/[id]"
-                  as={`/raid/edit/${loot.raidByRaidId.id}`}
-                >
-                  <a>
-                    <Button variant="contained" color="primary">
-                      {loot.raidByRaidId.date}
-                      <VisibilityIcon />
-                    </Button>
-                  </a>
-                </Link>
-              </TableCell>
+      <div className={classes.tableWrapper}>
+        <Table size="small" stickyHeader={true} aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Item</TableCell>
+              <TableCell>Raid</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {lootData.map(loot => (
+              <TableRow
+                key={loot.raidByRaidId.date + loot.itemByItemId.wowheadId}
+              >
+                <TableCell>
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                    href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                  >
+                    {loot.itemByItemId.name}
+                  </a>
+                </TableCell>
+                <TableCell className={classes.raidButtonCell}>
+                  <Link
+                    href="/raid/edit/[id]"
+                    as={`/raid/edit/${loot.raidByRaidId.id}`}
+                  >
+                    <a>
+                      <Button variant="contained" color="primary">
+                        {loot.raidByRaidId.date}
+                        <VisibilityIcon />
+                      </Button>
+                    </a>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
