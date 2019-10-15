@@ -39,12 +39,17 @@ interface Props {
 const useStyles = makeStyles({
   root: {
     width: "100%",
+    height: "100%",
     marginTop: "10px",
     overflowX: "auto",
     "& .MuiTableCell-head": {
       backgroundColor: (props: Props) => `${props.classColor}`,
       color: "black"
     }
+  },
+  tableWrapper: {
+    maxHeight: "calc(100vh - 250px)",
+    overflow: "auto"
   },
   table: {
     minWidth: 700
@@ -196,49 +201,51 @@ export default function PlayersTable(props: Props) {
 
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            {[
-              "Pseudo",
-              // "Merit",
-              "Total Loot",
-              "Total raid",
-              "Last loot",
-              "Last raid",
-              ""
-            ].map((columnName: ColumnName) => (
-              <StyledTableCell key={columnName} align="center">
-                {" "}
-                <Button
-                  className={classes.headButton}
-                  variant={"text"}
-                  onClick={() => {
-                    orderBy(columnName);
-                  }}
-                >
-                  {columnName}
-                  {sortArrow(columnName)}
-                </Button>
-              </StyledTableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <React.Fragment>
-            {rows.map(row => (
-              <PlayerTableRow
-                key={row.name}
-                rowData={row}
-                classColor={props.classColor}
-                showed={props.showed}
-                lootData={row.playerLoots}
-                openLootWindow={props.openLootWindow}
-              />
-            ))}
-          </React.Fragment>
-        </TableBody>
-      </Table>
+      <div className={classes.tableWrapper}>
+        <Table className={classes.table} stickyHeader={true}>
+          <TableHead>
+            <TableRow>
+              {[
+                "Pseudo",
+                // "Merit",
+                "Total Loot",
+                "Total raid",
+                "Last loot",
+                "Last raid",
+                ""
+              ].map((columnName: ColumnName) => (
+                <StyledTableCell key={columnName} align="center">
+                  {" "}
+                  <Button
+                    className={classes.headButton}
+                    variant={"text"}
+                    onClick={() => {
+                      orderBy(columnName);
+                    }}
+                  >
+                    {columnName}
+                    {sortArrow(columnName)}
+                  </Button>
+                </StyledTableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <React.Fragment>
+              {rows.map(row => (
+                <PlayerTableRow
+                  key={row.name}
+                  rowData={row}
+                  classColor={props.classColor}
+                  showed={props.showed}
+                  lootData={row.playerLoots}
+                  openLootWindow={props.openLootWindow}
+                />
+              ))}
+            </React.Fragment>
+          </TableBody>
+        </Table>
+      </div>
     </Paper>
   );
 }
