@@ -18,7 +18,7 @@ import {
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Player } from "../../lib/generatedTypes";
-import { byDate, byValue } from "../../lib/utils/sorter";
+import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
 import PlayerTableRow from "./PlayerTableRow";
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -170,15 +170,7 @@ export default function PlayersTable(props: Props) {
     } else if (colName === "Total Loot") {
       newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
     } else if (colName === "Pseudo") {
-      newRows.sort((a, b) => {
-        if (a.name > b.name) {
-          return currentlyOrderedDesc ? -1 : 1;
-        }
-        if (b.name > a.name) {
-          return currentlyOrderedDesc ? 1 : -1;
-        }
-        return 0;
-      });
+      newRows.sort(byAlphabet("name", currentlyOrderedDesc));
     } else if (colName === "Last loot") {
       newRows.sort(byDate("lastLootDate", currentlyOrderedDesc));
     } else if (colName === "Last raid") {
@@ -223,7 +215,8 @@ export default function PlayersTable(props: Props) {
                   variant={"text"}
                   onClick={() => {
                     orderBy(columnName);
-                  }}>
+                  }}
+                >
                   {columnName}
                   {sortArrow(columnName)}
                 </Button>
