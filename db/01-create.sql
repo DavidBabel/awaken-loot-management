@@ -66,7 +66,7 @@ CREATE TABLE "Items" (
   "name" varchar,
   "wowheadId" int,
   "classId" int,
-  "phatLoot" boolean DEFAULT false
+  "lootLevel" int
 );
 comment on table "Items" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Items" ("id");
