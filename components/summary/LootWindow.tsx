@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     border: "solid 1px grey",
     boxShadow: "2px 2px 15px -1px rgba(0,0,0,0.75)",
-    zIndex: 2,
+    zIndex: 9999999999,
     "& .MuiTableCell-head": {
       backgroundColor: "white"
     }

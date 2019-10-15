@@ -1,7 +1,7 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const useStyles = makeStyles({
   avatar: {
@@ -15,7 +15,7 @@ export default function classAvatar({ playerClass }: Props) {
   const classes = useStyles("");
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container={true} justify="center" alignItems="center">
       <Avatar
         alt={playerClass + "avatar"}
         src={`/public/img/class/${playerClass}.jpg`}

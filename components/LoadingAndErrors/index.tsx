@@ -11,6 +11,12 @@ export function LoadingAndError({ loading, error }: Props) {
   const [showError, setShowError] = useState(false);
 
   if (error) {
+    if (window) {
+      if (window.location.href.includes("?reload")) {
+        window.location.reload();
+        return <div>Reloading ...</div>;
+      }
+    }
     return (
       <div>
         <p>

@@ -49,13 +49,15 @@ export default function PlayerTableRow(props) {
       <StyledTableCell component="th" scope="row">
         {rowData.name}
       </StyledTableCell>
-      <StyledTableCell className={classes.progressCell} align="center">
-        <ProgressBar
-          classColor={classColor}
-          progress={rowData.merit}
-          showed={showed}
-        />
-      </StyledTableCell>
+      {false && (
+        <StyledTableCell className={classes.progressCell} align="center">
+          <ProgressBar
+            classColor={classColor}
+            progress={rowData.merit}
+            showed={showed}
+          />
+        </StyledTableCell>
+      )}
       <StyledTableCell align="center">
         {rowData.totalLoot}
         {rowData.totalLoot > 0 ? (
@@ -87,7 +89,7 @@ export default function PlayerTableRow(props) {
       <StyledTableCell align="center">{rowData.lastRaidDate}</StyledTableCell>
       <StyledTableCell align="center" className={classes.link}>
         <Link href="/player/view/[id]" as={`/player/view/${rowData.playerId}`}>
-          <a>
+          <a target="_blank">
             <Button variant="contained" color="primary">
               Details
             </Button>

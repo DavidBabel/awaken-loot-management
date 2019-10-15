@@ -1,5 +1,17 @@
 import { gql } from "apollo-boost";
 
+export const ALL_CLASSES = gql`
+  query MyQuery {
+    allClasses {
+      nodes {
+        color
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const ALL_PLAYERS = gql`
   query AllPlayers {
     allPlayers {
@@ -12,6 +24,7 @@ export const ALL_PLAYERS = gql`
         id
         name
         active
+        inRoster
         classId
         playerMeritsByPlayerId {
           nodes {

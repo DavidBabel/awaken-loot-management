@@ -2,9 +2,11 @@ import {
   Divider,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
   ListSubheader
 } from "@material-ui/core";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import Link from "next/link";
 import Router from "next/router";
 import { destroyCookie } from "nookies";
@@ -16,7 +18,7 @@ import { role } from "../../lib/role-level";
 
 function resetToken() {
   destroyCookie({}, "member");
-  Router.push("/");
+  Router.push("/login");
 }
 
 export function Menu() {
@@ -24,14 +26,7 @@ export function Menu() {
   const isConnected = member.level > 0;
 
   return (
-    <div
-      style={{
-        borderRight: "1px solid #E0E0E0",
-        width: "300px",
-        height: "90vh",
-        marginRight: 30
-      }}
-    >
+    <div>
       {isConnected ? (
         <>
           <List>
@@ -47,6 +42,9 @@ export function Menu() {
           <Divider />
           <List>
             <ListItem button={true}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
               <Link href="/player/list">
                 <ListItemText primary="Player list" />
               </Link>
