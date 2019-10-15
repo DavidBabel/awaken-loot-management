@@ -20,14 +20,12 @@ import { byValue } from "../../lib/utils/sorter";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "calc(100vw - 300px)"
-    },
-    paper: {
-      marginTop: theme.spacing(3),
       width: "100%",
-      height: "calc(100vh - 120px)",
-      overflowX: "auto",
-      marginBottom: theme.spacing(2)
+      height: "calc(100vh - 140px)"
+    },
+    tableWrapper: {
+      height: "100%",
+      overflow: "auto"
     },
     table: {
       minWidth: 650,
@@ -113,8 +111,8 @@ export default function PageIndex() {
   });
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
+    <Paper className={classes.root}>
+      <div className={classes.tableWrapper}>
         <Table className={classes.table} size="small" stickyHeader={true}>
           <TableHead>
             <TableRow>
@@ -203,7 +201,7 @@ export default function PageIndex() {
             ))}
           </TableBody>
         </Table>
-      </Paper>
-    </div>
+      </div>
+    </Paper>
   );
 }

@@ -59,9 +59,8 @@ const classColors = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: "calc(100vw - 300px)",
-    height: "calc(100vh - 80px)",
-    overflowY: "scroll",
+    width: "100%",
+    height: "calc(100vh - 140px)",
     backgroundColor: theme.palette.background.paper,
     "& .MuiTabs-indicator": {
       height: "3px"
