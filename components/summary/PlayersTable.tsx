@@ -201,7 +201,7 @@ export default function PlayersTable(props: Props) {
           <TableRow>
             {[
               "Pseudo",
-              "Merit",
+              // "Merit",
               "Total Loot",
               "Total raid",
               "Last loot",

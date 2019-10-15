@@ -27,6 +27,7 @@ export function Menu() {
     <div
       style={{
         borderRight: "1px solid #E0E0E0",
+        minWidth: "300px",
         width: "300px",
         height: "90vh",
         marginRight: 30
