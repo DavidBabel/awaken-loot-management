@@ -171,6 +171,7 @@ export default function PageIndex() {
                     raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
                       if (
                         raidPlayer &&
+                        raidPlayer.playerByPlayerId &&
                         raidPlayer.playerByPlayerId.id === player.id
                       ) {
                         absent = false;
