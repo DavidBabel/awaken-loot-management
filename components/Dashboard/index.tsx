@@ -129,6 +129,15 @@ export function Dashboard({ children }: Props) {
   };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  if (
+    global.hasOwnProperty("window") &&
+    window &&
+    window.location &&
+    window.location.href.includes("/iframe/")
+  ) {
+    return <>{children}</>;
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />

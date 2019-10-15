@@ -20,7 +20,8 @@ CREATE TABLE "Players" (
   "classId" int NOT NULL,
   "role" varchar,
   "password" varchar,
-  "active" boolean DEFAULT true
+  "active" boolean DEFAULT true,
+  "inRoster" boolean DEFAULT false
 );
 comment on table "Players" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
