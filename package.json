@@ -39,6 +39,7 @@
     "postgraphile": "^4.4.4",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-items-carousel": "^2.8.0",
     "tslint": "^5.20.0"
   },
   "devDependencies": {
