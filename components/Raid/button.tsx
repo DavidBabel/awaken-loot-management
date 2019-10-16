@@ -1,47 +1,54 @@
 import {
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
   Typography
-} from '@material-ui/core';
-import Link from 'next/link';
-import { Donjon } from '../../lib/generatedTypes';
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Link from "next/link";
+import { Donjon } from "../../lib/generatedTypes";
 
 interface Props {
   donjon: Donjon;
 }
-
+const useStyles = makeStyles({
+  card: {
+    margin: 5
+  },
+  media: {
+    height: 70
+  },
+  cardContent: {
+    padding: 5,
+    textAlign: "center"
+  },
+  cardActions: {
+    display: "flex",
+    justifyContent: "center",
+    padding: 0,
+    marginBottom: 10
+  }
+});
 export function CreateRaid({ donjon }: Props) {
+  const classes = useStyles("");
   return (
-    <Card>
-      <CardActionArea>
-        <CardMedia
-          image="/public/images/cards/contemplative-reptile.jpg"
-          title={donjon.name}
-        />
-        <CardContent>
-          <Typography gutterBottom={true} variant="h5" /* component="h2" */>
-            {donjon.name}
-          </Typography>
-          {/*       <Typography variant="body2" color="textSecondary" component="p">
-            Raid of the {date}
-          </Typography> */}
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        {/* <Button size="small" color="primary">
-          <Link href="/raid/edit/[id]" as={`/raid/edit/${id}`}>
-            <a>Edit</a>
-          </Link>
-        </Button> */}
-        <Button size="small" color="primary">
-          <Link href="/raid/create/[id]" as={`/raid/create/${donjon.id}`}>
-            <a>Create new</a>
-          </Link>
-        </Button>
+    <Card className={classes.card}>
+      <CardMedia
+        className={classes.media}
+        image={`/static/img/donjon/${donjon.name}.jpg`}
+        title={donjon.name}
+      />
+      <CardContent className={classes.cardContent}>
+        <Typography variant="subtitle1">{donjon.name}</Typography>
+      </CardContent>
+      <CardActions className={classes.cardActions}>
+        <Link href="/raid/create/[id]" as={`/raid/create/${donjon.id}`}>
+          <Button size="small" variant="outlined" color="primary">
+            <a>Create</a>
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
