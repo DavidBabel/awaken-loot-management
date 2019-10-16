@@ -15,10 +15,14 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: "100%",
       marginTop: theme.spacing(3),
-      overflowX: "auto"
+      overflow: "auto"
     },
     hidden: {
       display: "none"
+    },
+    tableWrapper: {
+      maxHeight: "calc(100vh - 300px)",
+      overflow: "auto"
     },
     table: {
       minWidth: 650
@@ -49,38 +53,40 @@ export default function RaidsTable({ raids, hidden }) {
   );
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Donjon</TableCell>
-            <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Link</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.donjonName + row.date}>
-              <TableCell /* component="th" */ scope="row">
-                {row.donjonName}
-              </TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right" className={classes.link}>
-                {" "}
-                <Link
-                  href="/raid/edit/[id]"
-                  as={`/raid/edit/${row.raidId}`} /* a remplacer par /raid/view/[id] */
-                >
-                  <a>
-                    <Button variant="contained" color="primary">
-                      View raid
-                    </Button>
-                  </a>
-                </Link>
-              </TableCell>
+      <div className={classes.tableWrapper}>
+        <Table className={classes.table} stickyHeader={true}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Donjon</TableCell>
+              <TableCell align="right">Date</TableCell>
+              <TableCell align="right">Link</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.donjonName + row.date}>
+                <TableCell /* component="th" */ scope="row">
+                  {row.donjonName}
+                </TableCell>
+                <TableCell align="right">{row.date}</TableCell>
+                <TableCell align="right" className={classes.link}>
+                  {" "}
+                  <Link
+                    href="/raid/edit/[id]"
+                    as={`/raid/edit/${row.raidId}`} /* a remplacer par /raid/view/[id] */
+                  >
+                    <a>
+                      <Button variant="contained" color="primary">
+                        View raid
+                      </Button>
+                    </a>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </Paper>
   );
 }
