@@ -236,7 +236,6 @@ export type ClassItem = Node & {
   id: Scalars["Int"];
   classId: Scalars["Int"];
   itemId: Scalars["Int"];
-  itemValueForThisClass?: Maybe<Scalars["Int"]>;
   /** Reads a single `Class` that is related to this `ClassItem`. */
   classByClassId?: Maybe<Class>;
   /** Reads a single `Item` that is related to this `ClassItem`. */
@@ -254,8 +253,6 @@ export type ClassItemCondition = {
   classId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `itemId` field. */
   itemId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `itemValueForThisClass` field. */
-  itemValueForThisClass?: Maybe<Scalars["Int"]>;
 };
 
 /** An input for mutations affecting `ClassItem` */
@@ -263,7 +260,6 @@ export type ClassItemInput = {
   id?: Maybe<Scalars["Int"]>;
   classId: Scalars["Int"];
   itemId: Scalars["Int"];
-  itemValueForThisClass?: Maybe<Scalars["Int"]>;
 };
 
 /** Represents an update to a `ClassItem`. Fields that are set will be updated. */
@@ -271,7 +267,6 @@ export type ClassItemPatch = {
   id?: Maybe<Scalars["Int"]>;
   classId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
-  itemValueForThisClass?: Maybe<Scalars["Int"]>;
 };
 
 /** A connection to a list of `ClassItem` values. */
@@ -305,8 +300,6 @@ export enum ClassItemsOrderBy {
   ClassIdDesc = "CLASS_ID_DESC",
   ItemIdAsc = "ITEM_ID_ASC",
   ItemIdDesc = "ITEM_ID_DESC",
-  ItemValueForThisClassAsc = "ITEM_VALUE_FOR_THIS_CLASS_ASC",
-  ItemValueForThisClassDesc = "ITEM_VALUE_FOR_THIS_CLASS_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
