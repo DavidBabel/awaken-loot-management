@@ -676,7 +676,7 @@ export type Item = Node & {
   name?: Maybe<Scalars["String"]>;
   wowheadId?: Maybe<Scalars["Int"]>;
   classId?: Maybe<Scalars["Int"]>;
-  phatLoot?: Maybe<Scalars["Boolean"]>;
+  lootLevel?: Maybe<Scalars["Int"]>;
   /** Reads a single `Class` that is related to this `Item`. */
   classByClassId?: Maybe<Class>;
   /** Reads and enables pagination through a set of `Loot`. */
@@ -727,8 +727,8 @@ export type ItemCondition = {
   wowheadId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `classId` field. */
   classId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `phatLoot` field. */
-  phatLoot?: Maybe<Scalars["Boolean"]>;
+  /** Checks for equality with the object’s `lootLevel` field. */
+  lootLevel?: Maybe<Scalars["Int"]>;
 };
 
 /** A connection to a list of `Item` values. */
@@ -764,8 +764,8 @@ export enum ItemsOrderBy {
   WowheadIdDesc = "WOWHEAD_ID_DESC",
   ClassIdAsc = "CLASS_ID_ASC",
   ClassIdDesc = "CLASS_ID_DESC",
-  PhatLootAsc = "PHAT_LOOT_ASC",
-  PhatLootDesc = "PHAT_LOOT_DESC",
+  LootLevelAsc = "LOOT_LEVEL_ASC",
+  LootLevelDesc = "LOOT_LEVEL_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
