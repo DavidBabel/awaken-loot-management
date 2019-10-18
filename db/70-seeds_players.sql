@@ -94,7 +94,7 @@ VALUES
 ('Wid'          , 2,  'player', null, false, false),
 ('Xihfu'        , 5,  'player', null, true, false),
 ('Yx'           , 4,  'player', null, true, false),
-('Zapikote'     , 3,  'player', null, true, false),
+('Zapikote'     , 2,  'player', null, true, false),
 ('Zhantla'      , 7,  'player', null, false, false),
 ('Zykxx'        , 7,  'player', null, false, false),
 ('Zzeus'        , 2,  'player', null, true, false),
@@ -109,7 +109,14 @@ VALUES
 ('Ogrim'        , 1,  'player', null, false, false),
 ('Olv'          , 2,  'player', null, false, false),
 ('Rognor'       , 7,  'player', null, false, false),
-('Secaly'       , 4,  'player', null, false, false)
+('Secaly'       , 4,  'player', null, false, false),
+('Keiki'        , 7,  'player', null, true, false),
+('Øupla'        , 4,  'player', null, true, false),
+('Flash'        , 7,  'player', null, true, false),
+('Knh'          , 5,  'player', null, true, false),
+-- ('Øups'        , 7,  'player', null, true, false),
+-- ('Slov'        , 7,  'player', null, true, false),
+('Elgor'        , 9,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
