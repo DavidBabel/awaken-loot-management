@@ -15,13 +15,13 @@ export function byDate(accessor: string, orderDesc: boolean = true) {
   return (a: any, b: any) => {
     if (
       new Date(a[accessor]) > new Date(b[accessor]) ||
-      a[accessor] === "Aucun"
+      b[accessor] === "Aucun"
     ) {
       return orderDesc ? -1 : 1;
     }
     if (
       new Date(b[accessor]) > new Date(a[accessor]) ||
-      b[accessor] === "Aucun"
+      a[accessor] === "Aucun"
     ) {
       return orderDesc ? 1 : -1;
     }
