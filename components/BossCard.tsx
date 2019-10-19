@@ -8,17 +8,14 @@ import {
   Fab,
   makeStyles
 } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-
 import { Add as AddIcon } from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-
 import { Boss } from "../lib/generatedTypes";
-// import { ItemCard } from './ItemCard';
 
 const useStyles = makeStyles({
   card: {
@@ -76,11 +73,15 @@ export function BossCard({
   name,
   bossItemsByBossId: { nodes: loots },
   donjonShortName,
-  looted
-}: Boss & { donjonShortName: string; looted: any }) {
-  // const [showLoots, setShowLoots] = useState(false);
-  // const toogleShowLoots = () => setShowLoots(!showLoots);
-
+  looted,
+  openLootWindow,
+  setDialogItems
+}: Boss & {
+  donjonShortName: string;
+  looted: any;
+  openLootWindow: any;
+  setDialogItems: any;
+}) {
   const classes = useStyles("");
   return (
     <Card className={classes.card}>
@@ -134,7 +135,15 @@ export function BossCard({
         </List>
       </CardContent>
       <CardActions disableSpacing={true} className={classes.cardActions}>
-        <Fab size="small" color="primary" aria-label="add">
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="add"
+          onClick={() => {
+            setDialogItems(loots);
+            openLootWindow();
+          }}
+        >
           <AddIcon />
         </Fab>
       </CardActions>
