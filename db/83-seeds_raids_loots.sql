@@ -806,3 +806,190 @@ VALUES
   (SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'))
 ;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+-- raid devilhunter
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture Rageterre')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets de puissance')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capriseum'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes d‘arcaniste')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de traqueur de géant')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Minatrix'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières d‘arcaniste')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ràys'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Vieux gants en cuir du Magma')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bracelets du tueur de la nuit')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes de traqueur de géant')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Need'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de prophétie')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Need'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collerette de prophétie')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kusogakî'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets de garde des flammes')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Qweakzor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque de traqueur de géant')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Knh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lums'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Epaulettes Rageterre')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Minatrix'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants d‘arcaniste')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Boblemoche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mules de Gangrecoeur')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tephrite'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture cénarienne')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Cocobanjo'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Protège-épaules du tueur de la nuit')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Boblemoche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Robe de Gangrecoeur')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cuirasse de traqueur de géant')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tàel'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bâton de domination')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Karaelys'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'L‘Oeil de la divinité')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Throma'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Dent de chien du magma')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Psykøhazard'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Echarpe des secrets murmurés')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Callumlolz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon Rougecroc')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de courroux')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de destruction')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cape sang-de-dragon')),
+-- raid elgor
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Disque Drillborer')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Médaillon de Puissance inébranlable')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ragegoriath'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de puissance')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Elgor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cuissards d‘Attise-flammes')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Øupla'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes du tueur de la nuit')),
+-- ( 14,
+--   (SELECT id FROM "Players" WHERE "name"=
+--   'Skau'),
+--   (SELECT id FROM "Items" WHERE "name"=
+--   'item ?????')), -- todo
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Keiki'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture Rageterre')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Keiki'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Habit Rageterre'))
+
+;
