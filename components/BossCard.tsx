@@ -85,6 +85,7 @@ export function BossCard({
   setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
 }) {
   const classes = useStyles("");
+  loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   return (
     <Card className={classes.card}>
       <CardHeader className={classes.header} title={name} subheader="" />

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -19,10 +19,17 @@ import { useRouter } from "next/router";
 import { forwardRef, useState } from "react";
 import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import { BossItem, Query } from "../../../lib/generatedTypes";
+import { BossItem, Query, Mutation } from "../../../lib/generatedTypes";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
+import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
-interface Variables {
+interface QueryVariables {
+  raidId: number;
+}
+interface CreateLootVariables {
+  playerId: number;
+  itemId: number;
   raidId: number;
 }
 const useStyles = makeStyles({
@@ -33,10 +40,12 @@ const useStyles = makeStyles({
     justifyContent: "center"
   },
   selectItem: {
-    minWidth: 200
+    minWidth: 200,
+    margin: 10
   },
   selectPlayer: {
-    minWidth: 150
+    minWidth: 150,
+    margin: 10
   },
   snackError: {
     backgroundColor: "#D32F2F"
@@ -114,10 +123,25 @@ export default function PageRaidView() {
       setBossNameSelected("");
       SetSnackBarOpened(false);
       // FONCTION MUTATION AJOUT ITEM ICI
-      openSnackBar("Item ajouté avec succès", "success");
-      refetch();
+      createLoot({
+        variables: {
+          playerId: parseInt(playerIdToAdd),
+          itemId: parseInt(itemIdToAdd),
+          raidId
+        }
+      })
+        .then(resp => {
+          openSnackBar(
+            `${resp.data.createLoot.itemByItemId.name} assigné à ${resp.data.createLoot.playerByPlayerId.name}`,
+            "success"
+          );
+          refetch();
+        })
+        .catch(err => {
+          openSnackBar(err.message, "error");
+        });
     } else {
-      openSnackBar("Please select both field", "error");
+      openSnackBar("Selectionnez un item et un joueur.", "error");
     }
   };
   const openSnackBar = (msg, action) => {
@@ -141,7 +165,7 @@ export default function PageRaidView() {
     SetSnackBarOpened(false);
   };
 
-  const { loading, data, error, refetch } = useQuery<Query, Variables>(
+  const { loading, data, error, refetch } = useQuery<Query, QueryVariables>(
     ONE_RAID,
     {
       variables: { raidId }
@@ -153,11 +177,16 @@ export default function PageRaidView() {
 
   const currentRaid = data.allRaids.nodes[0];
   const loots = currentRaid.lootsByRaidId.nodes;
-  const allPlayers = currentRaid.raidPlayersByRaidId.nodes.sort((a, b) =>
-    a.playerByPlayerId.name > b.playerByPlayerId.name ? 1 : -1
+  const allPlayers = currentRaid.raidPlayersByRaidId.nodes.sort(
+    raidPlayerByClass
   );
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
+
+  const [
+    createLoot
+    // { loading: mutationLoading, data: mutationData }
+  ] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
 
   return (
     <div className={classes.root}>
@@ -232,6 +261,12 @@ export default function PageRaidView() {
               {allPlayers.map(player => {
                 return (
                   <MenuItem
+                    style={{
+                      borderLeft:
+                        "solid 4px " +
+                        player.playerByPlayerId.classByClassId.color,
+                      margin: 2
+                    }}
                     key={player.playerByPlayerId.id}
                     value={player.playerByPlayerId.id}
                   >
