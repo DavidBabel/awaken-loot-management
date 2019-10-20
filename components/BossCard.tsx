@@ -15,7 +15,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { Boss } from "../lib/generatedTypes";
+import { Dispatch, SetStateAction } from "react";
+import { Boss, BossItem, Loot } from "../lib/generatedTypes";
 
 const useStyles = makeStyles({
   card: {
@@ -78,9 +79,9 @@ export function BossCard({
   setDialogItems
 }: Boss & {
   donjonShortName: string;
-  looted: any;
-  openLootWindow: any;
-  setDialogItems: any;
+  looted: Loot[];
+  openLootWindow: () => void;
+  setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
 }) {
   const classes = useStyles("");
   return (
