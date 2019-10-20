@@ -90,20 +90,20 @@ export default function PageRaidView() {
     setSelectItemOpened(false);
   };
   const handleChangeSelectItem = (
-    event: React.ChangeEvent<{ value: unknown }>
+    event: React.ChangeEvent<{ value: string }>
   ): void => {
     setItemIdToAdd(event.target.value as string);
+  };
+  const handleChangeSelectPlayer = (
+    event: React.ChangeEvent<{ value: string }>
+  ): void => {
+    setPlayerIdToAdd(event.target.value as string);
   };
   const handleOpenSelectPlayer = (): void => {
     setSelectPlayerOpened(true);
   };
   const handleCloseSelectPlayer = (): void => {
     setSelectPlayerOpened(false);
-  };
-  const handleChangeSelectPlayer = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ): void => {
-    setPlayerIdToAdd(event.target.value as string);
   };
   const addLoot = () => {
     if (itemIdToAdd && playerIdToAdd && bossIdSelected) {

@@ -65,7 +65,8 @@ const useStyles = makeStyles({
     textAlign: "center",
     backgroundColor: "#F5F5F5",
     border: "2px solid",
-    borderRadius: "5px"
+    borderRadius: "5px",
+    overflow: "hidden"
   }
 });
 
