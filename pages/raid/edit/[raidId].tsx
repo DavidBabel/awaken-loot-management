@@ -5,12 +5,16 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControl from "@material-ui/core/FormControl";
+import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Slide from "@material-ui/core/Slide";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
+import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
 import { forwardRef, useState } from "react";
 import { BossCard } from "../../../components/BossCard";
@@ -33,6 +37,12 @@ const useStyles = makeStyles({
   },
   selectPlayer: {
     minWidth: 150
+  },
+  snackError: {
+    backgroundColor: "#D32F2F"
+  },
+  snackSuccess: {
+    backgroundColor: "#43A047"
   }
 });
 
@@ -44,19 +54,33 @@ const Transition = forwardRef<unknown, TransitionProps>(function Transition(
 });
 
 export default function PageRaidView() {
+  const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
   const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
-  const [itemIdToAdd, setItemIdToAdd] = useState(null);
   const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
   const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
-  const [playerIdToAdd, setPlayerIdToAdd] = useState(null);
+  const [itemIdToAdd, setItemIdToAdd] = useState<string>("");
+  const [playerIdToAdd, setPlayerIdToAdd] = useState<string>("");
+  const [bossIdSelected, setBossIdSelected] = useState<string>("");
+  const [bossNameSelected, setBossNameSelected] = useState<string>("");
+  const [snackBarOpened, SetSnackBarOpened] = useState<boolean>(false);
+  const [snackBarMsg, setSnackBarMsg] = useState<string>("");
+  const [snackBarClass, setSnackBarClass] = useState<string>(
+    classes.snackError
+  );
 
-  const handleOpenDialog = (): void => {
+  const handleOpenAddItemWindow = (bossId: string, bossName: string): void => {
+    setBossIdSelected(bossId);
+    setBossNameSelected(bossName);
     setAddLootOpened(true);
   };
-  const handleCloseDialog = (): void => {
+  const handleCloseAddItemWindow = (): void => {
+    setItemIdToAdd("");
+    setPlayerIdToAdd("");
+    setBossIdSelected("");
+    setBossNameSelected("");
     setAddLootOpened(false);
   };
   const handleOpenSelectItem = (): void => {
@@ -81,9 +105,48 @@ export default function PageRaidView() {
   ): void => {
     setPlayerIdToAdd(event.target.value as string);
   };
-  const { loading, data, error } = useQuery<Query, Variables>(ONE_RAID, {
-    variables: { raidId }
-  });
+  const addLoot = () => {
+    if (itemIdToAdd && playerIdToAdd && bossIdSelected) {
+      setAddLootOpened(false);
+      setItemIdToAdd("");
+      setPlayerIdToAdd("");
+      setBossIdSelected("");
+      setBossNameSelected("");
+      SetSnackBarOpened(false);
+      // FONCTION MUTATION AJOUT ITEM ICI
+      openSnackBar("Item ajouté avec succès", "success");
+      refetch();
+    } else {
+      openSnackBar("Please select both field", "error");
+    }
+  };
+  const openSnackBar = (msg, action) => {
+    if (action === "error") {
+      setSnackBarClass(classes.snackError);
+    } else {
+      setSnackBarClass(classes.snackSuccess);
+    }
+    setSnackBarMsg(msg);
+    SetSnackBarOpened(true);
+  };
+
+  const closeSnackBar = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    SetSnackBarOpened(false);
+  };
+
+  const { loading, data, error, refetch } = useQuery<Query, Variables>(
+    ONE_RAID,
+    {
+      variables: { raidId }
+    }
+  );
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
@@ -95,7 +158,7 @@ export default function PageRaidView() {
   );
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
-  const classes = useStyles("");
+
   return (
     <div className={classes.root}>
       {bosses.map(boss => {
@@ -113,7 +176,7 @@ export default function PageRaidView() {
           <BossCard
             key={boss.id}
             {...boss}
-            openLootWindow={handleOpenDialog}
+            openLootWindow={handleOpenAddItemWindow}
             donjonShortName={donjonShortName}
             looted={lootedForThisBoss}
             setDialogItems={setDialogItems}
@@ -124,11 +187,13 @@ export default function PageRaidView() {
         open={addLootOpened}
         TransitionComponent={Transition}
         keepMounted={true}
-        onClose={handleCloseDialog}
+        onClose={handleCloseAddItemWindow}
         aria-labelledby="add-loot-dialog"
         aria-describedby="add loot window"
       >
-        <DialogTitle id="add-loot-dialog">{"Ajouter un loot"}</DialogTitle>
+        <DialogTitle id="add-loot-dialog">
+          {"Ajouter un loot sur: " + bossNameSelected}
+        </DialogTitle>
         <DialogContent>
           <FormControl>
             <InputLabel htmlFor="demo-controlled-open-select">Item</InputLabel>
@@ -178,14 +243,38 @@ export default function PageRaidView() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
+          <Button onClick={handleCloseAddItemWindow} color="primary">
             CANCEL
           </Button>
-          <Button onClick={handleCloseDialog} color="primary">
+          <Button onClick={addLoot} color="primary">
             ADD
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={snackBarOpened}
+        autoHideDuration={3000}
+        onClose={closeSnackBar}
+      >
+        <SnackbarContent
+          className={snackBarClass}
+          message={<span id="message-id">{snackBarMsg}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={closeSnackBar}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
     </div>
   );
 }

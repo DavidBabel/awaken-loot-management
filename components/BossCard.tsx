@@ -80,7 +80,7 @@ export function BossCard({
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
-  openLootWindow: () => void;
+  openLootWindow: (bossId: string, bossName: string) => void;
   setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
 }) {
   const classes = useStyles("");
@@ -99,7 +99,7 @@ export function BossCard({
           {looted.map(loot => {
             return (
               <ListItem
-                key={loot.itemByItemId.id}
+                key={loot.itemByItemId.id + loot.playerByPlayerId.id}
                 divider={true}
                 role={undefined}
                 alignItems="flex-start"
@@ -142,7 +142,7 @@ export function BossCard({
           aria-label="add"
           onClick={() => {
             setDialogItems(loots);
-            openLootWindow();
+            openLootWindow(id.toString(), name);
           }}
         >
           <AddIcon />
