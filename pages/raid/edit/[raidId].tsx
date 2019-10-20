@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { forwardRef, useState } from "react";
 import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import { Query } from "../../../lib/generatedTypes";
+import { BossItem, Query } from "../../../lib/generatedTypes";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 
 interface Variables {
@@ -43,42 +43,42 @@ const Transition = forwardRef<unknown, TransitionProps>(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PageRaidView(/* { raidId }: Props */) {
+export default function PageRaidView() {
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
-  const [addLootOpened, setAddLootOpened] = useState(false);
-  const [selectItemOpened, setSelectItemOpened] = useState(false);
-  const [itemIdToAdd, setItemIdToAdd] = useState("test");
-  const [dialogItems, setDialogItems] = useState([]);
-  const [selectPlayerOpened, setSelectPlayerOpened] = useState(false);
-  const [playerIdToAdd, setPlayerIdToAdd] = useState("test");
+  const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
+  const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
+  const [itemIdToAdd, setItemIdToAdd] = useState(null);
+  const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
+  const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
+  const [playerIdToAdd, setPlayerIdToAdd] = useState(null);
 
-  const handleOpenDialog = () => {
+  const handleOpenDialog = (): void => {
     setAddLootOpened(true);
   };
-  const handleCloseDialog = () => {
+  const handleCloseDialog = (): void => {
     setAddLootOpened(false);
   };
-  const handleOpenSelectItem = () => {
+  const handleOpenSelectItem = (): void => {
     setSelectItemOpened(true);
   };
-  const handleCloseSelectItem = () => {
+  const handleCloseSelectItem = (): void => {
     setSelectItemOpened(false);
   };
   const handleChangeSelectItem = (
     event: React.ChangeEvent<{ value: unknown }>
-  ) => {
+  ): void => {
     setItemIdToAdd(event.target.value as string);
   };
-  const handleOpenSelectPlayer = () => {
+  const handleOpenSelectPlayer = (): void => {
     setSelectPlayerOpened(true);
   };
-  const handleCloseSelectPlayer = () => {
+  const handleCloseSelectPlayer = (): void => {
     setSelectPlayerOpened(false);
   };
   const handleChangeSelectPlayer = (
     event: React.ChangeEvent<{ value: unknown }>
-  ) => {
+  ): void => {
     setPlayerIdToAdd(event.target.value as string);
   };
   const { loading, data, error } = useQuery<Query, Variables>(ONE_RAID, {
@@ -99,7 +99,7 @@ export default function PageRaidView(/* { raidId }: Props */) {
   return (
     <div className={classes.root}>
       {bosses.map(boss => {
-        const lootedForThisBoss = [...loots].filter(loot => {
+        const lootedForThisBoss = [...loots].filter((loot): boolean => {
           if (loot.itemByItemId.bossItemsByItemId.nodes.length === 0) {
             // A CORRIGER en BDD (par exemple le defenseur de malistar n'a pas de bossID attaché a lui)
           }
