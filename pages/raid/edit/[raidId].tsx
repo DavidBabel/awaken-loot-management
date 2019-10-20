@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -16,12 +16,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, MutableRefObject, useEffect } from "react";
 import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import { BossItem, Query, Mutation } from "../../../lib/generatedTypes";
-import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
+import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 interface QueryVariables {
@@ -79,8 +79,16 @@ export default function PageRaidView() {
   const [snackBarClass, setSnackBarClass] = useState<string>(
     classes.snackError
   );
+  const [currentBossCardContentElem, setCurrentBossCardContentElem] = useState<
+    MutableRefObject<any>
+  >(null);
 
-  const handleOpenAddItemWindow = (bossId: string, bossName: string): void => {
+  const handleOpenAddItemWindow = (
+    bossId: string,
+    bossName: string,
+    bossCardContentElem: MutableRefObject<any>
+  ): void => {
+    setCurrentBossCardContentElem(bossCardContentElem);
     setBossIdSelected(bossId);
     setBossNameSelected(bossName);
     setAddLootOpened(true);
@@ -177,9 +185,11 @@ export default function PageRaidView() {
 
   const currentRaid = data.allRaids.nodes[0];
   const loots = currentRaid.lootsByRaidId.nodes;
-  const allPlayers = currentRaid.raidPlayersByRaidId.nodes.sort(
-    raidPlayerByClass
-  );
+  const allPlayers = currentRaid.raidPlayersByRaidId.nodes
+    .sort((a, b) =>
+      a.playerByPlayerId.name > b.playerByPlayerId.name ? 1 : -1
+    )
+    .sort(raidPlayerByClass);
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
@@ -188,6 +198,21 @@ export default function PageRaidView() {
     // { loading: mutationLoading, data: mutationData }
   ] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
 
+  useEffect(() => {
+    if (currentBossCardContentElem) {
+      // Scroll tout en bas d'une liste de loot quand un item est ajouté
+      if (currentBossCardContentElem.current.scrollBy) {
+        currentBossCardContentElem.current.scrollBy({
+          top: currentBossCardContentElem.current.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      } else {
+        currentBossCardContentElem.current.scrollTop =
+          currentBossCardContentElem.current.offsetHeight;
+      }
+    }
+  }, [data]);
   return (
     <div className={classes.root}>
       {bosses.map(boss => {
@@ -197,8 +222,9 @@ export default function PageRaidView() {
           }
           return (
             loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
-            loot.itemByItemId.bossItemsByItemId.nodes[0].bossByBossId.id ===
-              boss.id
+            loot.itemByItemId.bossItemsByItemId.nodes.some(
+              bossItem => bossItem.bossByBossId.id === boss.id
+            )
           );
         });
         return (

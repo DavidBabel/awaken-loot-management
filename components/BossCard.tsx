@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import {
   Card,
   CardActions,
@@ -15,6 +14,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { MutableRefObject, useRef } from "react";
 import { Dispatch, SetStateAction } from "react";
 import { Boss, BossItem, Loot } from "../lib/generatedTypes";
 
@@ -81,10 +81,15 @@ export function BossCard({
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
-  openLootWindow: (bossId: string, bossName: string) => void;
+  openLootWindow: (
+    bossId: string,
+    bossName: string,
+    bossCardContentElem: MutableRefObject<any>
+  ) => void;
   setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
 }) {
   const classes = useStyles("");
+  const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   return (
     <Card className={classes.card}>
@@ -96,12 +101,16 @@ export function BossCard({
           .replace(/\s/g, "-")}.jpg`}
         title={name}
       />
-      <CardContent className={classes.cardContent}>
+      <CardContent className={classes.cardContent} ref={bossCardContentElem}>
         <List>
-          {looted.map(loot => {
+          {looted.map((loot, index) => {
             return (
               <ListItem
-                key={loot.itemByItemId.id + loot.playerByPlayerId.id}
+                key={
+                  loot.itemByItemId.id +
+                  loot.playerByPlayerId.id +
+                  index.toString()
+                }
                 divider={true}
                 role={undefined}
                 alignItems="flex-start"
@@ -144,7 +153,7 @@ export function BossCard({
           aria-label="add"
           onClick={() => {
             setDialogItems(loots);
-            openLootWindow(id.toString(), name);
+            openLootWindow(id.toString(), name, bossCardContentElem);
           }}
         >
           <AddIcon />
