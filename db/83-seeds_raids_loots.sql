@@ -976,11 +976,11 @@ VALUES
   'Øupla'),
   (SELECT id FROM "Items" WHERE "name"=
   'Bottes du tueur de la nuit')),
--- ( 14,
---   (SELECT id FROM "Players" WHERE "name"=
---   'Skau'),
---   (SELECT id FROM "Items" WHERE "name"=
---   'item ?????')), -- todo
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skau'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon de prophétie')),
 ( 14,
   (SELECT id FROM "Players" WHERE "name"=
   'Keiki'),
@@ -988,8 +988,74 @@ VALUES
   'Ceinture Rageterre')),
 ( 14,
   (SELECT id FROM "Players" WHERE "name"=
+  'Gidgud'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Trembleterre')),
+( 14,
+  (SELECT id FROM "Players" WHERE "name"=
   'Keiki'),
   (SELECT id FROM "Items" WHERE "name"=
   'Habit Rageterre'))
+;
 
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+-- raid devilhunter
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Abramus'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Knh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couvre-chef de Stormrage')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Devilhunter'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brosko'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia')),
+
+-- raid deiv
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Cocobanjo'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cagoule Rougecroc')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tephrite'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couvre-chef de Stormrage')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille')),
+( 15,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Cocobanjo'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'))
 ;
