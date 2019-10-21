@@ -2770,77 +2770,101 @@ VALUES
   'Habit Rageterre'))
 ;
 
-INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
 VALUES
 -- raid devilhunter
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Abramus'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Couronne de Vent du néant')),
+  'Couronne de Vent du néant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Knh'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef de Stormrage')),
+  'Couvre-chef de Stormrage'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Ladj'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Collier d‘Eskhandar')),
+  'Collier d‘Eskhandar'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Devilhunter'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Sac à dos en cuir d‘Onyxia')),
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Brosko'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Tête d‘Onyxia')),
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 
 -- raid deiv
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Cocobanjo'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Cagoule Rougecroc')),
+  'Cagoule Rougecroc'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Tephrite'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef de Stormrage')),
+  'Couvre-chef de Stormrage'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Ladj'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Collier d‘Eskhandar')),
+  'Collier d‘Eskhandar'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Mergueztguez'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Sac à dos en cuir d‘Onyxia')),
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Thünberg'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Eclat de l‘Ecaille')),
+  'Eclat de l‘Ecaille'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
 ( 15,
   (SELECT id FROM "Players" WHERE "name"=
   'Cocobanjo'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Tête d‘Onyxia'))
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia'))
 ;
 
 
-INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
 VALUES
 -- raid devilhunter
 ( 16,
   (SELECT id FROM "Players" WHERE "name"=
   'Flash'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Défenseur de Malistar'))
+  'Défenseur de Malistar'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Ragnaros'))
 ; -- SAFE BEGIN FOR CONCAT
 
 
