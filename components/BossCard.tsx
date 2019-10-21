@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import {
   Card,
   CardActions,
@@ -6,35 +5,68 @@ import {
   CardHeader,
   CardMedia,
   Fab,
-  IconButton,
   makeStyles
-} from '@material-ui/core';
-import { Add as AddIcon, MoreVert as MoreVertIcon } from '@material-ui/icons';
-
-import { Boss } from '../lib/generatedTypes';
-import { ItemCard } from './ItemCard';
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import { Add as AddIcon } from "@material-ui/icons";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { MutableRefObject, useRef } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Boss, BossItem, Loot } from "../lib/generatedTypes";
 
 const useStyles = makeStyles({
   card: {
-    position: 'relative',
-    width: 400,
-    minHeight: 400,
-    margin: '10px',
-    backgroundColor: '#dedede',
-    paddingBottom: '40px'
+    position: "relative",
+    width: 500,
+    maxHeight: 600,
+    margin: "10px",
+    backgroundColor: "white",
+    paddingBottom: "40px",
+    boxShadow: "0 0 20px 0 rgba(0,0,0,0.35)"
+  },
+  header: {
+    position: "absolute",
+    top: "0px",
+    backgroundColor: "#F50057",
+    color: "white",
+    zIndex: 2,
+    padding: "5px 15px",
+    borderBottomRightRadius: "10px"
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
+    height: 180,
+    clipPath: "polygon(0 0, 100% 0, 100% 79%, 0% 100%)"
   },
   cardContent: {
-    height: 'auto'
+    maxHeight: 300,
+    height: "auto",
+    overflow: "auto"
   },
   cardActions: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    right: 0,
-    margin: 'auto'
+    right: 10,
+    margin: "auto"
+  },
+  itemCell: {
+    width: 240,
+    whiteSpace: "nowrap",
+    lineHeight: "44px",
+    overflow: "hidden"
+  },
+  playerCell: {
+    width: 120,
+    lineHeight: "44px",
+    margin: "0px 10px",
+    textAlign: "center",
+    backgroundColor: "#F5F5F5",
+    border: "2px solid",
+    borderRadius: "5px",
+    overflow: "hidden"
   }
 });
 
@@ -42,45 +74,88 @@ export function BossCard({
   id,
   name,
   bossItemsByBossId: { nodes: loots },
-  donjonShortName
-}: Boss & { donjonShortName: string }) {
-  // const [showLoots, setShowLoots] = useState(false);
-  // const toogleShowLoots = () => setShowLoots(!showLoots);
-
-  const classes = useStyles('');
-
+  donjonShortName,
+  looted,
+  openLootWindow,
+  setDialogItems
+}: Boss & {
+  donjonShortName: string;
+  looted: Loot[];
+  openLootWindow: (
+    bossId: string,
+    bossName: string,
+    bossCardContentElem: MutableRefObject<any>
+  ) => void;
+  setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
+}) {
+  const classes = useStyles("");
+  const bossCardContentElem = useRef(null);
+  loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   return (
     <Card className={classes.card}>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={name}
-        subheader=""
-      />
+      <CardHeader className={classes.header} title={name} subheader="" />
       <CardMedia
         className={classes.media}
-        image={`/public/img/boss/${donjonShortName}/${name
+        image={`/static/img/boss/${donjonShortName}/${name
           .toLowerCase()
-          .replace(/\s/g, '-')}.jpg`}
+          .replace(/\s/g, "-")}.jpg`}
         title={name}
       />
-      <CardContent className={classes.cardContent}>
-        {loots.map(loot => {
-          if (loot.itemByItemId.lootsByItemId.nodes.length > 0) {
+      <CardContent className={classes.cardContent} ref={bossCardContentElem}>
+        <List>
+          {looted.map((loot, index) => {
             return (
-              <div key={name + loot.itemByItemId.name}>
-                <ItemCard boss={name} {...loot.itemByItemId} />
-              </div>
+              <ListItem
+                key={
+                  loot.itemByItemId.id +
+                  loot.playerByPlayerId.id +
+                  index.toString()
+                }
+                divider={true}
+                role={undefined}
+                alignItems="flex-start"
+              >
+                <ListItemText className={classes.itemCell}>
+                  {" "}
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                    href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                  >
+                    {loot.itemByItemId.name}
+                  </a>
+                </ListItemText>
+                <ListItemText
+                  style={{
+                    borderColor:
+                      loot.playerByPlayerId.classByClassId.id !== 1
+                        ? loot.playerByPlayerId.classByClassId.color
+                        : "grey"
+                  }}
+                  className={classes.playerCell}
+                  primary={loot.playerByPlayerId.name}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton edge="end" aria-label="comments">
+                    <DeleteForeverIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
             );
-          }
-          return null;
-        })}
+          })}
+        </List>
       </CardContent>
       <CardActions disableSpacing={true} className={classes.cardActions}>
-        <Fab size="small" color="primary" aria-label="add">
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="add"
+          onClick={() => {
+            setDialogItems(loots);
+            openLootWindow(id.toString(), name, bossCardContentElem);
+          }}
+        >
           <AddIcon />
         </Fab>
       </CardActions>

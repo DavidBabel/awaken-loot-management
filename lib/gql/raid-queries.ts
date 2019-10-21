@@ -95,7 +95,6 @@ export const ONE_RAID = gql`
                     id
                     classItemsByItemId {
                       nodes {
-                        itemValueForThisClass
                         itemId
                         classByClassId {
                           color
@@ -151,6 +150,17 @@ export const ONE_RAID = gql`
           nodes {
             itemByItemId {
               name
+              classId
+              id
+              lootLevel
+              wowheadId
+              bossItemsByItemId {
+                nodes {
+                  bossByBossId {
+                    id
+                  }
+                }
+              }
               lootsByItemId {
                 nodes {
                   playerByPlayerId {
@@ -165,6 +175,19 @@ export const ONE_RAID = gql`
                     name
                   }
                 }
+              }
+            }
+            raidByRaidId {
+              date
+              id
+            }
+            playerByPlayerId {
+              name
+              id
+              classId
+              classByClassId {
+                id
+                color
               }
             }
           }

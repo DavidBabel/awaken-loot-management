@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
     hidden: {
       display: "none"
     },
+    tableWrapper: {
+      maxHeight: "calc(100vh - 300px)",
+      overflow: "auto"
+    },
     table: {
       minWidth: 650
     },
@@ -54,42 +58,44 @@ export default function LootsTable({ loots, hidden }) {
   );
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Loot</TableCell>
-            <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Raid</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.wowheadId + row.raidId}>
-              <TableCell /* component="th" */ scope="row">
-                <a
-                  onClick={e => {
-                    e.preventDefault();
-                  }}
-                  href={`https://fr.classic.wowhead.com/item=${row.wowheadId}`}
-                >
-                  {row.name}
-                </a>
-              </TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right" className={classes.link}>
-                {" "}
-                <Link href="/raid/edit/[id]" as={`/raid/edit/${row.raidId}`}>
-                  <a>
-                    <Button variant="contained" color="primary">
-                      View raid
-                    </Button>
-                  </a>
-                </Link>
-              </TableCell>
+      <div className={classes.tableWrapper}>
+        <Table className={classes.table} stickyHeader={true}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Loot</TableCell>
+              <TableCell align="right">Date</TableCell>
+              <TableCell align="right">Raid</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow key={row.wowheadId + row.raidId}>
+                <TableCell /* component="th" */ scope="row">
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                    href={`https://fr.classic.wowhead.com/item=${row.wowheadId}`}
+                  >
+                    {row.name}
+                  </a>
+                </TableCell>
+                <TableCell align="right">{row.date}</TableCell>
+                <TableCell align="right" className={classes.link}>
+                  {" "}
+                  <Link href="/raid/edit/[id]" as={`/raid/edit/${row.raidId}`}>
+                    <a>
+                      <Button variant="contained" color="primary">
+                        View raid
+                      </Button>
+                    </a>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </Paper>
   );
 }
