@@ -15,7 +15,8 @@ import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 
 const useStyles = makeStyles({
   root: {
-    width: "calc(100vw - 300px)",
+    width: "100%",
+    height: "calc(100vh - 140px)",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
