@@ -56,10 +56,9 @@ CREATE TABLE "Loots" (
   "itemId" int NOT NULL,
   "raidId" int NOT NULL,
   "bossId" int,
-  "active" boolean DEFAULT true
-  -- ,
-  -- "lastActionBy" varchar NOT NULL,
-  -- "lastActionDate" varchar NOT NULL,
+  "active" boolean DEFAULT true,
+  "lastActionBy" varchar,
+  "lastActionDate" varchar
 );
 comment on table "Loots" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Loots" ("id");

@@ -787,6 +787,8 @@ export type Loot = Node & {
   raidId: Scalars["Int"];
   bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
+  lastActionBy?: Maybe<Scalars["String"]>;
+  lastActionDate?: Maybe<Scalars["String"]>;
   /** Reads a single `Player` that is related to this `Loot`. */
   playerByPlayerId?: Maybe<Player>;
   /** Reads a single `Item` that is related to this `Loot`. */
@@ -811,6 +813,10 @@ export type LootCondition = {
   bossId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `active` field. */
   active?: Maybe<Scalars["Boolean"]>;
+  /** Checks for equality with the object’s `lastActionBy` field. */
+  lastActionBy?: Maybe<Scalars["String"]>;
+  /** Checks for equality with the object’s `lastActionDate` field. */
+  lastActionDate?: Maybe<Scalars["String"]>;
 };
 
 /** An input for mutations affecting `Loot` */
@@ -821,6 +827,8 @@ export type LootInput = {
   raidId: Scalars["Int"];
   bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
+  lastActionBy?: Maybe<Scalars["String"]>;
+  lastActionDate?: Maybe<Scalars["String"]>;
 };
 
 /** Represents an update to a `Loot`. Fields that are set will be updated. */
@@ -831,6 +839,8 @@ export type LootPatch = {
   raidId?: Maybe<Scalars["Int"]>;
   bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
+  lastActionBy?: Maybe<Scalars["String"]>;
+  lastActionDate?: Maybe<Scalars["String"]>;
 };
 
 /** A connection to a list of `Loot` values. */
@@ -870,6 +880,10 @@ export enum LootsOrderBy {
   BossIdDesc = "BOSS_ID_DESC",
   ActiveAsc = "ACTIVE_ASC",
   ActiveDesc = "ACTIVE_DESC",
+  LastActionByAsc = "LAST_ACTION_BY_ASC",
+  LastActionByDesc = "LAST_ACTION_BY_DESC",
+  LastActionDateAsc = "LAST_ACTION_DATE_ASC",
+  LastActionDateDesc = "LAST_ACTION_DATE_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
