@@ -2828,6 +2828,17 @@ VALUES
   'Cocobanjo'),
   (SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'))
+;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId")
+VALUES
+-- raid devilhunter
+( 16,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Flash'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Défenseur de Malistar'))
 ; -- SAFE BEGIN FOR CONCAT
 
 
