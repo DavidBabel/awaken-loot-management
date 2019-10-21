@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
     hidden: {
       display: "none"
     },
+    tableWrapper: {
+      maxHeight: "calc(100vh - 300px)",
+      overflow: "auto"
+    },
     table: {
       minWidth: 650
     },
@@ -60,37 +64,39 @@ export default function MeritsTable({ merits, hidden }) {
   });
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Merit</TableCell>
-            <TableCell align="right">Categorie</TableCell>
-            <TableCell align="right">Commentaire</TableCell>
-            <TableCell align="right">Valeur</TableCell>
-            <TableCell align="right">Validé</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow
-              key={row.name}
-              className={
-                row.validated === "Non"
-                  ? classes.notValidated
-                  : classes.validated
-              }
-            >
-              <TableCell /* component="th"  */ scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.categorie}</TableCell>
-              <TableCell align="right">{row.comment}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
-              <TableCell align="right">{row.validated}</TableCell>
+      <div className={classes.tableWrapper}>
+        <Table className={classes.table} stickyHeader={true}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Merit</TableCell>
+              <TableCell align="right">Categorie</TableCell>
+              <TableCell align="right">Commentaire</TableCell>
+              <TableCell align="right">Valeur</TableCell>
+              <TableCell align="right">Validé</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+              <TableRow
+                key={row.name}
+                className={
+                  row.validated === "Non"
+                    ? classes.notValidated
+                    : classes.validated
+                }
+              >
+                <TableCell /* component="th"  */ scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.categorie}</TableCell>
+                <TableCell align="right">{row.comment}</TableCell>
+                <TableCell align="right">{row.value}</TableCell>
+                <TableCell align="right">{row.validated}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </Paper>
   );
 }

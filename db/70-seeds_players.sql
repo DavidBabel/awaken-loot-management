@@ -116,7 +116,8 @@ VALUES
 ('Knh'          , 5,  'player', null, true, false),
 -- ('Øups'        , 7,  'player', null, true, false),
 -- ('Slov'        , 7,  'player', null, true, false),
-('Elgor'        , 9,  'player', null, true, false)
+('Elgor'        , 9,  'player', null, true, false),
+('Rassis'       , 3,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
