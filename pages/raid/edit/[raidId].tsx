@@ -1,144 +1,341 @@
-import { useQuery } from "@apollo/react-hooks";
-import { Checkbox } from "@material-ui/core";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import FormControl from "@material-ui/core/FormControl";
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import Slide from "@material-ui/core/Slide";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import { makeStyles } from "@material-ui/core/styles";
+import { TransitionProps } from "@material-ui/core/transitions";
+import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
-import { useState } from "react";
-// import { BossCard } from '../../../components/BossCard';
+import { forwardRef, useState, MutableRefObject, useEffect } from "react";
+import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import { LootList } from "../../../components/LootList";
-import { PlayerCard } from "../../../components/PlayerCard";
-import { BossMenu } from "../../../components/RaidMenu/BossMenu";
-import { RaidMenu } from "../../../components/RaidMenu/RaidMenu";
-import { Player, Query } from "../../../lib/generatedTypes";
+import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
+import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
-import { useToggle } from "../../../lib/hooks/toggle";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
-// interface Props {
-//   raidId: number;
-// }
-
-interface Variables {
+interface QueryVariables {
   raidId: number;
 }
+interface CreateLootVariables {
+  playerId: number;
+  itemId: number;
+  raidId: number;
+}
+const useStyles = makeStyles({
+  root: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center"
+  },
+  selectItem: {
+    minWidth: 200,
+    margin: 10
+  },
+  selectPlayer: {
+    minWidth: 150,
+    margin: 10
+  },
+  snackError: {
+    backgroundColor: "#D32F2F"
+  },
+  snackSuccess: {
+    backgroundColor: "#43A047"
+  }
+});
 
-export default function PageRaidView(/* { raidId }: Props */) {
+const Transition = forwardRef<unknown, TransitionProps>(function Transition(
+  props,
+  ref
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export default function PageRaidView() {
+  const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
+  const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
+  const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
+  const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
+  const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
+  const [itemIdToAdd, setItemIdToAdd] = useState<string>("");
+  const [playerIdToAdd, setPlayerIdToAdd] = useState<string>("");
+  const [bossIdSelected, setBossIdSelected] = useState<string>("");
+  const [bossNameSelected, setBossNameSelected] = useState<string>("");
+  const [snackBarOpened, SetSnackBarOpened] = useState<boolean>(false);
+  const [snackBarMsg, setSnackBarMsg] = useState<string>("");
+  const [snackBarClass, setSnackBarClass] = useState<string>(
+    classes.snackError
+  );
+  const [currentBossCardContentElem, setCurrentBossCardContentElem] = useState<
+    MutableRefObject<any>
+  >(null);
 
-  const [displayLoots, setDisplayLoots] = useState(false);
-  const [shouldDisplayAllClass, toggleShouldDisplayAllClass] = useToggle(false);
-  const [currentBossId, setCurrentBossId] = useState<number>();
-  const [currentItemId, setCurrentItemId] = useState<number>();
-  const [playersToInspect, setPlayersToInspect] = useState<Player[]>([]);
-
-  function togglePlayerToInspect(player: Player) {
-    if (playersToInspect.map(p => p.id).includes(player.id)) {
-      setPlayersToInspect(playersToInspect.filter(p => p.id !== player.id));
+  const handleOpenAddItemWindow = (
+    bossId: string,
+    bossName: string,
+    bossCardContentElem: MutableRefObject<any>
+  ): void => {
+    setCurrentBossCardContentElem(bossCardContentElem);
+    setBossIdSelected(bossId);
+    setBossNameSelected(bossName);
+    setAddLootOpened(true);
+  };
+  const handleCloseAddItemWindow = (): void => {
+    setItemIdToAdd("");
+    setPlayerIdToAdd("");
+    setBossIdSelected("");
+    setBossNameSelected("");
+    setAddLootOpened(false);
+  };
+  const handleOpenSelectItem = (): void => {
+    setSelectItemOpened(true);
+  };
+  const handleCloseSelectItem = (): void => {
+    setSelectItemOpened(false);
+  };
+  const handleChangeSelectItem = (
+    event: React.ChangeEvent<{ value: string }>
+  ): void => {
+    setItemIdToAdd(event.target.value as string);
+  };
+  const handleChangeSelectPlayer = (
+    event: React.ChangeEvent<{ value: string }>
+  ): void => {
+    setPlayerIdToAdd(event.target.value as string);
+  };
+  const handleOpenSelectPlayer = (): void => {
+    setSelectPlayerOpened(true);
+  };
+  const handleCloseSelectPlayer = (): void => {
+    setSelectPlayerOpened(false);
+  };
+  const addLoot = () => {
+    if (itemIdToAdd && playerIdToAdd && bossIdSelected) {
+      setAddLootOpened(false);
+      setItemIdToAdd("");
+      setPlayerIdToAdd("");
+      setBossIdSelected("");
+      setBossNameSelected("");
+      SetSnackBarOpened(false);
+      // FONCTION MUTATION AJOUT ITEM ICI
+      createLoot({
+        variables: {
+          playerId: parseInt(playerIdToAdd),
+          itemId: parseInt(itemIdToAdd),
+          raidId
+        }
+      })
+        .then(resp => {
+          openSnackBar(
+            `${resp.data.createLoot.itemByItemId.name} assigné à ${resp.data.createLoot.playerByPlayerId.name}`,
+            "success"
+          );
+          refetch();
+        })
+        .catch(err => {
+          openSnackBar(err.message, "error");
+        });
     } else {
-      setPlayersToInspect([...playersToInspect, player]);
+      openSnackBar("Selectionnez un item et un joueur.", "error");
     }
-  }
+  };
+  const openSnackBar = (msg, action) => {
+    if (action === "error") {
+      setSnackBarClass(classes.snackError);
+    } else {
+      setSnackBarClass(classes.snackSuccess);
+    }
+    setSnackBarMsg(msg);
+    SetSnackBarOpened(true);
+  };
 
-  const { loading, data, error } = useQuery<Query, Variables>(ONE_RAID, {
-    variables: { raidId }
-  });
+  const closeSnackBar = (
+    event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    SetSnackBarOpened(false);
+  };
+
+  const { loading, data, error, refetch } = useQuery<Query, QueryVariables>(
+    ONE_RAID,
+    {
+      variables: { raidId }
+    }
+  );
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
   const currentRaid = data.allRaids.nodes[0];
   const loots = currentRaid.lootsByRaidId.nodes;
-
+  const allPlayers = currentRaid.raidPlayersByRaidId.nodes
+    .sort((a, b) =>
+      a.playerByPlayerId.name > b.playerByPlayerId.name ? 1 : -1
+    )
+    .sort(raidPlayerByClass);
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
-  // const donjonShortName = currentRaid.donjonByDonjonId.shortName;
-  const currentBoss = currentBossId
-    ? bosses.filter(boss => boss.id === currentBossId)[0]
-    : undefined;
+  const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
-  const items = currentBoss ? currentBoss.bossItemsByBossId.nodes : undefined;
+  const [
+    createLoot
+    // { loading: mutationLoading, data: mutationData }
+  ] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
 
-  const currentItem =
-    currentItemId && items
-      ? items.filter(item => item.itemByItemId.id === currentItemId)[0]
-          .itemByItemId
-      : undefined;
-
-  const allowedClasses =
-    currentItem && currentItem.classId ? [currentItem.classId] : [];
-
-  const allPlayers = currentRaid.raidPlayersByRaidId.nodes.sort(
-    raidPlayerByClass
-  );
-
-  const playersToDisplay = shouldDisplayAllClass
-    ? allPlayers
-    : allPlayers.filter(player =>
-        allowedClasses.includes(player.playerByPlayerId.classId)
-      );
-
+  useEffect(() => {
+    if (currentBossCardContentElem) {
+      // Scroll tout en bas d'une liste de loot quand un item est ajouté
+      if (currentBossCardContentElem.current.scrollBy) {
+        currentBossCardContentElem.current.scrollBy({
+          top: currentBossCardContentElem.current.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      } else {
+        currentBossCardContentElem.current.scrollTop =
+          currentBossCardContentElem.current.offsetHeight;
+      }
+    }
+  }, [data]);
   return (
-    <>
-      <RaidMenu
-        raid={currentRaid}
-        bosses={bosses}
-        goToLoots={() => setDisplayLoots(true)}
-        onBossSelect={newBossId => {
-          setDisplayLoots(false);
-          setCurrentItemId(undefined);
-          setPlayersToInspect([]);
-          setCurrentBossId(newBossId);
-        }}
-      />
-      {displayLoots && <LootList loots={loots} />}
-      {!displayLoots && currentBoss && (
-        <BossMenu
-          boss={currentBoss}
-          onItemSelect={newItemId => {
-            setDisplayLoots(false);
-            setPlayersToInspect([]);
-            setCurrentItemId(newItemId);
-          }}
-        />
-      )}
-      <div
-        style={{
-          // display: 'flex',
-          width: "80%",
-          flexWrap: "wrap",
-          margin: "15px",
-          alignItems: "flex-start",
-          justifyContent: "center"
-        }}
+    <div className={classes.root}>
+      {bosses.map(boss => {
+        const lootedForThisBoss = [...loots].filter((loot): boolean => {
+          if (loot.itemByItemId.bossItemsByItemId.nodes.length === 0) {
+            // A CORRIGER en BDD (par exemple le defenseur de malistar n'a pas de bossID attaché a lui)
+          }
+          return (
+            loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
+            loot.itemByItemId.bossItemsByItemId.nodes.some(
+              bossItem => bossItem.bossByBossId.id === boss.id
+            )
+          );
+        });
+        return (
+          <BossCard
+            key={boss.id}
+            {...boss}
+            openLootWindow={handleOpenAddItemWindow}
+            donjonShortName={donjonShortName}
+            looted={lootedForThisBoss}
+            setDialogItems={setDialogItems}
+          />
+        );
+      })}
+      <Dialog
+        open={addLootOpened}
+        TransitionComponent={Transition}
+        keepMounted={true}
+        onClose={handleCloseAddItemWindow}
+        aria-labelledby="add-loot-dialog"
+        aria-describedby="add loot window"
       >
-        {!displayLoots && currentItem && (
-          <>
-            <Checkbox
-              checked={shouldDisplayAllClass}
-              onClick={toggleShouldDisplayAllClass}
-            />{" "}
-            Display all classes
-            {/* {currentItem} */}
-            {playersToDisplay.map(raidPlayer => {
-              const player = raidPlayer.playerByPlayerId;
-              return (
-                <PlayerCard
-                  key={`player-${currentItem.id}-${player.name}`}
-                  onClick={togglePlayerToInspect.bind(null, player)}
-                  {...player}
-                />
-              );
-            })}
-          </>
-        )}
-        {playersToInspect.map(playerToInspect =>
-          JSON.stringify(playerToInspect)
-        )}
-      </div>
-    </>
-
-    // <button onClick={() => router.push({ path: '/seeRaid', query: { id } })}>
-    //   <div>{date}</div>
-    //   <div>{name}</div>
-    // </button>
+        <DialogTitle id="add-loot-dialog">
+          {"Ajouter un loot sur: " + bossNameSelected}
+        </DialogTitle>
+        <DialogContent>
+          <FormControl>
+            <InputLabel htmlFor="demo-controlled-open-select">Item</InputLabel>
+            <Select
+              className={classes.selectItem}
+              open={selectItemOpened}
+              onClose={handleCloseSelectItem}
+              onOpen={handleOpenSelectItem}
+              value={itemIdToAdd}
+              onChange={handleChangeSelectItem}
+            >
+              {dialogItems.map(item => {
+                return (
+                  <MenuItem
+                    key={item.itemByItemId.id}
+                    value={item.itemByItemId.id}
+                  >
+                    {item.itemByItemId.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel htmlFor="demo-controlled-open-select">
+              Player
+            </InputLabel>
+            <Select
+              className={classes.selectPlayer}
+              open={selectPlayerOpened}
+              onClose={handleCloseSelectPlayer}
+              onOpen={handleOpenSelectPlayer}
+              value={playerIdToAdd}
+              onChange={handleChangeSelectPlayer}
+            >
+              {allPlayers.map(player => {
+                return (
+                  <MenuItem
+                    style={{
+                      borderLeft:
+                        "solid 4px " +
+                        player.playerByPlayerId.classByClassId.color,
+                      margin: 2
+                    }}
+                    key={player.playerByPlayerId.id}
+                    value={player.playerByPlayerId.id}
+                  >
+                    {player.playerByPlayerId.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAddItemWindow} color="primary">
+            CANCEL
+          </Button>
+          <Button onClick={addLoot} color="primary">
+            ADD
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={snackBarOpened}
+        autoHideDuration={3000}
+        onClose={closeSnackBar}
+      >
+        <SnackbarContent
+          className={snackBarClass}
+          message={<span id="message-id">{snackBarMsg}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={closeSnackBar}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
+    </div>
   );
 }
