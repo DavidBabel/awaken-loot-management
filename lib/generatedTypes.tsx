@@ -19,8 +19,20 @@ export type Boss = Node & {
   name?: Maybe<Scalars["String"]>;
   /** Reads a single `Donjon` that is related to this `Boss`. */
   donjonByDonjonId?: Maybe<Donjon>;
+  /** Reads and enables pagination through a set of `Loot`. */
+  lootsByBossId: LootsConnection;
   /** Reads and enables pagination through a set of `BossItem`. */
   bossItemsByBossId: BossItemsConnection;
+};
+
+export type BossLootsByBossIdArgs = {
+  first?: Maybe<Scalars["Int"]>;
+  last?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  before?: Maybe<Scalars["Cursor"]>;
+  after?: Maybe<Scalars["Cursor"]>;
+  orderBy?: Maybe<Array<LootsOrderBy>>;
+  condition?: Maybe<LootCondition>;
 };
 
 export type BossBossItemsByBossIdArgs = {
@@ -369,6 +381,8 @@ export type CreateLootPayload = {
   itemByItemId?: Maybe<Item>;
   /** Reads a single `Raid` that is related to this `Loot`. */
   raidByRaidId?: Maybe<Raid>;
+  /** Reads a single `Boss` that is related to this `Loot`. */
+  bossByBossId?: Maybe<Boss>;
   /** An edge for our `Loot`. May be used by Relay 1. */
   lootEdge?: Maybe<LootsEdge>;
 };
@@ -771,6 +785,7 @@ export type Loot = Node & {
   playerId: Scalars["Int"];
   itemId: Scalars["Int"];
   raidId: Scalars["Int"];
+  bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
   /** Reads a single `Player` that is related to this `Loot`. */
   playerByPlayerId?: Maybe<Player>;
@@ -778,6 +793,8 @@ export type Loot = Node & {
   itemByItemId?: Maybe<Item>;
   /** Reads a single `Raid` that is related to this `Loot`. */
   raidByRaidId?: Maybe<Raid>;
+  /** Reads a single `Boss` that is related to this `Loot`. */
+  bossByBossId?: Maybe<Boss>;
 };
 
 /** A condition to be used against `Loot` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -790,6 +807,8 @@ export type LootCondition = {
   itemId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `raidId` field. */
   raidId?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `bossId` field. */
+  bossId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `active` field. */
   active?: Maybe<Scalars["Boolean"]>;
 };
@@ -800,6 +819,7 @@ export type LootInput = {
   playerId: Scalars["Int"];
   itemId: Scalars["Int"];
   raidId: Scalars["Int"];
+  bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -809,6 +829,7 @@ export type LootPatch = {
   playerId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
   raidId?: Maybe<Scalars["Int"]>;
+  bossId?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
 };
 
@@ -845,6 +866,8 @@ export enum LootsOrderBy {
   ItemIdDesc = "ITEM_ID_DESC",
   RaidIdAsc = "RAID_ID_ASC",
   RaidIdDesc = "RAID_ID_DESC",
+  BossIdAsc = "BOSS_ID_ASC",
+  BossIdDesc = "BOSS_ID_DESC",
   ActiveAsc = "ACTIVE_ASC",
   ActiveDesc = "ACTIVE_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
@@ -1890,6 +1913,8 @@ export type UpdateLootPayload = {
   itemByItemId?: Maybe<Item>;
   /** Reads a single `Raid` that is related to this `Loot`. */
   raidByRaidId?: Maybe<Raid>;
+  /** Reads a single `Boss` that is related to this `Loot`. */
+  bossByBossId?: Maybe<Boss>;
   /** An edge for our `Loot`. May be used by Relay 1. */
   lootEdge?: Maybe<LootsEdge>;
 };
