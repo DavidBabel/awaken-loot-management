@@ -8,7 +8,14 @@ import {
   Fab,
   makeStyles
 } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -16,8 +23,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { MutableRefObject, useEffect, useRef } from "react";
 import { Dispatch, SetStateAction } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Boss, BossItem, Loot, Mutation } from "../lib/generatedTypes";
 import { UPDATE_LOOT } from "../lib/gql/loot-mutations";
 
@@ -78,6 +85,17 @@ const useStyles = makeStyles({
     border: "2px solid",
     borderRadius: "5px",
     overflow: "hidden"
+  },
+  confirmDeleteContent: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "& a": {
+      marginRight: 10
+    }
+  },
+  linearProgress: {
+    marginBottom: 10
   }
 });
 
@@ -88,7 +106,8 @@ export function BossCard({
   donjonShortName,
   looted,
   openLootWindow,
-  setDialogItems
+  setDialogItems,
+  openSnackBar
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
@@ -98,114 +117,192 @@ export function BossCard({
     bossCardContentElem: MutableRefObject<any>
   ) => void;
   setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
+  openSnackBar: (msg: any, action: any) => void;
 }) {
   const classes = useStyles("");
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   const [deleteLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
+  const [deleteLootConfirmOpen, setDeleteLootConfirmOpen] = useState<boolean>(
+    false
+  );
+  const [currentLootToBeDeleted, setCurrentLootToBeDeleted] = useState<Loot>(
+    null
+  );
+  const [deleteIsLoading, setDeleteIsLoading] = useState<boolean>(false);
+  const openDeleteLootConfirm = (loot: Loot) => {
+    setCurrentLootToBeDeleted(loot);
+    setDeleteLootConfirmOpen(true);
+    setTimeout(() => {
+      if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+        try {
+          window.$WowheadPower.refreshLinks();
+        } catch (e) {}
+      }
+    }, 50);
+  };
+  const closeDeleteLootConfirm = () => {
+    setDeleteLootConfirmOpen(false);
+  };
+  const confirmDeleteLoot = () => {
+    setDeleteIsLoading(true);
+    deleteLoot({
+      variables: { id: currentLootToBeDeleted.id }
+    })
+      .then(resp => {
+        openSnackBar("Loot supprimé avec succès", "success");
+        setCurrentLootToBeDeleted(null);
+        setDeleteLootConfirmOpen(false);
+        setDeleteIsLoading(false);
+      })
+      .catch(err => {
+        openSnackBar(err.message, "error");
+        setCurrentLootToBeDeleted(null);
+        setDeleteLootConfirmOpen(false);
+        setDeleteIsLoading(false);
+      });
+  };
   useEffect(() => {
-    // if (window.$WowheadPower) {
-    //   window.$WowheadPower.refreshLinks();
-    // }
-  });
-
+    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+      try {
+        window.$WowheadPower.refreshLinks();
+      } catch (e) {}
+    }
+  }, [looted]);
   return (
-    <Card className={classes.card}>
-      <CardHeader className={classes.header} title={name} subheader="" />
-      <CardMedia
-        className={classes.media}
-        image={`/static/img/boss/${donjonShortName}/${name
-          .toLowerCase()
-          .replace(/\s/g, "-")}.jpg`}
-        title={name}
-      />
-      <CardContent className={classes.cardContent} ref={bossCardContentElem}>
-        <List>
-          {looted.map((loot, index) => {
-            return (
-              <Tooltip
-                key={
-                  loot.itemByItemId.id +
-                  loot.playerByPlayerId.id +
-                  index.toString()
-                }
-                title={
-                  loot.lastActionBy && loot.lastActionDate
-                    ? `Ajouté par ${loot.lastActionBy} le ${loot.lastActionDate}`
-                    : ""
-                }
-                placement="left"
-              >
-                <ListItem
-                  divider={true}
-                  role={undefined}
-                  alignItems="flex-start"
+    <>
+      <Card className={classes.card}>
+        <CardHeader className={classes.header} title={name} subheader="" />
+        <CardMedia
+          className={classes.media}
+          image={`/static/img/boss/${donjonShortName}/${name
+            .toLowerCase()
+            .replace(/\s/g, "-")}.jpg`}
+          title={name}
+        />
+        <CardContent className={classes.cardContent} ref={bossCardContentElem}>
+          <List>
+            {looted.map((loot, index) => {
+              return (
+                <Tooltip
+                  key={
+                    loot.itemByItemId.id +
+                    loot.playerByPlayerId.id +
+                    index.toString()
+                  }
+                  title={
+                    loot.lastActionBy && loot.lastActionDate
+                      ? `Ajouté par ${loot.lastActionBy} le ${loot.lastActionDate}`
+                      : ""
+                  }
+                  placement="left"
                 >
-                  <ListItemText className={classes.itemCell}>
-                    {" "}
-                    <a
-                      onClick={e => {
-                        e.preventDefault();
+                  <ListItem
+                    divider={true}
+                    role={undefined}
+                    alignItems="flex-start"
+                  >
+                    <ListItemText className={classes.itemCell}>
+                      <a
+                        onClick={e => {
+                          e.preventDefault();
+                        }}
+                        href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                      >
+                        {loot.itemByItemId.name}
+                      </a>
+                    </ListItemText>
+                    <ListItemText
+                      style={{
+                        borderColor:
+                          loot.playerByPlayerId.classByClassId.id !== 1
+                            ? loot.playerByPlayerId.classByClassId.color
+                            : "grey"
                       }}
-                      href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
-                    >
-                      {loot.itemByItemId.name}
-                    </a>
-                  </ListItemText>
-                  <ListItemText
-                    style={{
-                      borderColor:
-                        loot.playerByPlayerId.classByClassId.id !== 1
-                          ? loot.playerByPlayerId.classByClassId.color
-                          : "grey"
-                    }}
-                    className={classes.playerCell}
-                    primary={loot.playerByPlayerId.name}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton
-                      edge="end"
-                      aria-label="comments"
-                      onClick={() => {
-                        deleteLoot({
-                          variables: { id: loot.id }
-                        });
-                      }}
-                    >
-                      <DeleteForeverIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              </Tooltip>
-            );
-          })}
-        </List>
-      </CardContent>
-      <CardActions disableSpacing={true} className={classes.cardActions}>
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="add"
-          onClick={() => {
-            setDialogItems(loots);
-            openLootWindow(id.toString(), name, bossCardContentElem);
-          }}
-        >
-          <AddIcon />
-        </Fab>
-      </CardActions>
-    </Card>
-
-    // <div>
-    //   <h2 onClick={toogleShowLoots}>{name}</h2>
-    //   {showLoots &&
-    //     loots.map(loot => {
-    //       return (
-    //         <div key={name + loot.itemByItemId.name}>
-    //           <ItemCard boss={name} {...loot.itemByItemId} />
-    //         </div>
-    //       );
-    //     })}
-    // </div>
+                      className={classes.playerCell}
+                      primary={loot.playerByPlayerId.name}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        edge="end"
+                        aria-label="comments"
+                        onClick={() => {
+                          openDeleteLootConfirm(loot);
+                        }}
+                      >
+                        <DeleteForeverIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </Tooltip>
+              );
+            })}
+          </List>
+        </CardContent>
+        <CardActions disableSpacing={true} className={classes.cardActions}>
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="add"
+            onClick={() => {
+              setDialogItems(loots);
+              openLootWindow(id.toString(), name, bossCardContentElem);
+            }}
+          >
+            <AddIcon />
+          </Fab>
+        </CardActions>
+      </Card>
+      <Dialog
+        open={deleteLootConfirmOpen}
+        onClose={closeDeleteLootConfirm}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="Delete loot confirm window"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Êtes vous sûrs de vouloir supprimer ce loot?"}
+        </DialogTitle>
+        <DialogContent>
+          {deleteIsLoading ? (
+            <LinearProgress
+              className={classes.linearProgress}
+              variant="query"
+            />
+          ) : (
+            ""
+          )}
+          <DialogContentText
+            className={classes.confirmDeleteContent}
+            id="alert-dialog-description"
+          >
+            {currentLootToBeDeleted ? (
+              <>
+                <a
+                  onClick={e => {
+                    e.preventDefault();
+                  }}
+                  href={`https://fr.classic.wowhead.com/item=${currentLootToBeDeleted.itemByItemId.wowheadId}`}
+                >
+                  {currentLootToBeDeleted.itemByItemId.name}
+                </a>
+                <span>
+                  {"Attribué à " + currentLootToBeDeleted.playerByPlayerId.name}
+                </span>
+              </>
+            ) : (
+              ""
+            )}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteLootConfirm} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={confirmDeleteLoot} color="primary" autoFocus={true}>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }

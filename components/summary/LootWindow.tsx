@@ -9,7 +9,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Link from "next/link";
 import React from "react";
+import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
+
+declare global {
+  interface Window {
+    $WowheadPower: any;
+  }
+}
 
 interface ElementPosition {
   top: number;
@@ -128,7 +135,7 @@ export default function LootWindow(props) {
       closeLootWindow(playerName);
     }
   }
-  React.useEffect(() => {
+  useEffect(() => {
     makeDraggable(lootWindowElem.current);
     lootWindowElem.current.style.top = iconClientPos.top + "px";
     lootWindowElem.current.style.left = iconClientPos.left + 50 + "px";
@@ -147,6 +154,13 @@ export default function LootWindow(props) {
       );
     }
   }, []);
+  useEffect(() => {
+    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+      try {
+        window.$WowheadPower.refreshLinks();
+      } catch (e) {}
+    }
+  });
   return (
     <div className={classes.root} ref={lootWindowElem}>
       <div className={classes.header} ref={headerElem}>

@@ -7,7 +7,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
-import React from "react";
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    $WowheadPower: any;
+  }
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,6 +64,13 @@ export default function LootsTable({ loots, hidden }) {
         loot.raidByRaidId.id
       )
     );
+  useEffect(() => {
+    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+      try {
+        window.$WowheadPower.refreshLinks();
+      } catch (e) {}
+    }
+  });
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <div className={classes.tableWrapper}>

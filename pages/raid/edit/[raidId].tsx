@@ -85,7 +85,7 @@ export default function PageRaidView() {
   const [playerIdToAdd, setPlayerIdToAdd] = useState<string>("");
   const [bossIdSelected, setBossIdSelected] = useState<string>("");
   const [bossNameSelected, setBossNameSelected] = useState<string>("");
-  const [snackBarOpened, SetSnackBarOpened] = useState<boolean>(false);
+  const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
   const [snackBarMsg, setSnackBarMsg] = useState<string>("");
   const [snackBarClass, setSnackBarClass] = useState<string>(
     classes.snackError
@@ -140,7 +140,7 @@ export default function PageRaidView() {
       setPlayerIdToAdd("");
       setBossIdSelected("");
       setBossNameSelected("");
-      SetSnackBarOpened(false);
+      setSnackBarOpened(false);
       // FONCTION MUTATION AJOUT ITEM ICI
       createLoot({
         variables: {
@@ -149,7 +149,10 @@ export default function PageRaidView() {
           raidId,
           bossId: parseInt(bossIdSelected),
           lastActionBy: member.name,
-          lastActionDate: new Date().toLocaleDateString("fr-FR")
+          lastActionDate: new Date().toLocaleDateString("fr-FR", {
+            hour: "2-digit",
+            minute: "2-digit"
+          })
         }
       })
         .then(resp => {
@@ -173,7 +176,7 @@ export default function PageRaidView() {
       setSnackBarClass(classes.snackSuccess);
     }
     setSnackBarMsg(msg);
-    SetSnackBarOpened(true);
+    setSnackBarOpened(true);
   };
 
   const closeSnackBar = (
@@ -184,9 +187,8 @@ export default function PageRaidView() {
       return;
     }
 
-    SetSnackBarOpened(false);
+    setSnackBarOpened(false);
   };
-
   const { loading, data, error, refetch } = useQuery<Query, QueryVariables>(
     ONE_RAID,
     {
@@ -249,6 +251,7 @@ export default function PageRaidView() {
             donjonShortName={donjonShortName}
             looted={lootedForThisBoss}
             setDialogItems={setDialogItems}
+            openSnackBar={openSnackBar}
           />
         );
       })}
