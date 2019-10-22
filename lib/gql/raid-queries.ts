@@ -148,6 +148,11 @@ export const ONE_RAID = gql`
         }
         lootsByRaidId {
           nodes {
+            id
+            active
+            bossId
+            lastActionBy
+            lastActionDate
             itemByItemId {
               name
               classId

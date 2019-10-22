@@ -16,9 +16,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
-import { forwardRef, useState, MutableRefObject, useEffect } from "react";
+import {
+  forwardRef,
+  MutableRefObject,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import MemberContext from "../../../lib/context/member";
 import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
@@ -31,6 +38,9 @@ interface CreateLootVariables {
   playerId: number;
   itemId: number;
   raidId: number;
+  bossId: number;
+  lastActionBy: string;
+  lastActionDate: string;
 }
 const useStyles = makeStyles({
   root: {
@@ -63,6 +73,7 @@ const Transition = forwardRef<unknown, TransitionProps>(function Transition(
 });
 
 export default function PageRaidView() {
+  const member = useContext(MemberContext);
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
@@ -135,7 +146,10 @@ export default function PageRaidView() {
         variables: {
           playerId: parseInt(playerIdToAdd),
           itemId: parseInt(itemIdToAdd),
-          raidId
+          raidId,
+          bossId: parseInt(bossIdSelected),
+          lastActionBy: member.name,
+          lastActionDate: new Date().toLocaleDateString("fr-FR")
         }
       })
         .then(resp => {
@@ -217,14 +231,14 @@ export default function PageRaidView() {
     <div className={classes.root}>
       {bosses.map(boss => {
         const lootedForThisBoss = [...loots].filter((loot): boolean => {
-          if (loot.itemByItemId.bossItemsByItemId.nodes.length === 0) {
-            // A CORRIGER en BDD (par exemple le defenseur de malistar n'a pas de bossID attaché a lui)
-          }
           return (
-            loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
-            loot.itemByItemId.bossItemsByItemId.nodes.some(
-              bossItem => bossItem.bossByBossId.id === boss.id
-            )
+            ((!loot.bossId &&
+              loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
+              loot.itemByItemId.bossItemsByItemId.nodes.some(
+                bossItem => bossItem.bossByBossId.id === boss.id
+              )) ||
+              loot.bossId === boss.id) &&
+            loot.active
           );
         });
         return (

@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/react-hooks";
 import {
   Card,
   CardActions,
@@ -12,12 +13,22 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
+import Tooltip from "@material-ui/core/Tooltip";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import { Dispatch, SetStateAction } from "react";
-import { Boss, BossItem, Loot } from "../lib/generatedTypes";
+import { Boss, BossItem, Loot, Mutation } from "../lib/generatedTypes";
+import { UPDATE_LOOT } from "../lib/gql/loot-mutations";
 
+declare global {
+  interface Window {
+    $WowheadPower: any;
+  }
+}
+interface UpdateLootVariables {
+  id: number;
+}
 const useStyles = makeStyles({
   card: {
     position: "relative",
@@ -91,6 +102,13 @@ export function BossCard({
   const classes = useStyles("");
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
+  const [deleteLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
+  useEffect(() => {
+    // if (window.$WowheadPower) {
+    //   window.$WowheadPower.refreshLinks();
+    // }
+  });
+
   return (
     <Card className={classes.card}>
       <CardHeader className={classes.header} title={name} subheader="" />
@@ -105,43 +123,60 @@ export function BossCard({
         <List>
           {looted.map((loot, index) => {
             return (
-              <ListItem
+              <Tooltip
                 key={
                   loot.itemByItemId.id +
                   loot.playerByPlayerId.id +
                   index.toString()
                 }
-                divider={true}
-                role={undefined}
-                alignItems="flex-start"
+                title={
+                  loot.lastActionBy && loot.lastActionDate
+                    ? `Ajouté par ${loot.lastActionBy} le ${loot.lastActionDate}`
+                    : ""
+                }
+                placement="left"
               >
-                <ListItemText className={classes.itemCell}>
-                  {" "}
-                  <a
-                    onClick={e => {
-                      e.preventDefault();
+                <ListItem
+                  divider={true}
+                  role={undefined}
+                  alignItems="flex-start"
+                >
+                  <ListItemText className={classes.itemCell}>
+                    {" "}
+                    <a
+                      onClick={e => {
+                        e.preventDefault();
+                      }}
+                      href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                    >
+                      {loot.itemByItemId.name}
+                    </a>
+                  </ListItemText>
+                  <ListItemText
+                    style={{
+                      borderColor:
+                        loot.playerByPlayerId.classByClassId.id !== 1
+                          ? loot.playerByPlayerId.classByClassId.color
+                          : "grey"
                     }}
-                    href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
-                  >
-                    {loot.itemByItemId.name}
-                  </a>
-                </ListItemText>
-                <ListItemText
-                  style={{
-                    borderColor:
-                      loot.playerByPlayerId.classByClassId.id !== 1
-                        ? loot.playerByPlayerId.classByClassId.color
-                        : "grey"
-                  }}
-                  className={classes.playerCell}
-                  primary={loot.playerByPlayerId.name}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="comments">
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
+                    className={classes.playerCell}
+                    primary={loot.playerByPlayerId.name}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      edge="end"
+                      aria-label="comments"
+                      onClick={() => {
+                        deleteLoot({
+                          variables: { id: loot.id }
+                        });
+                      }}
+                    >
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </Tooltip>
             );
           })}
         </List>
