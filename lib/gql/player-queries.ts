@@ -91,6 +91,7 @@ export const ONE_PLAYER = gql`
         }
         lootsByPlayerId {
           nodes {
+            active
             itemByItemId {
               wowheadId
               name

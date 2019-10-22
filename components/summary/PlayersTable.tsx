@@ -146,15 +146,17 @@ export default function PlayersTable(props: Props) {
         ? lastRaidDate.toLocaleDateString("en-EN", dateOptions)
         : "Aucun",
       player.id,
-      [...player.lootsByPlayerId.nodes].sort((a: any, b: any) => {
-        if (new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)) {
-          return -1;
-        }
-        if (new Date(b.raidByRaidId.date) > new Date(a.raidByRaidId.date)) {
-          return 1;
-        }
-        return 0;
-      })
+      [...player.lootsByPlayerId.nodes]
+        .sort((a: any, b: any) => {
+          if (new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)) {
+            return -1;
+          }
+          if (new Date(b.raidByRaidId.date) > new Date(a.raidByRaidId.date)) {
+            return 1;
+          }
+          return 0;
+        })
+        .filter(loot => loot.active)
     );
   });
   rowsData.sort((a, b) => b.merit - a.merit);

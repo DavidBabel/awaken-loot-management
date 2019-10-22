@@ -48,14 +48,16 @@ export default function LootsTable({ loots, hidden }) {
       </div>
     );
   }
-  const rows = loots.map(loot =>
-    createData(
-      loot.itemByItemId.name,
-      loot.itemByItemId.wowheadId,
-      new Date(loot.raidByRaidId.date).toLocaleDateString("fr-FR"),
-      loot.raidByRaidId.id
-    )
-  );
+  const rows = loots
+    .filter(loot => loot.active)
+    .map(loot =>
+      createData(
+        loot.itemByItemId.name,
+        loot.itemByItemId.wowheadId,
+        new Date(loot.raidByRaidId.date).toLocaleDateString("fr-FR"),
+        loot.raidByRaidId.id
+      )
+    );
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <div className={classes.tableWrapper}>
