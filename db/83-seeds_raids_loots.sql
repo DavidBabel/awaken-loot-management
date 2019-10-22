@@ -1085,7 +1085,6 @@ VALUES
 
 INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
 VALUES
--- raid devilhunter
 ( 16,
   (SELECT id FROM "Players" WHERE "name"=
   'Flash'),
@@ -1093,4 +1092,94 @@ VALUES
   'Défenseur de Malistar'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Ragnaros'))
+;
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
+VALUES
+-- devilhunter
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Elgor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Oscuro'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Capriseum'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Heaume de courroux'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thorsen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kusogakî'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Porte-mort'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+-- ragegoriath
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Elgor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Yx'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Néstor'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tad'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque des dix tempêtes'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 17,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia'))
 ;

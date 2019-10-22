@@ -24,7 +24,8 @@ VALUES
 (2, '2019-10-13'), -- 13
 (1, '2019-10-16'), -- 14
 (2, '2019-10-20'), -- 15
-(1, '2019-10-20'); -- 16
+(1, '2019-10-20'), -- 16
+(2, '2019-10-21'); -- 17
 
 
 -- MC 2019-09-19
@@ -725,4 +726,62 @@ VALUES
 -- (16, (SELECT id FROM "Players" WHERE "name"='Pitbuff')),
 -- (16, (SELECT id FROM "Players" WHERE "name"='Ragegueg')),
 -- (16, (SELECT id FROM "Players" WHERE "name"='Slov')),
+;
+
+-- double id onyxia - 2019-10-17
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+-- devilhunter
+(17, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(17, (SELECT id FROM "Players" WHERE "name"='Kusogakî')),
+(17, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(17, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(17, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(17, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(17, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(17, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(17, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(17, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(17, (SELECT id FROM "Players" WHERE "name"='Ràys')),
+(17, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(17, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(17, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(17, (SELECT id FROM "Players" WHERE "name"='Elgor')),
+(17, (SELECT id FROM "Players" WHERE "name"='Felrik')),
+(17, (SELECT id FROM "Players" WHERE "name"='Oscuro')),
+(17, (SELECT id FROM "Players" WHERE "name"='Knh')),
+(17, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(17, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(17, (SELECT id FROM "Players" WHERE "name"='Skau')),
+(17, (SELECT id FROM "Players" WHERE "name"='Keiki')),
+(17, (SELECT id FROM "Players" WHERE "name"='Mergueztguez')),
+(17, (SELECT id FROM "Players" WHERE "name"='Thünberg')),
+-- ragegoriath
+(17, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(17, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(17, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(17, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(17, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(17, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(17, (SELECT id FROM "Players" WHERE "name"='Minatrix')),
+(17, (SELECT id FROM "Players" WHERE "name"='Owhlord')),
+(17, (SELECT id FROM "Players" WHERE "name"='Zzeus')),
+(17, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(17, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(17, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(17, (SELECT id FROM "Players" WHERE "name"='Néstor')),
+(17, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(17, (SELECT id FROM "Players" WHERE "name"='Angelus')),
+(17, (SELECT id FROM "Players" WHERE "name"='Bobbyz')),
+(17, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+(17, (SELECT id FROM "Players" WHERE "name"='Ladj')),
+(17, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(17, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(17, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(17, (SELECT id FROM "Players" WHERE "name"='Xihfu')),
+(17, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(17, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(17, (SELECT id FROM "Players" WHERE "name"='Flash')),
+(17, (SELECT id FROM "Players" WHERE "name"='Lums')),
+(17, (SELECT id FROM "Players" WHERE "name"='Tad'))
 ;
