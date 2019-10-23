@@ -117,7 +117,10 @@ VALUES
 -- ('Øups'        , 7,  'player', null, true, false),
 -- ('Slov'        , 7,  'player', null, true, false),
 ('Elgor'        , 9,  'player', null, true, false),
-('Rassis'       , 3,  'player', null, true, false)
+('Rassis'       , 3,  'player', null, true, false),
+('Owhlord'      , 2,  'player', null, true, false),
+('Angelus'      , 9,  'player', null, true, false),
+('Felrik'      , 9,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
