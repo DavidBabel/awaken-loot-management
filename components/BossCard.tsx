@@ -296,10 +296,10 @@ export function BossCard({
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDeleteLootConfirm} color="primary">
-            Disagree
+            Annuler
           </Button>
           <Button onClick={confirmDeleteLoot} color="primary" autoFocus={true}>
-            Agree
+            Confirmer
           </Button>
         </DialogActions>
       </Dialog>
