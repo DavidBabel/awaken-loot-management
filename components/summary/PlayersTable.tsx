@@ -95,7 +95,9 @@ export default function PlayersTable(props: Props) {
   const rowsData = props.players.map((player: Player) => {
     let maxMerit = 0;
     let totalLoot = 0;
-    const totalRaid = player.raidPlayersByPlayerId.nodes.length;
+    const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
+      raid => !raid.passed
+    ).length;
     player.playerMeritsByPlayerId.nodes.map(merit => {
       if (merit.validated) {
         maxMerit += merit.meritByMeritId.value;
@@ -110,12 +112,14 @@ export default function PlayersTable(props: Props) {
     if (totalRaid === 0) {
       lastRaidDate = null;
     } else {
-      player.raidPlayersByPlayerId.nodes.map(raid => {
-        const currentRaidDate = new Date(raid.raidByRaidId.date);
-        if (currentRaidDate > lastRaidDate) {
-          lastRaidDate = currentRaidDate;
-        }
-      });
+      [...player.raidPlayersByPlayerId.nodes]
+        .filter(raid => !raid.passed)
+        .map(raid => {
+          const currentRaidDate = new Date(raid.raidByRaidId.date);
+          if (currentRaidDate > lastRaidDate) {
+            lastRaidDate = currentRaidDate;
+          }
+        });
     }
 
     let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée

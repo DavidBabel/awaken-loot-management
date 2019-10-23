@@ -44,13 +44,15 @@ export default function RaidsTable({ raids, hidden }) {
       </div>
     );
   }
-  const rows = raids.map(raid =>
-    createData(
-      raid.raidByRaidId.donjonByDonjonId.name,
-      new Date(raid.raidByRaidId.date).toLocaleDateString("fr-FR"),
-      raid.raidId
-    )
-  );
+  const rows = raids
+    .filter(raid => !raid.passed)
+    .map(raid =>
+      createData(
+        raid.raidByRaidId.donjonByDonjonId.name,
+        new Date(raid.raidByRaidId.date).toLocaleDateString("fr-FR"),
+        raid.raidId
+      )
+    );
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <div className={classes.tableWrapper}>
