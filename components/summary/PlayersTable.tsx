@@ -56,6 +56,12 @@ const useStyles = makeStyles({
   },
   headButton: {
     fontSize: "12px"
+  },
+  shown: {
+    opacity: 1
+  },
+  hidden: {
+    opacity: 0
   }
 });
 
@@ -165,8 +171,8 @@ export default function PlayersTable(props: Props) {
   });
   rowsData.sort((a, b) => b.merit - a.merit);
   const [rows, setRows] = React.useState(rowsData);
-  const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Merit");
-  const [orderedDESC, setOrderedDESC] = React.useState(false);
+  const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Total Loot");
+  const [orderedDESC, setOrderedDESC] = React.useState(true);
 
   function orderBy(colName: ColumnName) {
     const newRows = [...rows];
@@ -199,12 +205,18 @@ export default function PlayersTable(props: Props) {
       return "";
     }
     return orderedBy === columnName && orderedDESC ? (
-      <KeyboardArrowUpIcon />
+      <KeyboardArrowUpIcon
+        className={orderedBy === columnName ? classes.shown : classes.hidden}
+      />
     ) : (
-      <KeyboardArrowDownIcon />
+      <KeyboardArrowDownIcon
+        className={orderedBy === columnName ? classes.shown : classes.hidden}
+      />
     );
   }
-
+  React.useEffect(() => {
+    orderBy("Total Loot");
+  }, []);
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
