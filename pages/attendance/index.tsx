@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     attPercentage: {
+      minWidth: 60,
       backgroundColor: "#242424",
       color: "white"
     },
@@ -113,7 +114,7 @@ export default function PageIndex() {
   return (
     <Paper className={classes.root}>
       <div className={classes.tableWrapper}>
-        <Table className={classes.table} size="small" stickyHeader={true}>
+        <Table className={classes.table} stickyHeader={true}>
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -138,7 +139,7 @@ export default function PageIndex() {
           </TableHead>
           <TableBody>
             {players.map(player => (
-              <TableRow key={player.name}>
+              <TableRow key={player.id + player.name}>
                 <TableCell component="th" scope="row">
                   <Link
                     href="/player/view/[id]"
