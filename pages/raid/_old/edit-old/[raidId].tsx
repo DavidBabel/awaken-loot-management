@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
-import { BossCard } from "../../../../components/BossCard";
 import { LoadingAndError } from "../../../../components/LoadingAndErrors";
+import { BossCard } from "../../../../components/Raid/BossCard";
 import { Query } from "../../../../lib/generatedTypes";
 import { ONE_RAID } from "../../../../lib/gql/raid-queries";
 

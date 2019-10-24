@@ -1,18 +1,23 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Slide,
+  Snackbar,
+  SnackbarContent
+} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Slide from "@material-ui/core/Slide";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import { makeStyles } from "@material-ui/core/styles";
+import { green } from "@material-ui/core/colors";
+
+import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
@@ -23,8 +28,9 @@ import {
   useEffect,
   useState
 } from "react";
-import { BossCard } from "../../../components/BossCard";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import { BossCard } from "../../../components/Raid/BossCard";
+import PlayerList from "../../../components/Raid/PlayerList";
 import MemberContext from "../../../lib/context/member";
 import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
@@ -49,6 +55,19 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "center"
   },
+  raidInfos: {
+    width: "80%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px 0",
+    marginBottom: 20
+  },
+  raidTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginRight: 20
+  },
   selectItem: {
     minWidth: 200,
     margin: 10
@@ -65,6 +84,18 @@ const useStyles = makeStyles({
   }
 });
 
+const GreenButton = withStyles((theme: Theme) => ({
+  root: {
+    color: theme.palette.getContrastText(green[500]),
+    marginLeft: 20,
+    backgroundColor: green[500],
+    "&:hover": {
+      backgroundColor: green[700]
+    }
+  }
+}))(Button);
+
+// tslint:disable-next-line:no-shadowed-variable
 const Transition = forwardRef<unknown, TransitionProps>(function Transition(
   props,
   ref
@@ -77,6 +108,7 @@ export default function PageRaidView() {
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
+  const [playerListOpened, setPlayerListOpened] = useState<boolean>(false);
   const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
   const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
@@ -93,7 +125,12 @@ export default function PageRaidView() {
   const [currentBossCardContentElem, setCurrentBossCardContentElem] = useState<
     MutableRefObject<any>
   >(null);
-
+  const handleOpenPlayerList = () => {
+    setPlayerListOpened(true);
+  };
+  const handleClosePlayerList = () => {
+    setPlayerListOpened(false);
+  };
   const handleOpenAddItemWindow = (
     bossId: string,
     bossName: string,
@@ -231,6 +268,22 @@ export default function PageRaidView() {
   }, [data]);
   return (
     <div className={classes.root}>
+      <Paper className={classes.raidInfos}>
+        <div className={classes.raidTitle}>
+          {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
+            " | " +
+            currentRaid.donjonByDonjonId.name}
+        </div>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleOpenPlayerList}
+        >
+          JOUEURS
+        </Button>
+        <GreenButton color="primary">EDITER JOUEURS</GreenButton>
+      </Paper>
       {bosses.map(boss => {
         const lootedForThisBoss = [...loots].filter((loot): boolean => {
           return (
@@ -353,6 +406,11 @@ export default function PageRaidView() {
           ]}
         />
       </Snackbar>
+      <PlayerList
+        handleClose={handleClosePlayerList}
+        open={playerListOpened}
+        players={allPlayers}
+      />
     </div>
   );
 }

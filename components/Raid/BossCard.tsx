@@ -25,8 +25,8 @@ import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Dispatch, SetStateAction } from "react";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { Boss, BossItem, Loot, Mutation } from "../lib/generatedTypes";
-import { UPDATE_LOOT } from "../lib/gql/loot-mutations";
+import { Boss, BossItem, Loot, Mutation } from "../../lib/generatedTypes";
+import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
 
 declare global {
   interface Window {
