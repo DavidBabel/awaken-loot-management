@@ -24,9 +24,17 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Dispatch, SetStateAction } from "react";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import {
+  MutableRefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from "react";
+import MemberContext from "../../lib/context/member";
 import { Boss, BossItem, Loot, Mutation } from "../../lib/generatedTypes";
 import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
+import { role } from "../../lib/role-level";
 
 declare global {
   interface Window {
@@ -120,6 +128,7 @@ export function BossCard({
   openSnackBar: (msg: any, action: any) => void;
 }) {
   const classes = useStyles("");
+  const member = useContext(MemberContext);
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   const [deleteLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
@@ -175,7 +184,7 @@ export function BossCard({
         <CardHeader className={classes.header} title={name} subheader="" />
         <CardMedia
           className={classes.media}
-          image={`/static/img/boss/${donjonShortName}/${name
+          image={`/img/boss/${donjonShortName}/${name
             .toLowerCase()
             .replace(/\s/g, "-")}.jpg`}
           title={name}
@@ -222,36 +231,40 @@ export function BossCard({
                       className={classes.playerCell}
                       primary={loot.playerByPlayerId.name}
                     />
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        edge="end"
-                        aria-label="comments"
-                        onClick={() => {
-                          openDeleteLootConfirm(loot);
-                        }}
-                      >
-                        <DeleteForeverIcon />
-                      </IconButton>
-                    </ListItemSecondaryAction>
+                    {member.level >= role.officer && (
+                      <ListItemSecondaryAction>
+                        <IconButton
+                          edge="end"
+                          aria-label="comments"
+                          onClick={() => {
+                            openDeleteLootConfirm(loot);
+                          }}
+                        >
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    )}
                   </ListItem>
                 </Tooltip>
               );
             })}
           </List>
         </CardContent>
-        <CardActions disableSpacing={true} className={classes.cardActions}>
-          <Fab
-            size="small"
-            color="primary"
-            aria-label="add"
-            onClick={() => {
-              setDialogItems(loots);
-              openLootWindow(id.toString(), name, bossCardContentElem);
-            }}
-          >
-            <AddIcon />
-          </Fab>
-        </CardActions>
+        {member.level >= role.officer && (
+          <CardActions disableSpacing={true} className={classes.cardActions}>
+            <Fab
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={() => {
+                setDialogItems(loots);
+                openLootWindow(id.toString(), name, bossCardContentElem);
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          </CardActions>
+        )}
       </Card>
       <Dialog
         open={deleteLootConfirmOpen}
