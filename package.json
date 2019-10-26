@@ -8,10 +8,12 @@
     "start": "NODE_ENV=production node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
     "gql": "node server/graphiql-dev.js",
-    "reset-db": "bin/reset-db.sh",
-    "bdb": "bin/db/backup-prod.sh",
+    "db-backup": "bin/db/backup-prod.sh",
+    "db": "bin/db/connect-to-db.sh",
+    "db-renew": "bin/db/renew-static-tables.sh",
+    "db-reset-local": "bin/db/reset-local-db.sh",
     "types": "bin/generate-types.sh",
-    "reset": "npm run reset-db && npm run types",
+    "reset": "yarn db-reset-local && yarn types",
     "lint": "tslint --project ."
   },
   "dependencies": {
