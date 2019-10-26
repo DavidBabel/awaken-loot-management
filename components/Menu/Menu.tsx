@@ -2,11 +2,9 @@ import {
   Divider,
   List,
   ListItem,
-  // ListItemIcon,
   ListItemText,
   ListSubheader
 } from "@material-ui/core";
-// import DashboardIcon from "@material-ui/icons/Dashboard";
 import Link from "next/link";
 import Router from "next/router";
 import { destroyCookie } from "nookies";
