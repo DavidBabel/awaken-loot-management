@@ -9,6 +9,7 @@
     "loot": "node db/json-to-sql/from-json-to-base.js",
     "gql": "node server/graphiql-dev.js",
     "reset-db": "bin/reset-db.sh",
+    "bdb": "bin/db/backup-prod.sh",
     "types": "bin/generate-types.sh",
     "reset": "npm run reset-db && npm run types",
     "lint": "tslint --project ."

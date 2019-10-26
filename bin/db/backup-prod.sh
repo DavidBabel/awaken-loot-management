@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# $PROD_DB is a local env var
+
+date=$(date '+%Y-%m-%d-%H-%M-%S')
+mkdir "./db/backups/$date"
+echo Backup All ...
+pg_dump $PROD_DB > "./db/backups/$date/db-all.sql"
+echo Backup Players ...
+pg_dump $PROD_DB -t "public.\"Players\"" > "./db/backups/$date/db-table-player.sql"
+echo Backup PlayerMerit ...
+pg_dump $PROD_DB -t "public.\"PlayerMerit\"" > "./db/backups/$date/db-table-playermerit.sql"
+echo Backup Loots ...
+pg_dump $PROD_DB -t "public.\"Loots\"" > "./db/backups/$date/db-table-loots.sql"
+echo Backup Raids ...
+pg_dump $PROD_DB -t "public.\"Raids\"" > "./db/backups/$date/db-table-raids.sql"
+echo Backup RaidPlayers ...
+pg_dump $PROD_DB -t "public.\"RaidPlayers\"" > "./db/backups/$date/db-table-raidplayers.sql"
+echo Backup finished
