@@ -37,7 +37,9 @@ export function CreateRaid({ donjon }: Props) {
     <Card className={classes.card}>
       <CardMedia
         className={classes.media}
-        image={`/static/img/donjon/${donjon.name}.jpg`}
+        image={`/img/donjon/${donjon.name
+          .toLowerCase()
+          .replace(/\s/g, "-")}.jpg`}
         title={donjon.name}
       />
       <CardContent className={classes.cardContent}>
