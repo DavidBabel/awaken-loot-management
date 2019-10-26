@@ -319,11 +319,6 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Oscuro'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Vis‘kag le Saigneur')),
-( 7,
-  (SELECT id FROM "Players" WHERE "name"=
-  'Oscuro'),
-  (SELECT id FROM "Items" WHERE "name"=
   'Vis‘kag le Saigneur'))
 
   ;

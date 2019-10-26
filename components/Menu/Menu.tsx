@@ -29,13 +29,11 @@ export function Menu() {
         <>
           <List>
             <ListSubheader>Raid management</ListSubheader>
-            {member.level >= role.officer && (
-              <ListItem button={true}>
-                <Link href="/raid">
-                  <ListItemText primary="Raids Dashboard" />
-                </Link>
-              </ListItem>
-            )}
+            <ListItem button={true}>
+              <Link href="/raid">
+                <ListItemText primary="Raids Dashboard" />
+              </Link>
+            </ListItem>
           </List>
           <Divider />
           <List>
