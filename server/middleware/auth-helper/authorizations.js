@@ -9,6 +9,7 @@ const PLAYER = "player";
 const GUEST = "guest";
 
 const NO_ONE = [];
+const ADMIN_MIN = [ADMIN];
 const OFFICER_MIN = [ADMIN, OFFICER];
 const CLASSMASTER_MIN = [ADMIN, OFFICER, CLASS_MASTER];
 const PLAYER_MIN = [ADMIN, OFFICER, CLASS_MASTER, PLAYER];
@@ -26,24 +27,21 @@ const rights = {
   allPlayers: PLAYER_MIN,
   allRaidPlayers: PLAYER_MIN,
   allRaids: PLAYER_MIN,
-  createClassItem: OFFICER_MIN,
+  createClassItem: ADMIN_MIN,
   createLoot: CLASSMASTER_MIN,
   createPlayerMerit: PLAYER_MIN,
-  createPlayerSlot: CLASSMASTER_MIN,
   createRaid: OFFICER_MIN,
-  createRaidPlayer: OFFICER_MIN,
+  createRaidPlayer: CLASSMASTER_MIN,
   deletePlayerMerit: NO_ONE,
   deletePlayerMeritById: CLASSMASTER_MIN,
   deleteRaidPlayer: NO_ONE,
-  deleteRaidPlayerById: OFFICER_MIN,
+  deleteRaidPlayerById: NO_ONE,
   updateClassItem: NO_ONE,
   updateClassItemById: OFFICER_MIN,
   updateLoot: NO_ONE,
   updateLootById: CLASSMASTER_MIN,
   updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: PLAYER_MIN,
-  updatePlayerSlot: NO_ONE,
-  updatePlayerSlotById: PLAYER_MIN,
   updateRaid: NO_ONE,
   updateRaidById: OFFICER_MIN,
   updateRaidPlayer: NO_ONE,
@@ -53,7 +51,6 @@ const rights = {
 /**
  *
  * @param {'admin'|'officer'|'classMaster'|'player'|'guest'} playerLevel
- * @param {number} playerId
  * @param {string} request
  */
 function checkRights(playerLevel = GUEST, request) {
@@ -62,15 +59,22 @@ function checkRights(playerLevel = GUEST, request) {
   const queries = parsedRequest.definitions.map(q =>
     q.selectionSet.selections.map(x => x.name.value)
   );
-  // if (queries.length !== 1 || queries[0].length) {
-  //   throw new Error("This API only accept one query at a time");
-  // }
-
-  const gqlQuery = queries[0][0];
-  if (!Object.keys(rights).includes(gqlQuery)) {
-    throw new Error(`Awaken Unknow query ${gqlQuery}`);
+  if (queries.length !== 1) {
+    throw new Error("Awaken: This API only accept one query at a time");
   }
-  return rights[gqlQuery].includes(playerLevel);
+
+  queries[0].forEach(query => {
+    if (!Object.keys(rights).includes(query)) {
+      throw new Error(`Awaken: Unknow query ${query}`);
+    }
+    if (!rights[query].includes(playerLevel)) {
+      throw new Error(
+        `Awaken: role ${playerLevel} not allowed to perform ${query}`
+      );
+    }
+  });
+
+  return true;
 }
 
 module.exports = {

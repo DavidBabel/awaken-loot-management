@@ -806,6 +806,7 @@ export type Loot = Node & {
   bossId?: Maybe<Scalars['Int']>,
   active?: Maybe<Scalars['Boolean']>,
   lastActionBy?: Maybe<Scalars['String']>,
+  lastActionType?: Maybe<Scalars['String']>,
   lastActionDate?: Maybe<Scalars['String']>,
   /** Reads a single `Player` that is related to this `Loot`. */
   playerByPlayerId?: Maybe<Player>,
@@ -833,6 +834,8 @@ export type LootCondition = {
   active?: Maybe<Scalars['Boolean']>,
   /** Checks for equality with the object’s `lastActionBy` field. */
   lastActionBy?: Maybe<Scalars['String']>,
+  /** Checks for equality with the object’s `lastActionType` field. */
+  lastActionType?: Maybe<Scalars['String']>,
   /** Checks for equality with the object’s `lastActionDate` field. */
   lastActionDate?: Maybe<Scalars['String']>,
 };
@@ -846,6 +849,7 @@ export type LootInput = {
   bossId?: Maybe<Scalars['Int']>,
   active?: Maybe<Scalars['Boolean']>,
   lastActionBy?: Maybe<Scalars['String']>,
+  lastActionType?: Maybe<Scalars['String']>,
   lastActionDate?: Maybe<Scalars['String']>,
 };
 
@@ -858,6 +862,7 @@ export type LootPatch = {
   bossId?: Maybe<Scalars['Int']>,
   active?: Maybe<Scalars['Boolean']>,
   lastActionBy?: Maybe<Scalars['String']>,
+  lastActionType?: Maybe<Scalars['String']>,
   lastActionDate?: Maybe<Scalars['String']>,
 };
 
@@ -900,6 +905,8 @@ export enum LootsOrderBy {
   ActiveDesc = 'ACTIVE_DESC',
   LastActionByAsc = 'LAST_ACTION_BY_ASC',
   LastActionByDesc = 'LAST_ACTION_BY_DESC',
+  LastActionTypeAsc = 'LAST_ACTION_TYPE_ASC',
+  LastActionTypeDesc = 'LAST_ACTION_TYPE_DESC',
   LastActionDateAsc = 'LAST_ACTION_DATE_ASC',
   LastActionDateDesc = 'LAST_ACTION_DATE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',

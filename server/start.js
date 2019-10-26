@@ -38,7 +38,7 @@ app
       checkTokenMiddleware,
       checkRoleMiddleware,
       postgraphile(
-        CONFIG.DATABASE_URL || "postgres://localhost:5432/test",
+        process.env.DATABASE_URL || "postgres://localhost:5432/test",
         "public",
         {
           // classicIds: true,
@@ -54,15 +54,6 @@ app
 
     const port = process.env.PORT || 3000;
     server.listen(port, err => {
-      // tslint:disable-next-line:no-console
-      console.log({
-        DATABASE_URL: process.env.DATABASE_URL,
-        GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT,
-        JWT_SECRET: process.env.JWT_SECRET,
-        PORT: process.env.PORT,
-        SERVER_URL: process.env.SERVER_URL
-      });
-
       if (err) {
         throw err;
       }

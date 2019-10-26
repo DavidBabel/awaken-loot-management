@@ -53,6 +53,9 @@ function tryToLogin(
   password: string,
   callback: (jwtInfos: JwtToken) => void
 ) {
+  const passwordSalted = md5(password + CONFIG.SALT);
+  // tslint:disable-next-line:no-console
+  console.log(passwordSalted);
   fetch(`${CONFIG.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
@@ -61,7 +64,7 @@ function tryToLogin(
     },
     body: JSON.stringify({
       username,
-      password: md5(password)
+      password: passwordSalted
     })
   })
     .then(response => response.json())
