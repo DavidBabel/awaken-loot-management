@@ -58,6 +58,7 @@ CREATE TABLE "Loots" (
   "bossId" int,
   "active" boolean DEFAULT true,
   "lastActionBy" varchar,
+  "lastActionType" varchar,
   "lastActionDate" varchar
 );
 comment on table "Loots" is E'@omit delete';
