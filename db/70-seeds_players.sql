@@ -20,8 +20,11 @@
 
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
-('Devilhunter'  , 6,  'admin', '55fc5b709962876903785fd64a6961e5', true, true),
-('test'         , 1,  'admin', '098f6bcd4621d373cade4e832627b4f6', true, false),
+('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
+('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', true, false),
+('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', true, false),
+('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', true, false),
+('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', true, false),
 ('Lums'         , 7,  'officer', null, true, true),
 ('Deiv'         , 1,  'officer', null, true, true),
 ('Krigen'       , 8,  'officer', null, true, true),

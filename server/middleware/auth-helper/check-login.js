@@ -1,8 +1,6 @@
-const CONFIG = require("../../config");
-
 const pg = require("knex")({
   client: "pg",
-  connection: CONFIG.DATABASE_URL || "postgres://localhost:5432/test",
+  connection: process.env.DATABASE_URL || "postgres://localhost:5432/test",
   searchPath: ["public"]
 });
 
