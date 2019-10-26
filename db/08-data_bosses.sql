@@ -12,7 +12,6 @@ VALUES
 INSERT INTO "Bosses" ("name", "donjonId" )
 VALUES
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC')),
--- ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Ony')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 ('Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx')),
