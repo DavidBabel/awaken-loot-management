@@ -10,7 +10,7 @@ interface Props extends ClassItem {
 
 export function ClassItemCard({
   countLootByClass,
-  itemValueForThisClass,
+  // itemValueForThisClass,
   classByClassId: { color, name }
 }: Props) {
   const useStyles = makeStyles((theme: Theme) =>
@@ -48,7 +48,7 @@ export function ClassItemCard({
           <Chip
             avatar={
               <Avatar className={styleClasses.avatar}>
-                {itemValueForThisClass}
+                {/* {itemValueForThisClass} */}
               </Avatar>
             }
             label={name}

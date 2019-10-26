@@ -5,3 +5,5 @@ schema.gql
 \#tools testss
 \#old
 .env
+db/backups/*
+!db/backups/.keepit
