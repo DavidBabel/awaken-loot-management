@@ -23,6 +23,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Add as AddIcon } from "@material-ui/icons";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 import {
   MutableRefObject,
@@ -90,9 +91,10 @@ const useStyles = makeStyles({
     margin: "0px 10px",
     textAlign: "center",
     backgroundColor: "#F5F5F5",
-    border: "2px solid",
-    borderRadius: "5px",
-    overflow: "hidden"
+    border: "1px solid",
+    borderRadius: "4px",
+    overflow: "hidden",
+    boxShadow: "0 0 20px 0 rgba(0,0,0,0.25)"
   },
   confirmDeleteContent: {
     display: "flex",
@@ -225,11 +227,33 @@ export function BossCard({
                       style={{
                         borderColor:
                           loot.playerByPlayerId.classByClassId.id !== 1
-                            ? loot.playerByPlayerId.classByClassId.color
+                            ? loot.playerByPlayerId.classByClassId.id !== 4
+                              ? loot.playerByPlayerId.classByClassId.color
+                              : "#d4d000"
                             : "grey"
                       }}
                       className={classes.playerCell}
-                      primary={loot.playerByPlayerId.name}
+                      primary={
+                        <Link
+                          href="/player/view/[id]"
+                          as={`/player/view/${loot.playerByPlayerId.id}`}
+                        >
+                          <a
+                            style={{
+                              color:
+                                loot.playerByPlayerId.classByClassId.id !== 1
+                                  ? loot.playerByPlayerId.classByClassId.id !==
+                                    4
+                                    ? loot.playerByPlayerId.classByClassId.color
+                                    : "#d4d000"
+                                  : "grey",
+                              textDecoration: "none"
+                            }}
+                          >
+                            {loot.playerByPlayerId.name}
+                          </a>
+                        </Link>
+                      }
                     />
                     {member.level >= role.officer && (
                       <ListItemSecondaryAction>
