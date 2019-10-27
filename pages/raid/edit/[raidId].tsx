@@ -298,7 +298,7 @@ export default function PageRaidView() {
             lootsAssigned.indexOf(loot) === -1
           );
         });
-        loots.map(loot => {
+        loots.forEach(loot => {
           // permet de stocker les loots deja assignés et de les checks pour qu'ils n'apparaissent pas plusieurs fois (ca sert seulement pour les loots qui n'ont pas de bossId)
           if (
             !loot.bossId &&
