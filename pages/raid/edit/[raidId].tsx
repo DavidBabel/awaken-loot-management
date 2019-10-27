@@ -125,6 +125,7 @@ export default function PageRaidView() {
   const [currentBossCardContentElem, setCurrentBossCardContentElem] = useState<
     MutableRefObject<any>
   >(null);
+  const lootsAssigned = [];
   const handleOpenPlayerList = () => {
     setPlayerListOpened(true);
   };
@@ -285,7 +286,7 @@ export default function PageRaidView() {
         <GreenButton color="primary">EDITER JOUEURS</GreenButton>
       </Paper>
       {bosses.map(boss => {
-        const lootedForThisBoss = [...loots].filter((loot): boolean => {
+        const lootedForThisBoss = loots.filter((loot): boolean => {
           return (
             ((!loot.bossId &&
               loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
@@ -293,8 +294,22 @@ export default function PageRaidView() {
                 bossItem => bossItem.bossByBossId.id === boss.id
               )) ||
               loot.bossId === boss.id) &&
-            loot.active
+            loot.active &&
+            lootsAssigned.indexOf(loot) === -1
           );
+        });
+        loots.map(loot => {
+          // permet de stocker les loots deja assignés et de les checks pour qu'ils n'apparaissent pas plusieurs fois (ca sert seulement pour les loots qui n'ont pas de bossId)
+          if (
+            !loot.bossId &&
+            loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
+            loot.itemByItemId.bossItemsByItemId.nodes.some(
+              bossItem => bossItem.bossByBossId.id === boss.id
+            ) &&
+            loot.active
+          ) {
+            lootsAssigned.push(loot);
+          }
         });
         return (
           <BossCard
