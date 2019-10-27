@@ -159,13 +159,13 @@ export default function Pagelogin({ apolloClient }: Props) {
           </Button>
           <div>{message}</div>
           <Grid container={true}>
-            <Grid item={true} xs={true}>
+            {/* <Grid item={true} xs={true}>
               <Link href="#" variant="body2">
                 Forgot password?
               </Link>
-            </Grid>
+            </Grid> */}
             <Grid item={true}>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

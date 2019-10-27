@@ -16,12 +16,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import ItemsCarousel from "react-items-carousel";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
+import MemberContext from "../../lib/context/member";
 import { Query } from "../../lib/generatedTypes";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
+import { role } from "../../lib/role-level";
 import { byDate } from "../../lib/utils/sorter";
 
 // import { getAll } from '../lib/helpers/graphql-helpers';
@@ -62,6 +64,7 @@ const useStyles = makeStyles({
 });
 
 export default function PageIndex() {
+  const member = useContext(MemberContext);
   const classes = useStyles("");
   const [activeItemIndex, setActiveItemIndex] = React.useState(0);
   const {
@@ -95,42 +98,50 @@ export default function PageIndex() {
   return (
     <Container className={classes.root}>
       <div className={classes.topPapers}>
-        <Paper className={classes.createRaidPaper}>
-          <Typography className={classes.boxTitle} variant="h6">
-            Create new raid
-          </Typography>
-          <Divider />
-          <div className={classes.createRaidCards}>
-            <ItemsCarousel
-              infiniteLoop={true}
-              gutter={20}
-              numberOfCards={1}
-              activeItemIndex={activeItemIndex}
-              requestToChangeActive={setActiveItemIndex}
-              activePosition={"center"}
-              showSlither={false}
-              firstAndLastGutter={false}
-              rightChevron={
-                <IconButton>
-                  <ChevronRightIcon color="primary" />
-                </IconButton>
-              }
-              leftChevron={
-                <IconButton>
-                  <ChevronLeftIcon color="primary" />
-                </IconButton>
-              }
-              outsideChevron={true}
-              chevronWidth={100}
-              children={donjons
-                .filter(({ node: donjon }) => donjon.active)
-                .map(({ node: donjon }) => (
-                  <CreateRaid key={donjon.name} donjon={donjon} />
-                ))}
-            />
-          </div>
-        </Paper>
-        <Paper className={classes.searchPlayerPaper}>
+        {member.level >= role.officer && (
+          <Paper className={classes.createRaidPaper}>
+            <Typography className={classes.boxTitle} variant="h6">
+              Create new raid
+            </Typography>
+            <Divider />
+            <div className={classes.createRaidCards}>
+              <ItemsCarousel
+                infiniteLoop={true}
+                gutter={20}
+                numberOfCards={1}
+                activeItemIndex={activeItemIndex}
+                requestToChangeActive={setActiveItemIndex}
+                activePosition={"center"}
+                showSlither={false}
+                firstAndLastGutter={false}
+                rightChevron={
+                  <IconButton>
+                    <ChevronRightIcon color="primary" />
+                  </IconButton>
+                }
+                leftChevron={
+                  <IconButton>
+                    <ChevronLeftIcon color="primary" />
+                  </IconButton>
+                }
+                outsideChevron={true}
+                chevronWidth={100}
+                children={donjons
+                  .filter(({ node: donjon }) => donjon.active)
+                  .map(({ node: donjon }) => (
+                    <CreateRaid key={donjon.name} donjon={donjon} />
+                  ))}
+              />
+            </div>
+          </Paper>
+        )}
+        <Paper
+          className={classes.searchPlayerPaper}
+          style={{
+            width: member.level < role.officer ? "100%" : "50%",
+            height: member.level < role.officer ? "230px" : "auto"
+          }}
+        >
           <Typography className={classes.boxTitle} variant="h6">
             Search player
           </Typography>

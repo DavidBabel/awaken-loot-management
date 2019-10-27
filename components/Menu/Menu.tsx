@@ -10,7 +10,6 @@ import Router from "next/router";
 import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
-// import { role } from "../../lib/role-level";
 
 // import { AppVersion } from '../AppVersion';
 
