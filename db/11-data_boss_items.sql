@@ -1,6 +1,6 @@
  -- SAFE BEGIN FOR CONCAT
 -- SELECT 1 AS "Trash";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Ceinture de traqueur de géant',16851,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
 ('Brassards de traqueur de géant',16850,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
@@ -44,7 +44,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=1),(SELECT id FROM "Items" WHERE "wowheadId"=16827));
 
 -- SELECT 1 AS "Lucifron";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Gantelets de puissance',16863,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank')),
 ('Gants de Gangrecoeur',16805,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
@@ -75,7 +75,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Lucifron'),(SELECT id FROM "Items" WHERE "wowheadId"=18861));
 
 -- SELECT 1 AS "Magmadar";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Trembleterre',17073,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Jambières cénariennes',16835,(SELECT id FROM "Classes" WHERE "name"='Druide')),
@@ -130,7 +130,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Magmadar'),(SELECT id FROM "Items" WHERE "wowheadId"=19144));
 
 -- SELECT 1 AS "Gehennas";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Gants de prophétie',16812,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
 ('Bottes de traqueur de géant',16849,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
@@ -167,7 +167,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=19147));
 
 -- SELECT 1 AS "Garr";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Marteau d‘Aurastone',17105,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Casque cénarien',16834,(SELECT id FROM "Classes" WHERE "name"='Druide')),
@@ -220,7 +220,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Garr'),(SELECT id FROM "Items" WHERE "wowheadId"=18829));
 
 -- SELECT 1 AS "Shazzrah";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Gants cénariens',16831,(SELECT id FROM "Classes" WHERE "name"='Druide')),
 ('Gants d‘arcaniste',16801,(SELECT id FROM "Classes" WHERE "name"='Mage')),
@@ -247,7 +247,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Shazzrah'),(SELECT id FROM "Items" WHERE "wowheadId"=19147));
 
 -- SELECT 1 AS "Baron Geddon";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Mantelet d‘arcaniste',16797,(SELECT id FROM "Classes" WHERE "name"='Mage')),
 ('Spallières cénariennes',16836,(SELECT id FROM "Classes" WHERE "name"='Druide')),
@@ -284,7 +284,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Baron Geddon'),(SELECT id FROM "Items" WHERE "wowheadId"=19143));
 
 -- SELECT 1 AS "Sulfuron Harbinger";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Frappe-ténèbres',17074,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Epaulettes de traqueur de géant',16848,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
@@ -317,7 +317,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Sulfuron Harbinger'),(SELECT id FROM "Items" WHERE "wowheadId"=18878));
 
 -- SELECT 1 AS "Golemagg the Incinerator";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Bâton de domination',18842,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Magelame de Chante-azur',17103,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -366,7 +366,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Golemagg the Incinerator'),(SELECT id FROM "Items" WHERE "wowheadId"=18820));
 
 -- SELECT 1 AS "Majordomo Executus";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Anneau de cautérisation',19140,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Cape ignifugée',18811,(SELECT id FROM "Classes" WHERE "name"='')),
@@ -397,7 +397,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Majordomo Executus'),(SELECT id FROM "Items" WHERE "wowheadId"=18810));
 
 -- SELECT 1 AS "Ragnaros";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Jambières de Stormrage',16901,(SELECT id FROM "Classes" WHERE "name"='Druide')),
 ('Pantalon de Vent du néant',16915,(SELECT id FROM "Classes" WHERE "name"='Mage')),
@@ -449,7 +449,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Ragnaros'),(SELECT id FROM "Items" WHERE "wowheadId"=17106));
 
 -- SELECT 1 AS "Onyxia";
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Tête d‘Onyxia',18422,(SELECT id FROM "Classes" WHERE "name"='')),
 ('Tendon de dragon noir adulte',18705,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
