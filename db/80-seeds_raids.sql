@@ -1,11 +1,4 @@
  -- SAFE BEGIN FOR CONCAT
--- 1 => Molten Core
--- 2 => Onyxia Lair
--- 3 => Blackwing Lair
--- 4 => Ahn‘Qiraj Temple
--- 5 => Naxxramas
--- 6 => Ahn‘Qiraj Ruins
--- 7 => Zul‘Gurub
 
 INSERT INTO "Raids" ("donjonId", "date")
 VALUES
@@ -25,7 +18,18 @@ VALUES
 (1, '2019-10-16'), -- 14
 (2, '2019-10-20'), -- 15
 (1, '2019-10-20'), -- 16
-(2, '2019-10-21'); -- 17
+(2, '2019-10-21'), -- 17
+(1, '2019-10-23'), -- 18
+(2, '2019-10-27'), -- 19
+(1, '2019-10-27'); -- 18
+
+-- 1 => Molten Core
+-- 2 => Onyxia Lair
+-- 3 => Blackwing Lair
+-- 4 => Ahn‘Qiraj Temple
+-- 5 => Naxxramas
+-- 6 => Ahn‘Qiraj Ruins
+-- 7 => Zul‘Gurub
 
 
 -- MC 2019-09-19
@@ -784,4 +788,135 @@ VALUES
 (17, (SELECT id FROM "Players" WHERE "name"='Flash')),
 (17, (SELECT id FROM "Players" WHERE "name"='Lums')),
 (17, (SELECT id FROM "Players" WHERE "name"='Tad'))
+;
+
+
+-- RAID 1 ragnaros (soir du bug) 23/10
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(18, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(18, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(18, (SELECT id FROM "Players" WHERE "name"='Ladj')),
+(18, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(18, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(18, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(18, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(18, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(18, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(18, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(18, (SELECT id FROM "Players" WHERE "name"='Owhlord')),
+(18, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(18, (SELECT id FROM "Players" WHERE "name"='Zzeus')),
+(18, (SELECT id FROM "Players" WHERE "name"='Caëdo')),
+(18, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(18, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(18, (SELECT id FROM "Players" WHERE "name"='Kheya')),
+(18, (SELECT id FROM "Players" WHERE "name"='Ràys')),
+(18, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(18, (SELECT id FROM "Players" WHERE "name"='Øupla')),
+(18, (SELECT id FROM "Players" WHERE "name"='Boblemoche')),
+(18, (SELECT id FROM "Players" WHERE "name"='Kgr')),
+(18, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(18, (SELECT id FROM "Players" WHERE "name"='Rassis')),
+(18, (SELECT id FROM "Players" WHERE "name"='Angelus')),
+(18, (SELECT id FROM "Players" WHERE "name"='Bobbyz')),
+(18, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(18, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(18, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(18, (SELECT id FROM "Players" WHERE "name"='Easìer')),
+(18, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(18, (SELECT id FROM "Players" WHERE "name"='Skau')),
+(18, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(18, (SELECT id FROM "Players" WHERE "name"='Flash')),
+(18, (SELECT id FROM "Players" WHERE "name"='Keiki')),
+(18, (SELECT id FROM "Players" WHERE "name"='Kenyâ')),
+(18, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'))
+;
+
+
+-- Onyxia Raid 1 : 27/10
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(19, (SELECT id FROM "Players" WHERE "name"='Brebouche')),
+(19, (SELECT id FROM "Players" WHERE "name"='Throma')),
+(19, (SELECT id FROM "Players" WHERE "name"='Alk')),
+(19, (SELECT id FROM "Players" WHERE "name"='Nozil')),
+(19, (SELECT id FROM "Players" WHERE "name"='Paren')),
+(19, (SELECT id FROM "Players" WHERE "name"='Abramus')),
+(19, (SELECT id FROM "Players" WHERE "name"='Allyssamyr')),
+(19, (SELECT id FROM "Players" WHERE "name"='Capriseum')),
+(19, (SELECT id FROM "Players" WHERE "name"='Ikith')),
+(19, (SELECT id FROM "Players" WHERE "name"='Owhlord')),
+(19, (SELECT id FROM "Players" WHERE "name"='Zapikote')),
+(19, (SELECT id FROM "Players" WHERE "name"='Zzeus')),
+(19, (SELECT id FROM "Players" WHERE "name"='Caëdo')),
+(19, (SELECT id FROM "Players" WHERE "name"='Cocobanjo')),
+(19, (SELECT id FROM "Players" WHERE "name"='Ez')),
+(19, (SELECT id FROM "Players" WHERE "name"='Jonasran')),
+(19, (SELECT id FROM "Players" WHERE "name"='Ràys')),
+(19, (SELECT id FROM "Players" WHERE "name"='Yx')),
+(19, (SELECT id FROM "Players" WHERE "name"='Øupla')),
+(19, (SELECT id FROM "Players" WHERE "name"='Hyknoz')),
+(19, (SELECT id FROM "Players" WHERE "name"='Kgr')),
+(19, (SELECT id FROM "Players" WHERE "name"='Psykøhazard')),
+(19, (SELECT id FROM "Players" WHERE "name"='Rassis')),
+(19, (SELECT id FROM "Players" WHERE "name"='Tàel')),
+(19, (SELECT id FROM "Players" WHERE "name"='Weezy')),
+(19, (SELECT id FROM "Players" WHERE "name"='Angelus')),
+(19, (SELECT id FROM "Players" WHERE "name"='Bobbyz')),
+(19, (SELECT id FROM "Players" WHERE "name"='Krigen')),
+(19, (SELECT id FROM "Players" WHERE "name"='Kusogakî')),
+(19, (SELECT id FROM "Players" WHERE "name"='Paffë')),
+(19, (SELECT id FROM "Players" WHERE "name"='Tephrite')),
+(19, (SELECT id FROM "Players" WHERE "name"='Karaelys')),
+(19, (SELECT id FROM "Players" WHERE "name"='Munuxi')),
+(19, (SELECT id FROM "Players" WHERE "name"='Skau')),
+(19, (SELECT id FROM "Players" WHERE "name"='Skwäsh')),
+(19, (SELECT id FROM "Players" WHERE "name"='Mergueztguez'))
+;
+
+
+-- MC sauvetage Raid 2 : 27/10
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(20, (SELECT id FROM "Players" WHERE "name"='Krijgs')),
+(20, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(20, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(20, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Powpit')),
+(20, (SELECT id FROM "Players" WHERE "name"='Volzam')),
+(20, (SELECT id FROM "Players" WHERE "name"='Zebaww')),
+(20, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Anahita')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Dumbledog')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Romek')),
+(20, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Malstep')),
+(20, (SELECT id FROM "Players" WHERE "name"='Gkz')),
+(20, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Lihàtarekt')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Qaen')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Shåðøw')),
+(20, (SELECT id FROM "Players" WHERE "name"='Sopalin')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Yuzumi')),
+(20, (SELECT id FROM "Players" WHERE "name"='Néstor')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Osdryon')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Rendalfllag')),
+(20, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Waira')),
+(20, (SELECT id FROM "Players" WHERE "name"='Brosko')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Skedone')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Warning')),
+(20, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(20, (SELECT id FROM "Players" WHERE "name"='Knh')),
+(20, (SELECT id FROM "Players" WHERE "name"='Xihfu')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Bayne')),
+(20, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Doky')),
+(20, (SELECT id FROM "Players" WHERE "name"='Need')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Splendo')),
+(20, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Daggot')),
+-- (20, (SELECT id FROM "Players" WHERE "name"='Gengrous')),
+(20, (SELECT id FROM "Players" WHERE "name"='Tad'))
 ;

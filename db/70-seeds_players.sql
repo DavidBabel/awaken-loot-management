@@ -123,7 +123,19 @@ VALUES
 ('Rassis'       , 3,  'player', null, true, false),
 ('Owhlord'      , 2,  'player', null, true, false),
 ('Angelus'      , 9,  'player', null, true, false),
-('Felrik'      , 9,  'player', null, true, false)
+('Felrik'       , 9,  'player', null, true, false),
+('Kgr'          , 3,  'player', null, true, false),
+('Kheya'        , 4,  'player', null, true, false),
+('Caëdo'        , 4,  'player', null, true, false),
+('Weezy'        , 3,  'player', null, true, false),
+('Paren'        , 6,  'player', null, true, false),
+('Munuxi'       , 1,  'player', null, true, false),
+('Hyknoz'       , 3,  'player', null, true, false),
+('Sopalin'      , 4,  'player', null, true, false),
+('Gkz'          , 4,  'player', null, true, false),
+('Zebaww'       , 6,  'player', null, true, false),
+('Krijgs'       , 8,  'player', null, true, false),
+('Volzam'       , 6,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
