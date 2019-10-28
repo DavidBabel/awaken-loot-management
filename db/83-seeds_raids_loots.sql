@@ -1423,3 +1423,43 @@ VALUES
   (SELECT id FROM "Bosses" WHERE "name"=
   'Trash'))
 ;
+
+-- ony 27/10
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
+VALUES
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tàel'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Crâne de Némésis'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Heaume de courroux'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Throma'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Hyknoz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Angelus'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia'))
+;
