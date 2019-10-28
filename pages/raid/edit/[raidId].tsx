@@ -390,10 +390,10 @@ export default function PageRaidView() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAddItemWindow} color="primary">
-            CANCEL
+            ANNULER
           </Button>
           <Button onClick={addLoot} color="primary">
-            ADD
+            AJOUTER
           </Button>
         </DialogActions>
       </Dialog>

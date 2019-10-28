@@ -11,6 +11,10 @@ import {
   TableRow,
   Typography
 } from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -25,7 +29,7 @@ import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
 import MemberContext from "../../lib/context/member";
 import { Query } from "../../lib/generatedTypes";
-// import { Loot, Player } from "../../lib/generatedTypes";
+import { Item } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
@@ -107,6 +111,10 @@ export default function PageIndex() {
   const [activeItemIndex, setActiveItemIndex] = React.useState<number>(0);
   const [playerInputValue, setPlayerInputValue] = React.useState<string>("");
   const [itemInputValue, setItemInputValue] = React.useState<string>("");
+  const [itemInfoOpened, setItemInfoOpened] = React.useState<boolean>(false);
+  const [itemCurrentlySelected, setItemCurrentlySelected] = React.useState<
+    Item
+  >(null);
 
   const {
     loading: loadingDonjons,
@@ -154,127 +162,164 @@ export default function PageIndex() {
   ) => {
     setItemInputValue(event.target.value);
   };
+  const handleCloseItemInfo = () => {
+    setItemInfoOpened(false);
+  };
+  const handleOpenItemInfo = () => {
+    setItemInfoOpened(true);
+  };
 
   return (
-    <Container className={classes.root}>
-      <div className={classes.topPapers}>
-        {member.level >= role.officer && (
-          <Paper className={classes.createRaidPaper}>
+    <>
+      <Container className={classes.root}>
+        <div className={classes.topPapers}>
+          {member.level >= role.officer && (
+            <Paper className={classes.createRaidPaper}>
+              <Typography className={classes.boxTitle} variant="h6">
+                Create new raid
+              </Typography>
+              <Divider />
+              <div className={classes.createRaidCards}>
+                <ItemsCarousel
+                  infiniteLoop={true}
+                  gutter={20}
+                  numberOfCards={1}
+                  activeItemIndex={activeItemIndex}
+                  requestToChangeActive={setActiveItemIndex}
+                  activePosition={"center"}
+                  showSlither={false}
+                  firstAndLastGutter={false}
+                  rightChevron={
+                    <IconButton>
+                      <ChevronRightIcon color="primary" />
+                    </IconButton>
+                  }
+                  leftChevron={
+                    <IconButton>
+                      <ChevronLeftIcon color="primary" />
+                    </IconButton>
+                  }
+                  outsideChevron={true}
+                  chevronWidth={100}
+                  children={donjons
+                    .filter(({ node: donjon }) => donjon.active)
+                    .map(({ node: donjon }) => (
+                      <CreateRaid key={donjon.name} donjon={donjon} />
+                    ))}
+                />
+              </div>
+            </Paper>
+          )}
+          <Paper
+            className={classes.searchPlayerPaper}
+            style={{
+              width: member.level < role.officer ? "100%" : "50%",
+              height: member.level < role.officer ? "230px" : "auto"
+            }}
+          >
             <Typography className={classes.boxTitle} variant="h6">
-              Create new raid
+              Search
             </Typography>
             <Divider />
-            <div className={classes.createRaidCards}>
-              <ItemsCarousel
-                infiniteLoop={true}
-                gutter={20}
-                numberOfCards={1}
-                activeItemIndex={activeItemIndex}
-                requestToChangeActive={setActiveItemIndex}
-                activePosition={"center"}
-                showSlither={false}
-                firstAndLastGutter={false}
-                rightChevron={
-                  <IconButton>
-                    <ChevronRightIcon color="primary" />
-                  </IconButton>
-                }
-                leftChevron={
-                  <IconButton>
-                    <ChevronLeftIcon color="primary" />
-                  </IconButton>
-                }
-                outsideChevron={true}
-                chevronWidth={100}
-                children={donjons
-                  .filter(({ node: donjon }) => donjon.active)
-                  .map(({ node: donjon }) => (
-                    <CreateRaid key={donjon.name} donjon={donjon} />
-                  ))}
-              />
+            <div className={classes.searchContainer}>
+              <div className={classes.searchBox}>
+                <TextField
+                  autoComplete="off"
+                  id="outlined-player"
+                  label="Player"
+                  className={classes.textField}
+                  value={playerInputValue}
+                  onChange={searchPlayerInputChange}
+                  margin="dense"
+                  variant="outlined"
+                />
+                <PlayerSearchedList
+                  searched={playerInputValue}
+                  players={players}
+                />
+              </div>
+              <div className={classes.searchBox}>
+                <TextField
+                  autoComplete="off"
+                  id="outlined-item"
+                  label="Item"
+                  className={classes.textField}
+                  value={itemInputValue}
+                  onChange={searchItemInputChange}
+                  margin="dense"
+                  variant="outlined"
+                />
+                <ItemSearchedList
+                  searched={itemInputValue}
+                  items={items}
+                  setItemCurrentlySelected={setItemCurrentlySelected}
+                  handleOpenItemInfo={handleOpenItemInfo}
+                />
+              </div>
             </div>
           </Paper>
-        )}
-        <Paper
-          className={classes.searchPlayerPaper}
-          style={{
-            width: member.level < role.officer ? "100%" : "50%",
-            height: member.level < role.officer ? "230px" : "auto"
-          }}
-        >
-          <Typography className={classes.boxTitle} variant="h6">
-            Search
+        </div>
+        <Paper className={classes.lastRaidsPaper}>
+          <Typography className={classes.boxTitleLastRaids} variant="h6">
+            Last raids
           </Typography>
           <Divider />
-          <div className={classes.searchContainer}>
-            <div className={classes.searchBox}>
-              <TextField
-                autoComplete="off"
-                id="outlined-player"
-                label="Player"
-                className={classes.textField}
-                value={playerInputValue}
-                onChange={searchPlayerInputChange}
-                margin="dense"
-                variant="outlined"
-              />
-              <PlayerSearchedList
-                searched={playerInputValue}
-                players={players}
-              />
-            </div>
-            <div className={classes.searchBox}>
-              <TextField
-                autoComplete="off"
-                id="outlined-item"
-                label="Item"
-                className={classes.textField}
-                value={itemInputValue}
-                onChange={searchItemInputChange}
-                margin="dense"
-                variant="outlined"
-              />
-              <ItemSearchedList searched={itemInputValue} items={items} />
-            </div>
+
+          <div className={classes.tableWrapper}>
+            <Table className={classes.table} size="small" stickyHeader={true}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Donjon</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>{""}</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {raids.map(raid => {
+                  return (
+                    <TableRow key={`raid-${raid.id}`}>
+                      <TableCell>{raid.donjonByDonjonId.name}</TableCell>
+                      <TableCell>{raid.date}</TableCell>
+                      <TableCell>
+                        <Link
+                          href="/raid/edit/[id]"
+                          as={`/raid/edit/${raid.id}`}
+                        >
+                          <Button variant="contained" color="primary">
+                            <a>VIEW</a>
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
           </div>
         </Paper>
-      </div>
-      <Paper className={classes.lastRaidsPaper}>
-        <Typography className={classes.boxTitleLastRaids} variant="h6">
-          Last raids
-        </Typography>
-        <Divider />
-
-        <div className={classes.tableWrapper}>
-          <Table className={classes.table} size="small" stickyHeader={true}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Donjon</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>{""}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {raids.map(raid => {
-                return (
-                  <TableRow key={`raid-${raid.id}`}>
-                    <TableCell>{raid.donjonByDonjonId.name}</TableCell>
-                    <TableCell>{raid.date}</TableCell>
-                    <TableCell>
-                      <Link href="/raid/edit/[id]" as={`/raid/edit/${raid.id}`}>
-                        <Button variant="contained" color="primary">
-                          <a>VIEW</a>
-                        </Button>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </div>
-      </Paper>
-    </Container>
+      </Container>
+      <Dialog
+        open={itemInfoOpened}
+        onClose={handleCloseItemInfo}
+        aria-labelledby="item-dialog-title"
+        aria-describedby="item-dialog-description"
+      >
+        <DialogTitle id="item-dialog-title">
+          {itemCurrentlySelected && itemCurrentlySelected.name}
+        </DialogTitle>
+        <DialogContent>
+          {itemCurrentlySelected &&
+            itemCurrentlySelected.lootsByItemId.nodes.map(
+              loot => loot.playerByPlayerId.name + " "
+            )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseItemInfo} color="primary">
+            FERMER
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
 // TODO

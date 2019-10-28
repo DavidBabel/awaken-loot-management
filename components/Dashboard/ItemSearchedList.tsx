@@ -24,7 +24,12 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function ItemSearchedList({ searched, items }) {
+export default function ItemSearchedList({
+  searched,
+  items,
+  setItemCurrentlySelected,
+  handleOpenItemInfo
+}) {
   const classes = useStyles("");
   const results =
     searched.length !== 0 &&
@@ -40,7 +45,14 @@ export default function ItemSearchedList({ searched, items }) {
     >
       {results &&
         results.map(result => (
-          <ListItem key={result.id} button={true}>
+          <ListItem
+            key={result.id}
+            button={true}
+            onClick={() => {
+              setItemCurrentlySelected(result);
+              handleOpenItemInfo(true);
+            }}
+          >
             <ListItemText
               className={classes.resultText}
               primary={result.name}
