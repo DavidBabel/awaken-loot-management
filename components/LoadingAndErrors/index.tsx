@@ -1,3 +1,8 @@
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Paper from "@material-ui/core/Paper";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import { ApolloError } from "apollo-boost";
 import Link from "next/link";
 import { useState } from "react";
@@ -6,8 +11,24 @@ interface Props {
   loading: boolean;
   error: ApolloError;
 }
-
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(3, 2),
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "calc(100vh - 150px)",
+      "& *": {
+        textDecoration: "none"
+      }
+    }
+  })
+);
 export function LoadingAndError({ loading, error }: Props) {
+  const classes = useStyles("");
   const [showError, setShowError] = useState(false);
 
   if (error) {
@@ -18,17 +39,26 @@ export function LoadingAndError({ loading, error }: Props) {
       }
     }
     return (
-      <div>
-        <p>
+      <Paper className={classes.root}>
+        <Typography variant="h5" component="h3">
           An error occured, are you{" "}
           <Link href="/login">
-            <a>logged in</a>
+            <a>
+              <Button variant="outlined" color="primary">
+                logged in
+              </Button>
+            </a>
           </Link>{" "}
           ?
-        </p>
-        <button onClick={() => setShowError(!showError)}>
+        </Typography>
+        <br />
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => setShowError(!showError)}
+        >
           {showError ? "Hide" : "Show"} error
-        </button>
+        </Button>
         {showError && (
           <div>
             <pre>
@@ -36,11 +66,15 @@ export function LoadingAndError({ loading, error }: Props) {
             </pre>
           </div>
         )}
-      </div>
+      </Paper>
     );
   }
   if (loading) {
-    return <div>Loading</div>;
+    return (
+      <Paper className={classes.root}>
+        <CircularProgress />
+      </Paper>
+    );
   }
   return null;
 }

@@ -65,7 +65,17 @@ const useStyles = makeStyles({
   },
   tableWrapper: {
     maxHeight: "calc(100vh - 425px)",
-    overflow: "auto"
+    overflow: "auto",
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "#3F51B5",
+      borderRadius: "2px"
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
+    },
+    "&::-webkit-scrollbar": {
+      width: "10px"
+    }
   },
   table: {},
   textField: {
@@ -199,6 +209,7 @@ export default function PageIndex() {
           <div className={classes.searchContainer}>
             <div className={classes.searchBox}>
               <TextField
+                autoComplete="off"
                 id="outlined-player"
                 label="Player"
                 className={classes.textField}
@@ -214,6 +225,7 @@ export default function PageIndex() {
             </div>
             <div className={classes.searchBox}>
               <TextField
+                autoComplete="off"
                 id="outlined-item"
                 label="Item"
                 className={classes.textField}

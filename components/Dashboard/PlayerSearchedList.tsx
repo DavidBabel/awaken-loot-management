@@ -1,16 +1,28 @@
 import { List, ListItem, ListItemText } from "@material-ui/core/";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import Link from "next/link";
 
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
       width: "100%",
       overflow: "auto",
-      height: "100px"
+      height: "100px",
+      fontWeight: "bold",
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#3F51B5",
+        borderRadius: "2px"
+      },
+      "&::-webkit-scrollbar-track": {
+        boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
+      },
+      "&::-webkit-scrollbar": {
+        width: "10px"
+      }
     },
     resultText: {
       textAlign: "center",
-      textShadow: "1px 1px 2px black"
+      textShadow: "1px 1px 1px black"
     }
   })
 );
@@ -34,13 +46,15 @@ export default function PlayerSearchedList({ searched, players }) {
       {results &&
         results.map(result => (
           <ListItem key={result.id} button={true}>
-            <ListItemText
-              className={classes.resultText}
-              style={{
-                color: result.classByClassId.color
-              }}
-              primary={result.name}
-            />
+            <Link href="/player/view/[id]" as={`/player/view/${result.id}`}>
+              <ListItemText
+                className={classes.resultText}
+                style={{
+                  color: result.classByClassId.color
+                }}
+                primary={<a>{result.name}</a>}
+              />
+            </Link>
           </ListItem>
         ))}
     </List>

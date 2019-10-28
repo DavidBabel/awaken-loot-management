@@ -17,6 +17,7 @@ export const ALL_ITEMS = gql`
               id
               classId
               classByClassId {
+                id
                 color
               }
               inRoster

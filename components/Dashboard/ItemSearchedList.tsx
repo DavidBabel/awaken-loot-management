@@ -6,7 +6,17 @@ const useStyles = makeStyles(() =>
     root: {
       width: "100%",
       overflow: "auto",
-      height: "100px"
+      height: "100px",
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#3F51B5",
+        borderRadius: "2px"
+      },
+      "&::-webkit-scrollbar-track": {
+        boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
+      },
+      "&::-webkit-scrollbar": {
+        width: "10px"
+      }
     },
     resultText: {
       textAlign: "center"
