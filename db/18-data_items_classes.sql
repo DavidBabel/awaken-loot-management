@@ -1,6 +1,6 @@
 
 
-INSERT INTO "ClassItem" ("classId","itemId")
+INSERT INTO "ClassItem" ("classId","itemId","prio")
 VALUES
   ((SELECT id FROM "Classes" WHERE "name"=
   ''
