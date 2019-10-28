@@ -7,6 +7,10 @@ const useStyles = makeStyles(() =>
       width: "100%",
       overflow: "auto",
       height: "100px"
+    },
+    resultText: {
+      textAlign: "center",
+      textShadow: "1px 1px 2px black"
     }
   })
 );
@@ -31,11 +35,9 @@ export default function PlayerSearchedList({ searched, players }) {
         results.map(result => (
           <ListItem key={result.id} button={true}>
             <ListItemText
+              className={classes.resultText}
               style={{
-                color:
-                  result.classByClassId.id !== 1
-                    ? result.classByClassId.color
-                    : "grey"
+                color: result.classByClassId.color
               }}
               primary={result.name}
             />

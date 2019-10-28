@@ -75,7 +75,8 @@ const useStyles = makeStyles({
   },
   searchContainer: {
     width: "100%",
-    display: "flex"
+    display: "flex",
+    height: "177px"
   },
   searchBox: {
     display: "flex",
@@ -83,7 +84,10 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     width: "50%",
-    maxHeight: "160px"
+    height: "177px",
+    "&:nth-child(1)": {
+      borderRight: " 1px solid #E0E0E0"
+    }
   }
 });
 

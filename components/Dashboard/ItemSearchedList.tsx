@@ -7,6 +7,9 @@ const useStyles = makeStyles(() =>
       width: "100%",
       overflow: "auto",
       height: "100px"
+    },
+    resultText: {
+      textAlign: "center"
     }
   })
 );
@@ -28,7 +31,10 @@ export default function ItemSearchedList({ searched, items }) {
       {results &&
         results.map(result => (
           <ListItem key={result.id} button={true}>
-            <ListItemText primary={result.name} />
+            <ListItemText
+              className={classes.resultText}
+              primary={result.name}
+            />
           </ListItem>
         ))}
     </List>
