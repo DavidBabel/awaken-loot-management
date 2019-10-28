@@ -1178,3 +1178,248 @@ VALUES
   (SELECT id FROM "Bosses" WHERE "name"=
   'Onyxia'))
 ;
+
+
+-- MC raid 1 propre
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
+VALUES
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Karaelys'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ecraseur cramoisi'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Lucifron')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Keiki'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Bottes Rageterre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Lucifron')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Krigen'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Médaillon de Puissance inébranlable'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Magmadar')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Bobbyz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets de garde des flammes'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Magmadar')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Easìer'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon de prophétie'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Magmadar')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Mergueztguez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gantelets Rageterre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Gehennas')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Flash'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Pantalon en écailles de salamandre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Gehennas')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Easìer'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Collerette de prophétie'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Garr')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Keiki'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque Rageterre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Garr')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ez'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lame de brutalité'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Garr')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skau'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sceau de l‘archimagus'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Baron Geddon')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tephrite'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Spallières cénariennes'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Baron Geddon')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kgr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Mules de Gangrecoeur'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Shazzrah')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Gants de traqueur de géant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Shazzrah')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Espauliers de puissance'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Sulfuron Harbinger')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Epaulettes de traqueur de géant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Sulfuron Harbinger')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Cuirasse de puissance'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Golemagg the Incinerator')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Rassis'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Robe de Gangrecoeur'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Golemagg the Incinerator')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Lance-grenaille explosif'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Golemagg the Incinerator')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Alk'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Feuille ancienne pétrifiée'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Majordomo Executus')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Spallières de croissance sauvage'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Majordomo Executus')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Ladj'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Epaulières de garde du feu'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Majordomo Executus')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Tephrite'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de Stormrage'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Ragnaros')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Boblemoche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Jambières de Némésis'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Ragnaros')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Bobbyz'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinturon d‘assaut'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Ragnaros')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kenyâ'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Anneau de Sulfuras'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Ragnaros')),
+
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Øupla'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture du tueur de la nuit'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Boblemoche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture de Gangrecoeur'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Allyssamyr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinture d‘arcaniste'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Brebouche'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Brassards de puissance'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Rassis'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Brassards de Gangrecoeur'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Easìer'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinturon de prophétie'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skwäsh'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinturon de prophétie'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
+( 18,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Skau'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ceinturon de prophétie'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash'))
+;
