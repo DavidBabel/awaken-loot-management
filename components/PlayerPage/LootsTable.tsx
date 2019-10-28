@@ -55,6 +55,11 @@ export default function LootsTable({ loots, hidden }) {
     );
   }
   const rows = loots
+    .sort((a, b) => {
+      return new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)
+        ? -1
+        : 1;
+    })
     .filter(loot => loot.active)
     .map(loot =>
       createData(

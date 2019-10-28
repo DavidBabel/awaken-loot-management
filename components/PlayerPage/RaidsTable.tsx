@@ -45,6 +45,11 @@ export default function RaidsTable({ raids, hidden }) {
     );
   }
   const rows = raids
+    .sort((a, b) => {
+      return new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)
+        ? -1
+        : 1;
+    })
     .filter(raid => !raid.passed)
     .map(raid =>
       createData(
