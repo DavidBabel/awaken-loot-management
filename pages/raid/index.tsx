@@ -13,15 +13,21 @@ import {
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
 import React, { useContext } from "react";
 import ItemsCarousel from "react-items-carousel";
+import ItemSearchedList from "../../components/Dashboard/ItemSearchedList";
+import PlayerSearchedList from "../../components/Dashboard/PlayerSearchedList";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
 import MemberContext from "../../lib/context/member";
 import { Query } from "../../lib/generatedTypes";
+// import { Loot, Player } from "../../lib/generatedTypes";
+import { ALL_ITEMS } from "../../lib/gql/item-query";
+import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { byDate } from "../../lib/utils/sorter";
@@ -49,7 +55,8 @@ const useStyles = makeStyles({
     marginRight: 20
   },
   searchPlayerPaper: {
-    width: "50%"
+    width: "50%",
+    maxHeight: "230px"
   },
   lastRaidsPaper: {
     width: "100%",
@@ -60,13 +67,33 @@ const useStyles = makeStyles({
     maxHeight: "calc(100vh - 425px)",
     overflow: "auto"
   },
-  table: {}
+  table: {},
+  textField: {
+    margin: "15px 5px",
+    maxWidth: "200px",
+    height: 40
+  },
+  searchContainer: {
+    width: "100%",
+    display: "flex"
+  },
+  searchBox: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "50%",
+    maxHeight: "160px"
+  }
 });
 
 export default function PageIndex() {
   const member = useContext(MemberContext);
   const classes = useStyles("");
-  const [activeItemIndex, setActiveItemIndex] = React.useState(0);
+  const [activeItemIndex, setActiveItemIndex] = React.useState<number>(0);
+  const [playerInputValue, setPlayerInputValue] = React.useState<string>("");
+  const [itemInputValue, setItemInputValue] = React.useState<string>("");
+
   const {
     loading: loadingDonjons,
     data: dataDonjons,
@@ -77,10 +104,20 @@ export default function PageIndex() {
     data: dataRaids,
     error: errorRaids
   } = useQuery<Query>(ALL_RAIDS);
-  // const router = useRouter();
+  const {
+    loading: loadingPlayers,
+    data: dataPlayers,
+    error: errorPlayers
+  } = useQuery<Query>(ALL_PLAYERS);
+  const {
+    loading: loadingItems,
+    data: dataItems,
+    error: errorItems
+  } = useQuery<Query>(ALL_ITEMS);
 
-  const loading = loadingDonjons || loadingRaids;
-  const error = errorDonjons || errorRaids;
+  const loading =
+    loadingDonjons || loadingRaids || loadingPlayers || loadingItems;
+  const error = errorDonjons || errorRaids || errorPlayers || errorItems;
 
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
@@ -88,12 +125,21 @@ export default function PageIndex() {
 
   const donjons = dataDonjons.allDonjons.edges;
   const raids = dataRaids.allRaids.nodes;
+  const players = dataPlayers.allPlayers.nodes;
+  const items = dataItems.allItems.nodes;
 
   raids.sort(byDate("date"));
-  // const raidDiffTime = 0;
-  // raids[0] &&
-  // moment(raids[0].date, 'YYYY-MM-DD').diff(moment()) / (1000 * 60 * 60);
-  // const alreadyRaidToday = raidDiffTime > -25 && raidDiffTime < 0;
+
+  const searchPlayerInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPlayerInputValue(event.target.value);
+  };
+  const searchItemInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setItemInputValue(event.target.value);
+  };
 
   return (
     <Container className={classes.root}>
@@ -143,9 +189,38 @@ export default function PageIndex() {
           }}
         >
           <Typography className={classes.boxTitle} variant="h6">
-            Search player
+            Search
           </Typography>
           <Divider />
+          <div className={classes.searchContainer}>
+            <div className={classes.searchBox}>
+              <TextField
+                id="outlined-player"
+                label="Player"
+                className={classes.textField}
+                value={playerInputValue}
+                onChange={searchPlayerInputChange}
+                margin="dense"
+                variant="outlined"
+              />
+              <PlayerSearchedList
+                searched={playerInputValue}
+                players={players}
+              />
+            </div>
+            <div className={classes.searchBox}>
+              <TextField
+                id="outlined-item"
+                label="Item"
+                className={classes.textField}
+                value={itemInputValue}
+                onChange={searchItemInputChange}
+                margin="dense"
+                variant="outlined"
+              />
+              <ItemSearchedList searched={itemInputValue} items={items} />
+            </div>
+          </div>
         </Paper>
       </div>
       <Paper className={classes.lastRaidsPaper}>
@@ -153,6 +228,7 @@ export default function PageIndex() {
           Last raids
         </Typography>
         <Divider />
+
         <div className={classes.tableWrapper}>
           <Table className={classes.table} size="small" stickyHeader={true}>
             <TableHead>
