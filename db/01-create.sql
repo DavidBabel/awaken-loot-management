@@ -80,7 +80,8 @@ CREATE UNIQUE INDEX ON "Items" ("wowheadId");
 CREATE TABLE "ClassItem" (
   "id" SERIAL PRIMARY KEY,
   "classId" int NOT NULL,
-  "itemId" int NOT NULL
+  "itemId" int NOT NULL,
+  "prio" boolean NOT NULL
 );
 comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
