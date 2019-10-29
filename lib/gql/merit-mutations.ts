@@ -20,6 +20,7 @@ export const UPDATE_PLAYER_MERIT = gql`
       }
     ) {
       playerMerit {
+        id
         validated
       }
     }
@@ -44,6 +45,7 @@ export const CREATE_PLAYER_MERIT = gql`
       }
     ) {
       playerMerit {
+        id
         validated
       }
     }

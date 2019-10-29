@@ -156,6 +156,7 @@ export default function PageIndex() {
                     as={`/player/view/${player.id}`}
                   >
                     <a
+                      target="_blank"
                       style={{
                         color: player.classByClassId.color,
                         textDecoration: "none"
@@ -191,7 +192,7 @@ export default function PageIndex() {
                     return (
                       <TableCell
                         onClick={() => {
-                          Router.push("/raid/edit/" + raid.id); // A remplacer par raid/view/[id] quand la page existera
+                          Router.push("/raid/edit/" + raid.id);
                         }}
                         key={player.id + raid.id}
                         className={

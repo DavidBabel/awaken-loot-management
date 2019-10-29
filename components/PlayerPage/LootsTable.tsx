@@ -110,7 +110,7 @@ export default function LootsTable({ loots, hidden }) {
                 <TableCell align="right" className={classes.link}>
                   {" "}
                   <Link href="/raid/edit/[id]" as={`/raid/edit/${row.raidId}`}>
-                    <a>
+                    <a target="_blank">
                       <Button variant="contained" color="primary">
                         View raid
                       </Button>
