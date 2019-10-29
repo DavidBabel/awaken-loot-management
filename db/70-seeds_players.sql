@@ -135,7 +135,11 @@ VALUES
 ('Gkz'          , 4,  'player', null, true, false),
 ('Zebaww'       , 6,  'player', null, true, false),
 ('Krijgs'       , 8,  'player', null, true, false),
-('Volzam'       , 6,  'player', null, true, false)
+('Volzam'       , 6,  'player', null, true, false),
+('Romek'        , 2,  'player', null, true, false),
+('Rupt'         , 4,  'player', null, true, false),
+('Ané'          , 9,  'player', null, true, false),
+('Squeeze'      , 4,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre

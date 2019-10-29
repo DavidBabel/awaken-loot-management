@@ -1936,7 +1936,11 @@ VALUES
 ('Gkz'          , 4,  'player', null, true, false),
 ('Zebaww'       , 6,  'player', null, true, false),
 ('Krijgs'       , 8,  'player', null, true, false),
-('Volzam'       , 6,  'player', null, true, false)
+('Volzam'       , 6,  'player', null, true, false),
+('Romek'        , 2,  'player', null, true, false),
+('Rupt'         , 4,  'player', null, true, false),
+('Ané'          , 9,  'player', null, true, false),
+('Squeeze'      , 4,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
@@ -1978,7 +1982,8 @@ VALUES
 (2, '2019-10-21'), -- 17
 (1, '2019-10-23'), -- 18
 (2, '2019-10-27'), -- 19
-(1, '2019-10-27'); -- 20
+(1, '2019-10-27'), -- 20
+(2, '2019-10-28'); -- 21
 
 -- 1 => Molten Core
 -- 2 => Onyxia Lair
@@ -2846,7 +2851,7 @@ VALUES
 (20, (SELECT id FROM "Players" WHERE "name"='Adblock')),
 -- (20, (SELECT id FROM "Players" WHERE "name"='Anahita')),
 -- (20, (SELECT id FROM "Players" WHERE "name"='Dumbledog')),
--- (20, (SELECT id FROM "Players" WHERE "name"='Romek')),
+(20, (SELECT id FROM "Players" WHERE "name"='Romek')),
 (20, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
 -- (20, (SELECT id FROM "Players" WHERE "name"='Malstep')),
 (20, (SELECT id FROM "Players" WHERE "name"='Gkz')),
@@ -2876,6 +2881,36 @@ VALUES
 -- (20, (SELECT id FROM "Players" WHERE "name"='Daggot')),
 -- (20, (SELECT id FROM "Players" WHERE "name"='Gengrous')),
 (20, (SELECT id FROM "Players" WHERE "name"='Tad'))
+;
+
+
+
+-- Onyxia Raid 1 : 28/10
+INSERT INTO "RaidPlayers" ("raidId", "playerId")
+VALUES
+(21, (SELECT id FROM "Players" WHERE "name"='Lykwette')),
+(21, (SELECT id FROM "Players" WHERE "name"='Devilhunter')),
+(21, (SELECT id FROM "Players" WHERE "name"='Qweakzor')),
+(21, (SELECT id FROM "Players" WHERE "name"='Adblock')),
+(21, (SELECT id FROM "Players" WHERE "name"='Romek')),
+(21, (SELECT id FROM "Players" WHERE "name"='Thorsen')),
+(21, (SELECT id FROM "Players" WHERE "name"='Callumlolz')),
+(21, (SELECT id FROM "Players" WHERE "name"='Gkz')),
+(21, (SELECT id FROM "Players" WHERE "name"='Kaarr')),
+(21, (SELECT id FROM "Players" WHERE "name"='Rupt')),
+(21, (SELECT id FROM "Players" WHERE "name"='Squeeze')),
+(21, (SELECT id FROM "Players" WHERE "name"='Suprême')),
+(21, (SELECT id FROM "Players" WHERE "name"='Ané')),
+(21, (SELECT id FROM "Players" WHERE "name"='Felrik')),
+(21, (SELECT id FROM "Players" WHERE "name"='Ragegoriath')),
+(21, (SELECT id FROM "Players" WHERE "name"='Capoul')),
+(21, (SELECT id FROM "Players" WHERE "name"='Deiv')),
+(21, (SELECT id FROM "Players" WHERE "name"='Easìer')),
+(21, (SELECT id FROM "Players" WHERE "name"='Need')),
+(21, (SELECT id FROM "Players" WHERE "name"='Trackass')),
+(21, (SELECT id FROM "Players" WHERE "name"='Lums')),
+(21, (SELECT id FROM "Players" WHERE "name"='Tad')),
+(21, (SELECT id FROM "Players" WHERE "name"='Thünberg'))
 ;
  -- SAFE BEGIN FOR CONCAT
 
@@ -4386,13 +4421,13 @@ VALUES
   'Ceinture de traqueur de géant'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Trash')),
--- ( 20, -- TODO complete => en banque de guilde
---   (SELECT id FROM "Players" WHERE "name"=
---   ''),
---   (SELECT id FROM "Items" WHERE "name"=
---   'Brassards Rageterre'),
---   (SELECT id FROM "Bosses" WHERE "name"=
---   'Trash')),
+( 20,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lums'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Brassards Rageterre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
 ( 20,
   (SELECT id FROM "Players" WHERE "name"=
   'Xihfu'),
@@ -4568,6 +4603,47 @@ VALUES
   'Cape sang-de-dragon'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Ragnaros'))
+
+;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
+VALUES
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Romek'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque des dix tempêtes'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kaarr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia'))
 
 ; -- SAFE BEGIN FOR CONCAT
 
