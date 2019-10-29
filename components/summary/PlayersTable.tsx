@@ -148,8 +148,8 @@ export default function PlayersTable(props: Props) {
     let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
     if (
       totalLootLevel1 === 0 &&
-      totalLootLevel1 === 0 &&
-      totalLootLevel1 === 0
+      totalLootLevel2 === 0 &&
+      totalLootLevel3 === 0
     ) {
       lastLootDate = null;
     } else {

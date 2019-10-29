@@ -26,7 +26,7 @@ interface Props {
   key: string;
   playerName: string;
   lootData: Loot;
-  lootLvl: number;
+  lootLvl: number | "all";
   iconClientPos: ElementPosition;
   classColor: string;
   closeLootWindow(playerName: string, lootLvl: number): any;
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     position: "absolute",
     backgroundColor: "#E6E8EB",
     borderRadius: "4px",
-    border: "solid 3px",
+    border: "solid 2px",
     boxShadow: "2px 2px 15px -1px rgba(0,0,0,0.75)",
     zIndex: 10000,
     "& .MuiTableCell-head": {
@@ -88,7 +88,8 @@ const useStyles = makeStyles({
   },
   epic: { borderColor: "#a335ee" },
   rare: { borderColor: "#0070dd" },
-  commun: { borderColor: "#1ad900" }
+  commun: { borderColor: "#1ad900" },
+  allLoot: { borderColor: "grey" }
 });
 export default function LootWindow(props) {
   const classes = useStyles(props);
@@ -151,7 +152,6 @@ export default function LootWindow(props) {
       closeLootWindow(playerName, lootLvl);
     }
   }
-  console.log(lootLvl);
   useEffect(() => {
     makeDraggable(lootWindowElem.current);
     lootWindowElem.current.style.top = iconClientPos.top + "px";
@@ -187,7 +187,9 @@ export default function LootWindow(props) {
           ? classes.commun
           : lootLvl === 2
           ? classes.rare
-          : classes.epic)
+          : lootLvl === 3
+          ? classes.epic
+          : classes.allLoot)
       }
       ref={lootWindowElem}
     >
@@ -197,7 +199,9 @@ export default function LootWindow(props) {
             ? "Qualité: médriocre"
             : lootLvl === 2
             ? "Qualité: normale"
-            : "Qualité: haute"
+            : lootLvl === 3
+            ? "Qualité: haute"
+            : "Tous les loots"
         })`}
         <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
