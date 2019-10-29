@@ -36,6 +36,11 @@ interface Props {
   maxMeritValue: number;
   openLootWindow: any;
 }
+interface LootsByLvl {
+  level1: number;
+  level2: number;
+  level3: number;
+}
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -69,6 +74,7 @@ function createData(
   name: string,
   merit: number,
   totalLoot: number,
+  totalLootByLvl: LootsByLvl,
   totalRaid: number,
   lastLootDate: string,
   lastRaidDate: string,
@@ -79,6 +85,7 @@ function createData(
     name,
     merit,
     totalLoot,
+    totalLootByLvl,
     totalRaid,
     lastLootDate,
     lastRaidDate,
@@ -100,6 +107,9 @@ export default function PlayersTable(props: Props) {
 
   const rowsData = props.players.map((player: Player) => {
     let maxMerit = 0;
+    let totalLootLevel1 = 0;
+    let totalLootLevel2 = 0;
+    let totalLootLevel3 = 0;
     let totalLoot = 0;
     const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
       raid => !raid.passed
@@ -109,11 +119,18 @@ export default function PlayersTable(props: Props) {
         maxMerit += merit.meritByMeritId.value;
       }
     });
-    player.lootsByPlayerId.nodes.map(loot => {
+    player.lootsByPlayerId.nodes.forEach(loot => {
       if (loot.active) {
-        totalLoot += 1;
+        if (loot.itemByItemId.lootLevel === 1) {
+          totalLootLevel1 += 1;
+        } else if (loot.itemByItemId.lootLevel === 2) {
+          totalLootLevel2 += 1;
+        } else if (loot.itemByItemId.lootLevel === 3) {
+          totalLootLevel3 += 1;
+        }
       }
     });
+    totalLoot = totalLootLevel3 + totalLootLevel2 + totalLootLevel1;
     let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
     if (totalRaid === 0) {
       lastRaidDate = null;
@@ -129,7 +146,11 @@ export default function PlayersTable(props: Props) {
     }
 
     let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
-    if (totalLoot === 0) {
+    if (
+      totalLootLevel1 === 0 &&
+      totalLootLevel1 === 0 &&
+      totalLootLevel1 === 0
+    ) {
       lastLootDate = null;
     } else {
       player.lootsByPlayerId.nodes.map(loot => {
@@ -148,6 +169,11 @@ export default function PlayersTable(props: Props) {
       player.name,
       Math.round((maxMerit * 100) / props.maxMeritValue),
       totalLoot,
+      {
+        level1: totalLootLevel1,
+        level2: totalLootLevel2,
+        level3: totalLootLevel3
+      },
       totalRaid,
       lastLootDate
         ? lastLootDate.toLocaleDateString("en-EN", dateOptions)

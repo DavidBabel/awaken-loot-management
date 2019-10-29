@@ -149,25 +149,29 @@ export default function PageIndex() {
   function openLootWindow(
     playerName: string,
     lootData: Loot,
+    lootLvl: number,
     iconClientPos: ElementPosition,
     classColor: string
   ) {
     const nameFound = lootWindows.find(element => {
       // check si la fenetre correspondant à ce name est deja ouverte
-      return element.playerName === playerName;
+      return element.playerName === playerName && element.lootLvl === lootLvl;
     });
     if (!nameFound) {
       setLootWindows(prevState => {
         return [
           ...prevState,
-          { playerName, lootData, iconClientPos, classColor }
+          { playerName, lootData, lootLvl, iconClientPos, classColor }
         ];
       });
     }
   }
-  function closeLootWindow(playerName: string) {
+  function closeLootWindow(playerName: string, lootLvl: number) {
     const newWindowsList = lootWindows.filter(
-      lootWindow => lootWindow.playerName !== playerName
+      lootWindow =>
+        !(
+          lootWindow.playerName === playerName && lootWindow.lootLvl === lootLvl
+        )
     );
     setLootWindows(newWindowsList);
   }
@@ -281,9 +285,10 @@ export default function PageIndex() {
       </TabPanel>
       {lootWindows.map(lootWindow => (
         <LootWindow
-          key={lootWindow.playerName}
+          key={lootWindow.playerName + lootWindow.lootLvl}
           playerName={lootWindow.playerName}
           lootData={lootWindow.lootData}
+          lootLvl={lootWindow.lootLvl}
           iconClientPos={lootWindow.iconClientPos}
           closeLootWindow={closeLootWindow}
           classColor={lootWindow.classColor}
