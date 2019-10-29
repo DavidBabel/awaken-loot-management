@@ -136,7 +136,7 @@ export default function PageIndex() {
         }, 150);
       } catch (e) {}
     }
-  }, [itemCurrentlySelected]);
+  }, [itemCurrentlySelected, itemInputValue]);
   const {
     loading: loadingDonjons,
     data: dataDonjons,

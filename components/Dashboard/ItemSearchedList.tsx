@@ -5,7 +5,8 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       width: "100%",
-      overflow: "auto",
+      overflowY: "auto",
+      overflowX: "hidden",
       height: "100px",
       "&::-webkit-scrollbar-thumb": {
         backgroundColor: "#3F51B5",
@@ -19,7 +20,13 @@ const useStyles = makeStyles(() =>
       }
     },
     resultText: {
-      textAlign: "center"
+      whiteSpace: "nowrap",
+      "& a": {
+        textDecoration: "none"
+      },
+      "& a span": {
+        margin: "0px 5px 0px 0px"
+      }
     }
   })
 );
@@ -55,7 +62,16 @@ export default function ItemSearchedList({
           >
             <ListItemText
               className={classes.resultText}
-              primary={result.name}
+              primary={
+                <a
+                  onClick={e => {
+                    e.preventDefault();
+                  }}
+                  href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
+                >
+                  {result.name}
+                </a>
+              }
             />
           </ListItem>
         ))}
