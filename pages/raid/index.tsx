@@ -21,15 +21,16 @@ import TextField from "@material-ui/core/TextField";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { ReactNode, useContext } from "react";
 import ItemsCarousel from "react-items-carousel";
-import ItemSearchedList from "../../components/Dashboard/ItemSearchedList";
-import PlayerSearchedList from "../../components/Dashboard/PlayerSearchedList";
+import ClassAvatar from "../../components/ClassAvatar";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
+import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
+import PlayerSearchedList from "../../components/searchBox/PlayerSearchedList";
 import MemberContext from "../../lib/context/member";
-import { Query } from "../../lib/generatedTypes";
 import { Item } from "../../lib/generatedTypes";
+import { Query } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
@@ -115,6 +116,37 @@ const useStyles = makeStyles({
     "& a span": {
       margin: "0px 5px 0px 0px"
     }
+  },
+  whoLootedContainer: {
+    display: "flex",
+    justifyContent: "center",
+    margin: 20
+  },
+  whoLootedColumn: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: 5,
+    border: "solid 1px rgba(0,0,0,0.2)",
+    backgroundColor: "rgba(0,0,0,0.05)",
+    borderRadius: "4px",
+    padding: 10,
+    width: 120,
+    boxShadow: "0 0 20px 0 rgba(0,0,0,0.15)"
+  },
+  lootedNbChip: {
+    position: "absolute",
+    top: "10px",
+    right: "30px",
+    zIndex: 4,
+    lineHeight: "24px",
+    width: 24,
+    height: 24,
+    textAlign: "center",
+    borderRadius: "50%",
+    color: "white",
+    backgroundColor: "#DC004E"
   }
 });
 
@@ -189,7 +221,46 @@ export default function PageIndex() {
   const handleOpenItemInfo = () => {
     setItemInfoOpened(true);
   };
+  const makeWhoLootedList = (item): ReactNode => {
+    const classesWhoLooted = [];
+    const columns = [];
+    item.lootsByItemId.nodes.forEach(loot => {
+      if (
+        classesWhoLooted.indexOf(loot.playerByPlayerId.classByClassId.name) ===
+        -1
+      ) {
+        classesWhoLooted.push(loot.playerByPlayerId.classByClassId.name);
+      }
+    });
+    classesWhoLooted.forEach(classWhoLooted => {
+      const column = {
+        classWhoLooted,
+        playersWhoLooted: []
+      };
+      item.lootsByItemId.nodes.forEach(loot => {
+        if (loot.playerByPlayerId.classByClassId.name === classWhoLooted) {
+          column.playersWhoLooted.push(loot.playerByPlayerId);
+        }
+      });
+      columns.push(column);
+    });
+    return (
+      <div className={classes.whoLootedContainer}>
+        {columns.map(column => (
+          <div key={column.classWhoLooted} className={classes.whoLootedColumn}>
+            <div className={classes.lootedNbChip}>
+              {column.playersWhoLooted.length}
+            </div>
+            <ClassAvatar playerClass={column.classWhoLooted} />
 
+            {column.playersWhoLooted.map(player => (
+              <div key={player.id}>{player.name}</div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
   return (
     <>
       <Container className={classes.root}>
@@ -321,6 +392,7 @@ export default function PageIndex() {
       </Container>
       <Dialog
         className={classes.itemInfoDialog}
+        maxWidth={"lg"}
         open={itemInfoOpened}
         onClose={handleCloseItemInfo}
         aria-labelledby="item-dialog-title"
@@ -339,10 +411,7 @@ export default function PageIndex() {
           )}
         </DialogTitle>
         <DialogContent>
-          {itemCurrentlySelected &&
-            itemCurrentlySelected.lootsByItemId.nodes.map(
-              loot => loot.playerByPlayerId.name + " "
-            )}
+          {itemCurrentlySelected && makeWhoLootedList(itemCurrentlySelected)}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseItemInfo} color="primary">
