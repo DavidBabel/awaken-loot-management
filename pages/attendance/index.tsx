@@ -25,7 +25,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tableWrapper: {
       height: "100%",
-      overflow: "auto"
+      overflow: "auto",
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "rgba(0,0,0,0.6)",
+        borderRadius: "2px"
+      },
+      "&::-webkit-scrollbar-track": {
+        boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
+      },
+      "&::-webkit-scrollbar": {
+        width: "10px"
+      }
     },
     table: {
       minWidth: 650,

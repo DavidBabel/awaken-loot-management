@@ -45,7 +45,13 @@ const useStyles = makeStyles({
   },
   tableWrapper: {
     maxHeight: 300,
-    overflow: "auto"
+    overflow: "auto",
+    "& a": {
+      textDecoration: "none"
+    },
+    "& a span": {
+      margin: "0px 5px 0px 0px"
+    }
   },
   header: {
     position: "relative",
