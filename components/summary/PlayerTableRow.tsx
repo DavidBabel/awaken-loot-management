@@ -43,15 +43,29 @@ const useStyles = makeStyles({
     border: "1px solid",
     borderRadius: "4px",
     padding: 4,
-    margin: 3
+    margin: 3,
+    position: "relative",
+    minWidth: "50px",
+    backgroundColor: "white"
   },
   viewIcon: {
     marginLeft: "2px",
     padding: 0
   },
+  levelDescription: {
+    position: "absolute",
+    left: "20%",
+    top: "-30%",
+    width: "60%",
+    height: "60%",
+    backgroundColor: "white",
+    fontSize: "12px"
+  },
+  allLoot: { marginLeft: 15 },
   epic: { color: "#a335ee", borderColor: "#a335ee" },
   rare: { color: "#0070dd", borderColor: "#0070dd" },
   commun: { color: "#1ad900", borderColor: "#1ad900" },
+  allLootColor: { color: "grey", borderColor: "grey" },
   noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
@@ -161,6 +175,49 @@ export default function PlayerTableRow(props) {
                   );
                 }}
                 className={classes.viewIcon + " " + classes.commun}
+                color="primary"
+                aria-label="View loots"
+              >
+                <VisibilityIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                ref={iconElem}
+                className={classes.viewIcon + " " + classes.noLoot}
+                color="primary"
+                aria-label="View loots"
+              >
+                <VisibilityOffIcon />
+              </IconButton>
+            )}
+          </div>
+          <div
+            className={
+              classes.numberAndEye +
+              " " +
+              classes.allLoot +
+              " " +
+              classes.allLootColor
+            }
+          >
+            <div className={classes.levelDescription}>All</div>
+            {rowData.totalLoot}
+            {rowData.totalLoot > 0 ? (
+              <IconButton
+                ref={iconElem}
+                onClick={() => {
+                  openLootWindow(
+                    rowData.name,
+                    lootData,
+                    "all",
+                    {
+                      top: iconElem.current.getBoundingClientRect().top,
+                      left: iconElem.current.getBoundingClientRect().left
+                    },
+                    classColor
+                  );
+                }}
+                className={classes.viewIcon + " " + classes.allLootColor}
                 color="primary"
                 aria-label="View loots"
               >
