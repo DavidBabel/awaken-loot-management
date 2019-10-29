@@ -1,12 +1,13 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { Avatar, Button, Container, Grid, Typography } from '@material-ui/core';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { DatePicker } from '../../../components/DatePicker';
-import { LoadingAndError } from '../../../components/LoadingAndErrors';
-import { Mutation, Query } from '../../../lib/generatedTypes';
-import { CREATE_RAID } from '../../../lib/gql/raid-mutations';
-import { ONE_DONJON } from '../../../lib/gql/raid-queries';
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Avatar, Button, Container, Grid, Typography } from "@material-ui/core";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { DatePicker } from "../../../components/DatePicker";
+import { LoadingAndError } from "../../../components/LoadingAndErrors";
+import { Mutation, Query } from "../../../lib/generatedTypes";
+import { CREATE_RAID } from "../../../lib/gql/raid-mutations";
+import { ONE_DONJON } from "../../../lib/gql/raid-queries";
+import { getDonjonImageUrl } from "../../../lib/utils/image";
 
 interface QueryVariables {
   donjonId: number;
@@ -36,7 +37,7 @@ export default function PageCreateRaid() {
   const loading = loadingDonjon || loadingCreateRaid;
   const error = errorDonjon || errorCreateRaid;
 
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   if (loading || error) {
@@ -50,7 +51,7 @@ export default function PageCreateRaid() {
         <Grid item={true}>
           <Avatar
             alt={currentDonjon.name}
-            src={`/public/images/avatar/${currentDonjon.shortName}.jpg`}
+            src={getDonjonImageUrl(currentDonjon.name)}
           />
         </Grid>
         <Grid item={true}>

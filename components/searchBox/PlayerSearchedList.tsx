@@ -52,7 +52,7 @@ export default function PlayerSearchedList({ searched, players }) {
                 style={{
                   color: result.classByClassId.color
                 }}
-                primary={<a>{result.name}</a>}
+                primary={<a target="_blank">{result.name}</a>}
               />
             </Link>
           </ListItem>

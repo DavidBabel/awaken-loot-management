@@ -97,6 +97,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${pretre.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: pretre.playerByPlayerId.classByClassId.color
                   }}
@@ -115,6 +116,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${mage.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: mage.playerByPlayerId.classByClassId.color
                   }}
@@ -133,6 +135,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${demoniste.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: demoniste.playerByPlayerId.classByClassId.color
                   }}
@@ -151,6 +154,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${voleur.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: voleur.playerByPlayerId.classByClassId.color
                   }}
@@ -169,6 +173,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${druide.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: druide.playerByPlayerId.classByClassId.color
                   }}
@@ -187,6 +192,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${chasseur.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: chasseur.playerByPlayerId.classByClassId.color
                   }}
@@ -205,6 +211,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${chaman.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: chaman.playerByPlayerId.classByClassId.color
                   }}
@@ -223,6 +230,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${guerrierTank.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: guerrierTank.playerByPlayerId.classByClassId.color
                   }}
@@ -241,6 +249,7 @@ export default function PlayerList({ open, handleClose, players }) {
                 as={`/player/view/${guerrierDPS.playerByPlayerId.id}`}
               >
                 <a
+                  target="_blank"
                   style={{
                     color: guerrierDPS.playerByPlayerId.classByClassId.color
                   }}

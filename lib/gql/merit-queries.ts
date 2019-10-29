@@ -4,10 +4,10 @@ export const PLAYER_MERIT = gql`
   query OnePlayerMerit($playerId: Int) {
     allMerits {
       nodes {
+        id
         name
         comment
         categorie
-        id
         active
         playerMeritsByMeritId(condition: { playerId: $playerId }) {
           nodes {
@@ -27,9 +27,9 @@ export const ALL_MERITS = gql`
     allMerits {
       edges {
         node {
+          id
           value
           name
-          id
           comment
           categorie
           active

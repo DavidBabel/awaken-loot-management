@@ -10,19 +10,19 @@ export const ALL_ITEMS = gql`
         wowheadId
         lootsByItemId {
           nodes {
-            active
             id
+            active
             playerByPlayerId {
-              active
               id
+              active
               classId
+              inRoster
+              name
               classByClassId {
                 id
                 color
                 name
               }
-              inRoster
-              name
             }
           }
         }

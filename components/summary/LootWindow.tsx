@@ -235,7 +235,7 @@ export default function LootWindow(props) {
                     href="/raid/edit/[id]"
                     as={`/raid/edit/${loot.raidByRaidId.id}`}
                   >
-                    <a>
+                    <a target="_blank">
                       <Button variant="contained" color="primary">
                         {loot.raidByRaidId.date}
                         <VisibilityIcon />

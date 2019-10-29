@@ -378,7 +378,7 @@ export default function PageIndex() {
                           as={`/raid/edit/${raid.id}`}
                         >
                           <Button variant="contained" color="primary">
-                            <a>VIEW</a>
+                            <a target="_blank">VIEW</a>
                           </Button>
                         </Link>
                       </TableCell>

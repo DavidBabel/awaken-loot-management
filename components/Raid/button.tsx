@@ -9,6 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "next/link";
 import { Donjon } from "../../lib/generatedTypes";
+import { getDonjonImageUrl } from "../../lib/utils/image";
 
 interface Props {
   donjon: Donjon;
@@ -37,9 +38,7 @@ export function CreateRaid({ donjon }: Props) {
     <Card className={classes.card}>
       <CardMedia
         className={classes.media}
-        image={`/img/donjon/${donjon.name
-          .toLowerCase()
-          .replace(/\s/g, "-")}.jpg`}
+        image={getDonjonImageUrl(donjon.name)}
         title={donjon.name}
       />
       <CardContent className={classes.cardContent}>
