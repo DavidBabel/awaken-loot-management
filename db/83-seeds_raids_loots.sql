@@ -1384,7 +1384,7 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Allyssamyr'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Ceinture d‘arcaniste'),
+  'Manchettes d‘arcaniste'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Trash')),
 ( 18,
