@@ -421,7 +421,7 @@ VALUES
 ('Fléau de Bonereaver',17076,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Jambières des dix tempêtes',16946,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 2),
 -- manually added
-('Défenseur de Malistar',17106,(SELECT id FROM "Classes" WHERE "name"=''), 3);
+('Défenseur de Malistar',17106,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Oeil de Sulfuras',17204,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
