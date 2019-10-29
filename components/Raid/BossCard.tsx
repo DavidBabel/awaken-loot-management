@@ -36,6 +36,7 @@ import MemberContext from "../../lib/context/member";
 import { Boss, BossItem, Loot, Mutation } from "../../lib/generatedTypes";
 import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
 import { role } from "../../lib/role-level";
+import { getBossImageUrl } from "../../lib/utils/image";
 
 declare global {
   interface Window {
@@ -192,9 +193,7 @@ export function BossCard({
         <CardHeader className={classes.header} title={name} subheader="" />
         <CardMedia
           className={classes.media}
-          image={`/img/boss/${donjonShortName}/${name
-            .toLowerCase()
-            .replace(/\s/g, "-")}.jpg`}
+          image={getBossImageUrl(donjonShortName, name)}
           title={name}
         />
         <CardContent className={classes.cardContent} ref={bossCardContentElem}>
