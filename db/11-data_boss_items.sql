@@ -374,11 +374,11 @@ VALUES
 ('Drague-lave de Finkle',18803,(SELECT id FROM "Classes" WHERE "name"=''), 1),
 ('Echarpe des secrets murmurés',18809,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Epaulières de garde du feu',19139,(SELECT id FROM "Classes" WHERE "name"=''), 1),
-('Feuille ancienne pétrifiée',18703,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 2),
+('Feuille ancienne pétrifiée',18703,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 3),
 ('Gants de la flamme hypnotique',18808,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Garde-poignets de vrai vol',18812,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Grèves du Coeur du Magma',18806,(SELECT id FROM "Classes" WHERE "name"=''), 2),
-('L‘Oeil de la divinité',18646,(SELECT id FROM "Classes" WHERE "name"='Prêtre'), 2),
+('L‘Oeil de la divinité',18646,(SELECT id FROM "Classes" WHERE "name"='Prêtre'), 3),
 ('Spallières de croissance sauvage',18810,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
