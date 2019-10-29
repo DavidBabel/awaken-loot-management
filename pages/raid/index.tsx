@@ -36,7 +36,12 @@ import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { byDate } from "../../lib/utils/sorter";
 
-// import { getAll } from '../lib/helpers/graphql-helpers';
+declare global {
+  interface Window {
+    $WowheadPower: any;
+  }
+}
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -102,6 +107,14 @@ const useStyles = makeStyles({
     "&:nth-child(1)": {
       borderRight: " 1px solid #E0E0E0"
     }
+  },
+  itemInfoDialog: {
+    "& a": {
+      textDecoration: "none"
+    },
+    "& a span": {
+      margin: "0px 5px 0px 0px"
+    }
   }
 });
 
@@ -115,7 +128,15 @@ export default function PageIndex() {
   const [itemCurrentlySelected, setItemCurrentlySelected] = React.useState<
     Item
   >(null);
-
+  React.useEffect(() => {
+    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+      try {
+        setTimeout(() => {
+          window.$WowheadPower.refreshLinks();
+        }, 150);
+      } catch (e) {}
+    }
+  }, [itemCurrentlySelected]);
   const {
     loading: loadingDonjons,
     data: dataDonjons,
@@ -299,13 +320,23 @@ export default function PageIndex() {
         </Paper>
       </Container>
       <Dialog
+        className={classes.itemInfoDialog}
         open={itemInfoOpened}
         onClose={handleCloseItemInfo}
         aria-labelledby="item-dialog-title"
         aria-describedby="item-dialog-description"
       >
         <DialogTitle id="item-dialog-title">
-          {itemCurrentlySelected && itemCurrentlySelected.name}
+          {itemCurrentlySelected && (
+            <a
+              onClick={e => {
+                e.preventDefault();
+              }}
+              href={`https://fr.classic.wowhead.com/item=${itemCurrentlySelected.wowheadId}`}
+            >
+              {itemCurrentlySelected.name}
+            </a>
+          )}
         </DialogTitle>
         <DialogContent>
           {itemCurrentlySelected &&

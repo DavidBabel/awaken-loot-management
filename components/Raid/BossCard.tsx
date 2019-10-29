@@ -83,7 +83,13 @@ const useStyles = makeStyles({
     width: 240,
     whiteSpace: "nowrap",
     lineHeight: "44px",
-    overflow: "hidden"
+    overflow: "hidden",
+    "& a": {
+      textDecoration: "none"
+    },
+    "& a span:nth-child(1)": {
+      margin: "0px 5px 0px 0px"
+    }
   },
   playerCell: {
     width: 120,

@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tableWrapper: {
       maxHeight: "calc(100vh - 300px)",
-      overflow: "auto"
+      overflow: "auto",
+      "& a": {
+        textDecoration: "none"
+      },
+      "& a span": {
+        margin: "0px 5px 0px 0px"
+      }
     },
     table: {
       minWidth: 650
