@@ -21,6 +21,7 @@
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
 ('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
+('awaken'       , 6,  'player', 'a4261bb727d95e6df608247a6559571f', true, true), -- awakentest
 ('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', true, false),
 ('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', true, false),
 ('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', true, false),
