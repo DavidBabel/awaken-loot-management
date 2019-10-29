@@ -1507,13 +1507,13 @@ VALUES
   'Ceinture de traqueur de géant'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Trash')),
--- ( 20, -- TODO complete => en banque de guilde
---   (SELECT id FROM "Players" WHERE "name"=
---   ''),
---   (SELECT id FROM "Items" WHERE "name"=
---   'Brassards Rageterre'),
---   (SELECT id FROM "Bosses" WHERE "name"=
---   'Trash')),
+( 20,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lums'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Brassards Rageterre'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Trash')),
 ( 20,
   (SELECT id FROM "Players" WHERE "name"=
   'Xihfu'),
@@ -1689,5 +1689,46 @@ VALUES
   'Cape sang-de-dragon'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Ragnaros'))
+
+;
+
+
+INSERT INTO "Loots" ("raidId", "playerId", "itemId", "bossId")
+VALUES
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Romek'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Couronne de Vent du néant'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Thünberg'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Casque des dix tempêtes'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Adblock'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Lykwette'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Sac à dos en cuir d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia')),
+( 21,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Kaarr'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'),
+  (SELECT id FROM "Bosses" WHERE "name"=
+  'Onyxia'))
 
 ;
