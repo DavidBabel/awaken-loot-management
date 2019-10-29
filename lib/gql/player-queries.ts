@@ -4,8 +4,8 @@ export const ALL_CLASSES = gql`
   query MyQuery {
     allClasses {
       nodes {
-        color
         id
+        color
         name
       }
     }
@@ -16,18 +16,19 @@ export const ALL_PLAYERS = gql`
   query AllPlayers {
     allPlayers {
       nodes {
-        classByClassId {
-          color
-          name
-          id
-        }
         id
         name
         active
         inRoster
         classId
+        classByClassId {
+          id
+          color
+          name
+        }
         playerMeritsByPlayerId {
           nodes {
+            id
             validated
             date
             meritByMeritId {
@@ -42,6 +43,7 @@ export const ALL_PLAYERS = gql`
         }
         lootsByPlayerId {
           nodes {
+            id
             active
             itemByItemId {
               id
@@ -50,15 +52,15 @@ export const ALL_PLAYERS = gql`
               lootLevel
             }
             raidByRaidId {
-              date
               id
+              date
             }
           }
         }
         raidPlayersByPlayerId {
           nodes {
-            passed
             id
+            passed
             raidId
             raidByRaidId {
               id
@@ -75,44 +77,50 @@ export const ONE_PLAYER = gql`
   query getOnePlayer($playerId: Int) {
     allPlayers(condition: { id: $playerId }) {
       nodes {
+        id
         name
         classByClassId {
+          id
           color
           name
-          id
         }
         playerMeritsByPlayerId {
           nodes {
+            id
             date
+            validated
             meritByMeritId {
+              id
               name
               value
               active
               categorie
               comment
             }
-            validated
           }
         }
         lootsByPlayerId {
           nodes {
+            id
             active
             itemByItemId {
+              id
               wowheadId
               name
             }
             raidByRaidId {
-              date
               id
+              date
             }
           }
         }
         raidPlayersByPlayerId {
           nodes {
-            passed
             id
+            passed
             raidId
             raidByRaidId {
+              id
               date
               donjonId
               donjonByDonjonId {

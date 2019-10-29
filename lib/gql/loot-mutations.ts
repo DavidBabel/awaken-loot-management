@@ -22,9 +22,11 @@ export const CREATE_LOOT = gql`
       }
     ) {
       itemByItemId {
+        id
         name
       }
       playerByPlayerId {
+        id
         name
       }
     }

@@ -30,14 +30,17 @@ export const ONE_DONJON = gql`
     allDonjons(condition: { id: $donjonId }) {
       edges {
         node {
+          id
           name
           shortName
           active
           bossesByDonjonId {
             nodes {
+              id
               name
               bossItemsByBossId {
                 nodes {
+                  id
                   itemId
                 }
               }
@@ -56,11 +59,13 @@ export const ALL_RAIDS = gql`
         date
         id
         donjonByDonjonId {
+          id
           name
           shortName
         }
         raidPlayersByRaidId {
           nodes {
+            id
             passed
             playerByPlayerId {
               name
@@ -78,33 +83,35 @@ export const ONE_RAID = gql`
   query GetOneRaid($raidId: Int) {
     allRaids(condition: { id: $raidId }) {
       nodes {
+        id
         date
         donjonByDonjonId {
           name
           shortName
           bossesByDonjonId {
             nodes {
-              name
               id
+              name
               donjonId
               bossItemsByBossId {
                 nodes {
+                  id
                   itemByItemId {
+                    id
                     wowheadId
                     name
-                    id
+                    classId
                     classItemsByItemId {
                       nodes {
+                        id
                         itemId
                         classByClassId {
+                          id
                           color
                           name
-                          id
                         }
-                        id
                       }
                     }
-                    classId
                   }
                 }
               }
@@ -113,31 +120,38 @@ export const ONE_RAID = gql`
         }
         raidPlayersByRaidId {
           nodes {
+            id
             playerByPlayerId {
+              id
               name
               classId
-              id
               classByClassId {
+                id
                 color
                 name
-                id
               }
               lootsByPlayerId {
                 nodes {
+                  id
                   itemByItemId {
+                    id
                     name
                   }
                   raidByRaidId {
+                    id
                     date
                   }
                 }
               }
               raidPlayersByPlayerId {
                 nodes {
+                  id
                   passed
                   raidByRaidId {
+                    id
                     date
                     donjonByDonjonId {
+                      id
                       name
                     }
                   }
@@ -154,13 +168,14 @@ export const ONE_RAID = gql`
             lastActionBy
             lastActionDate
             itemByItemId {
+              id
               name
               classId
-              id
               lootLevel
               wowheadId
               bossItemsByItemId {
                 nodes {
+                  id
                   bossByBossId {
                     id
                   }
@@ -168,27 +183,31 @@ export const ONE_RAID = gql`
               }
               lootsByItemId {
                 nodes {
+                  id
                   playerByPlayerId {
+                    id
                     name
                     classId
                     classByClassId {
+                      id
                       color
                       name
                     }
                   }
                   itemByItemId {
+                    id
                     name
                   }
                 }
               }
             }
             raidByRaidId {
-              date
               id
+              date
             }
             playerByPlayerId {
-              name
               id
+              name
               classId
               classByClassId {
                 id

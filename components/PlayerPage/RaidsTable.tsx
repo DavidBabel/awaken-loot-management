@@ -82,7 +82,7 @@ export default function RaidsTable({ raids, hidden }) {
                     href="/raid/edit/[id]"
                     as={`/raid/edit/${row.raidId}`} /* a remplacer par /raid/view/[id] */
                   >
-                    <a>
+                    <a target="_blank">
                       <Button variant="contained" color="primary">
                         View raid
                       </Button>

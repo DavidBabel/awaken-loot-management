@@ -245,6 +245,7 @@ export function BossCard({
                           as={`/player/view/${loot.playerByPlayerId.id}`}
                         >
                           <a
+                            target="_blank"
                             style={{
                               color:
                                 loot.playerByPlayerId.classByClassId.id !== 1
