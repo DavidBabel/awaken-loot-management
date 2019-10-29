@@ -706,26 +706,26 @@ VALUES
 -- SELECT 1 AS "Onyxia";
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Tête d‘Onyxia',18422,(SELECT id FROM "Classes" WHERE "name"=''), 2),
-('Tendon de dragon noir adulte',18705,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 2),
-('Ancien Grimoire de Cornerstone',17067,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Tête d‘Onyxia',18422,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Tendon de dragon noir adulte',18705,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 1),
+('Ancien Grimoire de Cornerstone',17067,(SELECT id FROM "Classes" WHERE "name"=''), 1),
 ('Anneau de lien',18813,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Couvre-chef de Stormrage',16900,(SELECT id FROM "Classes" WHERE "name"='Druide'), 2),
 ('Crâne de Némésis',16929,(SELECT id FROM "Classes" WHERE "name"='Démoniste'), 2),
 ('Casque de traqueur de dragon',16939,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 2),
 ('Couronne de Vent du néant',16914,(SELECT id FROM "Classes" WHERE "name"='Mage'), 2),
-('Drapé de Saphiron',17078,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Drapé de Saphiron',17078,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Auréole de transcendance',16921,(SELECT id FROM "Classes" WHERE "name"='Prêtre'), 2),
 ('Cagoule Rougecroc',16908,(SELECT id FROM "Classes" WHERE "name"='Voleur'), 2),
 ('Heaume de courroux',16963,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'), 2),
 ('Collier d‘Eskhandar',18205,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Couronne du jugement',16955,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 2),
 ('Casque des dix tempêtes',16947,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 2),
-('Eclat de l‘Ecaille',17064,(SELECT id FROM "Classes" WHERE "name"=''), 2),
-('Porte-mort',17068,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Eclat de l‘Ecaille',17064,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Porte-mort',17068,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Sac à dos en cuir d‘Onyxia',17966,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 -- ('Tête d‘Onyxia',18423,(SELECT id FROM "Classes" WHERE "name"=''), 2),
-('Vis‘kag le Saigneur',17075,(SELECT id FROM "Classes" WHERE "name"=''), 2);
+('Vis‘kag le Saigneur',17075,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -749,7 +749,7 @@ VALUES
 -- ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075));
 
-
+-- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
   ((SELECT id FROM "Items" WHERE "name"=
@@ -1479,13 +1479,157 @@ VALUES
   'Chaman'), true)
 ;
 
--- INSERT INTO "ClassItem" ("classId","itemId","prio")
--- VALUES
---   ((SELECT id FROM "Items" WHERE "name"=
---   'Défenseur de Malistar'
---   ),(SELECT id FROM "Classes" WHERE "name"=
---   'Chaman'), true)
--- ;
+-- onyxia
+INSERT INTO "ClassItem" ("itemId","classId","prio")
+VALUES
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Mage'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Démoniste'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier DPS'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier Tank'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Voleur'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Tête d‘Onyxia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chasseur'), true),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Mage'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Ancien Grimoire de Cornerstone'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Démoniste'), false),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de lien'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier Tank'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de lien'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier DPS'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de lien'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), false),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Mage'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Drapé de Saphiron'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Démoniste'), true),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier Tank'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier DPS'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Collier d‘Eskhandar'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), false),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Mage'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Eclat de l‘Ecaille'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Démoniste'), false),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Porte-mort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier Tank'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Porte-mort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier DPS'), true),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier Tank'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Guerrier DPS'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Vis‘kag le Saigneur'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Voleur'), true)
+;
 
 
 -- ('Prêtre',        '#FFFFFF'),
