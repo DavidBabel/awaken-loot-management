@@ -99,7 +99,8 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 CREATE TABLE "Bosses" (
   "id" SERIAL PRIMARY KEY,
   "donjonId" int NOT NULL,
-  "name" varchar
+  "name" varchar,
+  "cdnImage" varchar
 );
 comment on table "Bosses" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Bosses" ("id");

@@ -17,6 +17,7 @@ export type Boss = Node & {
   id: Scalars['Int'],
   donjonId: Scalars['Int'],
   name?: Maybe<Scalars['String']>,
+  cdnImage?: Maybe<Scalars['String']>,
   /** Reads a single `Donjon` that is related to this `Boss`. */
   donjonByDonjonId?: Maybe<Donjon>,
   /** Reads and enables pagination through a set of `Loot`. */
@@ -55,6 +56,8 @@ export type BossCondition = {
   donjonId?: Maybe<Scalars['Int']>,
   /** Checks for equality with the object’s `name` field. */
   name?: Maybe<Scalars['String']>,
+  /** Checks for equality with the object’s `cdnImage` field. */
+  cdnImage?: Maybe<Scalars['String']>,
 };
 
 /** A connection to a list of `Boss` values. */
@@ -88,6 +91,8 @@ export enum BossesOrderBy {
   DonjonIdDesc = 'DONJON_ID_DESC',
   NameAsc = 'NAME_ASC',
   NameDesc = 'NAME_DESC',
+  CdnImageAsc = 'CDN_IMAGE_ASC',
+  CdnImageDesc = 'CDN_IMAGE_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
