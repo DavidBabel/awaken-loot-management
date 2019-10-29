@@ -26,17 +26,18 @@ interface Props {
   key: string;
   playerName: string;
   lootData: Loot;
+  lootLvl: number;
   iconClientPos: ElementPosition;
   classColor: string;
-  closeLootWindow(playerName: string): any;
+  closeLootWindow(playerName: string, lootLvl: number): any;
 }
 
 const useStyles = makeStyles({
   root: {
     position: "absolute",
     backgroundColor: "#E6E8EB",
-    borderRadius: "5px",
-    border: "solid 1px grey",
+    borderRadius: "4px",
+    border: "solid 3px",
     boxShadow: "2px 2px 15px -1px rgba(0,0,0,0.75)",
     zIndex: 10000,
     "& .MuiTableCell-head": {
@@ -63,7 +64,7 @@ const useStyles = makeStyles({
     height: "30px",
     lineHeight: "30px",
     cursor: "move",
-    borderRadius: "3px 3px 0px 0px"
+    borderRadius: "1px 1px 0px 0px"
   },
   cross: {
     position: "absolute",
@@ -84,11 +85,20 @@ const useStyles = makeStyles({
     "& .MuiSvgIcon-root": {
       marginLeft: "5px"
     }
-  }
+  },
+  epic: { borderColor: "#a335ee" },
+  rare: { borderColor: "#0070dd" },
+  commun: { borderColor: "#1ad900" }
 });
 export default function LootWindow(props) {
   const classes = useStyles(props);
-  const { closeLootWindow, playerName, iconClientPos, lootData } = props;
+  const {
+    closeLootWindow,
+    playerName,
+    lootLvl,
+    iconClientPos,
+    lootData
+  } = props;
   const lootWindowElem = React.useRef(null);
   const headerElem = React.useRef(null);
   function makeDraggable(elem: HTMLElement) {
@@ -135,12 +145,13 @@ export default function LootWindow(props) {
         }
       );
       setTimeout(() => {
-        closeLootWindow(playerName);
+        closeLootWindow(playerName, lootLvl);
       }, 250);
     } else {
-      closeLootWindow(playerName);
+      closeLootWindow(playerName, lootLvl);
     }
   }
+  console.log(lootLvl);
   useEffect(() => {
     makeDraggable(lootWindowElem.current);
     lootWindowElem.current.style.top = iconClientPos.top + "px";
@@ -168,9 +179,26 @@ export default function LootWindow(props) {
     }
   });
   return (
-    <div className={classes.root} ref={lootWindowElem}>
+    <div
+      className={
+        classes.root +
+        " " +
+        (lootLvl === 1
+          ? classes.commun
+          : lootLvl === 2
+          ? classes.rare
+          : classes.epic)
+      }
+      ref={lootWindowElem}
+    >
       <div className={classes.header} ref={headerElem}>
-        {playerName.toUpperCase()}
+        {`${playerName.toUpperCase()} (${
+          lootLvl === 1
+            ? "Qualité: médriocre"
+            : lootLvl === 2
+            ? "Qualité: normale"
+            : "Qualité: haute"
+        })`}
         <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
         </div>

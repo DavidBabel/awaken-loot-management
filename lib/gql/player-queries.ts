@@ -31,6 +31,7 @@ export const ALL_PLAYERS = gql`
             validated
             date
             meritByMeritId {
+              id
               name
               value
               active
@@ -43,8 +44,10 @@ export const ALL_PLAYERS = gql`
           nodes {
             active
             itemByItemId {
+              id
               wowheadId
               name
+              lootLevel
             }
             raidByRaidId {
               date
@@ -58,6 +61,7 @@ export const ALL_PLAYERS = gql`
             id
             raidId
             raidByRaidId {
+              id
               date
               donjonId
             }
