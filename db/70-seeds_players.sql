@@ -70,7 +70,7 @@ VALUES
 ('Lylith'       , 1,  'player', null, true, false),
 ('Mergueztguez' , 7,  'player', null, true, false),
 ('Minatrix'     , 2,  'player', null, true, false),
-('Need'         , 1,  'player', null, true, false),
+('Need'         , 1,  'player', 'b1d38a948caf22ca343d9efc2d36729e', true, false),
 ('Nérull'       , 4,  'player', null, false, false),
 ('Néstor'       , 3,  'player', null, true, false),
 ('Nøwad'        , 9,  'player', null, true, false),
