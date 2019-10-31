@@ -41,7 +41,7 @@ VALUES
 ('Hakken'       , 2,  'player', null, false, false),
 ('Adblock'      , 2,  'player', null, true, false),
 ('Affligeant'   , 3,  'player', null, false, false),
-('Alk'          , 6,  'player', null, true, false),
+('Alk'          , 6,  'player', '2554dbad66e1367b98f6c52cea0811b6', true, false),
 ('Allyssamyr'   , 2,  'player', null, true, false),
 ('Beudinio'     , 5,  'player', null, false, false),
 ('Bobbyz'       , 9,  'player', null, true, false),
