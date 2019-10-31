@@ -140,7 +140,7 @@ VALUES
 ('Romek'        , 2,  'player', null, true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),
-('Squeeze'      , 4,  'player', null, true, false)
+('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false)
 ;
 
 -- 1 - Prêtre
