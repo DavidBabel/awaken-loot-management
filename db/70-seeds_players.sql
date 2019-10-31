@@ -33,7 +33,7 @@ VALUES
 ('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
 ('Oscuro'       , 9,  'player', null, true, true),
 ('Paffë'        , 5,  'player', null, true, true),
-('Skwäsh'       , 1,  'player', null, true, true),
+('Skwäsh'       , 1,  'player', '2f8b09d7750539ba0d7853cd1eae78ee', true, true),
 ('Tàel'         , 3,  'player', null, true, true),
 ('Ragegoriath'  , 8,  'player', null, true, true),
 ('Abramus'      , 2,  'player', null, true, true),
