@@ -246,18 +246,23 @@ export default function PageIndex() {
     });
     return (
       <div className={classes.whoLootedContainer}>
-        {columns.map(column => (
-          <div key={column.classWhoLooted} className={classes.whoLootedColumn}>
-            <div className={classes.lootedNbChip}>
-              {column.playersWhoLooted.length}
-            </div>
-            <ClassAvatar playerClass={column.classWhoLooted} />
+        {columns.length > 0
+          ? columns.map(column => (
+              <div
+                key={column.classWhoLooted}
+                className={classes.whoLootedColumn}
+              >
+                <div className={classes.lootedNbChip}>
+                  {column.playersWhoLooted.length}
+                </div>
+                <ClassAvatar playerClass={column.classWhoLooted} />
 
-            {column.playersWhoLooted.map(player => (
-              <div key={player.id}>{player.name}</div>
-            ))}
-          </div>
-        ))}
+                {column.playersWhoLooted.map(player => (
+                  <div key={player.id}>{player.name}</div>
+                ))}
+              </div>
+            ))
+          : "Pas looté"}
       </div>
     );
   };
