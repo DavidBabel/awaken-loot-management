@@ -129,7 +129,7 @@ export default function ItemSearchedList({
                 " " +
                 classes["lootLevel" + result.lootLevel]
               }
-              primary={result.lootLevel}
+              primary={result.lootsByItemId.nodes.length}
             />
           </ListItem>
         ))}
