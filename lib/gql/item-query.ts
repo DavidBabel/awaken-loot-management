@@ -8,6 +8,7 @@ export const ALL_ITEMS = gql`
         lootLevel
         name
         wowheadId
+        classId
         lootsByItemId {
           nodes {
             id
@@ -25,6 +26,20 @@ export const ALL_ITEMS = gql`
               }
             }
           }
+        }
+        classItemsByItemId {
+          nodes {
+            id
+            prio
+            classByClassId {
+              id
+              name
+            }
+          }
+        }
+        classByClassId {
+          name
+          id
         }
       }
     }
