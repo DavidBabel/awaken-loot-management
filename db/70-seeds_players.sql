@@ -27,7 +27,7 @@ VALUES
 ('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', true, false),
 ('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', true, false),
 ('Lums'         , 7,  'player', null, true, true),
-('Deiv'         , 1,  'player', null, true, true),
+('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
 ('Krigen'       , 8,  'player', null, true, true),
 ('Cocobanjo'    , 4,  'player', null, true, true),
 ('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
