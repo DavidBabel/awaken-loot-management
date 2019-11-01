@@ -125,7 +125,7 @@ VALUES
 ('Owhlord'      , 2,  'player', null, true, false),
 ('Angelus'      , 9,  'player', null, true, false),
 ('Felrik'       , 9,  'player', null, true, false),
-('Kgr'          , 3,  'player', null, true, false),
+('Kgr'          , 3,  'player', '4523bea82ba2f9c9d30644931d2dc35e', true, false),
 ('Kheya'        , 4,  'player', null, true, false),
 ('Caëdo'        , 4,  'player', null, true, false),
 ('Weezy'        , 3,  'player', null, true, false),
