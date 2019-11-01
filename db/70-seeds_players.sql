@@ -137,7 +137,7 @@ VALUES
 ('Zebaww'       , 6,  'player', null, true, false),
 ('Krijgs'       , 8,  'player', null, true, false),
 ('Volzam'       , 6,  'player', null, true, false),
-('Romek'        , 2,  'player', null, true, false),
+('Romek'        , 2,  'player', '8f7029a25f593e64a888e673ce5689a9', true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),
 ('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false)
