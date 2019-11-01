@@ -6,13 +6,24 @@ import { getClassImageUrl } from "../lib/utils/image";
 
 const useStyles = makeStyles({
   avatar: {
-    margin: 10
+    margin: 10,
+    position: "relative"
+  },
+  prio: {
+    padding: 2,
+    position: "absolute",
+    borderRadius: "4px",
+    backgroundColor: "#EF5858",
+    color: "white",
+    fontSize: "10px",
+    top: "5px"
   }
 });
 interface Props {
   playerClass: string;
+  prio?: boolean;
 }
-export default function classAvatar({ playerClass }: Props) {
+export default function classAvatar({ playerClass, prio }: Props) {
   const classes = useStyles("");
 
   return (
@@ -22,6 +33,7 @@ export default function classAvatar({ playerClass }: Props) {
         src={getClassImageUrl(playerClass)}
         className={classes.avatar}
       />
+      {prio && <div className={classes.prio}>PRIO</div>}
     </Grid>
   );
 }

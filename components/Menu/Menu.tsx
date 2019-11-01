@@ -46,6 +46,11 @@ export function Menu() {
                 <ListItemText primary="Attendance" />
               </Link>
             </ListItem>
+            <ListItem button={true}>
+              <Link href="/items">
+                <ListItemText primary="Items" />
+              </Link>
+            </ListItem>
           </List>
 
           <List>

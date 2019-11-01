@@ -342,6 +342,7 @@ export default function PageIndex() {
                   variant="outlined"
                 />
                 <ItemSearchedList
+                  listHeight={"100px"}
                   searched={itemInputValue}
                   items={items}
                   setItemCurrentlySelected={setItemCurrentlySelected}
