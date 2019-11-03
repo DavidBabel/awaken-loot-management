@@ -35,7 +35,7 @@ VALUES
 ('Paffë'        , 5,  'player', null, true, true),
 ('Skwäsh'       , 1,  'player', '2f8b09d7750539ba0d7853cd1eae78ee', true, true),
 ('Tàel'         , 3,  'player', null, true, true),
-('Ragegoriath'  , 8,  'player', null, true, true),
+('Ragegoriath'  , 8,  'player', 'e3b557b6f939ad38f1610dd5102b1ee7', true, true),
 ('Abramus'      , 2,  'player', null, true, true),
 ('Shaheem'      , 3,  'player', null, false, false),
 ('Hakken'       , 2,  'player', null, false, false),
