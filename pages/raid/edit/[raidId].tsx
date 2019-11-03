@@ -15,9 +15,10 @@ import {
   SnackbarContent
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import { green } from "@material-ui/core/colors";
+// import { green } from "@material-ui/core/colors";
 
-import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
+// import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import { useRouter } from "next/router";
@@ -35,6 +36,7 @@ import MemberContext from "../../../lib/context/member";
 import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { useToggle } from "../../../lib/hooks/toggle";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 interface QueryVariables {
@@ -84,16 +86,16 @@ const useStyles = makeStyles({
   }
 });
 
-const GreenButton = withStyles((theme: Theme) => ({
-  root: {
-    color: theme.palette.getContrastText(green[500]),
-    marginLeft: 20,
-    backgroundColor: green[500],
-    "&:hover": {
-      backgroundColor: green[700]
-    }
-  }
-}))(Button);
+// const GreenButton = withStyles((theme: Theme) => ({
+//   root: {
+//     color: theme.palette.getContrastText(green[500]),
+//     marginLeft: 20,
+//     backgroundColor: green[500],
+//     "&:hover": {
+//       backgroundColor: green[700]
+//     }
+//   }
+// }))(Button);
 
 // tslint:disable-next-line:no-shadowed-variable
 const Transition = forwardRef<unknown, TransitionProps>(function Transition(
@@ -108,7 +110,7 @@ export default function PageRaidView() {
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
-  const [playerListOpened, setPlayerListOpened] = useState<boolean>(false);
+  const [playerListOpened, togglePlayerListOpened] = useToggle(false);
   const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
   const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
@@ -126,12 +128,6 @@ export default function PageRaidView() {
     MutableRefObject<any>
   >(null);
   const lootsAssigned = [];
-  const handleOpenPlayerList = () => {
-    setPlayerListOpened(true);
-  };
-  const handleClosePlayerList = () => {
-    setPlayerListOpened(false);
-  };
   const handleOpenAddItemWindow = (
     bossId: string,
     bossName: string,
@@ -279,11 +275,11 @@ export default function PageRaidView() {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleOpenPlayerList}
+          onClick={togglePlayerListOpened}
         >
           JOUEURS
         </Button>
-        <GreenButton color="primary">EDITER JOUEURS</GreenButton>
+        {/* <GreenButton color="primary">EDITER JOUEURS</GreenButton> */}
       </Paper>
       {bosses.map(boss => {
         const lootedForThisBoss = loots.filter((loot): boolean => {
@@ -422,7 +418,7 @@ export default function PageRaidView() {
         />
       </Snackbar>
       <PlayerList
-        handleClose={handleClosePlayerList}
+        handleClose={togglePlayerListOpened}
         open={playerListOpened}
         players={allPlayers}
       />

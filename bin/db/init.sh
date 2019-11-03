@@ -8,5 +8,6 @@ date=$(date '+%Y-%m-%d-%H-%M-%S')
 
 echo -e $RED Reset all databases ... $NC
 psql $PROD_DB < ./bin/db/reset_static_databases.sql
+cat db/*.sql > db/gen/db.sql
 echo -e $RED Send seeds ... $NC
 psql $PROD_DB < ./db/gen/db.sql

@@ -1824,11 +1824,11 @@ VALUES
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
 ('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
-('awaken'       , 6,  'player', 'a4261bb727d95e6df608247a6559571f', true, true), -- awakentest
-('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', true, false),
-('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', true, false),
-('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', true, false),
-('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', true, false),
+('awaken'       , 6,  'player', 'a4261bb727d95e6df608247a6559571f', false, true), -- awakentest
+('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', false, false),
+('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', false, false),
+('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', false, false),
+('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', false, false),
 ('Lums'         , 7,  'player', null, true, true),
 ('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
 ('Krigen'       , 8,  'player', null, true, true),
@@ -1838,11 +1838,11 @@ VALUES
 ('Paffë'        , 5,  'player', null, true, true),
 ('Skwäsh'       , 1,  'player', '2f8b09d7750539ba0d7853cd1eae78ee', true, true),
 ('Tàel'         , 3,  'player', null, true, true),
-('Ragegoriath'  , 8,  'player', null, true, true),
+('Ragegoriath'  , 8,  'player', 'e3b557b6f939ad38f1610dd5102b1ee7', true, true),
 ('Abramus'      , 2,  'player', null, true, true),
 ('Shaheem'      , 3,  'player', null, false, false),
 ('Hakken'       , 2,  'player', null, false, false),
-('Adblock'      , 2,  'player', null, true, false),
+('Adblock'      , 2,  'player', 'fff2cc3acaab98a5b0b7f0550c6981df', true, false),
 ('Affligeant'   , 3,  'player', null, false, false),
 ('Alk'          , 6,  'player', '2554dbad66e1367b98f6c52cea0811b6', true, false),
 ('Allyssamyr'   , 2,  'player', null, true, false),
@@ -1987,7 +1987,12 @@ VALUES
 (1, '2019-10-23'), -- 18
 (2, '2019-10-27'), -- 19
 (1, '2019-10-27'), -- 20
-(2, '2019-10-28'); -- 21
+(2, '2019-10-28'), -- 21
+(1, '2019-10-30'), -- 22
+(1, '2019-10-30'), -- 23
+(2, '2019-11-03'), -- 24 - all ony
+(1, '2019-11-06'), -- 25
+(1, '2019-11-07'); -- 26
 
 -- 1 => Molten Core
 -- 2 => Onyxia Lair
@@ -4654,15 +4659,4 @@ VALUES
   (SELECT id FROM "Bosses" WHERE "name"=
   'Onyxia'))
 
-; -- SAFE BEGIN FOR CONCAT
-
-
--- INSERT INTO "ClassItem" ("itemValueForThisClass","itemId","classId")
--- VALUES
--- (2, (SELECT id FROM "Items" WHERE "wowheadId"=16863), (SELECT id FROM "Classes" WHERE "name"='Chasseur')),
--- (5, (SELECT id FROM "Items" WHERE "wowheadId"=16863), (SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'));
-
--- INSERT INTO "Loots" ("playerId","itemId","raidId")
--- VALUES
--- ((SELECT id FROM "Players" WHERE "name"='Devilhunter'), (SELECT id FROM "Items" WHERE "wowheadId"=16863), 1),
--- ((SELECT id FROM "Players" WHERE "name"='Devilhunter'), (SELECT id FROM "Items" WHERE "wowheadId"=16863), 1);
+;

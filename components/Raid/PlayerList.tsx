@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Link from "next/link";
 import { forwardRef } from "react";
+import { RaidPlayer } from "../../lib/generatedTypes";
 import ClassAvatar from "../ClassAvatar";
 
 const useStyles = makeStyles({
@@ -42,35 +43,43 @@ const Transition = forwardRef<unknown, TransitionProps>(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function PlayerList({ open, handleClose, players }) {
+interface Props {
+  open: boolean;
+  handleClose: () => void;
+  players: RaidPlayer[];
+}
+
+export default function PlayerList({ open, handleClose, players }: Props) {
   const classes = useStyles("");
-  const pretres = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 1
-  );
-  const mages = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 2
-  );
-  const demonistes = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 3
-  );
-  const voleurs = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 4
-  );
-  const druides = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 5
-  );
-  const chasseurs = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 6
-  );
-  const chamans = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 7
-  );
-  const guerriersTank = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 8
-  );
-  const guerriersDPS = players.filter(
-    player => player.playerByPlayerId.classByClassId.id === 9
-  );
+
+  function displayClass(className: string, allPlayers: RaidPlayer[]) {
+    const classPlayers = allPlayers.filter(
+      player => player.playerByPlayerId.classByClassId.name === className
+    );
+
+    return (
+      <div className={classes.column}>
+        <ClassAvatar playerClass={className} />
+        {classPlayers.map((player: RaidPlayer) => (
+          <Link
+            key={player.playerByPlayerId.name}
+            href="/player/view/[id]"
+            as={`/player/view/${player.playerByPlayerId.id}`}
+          >
+            <a
+              target="_blank"
+              style={{
+                color: player.playerByPlayerId.classByClassId.color
+              }}
+            >
+              {player.playerByPlayerId.name}
+            </a>
+          </Link>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <Dialog
       className={classes.root}
@@ -88,177 +97,15 @@ export default function PlayerList({ open, handleClose, players }) {
       </DialogTitle>
       <DialogContent>
         <div className={classes.listRoot}>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Prêtre" />
-            {pretres.map(pretre => (
-              <Link
-                key={pretre.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${pretre.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: pretre.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {pretre.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Mage" />
-            {mages.map(mage => (
-              <Link
-                key={mage.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${mage.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: mage.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {mage.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Démoniste" />
-            {demonistes.map(demoniste => (
-              <Link
-                key={demoniste.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${demoniste.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: demoniste.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {demoniste.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Voleur" />
-            {voleurs.map(voleur => (
-              <Link
-                key={voleur.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${voleur.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: voleur.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {voleur.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Druide" />
-            {druides.map(druide => (
-              <Link
-                key={druide.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${druide.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: druide.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {druide.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Chasseur" />
-            {chasseurs.map(chasseur => (
-              <Link
-                key={chasseur.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${chasseur.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: chasseur.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {chasseur.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Chaman" />
-            {chamans.map(chaman => (
-              <Link
-                key={chaman.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${chaman.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: chaman.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {chaman.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Guerrier DPS" />
-            {guerriersTank.map(guerrierTank => (
-              <Link
-                key={guerrierTank.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${guerrierTank.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: guerrierTank.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {guerrierTank.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
-          <div className={classes.column}>
-            <ClassAvatar playerClass="Guerrier Tank" />
-            {guerriersDPS.map(guerrierDPS => (
-              <Link
-                key={guerrierDPS.playerByPlayerId.name}
-                href="/player/view/[id]"
-                as={`/player/view/${guerrierDPS.playerByPlayerId.id}`}
-              >
-                <a
-                  target="_blank"
-                  style={{
-                    color: guerrierDPS.playerByPlayerId.classByClassId.color
-                  }}
-                >
-                  {guerrierDPS.playerByPlayerId.name}
-                </a>
-              </Link>
-            ))}
-          </div>
+          {displayClass("Prêtre", players)}
+          {displayClass("Mage", players)}
+          {displayClass("Démoniste", players)}
+          {displayClass("Voleur", players)}
+          {displayClass("Druide", players)}
+          {displayClass("Chasseur", players)}
+          {displayClass("Chaman", players)}
+          {displayClass("Guerrier Tank", players)}
+          {displayClass("Guerrier DPS", players)}
         </div>
       </DialogContent>
       <DialogActions>
