@@ -29,12 +29,20 @@ import {
   useEffect,
   useState
 } from "react";
+import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
 import MemberContext from "../../../lib/context/member";
-import { BossItem, Mutation, Query } from "../../../lib/generatedTypes";
+import {
+  BossItem,
+  Mutation,
+  Player,
+  Query,
+  RaidPlayer
+} from "../../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
+import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
@@ -78,6 +86,12 @@ const useStyles = makeStyles({
     minWidth: 150,
     margin: 10
   },
+  lootToAddAvatars: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%"
+  },
   snackError: {
     backgroundColor: "#D32F2F"
   },
@@ -116,7 +130,9 @@ export default function PageRaidView() {
   const [dialogItems, setDialogItems] = useState<BossItem[]>([]);
   const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
   const [itemIdToAdd, setItemIdToAdd] = useState<string>("");
+  const [itemToAdd, setItemToAdd] = useState<BossItem>(null);
   const [playerIdToAdd, setPlayerIdToAdd] = useState<string>("");
+  const [restrictedClassIds, setRestrictedClassIds] = useState<number[]>([]);
   const [bossIdSelected, setBossIdSelected] = useState<string>("");
   const [bossNameSelected, setBossNameSelected] = useState<string>("");
   const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
@@ -140,7 +156,8 @@ export default function PageRaidView() {
   };
   const handleCloseAddItemWindow = (): void => {
     setItemIdToAdd("");
-    setPlayerIdToAdd("");
+    setItemToAdd(null);
+    setRestrictedClassIds([]), setPlayerIdToAdd("");
     setBossIdSelected("");
     setBossNameSelected("");
     setAddLootOpened(false);
@@ -154,7 +171,27 @@ export default function PageRaidView() {
   const handleChangeSelectItem = (
     event: React.ChangeEvent<{ value: string }>
   ): void => {
+    setPlayerIdToAdd("");
     setItemIdToAdd(event.target.value as string);
+    if (dialogItems.length > 0) {
+      const itemChosen = dialogItems.filter(
+        item => item.itemByItemId.id === parseInt(event.target.value)
+      );
+      if (itemChosen.length > 0) {
+        setItemToAdd(itemChosen[0]);
+        if (itemChosen[0].itemByItemId.classByClassId) {
+          setRestrictedClassIds([itemChosen[0].itemByItemId.classByClassId.id]);
+        } else {
+          const classIds = [];
+          itemChosen[0].itemByItemId.classItemsByItemId.nodes.forEach(
+            playerClass => {
+              classIds.push(playerClass.classByClassId.id);
+            }
+          );
+          setRestrictedClassIds(classIds);
+        }
+      }
+    }
   };
   const handleChangeSelectPlayer = (
     event: React.ChangeEvent<{ value: string }>
@@ -174,6 +211,7 @@ export default function PageRaidView() {
       setPlayerIdToAdd("");
       setBossIdSelected("");
       setBossNameSelected("");
+      setRestrictedClassIds([]);
       setSnackBarOpened(false);
       // FONCTION MUTATION AJOUT ITEM ICI
       createLoot({
@@ -194,7 +232,7 @@ export default function PageRaidView() {
             `${resp.data.createLoot.itemByItemId.name} assigné à ${resp.data.createLoot.playerByPlayerId.name}`,
             "success"
           );
-          refetch();
+          refetchOneRaid();
         })
         .catch(err => {
           openSnackBar(err.message, "error");
@@ -223,23 +261,43 @@ export default function PageRaidView() {
 
     setSnackBarOpened(false);
   };
-  const { loading, data, error, refetch } = useQuery<Query, QueryVariables>(
-    ONE_RAID,
-    {
-      variables: { raidId }
-    }
-  );
-  if (loading || error) {
+  const {
+    loading: loadingOneRaid,
+    data: dataOneRaid,
+    error: errorOneRaid,
+    refetch: refetchOneRaid
+  } = useQuery<Query, QueryVariables>(ONE_RAID, {
+    variables: { raidId }
+  });
+  const {
+    loading: loadingPlayers,
+    data: dataPlayers,
+    error: errorPlayers
+  } = useQuery<Query>(ALL_PLAYERS);
+  const error = errorOneRaid || errorPlayers;
+  const loading = loadingOneRaid || loadingPlayers;
+  if (loadingOneRaid || loadingPlayers || errorOneRaid || errorPlayers) {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
-  const currentRaid = data.allRaids.nodes[0];
+  const currentRaid = dataOneRaid.allRaids.nodes[0];
   const loots = currentRaid.lootsByRaidId.nodes;
-  const allPlayers = currentRaid.raidPlayersByRaidId.nodes
-    .sort((a, b) =>
+  const currentRaidPlayers = currentRaid.raidPlayersByRaidId.nodes
+    .sort((a: RaidPlayer, b: RaidPlayer) =>
       a.playerByPlayerId.name > b.playerByPlayerId.name ? 1 : -1
     )
     .sort(raidPlayerByClass);
+  const allPlayers = dataPlayers.allPlayers.nodes
+    .filter((player: Player) => player.active)
+    .sort((a: Player, b: Player) => (a.name > b.name ? 1 : -1))
+    .sort((a: Player, b: Player) => {
+      const p1Class = a.classByClassId.id;
+      const p2Class = b.classByClassId.id;
+      if (p1Class === p2Class) {
+        return a.name < b.name ? -1 : 1;
+      }
+      return p1Class - p2Class;
+    });
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
@@ -262,7 +320,7 @@ export default function PageRaidView() {
           currentBossCardContentElem.current.offsetHeight;
       }
     }
-  }, [data]);
+  }, [dataOneRaid]);
   return (
     <div className={classes.root}>
       <Paper className={classes.raidInfos}>
@@ -365,24 +423,54 @@ export default function PageRaidView() {
               value={playerIdToAdd}
               onChange={handleChangeSelectPlayer}
             >
-              {allPlayers.map(player => {
-                return (
-                  <MenuItem
-                    style={{
-                      borderLeft:
-                        "solid 4px " +
-                        player.playerByPlayerId.classByClassId.color,
-                      margin: 2
-                    }}
-                    key={player.playerByPlayerId.id}
-                    value={player.playerByPlayerId.id}
-                  >
-                    {player.playerByPlayerId.name}
-                  </MenuItem>
-                );
-              })}
+              {allPlayers
+                .filter((player: Player) => {
+                  if (restrictedClassIds.length === 0) {
+                    return true;
+                  }
+                  return restrictedClassIds.indexOf(player.classId) !== -1;
+                })
+                .map((player: Player) => {
+                  return (
+                    <MenuItem
+                      style={{
+                        borderLeft:
+                          "solid 4px " +
+                          (player.classByClassId.id === 1
+                            ? "grey"
+                            : player.classByClassId.color),
+                        margin: 2
+                      }}
+                      key={player.id}
+                      value={player.id}
+                    >
+                      {player.name}
+                    </MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
+          <div className={classes.lootToAddAvatars}>
+            {itemToAdd &&
+              (!itemToAdd.itemByItemId.classByClassId ? (
+                itemToAdd.itemByItemId.classItemsByItemId.nodes.map(
+                  playerClass => (
+                    <ClassAvatar
+                      key={
+                        playerClass.classByClassId.id +
+                        itemToAdd.itemByItemId.name
+                      }
+                      playerClass={playerClass.classByClassId.name}
+                      prio={playerClass.prio}
+                    />
+                  )
+                )
+              ) : (
+                <ClassAvatar
+                  playerClass={itemToAdd.itemByItemId.classByClassId.name}
+                />
+              ))}
+          </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAddItemWindow} color="primary">
@@ -420,7 +508,7 @@ export default function PageRaidView() {
       <PlayerList
         handleClose={togglePlayerListOpened}
         open={playerListOpened}
-        players={allPlayers}
+        players={currentRaidPlayers}
       />
     </div>
   );

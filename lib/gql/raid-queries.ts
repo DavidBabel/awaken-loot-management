@@ -105,12 +105,17 @@ export const ONE_RAID = gql`
                       nodes {
                         id
                         itemId
+                        prio
                         classByClassId {
                           id
                           color
                           name
                         }
                       }
+                    }
+                    classByClassId {
+                      id
+                      name
                     }
                   }
                 }
