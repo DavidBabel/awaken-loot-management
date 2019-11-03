@@ -118,6 +118,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
+  "title" varchar,
   "donjonId" int NOT NULL,
   "date" varchar
 );

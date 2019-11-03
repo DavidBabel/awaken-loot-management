@@ -22,6 +22,9 @@ psql $PROD_DB < ./db/08-data_bosses.sql
 echo -e $RED Create data boss items ... $NC
 psql $PROD_DB < ./db/11-data_boss_items.sql
 
+echo -e $RED Create data boss items ... $NC
+psql $PROD_DB < ./db/18-data_items_classes.sql
+
 echo -e $RED Create data merites ... $NC
 psql $PROD_DB < ./db/40-merites.sql
 

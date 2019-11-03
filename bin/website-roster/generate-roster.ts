@@ -14,7 +14,7 @@ const roster: Roster[] = [
     prio: "ouvert"
   },
   { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "prio" },
-  { name: "Chaman", shivtrIcon: "18", prepend: "R", prio: "ouvert" },
+  { name: "Chaman", shivtrIcon: "18", prepend: "R", prio: "prio" },
   { name: "Mage", shivtrIcon: "19", prepend: "", prio: "faible" },
   { name: "Démoniste", shivtrIcon: "20", prepend: "", prio: "ouvert" },
   { name: "Voleur", shivtrIcon: "15", prepend: "", prio: "fermé" },

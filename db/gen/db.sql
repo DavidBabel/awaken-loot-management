@@ -118,6 +118,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 
 CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
+  "title" varchar,
   "donjonId" int NOT NULL,
   "date" varchar
 );
@@ -1828,22 +1829,22 @@ VALUES
 ('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', true, false),
 ('classMaster'  , 1,  'classMaster', 'ca114be619ce539ca093ee7121acf98b', true, false),
 ('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', true, false),
-('Lums'         , 7,  'officer', null, true, true),
-('Deiv'         , 1,  'officer', null, true, true),
-('Krigen'       , 8,  'officer', null, true, true),
-('Cocobanjo'    , 4,  'classMaster', null, true, true),
-('Nozil'        , 6,  'classMaster', null, true, true),
-('Oscuro'       , 9,  'classMaster', null, true, true),
-('Paffë'        , 5,  'classMaster', null, true, true),
-('Skwäsh'       , 1,  'classMaster', null, true, true),
-('Tàel'         , 3,  'classMaster', null, true, true),
-('Ragegoriath'  , 8,  'classMaster', null, true, true),
-('Abramus'      , 2,  'classMaster', null, true, true),
+('Lums'         , 7,  'player', null, true, true),
+('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
+('Krigen'       , 8,  'player', null, true, true),
+('Cocobanjo'    , 4,  'player', null, true, true),
+('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
+('Oscuro'       , 9,  'player', null, true, true),
+('Paffë'        , 5,  'player', null, true, true),
+('Skwäsh'       , 1,  'player', '2f8b09d7750539ba0d7853cd1eae78ee', true, true),
+('Tàel'         , 3,  'player', null, true, true),
+('Ragegoriath'  , 8,  'player', null, true, true),
+('Abramus'      , 2,  'player', null, true, true),
 ('Shaheem'      , 3,  'player', null, false, false),
 ('Hakken'       , 2,  'player', null, false, false),
 ('Adblock'      , 2,  'player', null, true, false),
 ('Affligeant'   , 3,  'player', null, false, false),
-('Alk'          , 6,  'player', null, true, false),
+('Alk'          , 6,  'player', '2554dbad66e1367b98f6c52cea0811b6', true, false),
 ('Allyssamyr'   , 2,  'player', null, true, false),
 ('Beudinio'     , 5,  'player', null, false, false),
 ('Bobbyz'       , 9,  'player', null, true, false),
@@ -1858,7 +1859,7 @@ VALUES
 ('Ez'           , 4,  'player', null, true, false),
 ('Gidgud'       , 7,  'player', null, true, false),
 ('Hanzaplast'   , 1,  'player', null, false, false),
-('Ikith'        , 2,  'classMaster', null, true, false),
+('Ikith'        , 2,  'player', null, true, false),
 ('Jonasran'     , 4,  'player', null, true, false),
 ('Kaarr'        , 4,  'player', null, true, false),
 ('Karaelys'     , 1,  'player', null, true, false),
@@ -1872,7 +1873,7 @@ VALUES
 ('Lylith'       , 1,  'player', null, true, false),
 ('Mergueztguez' , 7,  'player', null, true, false),
 ('Minatrix'     , 2,  'player', null, true, false),
-('Need'         , 1,  'player', null, true, false),
+('Need'         , 1,  'player', 'b1d38a948caf22ca343d9efc2d36729e', true, false),
 ('Nérull'       , 4,  'player', null, false, false),
 ('Néstor'       , 3,  'player', null, true, false),
 ('Nøwad'        , 9,  'player', null, true, false),
@@ -1886,7 +1887,7 @@ VALUES
 ('Størmfury'    , 5,  'player', null, false, false),
 ('Suprême'      , 3,  'player', null, true, false),
 ('Synrj'        , 5,  'player', null, true, false),
-('Tad'          , 7,  'classMaster', null, true, false),
+('Tad'          , 7,  'player', null, true, false),
 ('Teimdall'     , 1,  'player', null, true, false),
 ('Tephrite'     , 5,  'player', null, true, false),
 ('Thorsen'      , 2,  'player', null, true, false),
@@ -1899,7 +1900,7 @@ VALUES
 ('Vòlt'         , 2,  'player', null, false, false),
 ('Wid'          , 2,  'player', null, false, false),
 ('Xihfu'        , 5,  'player', null, true, false),
-('Yx'           , 4,  'player', null, true, false),
+('Yx'           , 4,  'player', '752c3c7a999aa21ac20b19f172a8463d', true, false),
 ('Zapikote'     , 2,  'player', null, true, false),
 ('Zhantla'      , 7,  'player', null, false, false),
 ('Zykxx'        , 7,  'player', null, false, false),
@@ -1927,7 +1928,7 @@ VALUES
 ('Owhlord'      , 2,  'player', null, true, false),
 ('Angelus'      , 9,  'player', null, true, false),
 ('Felrik'       , 9,  'player', null, true, false),
-('Kgr'          , 3,  'player', null, true, false),
+('Kgr'          , 3,  'player', '4523bea82ba2f9c9d30644931d2dc35e', true, false),
 ('Kheya'        , 4,  'player', null, true, false),
 ('Caëdo'        , 4,  'player', null, true, false),
 ('Weezy'        , 3,  'player', null, true, false),
@@ -1939,10 +1940,10 @@ VALUES
 ('Zebaww'       , 6,  'player', null, true, false),
 ('Krijgs'       , 8,  'player', null, true, false),
 ('Volzam'       , 6,  'player', null, true, false),
-('Romek'        , 2,  'player', null, true, false),
+('Romek'        , 2,  'player', '8f7029a25f593e64a888e673ce5689a9', true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),
-('Squeeze'      , 4,  'player', null, true, false)
+('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false)
 ;
 
 -- 1 - Prêtre
@@ -1954,7 +1955,8 @@ VALUES
 -- 7 - Chaman
 -- 8 - Guerrier Tank
 -- 9 - Guerrier DPS
--- 10 - Paladin -- SAFE BEGIN FOR CONCAT
+-- 10 - Paladin
+ -- SAFE BEGIN FOR CONCAT
 INSERT INTO "PlayerMerit" ("meritId", "playerId", "date", "validated")
 VALUES
 (1, 1, '2019-10-10', true),
@@ -3019,7 +3021,12 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Traqùs'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Casque de traqueur de dragon'))
+  'Casque de traqueur de dragon')),
+( 3,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tendon de dragon noir adulte'))
 -- TODO autres loots sur onyxia ?
   ;
 

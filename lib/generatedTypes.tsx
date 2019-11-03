@@ -1760,6 +1760,7 @@ export type Raid = Node & {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID'],
   id: Scalars['Int'],
+  title?: Maybe<Scalars['String']>,
   donjonId: Scalars['Int'],
   date?: Maybe<Scalars['String']>,
   /** Reads a single `Donjon` that is related to this `Raid`. */
@@ -1796,6 +1797,8 @@ export type RaidRaidPlayersByRaidIdArgs = {
 export type RaidCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['Int']>,
+  /** Checks for equality with the object’s `title` field. */
+  title?: Maybe<Scalars['String']>,
   /** Checks for equality with the object’s `donjonId` field. */
   donjonId?: Maybe<Scalars['Int']>,
   /** Checks for equality with the object’s `date` field. */
@@ -1805,6 +1808,7 @@ export type RaidCondition = {
 /** An input for mutations affecting `Raid` */
 export type RaidInput = {
   id?: Maybe<Scalars['Int']>,
+  title?: Maybe<Scalars['String']>,
   donjonId: Scalars['Int'],
   date?: Maybe<Scalars['String']>,
 };
@@ -1812,6 +1816,7 @@ export type RaidInput = {
 /** Represents an update to a `Raid`. Fields that are set will be updated. */
 export type RaidPatch = {
   id?: Maybe<Scalars['Int']>,
+  title?: Maybe<Scalars['String']>,
   donjonId?: Maybe<Scalars['Int']>,
   date?: Maybe<Scalars['String']>,
 };
@@ -1925,6 +1930,8 @@ export enum RaidsOrderBy {
   Natural = 'NATURAL',
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
+  TitleAsc = 'TITLE_ASC',
+  TitleDesc = 'TITLE_DESC',
   DonjonIdAsc = 'DONJON_ID_ASC',
   DonjonIdDesc = 'DONJON_ID_DESC',
   DateAsc = 'DATE_ASC',

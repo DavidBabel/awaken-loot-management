@@ -103,7 +103,12 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Traqùs'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Casque de traqueur de dragon'))
+  'Casque de traqueur de dragon')),
+( 3,
+  (SELECT id FROM "Players" WHERE "name"=
+  'Nozil'),
+  (SELECT id FROM "Items" WHERE "name"=
+  'Tendon de dragon noir adulte'))
 -- TODO autres loots sur onyxia ?
   ;
 
