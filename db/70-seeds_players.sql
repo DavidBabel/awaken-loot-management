@@ -39,7 +39,7 @@ VALUES
 ('Abramus'      , 2,  'player', null, true, true),
 ('Shaheem'      , 3,  'player', null, false, false),
 ('Hakken'       , 2,  'player', null, false, false),
-('Adblock'      , 2,  'player', null, true, false),
+('Adblock'      , 2,  'player', 'fff2cc3acaab98a5b0b7f0550c6981df', true, false),
 ('Affligeant'   , 3,  'player', null, false, false),
 ('Alk'          , 6,  'player', '2554dbad66e1367b98f6c52cea0811b6', true, false),
 ('Allyssamyr'   , 2,  'player', null, true, false),
