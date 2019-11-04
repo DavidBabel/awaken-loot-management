@@ -20,7 +20,7 @@ export function DatePicker({ selectedDate, setSelectedDate }: Props) {
         style={{ marginBottom: -5 }}
         disableToolbar={true}
         variant="inline"
-        format="MM/dd/yyyy"
+        format="dd/MM/yyyy"
         margin="normal"
         id="date-picker-inline"
         label="Date picker inline"
