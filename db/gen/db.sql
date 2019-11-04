@@ -120,7 +120,8 @@ CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
   "title" varchar,
   "donjonId" int NOT NULL,
-  "date" varchar
+  "date" varchar,
+  "active" boolean DEFAULT true
 );
 comment on table "Raids" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Raids" ("id");
