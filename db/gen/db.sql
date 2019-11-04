@@ -749,7 +749,8 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17064)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17068)),
 -- ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=18423)),
-((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075));
+((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075)),
+((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17966));
 
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
@@ -1927,10 +1928,10 @@ VALUES
 ('Rassis'       , 3,  'player', null, true, false),
 ('Owhlord'      , 2,  'player', null, true, false),
 ('Angelus'      , 9,  'player', null, true, false),
-('Felrik'       , 9,  'player', null, true, false),
+('Felrik'       , 9,  'player', '26b0386e5b40cceb3be2ff00e2a32a8c', true, false),
 ('Kgr'          , 3,  'player', '4523bea82ba2f9c9d30644931d2dc35e', true, false),
 ('Kheya'        , 4,  'player', null, true, false),
-('Caëdo'        , 4,  'player', null, true, false),
+('Caëdo'        , 4,  'player', '4432062f5df9be53c4c50741321644a4', true, false),
 ('Weezy'        , 3,  'player', null, true, false),
 ('Paren'        , 6,  'player', null, true, false),
 ('Munuxi'       , 1,  'player', null, true, false),
