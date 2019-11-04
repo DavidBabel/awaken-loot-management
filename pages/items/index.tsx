@@ -4,6 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -47,7 +48,6 @@ const useStyles = makeStyles({
   textField: {
     width: "60%"
   },
-  searchBtn: { position: "absolute", top: "80px", zIndex: 5 },
   itemInfoDialog: {
     "& a": {
       textDecoration: "none"
@@ -179,6 +179,7 @@ export default function PageIndex() {
   return (
     <div className={classes.root}>
       <Paper className={classes.searchBox}>
+        <Typography>Tappez votre recherche:</Typography>
         <TextField
           autoComplete="off"
           id="outlined-item"
@@ -189,13 +190,6 @@ export default function PageIndex() {
           margin="dense"
           variant="outlined"
         />
-        <Button
-          className={classes.searchBtn}
-          variant="contained"
-          color="primary"
-        >
-          SEARCH
-        </Button>
       </Paper>{" "}
       <ItemSearchedList
         listHeight={"auto"}
