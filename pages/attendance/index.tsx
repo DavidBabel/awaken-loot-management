@@ -117,12 +117,6 @@ export default function PageIndex() {
   const players = dataPlayers.allPlayers.nodes
     .filter((p: Player) => p.active)
     .sort(byValue("classId"));
-  let raidsNb = 0;
-  allRaids.forEach(raid => {
-    if (raid.raidPlayersByRaidId.nodes.length > 0) {
-      raidsNb++;
-    }
-  });
 
   return (
     <Paper className={classes.root}>
@@ -153,11 +147,20 @@ export default function PageIndex() {
           <TableBody>
             {players.map(player => {
               let firstRaidDate = new Date();
-              const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
               player.raidPlayersByPlayerId.nodes.forEach(raid => {
                 const currentRaidDate = new Date(raid.raidByRaidId.date);
                 if (currentRaidDate < firstRaidDate) {
                   firstRaidDate = currentRaidDate;
+                }
+              });
+              let raidsNb = 0;
+              const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
+              allRaids.forEach(raid => {
+                if (
+                  raid.raidPlayersByRaidId.nodes.length > 0 &&
+                  new Date(raid.date) >= firstRaidDate
+                ) {
+                  raidsNb++;
                 }
               });
               return (
