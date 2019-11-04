@@ -18,9 +18,11 @@ import Button from "@material-ui/core/Button";
 // import { green } from "@material-ui/core/colors";
 
 // import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";
+
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
+import ForwardIcon from "@material-ui/icons/Forward";
 import { useRouter } from "next/router";
 import {
   forwardRef,
@@ -58,47 +60,78 @@ interface CreateLootVariables {
   lastActionBy: string;
   lastActionDate: string;
 }
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center"
-  },
-  raidInfos: {
-    width: "80%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "10px 0",
-    marginBottom: 20
-  },
-  raidTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginRight: 20
-  },
-  selectItem: {
-    minWidth: 200,
-    margin: 10
-  },
-  selectPlayer: {
-    minWidth: 150,
-    margin: 10
-  },
-  lootToAddAvatars: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    width: "100%"
-  },
-  snackError: {
-    backgroundColor: "#D32F2F"
-  },
-  snackSuccess: {
-    backgroundColor: "#43A047"
-  }
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    raidInfos: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "10px 0",
+      marginBottom: 35,
+      position: "relative"
+    },
+    raidTitle: {
+      fontSize: 22,
+      fontWeight: "bold",
+      margin: "0px 25px 15px 25px"
+    },
+    playerListBtn: {
+      position: "absolute",
+      top: "48px",
+      zIndex: 4
+    },
+    bossCards: {
+      width: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center"
+    },
+    selectItem: {
+      minWidth: 200,
+      [theme.breakpoints.down("sm")]: {
+        minWidth: 100,
+        marginRight: 8
+      }
+    },
+    fleche: {
+      alignSelf: "flex-end",
+      margin: "0px 15px",
+      [theme.breakpoints.down("sm")]: {
+        display: "none"
+      }
+    },
+    selectPlayer: {
+      minWidth: 200,
+      [theme.breakpoints.down("sm")]: {
+        minWidth: 100
+      }
+    },
+    lootInfoSelects: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    },
+    lootToAddAvatars: {
+      position: "relative",
+      display: "flex",
+      justifyContent: "center",
+      width: "100%"
+    },
+    snackError: {
+      backgroundColor: "#D32F2F"
+    },
+    snackSuccess: {
+      backgroundColor: "#43A047"
+    }
+  })
+);
 
 // const GreenButton = withStyles((theme: Theme) => ({
 //   root: {
@@ -329,8 +362,8 @@ export default function PageRaidView() {
             " | " +
             currentRaid.donjonByDonjonId.name}
         </div>
-
         <Button
+          className={classes.playerListBtn}
           variant="contained"
           color="primary"
           onClick={togglePlayerListOpened}
@@ -339,45 +372,48 @@ export default function PageRaidView() {
         </Button>
         {/* <GreenButton color="primary">EDITER JOUEURS</GreenButton> */}
       </Paper>
-      {bosses.map(boss => {
-        const lootedForThisBoss = loots.filter((loot): boolean => {
-          return (
-            ((!loot.bossId &&
+      <div className={classes.bossCards}>
+        {bosses.map(boss => {
+          const lootedForThisBoss = loots.filter((loot): boolean => {
+            return (
+              ((!loot.bossId &&
+                loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
+                loot.itemByItemId.bossItemsByItemId.nodes.some(
+                  bossItem => bossItem.bossByBossId.id === boss.id
+                )) ||
+                loot.bossId === boss.id) &&
+              loot.active &&
+              lootsAssigned.indexOf(loot) === -1
+            );
+          });
+          loots.forEach(loot => {
+            // permet de stocker les loots deja assignés et de les checks pour qu'ils n'apparaissent pas plusieurs fois (ca sert seulement pour les loots qui n'ont pas de bossId)
+            if (
+              !loot.bossId &&
               loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
               loot.itemByItemId.bossItemsByItemId.nodes.some(
                 bossItem => bossItem.bossByBossId.id === boss.id
-              )) ||
-              loot.bossId === boss.id) &&
-            loot.active &&
-            lootsAssigned.indexOf(loot) === -1
+              ) &&
+              loot.active
+            ) {
+              lootsAssigned.push(loot);
+            }
+          });
+          return (
+            <BossCard
+              key={boss.id}
+              {...boss}
+              openLootWindow={handleOpenAddItemWindow}
+              donjonShortName={donjonShortName}
+              looted={lootedForThisBoss}
+              setDialogItems={setDialogItems}
+              openSnackBar={openSnackBar}
+            />
           );
-        });
-        loots.forEach(loot => {
-          // permet de stocker les loots deja assignés et de les checks pour qu'ils n'apparaissent pas plusieurs fois (ca sert seulement pour les loots qui n'ont pas de bossId)
-          if (
-            !loot.bossId &&
-            loot.itemByItemId.bossItemsByItemId.nodes.length > 0 &&
-            loot.itemByItemId.bossItemsByItemId.nodes.some(
-              bossItem => bossItem.bossByBossId.id === boss.id
-            ) &&
-            loot.active
-          ) {
-            lootsAssigned.push(loot);
-          }
-        });
-        return (
-          <BossCard
-            key={boss.id}
-            {...boss}
-            openLootWindow={handleOpenAddItemWindow}
-            donjonShortName={donjonShortName}
-            looted={lootedForThisBoss}
-            setDialogItems={setDialogItems}
-            openSnackBar={openSnackBar}
-          />
-        );
-      })}
+        })}
+      </div>
       <Dialog
+        maxWidth={"lg"}
         open={addLootOpened}
         TransitionComponent={Transition}
         keepMounted={true}
@@ -388,7 +424,7 @@ export default function PageRaidView() {
         <DialogTitle id="add-loot-dialog">
           {"Ajouter un loot sur: " + bossNameSelected}
         </DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.lootInfoSelects}>
           <FormControl>
             <InputLabel htmlFor="demo-controlled-open-select">Item</InputLabel>
             <Select
@@ -411,6 +447,9 @@ export default function PageRaidView() {
               })}
             </Select>
           </FormControl>
+
+          <ForwardIcon color="primary" className={classes.fleche} />
+
           <FormControl>
             <InputLabel htmlFor="demo-controlled-open-select">
               Player
@@ -450,28 +489,28 @@ export default function PageRaidView() {
                 })}
             </Select>
           </FormControl>
-          <div className={classes.lootToAddAvatars}>
-            {itemToAdd &&
-              (!itemToAdd.itemByItemId.classByClassId ? (
-                itemToAdd.itemByItemId.classItemsByItemId.nodes.map(
-                  playerClass => (
-                    <ClassAvatar
-                      key={
-                        playerClass.classByClassId.id +
-                        itemToAdd.itemByItemId.name
-                      }
-                      playerClass={playerClass.classByClassId.name}
-                      prio={playerClass.prio}
-                    />
-                  )
-                )
-              ) : (
-                <ClassAvatar
-                  playerClass={itemToAdd.itemByItemId.classByClassId.name}
-                />
-              ))}
-          </div>
         </DialogContent>
+        <div className={classes.lootToAddAvatars}>
+          {itemToAdd &&
+            (!itemToAdd.itemByItemId.classByClassId ? (
+              itemToAdd.itemByItemId.classItemsByItemId.nodes.map(
+                playerClass => (
+                  <ClassAvatar
+                    key={
+                      playerClass.classByClassId.id +
+                      itemToAdd.itemByItemId.name
+                    }
+                    playerClass={playerClass.classByClassId.name}
+                    prio={playerClass.prio}
+                  />
+                )
+              )
+            ) : (
+              <ClassAvatar
+                playerClass={itemToAdd.itemByItemId.classByClassId.name}
+              />
+            ))}
+        </div>
         <DialogActions>
           <Button onClick={handleCloseAddItemWindow} color="primary">
             ANNULER

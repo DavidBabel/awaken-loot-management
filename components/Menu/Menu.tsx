@@ -28,29 +28,29 @@ export function Menu() {
         <>
           <List>
             <ListSubheader>Raid management</ListSubheader>
-            <ListItem button={true}>
-              <Link href="/raid">
+            <Link href="/raid">
+              <ListItem button={true}>
                 <ListItemText primary="Raids Dashboard" />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           </List>
           <Divider />
           <List>
-            <ListItem button={true}>
-              <Link href="/summary">
+            <Link href="/summary">
+              <ListItem button={true}>
                 <ListItemText primary="Characters summary" />
-              </Link>
-            </ListItem>
-            <ListItem button={true}>
-              <Link href="/attendance">
+              </ListItem>
+            </Link>
+            <Link href="/attendance">
+              <ListItem button={true}>
                 <ListItemText primary="Attendance" />
-              </Link>
-            </ListItem>
-            <ListItem button={true}>
-              <Link href="/items">
+              </ListItem>
+            </Link>
+            <Link href="/items">
+              <ListItem button={true}>
                 <ListItemText primary="Items" />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           </List>
 
           <List>
@@ -63,11 +63,11 @@ export function Menu() {
       ) : (
         <List>
           <ListSubheader>Please connect</ListSubheader>
-          <ListItem button={true}>
-            <Link href="/login">
+          <Link href="/login">
+            <ListItem button={true}>
               <ListItemText primary="Login page" />
-            </Link>
-          </ListItem>
+            </ListItem>
+          </Link>
         </List>
       )}
     </div>
