@@ -19,7 +19,7 @@ import Button from "@material-ui/core/Button";
 
 // import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
 
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import ForwardIcon from "@material-ui/icons/Forward";

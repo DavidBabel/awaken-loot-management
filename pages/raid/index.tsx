@@ -11,6 +11,7 @@ import {
   TableRow,
   Typography
 } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -62,7 +63,9 @@ const useStyles = makeStyles({
   },
   createRaidPaper: {
     width: "50%",
-    marginRight: 20
+    marginRight: 20,
+    maxHeight: "230px",
+    flexShrink: 0
   },
   searchPlayerPaper: {
     width: "50%",
@@ -147,6 +150,16 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     color: "white",
     backgroundColor: "#DC004E"
+  },
+  carouselProgress: {
+    width: "100%",
+    height: "180px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  hidden: {
+    display: "none"
   }
 });
 
@@ -160,6 +173,10 @@ export default function PageIndex() {
   const [itemCurrentlySelected, setItemCurrentlySelected] = React.useState<
     Item
   >(null);
+  const [loadingRender, setLoadingRender] = React.useState<boolean>(true);
+  React.useEffect(() => {
+    setLoadingRender(false);
+  }, []);
   React.useEffect(() => {
     if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
       try {
@@ -270,13 +287,24 @@ export default function PageIndex() {
     <>
       <Container className={classes.root}>
         <div className={classes.topPapers}>
-          {member.level >= role.officer && (
+          {member.level >= role.player && (
             <Paper className={classes.createRaidPaper}>
               <Typography className={classes.boxTitle} variant="h6">
                 Create new raid
               </Typography>
               <Divider />
-              <div className={classes.createRaidCards}>
+              {loadingRender ? (
+                <div className={classes.carouselProgress}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                ""
+              )}
+              <div
+                className={
+                  loadingRender ? classes.hidden : classes.createRaidCards
+                }
+              >
                 <ItemsCarousel
                   infiniteLoop={true}
                   gutter={20}
