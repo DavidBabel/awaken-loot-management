@@ -287,7 +287,7 @@ export default function PageIndex() {
     <>
       <Container className={classes.root}>
         <div className={classes.topPapers}>
-          {member.level >= role.player && (
+          {member.level >= role.officer && (
             <Paper className={classes.createRaidPaper}>
               <Typography className={classes.boxTitle} variant="h6">
                 Create new raid
