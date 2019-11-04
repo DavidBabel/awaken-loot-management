@@ -86,6 +86,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     rotation: {
       backgroundColor: "#b09000"
+    },
+    pasDansGuilde: {
+      backgroundColor: "#242424"
     }
   })
 );
@@ -148,69 +151,85 @@ export default function PageIndex() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {players.map(player => (
-              <TableRow key={player.id + player.name}>
-                <TableCell component="th" scope="row">
-                  <Link
-                    href="/player/view/[id]"
-                    as={`/player/view/${player.id}`}
-                  >
-                    <a
-                      target="_blank"
-                      style={{
-                        color: player.classByClassId.color,
-                        textDecoration: "none"
-                      }}
+            {players.map(player => {
+              let firstRaidDate = new Date();
+              const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
+              player.raidPlayersByPlayerId.nodes.forEach(raid => {
+                const currentRaidDate = new Date(raid.raidByRaidId.date);
+                if (currentRaidDate < firstRaidDate) {
+                  firstRaidDate = currentRaidDate;
+                }
+              });
+              return (
+                <TableRow key={player.id + player.name}>
+                  <TableCell component="th" scope="row">
+                    <Link
+                      href="/player/view/[id]"
+                      as={`/player/view/${player.id}`}
                     >
-                      {player.name}
-                    </a>
-                  </Link>
-                </TableCell>
-                <TableCell className={classes.attPercentage + " perc-cell"}>
-                  {player.raidPlayersByPlayerId.nodes.length === 0
-                    ? "0 %"
-                    : `${Math.round(
-                        (player.raidPlayersByPlayerId.nodes.length * 100) /
-                          raidsNb
-                      )} %`}
-                </TableCell>
-                {allRaids.map(raid => {
-                  if (raid.raidPlayersByRaidId.nodes.length > 0) {
-                    let absent = true;
-                    let enRotation = false;
-                    raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
-                      if (
-                        raidPlayer &&
-                        raidPlayer.playerByPlayerId.id === player.id
-                      ) {
-                        absent = false;
-                        if (raidPlayer.passed) {
-                          enRotation = true;
-                        }
-                      }
-                    });
-                    return (
-                      <TableCell
-                        onClick={() => {
-                          Router.push("/raid/edit/" + raid.id);
+                      <a
+                        target="_blank"
+                        style={{
+                          color: player.classByClassId.color,
+                          textDecoration: "none"
                         }}
-                        key={player.id + raid.id}
-                        className={
-                          absent
-                            ? classes.absent
-                            : enRotation
-                            ? classes.rotation
-                            : classes.present
-                        }
                       >
-                        <VisibilityIcon />
-                      </TableCell>
-                    );
-                  }
-                  return null;
-                })}
-              </TableRow>
-            ))}
+                        {player.name}
+                      </a>
+                    </Link>
+                  </TableCell>
+                  <TableCell className={classes.attPercentage + " perc-cell"}>
+                    {totalRaidPlayed === 0
+                      ? "0 %"
+                      : `${Math.round((totalRaidPlayed * 100) / raidsNb)} %`}
+                  </TableCell>
+                  {allRaids.map(raid => {
+                    if (raid.raidPlayersByRaidId.nodes.length > 0) {
+                      let absent = true;
+                      let enRotation = false;
+                      let pasEncoreDansGuilde = false;
+                      if (new Date(raid.date) >= firstRaidDate) {
+                        raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
+                          if (
+                            raidPlayer &&
+                            raidPlayer.playerByPlayerId.id === player.id
+                          ) {
+                            absent = false;
+                            if (raidPlayer.passed) {
+                              enRotation = true;
+                            }
+                          }
+                        });
+                      } else {
+                        pasEncoreDansGuilde = true;
+                        absent = false;
+                      }
+
+                      return (
+                        <TableCell
+                          onClick={() => {
+                            Router.push("/raid/edit/" + raid.id);
+                          }}
+                          key={player.id + raid.id}
+                          className={
+                            absent
+                              ? classes.absent
+                              : enRotation
+                              ? classes.rotation
+                              : pasEncoreDansGuilde
+                              ? classes.pasDansGuilde
+                              : classes.present
+                          }
+                        >
+                          <VisibilityIcon />
+                        </TableCell>
+                      );
+                    }
+                    return null;
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
