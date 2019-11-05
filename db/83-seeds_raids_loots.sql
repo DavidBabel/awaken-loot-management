@@ -621,12 +621,12 @@ VALUES
   (SELECT id FROM "Players" WHERE "name"=
   'Callumlolz'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Casque de puissance')),
+  'Couvre-chef du tueur de la nuit')),
 ( 12,
   (SELECT id FROM "Players" WHERE "name"=
   'Brebouche'),
   (SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef du tueur de la nuit')),
+  'Casque de puissance')),
 ( 12,
   (SELECT id FROM "Players" WHERE "name"=
   'Suprême'),
@@ -1050,13 +1050,6 @@ VALUES
   'Tephrite'),
   (SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef de Stormrage'),
-  (SELECT id FROM "Bosses" WHERE "name"=
-  'Onyxia')),
-( 15,
-  (SELECT id FROM "Players" WHERE "name"=
-  'Ladj'),
-  (SELECT id FROM "Items" WHERE "name"=
-  'Collier d‘Eskhandar'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Onyxia')),
 ( 15,
@@ -1519,13 +1512,13 @@ VALUES
   'Brassards Rageterre'),
   (SELECT id FROM "Bosses" WHERE "name"=
   'Trash')),
-( 20,
-  (SELECT id FROM "Players" WHERE "name"=
-  'Xihfu'),
-  (SELECT id FROM "Items" WHERE "name"=
-  'Gants du tueur de la nuit'),
-  (SELECT id FROM "Bosses" WHERE "name"=
-  'Gehennas')),
+-- ( 20, -- TODO
+--   (SELECT id FROM "Players" WHERE "name"=
+--   'Xihfu'),
+--   (SELECT id FROM "Items" WHERE "name"=
+--   'Gants du tueur de la nuit'),
+--   (SELECT id FROM "Bosses" WHERE "name"=
+--   'Gehennas')),
 -- ( 20,
 --   (SELECT id FROM "Players" WHERE "name"=
 --   'Lihàtarekt'),
