@@ -16,7 +16,6 @@ export function DatePicker({ selectedDate, setSelectedDate }: Props) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
-        todayLabel={true}
         style={{ marginBottom: -5 }}
         disableToolbar={true}
         variant="inline"
