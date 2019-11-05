@@ -87,6 +87,7 @@ export const ONE_RAID = gql`
         date
         title
         donjonByDonjonId {
+          id
           name
           shortName
           bossesByDonjonId {

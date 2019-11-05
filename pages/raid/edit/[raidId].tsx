@@ -49,6 +49,7 @@ import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
 import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
+import { role } from "../../../lib/role-level";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 interface QueryVariables {
@@ -318,8 +319,28 @@ export default function PageRaidView() {
     data: dataPlayers,
     error: errorPlayers
   } = useQuery<Query>(ALL_PLAYERS);
+
+  const [createLoot] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
   const error = errorOneRaid || errorPlayers;
   const loading = loadingOneRaid || loadingPlayers;
+
+  useEffect(() => {
+    if (currentBossCardContentElem) {
+      // Scroll tout en bas d'une liste de loot quand un item est ajouté
+      if (currentBossCardContentElem.current.scrollBy) {
+        currentBossCardContentElem.current.scrollBy({
+          top: currentBossCardContentElem.current.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      } else {
+        currentBossCardContentElem.current.scrollTop =
+          currentBossCardContentElem.current.offsetHeight;
+      }
+    }
+    setRaidTitle(currentRaid.title);
+  }, [dataOneRaid]);
+
   if (loadingOneRaid || loadingPlayers || errorOneRaid || errorPlayers) {
     return <LoadingAndError loading={loading} error={error} />;
   }
@@ -345,27 +366,6 @@ export default function PageRaidView() {
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
-  const [
-    createLoot
-    // { loading: mutationLoading, data: mutationData }
-  ] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
-
-  useEffect(() => {
-    if (currentBossCardContentElem) {
-      // Scroll tout en bas d'une liste de loot quand un item est ajouté
-      if (currentBossCardContentElem.current.scrollBy) {
-        currentBossCardContentElem.current.scrollBy({
-          top: currentBossCardContentElem.current.scrollHeight,
-          left: 0,
-          behavior: "smooth"
-        });
-      } else {
-        currentBossCardContentElem.current.scrollTop =
-          currentBossCardContentElem.current.offsetHeight;
-      }
-    }
-    setRaidTitle(currentRaid.title);
-  }, [dataOneRaid]);
   return (
     <div className={classes.root}>
       <Paper className={classes.raidInfos}>
@@ -376,11 +376,13 @@ export default function PageRaidView() {
               currentRaid.donjonByDonjonId.name +
               (raidTitle ? " (" + raidTitle + ")" : "")}
           </div>
-          <RaidTitleButton
-            raid={currentRaid}
-            openSnackBar={openSnackBar}
-            setRaidTitle={setRaidTitle}
-          />
+          {member.level >= role.officer && (
+            <RaidTitleButton
+              raid={currentRaid}
+              openSnackBar={openSnackBar}
+              setRaidTitle={setRaidTitle}
+            />
+          )}
         </div>
         <Button
           className={classes.playerListBtn}
