@@ -10,6 +10,16 @@ export const CREATE_RAID = gql`
   }
 `;
 
+export const UPDATE_RAID_TITLE = gql`
+  mutation updateRaidTitle($raidId: Int!, $newTitle: String!) {
+    updateRaidById(input: { raidPatch: { title: $newTitle }, id: $raidId }) {
+      raid {
+        title
+      }
+    }
+  }
+`;
+
 // export const CREATE_RAID = gql`
 //   mutation CreateRaid($date: String, $donjonId: Int!) {
 //     createRaid(input: { raid: { date: $date, donjonId: $donjonId } }) {

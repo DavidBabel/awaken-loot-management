@@ -22,6 +22,7 @@ import Button from "@material-ui/core/Button";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
+
 import ForwardIcon from "@material-ui/icons/Forward";
 import { useRouter } from "next/router";
 import {
@@ -35,6 +36,7 @@ import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
+import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
 import MemberContext from "../../../lib/context/member";
 import {
   BossItem,
@@ -60,6 +62,7 @@ interface CreateLootVariables {
   lastActionBy: string;
   lastActionDate: string;
 }
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -80,11 +83,13 @@ const useStyles = makeStyles((theme: Theme) =>
     raidTitle: {
       fontSize: 22,
       fontWeight: "bold",
-      margin: "0px 25px 15px 25px"
+      margin: "0px 25px 15px 25px",
+      display: "flex",
+      alignItems: "center"
     },
     playerListBtn: {
       position: "absolute",
-      top: "48px",
+      top: "65px",
       zIndex: 4
     },
     bossCards: {
@@ -168,6 +173,7 @@ export default function PageRaidView() {
   const [restrictedClassIds, setRestrictedClassIds] = useState<number[]>([]);
   const [bossIdSelected, setBossIdSelected] = useState<string>("");
   const [bossNameSelected, setBossNameSelected] = useState<string>("");
+
   const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
   const [snackBarMsg, setSnackBarMsg] = useState<string>("");
   const [snackBarClass, setSnackBarClass] = useState<string>(
@@ -187,6 +193,7 @@ export default function PageRaidView() {
     setBossNameSelected(bossName);
     setAddLootOpened(true);
   };
+
   const handleCloseAddItemWindow = (): void => {
     setItemIdToAdd("");
     setItemToAdd(null);
@@ -195,6 +202,7 @@ export default function PageRaidView() {
     setBossNameSelected("");
     setAddLootOpened(false);
   };
+
   const handleOpenSelectItem = (): void => {
     setSelectItemOpened(true);
   };
@@ -231,12 +239,14 @@ export default function PageRaidView() {
   ): void => {
     setPlayerIdToAdd(event.target.value as string);
   };
+
   const handleOpenSelectPlayer = (): void => {
     setSelectPlayerOpened(true);
   };
   const handleCloseSelectPlayer = (): void => {
     setSelectPlayerOpened(false);
   };
+
   const addLoot = () => {
     if (itemIdToAdd && playerIdToAdd && bossIdSelected) {
       setAddLootOpened(false);
@@ -294,6 +304,7 @@ export default function PageRaidView() {
 
     setSnackBarOpened(false);
   };
+
   const {
     loading: loadingOneRaid,
     data: dataOneRaid,
@@ -358,9 +369,13 @@ export default function PageRaidView() {
     <div className={classes.root}>
       <Paper className={classes.raidInfos}>
         <div className={classes.raidTitle}>
-          {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
-            " | " +
-            currentRaid.donjonByDonjonId.name}
+          <div>
+            {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
+              " | " +
+              currentRaid.donjonByDonjonId.name +
+              (currentRaid.title ? " (" + currentRaid.title + ")" : "")}
+          </div>
+          <RaidTitleButton raid={currentRaid} openSnackBar={openSnackBar} />
         </div>
         <Button
           className={classes.playerListBtn}
