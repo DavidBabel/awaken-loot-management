@@ -12,7 +12,8 @@ import {
   Select,
   Slide,
   Snackbar,
-  SnackbarContent
+  SnackbarContent,
+  Switch
 } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 // import { green } from "@material-ui/core/colors";
@@ -106,6 +107,7 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: 8
       }
     },
+    restrictSwitch: { alignSelf: "flex-end" },
     fleche: {
       alignSelf: "flex-end",
       margin: "0px 15px",
@@ -171,6 +173,7 @@ export default function PageRaidView() {
   const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
   const [itemIdToAdd, setItemIdToAdd] = useState<string>("");
   const [itemToAdd, setItemToAdd] = useState<BossItem>(null);
+  const [restrictPlayerList, setRestrictPlayerList] = useState<boolean>(true);
   const [playerIdToAdd, setPlayerIdToAdd] = useState<string>("");
   const [restrictedClassIds, setRestrictedClassIds] = useState<number[]>([]);
   const [bossIdSelected, setBossIdSelected] = useState<string>("");
@@ -284,6 +287,9 @@ export default function PageRaidView() {
     } else {
       openSnackBar("Selectionnez un item et un joueur.", "error");
     }
+  };
+  const toggleSwitchRestrictPlayerList = () => {
+    setRestrictPlayerList(!restrictPlayerList);
   };
   const openSnackBar = (msg, action) => {
     if (action === "error") {
@@ -486,7 +492,7 @@ export default function PageRaidView() {
             >
               {allPlayers
                 .filter((player: Player) => {
-                  if (restrictedClassIds.length === 0) {
+                  if (restrictedClassIds.length === 0 || !restrictPlayerList) {
                     return true;
                   }
                   return restrictedClassIds.indexOf(player.classId) !== -1;
@@ -511,6 +517,13 @@ export default function PageRaidView() {
                 })}
             </Select>
           </FormControl>
+          <div className={classes.restrictSwitch}>
+            <Switch
+              size="small"
+              checked={restrictPlayerList}
+              onChange={toggleSwitchRestrictPlayerList}
+            />
+          </div>
         </DialogContent>
         <div className={classes.lootToAddAvatars}>
           {itemToAdd &&
