@@ -54,7 +54,8 @@ const classColors = {
   voleur: "rgba(255,245,105)",
   chaman: "rgba(0,112,222)",
   demoniste: "rgba(148,130,201)",
-  guerrier: "rgba(199,156,110)"
+  guerrierTank: "rgba(199,156,110)",
+  guerrierDD: "#C41F3B"
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -95,7 +96,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& .MuiTabs-indicator": { backgroundColor: classColors.demoniste }
   },
   indicator_7: {
-    "& .MuiTabs-indicator": { backgroundColor: classColors.guerrier }
+    "& .MuiTabs-indicator": { backgroundColor: classColors.guerrierTank }
+  },
+  indicator_8: {
+    "& .MuiTabs-indicator": { backgroundColor: classColors.guerrierDD }
   }
 }));
 
@@ -268,7 +272,7 @@ export default function PageIndex() {
       <TabPanel value={value} index={7}>
         <PlayersTable
           showed={value === 7}
-          classColor={classColors.guerrier}
+          classColor={classColors.guerrierTank}
           players={guerriersTank}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
@@ -277,7 +281,7 @@ export default function PageIndex() {
       <TabPanel value={value} index={8}>
         <PlayersTable
           showed={value === 8}
-          classColor={classColors.guerrier}
+          classColor={classColors.guerrierDD}
           players={guerriersDps}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
