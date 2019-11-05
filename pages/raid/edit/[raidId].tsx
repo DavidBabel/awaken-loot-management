@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme: Theme) =>
     raidTitle: {
       fontSize: 22,
       fontWeight: "bold",
+      height: "48px",
       margin: "0px 25px 15px 25px",
       display: "flex",
       alignItems: "center"
