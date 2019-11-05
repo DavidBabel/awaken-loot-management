@@ -136,7 +136,7 @@ VALUES
 ('Gkz'          , 4,  'player', null, true, false),
 ('Zebaww'       , 6,  'player', null, true, false),
 ('Krijgs'       , 8,  'player', null, true, false),
-('Volzam'       , 6,  'player', null, true, false),
+('Volzam'       , 6,  'player', '3ab013c196ad5aeebc46b51d451daa08', true, false),
 ('Romek'        , 2,  'player', '8f7029a25f593e64a888e673ce5689a9', true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),

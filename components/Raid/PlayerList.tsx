@@ -7,8 +7,11 @@ import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Link from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, useContext, useState } from "react";
+import MemberContext from "../../lib/context/member";
 import { RaidPlayer } from "../../lib/generatedTypes";
+import { useToggle } from "../../lib/hooks/toggle";
+import { role } from "../../lib/role-level";
 import ClassAvatar from "../ClassAvatar";
 
 const useStyles = makeStyles({
@@ -49,8 +52,27 @@ interface Props {
   players: RaidPlayer[];
 }
 
+// tslint:disable:no-console
+function parseWarcraftLogs(content: string) {
+  const [, tanks] = content.match(/(Tanks|Healers|DPS):	(.*)/);
+  const [, healers] = content.match(/Healers:	(.*)/);
+  const [, dps] = content.match(/DPS:	(.*)/);
+
+  return (tanks + healers + dps)
+    .split(/(?=[A-Z])/)
+    .filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
+}
+
 export default function PlayerList({ open, handleClose, players }: Props) {
+  const member = useContext(MemberContext);
+
   const classes = useStyles("");
+  const [displayImportPlayerArea, toggleDisplayImportPlayerArea] = useToggle(
+    false
+  );
+  const [warcraftLogsContent, setWarcraftLogsContent] = useState("");
 
   function displayClass(className: string, allPlayers: RaidPlayer[]) {
     const classPlayers = allPlayers.filter(
@@ -107,8 +129,35 @@ export default function PlayerList({ open, handleClose, players }: Props) {
           {displayClass("Guerrier Tank", players)}
           {displayClass("Guerrier DPS", players)}
         </div>
+        {displayImportPlayerArea && (
+          <div>
+            <textarea
+              style={{ width: 400, height: 350 }}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setWarcraftLogsContent(e.target.value)
+              }
+            >
+              {warcraftLogsContent}
+            </textarea>
+
+            <Button
+              onClick={() => {
+                const aa = parseWarcraftLogs(warcraftLogsContent);
+                // toggleDisplayImportPlayerArea();
+              }}
+              color="primary"
+            >
+              Enregistrer les joueurs
+            </Button>
+          </div>
+        )}
       </DialogContent>
       <DialogActions>
+        {member.level > role.officer && (
+          <Button onClick={toggleDisplayImportPlayerArea} color="primary">
+            Import
+          </Button>
+        )}
         <Button onClick={handleClose} color="primary">
           Fermer
         </Button>
