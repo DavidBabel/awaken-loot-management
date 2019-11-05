@@ -162,6 +162,7 @@ export default function PageRaidView() {
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
+  const [raidTitle, setRaidTitle] = useState<string>("");
   const [playerListOpened, togglePlayerListOpened] = useToggle(false);
   const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
@@ -173,7 +174,6 @@ export default function PageRaidView() {
   const [restrictedClassIds, setRestrictedClassIds] = useState<number[]>([]);
   const [bossIdSelected, setBossIdSelected] = useState<string>("");
   const [bossNameSelected, setBossNameSelected] = useState<string>("");
-
   const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
   const [snackBarMsg, setSnackBarMsg] = useState<string>("");
   const [snackBarClass, setSnackBarClass] = useState<string>(
@@ -364,6 +364,7 @@ export default function PageRaidView() {
           currentBossCardContentElem.current.offsetHeight;
       }
     }
+    setRaidTitle(currentRaid.title);
   }, [dataOneRaid]);
   return (
     <div className={classes.root}>
@@ -373,9 +374,13 @@ export default function PageRaidView() {
             {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
               " | " +
               currentRaid.donjonByDonjonId.name +
-              (currentRaid.title ? " (" + currentRaid.title + ")" : "")}
+              (raidTitle ? " (" + raidTitle + ")" : "")}
           </div>
-          <RaidTitleButton raid={currentRaid} openSnackBar={openSnackBar} />
+          <RaidTitleButton
+            raid={currentRaid}
+            openSnackBar={openSnackBar}
+            setRaidTitle={setRaidTitle}
+          />
         </div>
         <Button
           className={classes.playerListBtn}

@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   root: {}
 });
 
-export default function RaidTitleButton({ raid, openSnackBar }) {
+export default function RaidTitleButton({ raid, setRaidTitle, openSnackBar }) {
   const classes = useStyles("");
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -50,7 +50,7 @@ export default function RaidTitleButton({ raid, openSnackBar }) {
     })
       .then(resp => {
         openSnackBar("Titre du raid modifié avec succès", "success");
-        raid.title = titleInput;
+        setRaidTitle(titleInput);
         setOpen(false);
         setLoading(false);
       })
