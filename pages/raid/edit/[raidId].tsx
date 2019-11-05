@@ -19,9 +19,10 @@ import Button from "@material-ui/core/Button";
 
 // import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
 
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
+
 import ForwardIcon from "@material-ui/icons/Forward";
 import { useRouter } from "next/router";
 import {
@@ -35,6 +36,7 @@ import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
+import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
 import MemberContext from "../../../lib/context/member";
 import {
   BossItem,
@@ -47,6 +49,7 @@ import { CREATE_LOOT } from "../../../lib/gql/loot-mutations";
 import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
+import { role } from "../../../lib/role-level";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 interface QueryVariables {
@@ -60,6 +63,7 @@ interface CreateLootVariables {
   lastActionBy: string;
   lastActionDate: string;
 }
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -80,11 +84,13 @@ const useStyles = makeStyles((theme: Theme) =>
     raidTitle: {
       fontSize: 22,
       fontWeight: "bold",
-      margin: "0px 25px 15px 25px"
+      margin: "0px 25px 15px 25px",
+      display: "flex",
+      alignItems: "center"
     },
     playerListBtn: {
       position: "absolute",
-      top: "48px",
+      top: "65px",
       zIndex: 4
     },
     bossCards: {
@@ -157,6 +163,7 @@ export default function PageRaidView() {
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));
+  const [raidTitle, setRaidTitle] = useState<string>("");
   const [playerListOpened, togglePlayerListOpened] = useToggle(false);
   const [addLootOpened, setAddLootOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
@@ -187,6 +194,7 @@ export default function PageRaidView() {
     setBossNameSelected(bossName);
     setAddLootOpened(true);
   };
+
   const handleCloseAddItemWindow = (): void => {
     setItemIdToAdd("");
     setItemToAdd(null);
@@ -195,6 +203,7 @@ export default function PageRaidView() {
     setBossNameSelected("");
     setAddLootOpened(false);
   };
+
   const handleOpenSelectItem = (): void => {
     setSelectItemOpened(true);
   };
@@ -231,12 +240,14 @@ export default function PageRaidView() {
   ): void => {
     setPlayerIdToAdd(event.target.value as string);
   };
+
   const handleOpenSelectPlayer = (): void => {
     setSelectPlayerOpened(true);
   };
   const handleCloseSelectPlayer = (): void => {
     setSelectPlayerOpened(false);
   };
+
   const addLoot = () => {
     if (itemIdToAdd && playerIdToAdd && bossIdSelected) {
       setAddLootOpened(false);
@@ -294,6 +305,7 @@ export default function PageRaidView() {
 
     setSnackBarOpened(false);
   };
+
   const {
     loading: loadingOneRaid,
     data: dataOneRaid,
@@ -307,8 +319,28 @@ export default function PageRaidView() {
     data: dataPlayers,
     error: errorPlayers
   } = useQuery<Query>(ALL_PLAYERS);
+
+  const [createLoot] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
   const error = errorOneRaid || errorPlayers;
   const loading = loadingOneRaid || loadingPlayers;
+
+  useEffect(() => {
+    if (currentBossCardContentElem) {
+      // Scroll tout en bas d'une liste de loot quand un item est ajouté
+      if (currentBossCardContentElem.current.scrollBy) {
+        currentBossCardContentElem.current.scrollBy({
+          top: currentBossCardContentElem.current.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      } else {
+        currentBossCardContentElem.current.scrollTop =
+          currentBossCardContentElem.current.offsetHeight;
+      }
+    }
+    setRaidTitle(currentRaid.title);
+  }, [dataOneRaid]);
+
   if (loadingOneRaid || loadingPlayers || errorOneRaid || errorPlayers) {
     return <LoadingAndError loading={loading} error={error} />;
   }
@@ -334,33 +366,23 @@ export default function PageRaidView() {
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
 
-  const [
-    createLoot
-    // { loading: mutationLoading, data: mutationData }
-  ] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
-
-  useEffect(() => {
-    if (currentBossCardContentElem) {
-      // Scroll tout en bas d'une liste de loot quand un item est ajouté
-      if (currentBossCardContentElem.current.scrollBy) {
-        currentBossCardContentElem.current.scrollBy({
-          top: currentBossCardContentElem.current.scrollHeight,
-          left: 0,
-          behavior: "smooth"
-        });
-      } else {
-        currentBossCardContentElem.current.scrollTop =
-          currentBossCardContentElem.current.offsetHeight;
-      }
-    }
-  }, [dataOneRaid]);
   return (
     <div className={classes.root}>
       <Paper className={classes.raidInfos}>
         <div className={classes.raidTitle}>
-          {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
-            " | " +
-            currentRaid.donjonByDonjonId.name}
+          <div>
+            {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
+              " | " +
+              currentRaid.donjonByDonjonId.name +
+              (raidTitle ? " (" + raidTitle + ")" : "")}
+          </div>
+          {member.level >= role.officer && (
+            <RaidTitleButton
+              raid={currentRaid}
+              openSnackBar={openSnackBar}
+              setRaidTitle={setRaidTitle}
+            />
+          )}
         </div>
         <Button
           className={classes.playerListBtn}
