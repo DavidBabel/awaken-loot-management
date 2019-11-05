@@ -42,6 +42,7 @@ app
         "public",
         {
           // classicIds: true,
+          enableQueryBatching: true,
           externalUrlBase: `/${CONFIG.GRAPHQL_ENDPOINT}`,
           graphqlRoute: "/"
         }

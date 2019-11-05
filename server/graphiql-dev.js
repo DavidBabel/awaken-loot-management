@@ -15,6 +15,7 @@ const databaseUrl =
 app.use(
   postgraphile(databaseUrl, "public", {
     // classicIds: true,
+    enableQueryBatching: true,
     enhanceGraphiql: true,
     graphiql: true,
     graphqlRoute: "/",
