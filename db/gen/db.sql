@@ -419,6 +419,8 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=18878)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=17077)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=19146)),
+((SELECT id FROM "Bosses" WHERE "name"='Lucifron'),(SELECT id FROM "Items" WHERE "wowheadId"=19146)),
+((SELECT id FROM "Bosses" WHERE "name"='Shazzrah'),(SELECT id FROM "Items" WHERE "wowheadId"=19146)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=19145)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=18861)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=18875)),
@@ -754,6 +756,18 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17075)),
 ((SELECT id FROM "Bosses" WHERE "name"='Onyxia'),(SELECT id FROM "Items" WHERE "wowheadId"=17966));
 
+
+-- added after crawl
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
+VALUES
+('Casque du donneur de vie',18870,(SELECT id FROM "Classes" WHERE "name"=''), 3);
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Lucifron'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
+((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
+((SELECT id FROM "Bosses" WHERE "name"='Shazzrah'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
+((SELECT id FROM "Bosses" WHERE "name"='Sulfuron Harbinger'),(SELECT id FROM "Items" WHERE "wowheadId"=18870));
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
@@ -1946,7 +1960,12 @@ VALUES
 ('Romek'        , 2,  'player', '8f7029a25f593e64a888e673ce5689a9', true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),
-('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false)
+('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false),
+('Blackgïft'    , 8,  'player', null, true, false),
+('Skedone'      , 9,  'player', null, true, false),
+('fucked-1'     , 1,  'player', null, false, false),
+('Spydermatrix' , 2,  'player', null, true, false),
+('Waira'        , 3,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
