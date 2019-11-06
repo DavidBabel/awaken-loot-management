@@ -28,7 +28,7 @@ VALUES
 ('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', false, false),
 ('Lums'         , 7,  'player', null, true, true),
 ('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
-('Krigen'       , 8,  'player', null, true, true),
+('Krigen'       , 8,  'player', '1ce82060116628e67b6dfa004ce8d70a', true, true),
 ('Cocobanjo'    , 4,  'player', null, true, true),
 ('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
 ('Oscuro'       , 9,  'player', null, true, true),
