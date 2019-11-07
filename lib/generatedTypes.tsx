@@ -995,6 +995,7 @@ export type Mutation = {
   createClassItem?: Maybe<CreateClassItemPayload>;
   /** Creates a single `Loot`. */
   createLoot?: Maybe<CreateLootPayload>;
+  createPlayer?: any;
   /** Creates a single `PlayerMerit`. */
   createPlayerMerit?: Maybe<CreatePlayerMeritPayload>;
   /** Creates a single `RaidPlayer`. */

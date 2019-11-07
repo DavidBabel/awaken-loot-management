@@ -7,13 +7,17 @@ import {
   DialogTitle,
   IconButton,
   LinearProgress,
+  Snackbar,
+  SnackbarContent,
   TextField
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
 import { UPDATE_RAID_TITLE } from "../../lib/gql/raid-mutations";
+import { useSnackBar } from "../../lib/hooks/snackbar";
 
 interface UpdateRaidTitleVariables {
   raidId: number;
@@ -23,7 +27,7 @@ const useStyles = makeStyles({
   root: {}
 });
 
-export default function RaidTitleButton({ raid, setRaidTitle, openSnackBar }) {
+export default function RaidTitleButton({ raid, setRaidTitle }) {
   const classes = useStyles("");
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -31,6 +35,14 @@ export default function RaidTitleButton({ raid, setRaidTitle, openSnackBar }) {
   const [updateRaidTitle] = useMutation<Mutation, UpdateRaidTitleVariables>(
     UPDATE_RAID_TITLE
   );
+  const {
+    snackBarOpen,
+    snackBarBackgroundColor,
+    openSnackBar,
+    closeSnackBar,
+    snackBarMessage
+  } = useSnackBar();
+
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -100,6 +112,30 @@ export default function RaidTitleButton({ raid, setRaidTitle, openSnackBar }) {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={snackBarOpen}
+        autoHideDuration={3000}
+        onClose={closeSnackBar}
+      >
+        <SnackbarContent
+          style={{ backgroundColor: snackBarBackgroundColor }}
+          message={<span id="message-id">{snackBarMessage}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={closeSnackBar}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
     </div>
   );
 }
