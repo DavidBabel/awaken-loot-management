@@ -25,7 +25,7 @@ import { ApolloQueryResult } from "apollo-boost";
 import { useContext, useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import MemberContext from "../../lib/context/member";
-import { Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
+import { BossItem, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../lib/gql/loot-mutations";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
@@ -105,7 +105,7 @@ export default function AddLootDialog({
   scrollDown
 }: {
   allPlayers: Player[];
-  loots: Loot[];
+  loots: BossItem[];
   raidId: number;
   bossId: number;
   bossName: string;
@@ -123,7 +123,7 @@ export default function AddLootDialog({
   const [newPlayerInputValue, setNewPlayerInputValue] = useState<string>(null);
   const [itemIdToAdd, setItemIdToAdd] = useState<string>("");
   const [classIdToAdd, setClassIdToAdd] = useState<string>("0");
-  const [itemToAdd, setItemToAdd] = useState<Loot>(null);
+  const [itemToAdd, setItemToAdd] = useState<BossItem>(null);
   const [addLootIsLoading, setAddLootIsLoading] = useState<boolean>(false);
   const [restrictedClassIds, setRestrictedClassIds] = useState<number[]>([]);
   const [selectPlayerOpened, setSelectPlayerOpened] = useState<boolean>(false);
