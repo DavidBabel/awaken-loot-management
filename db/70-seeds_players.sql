@@ -64,7 +64,7 @@ VALUES
 ('Kresmi'       , 3,  'player', null, false, false),
 ('Kusogakî'     , 9,  'player', null, true, false),
 ('Kynosura'     , 2,  'player', null, true, false),
-('Ladj'         , 8,  'player', null, true, false),
+('Ladj'         , 8,  'player', '885eeaac6ca8a9456d6d73fbb6e7f12e', true, false),
 ('Lyaxus'       , 7,  'player', null, false, false),
 ('Lykwette'     , 8,  'player', null, true, false),
 ('Lylith'       , 1,  'player', null, true, false),
