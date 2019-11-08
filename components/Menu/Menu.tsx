@@ -51,6 +51,13 @@ export function Menu() {
                 <ListItemText primary="Items" />
               </ListItem>
             </Link>
+            {member.level >= 4 && (
+              <Link href="/editplayers">
+                <ListItem button={true}>
+                  <ListItemText primary="Editer joueurs" />
+                </ListItem>
+              </Link>
+            )}
           </List>
           <Divider />
 

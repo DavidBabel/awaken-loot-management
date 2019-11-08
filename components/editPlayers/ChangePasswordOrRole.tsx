@@ -16,24 +16,30 @@ import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
-import { UPDATE_RAID_TITLE } from "../../lib/gql/raid-mutations";
+import { UPDATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 
-interface UpdateRaidTitleVariables {
-  raidId: number;
-  newTitle: string;
+interface UpdatePlayerVariables {
+  id: number;
+  active?: boolean;
+  name?: string;
+  inRoster?: boolean;
+  password?: string;
+  role?: string;
 }
+
 const useStyles = makeStyles({
-  root: {}
+  button: { marginLeft: 5 },
+  input: { width: "100%" }
 });
 
-export default function RaidTitleButton({ raid, setRaidTitle }) {
+export default function ChangePasswordOrRole({ playerId, accessor }) {
   const classes = useStyles("");
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-  const [titleInput, setTitleInput] = useState<string>("");
-  const [updateRaidTitle] = useMutation<Mutation, UpdateRaidTitleVariables>(
-    UPDATE_RAID_TITLE
+  const [input, setInput] = useState<string>("");
+  const [updatePlayer] = useMutation<Mutation, UpdatePlayerVariables>(
+    UPDATE_PLAYER
   );
   const {
     snackBarOpen,
@@ -50,31 +56,35 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
     setOpen(false);
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitleInput(event.target.value);
+    setInput(event.target.value);
   };
   const confirm = () => {
     setLoading(true);
-    updateRaidTitle({
-      variables: {
-        raidId: raid.id,
-        newTitle: titleInput
-      }
-    })
-      .then(resp => {
-        openSnackBar("Titre du raid modifié avec succès", "success");
-        setRaidTitle(titleInput);
-        setOpen(false);
-        setLoading(false);
+    if (input.length > 0) {
+      updatePlayer({
+        variables: {
+          id: playerId,
+          [accessor]: input
+        }
       })
-      .catch(err => {
-        openSnackBar(err.message, "error");
-        setOpen(false);
-        setLoading(false);
-      });
+        .then(resp => {
+          openSnackBar(accessor + " modifié avec succès", "success");
+          setOpen(false);
+          setLoading(false);
+        })
+        .catch(err => {
+          openSnackBar(err.message, "error");
+          setOpen(false);
+          setLoading(false);
+        });
+    } else {
+      openSnackBar("Veuillez remplir le champ", "error");
+      setLoading(false);
+    }
   };
   return (
-    <div className={classes.root}>
-      <IconButton onClick={handleOpen}>
+    <div>
+      <IconButton className={classes.button} onClick={handleOpen}>
         <CreateIcon />
       </IconButton>
       <Dialog
@@ -82,21 +92,22 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
         open={open}
         keepMounted={true}
         onClose={handleClose}
-        aria-labelledby="update-title-dialog"
-        aria-describedby="update title window"
+        aria-labelledby="update-passwordOrRole-dialog"
+        aria-describedby="update passwordOrRole window"
       >
-        <DialogTitle id="update-title-dialog">
-          Modifier le titre du raid
+        <DialogTitle id="update-passwordOrRole-dialog">
+          Modifier le "{accessor}":
         </DialogTitle>
         <DialogContent>
           {loading ? (
             <LinearProgress />
           ) : (
             <TextField
+              className={classes.input}
               autoComplete="off"
-              id="outlined-title-input"
-              label="Title"
-              value={titleInput}
+              id="outlined-passwordOrRole-input"
+              label={accessor}
+              value={input}
               onChange={handleChange}
               margin="dense"
               variant="outlined"

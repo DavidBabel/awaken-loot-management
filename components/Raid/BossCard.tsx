@@ -1,40 +1,37 @@
 import { useMutation } from "@apollo/react-hooks";
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   CardMedia,
-  Fab,
-  makeStyles
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  LinearProgress,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  makeStyles,
+  Snackbar,
+  SnackbarContent,
+  Tooltip
 } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from "@material-ui/core/IconButton";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Tooltip from "@material-ui/core/Tooltip";
-import { Add as AddIcon } from "@material-ui/icons";
+import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
-import {
-  MutableRefObject,
-  useContext,
-  useEffect,
-  useRef,
-  useState
-} from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import AddLootDialog from "../../components/Raid/AddLootDialog";
 import MemberContext from "../../lib/context/member";
-import { Boss, BossItem, Loot, Mutation } from "../../lib/generatedTypes";
+import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
+import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
 import { getBossImageUrl } from "../../lib/utils/image";
 
@@ -122,19 +119,17 @@ export function BossCard({
   bossItemsByBossId: { nodes: loots },
   donjonShortName,
   looted,
-  openLootWindow,
-  setDialogItems,
-  openSnackBar
+  raidId,
+  refetchOneRaid,
+  refetchAllPlayers,
+  allPlayers
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
-  openLootWindow: (
-    bossId: string,
-    bossName: string,
-    bossCardContentElem: MutableRefObject<any>
-  ) => void;
-  setDialogItems: Dispatch<SetStateAction<BossItem[]>>;
-  openSnackBar: (msg: any, action: any) => void;
+  raidId: number;
+  allPlayers: Player[];
+  refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
+  refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
 }) {
   const classes = useStyles("");
   const member = useContext(MemberContext);
@@ -148,6 +143,14 @@ export function BossCard({
     null
   );
   const [deleteIsLoading, setDeleteIsLoading] = useState<boolean>(false);
+  const {
+    snackBarOpen,
+    snackBarBackgroundColor,
+    openSnackBar,
+    closeSnackBar,
+    snackBarMessage
+  } = useSnackBar();
+
   const openDeleteLootConfirm = (loot: Loot) => {
     setCurrentLootToBeDeleted(loot);
     setDeleteLootConfirmOpen(true);
@@ -179,6 +182,20 @@ export function BossCard({
         setDeleteLootConfirmOpen(false);
         setDeleteIsLoading(false);
       });
+  };
+  const scrollDown = () => {
+    if (bossCardContentElem) {
+      if (bossCardContentElem.current.scrollBy) {
+        bossCardContentElem.current.scrollBy({
+          top: bossCardContentElem.current.scrollHeight,
+          left: 0,
+          behavior: "smooth"
+        });
+      } else {
+        bossCardContentElem.current.scrollTop =
+          bossCardContentElem.current.offsetHeight;
+      }
+    }
   };
   useEffect(() => {
     if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
@@ -282,17 +299,16 @@ export function BossCard({
         </CardContent>
         {member.level >= role.officer && (
           <CardActions disableSpacing={true} className={classes.cardActions}>
-            <Fab
-              size="small"
-              color="primary"
-              aria-label="add"
-              onClick={() => {
-                setDialogItems(loots);
-                openLootWindow(id.toString(), name, bossCardContentElem);
-              }}
-            >
-              <AddIcon />
-            </Fab>
+            <AddLootDialog
+              allPlayers={allPlayers}
+              raidId={raidId}
+              bossId={id}
+              bossName={name}
+              loots={loots}
+              refetchOneRaid={refetchOneRaid}
+              refetchAllPlayers={refetchAllPlayers}
+              scrollDown={scrollDown}
+            />
           </CardActions>
         )}
       </Card>
@@ -346,6 +362,30 @@ export function BossCard({
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        open={snackBarOpen}
+        autoHideDuration={3000}
+        onClose={closeSnackBar}
+      >
+        <SnackbarContent
+          style={{ backgroundColor: snackBarBackgroundColor }}
+          message={<span id="message-id">{snackBarMessage}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={closeSnackBar}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
     </>
   );
 }
