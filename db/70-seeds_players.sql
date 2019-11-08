@@ -79,7 +79,7 @@ VALUES
 ('Qweakzor'     , 6,  'player', null, true, false),
 ('Ràys'         , 4,  'player', null, true, false),
 ('Rektall'      , 3,  'player', null, true, false),
-('Skau'         , 1,  'player', null, false, false),
+('Skau'         , 1,  'player', null, true, false),
 ('Sprawl'       , 8,  'player', null, false, false),
 ('Størmfury'    , 5,  'player', null, false, false),
 ('Suprême'      , 3,  'player', null, true, false),
@@ -145,7 +145,8 @@ VALUES
 ('Skedone'      , 9,  'player', null, true, false),
 ('fucked-1'     , 1,  'player', null, false, false),
 ('Spydermatrix' , 2,  'player', null, true, false),
-('Waira'        , 3,  'player', null, true, false)
+('Waira'        , 3,  'player', null, true, false),
+('Panou'        , 7,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre
