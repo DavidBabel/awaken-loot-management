@@ -11,16 +11,16 @@ const roster: Roster[] = [
     name: "Prêtre",
     shivtrIcon: "16",
     prepend: "H",
-    prio: "ouvert"
+    prio: "fermé"
   },
-  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "prio" },
+  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "fermé" },
   { name: "Chaman", shivtrIcon: "18", prepend: "R", prio: "prio" },
-  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "faible" },
-  { name: "Démoniste", shivtrIcon: "20", prepend: "", prio: "ouvert" },
+  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "fermé" },
+  { name: "Démoniste", shivtrIcon: "20", prepend: "", prio: "fermé" },
   { name: "Voleur", shivtrIcon: "15", prepend: "", prio: "fermé" },
   { name: "Chasseur", shivtrIcon: "14", prepend: "", prio: "faible" },
-  { name: "Guerrier Tank", shivtrIcon: "12", prepend: "", prio: "ouvert" },
-  { name: "Guerrier DPS", shivtrIcon: "17", prepend: "", prio: "ouvert" }
+  { name: "Guerrier Tank", shivtrIcon: "12", prepend: "", prio: "fermé" },
+  { name: "Guerrier DPS", shivtrIcon: "17", prepend: "", prio: "fermé" }
 ];
 
 const recrutement: Prios[] = ["prio", "ouvert", "faible", "fermé"];
