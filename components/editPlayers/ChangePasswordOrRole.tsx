@@ -96,7 +96,7 @@ export default function ChangePasswordOrRole({ playerId, accessor }) {
         aria-describedby="update passwordOrRole window"
       >
         <DialogTitle id="update-passwordOrRole-dialog">
-          Modifier le mot de passe crypté:
+          Modifier le "{accessor}":
         </DialogTitle>
         <DialogContent>
           {loading ? (
