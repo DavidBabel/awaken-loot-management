@@ -47,12 +47,15 @@ const useStyles = makeStyles({
   },
   table: {
     "& .MuiTableCell-head": { backgroundColor: "#4d4d4d", color: "white" },
-    "& .MuiTableCell-root": { position: "relative" },
+    "& .MuiTableCell-root:not(.MuiTableCell-head)": { position: "relative" },
     "& .MuiTableRow-root:nth-child(even)": {
       backgroundColor: "rgba(0,0,0,0.05)"
     }
   },
-  nameCell: { textShadow: "1px 1px 1px rgba(0,0,0,0.8)" },
+  nameCell: {
+    textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
+    backgroundColor: "#4D4D4D"
+  },
   passwordOrRole: {
     display: "flex",
     justifyContent: "flex-end",
