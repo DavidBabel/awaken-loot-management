@@ -21,6 +21,8 @@ export const ALL_PLAYERS = gql`
         active
         inRoster
         classId
+        role
+        password
         classByClassId {
           id
           color

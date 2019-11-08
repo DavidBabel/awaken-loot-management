@@ -36,10 +36,10 @@ export function byValue(accessor: string, orderDesc: boolean = true) {
 export function byAlphabet(accessor: string, orderDesc: boolean = true) {
   return (a: any, b: any) =>
     orderDesc
-      ? a[accessor] > b[accessor]
+      ? a[accessor].toLowerCase() > b[accessor].toLowerCase()
         ? -1
         : 1
-      : a[accessor] > b[accessor]
+      : a[accessor].toLowerCase() > b[accessor].toLowerCase()
       ? 1
       : -1;
 }
