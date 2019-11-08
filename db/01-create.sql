@@ -18,12 +18,12 @@ CREATE TABLE "Players" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "classId" int NOT NULL,
-  "role" varchar,
+  "role" varchar DEFAULT "player",
   "password" varchar,
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false
 );
-comment on table "Players" is E'@omit create,update,delete';
+comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
 
 
@@ -46,7 +46,7 @@ CREATE TABLE "PlayerMerit" (
   "date" varchar,
   "validated" boolean DEFAULT false
 );
--- comment on table "PlayerMerit" is E'@omit delete';
+comment on table "PlayerMerit" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 

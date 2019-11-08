@@ -239,8 +239,7 @@ export default function AddLootDialog({
         createPlayer({
           variables: {
             classId: parseInt(classIdToAdd),
-            name: newPlayerInputValue,
-            role: "player"
+            name: newPlayerInputValue
           }
         })
           .then(resp => {
