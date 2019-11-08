@@ -28,10 +28,14 @@ psql $PROD_DB < ./db/18-data_items_classes.sql
 echo -e $RED Create data merites ... $NC
 psql $PROD_DB < ./db/40-merites.sql
 
-echo -e $RED Create data players ... $NC
-psql $PROD_DB < ./db/70-seeds_players.sql
+# # old managed :
+# echo -e $RED Create data players ... $NC
+# psql $PROD_DB < ./db/70-seeds_players.sql
 
 # # remote management
+echo -e $RED Import players $NC
+psql $PROD_DB < ./db/backups/$date/db-table-players.sql
+
 echo -e $RED Import player merits $NC
 psql $PROD_DB < ./db/backups/$date/db-table-playermerit.sql
 

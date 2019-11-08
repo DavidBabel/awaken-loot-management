@@ -11,7 +11,7 @@ echo -e $RED Backup All ... $NC
 pg_dump $PROD_DB > "./db/backups/$date/db-all.sql"
 
 echo -e $RED Backup Players ... $NC
-pg_dump $PROD_DB --data-only -t "public.\"Players\"" > "./db/backups/$date/db-table-player.sql"
+pg_dump $PROD_DB --data-only -t "public.\"Players\"" > "./db/backups/$date/db-table-players.sql"
 
 echo -e $RED Backup PlayerMerit ... $NC
 pg_dump $PROD_DB --data-only -t "public.\"PlayerMerit\"" > "./db/backups/$date/db-table-playermerit.sql"

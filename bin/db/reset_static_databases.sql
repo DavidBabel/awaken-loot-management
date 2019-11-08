@@ -1,7 +1,6 @@
 
 -- wipe database
 DROP TABLE "Classes" CASCADE;
-DROP TABLE "Players" CASCADE;
 DROP TABLE "Merit" CASCADE;
 DROP TABLE "PlayerMerit" CASCADE;
 DROP TABLE "Loots" CASCADE;
