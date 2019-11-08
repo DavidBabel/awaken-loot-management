@@ -6,6 +6,7 @@ export const CREATE_PLAYER = gql`
       player {
         id
         name
+        role
         active
       }
     }
