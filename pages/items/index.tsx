@@ -179,7 +179,7 @@ export default function PageIndex() {
   return (
     <div className={classes.root}>
       <Paper className={classes.searchBox}>
-        <Typography>Tappez votre recherche:</Typography>
+        <Typography>Tapez votre recherche:</Typography>
         <TextField
           autoComplete="off"
           id="outlined-item"
