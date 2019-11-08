@@ -29,7 +29,7 @@ CREATE TABLE "Players"
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false
 );
-comment on table "Players" is E'@omit update,delete';
+comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players"
 ("id");
 

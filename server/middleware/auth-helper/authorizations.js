@@ -41,6 +41,7 @@ const rights = {
   updateClassItemById: OFFICER_MIN,
   updateLoot: NO_ONE,
   updateLootById: CLASSMASTER_MIN,
+  updatePlayerById: ADMIN_MIN,
   updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: PLAYER_MIN,
   updateRaid: NO_ONE,

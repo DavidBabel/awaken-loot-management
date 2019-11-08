@@ -1012,6 +1012,7 @@ export type Mutation = {
   updateLootById?: Maybe<UpdateLootPayload>;
   /** Updates a single `PlayerMerit` using its globally unique id and a patch. */
   updatePlayerMerit?: Maybe<UpdatePlayerMeritPayload>;
+  updatePlayer?: any;
   /** Updates a single `PlayerMerit` using a unique key and a patch. */
   updatePlayerMeritById?: Maybe<UpdatePlayerMeritPayload>;
   /** Updates a single `RaidPlayer` using its globally unique id and a patch. */

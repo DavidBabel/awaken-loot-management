@@ -51,6 +51,11 @@ export function Menu() {
                 <ListItemText primary="Items" />
               </ListItem>
             </Link>
+            <Link href="/editplayers">
+              <ListItem button={true}>
+                <ListItemText primary="Editer joueurs" />
+              </ListItem>
+            </Link>
           </List>
 
           <List>
