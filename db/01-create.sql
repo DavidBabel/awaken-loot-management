@@ -121,6 +121,7 @@ CREATE TABLE "Raids" (
   "title" varchar,
   "donjonId" int NOT NULL,
   "date" varchar,
+  "linkBetweenRaids" varchar,
   "active" boolean DEFAULT true
 );
 comment on table "Raids" is E'@omit delete';

@@ -28,7 +28,7 @@ VALUES
 ('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', false, false),
 ('Lums'         , 7,  'player', null, true, true),
 ('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
-('Krigen'       , 8,  'player', null, true, true),
+('Krigen'       , 8,  'player', '1ce82060116628e67b6dfa004ce8d70a', true, true),
 ('Cocobanjo'    , 4,  'player', null, true, true),
 ('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
 ('Oscuro'       , 9,  'player', null, true, true),
@@ -64,7 +64,7 @@ VALUES
 ('Kresmi'       , 3,  'player', null, false, false),
 ('Kusogakî'     , 9,  'player', null, true, false),
 ('Kynosura'     , 2,  'player', null, true, false),
-('Ladj'         , 8,  'player', null, true, false),
+('Ladj'         , 8,  'player', '885eeaac6ca8a9456d6d73fbb6e7f12e', true, false),
 ('Lyaxus'       , 7,  'player', null, false, false),
 ('Lykwette'     , 8,  'player', null, true, false),
 ('Lylith'       , 1,  'player', null, true, false),
@@ -79,7 +79,7 @@ VALUES
 ('Qweakzor'     , 6,  'player', null, true, false),
 ('Ràys'         , 4,  'player', null, true, false),
 ('Rektall'      , 3,  'player', null, true, false),
-('Skau'         , 1,  'player', null, false, false),
+('Skau'         , 1,  'player', null, true, false),
 ('Sprawl'       , 8,  'player', null, false, false),
 ('Størmfury'    , 5,  'player', null, false, false),
 ('Suprême'      , 3,  'player', null, true, false),
@@ -140,7 +140,13 @@ VALUES
 ('Romek'        , 2,  'player', '8f7029a25f593e64a888e673ce5689a9', true, false),
 ('Rupt'         , 4,  'player', null, true, false),
 ('Ané'          , 9,  'player', null, true, false),
-('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false)
+('Squeeze'      , 4,  'player', 'a8c934f5d23534db9db4db7b91c558e7', true, false),
+('Blackgïft'    , 8,  'player', null, true, false),
+('Skedone'      , 9,  'player', null, true, false),
+('fucked-1'     , 1,  'player', null, false, false),
+('Spydermatrix' , 2,  'player', null, true, false),
+('Waira'        , 3,  'player', null, true, false),
+('Panou'        , 7,  'player', null, true, false)
 ;
 
 -- 1 - Prêtre

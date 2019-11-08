@@ -38,12 +38,12 @@ export function Menu() {
           <List>
             <Link href="/summary">
               <ListItem button={true}>
-                <ListItemText primary="Characters summary" />
+                <ListItemText primary="Joueurs" />
               </ListItem>
             </Link>
             <Link href="/attendance">
               <ListItem button={true}>
-                <ListItemText primary="Attendance" />
+                <ListItemText primary="Présence en raid" />
               </ListItem>
             </Link>
             <Link href="/items">
@@ -59,6 +59,7 @@ export function Menu() {
               </Link>
             )}
           </List>
+          <Divider />
 
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
