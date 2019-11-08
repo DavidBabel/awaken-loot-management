@@ -18,7 +18,7 @@ CREATE TABLE "Players" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "classId" int NOT NULL,
-  "role" varchar DEFAULT "player",
+  "role" varchar DEFAULT 'player',
   "password" varchar,
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false
