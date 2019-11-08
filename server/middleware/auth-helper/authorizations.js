@@ -14,6 +14,7 @@ const OFFICER_MIN = [ADMIN, OFFICER];
 const CLASSMASTER_MIN = [ADMIN, OFFICER, CLASS_MASTER];
 const PLAYER_MIN = [ADMIN, OFFICER, CLASS_MASTER, PLAYER];
 
+// TODO : check if we have right for EVERY mutation in base on service launch
 const rights = {
   allBossItems: PLAYER_MIN,
   allBosses: PLAYER_MIN,
@@ -41,6 +42,7 @@ const rights = {
   updateClassItemById: OFFICER_MIN,
   updateLoot: NO_ONE,
   updateLootById: CLASSMASTER_MIN,
+  updatePlayer: NO_ONE,
   updatePlayerById: ADMIN_MIN,
   updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: PLAYER_MIN,
