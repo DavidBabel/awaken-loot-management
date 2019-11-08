@@ -33,7 +33,7 @@ const rights = {
   createPlayerMerit: PLAYER_MIN,
   createRaid: OFFICER_MIN,
   createRaidPlayer: CLASSMASTER_MIN,
-  createPlayer: CLASSMASTER_MIN,
+  createPlayer: OFFICER_MIN,
   deletePlayerMerit: NO_ONE,
   deletePlayerMeritById: CLASSMASTER_MIN,
   deleteRaidPlayer: NO_ONE,
