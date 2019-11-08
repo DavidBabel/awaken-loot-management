@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 // import { useState } from "react";
 
+import ChangePasswordOrRole from "../../components/editPlayers/ChangePasswordOrRole";
 import InRosterAndActiveSwitch from "../../components/editPlayers/InRosterAndActiveSwitch";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Player } from "../../lib/generatedTypes";
@@ -51,7 +52,12 @@ const useStyles = makeStyles({
       backgroundColor: "rgba(0,0,0,0.05)"
     }
   },
-  nameCell: { textShadow: "1px 1px 1px rgba(0,0,0,0.8)" }
+  nameCell: { textShadow: "1px 1px 1px rgba(0,0,0,0.8)" },
+  passwordOrRole: {
+    display: "flex",
+    justifyContent: "flex-end",
+    lineHeight: "48px"
+  }
 });
 
 export default function PageIndex() {
@@ -66,7 +72,6 @@ export default function PageIndex() {
     return <LoadingAndError loading={loading} error={error} />;
   }
   const allPlayers = data.allPlayers.nodes.sort(byAlphabet("name", false));
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -102,8 +107,28 @@ export default function PageIndex() {
                 <TableCell align="right">
                   {player.classByClassId.name}
                 </TableCell>
-                <TableCell align="right">{player.role}</TableCell>
-                <TableCell align="right">{player.password}</TableCell>
+                <TableCell align="right">
+                  <div className={classes.passwordOrRole}>
+                    {player.role}
+                    {
+                      <ChangePasswordOrRole
+                        playerId={player.id}
+                        accessor={"role"}
+                      />
+                    }
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div className={classes.passwordOrRole}>
+                    {player.password}
+                    {
+                      <ChangePasswordOrRole
+                        playerId={player.id}
+                        accessor={"password"}
+                      />
+                    }
+                  </div>
+                </TableCell>
                 <TableCell align="center">
                   <InRosterAndActiveSwitch
                     active={player.active}
