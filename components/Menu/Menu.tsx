@@ -10,6 +10,7 @@ import Router from "next/router";
 import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
+import { role } from "../../lib/role-level";
 
 // import { AppVersion } from '../AppVersion';
 
@@ -20,7 +21,7 @@ function resetToken() {
 
 export function Menu() {
   const member = useContext(MemberContext);
-  const isConnected = member.level > 0;
+  const isConnected = member.level > role.guest;
 
   return (
     <div>
@@ -51,7 +52,7 @@ export function Menu() {
                 <ListItemText primary="Items" />
               </ListItem>
             </Link>
-            {member.level >= 4 && (
+            {member.level >= role.admin && (
               <Link href="/editplayers">
                 <ListItem button={true}>
                   <ListItemText primary="Editer joueurs" />
