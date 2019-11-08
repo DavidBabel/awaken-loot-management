@@ -15,6 +15,10 @@ const CLASSMASTER_MIN = [ADMIN, OFFICER, CLASS_MASTER];
 const PLAYER_MIN = [ADMIN, OFFICER, CLASS_MASTER, PLAYER];
 
 // TODO : check if we have right for EVERY mutation in base on service launch
+// TODO : créer des rules qui prennent en entrée la query et des condition
+// - exemple : un gars ne peut s'editer que lui même (mérite)
+// - personne ne peux créer autre chose que des "player"
+
 const rights = {
   allBossItems: PLAYER_MIN,
   allBosses: PLAYER_MIN,
