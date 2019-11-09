@@ -17,7 +17,7 @@ module.exports = async function loginRoute(req, res) {
     res
       .json({
         ...payload,
-        jwt: jwt.sign({ role: account.role }, CONFIG.JWT_SECRET, {
+        jwt: jwt.sign(payload, CONFIG.JWT_SECRET, {
           expiresIn: CONFIG.COOKIE_LIFE
         })
       })

@@ -1,6 +1,7 @@
 // ts-check
 
 const { gql } = require("apollo-boost");
+const { playerItself } = require("./query-rules");
 
 const ADMIN = "admin";
 const OFFICER = "officer";
@@ -13,6 +14,11 @@ const ADMIN_MIN = [ADMIN];
 const OFFICER_MIN = [ADMIN, OFFICER];
 const CLASSMASTER_MIN = [ADMIN, OFFICER, CLASS_MASTER];
 const PLAYER_MIN = [ADMIN, OFFICER, CLASS_MASTER, PLAYER];
+
+// TODO : check if we have right for EVERY mutation in base on service launch
+// TODO : créer des rules qui prennent en entrée la query et des condition
+// - exemple : un gars ne peut s'editer que lui même (mérite)
+// - personne ne peux créer autre chose que des "player"
 
 const rights = {
   allBossItems: PLAYER_MIN,
@@ -32,7 +38,7 @@ const rights = {
   createPlayerMerit: PLAYER_MIN,
   createRaid: OFFICER_MIN,
   createRaidPlayer: CLASSMASTER_MIN,
-  createPlayer: CLASSMASTER_MIN,
+  createPlayer: OFFICER_MIN,
   deletePlayerMerit: NO_ONE,
   deletePlayerMeritById: CLASSMASTER_MIN,
   deleteRaidPlayer: NO_ONE,
@@ -41,6 +47,7 @@ const rights = {
   updateClassItemById: OFFICER_MIN,
   updateLoot: NO_ONE,
   updateLootById: CLASSMASTER_MIN,
+  updatePlayer: NO_ONE,
   updatePlayerById: ADMIN_MIN,
   updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: PLAYER_MIN,
@@ -50,12 +57,17 @@ const rights = {
   updateRaidPlayerById: OFFICER_MIN
 };
 
+const constraints = {
+  createPlayerMerit: [playerItself]
+};
+
 /**
  *
  * @param {'admin'|'officer'|'classMaster'|'player'|'guest'} playerLevel
  * @param {string} request
  */
-function checkRights(playerLevel = GUEST, request) {
+function checkRights(user, request) {
+  const { role = GUEST } = user;
   const parsedRequest = gql(request);
 
   const queries = parsedRequest.definitions.map(q =>
@@ -69,10 +81,17 @@ function checkRights(playerLevel = GUEST, request) {
     if (!Object.keys(rights).includes(query)) {
       throw new Error(`Awaken: Unknow query ${query}`);
     }
-    if (!rights[query].includes(playerLevel)) {
-      throw new Error(
-        `Awaken: role ${playerLevel} not allowed to perform ${query}`
-      );
+    if (!rights[query].includes(role)) {
+      throw new Error(`Awaken: role ${role} not allowed to perform ${query}`);
+    }
+    if (constraints[query]) {
+      constraints[query].forEach(isValidQuery => {
+        if (!isValidQuery(user, parsedRequest)) {
+          throw new Error(
+            `Awaken: role ${role} or player ${"playername"} is not allowed to perform ${query}`
+          );
+        }
+      });
     }
   });
 
