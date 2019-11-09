@@ -1,4 +1,4 @@
-const { checkRights } = require('./auth-helper/authorizations');
+const { checkRights } = require("./auth-helper/authorizations");
 
 /**
  *
@@ -12,13 +12,13 @@ module.exports = function(req, res, next) {
       return next();
     }
 
-    if (req.user && checkRights(req.user.role, req.body.query)) {
+    if (req.user && checkRights(req.user, req.body.query)) {
       return next();
     }
   }
   return res.status(403).json({
     error: {
-      msg: 'UNAUTHORIZED: you are not allowed to perform this action'
+      msg: "UNAUTHORIZED: you are not allowed to perform this action"
     }
   });
 };

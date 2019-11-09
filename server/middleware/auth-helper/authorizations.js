@@ -1,6 +1,7 @@
 // ts-check
 
 const { gql } = require("apollo-boost");
+const { playerItself } = require("./query-rules");
 
 const ADMIN = "admin";
 const OFFICER = "officer";
@@ -56,12 +57,17 @@ const rights = {
   updateRaidPlayerById: OFFICER_MIN
 };
 
+const constraints = {
+  createPlayerMerit: [playerItself]
+};
+
 /**
  *
  * @param {'admin'|'officer'|'classMaster'|'player'|'guest'} playerLevel
  * @param {string} request
  */
-function checkRights(playerLevel = GUEST, request) {
+function checkRights(user, request) {
+  const { role = GUEST } = user;
   const parsedRequest = gql(request);
 
   const queries = parsedRequest.definitions.map(q =>
@@ -75,10 +81,17 @@ function checkRights(playerLevel = GUEST, request) {
     if (!Object.keys(rights).includes(query)) {
       throw new Error(`Awaken: Unknow query ${query}`);
     }
-    if (!rights[query].includes(playerLevel)) {
-      throw new Error(
-        `Awaken: role ${playerLevel} not allowed to perform ${query}`
-      );
+    if (!rights[query].includes(role)) {
+      throw new Error(`Awaken: role ${role} not allowed to perform ${query}`);
+    }
+    if (constraints[query]) {
+      constraints[query].forEach(isValidQuery => {
+        if (!isValidQuery(user, parsedRequest)) {
+          throw new Error(
+            `Awaken: role ${role} or player ${"playername"} is not allowed to perform ${query}`
+          );
+        }
+      });
     }
   });
 
