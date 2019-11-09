@@ -8,31 +8,20 @@ import {
 } from "@material-ui/core/";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-// import { useState } from "react";
-
 import ChangePasswordOrRole from "../../components/editPlayers/ChangePasswordOrRole";
 import InRosterAndActiveSwitch from "../../components/editPlayers/InRosterAndActiveSwitch";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Player } from "../../lib/generatedTypes";
 import { Query } from "../../lib/generatedTypes";
-// import { UPDATE_PLAYER } from "../../lib/gql/player-mutations";
+import AddPlayer from "../../components/editPlayers/AddPlayer";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { byAlphabet } from "../../lib/utils/sorter";
-
-// interface UpdatePlayerVariables {
-//   id: number;
-//   active?: boolean;
-//   name?: string;
-//   inRoster?: boolean;
-//   password?: string;
-//   role?: string;
-// }
 
 const useStyles = makeStyles({
   root: { width: "100%" },
   paper: {
     width: "100%",
-    maxHeight: "calc(100vh - 140px)",
+    maxHeight: "calc(100vh - 190px)",
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "rgba(0,0,0,0.6)",
@@ -44,6 +33,12 @@ const useStyles = makeStyles({
     "&::-webkit-scrollbar": {
       width: "10px"
     }
+  },
+  addPlayerBtn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 15
   },
   table: {
     "& .MuiTableCell-head": { backgroundColor: "#4d4d4d", color: "white" },
@@ -68,22 +63,22 @@ export default function PageIndex() {
   const { loading: loading, data: data, error: error } = useQuery<Query>(
     ALL_PLAYERS
   );
-  // const [updatePlayer] = useMutation<Mutation, UpdatePlayerVariables>(
-  //   UPDATE_PLAYER
-  // );
+
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
   const allPlayers = data.allPlayers.nodes.sort(byAlphabet("name", false));
   return (
     <div className={classes.root}>
+      <div className={classes.addPlayerBtn}>
+        <AddPlayer {...{ allPlayers, refetchAllPlayers }} />
+      </div>
       <Paper className={classes.paper}>
         <Table
           className={classes.table}
           stickyHeader={true}
           size="small"
-          aria-label="players table"
-        >
+          aria-label="players table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -103,8 +98,7 @@ export default function PageIndex() {
                   scope="row"
                   style={{
                     color: player.classByClassId.color
-                  }}
-                >
+                  }}>
                   {player.name}
                 </TableCell>
                 <TableCell align="right">
