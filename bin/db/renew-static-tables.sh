@@ -6,6 +6,13 @@ NC='\033[0m' # No Color
 date=$(date '+%Y-%m-%d-%H-%M-%S')
 ./bin/db/backup-prod.sh
 
+read -p "Renew complete prod database ? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+  exit 1 || return 1
+fi
+
 echo -e $RED Reset all databases ... $NC
 psql $PROD_DB < ./bin/db/reset_static_databases.sql
 # psql $PROD_DB < ./db/gen/db.sql
@@ -28,10 +35,14 @@ psql $PROD_DB < ./db/18-data_items_classes.sql
 echo -e $RED Create data merites ... $NC
 psql $PROD_DB < ./db/40-merites.sql
 
-echo -e $RED Create data players ... $NC
-psql $PROD_DB < ./db/70-seeds_players.sql
+# # old managed :
+# echo -e $RED Create data players ... $NC
+# psql $PROD_DB < ./db/70-seeds_players.sql
 
 # # remote management
+echo -e $RED Import players $NC
+psql $PROD_DB < ./db/backups/$date/db-table-players.sql
+
 echo -e $RED Import player merits $NC
 psql $PROD_DB < ./db/backups/$date/db-table-playermerit.sql
 
