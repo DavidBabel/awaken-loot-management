@@ -6,6 +6,13 @@ NC='\033[0m' # No Color
 date=$(date '+%Y-%m-%d-%H-%M-%S')
 ./bin/db/backup-prod.sh
 
+read -p "Renew complete prod database ? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+  exit 1 || return 1
+fi
+
 echo -e $RED Reset all databases ... $NC
 psql $PROD_DB < ./bin/db/reset_static_databases.sql
 # psql $PROD_DB < ./db/gen/db.sql
