@@ -8,12 +8,12 @@ import {
 } from "@material-ui/core/";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import AddPlayer from "../../components/editPlayers/AddPlayer";
 import ChangePasswordOrRole from "../../components/editPlayers/ChangePasswordOrRole";
 import InRosterAndActiveSwitch from "../../components/editPlayers/InRosterAndActiveSwitch";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Player } from "../../lib/generatedTypes";
 import { Query } from "../../lib/generatedTypes";
-import AddPlayer from "../../components/editPlayers/AddPlayer";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { byAlphabet } from "../../lib/utils/sorter";
 
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 
 export default function PageIndex() {
   const classes = useStyles("");
-  const { loading: loading, data: data, error: error } = useQuery<Query>(
+  const { loading, data, error, refetch: refetchAllPlayers } = useQuery<Query>(
     ALL_PLAYERS
   );
 
@@ -78,7 +78,8 @@ export default function PageIndex() {
           className={classes.table}
           stickyHeader={true}
           size="small"
-          aria-label="players table">
+          aria-label="players table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -98,7 +99,8 @@ export default function PageIndex() {
                   scope="row"
                   style={{
                     color: player.classByClassId.color
-                  }}>
+                  }}
+                >
                   {player.name}
                 </TableCell>
                 <TableCell align="right">
