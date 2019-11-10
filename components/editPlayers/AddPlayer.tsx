@@ -16,11 +16,11 @@ import {
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
 import CloseIcon from "@material-ui/icons/Close";
+import { ApolloQueryResult } from "apollo-boost";
 import { useState } from "react";
 import { Mutation, Player, Query } from "../../lib/generatedTypes";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
-import { ApolloQueryResult } from "apollo-boost";
 
 interface CreatePlayerVariables {
   classId: number;
@@ -167,7 +167,8 @@ export default function AddPlayer({
         keepMounted={true}
         onClose={handleClose}
         aria-labelledby="add-loot-dialog"
-        aria-describedby="add loot window">
+        aria-describedby="add loot window"
+      >
         <DialogTitle id="add-loot-dialog">
           Ajouter un nouveau joueur:
         </DialogTitle>
@@ -191,7 +192,8 @@ export default function AddPlayer({
             onClose={handleCloseSelectClass}
             onOpen={handleOpenSelectClass}
             value={classIdToAdd}
-            onChange={handleChangeSelectClass}>
+            onChange={handleChangeSelectClass}
+          >
             {wowClasses.map(wowClass => {
               return (
                 <MenuItem key={wowClass.id} value={wowClass.id}>
@@ -204,7 +206,8 @@ export default function AddPlayer({
         <DialogActions
           classes={{
             root: classes.dialogActions
-          }}>
+          }}
+        >
           <Button onClick={handleClose} color="primary">
             ANNULER
           </Button>
@@ -220,7 +223,8 @@ export default function AddPlayer({
         }}
         open={snackBarOpen}
         autoHideDuration={3000}
-        onClose={closeSnackBar}>
+        onClose={closeSnackBar}
+      >
         <SnackbarContent
           style={{ backgroundColor: snackBarBackgroundColor }}
           message={<span id="message-id">{snackBarMessage}</span>}
@@ -229,7 +233,8 @@ export default function AddPlayer({
               key="close"
               aria-label="close"
               color="inherit"
-              onClick={closeSnackBar}>
+              onClick={closeSnackBar}
+            >
               <CloseIcon />
             </IconButton>
           ]}

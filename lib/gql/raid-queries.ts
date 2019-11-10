@@ -64,15 +64,19 @@ export const ALL_RAIDS = gql`
           shortName
         }
         raidPlayersByRaidId {
+          totalCount
           nodes {
             id
             passed
             playerByPlayerId {
-              name
               id
+              name
               classId
             }
           }
+        }
+        lootsByRaidId {
+          totalCount
         }
       }
     }

@@ -397,6 +397,8 @@ export default function PageIndex() {
                 <TableRow>
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
+                  <TableCell>Nb loots</TableCell>
+                  <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
                 </TableRow>
               </TableHead>
@@ -407,13 +409,25 @@ export default function PageIndex() {
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
                       <TableCell>{raid.date}</TableCell>
                       <TableCell>
+                        {raid.lootsByRaidId
+                          ? raid.lootsByRaidId.totalCount
+                          : "0"}
+                      </TableCell>
+                      <TableCell>
+                        {raid.raidPlayersByRaidId
+                          ? raid.raidPlayersByRaidId.totalCount
+                          : "0"}
+                      </TableCell>
+                      <TableCell>
                         <Link
                           href="/raid/edit/[id]"
                           as={`/raid/edit/${raid.id}`}
                         >
-                          <Button variant="contained" color="primary">
-                            <a target="_blank">VIEW</a>
-                          </Button>
+                          <a target="_blank" style={{ textDecoration: "none" }}>
+                            <Button variant="contained" color="primary">
+                              VIEW
+                            </Button>
+                          </a>
                         </Link>
                       </TableCell>
                     </TableRow>
