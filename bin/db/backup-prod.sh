@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # $PROD_DB is a local env var
 
 RED='\033[0;31m'
