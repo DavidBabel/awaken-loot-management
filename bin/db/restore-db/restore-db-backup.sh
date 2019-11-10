@@ -5,7 +5,7 @@ NC='\033[0m' # No Color
 
 date=$(date '+%Y-%m-%d-%H-%M-%S')
 
-FILE=./bin/db/db-all.sql
+FILE=./bin/db/restore-db/backup.sql
 if test -f "$FILE"; then
   ./bin/db/backup-prod.sh
 
