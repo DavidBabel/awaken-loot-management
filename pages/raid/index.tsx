@@ -397,6 +397,8 @@ export default function PageIndex() {
                 <TableRow>
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
+                  <TableCell>Nb loots</TableCell>
+                  <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
                 </TableRow>
               </TableHead>
@@ -406,6 +408,16 @@ export default function PageIndex() {
                     <TableRow key={`raid-${raid.id}`}>
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
                       <TableCell>{raid.date}</TableCell>
+                      <TableCell>
+                        {raid.lootsByRaidId
+                          ? raid.lootsByRaidId.totalCount
+                          : "0"}
+                      </TableCell>
+                      <TableCell>
+                        {raid.raidPlayersByRaidId
+                          ? raid.raidPlayersByRaidId.totalCount
+                          : "0"}
+                      </TableCell>
                       <TableCell>
                         <Link
                           href="/raid/edit/[id]"
