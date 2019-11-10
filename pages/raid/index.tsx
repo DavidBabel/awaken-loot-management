@@ -423,9 +423,9 @@ export default function PageIndex() {
                           href="/raid/edit/[id]"
                           as={`/raid/edit/${raid.id}`}
                         >
-                          <a target="_blank">
+                          <a target="_blank" style={{ textDecoration: "none" }}>
                             <Button variant="contained" color="primary">
-                              VIEW{" "}
+                              VIEW
                             </Button>
                           </a>
                         </Link>
