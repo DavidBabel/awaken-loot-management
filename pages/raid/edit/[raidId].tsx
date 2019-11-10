@@ -1,22 +1,16 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-// import { green } from "@material-ui/core/colors";
-
-// import { makeStyles, Theme, withStyles } from "@material-ui/core/styles";
-
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
 import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
 import MemberContext from "../../../lib/context/member";
 import { Player, Query, RaidPlayer } from "../../../lib/generatedTypes";
-
 import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
@@ -48,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 22,
       fontWeight: "bold",
       height: "48px",
-      margin: "0px 25px 15px 25px",
+      margin: "0px 40px 15px 40px",
       display: "flex",
       alignItems: "center"
     },
@@ -62,6 +56,26 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center"
+    },
+    raidNotExist: {
+      width: "100%",
+      height: "calc(100vh - 140px)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontSize: "30px"
+    },
+    previousBtn: {
+      position: "absolute",
+      top: "20px",
+      left: "-180px",
+      zIndex: 4
+    },
+    nextBtn: {
+      position: "absolute",
+      top: "20px",
+      right: "-160px",
+      zIndex: 4
     }
   })
 );
@@ -94,14 +108,22 @@ export default function PageRaidView() {
   const loading = loadingOneRaid || loadingPlayers;
 
   useEffect(() => {
-    setRaidTitle(currentRaid.title);
+    if (currentRaid) {
+      setRaidTitle(currentRaid.title);
+    }
   }, [dataOneRaid]);
 
   if (loadingOneRaid || loadingPlayers || errorOneRaid || errorPlayers) {
     return <LoadingAndError loading={loading} error={error} />;
   }
-
   const currentRaid = dataOneRaid.allRaids.nodes[0];
+  if (!currentRaid) {
+    return (
+      <div className={classes.raidNotExist}>
+        <span>Oups! Ce raid n'existe pas</span>
+      </div>
+    );
+  }
   const loots = currentRaid.lootsByRaidId.nodes;
   const currentRaidPlayers = currentRaid.raidPlayersByRaidId.nodes
     .sort((a: RaidPlayer, b: RaidPlayer) =>
@@ -144,6 +166,25 @@ export default function PageRaidView() {
         >
           JOUEURS
         </Button>
+        {currentRaid.id - 1 !== 0 && (
+          <Link href="/raid/edit/[id]" as={`/raid/edit/${currentRaid.id - 1}`}>
+            <a
+              className={classes.previousBtn}
+              style={{ textDecoration: "none" }}
+            >
+              <Button variant="outlined" color="primary">
+                Raid précedent
+              </Button>
+            </a>
+          </Link>
+        )}
+        <Link href="/raid/edit/[id]" as={`/raid/edit/${currentRaid.id + 1}`}>
+          <a className={classes.nextBtn} style={{ textDecoration: "none" }}>
+            <Button variant="outlined" color="primary">
+              Raid suivant
+            </Button>
+          </a>
+        </Link>
       </Paper>
       <div className={classes.bossCards}>
         {bosses.map(boss => {
