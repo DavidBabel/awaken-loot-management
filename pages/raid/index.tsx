@@ -423,9 +423,11 @@ export default function PageIndex() {
                           href="/raid/edit/[id]"
                           as={`/raid/edit/${raid.id}`}
                         >
-                          <Button variant="contained" color="primary">
-                            <a target="_blank">VIEW</a>
-                          </Button>
+                          <a target="_blank">
+                            <Button variant="contained" color="primary">
+                              VIEW{" "}
+                            </Button>
+                          </a>
                         </Link>
                       </TableCell>
                     </TableRow>
