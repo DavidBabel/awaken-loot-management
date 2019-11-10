@@ -6,7 +6,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 date=$(date '+%Y-%m-%d-%H-%M-%S')
-./bin/db/backup-prod.sh
+./bin/db/backup-prod.sh $date
 
 read -p "Renew complete prod database ? " -n 1 -r
 echo    # (optional) move to a new line

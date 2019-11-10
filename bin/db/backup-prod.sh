@@ -7,7 +7,13 @@ set -e
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-date=$(date '+%Y-%m-%d-%H-%M-%S')
+date=$1
+if [ -z "$date" ]
+then
+  echo "set default date"
+  date=$(date '+%Y-%m-%d-%H-%M-%S')
+fi
+
 mkdir "./db/backups/$date"
 echo -e $RED Backup All ... $NC
 pg_dump $PROD_DB > "./db/backups/$date/db-all.sql"
