@@ -75,6 +75,7 @@ export const ALL_PLAYERS = gql`
     }
   }
 `;
+
 export const ONE_PLAYER = gql`
   query getOnePlayer($playerId: Int) {
     allPlayers(condition: { id: $playerId }) {

@@ -46,10 +46,14 @@ export const UPDATE_RAID_LINK = gql`
 // mutation MyMutation($raidId: Int!, $playerId: Int!) {
 //   createRaidPlayer(input: {raidPlayer: {playerId: $playerId, raidId: $raidId}})
 // }
-export const ADD_PLAYERS_TO_RAID = gql`
-  mutation CreateRaid($playerId: Int, $raidId: Int) {
-    createRaidPlayer(input: {raidPlayer: {playerId: $playerId, raidId: $raidId}} }) {
-
+export const ADD_PLAYER_TO_RAID = gql`
+  mutation CreateRaid($playerId: Int!, $raidId: Int!) {
+    createRaidPlayer(
+      input: { raidPlayer: { playerId: $playerId, raidId: $raidId } }
+    ) {
+      raidPlayer {
+        playerId
+      }
     }
   }
 `;
