@@ -74,6 +74,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: "black"
     }
   },
+  tab: {
+    minWidth: 135,
+    width: 135
+  },
   indicator_0: {
     "& .MuiTabs-indicator": { backgroundColor: classColors.druide }
   },
@@ -195,15 +199,19 @@ export default function PageIndex() {
           scrollButtons="auto"
           aria-label="Player summary"
         >
-          <Tab label="Druide" {...a11yProps(0)} />
-          <Tab label="Chasseur" {...a11yProps(1)} />
-          <Tab label="Mage" {...a11yProps(2)} />
-          <Tab label="Prêtre" {...a11yProps(3)} />
-          <Tab label="Voleur" {...a11yProps(4)} />
-          <Tab label="Chaman" {...a11yProps(5)} />
-          <Tab label="Démoniste" {...a11yProps(6)} />
-          <Tab label="Guerrier Tank" {...a11yProps(7)} />
-          <Tab label="Guerrier DPS" {...a11yProps(8)} />
+          <Tab className={classes.tab} label="Druide" {...a11yProps(0)} />
+          <Tab className={classes.tab} label="Chasseur" {...a11yProps(1)} />
+          <Tab className={classes.tab} label="Mage" {...a11yProps(2)} />
+          <Tab className={classes.tab} label="Prêtre" {...a11yProps(3)} />
+          <Tab className={classes.tab} label="Voleur" {...a11yProps(4)} />
+          <Tab className={classes.tab} label="Chaman" {...a11yProps(5)} />
+          <Tab className={classes.tab} label="Démoniste" {...a11yProps(6)} />
+          <Tab
+            className={classes.tab}
+            label="Guerrier Tank"
+            {...a11yProps(7)}
+          />
+          <Tab className={classes.tab} label="Guerrier DPS" {...a11yProps(8)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
