@@ -7,7 +7,6 @@ const { gql } = require("apollo-boost");
  */
 function playerItself(user = {}, parsedRequest) {
   const { username, playerLevel = GUEST } = user;
-  const parsedRequest = gql(request);
 
   console.log("username :");
   console.log(username);
