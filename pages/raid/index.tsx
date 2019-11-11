@@ -1,6 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import {
   Button,
+  Checkbox,
   Container,
   Divider,
   Paper,
@@ -24,16 +25,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
 import React, { ReactNode, useContext } from "react";
 import ItemsCarousel from "react-items-carousel";
+import uuidv4 from "uuid/v4";
 import ClassAvatar from "../../components/ClassAvatar";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
+import LinkLine from "../../components/Raid/LinkLine";
 import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
 import PlayerSearchedList from "../../components/searchBox/PlayerSearchedList";
 import MemberContext from "../../lib/context/member";
 import { Item } from "../../lib/generatedTypes";
-import { Query } from "../../lib/generatedTypes";
+import { Mutation, Query, Raid } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { byDate } from "../../lib/utils/sorter";
@@ -43,7 +47,10 @@ declare global {
     $WowheadPower: any;
   }
 }
-
+interface UpdateRaidLinkVariables {
+  raidId: number;
+  linkId: string;
+}
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -76,8 +83,14 @@ const useStyles = makeStyles({
     height: "calc(100vh - 370px)",
     marginTop: 20
   },
+  lastRaidsPaperHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingRight: "25px"
+  },
   tableWrapper: {
-    maxHeight: "calc(100vh - 425px)",
+    maxHeight: "calc(100vh - 435px)",
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "#3F51B5",
@@ -88,7 +101,8 @@ const useStyles = makeStyles({
     },
     "&::-webkit-scrollbar": {
       width: "10px"
-    }
+    },
+    position: "relative"
   },
   table: {},
   textField: {
@@ -174,6 +188,8 @@ export default function PageIndex() {
     Item
   >(null);
   const [loadingRender, setLoadingRender] = React.useState<boolean>(true);
+  const [raidChecked, setRaidChecked] = React.useState<number[]>([]);
+  const [loadingLink, setLoadingLink] = React.useState<boolean>(false);
   React.useEffect(() => {
     setLoadingRender(false);
   }, []);
@@ -186,6 +202,9 @@ export default function PageIndex() {
       } catch (e) {}
     }
   }, [itemCurrentlySelected, itemInputValue]);
+  const [updateRaidLink] = useMutation<Mutation, UpdateRaidLinkVariables>(
+    UPDATE_RAID_LINK
+  );
   const {
     loading: loadingDonjons,
     data: dataDonjons,
@@ -221,6 +240,34 @@ export default function PageIndex() {
   const items = dataItems.allItems.nodes;
 
   raids.sort(byDate("date"));
+
+  const raidLinks = [];
+  raids.forEach((raid: Raid) => {
+    if (raid.linkBetweenRaids) {
+      if (raidLinks.length === 0) {
+        raidLinks.push({
+          raidLinkId: raid.linkBetweenRaids,
+          raidIds: [raid.id],
+          decalage: 0
+        });
+      } else {
+        let raidLinkFound = false;
+        raidLinks.forEach(raidLink => {
+          if (raidLink.raidLinkId === raid.linkBetweenRaids) {
+            raidLink.raidIds.push(raid.id);
+            raidLinkFound = true;
+          }
+        });
+        if (!raidLinkFound) {
+          raidLinks.push({
+            raidLinkId: raid.linkBetweenRaids,
+            raidIds: [raid.id],
+            decalage: raidLinks.length % 5
+          });
+        }
+      }
+    }
+  });
 
   const searchPlayerInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -261,6 +308,7 @@ export default function PageIndex() {
       });
       columns.push(column);
     });
+
     return (
       <div className={classes.whoLootedContainer}>
         {columns.length > 0
@@ -283,6 +331,66 @@ export default function PageIndex() {
       </div>
     );
   };
+  const handleCheck = (raidId: number) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.checked) {
+      setRaidChecked([...raidChecked, raidId]);
+    } else {
+      setRaidChecked(raidChecked.filter(raidIdNb => raidIdNb !== raidId));
+    }
+  };
+  const handleLink = () => {
+    const linkId = uuidv4();
+    setLoadingLink(true);
+    Promise.all(
+      raidChecked.map(raidIdNb =>
+        updateRaidLink({
+          variables: {
+            raidId: raidIdNb,
+            linkId
+          }
+        })
+      )
+    )
+      .then(resp => {
+        setLoadingLink(false);
+        setRaidChecked([]);
+      })
+      .catch(err => {
+        alert(err.message);
+        setLoadingLink(false);
+        setRaidChecked([]);
+      });
+  };
+  const handleUnLink = async (raidId: number, raidLinkId: string) => {
+    setLoadingLink(true);
+    try {
+      await updateRaidLink({
+        variables: {
+          raidId,
+          linkId: ""
+        }
+      });
+      const raidLinked = raids.filter(
+        (raid: Raid) =>
+          raid.linkBetweenRaids === raidLinkId && raid.id !== raidId
+      );
+      if (raidLinked && raidLinked.length === 1) {
+        const raidBidome = raidLinked[0];
+        await updateRaidLink({
+          variables: {
+            raidId: raidBidome.id,
+            linkId: ""
+          }
+        });
+      }
+      setLoadingLink(false);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <>
       <Container className={classes.root}>
@@ -386,9 +494,22 @@ export default function PageIndex() {
           </Paper>
         </div>
         <Paper className={classes.lastRaidsPaper}>
-          <Typography className={classes.boxTitleLastRaids} variant="h6">
-            Last raids
-          </Typography>
+          <div className={classes.lastRaidsPaperHeader}>
+            <Typography className={classes.boxTitleLastRaids} variant="h6">
+              Last raids
+            </Typography>
+            {member.level >= role.officer && (
+              <Button
+                onClick={handleLink}
+                variant="contained"
+                disabled={raidChecked.length < 2}
+                color="primary"
+              >
+                {loadingLink ? "LOADING.." : "LIER"}
+              </Button>
+            )}
+          </div>
+
           <Divider />
 
           <div className={classes.tableWrapper}>
@@ -400,10 +521,11 @@ export default function PageIndex() {
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
+                  {member.level >= role.officer && <TableCell>Lier</TableCell>}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {raids.map(raid => {
+                {raids.map((raid: Raid) => {
                   return (
                     <TableRow key={`raid-${raid.id}`}>
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
@@ -430,11 +552,49 @@ export default function PageIndex() {
                           </a>
                         </Link>
                       </TableCell>
+                      {member.level >= role.officer && (
+                        <TableCell>
+                          {raid.linkBetweenRaids ? (
+                            <Button
+                              className={`unlink-btn-${raid.id}`}
+                              onClick={() => {
+                                handleUnLink(raid.id, raid.linkBetweenRaids);
+                              }}
+                              variant="outlined"
+                              color="secondary"
+                            >
+                              {loadingLink ? "Loading..." : "DÉLIER"}
+                            </Button>
+                          ) : (
+                            <Checkbox
+                              checked={
+                                raidChecked.indexOf(raid.id) !== -1
+                                  ? true
+                                  : false
+                              }
+                              onChange={handleCheck(raid.id)}
+                              value={`${raid.id}checked`}
+                              color="primary"
+                              inputProps={{
+                                "aria-label": `${raid.id} checkbox`
+                              }}
+                            />
+                          )}
+                        </TableCell>
+                      )}
                     </TableRow>
                   );
                 })}
               </TableBody>
             </Table>
+            {!loadingLink &&
+              raidLinks.map(raidLink => (
+                <LinkLine
+                  key={"linkline-" + raidLink.raidLinkId}
+                  raidIds={raidLink.raidIds}
+                  decalage={raidLink.decalage}
+                />
+              ))}
           </div>
         </Paper>
       </Container>
