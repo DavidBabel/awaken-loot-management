@@ -61,7 +61,18 @@ const useStyles = makeStyles({
     backgroundColor: "white",
     fontSize: "12px"
   },
-  allLoot: { marginLeft: 15 },
+  allLoot: {
+    marginLeft: 15,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  badLootPlus: {
+    fontSize: "10px",
+    alignSelf: "flex-start",
+    marginTop: 1,
+    zIndex: 5
+  },
   epic: { color: "#a335ee", borderColor: "#a335ee" },
   rare: { color: "#0070dd", borderColor: "#0070dd" },
   commun: { color: "#1ad900", borderColor: "#1ad900" },
@@ -201,7 +212,14 @@ export default function PlayerTableRow(props) {
             }
           >
             <div className={classes.levelDescription}>All</div>
-            {rowData.totalLoot}
+            <span>{rowData.totalLoot}</span>
+            {rowData.totalLootByLvl.level1 ? (
+              <span className={classes.badLootPlus}>
+                {"+" + rowData.totalLootByLvl.level1}
+              </span>
+            ) : (
+              ""
+            )}
             {rowData.totalLoot > 0 ? (
               <IconButton
                 ref={iconElem}
