@@ -28,6 +28,15 @@ export default function LinkLine({
     btnsOffsetsTop: [],
     btnHeight: 0
   });
+  const [windowWidth, setWindowWidth] = useState(0);
+  useEffect(() => {
+    function updateSize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
   useEffect(() => {
     const btns = [];
     raidIds.forEach(raidId => {
@@ -39,15 +48,17 @@ export default function LinkLine({
     let height = 0;
     const btnsOffsetsTop = [];
     btns.forEach(btn => {
-      if (btn.offsetTop > max) {
-        max = btn.offsetTop;
+      if (btn) {
+        if (btn.offsetTop > max) {
+          max = btn.offsetTop;
+        }
+        if (btn.offsetTop < min) {
+          min = btn.offsetTop;
+        }
+        left = btn.offsetLeft;
+        height = btn.offsetHeight;
+        btnsOffsetsTop.push(btn.offsetTop);
       }
-      if (btn.offsetTop < min) {
-        min = btn.offsetTop;
-      }
-      left = btn.offsetLeft;
-      height = btn.offsetHeight;
-      btnsOffsetsTop.push(btn.offsetTop);
     });
     setState({
       min: min + height * 0.5,
@@ -57,7 +68,7 @@ export default function LinkLine({
       btnsOffsetsTop,
       btnHeight: height
     });
-  }, [raidIds]);
+  }, [raidIds, windowWidth]);
   return (
     <>
       <div

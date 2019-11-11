@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "calc(100vh - 140px)"
     },
     tableWrapper: {
+      position: "relative",
       height: "100%",
       overflow: "auto",
       "&::-webkit-scrollbar-thumb": {
@@ -41,7 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: 650,
       "& .MuiTableCell-head": {
         backgroundColor: "#242424",
-        color: "white"
+        color: "white",
+        minWidth: 60
       },
       "& .MuiTableCell-root": {
         border: "solid 1px #212121",
@@ -73,6 +75,28 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#242424"
       }
     },
+    legende: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      "& div": {
+        margin: 5
+      },
+      "& span": {
+        marginRight: 10
+      }
+    },
+    legendeItem: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    legendeSquare: {
+      width: 40,
+      height: 30,
+      border: "2px solid #212121"
+    },
     attPercentage: {
       minWidth: 60,
       backgroundColor: "#242424",
@@ -83,6 +107,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     present: {
       backgroundColor: "#106010"
+    },
+    inAnotherId: {
+      backgroundColor: "#474747"
     },
     rotation: {
       backgroundColor: "#b09000"
@@ -120,6 +147,30 @@ export default function PageIndex() {
 
   return (
     <Paper className={classes.root}>
+      <div className={classes.legende}>
+        <div className={classes.legendeItem}>
+          <div className={classes.legendeSquare + " " + classes.present} />
+          <span>Présent</span>
+        </div>
+        <div className={classes.legendeItem}>
+          <div className={classes.legendeSquare + " " + classes.absent} />
+          <span>Absent</span>
+        </div>
+        <div className={classes.legendeItem}>
+          <div className={classes.legendeSquare + " " + classes.inAnotherId} />
+          <span>Présent dans un raid lié</span>
+        </div>
+        <div className={classes.legendeItem}>
+          <div className={classes.legendeSquare + " " + classes.rotation} />
+          <span>En rotation</span>
+        </div>
+        <div className={classes.legendeItem}>
+          <div
+            className={classes.legendeSquare + " " + classes.pasDansGuilde}
+          />
+          <span>Pas encore dans la guilde</span>
+        </div>
+      </div>
       <div className={classes.tableWrapper}>
         <Table className={classes.table} stickyHeader={true}>
           <TableHead>
@@ -154,15 +205,42 @@ export default function PageIndex() {
                 }
               });
               let raidsNb = 0;
+              const raidLinkIds = [];
               const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
+              const raidLinkedIdsPresent = [];
               allRaids.forEach(raid => {
                 if (
                   raid.raidPlayersByRaidId.nodes.length > 0 &&
                   new Date(raid.date) >= firstRaidDate
                 ) {
-                  raidsNb++;
+                  if (!raid.linkBetweenRaids) {
+                    raidsNb++;
+                  } else {
+                    if (raidLinkIds.indexOf(raid.linkBetweenRaids) === -1) {
+                      raidLinkIds.push(raid.linkBetweenRaids);
+                      raidsNb++;
+                    }
+                  }
                 }
+                raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
+                  if (
+                    raidPlayer &&
+                    raidPlayer.playerByPlayerId.id === player.id
+                  ) {
+                    if (raid.linkBetweenRaids) {
+                      if (
+                        raidLinkedIdsPresent.indexOf(raid.linkBetweenRaids) ===
+                        -1
+                      ) {
+                        raidLinkedIdsPresent.push(raid.linkBetweenRaids);
+                      } else {
+                        raidsNb++; // rare cas ou le joueur est présent dans plusieur raid linké entre eux (exemple: easier)
+                      }
+                    }
+                  }
+                });
               });
+
               return (
                 <TableRow key={player.id + player.name}>
                   <TableCell component="th" scope="row">
@@ -189,8 +267,10 @@ export default function PageIndex() {
                   {allRaids.map(raid => {
                     if (raid.raidPlayersByRaidId.nodes.length > 0) {
                       let absent = true;
+                      let inAnotherId = false;
                       let enRotation = false;
                       let pasEncoreDansGuilde = false;
+
                       if (new Date(raid.date) >= firstRaidDate) {
                         raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
                           if (
@@ -207,7 +287,17 @@ export default function PageIndex() {
                         pasEncoreDansGuilde = true;
                         absent = false;
                       }
-
+                      if (absent) {
+                        if (
+                          raid.linkBetweenRaids &&
+                          raidLinkedIdsPresent.indexOf(
+                            raid.linkBetweenRaids
+                          ) !== -1
+                        ) {
+                          inAnotherId = true;
+                          absent = false;
+                        }
+                      }
                       return (
                         <TableCell
                           onClick={() => {
@@ -217,6 +307,8 @@ export default function PageIndex() {
                           className={
                             absent
                               ? classes.absent
+                              : inAnotherId
+                              ? classes.inAnotherId
                               : enRotation
                               ? classes.rotation
                               : pasEncoreDansGuilde

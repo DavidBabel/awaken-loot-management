@@ -521,7 +521,9 @@ export default function PageIndex() {
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
-                  {member.level >= role.officer && <TableCell>Lier</TableCell>}
+                  <TableCell>
+                    {member.level >= role.officer ? "Lier" : "Liaisons"}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -552,20 +554,27 @@ export default function PageIndex() {
                           </a>
                         </Link>
                       </TableCell>
-                      {member.level >= role.officer && (
-                        <TableCell>
-                          {raid.linkBetweenRaids ? (
-                            <Button
-                              className={`unlink-btn-${raid.id}`}
-                              onClick={() => {
+
+                      <TableCell>
+                        {raid.linkBetweenRaids ? (
+                          <Button
+                            className={`unlink-btn-${raid.id}`}
+                            onClick={() => {
+                              if (member.level >= role.officer) {
                                 handleUnLink(raid.id, raid.linkBetweenRaids);
-                              }}
-                              variant="outlined"
-                              color="secondary"
-                            >
-                              {loadingLink ? "Loading..." : "DÉLIER"}
-                            </Button>
-                          ) : (
+                              }
+                            }}
+                            variant="outlined"
+                            color="secondary"
+                          >
+                            {loadingLink
+                              ? "Loading..."
+                              : member.level >= role.officer
+                              ? "DÉLIER"
+                              : "LIÉ"}
+                          </Button>
+                        ) : (
+                          member.level >= role.officer && (
                             <Checkbox
                               checked={
                                 raidChecked.indexOf(raid.id) !== -1
@@ -579,9 +588,9 @@ export default function PageIndex() {
                                 "aria-label": `${raid.id} checkbox`
                               }}
                             />
-                          )}
-                        </TableCell>
-                      )}
+                          )
+                        )}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
