@@ -15,6 +15,7 @@ export type Boss = Node & {
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars["ID"];
   id: Scalars["Int"];
+  order: Scalars["Int"];
   donjonId: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   cdnImage?: Maybe<Scalars["String"]>;
@@ -50,6 +51,8 @@ export type BossBossItemsByBossIdArgs = {
 export type BossCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `order` field. */
+  order?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `donjonId` field. */
   donjonId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `name` field. */
@@ -85,6 +88,8 @@ export enum BossesOrderBy {
   Natural = "NATURAL",
   IdAsc = "ID_ASC",
   IdDesc = "ID_DESC",
+  OrderAsc = "ORDER_ASC",
+  OrderDesc = "ORDER_DESC",
   DonjonIdAsc = "DONJON_ID_ASC",
   DonjonIdDesc = "DONJON_ID_DESC",
   NameAsc = "NAME_ASC",
