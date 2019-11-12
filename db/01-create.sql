@@ -110,7 +110,8 @@ CREATE TABLE "Donjons" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar,
   "shortName" varchar,
-  "active" boolean DEFAULT false
+  "active" boolean DEFAULT false,
+  "cdnImage" varchar
 );
 comment on table "Donjons" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Donjons" ("id");
