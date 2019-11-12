@@ -11,9 +11,6 @@ import Link from "next/link";
 import { Donjon } from "../../lib/generatedTypes";
 import { getDonjonImageUrl } from "../../lib/utils/image";
 
-interface Props {
-  donjon: Donjon;
-}
 const useStyles = makeStyles({
   card: {
     margin: 5
@@ -32,13 +29,13 @@ const useStyles = makeStyles({
     marginBottom: 10
   }
 });
-export function CreateRaid({ donjon }: Props) {
+export function CreateRaid(donjon: Donjon) {
   const classes = useStyles("");
   return (
     <Card className={classes.card}>
       <CardMedia
         className={classes.media}
-        image={getDonjonImageUrl(donjon.name)}
+        image={donjon.cdnImage || getDonjonImageUrl(donjon.name)}
         title={donjon.name}
       />
       <CardContent className={classes.cardContent}>

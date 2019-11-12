@@ -122,7 +122,8 @@ export function BossCard({
   raidId,
   refetchOneRaid,
   refetchAllPlayers,
-  allPlayers
+  allPlayers,
+  cdnImage
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
@@ -210,7 +211,7 @@ export function BossCard({
         <CardHeader className={classes.header} title={name} subheader="" />
         <CardMedia
           className={classes.media}
-          image={getBossImageUrl(donjonShortName, name)}
+          image={cdnImage || getBossImageUrl(donjonShortName, name)}
           title={name}
         />
         <CardContent className={classes.cardContent} ref={bossCardContentElem}>
