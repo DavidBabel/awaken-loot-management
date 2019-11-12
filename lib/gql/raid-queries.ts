@@ -184,6 +184,7 @@ export const ONE_RAID = gql`
             bossId
             lastActionBy
             lastActionDate
+            lastActionType
             itemByItemId {
               id
               name

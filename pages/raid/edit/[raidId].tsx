@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Paper } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import { Button, Paper, Switch } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -55,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "center"
+      justifyContent: "center",
+      position: "relative"
     },
     raidNotExist: {
       width: "100%",
@@ -76,6 +76,12 @@ const useStyles = makeStyles((theme: Theme) =>
       top: "20px",
       right: "-160px",
       zIndex: 4
+    },
+    showDeleted: {
+      position: "absolute",
+      top: "-18px",
+      right: "100px",
+      zIndex: 6
     }
   })
 );
@@ -87,6 +93,7 @@ export default function PageRaidView() {
   const raidId = parseInt(String(router.query.raidId));
   const [raidTitle, setRaidTitle] = useState<string>("");
   const [playerListOpened, togglePlayerListOpened] = useToggle(false);
+  const [showDeletedLoot, toggleShowDeletedLoot] = useToggle(false);
   const lootsAssigned = [];
 
   const {
@@ -187,6 +194,16 @@ export default function PageRaidView() {
         </Link>
       </Paper>
       <div className={classes.bossCards}>
+        {member.level >= role.officer && (
+          <div className={classes.showDeleted}>
+            <span>Montrer les loots supprimés</span>
+            <Switch
+              size="small"
+              checked={showDeletedLoot}
+              onChange={toggleShowDeletedLoot}
+            />
+          </div>
+        )}
         {bosses.map(boss => {
           const lootedForThisBoss = loots.filter((loot): boolean => {
             return (
@@ -196,7 +213,7 @@ export default function PageRaidView() {
                   bossItem => bossItem.bossByBossId.id === boss.id
                 )) ||
                 loot.bossId === boss.id) &&
-              loot.active &&
+              (showDeletedLoot ? true : loot.active) &&
               lootsAssigned.indexOf(loot) === -1
             );
           });
@@ -208,7 +225,7 @@ export default function PageRaidView() {
               loot.itemByItemId.bossItemsByItemId.nodes.some(
                 bossItem => bossItem.bossByBossId.id === boss.id
               ) &&
-              loot.active
+              (showDeletedLoot ? true : loot.active)
             ) {
               lootsAssigned.push(loot);
             }

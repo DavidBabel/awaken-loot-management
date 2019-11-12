@@ -529,7 +529,6 @@ export default function PageIndex() {
               </TableHead>
               <TableBody>
                 {raids.map((raid: Raid) => {
-                  console.log(raid.title);
                   return (
                     <TableRow key={`raid-${raid.id}`}>
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
