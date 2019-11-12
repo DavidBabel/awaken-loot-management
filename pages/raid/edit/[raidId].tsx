@@ -234,6 +234,7 @@ export default function PageRaidView() {
         raidId={raidId}
         allPlayers={dataPlayers.allPlayers.nodes}
         refetchOneRaid={refetchOneRaid}
+        refetchAllPlayers={refetchAllPlayers}
       />
     </div>
   );

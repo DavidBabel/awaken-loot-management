@@ -20,6 +20,7 @@ import { useSnackBar } from "../../lib/hooks/snackbar";
 import { useToggle } from "../../lib/hooks/toggle";
 import { role } from "../../lib/role-level";
 import ClassAvatar from "../ClassAvatar";
+import AddPlayer from "../editPlayers/AddPlayer";
 
 // import { LoadingAndError } from "../LoadingAndErrors";
 
@@ -54,15 +55,6 @@ const Transition = forwardRef<unknown, TransitionProps>(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-interface Props {
-  open: boolean;
-  handleClose: () => void;
-  players: RaidPlayer[];
-  allPlayers: Player[];
-  raidId: number;
-  refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
-}
 
 interface CreateRaidPlayerVariables {
   playerId: number;
@@ -110,13 +102,24 @@ function getPlayerId(playerName: string, allPlayers: Player[]) {
   return -1;
 }
 
+interface Props {
+  open: boolean;
+  handleClose: () => void;
+  players: RaidPlayer[];
+  allPlayers: Player[];
+  raidId: number;
+  refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
+  refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
+}
+
 export default function PlayerList({
   open,
   handleClose,
   players,
   allPlayers,
   raidId,
-  refetchOneRaid
+  refetchOneRaid,
+  refetchAllPlayers
 }: Props) {
   const member = useContext(MemberContext);
   console.log(players);
@@ -207,12 +210,29 @@ export default function PlayerList({
               >
                 {warcraftLogsContent}
               </textarea>
-              <div style={{ margin: 10 }}>
-                {playerToCreate.length > 0 &&
-                  `Les joueurs ${playerToCreate.join(
-                    ", "
-                  )} doivent être créés d'abord.`}
-              </div>
+              {playerToCreate.length > 0 && (
+                <div style={{ margin: 10 }}>
+                  Les joueurs suivants doivent être créés d'abord :
+                  <div style={{ margin: 10 }}>
+                    {playerToCreate.map(player => (
+                      <AddPlayer
+                        buttonLabel={`Créer ${player}`}
+                        initialName={player}
+                        key={`create-player-${player}`}
+                        allPlayers={allPlayers}
+                        refetchAllPlayers={() => {
+                          const withoutNewPLayer = playerToCreate.filter(
+                            x => x !== player
+                          );
+                          setPlayerToCreate(withoutNewPLayer);
+                          return refetchAllPlayers();
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <Button
                   onClick={() => {
@@ -247,6 +267,7 @@ export default function PlayerList({
                             "success"
                           );
                           refetchOneRaid();
+                          toggleDisplayImportPlayerArea();
                         })
                         .catch(() => {
                           openSnackBar("Quelque chose n‘a pas marché", "error");
@@ -255,7 +276,7 @@ export default function PlayerList({
                   }}
                   color="primary"
                 >
-                  Importer les joueurs les joueurs
+                  Importer les joueurs dans ce raid
                 </Button>
               </div>
             </div>
