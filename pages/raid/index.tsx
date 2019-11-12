@@ -518,6 +518,7 @@ export default function PageIndex() {
                 <TableRow>
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
+                  <TableCell>Titre</TableCell>
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
@@ -528,10 +529,12 @@ export default function PageIndex() {
               </TableHead>
               <TableBody>
                 {raids.map((raid: Raid) => {
+                  console.log(raid.title);
                   return (
                     <TableRow key={`raid-${raid.id}`}>
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
                       <TableCell>{raid.date}</TableCell>
+                      <TableCell>{raid.title}</TableCell>
                       <TableCell>
                         {raid.lootsByRaidId
                           ? raid.lootsByRaidId.totalCount

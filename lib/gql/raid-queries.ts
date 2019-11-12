@@ -61,6 +61,7 @@ export const ALL_RAIDS = gql`
       nodes {
         id
         date
+        title
         linkBetweenRaids
         donjonByDonjonId {
           id
