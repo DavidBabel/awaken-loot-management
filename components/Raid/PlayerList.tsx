@@ -202,8 +202,8 @@ export default function PlayerList({
           {displayImportPlayerArea && (
             <div>
               <textarea
-                style={{ width: 600, height: 350, margin: 25 }}
-                placeholder="Copier ici le texte d'une page warcraft logs"
+                style={{ maxWidth: 700, width: "60%", height: 350, margin: 25 }}
+                placeholder="Copier ici le texte d'une page warcraft logs (ctrl + a / ctrl + c)"
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                   setWarcraftLogsContent(e.target.value)
                 }
@@ -216,9 +216,9 @@ export default function PlayerList({
                   <div style={{ margin: 10 }}>
                     {playerToCreate.map(player => (
                       <AddPlayer
+                        key={`create-player-${player}`}
                         buttonLabel={`Créer ${player}`}
                         initialName={player}
-                        key={`create-player-${player}`}
                         allPlayers={allPlayers}
                         refetchAllPlayers={() => {
                           const withoutNewPLayer = playerToCreate.filter(
@@ -252,14 +252,22 @@ export default function PlayerList({
                     if (nonExistingPlayers.length > 0) {
                       setPlayerToCreate(nonExistingPlayers);
                     } else {
-                      const queries = playerList.map(currentPlayerName => {
-                        return createRaidPlayer({
-                          variables: {
-                            raidId,
-                            playerId: getPlayerId(currentPlayerName, allPlayers)
-                          }
+                      const alreadyExistingPlayers = players.map(
+                        p => p.playerByPlayerId.name
+                      );
+                      const queries = playerList
+                        .filter(p => !alreadyExistingPlayers.includes(p))
+                        .map(currentPlayerName => {
+                          return createRaidPlayer({
+                            variables: {
+                              raidId,
+                              playerId: getPlayerId(
+                                currentPlayerName,
+                                allPlayers
+                              )
+                            }
+                          });
                         });
-                      });
                       Promise.all(queries)
                         .then(() => {
                           openSnackBar(
@@ -267,6 +275,7 @@ export default function PlayerList({
                             "success"
                           );
                           refetchOneRaid();
+                          setWarcraftLogsContent("");
                           toggleDisplayImportPlayerArea();
                         })
                         .catch(() => {
