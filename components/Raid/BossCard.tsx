@@ -180,7 +180,7 @@ export function BossCard({
     updateLoot({
       variables: {
         id: currentLootToBeUpdated.loot.id,
-        active: false,
+        active: currentLootToBeUpdated.actionType === "restore" ? true : false,
         lastActionBy: member.name,
         lastActionDate: new Date().toLocaleDateString("fr-FR", {
           hour: "2-digit",
