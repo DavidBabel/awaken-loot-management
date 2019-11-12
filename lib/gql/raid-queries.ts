@@ -10,7 +10,7 @@ export const ALL_DONJONS = gql`
           shortName
           active
           cdnImage
-          bossesByDonjonId {
+          bossesByDonjonId(orderBy: ORDER_ASC) {
             nodes {
               name
               bossItemsByBossId {
@@ -36,7 +36,7 @@ export const ONE_DONJON = gql`
           shortName
           active
           cdnImage
-          bossesByDonjonId {
+          bossesByDonjonId(orderBy: ORDER_ASC) {
             nodes {
               id
               name
@@ -98,7 +98,7 @@ export const ONE_RAID = gql`
           id
           name
           shortName
-          bossesByDonjonId {
+          bossesByDonjonId(orderBy: ORDER_ASC) {
             nodes {
               id
               name

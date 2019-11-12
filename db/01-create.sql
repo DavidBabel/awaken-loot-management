@@ -98,6 +98,7 @@ CREATE UNIQUE INDEX ON "BossItem" ("id");
 
 CREATE TABLE "Bosses" (
   "id" SERIAL PRIMARY KEY,
+  "order" int NOT NULL,
   "donjonId" int NOT NULL,
   "name" varchar,
   "cdnImage" varchar
