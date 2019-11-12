@@ -47,16 +47,24 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AddPlayer({
-  allPlayers,
-  refetchAllPlayers
-}: {
+interface Props {
+  buttonLabel?: string;
+  initialName?: string;
   allPlayers: Player[];
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
-}) {
+}
+
+export default function AddPlayer({
+  initialName = "",
+  buttonLabel = "Ajouter un joueur",
+  allPlayers,
+  refetchAllPlayers
+}: Props) {
   const classes = useStyles("");
   const [open, setOpen] = useState<boolean>(false);
-  const [newPlayerInputValue, setNewPlayerInputValue] = useState<string>("");
+  const [newPlayerInputValue, setNewPlayerInputValue] = useState<string>(
+    initialName
+  );
   const [classIdToAdd, setClassIdToAdd] = useState<string>("0");
   const [selectClassOpened, setSelectClassOpened] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -156,9 +164,9 @@ export default function AddPlayer({
   };
 
   return (
-    <div>
+    <>
       <Button onClick={handleOpen} variant="outlined" color="primary">
-        <span className={classes.btnTxt}>Ajouter un joueur</span>
+        <span className={classes.btnTxt}>{buttonLabel}</span>
         <AddIcon />
       </Button>
       <Dialog
@@ -240,6 +248,6 @@ export default function AddPlayer({
           ]}
         />
       </Snackbar>
-    </div>
+    </>
   );
 }

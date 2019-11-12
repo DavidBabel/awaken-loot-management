@@ -51,7 +51,9 @@ export default function PageCreateRaid() {
         <Grid item={true}>
           <Avatar
             alt={currentDonjon.name}
-            src={getDonjonImageUrl(currentDonjon.name)}
+            src={
+              currentDonjon.cdnImage || getDonjonImageUrl(currentDonjon.name)
+            }
           />
         </Grid>
         <Grid item={true}>

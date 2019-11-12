@@ -4,6 +4,6 @@ module.exports = {
   DATE_FORMAT: "yyyy-MM-dd",
   GRAPHQL_ENDPOINT: process.env.GRAPHQL_ENDPOINT || "api/queries",
   JWT_SECRET: process.env.JWT_SECRET || "any",
-  SERVER_URL: process.env.SERVER_URL || "http://localhost:3000",
-  SALT: "this_is_awaken_and_we_will_kill_Kelthuzad"
+  SALT: "this_is_awaken_and_we_will_kill_Kelthuzad",
+  SERVER_URL: process.env.SERVER_URL || "http://localhost:3000"
 };

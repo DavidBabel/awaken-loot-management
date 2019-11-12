@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface MemberInfos {
   name: string;
@@ -8,8 +8,8 @@ export interface MemberInfos {
 }
 
 const MemberContext = React.createContext<MemberInfos>({
-  name: '',
-  role: 'guest',
+  name: "",
+  role: "guest",
   level: 0,
   token: null
 });

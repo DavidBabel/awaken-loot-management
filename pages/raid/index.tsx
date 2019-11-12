@@ -437,7 +437,7 @@ export default function PageIndex() {
                   children={donjons
                     .filter(({ node: donjon }) => donjon.active)
                     .map(({ node: donjon }) => (
-                      <CreateRaid key={donjon.name} donjon={donjon} />
+                      <CreateRaid key={donjon.name} {...donjon} />
                     ))}
                 />
               </div>

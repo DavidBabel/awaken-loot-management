@@ -231,6 +231,10 @@ export default function PageRaidView() {
         handleClose={togglePlayerListOpened}
         open={playerListOpened}
         players={currentRaidPlayers}
+        raidId={raidId}
+        allPlayers={dataPlayers.allPlayers.nodes}
+        refetchOneRaid={refetchOneRaid}
+        refetchAllPlayers={refetchAllPlayers}
       />
     </div>
   );

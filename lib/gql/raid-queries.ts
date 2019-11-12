@@ -9,6 +9,7 @@ export const ALL_DONJONS = gql`
           name
           shortName
           active
+          cdnImage
           bossesByDonjonId {
             nodes {
               name
@@ -34,10 +35,12 @@ export const ONE_DONJON = gql`
           name
           shortName
           active
+          cdnImage
           bossesByDonjonId {
             nodes {
               id
               name
+              cdnImage
               bossItemsByBossId {
                 nodes {
                   id
@@ -99,6 +102,7 @@ export const ONE_RAID = gql`
             nodes {
               id
               name
+              cdnImage
               donjonId
               bossItemsByBossId {
                 nodes {
