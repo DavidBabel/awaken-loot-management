@@ -56,8 +56,9 @@ export const ALL_RAIDS = gql`
   query AllRaids {
     allRaids(orderBy: DATE_DESC) {
       nodes {
-        date
         id
+        date
+        linkBetweenRaids
         donjonByDonjonId {
           id
           name

@@ -46,7 +46,8 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-items-carousel": "^2.8.0",
-    "tslint": "^5.20.1"
+    "tslint": "^5.20.1",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.8.3",

@@ -130,7 +130,7 @@ export default function PlayersTable(props: Props) {
         }
       }
     });
-    totalLoot = totalLootLevel3 + totalLootLevel2 + totalLootLevel1;
+    totalLoot = totalLootLevel3 + totalLootLevel2;
     let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
     if (totalRaid === 0) {
       lastRaidDate = null;
@@ -259,7 +259,6 @@ export default function PlayersTable(props: Props) {
                 ""
               ].map((columnName: ColumnName) => (
                 <StyledTableCell key={columnName} align="center">
-                  {" "}
                   <Button
                     className={classes.headButton}
                     variant={"text"}
