@@ -22,6 +22,7 @@ import {
   SnackbarContent,
   Tooltip
 } from "@material-ui/core";
+import CachedIcon from "@material-ui/icons/Cached";
 import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { ApolloQueryResult } from "apollo-boost";
@@ -42,6 +43,10 @@ declare global {
 }
 interface UpdateLootVariables {
   id: number;
+  active: boolean;
+  lastActionBy: string;
+  lastActionDate: string;
+  actionType: string;
 }
 const useStyles = makeStyles({
   card: {
@@ -100,7 +105,7 @@ const useStyles = makeStyles({
     overflow: "hidden",
     boxShadow: "0 0 20px 0 rgba(0,0,0,0.25)"
   },
-  confirmDeleteContent: {
+  confirmUpdateContent: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -110,6 +115,9 @@ const useStyles = makeStyles({
   },
   linearProgress: {
     marginBottom: 10
+  },
+  lootDeleted: {
+    backgroundColor: "rgba(0,0,0,0.2)"
   }
 });
 
@@ -136,14 +144,15 @@ export function BossCard({
   const member = useContext(MemberContext);
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
-  const [deleteLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
-  const [deleteLootConfirmOpen, setDeleteLootConfirmOpen] = useState<boolean>(
+  const [updateLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
+  const [updateLootConfirm, setUpdateLootConfirm] = useState<boolean>(false);
+  const [currentLootToBeUpdated, setCurrentLootToBeUpdated] = useState<{
+    loot: Loot;
+    actionType: string;
+  }>(null);
+  const [updateLootIsLoading, setUpdateLootIsLoading] = useState<boolean>(
     false
   );
-  const [currentLootToBeDeleted, setCurrentLootToBeDeleted] = useState<Loot>(
-    null
-  );
-  const [deleteIsLoading, setDeleteIsLoading] = useState<boolean>(false);
   const {
     snackBarOpen,
     snackBarBackgroundColor,
@@ -152,9 +161,9 @@ export function BossCard({
     snackBarMessage
   } = useSnackBar();
 
-  const openDeleteLootConfirm = (loot: Loot) => {
-    setCurrentLootToBeDeleted(loot);
-    setDeleteLootConfirmOpen(true);
+  const openUpdateLootConfirm = (loot: Loot, actionType: string) => {
+    setCurrentLootToBeUpdated({ loot, actionType });
+    setUpdateLootConfirm(true);
     setTimeout(() => {
       if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
         try {
@@ -163,25 +172,41 @@ export function BossCard({
       }
     }, 50);
   };
-  const closeDeleteLootConfirm = () => {
-    setDeleteLootConfirmOpen(false);
+  const closeUpdateLootConfirm = () => {
+    setUpdateLootConfirm(false);
   };
-  const confirmDeleteLoot = () => {
-    setDeleteIsLoading(true);
-    deleteLoot({
-      variables: { id: currentLootToBeDeleted.id }
+  const confirmUpdateLoot = () => {
+    setUpdateLootIsLoading(true);
+    updateLoot({
+      variables: {
+        id: currentLootToBeUpdated.loot.id,
+        active: false,
+        lastActionBy: member.name,
+        lastActionDate: new Date().toLocaleDateString("fr-FR", {
+          hour: "2-digit",
+          minute: "2-digit"
+        }),
+        actionType: currentLootToBeUpdated.actionType
+      }
     })
       .then(resp => {
-        openSnackBar("Loot supprimé avec succès", "success");
-        setCurrentLootToBeDeleted(null);
-        setDeleteLootConfirmOpen(false);
-        setDeleteIsLoading(false);
+        openSnackBar(
+          "Loot " +
+            (currentLootToBeUpdated.actionType === "delete"
+              ? "supprimé"
+              : "ajouté") +
+            " avec succès",
+          "success"
+        );
+        setCurrentLootToBeUpdated(null);
+        setUpdateLootConfirm(false);
+        setUpdateLootIsLoading(false);
       })
       .catch(err => {
         openSnackBar(err.message, "error");
-        setCurrentLootToBeDeleted(null);
-        setDeleteLootConfirmOpen(false);
-        setDeleteIsLoading(false);
+        setCurrentLootToBeUpdated(null);
+        setUpdateLootConfirm(false);
+        setUpdateLootIsLoading(false);
       });
   };
   const scrollDown = () => {
@@ -226,12 +251,23 @@ export function BossCard({
                   }
                   title={
                     loot.lastActionBy && loot.lastActionDate
-                      ? `Ajouté par ${loot.lastActionBy} le ${loot.lastActionDate}`
+                      ? `${
+                          loot.lastActionType === "delete"
+                            ? "Supprimé"
+                            : loot.lastActionType === "add"
+                            ? "Ajouté"
+                            : "Restauré"
+                        } par ${loot.lastActionBy} le ${loot.lastActionDate}`
                       : ""
                   }
                   placement="left"
                 >
                   <ListItem
+                    className={
+                      loot.lastActionType === "delete"
+                        ? classes.lootDeleted
+                        : ""
+                    }
                     divider={true}
                     role={undefined}
                     alignItems="flex-start"
@@ -285,10 +321,19 @@ export function BossCard({
                           edge="end"
                           aria-label="comments"
                           onClick={() => {
-                            openDeleteLootConfirm(loot);
+                            openUpdateLootConfirm(
+                              loot,
+                              loot.lastActionType === "delete"
+                                ? "restore"
+                                : "delete"
+                            );
                           }}
                         >
-                          <DeleteForeverIcon />
+                          {loot.lastActionType === "delete" ? (
+                            <CachedIcon />
+                          ) : (
+                            <DeleteForeverIcon />
+                          )}
                         </IconButton>
                       </ListItemSecondaryAction>
                     )}
@@ -314,16 +359,21 @@ export function BossCard({
         )}
       </Card>
       <Dialog
-        open={deleteLootConfirmOpen}
-        onClose={closeDeleteLootConfirm}
+        open={updateLootConfirm}
+        onClose={closeUpdateLootConfirm}
         aria-labelledby="alert-dialog-title"
         aria-describedby="Delete loot confirm window"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Êtes vous sûrs de vouloir supprimer ce loot?"}
+          {"Êtes vous sûrs de vouloir " +
+            (currentLootToBeUpdated &&
+            currentLootToBeUpdated.actionType === "delete"
+              ? "supprimer"
+              : "restaurer") +
+            " ce loot?"}
         </DialogTitle>
         <DialogContent>
-          {deleteIsLoading ? (
+          {updateLootIsLoading ? (
             <LinearProgress
               className={classes.linearProgress}
               variant="query"
@@ -332,21 +382,22 @@ export function BossCard({
             ""
           )}
           <DialogContentText
-            className={classes.confirmDeleteContent}
+            className={classes.confirmUpdateContent}
             id="alert-dialog-description"
           >
-            {currentLootToBeDeleted ? (
+            {currentLootToBeUpdated ? (
               <>
                 <a
                   onClick={e => {
                     e.preventDefault();
                   }}
-                  href={`https://fr.classic.wowhead.com/item=${currentLootToBeDeleted.itemByItemId.wowheadId}`}
+                  href={`https://fr.classic.wowhead.com/item=${currentLootToBeUpdated.loot.itemByItemId.wowheadId}`}
                 >
-                  {currentLootToBeDeleted.itemByItemId.name}
+                  {currentLootToBeUpdated.loot.itemByItemId.name}
                 </a>
                 <span>
-                  {"Attribué à " + currentLootToBeDeleted.playerByPlayerId.name}
+                  {"Attribué à " +
+                    currentLootToBeUpdated.loot.playerByPlayerId.name}
                 </span>
               </>
             ) : (
@@ -355,10 +406,10 @@ export function BossCard({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeDeleteLootConfirm} color="primary">
+          <Button onClick={closeUpdateLootConfirm} color="primary">
             Annuler
           </Button>
-          <Button onClick={confirmDeleteLoot} color="primary" autoFocus={true}>
+          <Button onClick={confirmUpdateLoot} color="primary" autoFocus={true}>
             Confirmer
           </Button>
         </DialogActions>

@@ -18,6 +18,7 @@ export const CREATE_LOOT = gql`
           bossId: $bossId
           lastActionBy: $lastActionBy
           lastActionDate: $lastActionDate
+          lastActionType: "add"
         }
       }
     ) {
@@ -34,11 +35,30 @@ export const CREATE_LOOT = gql`
 `;
 
 export const UPDATE_LOOT = gql`
-  mutation updateLoot($id: Int!) {
-    updateLootById(input: { id: $id, lootPatch: { active: false } }) {
+  mutation updateLoot(
+    $id: Int!
+    $active: Boolean!
+    $lastActionBy: String!
+    $lastActionDate: String!
+    $actionType: String!
+  ) {
+    updateLootById(
+      input: {
+        id: $id
+        lootPatch: {
+          active: $active
+          lastActionBy: $lastActionBy
+          lastActionDate: $lastActionDate
+          lastActionType: $actionType
+        }
+      }
+    ) {
       loot {
         id
         active
+        lastActionBy
+        lastActionDate
+        lastActionType
       }
     }
   }

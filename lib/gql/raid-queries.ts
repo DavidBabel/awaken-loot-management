@@ -61,6 +61,7 @@ export const ALL_RAIDS = gql`
       nodes {
         id
         date
+        title
         linkBetweenRaids
         donjonByDonjonId {
           id
@@ -183,6 +184,7 @@ export const ONE_RAID = gql`
             bossId
             lastActionBy
             lastActionDate
+            lastActionType
             itemByItemId {
               id
               name
