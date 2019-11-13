@@ -7,6 +7,7 @@ import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_RAID } from "../../../lib/gql/raid-mutations";
 import { ONE_DONJON } from "../../../lib/gql/raid-queries";
+import { formatDate } from "../../../lib/utils/date";
 import { getDonjonImageUrl } from "../../../lib/utils/image";
 
 interface QueryVariables {
@@ -37,8 +38,11 @@ export default function PageCreateRaid() {
   const loading = loadingDonjon || loadingCreateRaid;
   const error = errorDonjon || errorCreateRaid;
 
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(formatDate());
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+
+  // tslint:disable-next-line:no-console
+  console.log(selectedDate);
 
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
@@ -79,7 +83,6 @@ export default function PageCreateRaid() {
             color="primary"
             onClick={() => {
               setButtonDisabled(true);
-              // TODO check if it's already created here
               createRaid({ variables: { date: selectedDate, donjonId } })
                 .then(({ data: { createRaid: { raid } } }) => {
                   router.push(`/raid/edit/${raid.id}`);

@@ -55,7 +55,7 @@ function tryToLogin(
 ) {
   const passwordSalted = md5(password + CONFIG.SALT);
   // tslint:disable-next-line:no-console
-  console.log(passwordSalted);
+
   fetch(`${CONFIG.SERVER_URL}/api/login`, {
     method: "POST",
     headers: {
