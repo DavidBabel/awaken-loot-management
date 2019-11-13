@@ -23,15 +23,18 @@ import { Menu } from "../Menu/Menu";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="http://awaken.se/">
-        Awaken loot manager
-      </Link>
-      {getCurrentYear()}
+    <>
       <br />
-      {". Developpé par Thorsen et Devilhunter."}
-    </Typography>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="http://awaken.se/">
+          Awaken loot manager
+        </Link>{" "}
+        {getCurrentYear()}
+        <br />
+        {". Developpé par Thorsen et Devilhunter."}
+      </Typography>
+    </>
   );
 }
 
