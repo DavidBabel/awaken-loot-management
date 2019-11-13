@@ -61,7 +61,7 @@ const classColors = {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
-    height: "calc(100vh - 140px)",
+    height: "calc(100vh - 105px)",
     backgroundColor: theme.palette.background.paper,
     "& .MuiTabs-indicator": {
       height: "3px"

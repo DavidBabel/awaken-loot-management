@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   root: { width: "100%" },
   paper: {
     width: "100%",
-    maxHeight: "calc(100vh - 190px)",
+    maxHeight: "calc(100vh - 160px)",
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "rgba(0,0,0,0.6)",

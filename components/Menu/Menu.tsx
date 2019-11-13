@@ -3,10 +3,11 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListSubheader
+  ListSubheader,
+  makeStyles
 } from "@material-ui/core";
 import Link from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
@@ -18,11 +19,20 @@ function resetToken() {
   destroyCookie({}, "member");
   Router.push("/login");
 }
+const useStyles = makeStyles({
+  selected: {
+    backgroundColor: "#EBEBEB",
+    "& *": {
+      fontWeight: "bold"
+    }
+  }
+});
 
 export function Menu() {
+  const classes = useStyles("");
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
-
+  const { route } = useRouter();
   return (
     <div>
       {isConnected ? (
@@ -30,7 +40,16 @@ export function Menu() {
           <List>
             <ListSubheader>Raid management</ListSubheader>
             <Link href="/raid">
-              <ListItem button={true}>
+              <ListItem
+                button={true}
+                className={
+                  route
+                    ? route === "/raid"
+                      ? classes.selected
+                      : ""
+                    : classes.selected
+                }
+              >
                 <ListItemText primary="Raids Dashboard" />
               </ListItem>
             </Link>
@@ -38,23 +57,35 @@ export function Menu() {
           <Divider />
           <List>
             <Link href="/summary">
-              <ListItem button={true}>
+              <ListItem
+                button={true}
+                className={route === "/summary" ? classes.selected : ""}
+              >
                 <ListItemText primary="Joueurs" />
               </ListItem>
             </Link>
             <Link href="/attendance">
-              <ListItem button={true}>
+              <ListItem
+                button={true}
+                className={route === "/attendance" ? classes.selected : ""}
+              >
                 <ListItemText primary="Présence en raid" />
               </ListItem>
             </Link>
             <Link href="/items">
-              <ListItem button={true}>
+              <ListItem
+                button={true}
+                className={route === "/items" ? classes.selected : ""}
+              >
                 <ListItemText primary="Items" />
               </ListItem>
             </Link>
             {member.level >= role.admin && (
               <Link href="/editplayers">
-                <ListItem button={true}>
+                <ListItem
+                  button={true}
+                  className={route === "/editplayers" ? classes.selected : ""}
+                >
                   <ListItemText primary="Editer joueurs" />
                 </ListItem>
               </Link>
@@ -73,7 +104,10 @@ export function Menu() {
         <List>
           <ListSubheader>Please connect</ListSubheader>
           <Link href="/login">
-            <ListItem button={true}>
+            <ListItem
+              button={true}
+              className={route === "/login" ? classes.selected : ""}
+            >
               <ListItemText primary="Login page" />
             </ListItem>
           </Link>
