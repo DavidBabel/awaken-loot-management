@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      height: "calc(100vh - 140px)"
+      height: "calc(100vh - 160px)"
     },
     tableWrapper: {
       position: "relative",
@@ -32,10 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
         borderRadius: "2px"
       },
       "&::-webkit-scrollbar-track": {
-        boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
+        boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)",
+        backgroundColor: "rgba(0,0,0,0.2)"
       },
       "&::-webkit-scrollbar": {
-        width: "10px"
+        width: "10px",
+        height: "10px"
       }
     },
     table: {

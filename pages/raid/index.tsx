@@ -81,7 +81,7 @@ const useStyles = makeStyles({
   },
   lastRaidsPaper: {
     width: "100%",
-    height: "calc(100vh - 370px)",
+    height: "calc(100vh - 360px)",
     marginTop: 20
   },
   lastRaidsPaperHeader: {
@@ -91,7 +91,7 @@ const useStyles = makeStyles({
     paddingRight: "25px"
   },
   tableWrapper: {
-    maxHeight: "calc(100vh - 435px)",
+    maxHeight: "calc(100vh - 425px)",
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "#3F51B5",

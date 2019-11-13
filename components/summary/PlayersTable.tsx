@@ -54,7 +54,7 @@ const useStyles = makeStyles({
     }
   },
   tableWrapper: {
-    maxHeight: "calc(100vh - 250px)",
+    maxHeight: "calc(100vh - 200px)",
     overflow: "auto"
   },
   table: {

@@ -26,7 +26,7 @@ declare global {
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    height: "calc(100vh - 140px)",
+    height: "calc(100vh - 110px)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center"

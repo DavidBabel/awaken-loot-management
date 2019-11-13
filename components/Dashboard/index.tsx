@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-// import Link from "@material-ui/core/Link";
+import Link from "@material-ui/core/Link";
 // import List from "@material-ui/core/List";
 // import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,22 +20,6 @@ import React from "react";
 // import { getCurrentYear } from "../../lib/utils/date";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
-
-// function Copyright() {
-//   return  <span/>;
-//   // <>
-//   //   <br />
-//   //   <Typography variant="body2" color="textSecondary" align="center">
-//   //     {"Copyright © "}
-//   //     <Link color="inherit" href="http://awaken.se/">
-//   //       Awaken loot manager
-//   //     </Link>{" "}
-//   //     {getCurrentYear()}
-//   //     <br />
-//   //     {". Developpé par Thorsen et Devilhunter."}
-//   //   </Typography>
-//   // </>
-// }
 
 const drawerWidth = 240;
 
@@ -115,6 +99,19 @@ const useStyles = makeStyles(theme => ({
   },
   fixedHeight: {
     height: 240
+  },
+  copyright: {
+    position: "absolute",
+    width: drawerWidth,
+    fontSize: "12px",
+    bottom: 10,
+    left: 0,
+    zIndex: 1000000,
+    transition: "left 0.2s ease-in-out"
+  },
+  hidden: {
+    left: -drawerWidth,
+    transition: "left 0.2s ease-in-out"
   }
 }));
 
@@ -201,26 +198,21 @@ export function Dashboard({ children }: Props) {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container={true} spacing={3}>
             {children}
-            {/* <Grid item={true} xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-
-            <Grid item={true} xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-
-            <Grid item={true} xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid> */}
           </Grid>
         </Container>
-        {/* <Copyright /> */}
+        <Typography
+          className={classes.copyright + " " + (!open && classes.hidden)}
+          variant="body2"
+          color="textSecondary"
+          align="center"
+        >
+          {"Copyright © "}
+          <Link color="inherit" href="http://awaken.se/">
+            Awaken loot manager
+          </Link>{" "}
+          {new Date().getFullYear()}
+          {". Developpé par Thorsen et Devilhunter."}
+        </Typography>
       </main>
     </div>
   );
