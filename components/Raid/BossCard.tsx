@@ -34,6 +34,7 @@ import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
+import { formatDate } from "../../lib/utils/date";
 import { getBossImageUrl } from "../../lib/utils/image";
 
 declare global {
@@ -182,10 +183,7 @@ export function BossCard({
         id: currentLootToBeUpdated.loot.id,
         active: currentLootToBeUpdated.actionType === "restore" ? true : false,
         lastActionBy: member.name,
-        lastActionDate: new Date().toLocaleDateString("fr-FR", {
-          hour: "2-digit",
-          minute: "2-digit"
-        }),
+        lastActionDate: formatDate(),
         actionType: currentLootToBeUpdated.actionType
       }
     })

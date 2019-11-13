@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
 import { useEffect } from "react";
+import { Loot } from "../../lib/generatedTypes";
+import { getDate } from "../../lib/utils/date";
 
 declare global {
   interface Window {
@@ -44,14 +46,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function createData(
   name: string,
-  wowheadId: string,
+  wowheadId: number,
   date: string,
-  raidId: string
+  raidId: number
 ) {
   return { name, wowheadId, date, raidId };
 }
 
-export default function LootsTable({ loots, hidden }) {
+interface Props {
+  loots: Loot[];
+  hidden: boolean;
+}
+
+export default function LootsTable({ loots, hidden }: Props) {
   const classes = useStyles("");
   if (loots.length === 0) {
     return (
@@ -71,7 +78,7 @@ export default function LootsTable({ loots, hidden }) {
       createData(
         loot.itemByItemId.name,
         loot.itemByItemId.wowheadId,
-        new Date(loot.raidByRaidId.date).toLocaleDateString("fr-FR"),
+        getDate(loot.raidByRaidId.date),
         loot.raidByRaidId.id
       )
     );

@@ -17,6 +17,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
 import React from "react";
+import { getCurrentYear } from "../../lib/utils/date";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
 
@@ -26,8 +27,9 @@ function Copyright() {
       {"Copyright © "}
       <Link color="inherit" href="http://awaken.se/">
         Awaken loot manager
-      </Link>{" "}
-      {new Date().getFullYear()}
+      </Link>
+      <br />
+      {getCurrentYear()}
       {". Developpé par Thorsen et Devilhunter."}
     </Typography>
   );

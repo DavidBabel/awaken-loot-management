@@ -14,6 +14,7 @@ import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
 import { role } from "../../../lib/role-level";
+import { formatDate } from "../../../lib/utils/date";
 import { raidPlayerByClass } from "../../../lib/utils/sorter";
 
 interface QueryVariables {
@@ -156,7 +157,7 @@ export default function PageRaidView() {
       <Paper className={classes.raidInfos}>
         <div className={classes.raidTitle}>
           <div>
-            {new Date(currentRaid.date).toLocaleDateString("fr-FR") +
+            {formatDate(currentRaid.date) +
               " | " +
               currentRaid.donjonByDonjonId.name +
               (raidTitle ? " (" + raidTitle + ")" : "")}
