@@ -28,8 +28,8 @@ function Copyright() {
       <Link color="inherit" href="http://awaken.se/">
         Awaken loot manager
       </Link>
-      <br />
       {getCurrentYear()}
+      <br />
       {". Developpé par Thorsen et Devilhunter."}
     </Typography>
   );
