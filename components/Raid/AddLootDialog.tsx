@@ -37,6 +37,7 @@ interface CreateLootVariables {
   bossId: number;
   lastActionBy: string;
   lastActionDate: string;
+  lastActionType: string;
 }
 interface CreatePlayerVariables {
   classId: number;
@@ -285,7 +286,8 @@ export default function AddLootDialog({
           lastActionDate: new Date().toLocaleDateString("fr-FR", {
             hour: "2-digit",
             minute: "2-digit"
-          })
+          }),
+          lastActionType: "add"
         }
       })
         .then(resp => {
@@ -336,7 +338,8 @@ export default function AddLootDialog({
         keepMounted={true}
         onClose={handleClose}
         aria-labelledby="add-loot-dialog"
-        aria-describedby="add loot window">
+        aria-describedby="add loot window"
+      >
         <DialogTitle id="add-loot-dialog">
           {"Ajouter un loot sur: " + bossName}
         </DialogTitle>
@@ -352,12 +355,14 @@ export default function AddLootDialog({
               onClose={handleCloseSelectItem}
               onOpen={handleOpenSelectItem}
               value={itemIdToAdd}
-              onChange={handleChangeSelectItem}>
+              onChange={handleChangeSelectItem}
+            >
               {loots.map(item => {
                 return (
                   <MenuItem
                     key={item.itemByItemId.id}
-                    value={item.itemByItemId.id}>
+                    value={item.itemByItemId.id}
+                  >
                     {item.itemByItemId.name}
                   </MenuItem>
                 );
@@ -385,7 +390,8 @@ export default function AddLootDialog({
                 onClose={handleCloseSelectClass}
                 onOpen={handleOpenSelectClass}
                 value={classIdToAdd}
-                onChange={handleChangeSelectClass}>
+                onChange={handleChangeSelectClass}
+              >
                 }>
                 {wowClasses.map(wowClass => {
                   return (
@@ -407,7 +413,8 @@ export default function AddLootDialog({
                 onClose={handleCloseSelectPlayer}
                 onOpen={handleOpenSelectPlayer}
                 value={playerIdToAdd}
-                onChange={handleChangeSelectPlayer}>
+                onChange={handleChangeSelectPlayer}
+              >
                 {allPlayers
                   .filter((player: Player) => {
                     if (
@@ -430,7 +437,8 @@ export default function AddLootDialog({
                           margin: 2
                         }}
                         key={player.id}
-                        value={player.id}>
+                        value={player.id}
+                      >
                         {player.name}
                       </MenuItem>
                     );
@@ -463,7 +471,8 @@ export default function AddLootDialog({
         <DialogActions
           classes={{
             root: classes.dialogActions
-          }}>
+          }}
+        >
           <div className={classes.switch}>
             {!showNewPlayerInput && (
               <>
@@ -493,7 +502,8 @@ export default function AddLootDialog({
             onClick={() => {
               showNewPlayerInput ? addNewPlayerAndLoot() : addLoot(null);
             }}
-            color="primary">
+            color="primary"
+          >
             AJOUTER
           </Button>
         </DialogActions>
@@ -505,7 +515,8 @@ export default function AddLootDialog({
         }}
         open={snackBarOpen}
         autoHideDuration={3000}
-        onClose={closeSnackBar}>
+        onClose={closeSnackBar}
+      >
         <SnackbarContent
           style={{ backgroundColor: snackBarBackgroundColor }}
           message={<span id="message-id">{snackBarMessage}</span>}
@@ -514,7 +525,8 @@ export default function AddLootDialog({
               key="close"
               aria-label="close"
               color="inherit"
-              onClick={closeSnackBar}>
+              onClick={closeSnackBar}
+            >
               <CloseIcon />
             </IconButton>
           ]}
