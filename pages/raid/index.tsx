@@ -40,6 +40,7 @@ import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
+import { getDate } from "../../lib/utils/date";
 import { byDate } from "../../lib/utils/sorter";
 
 declare global {
@@ -564,7 +565,7 @@ export default function PageIndex() {
                   return (
                     <TableRow key={`raid-${raid.id}`}>
                       <TableCell>{raid.donjonByDonjonId.name}</TableCell>
-                      <TableCell>{raid.date}</TableCell>
+                      <TableCell>{getDate(raid.date)}</TableCell>
                       <TableCell>{raid.title}</TableCell>
                       <TableCell>
                         {raid.lootsByRaidId
