@@ -9,6 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
+import { getDate } from "../../lib/utils/date";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +55,7 @@ export default function RaidsTable({ raids, hidden }) {
     .map(raid =>
       createData(
         raid.raidByRaidId.donjonByDonjonId.name,
-        new Date(raid.raidByRaidId.date).toLocaleDateString("fr-FR"),
+        getDate(raid.raidByRaidId.date),
         raid.raidId
       )
     );

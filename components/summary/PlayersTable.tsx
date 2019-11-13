@@ -18,6 +18,7 @@ import {
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Player } from "../../lib/generatedTypes";
+import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
 import PlayerTableRow from "./PlayerTableRow";
 
@@ -160,11 +161,11 @@ export default function PlayersTable(props: Props) {
         }
       });
     }
-    const dateOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    };
+    // const dateOptions = {
+    //   year: "numeric",
+    //   month: "long",
+    //   day: "numeric"
+    // };
     return createData(
       player.name,
       Math.round((maxMerit * 100) / props.maxMeritValue),
@@ -175,12 +176,8 @@ export default function PlayersTable(props: Props) {
         level3: totalLootLevel3
       },
       totalRaid,
-      lastLootDate
-        ? lastLootDate.toLocaleDateString("en-EN", dateOptions)
-        : "Aucun",
-      lastRaidDate
-        ? lastRaidDate.toLocaleDateString("en-EN", dateOptions)
-        : "Aucun",
+      lastLootDate ? formatDate(lastLootDate) : "Aucun",
+      lastRaidDate ? formatDate(lastRaidDate) : "Aucun",
       player.id,
       [...player.lootsByPlayerId.nodes]
         .sort((a: any, b: any) => {

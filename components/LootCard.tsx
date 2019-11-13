@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Loot } from "../lib/generatedTypes";
 
 export function LootCard({
-  raidByRaidId: { date },
+  // raidByRaidId: { date },
   playerByPlayerId: {
     name,
     classByClassId: { color }

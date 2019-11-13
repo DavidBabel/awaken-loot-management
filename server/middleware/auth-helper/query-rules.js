@@ -8,11 +8,11 @@ const { gql } = require("apollo-boost");
 function playerItself(user = {}, parsedRequest) {
   const { username, playerLevel = GUEST } = user;
 
-  console.log("username :");
-  console.log(username);
+  // console.log("username :");
+  // console.log(username);
 
-  console.log("parsedRequest :");
-  console.dir(parsedRequest, { depth: null, colors: true, showHidden: false });
+  // console.log("parsedRequest :");
+  // console.dir(parsedRequest, { depth: null, colors: true, showHidden: false });
 
   return true;
 }

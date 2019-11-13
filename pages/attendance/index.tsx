@@ -183,11 +183,13 @@ export default function PageIndex() {
                     <TableCell align="center" key={raid.id}>
                       {raid.donjonByDonjonId.shortName}
                       <br />
+                      {/*
+                      TODO restore that without toLocaleDateString
                       {new Date(raid.date).toLocaleDateString("en-EN", {
                         year: "numeric",
                         month: "short",
                         day: "numeric"
-                      })}
+                      })} */}
                     </TableCell>
                   );
                 }

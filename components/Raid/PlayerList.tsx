@@ -122,7 +122,6 @@ export default function PlayerList({
   refetchAllPlayers
 }: Props) {
   const member = useContext(MemberContext);
-  console.log(players);
 
   const [createRaidPlayer] = useMutation<Mutation, CreateRaidPlayerVariables>(
     ADD_PLAYER_TO_RAID

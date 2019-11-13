@@ -29,6 +29,7 @@ import { BossItem, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { CREATE_LOOT } from "../../lib/gql/loot-mutations";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
+import { formatDate } from "../../lib/utils/date";
 
 interface CreateLootVariables {
   playerId: number;
@@ -283,11 +284,8 @@ export default function AddLootDialog({
           raidId,
           bossId,
           lastActionBy: member.name,
-          lastActionDate: new Date().toLocaleDateString("fr-FR", {
-            hour: "2-digit",
-            minute: "2-digit"
-          }),
-          lastActionType: "add"
+          lastActionType: "add",
+          lastActionDate: formatDate()
         }
       })
         .then(resp => {
