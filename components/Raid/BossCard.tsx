@@ -252,9 +252,9 @@ export function BossCard({
                       ? `${
                           loot.lastActionType === "delete"
                             ? "Supprimé"
-                            : loot.lastActionType === "add"
-                            ? "Ajouté"
-                            : "Restauré"
+                            : loot.lastActionType === "restore"
+                            ? "Restauré"
+                            : "Ajouté"
                         } par ${loot.lastActionBy} le ${loot.lastActionDate}`
                       : ""
                   }

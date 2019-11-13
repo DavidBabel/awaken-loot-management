@@ -38,6 +38,7 @@ interface CreateLootVariables {
   bossId: number;
   lastActionBy: string;
   lastActionDate: string;
+  lastActionType: string;
 }
 interface CreatePlayerVariables {
   classId: number;
@@ -283,6 +284,7 @@ export default function AddLootDialog({
           raidId,
           bossId,
           lastActionBy: member.name,
+          lastActionType: "add",
           lastActionDate: formatDate()
         }
       })
