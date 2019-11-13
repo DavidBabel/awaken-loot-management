@@ -248,6 +248,7 @@ export default function PageIndex() {
         raidLinks.push({
           raidLinkId: raid.linkBetweenRaids,
           raidIds: [raid.id],
+          raidDates: [raid.date],
           decalage: 0
         });
       } else {
@@ -255,6 +256,7 @@ export default function PageIndex() {
         raidLinks.forEach(raidLink => {
           if (raidLink.raidLinkId === raid.linkBetweenRaids) {
             raidLink.raidIds.push(raid.id);
+            raidLink.raidDates.push(raid.date);
             raidLinkFound = true;
           }
         });
@@ -262,10 +264,40 @@ export default function PageIndex() {
           raidLinks.push({
             raidLinkId: raid.linkBetweenRaids,
             raidIds: [raid.id],
-            decalage: raidLinks.length % 5
+            raidDates: [raid.date],
+            decalage: 0
           });
         }
       }
+    }
+  });
+  let decalage = 0;
+  raidLinks.forEach(raidLink => {
+    let linkIntercale = false;
+    raidLinks.forEach(rLink => {
+      if (rLink.raidLinkId !== raidLink.raidLinkId) {
+        rLink.raidDates.forEach(date => {
+          if (
+            new Date(date) >
+              raidLink.raidDates.reduce((a, b) =>
+                new Date(a) < new Date(b) ? new Date(a) : new Date(b)
+              ) &&
+            new Date(date) <
+              raidLink.raidDates.reduce((a, b) =>
+                new Date(a) > new Date(b) ? new Date(a) : new Date(b)
+              )
+          ) {
+            linkIntercale = true;
+          }
+        });
+      }
+    });
+    if (linkIntercale) {
+      if (decalage > 8) {
+        decalage = 0;
+      }
+      decalage++;
+      raidLink.decalage = decalage;
     }
   });
 
