@@ -7,9 +7,9 @@ import {
   makeStyles
 } from "@material-ui/core";
 import Link from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { role } from "../../lib/role-level";
 
@@ -27,14 +27,12 @@ const useStyles = makeStyles({
     }
   }
 });
+
 export function Menu() {
   const classes = useStyles("");
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
-  const [route, setRoute] = useState(null);
-  useEffect(() => {
-    setRoute(Router.router ? Router.router.route : null);
-  }, [Router.route]);
+  const { route } = useRouter();
   return (
     <div>
       {isConnected ? (
