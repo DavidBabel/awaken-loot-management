@@ -21,21 +21,21 @@ import React from "react";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
 
-function Copyright() {
-  return "";
-  // <>
-  //   <br />
-  //   <Typography variant="body2" color="textSecondary" align="center">
-  //     {"Copyright © "}
-  //     <Link color="inherit" href="http://awaken.se/">
-  //       Awaken loot manager
-  //     </Link>{" "}
-  //     {getCurrentYear()}
-  //     <br />
-  //     {". Developpé par Thorsen et Devilhunter."}
-  //   </Typography>
-  // </>
-}
+// function Copyright() {
+//   return  <span/>;
+//   // <>
+//   //   <br />
+//   //   <Typography variant="body2" color="textSecondary" align="center">
+//   //     {"Copyright © "}
+//   //     <Link color="inherit" href="http://awaken.se/">
+//   //       Awaken loot manager
+//   //     </Link>{" "}
+//   //     {getCurrentYear()}
+//   //     <br />
+//   //     {". Developpé par Thorsen et Devilhunter."}
+//   //   </Typography>
+//   // </>
+// }
 
 const drawerWidth = 240;
 
@@ -220,7 +220,7 @@ export function Dashboard({ children }: Props) {
             </Grid> */}
           </Grid>
         </Container>
-        <Copyright />
+        {/* <Copyright /> */}
       </main>
     </div>
   );
