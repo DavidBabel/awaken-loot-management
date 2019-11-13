@@ -64,7 +64,7 @@ interface CreateRaidPlayerVariables {
 // tslint:disable:no-console
 function parseWarcraftLogs(content: string) {
   try {
-    const [, tanks] = content.match(/(Tanks|Healers|DPS):	(.*)/);
+    const [, tanks] = content.match(/(Tanks):	(.*)/);
     const [, healers] = content.match(/Healers:	(.*)/);
     const [, dps] = content.match(/DPS:	(.*)/);
 
@@ -73,7 +73,7 @@ function parseWarcraftLogs(content: string) {
       .filter((value, index, self) => {
         return self.indexOf(value) === index;
       })
-      .filter(x => !["Tanks"].includes(x));
+      .filter(x => !["Tanks", "Healers", "DPS"].includes(x));
   } catch (error) {
     return [];
   }
