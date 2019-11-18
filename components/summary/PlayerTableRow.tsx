@@ -14,6 +14,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
 import React from "react";
 import ProgressBar from "../../components/summary/ProgressBar";
+import { PlayerTableRowDatas } from "./PlayersTable";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -80,8 +81,22 @@ const useStyles = makeStyles({
   noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: { "& a": { textDecoration: "none", color: "white" } }
 });
-export default function PlayerTableRow(props) {
-  const { rowData, classColor, showed, openLootWindow, lootData } = props;
+
+interface Props {
+  rowData: PlayerTableRowDatas;
+  classColor: string;
+  showed: boolean;
+  openLootWindow: any;
+  lootData: any;
+}
+
+export default function PlayerTableRow({
+  rowData,
+  classColor,
+  showed,
+  openLootWindow,
+  lootData
+}: Props) {
   const classes = useStyles("");
   const iconElem = React.useRef(null);
   return (
@@ -262,6 +277,15 @@ export default function PlayerTableRow(props) {
           <a target="_blank">
             <Button variant="contained" color="primary">
               Details
+            </Button>
+          </a>
+        </Link>
+      </StyledTableCell>
+      <StyledTableCell align="center" className={classes.link}>
+        <Link href={`https://ironforge.pro/players/Sulfuron/${rowData.name}/`}>
+          <a target="_blank">
+            <Button variant="contained" color="primary">
+              Stuff
             </Button>
           </a>
         </Link>

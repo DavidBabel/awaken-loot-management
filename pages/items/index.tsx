@@ -4,17 +4,16 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import React, { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
-import { Item } from "../../lib/generatedTypes";
-import { Query } from "../../lib/generatedTypes";
+import { Item, Player, Query } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 
 declare global {
@@ -131,7 +130,7 @@ export default function PageIndex() {
     setItemInputValue(event.target.value);
   };
 
-  const makeWhoLootedList = (item): ReactNode => {
+  const makeWhoLootedList = (item: Item): ReactNode => {
     const classesWhoLooted = [];
     const columns = [];
     item.lootsByItemId.nodes.forEach(loot => {
@@ -167,7 +166,7 @@ export default function PageIndex() {
                 </div>
                 <ClassAvatar playerClass={column.classWhoLooted} />
 
-                {column.playersWhoLooted.map(player => (
+                {column.playersWhoLooted.map((player: Player) => (
                   <div key={player.id}>{player.name}</div>
                 ))}
               </div>

@@ -164,13 +164,13 @@ export default function PageIndex() {
         </div>
         <div className={classes.legendeItem}>
           <div className={classes.legendeSquare + " " + classes.rotation} />
-          <span>En rotation</span>
+          <span>En rotation / Backup</span>
         </div>
         <div className={classes.legendeItem}>
           <div
             className={classes.legendeSquare + " " + classes.pasDansGuilde}
           />
-          <span>Pas encore dans la guilde</span>
+          <span>Pas encore en raid</span>
         </div>
       </div>
       <div className={classes.tableWrapper}>
