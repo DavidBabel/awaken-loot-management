@@ -50,18 +50,28 @@ export function Menu() {
                     : classes.selected
                 }
               >
-                <ListItemText primary="Raids Dashboard" />
+                <ListItemText primary="Liste des Raids" />
+              </ListItem>
+            </Link>
+            <Link href="/items">
+              <ListItem
+                button={true}
+                className={route === "/items" ? classes.selected : ""}
+              >
+                <ListItemText primary="Répartition des Items" />
               </ListItem>
             </Link>
           </List>
           <Divider />
           <List>
+            <ListSubheader>Joueurs</ListSubheader>
+
             <Link href="/summary">
               <ListItem
                 button={true}
                 className={route === "/summary" ? classes.selected : ""}
               >
-                <ListItemText primary="Joueurs" />
+                <ListItemText primary="Résumé / loots" />
               </ListItem>
             </Link>
             <Link href="/attendance">
@@ -72,25 +82,26 @@ export function Menu() {
                 <ListItemText primary="Présence en raid" />
               </ListItem>
             </Link>
-            <Link href="/items">
-              <ListItem
-                button={true}
-                className={route === "/items" ? classes.selected : ""}
-              >
-                <ListItemText primary="Items" />
-              </ListItem>
-            </Link>
-            {member.level >= role.admin && (
-              <Link href="/editplayers">
-                <ListItem
-                  button={true}
-                  className={route === "/editplayers" ? classes.selected : ""}
-                >
-                  <ListItemText primary="Editer joueurs" />
-                </ListItem>
-              </Link>
-            )}
           </List>
+
+          {member.level >= role.admin && (
+            <>
+              <Divider />
+              <List>
+                <ListSubheader>Admin</ListSubheader>
+
+                <Link href="/editplayers">
+                  <ListItem
+                    button={true}
+                    className={route === "/editplayers" ? classes.selected : ""}
+                  >
+                    <ListItemText primary="Editer joueurs" />
+                  </ListItem>
+                </Link>
+              </List>
+            </>
+          )}
+
           <Divider />
 
           <List>

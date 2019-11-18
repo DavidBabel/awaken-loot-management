@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Button } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
@@ -76,6 +77,16 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
           <Tab label="Merits" />
           <Tab label="Loots" />
           <Tab label="Raids" />
+          <div style={{ marginTop: 6 }}>
+            <a
+              target="_blank"
+              href={`https://ironforge.pro/players/Sulfuron/${currentPlayer.name}/`}
+            >
+              <Button variant="contained" color="primary">
+                voir l'équipement
+              </Button>
+            </a>
+          </div>
         </Tabs>
         <MeritsTable hidden={value !== 0} merits={merits} />
         <LootsTable hidden={value !== 1} loots={loots} />

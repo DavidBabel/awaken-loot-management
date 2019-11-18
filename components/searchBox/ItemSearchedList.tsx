@@ -1,11 +1,12 @@
 import {
   List,
   ListItem,
-  ListItemText,
-  ListItemAvatar
+  ListItemAvatar,
+  ListItemText
 } from "@material-ui/core/";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ClassAvatar from "../../components/ClassAvatar";
+import { normalizeText } from "../../lib/utils/string";
 
 interface Props {
   listHeight: string;
@@ -75,7 +76,7 @@ export default function ItemSearchedList({
   const results =
     searched.length !== 0 &&
     items.filter(
-      item => item.name.toLowerCase().indexOf(searched.toLowerCase()) !== -1
+      item => normalizeText(item.name).indexOf(normalizeText(searched)) !== -1
     );
   return (
     <List

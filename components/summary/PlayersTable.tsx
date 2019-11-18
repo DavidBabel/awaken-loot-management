@@ -30,6 +30,18 @@ const StyledTableCell = withStyles((theme: Theme) =>
   })
 )(TableCell);
 
+export interface PlayerTableRowDatas {
+  name: string;
+  merit: number;
+  totalLoot: number;
+  totalLootByLvl: LootsByLvl;
+  totalRaid: number;
+  lastLootDate: string;
+  lastRaidDate: string;
+  playerId: number;
+  playerLoots: any;
+}
+
 interface Props {
   showed: boolean;
   classColor: string;
@@ -253,6 +265,7 @@ export default function PlayersTable(props: Props) {
                 "Total raid",
                 "Last loot",
                 "Last raid",
+                "",
                 ""
               ].map((columnName: ColumnName) => (
                 <StyledTableCell key={columnName} align="center">
@@ -271,10 +284,10 @@ export default function PlayersTable(props: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            <React.Fragment>
-              {rows.map(row => (
+            <>
+              {rows.map((row: PlayerTableRowDatas) => (
                 <PlayerTableRow
-                  key={row.name}
+                  key={`player-table-${row.name}`}
                   rowData={row}
                   classColor={props.classColor}
                   showed={props.showed}
@@ -282,7 +295,7 @@ export default function PlayersTable(props: Props) {
                   openLootWindow={props.openLootWindow}
                 />
               ))}
-            </React.Fragment>
+            </>
           </TableBody>
         </Table>
       </div>
