@@ -136,7 +136,9 @@ export default function PageIndex() {
     item.lootsByItemId.nodes.forEach(loot => {
       if (
         classesWhoLooted.indexOf(loot.playerByPlayerId.classByClassId.name) ===
-        -1
+          -1 &&
+        loot.playerByPlayerId.active &&
+        loot.active
       ) {
         classesWhoLooted.push(loot.playerByPlayerId.classByClassId.name);
       }
@@ -147,7 +149,11 @@ export default function PageIndex() {
         playersWhoLooted: []
       };
       item.lootsByItemId.nodes.forEach(loot => {
-        if (loot.playerByPlayerId.classByClassId.name === classWhoLooted) {
+        if (
+          loot.playerByPlayerId.classByClassId.name === classWhoLooted &&
+          loot.playerByPlayerId.active &&
+          loot.active
+        ) {
           column.playersWhoLooted.push(loot.playerByPlayerId);
         }
       });
