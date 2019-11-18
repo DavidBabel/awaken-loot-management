@@ -83,57 +83,65 @@ export default function ItemSearchedList({
       className={classes.root}
       component="nav"
       dense={true}
-      aria-label="secondary mailbox folder"
+      aria-label="item list"
     >
       {results &&
-        results.map(result => (
-          <ListItem
-            key={result.id}
-            button={true}
-            onClick={() => {
-              setItemCurrentlySelected(result);
-              handleOpenItemInfo(true);
-            }}
-          >
-            <ListItemText
-              className={classes.resultText}
-              primary={
-                <a
-                  onClick={e => {
-                    e.preventDefault();
-                  }}
-                  href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
-                >
-                  {result.name}
-                </a>
-              }
-            />
-            {!result.classByClassId ? (
-              result.classItemsByItemId.nodes.map(playerClass => (
-                <ListItemAvatar
-                  key={playerClass.classByClassId.id + result.name}
-                >
-                  <ClassAvatar
-                    playerClass={playerClass.classByClassId.name}
-                    prio={playerClass.prio}
-                  />
+        results.map(result => {
+          let lootedNb = 0;
+          result.lootsByItemId.nodes.forEach(loot => {
+            if (loot.active && loot.playerByPlayerId.active) {
+              lootedNb++;
+            }
+          });
+          return (
+            <ListItem
+              key={result.id}
+              button={true}
+              onClick={() => {
+                setItemCurrentlySelected(result);
+                handleOpenItemInfo(true);
+              }}
+            >
+              <ListItemText
+                className={classes.resultText}
+                primary={
+                  <a
+                    onClick={e => {
+                      e.preventDefault();
+                    }}
+                    href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
+                  >
+                    {result.name}
+                  </a>
+                }
+              />
+              {!result.classByClassId ? (
+                result.classItemsByItemId.nodes.map(playerClass => (
+                  <ListItemAvatar
+                    key={playerClass.classByClassId.id + result.name}
+                  >
+                    <ClassAvatar
+                      playerClass={playerClass.classByClassId.name}
+                      prio={playerClass.prio}
+                    />
+                  </ListItemAvatar>
+                ))
+              ) : (
+                <ListItemAvatar>
+                  <ClassAvatar playerClass={result.classByClassId.name} />
                 </ListItemAvatar>
-              ))
-            ) : (
-              <ListItemAvatar>
-                <ClassAvatar playerClass={result.classByClassId.name} />
-              </ListItemAvatar>
-            )}
-            <ListItemText
-              className={
-                classes.lootLevel +
-                " " +
-                classes["lootLevel" + result.lootLevel]
-              }
-              primary={result.lootsByItemId.nodes.length}
-            />
-          </ListItem>
-        ))}
+              )}
+              <ListItemText
+                className={
+                  classes.lootLevel +
+                  " " +
+                  classes["lootLevel" + result.lootLevel]
+                }
+                primary={lootedNb}
+              />
+            </ListItem>
+          );
+        })}
     </List>
   );
 }
