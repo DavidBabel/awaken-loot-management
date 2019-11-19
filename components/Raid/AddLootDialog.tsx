@@ -356,9 +356,26 @@ export default function AddLootDialog({
               onChange={handleChangeSelectItem}
             >
               {loots.map(item => {
+                let itemStyle = {
+                  margin: 2,
+                  borderLeft: "4px solid transparent"
+                };
+
+                if (item.itemByItemId.classId) {
+                  const playerColor =
+                    item.itemByItemId.classId === 1
+                      ? "grey"
+                      : item.itemByItemId.classByClassId.color;
+                  itemStyle = {
+                    borderLeft: "solid 4px " + playerColor,
+                    margin: 2
+                  };
+                }
+
                 return (
                   <MenuItem
-                    key={item.itemByItemId.id}
+                    key={`loot-list-${item.itemByItemId.id}`}
+                    style={itemStyle}
                     value={item.itemByItemId.id}
                   >
                     {item.itemByItemId.name}
@@ -424,14 +441,14 @@ export default function AddLootDialog({
                     return restrictedClassIds.indexOf(player.classId) !== -1;
                   })
                   .map((player: Player) => {
+                    const playerColor =
+                      player.classByClassId.id === 1
+                        ? "grey"
+                        : player.classByClassId.color;
                     return (
                       <MenuItem
                         style={{
-                          borderLeft:
-                            "solid 4px " +
-                            (player.classByClassId.id === 1
-                              ? "grey"
-                              : player.classByClassId.color),
+                          borderLeft: "solid 4px " + playerColor,
                           margin: 2
                         }}
                         key={player.id}
