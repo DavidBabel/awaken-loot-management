@@ -16,6 +16,7 @@ async function checkLogin(username, password) {
       .select("*")
       .from("Players")
       .where({
+        active: true,
         name: username
       })
       .first();
@@ -25,7 +26,12 @@ async function checkLogin(username, password) {
     return false;
   }
 
-  if (result.password && password && result.password === password) {
+  if (
+    result.password &&
+    result.password.trim().length > 6 &&
+    password &&
+    result.password === password
+  ) {
     console.log(`Success login : ${result}`);
     return result;
   }
