@@ -771,14 +771,19 @@ VALUES
 -- added after crawl
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Casque du donneur de vie',18870,(SELECT id FROM "Classes" WHERE "name"=''), 3);
+('Casque du donneur de vie',18870,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Liens du Cherchevent',18564,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Liens du Cherchevent',18563,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Lucifron'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
 ((SELECT id FROM "Bosses" WHERE "name"='Gehennas'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
 ((SELECT id FROM "Bosses" WHERE "name"='Shazzrah'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
-((SELECT id FROM "Bosses" WHERE "name"='Sulfuron Harbinger'),(SELECT id FROM "Items" WHERE "wowheadId"=18870));
+((SELECT id FROM "Bosses" WHERE "name"='Sulfuron Harbinger'),(SELECT id FROM "Items" WHERE "wowheadId"=18870)),
+((SELECT id FROM "Bosses" WHERE "name"='Garr'),(SELECT id FROM "Items" WHERE "wowheadId"=18564)),
+((SELECT id FROM "Bosses" WHERE "name"='Baron Geddon'),(SELECT id FROM "Items" WHERE "wowheadId"=18563)),
+((SELECT id FROM "Bosses" WHERE "name"='Ragnaros'),(SELECT id FROM "Items" WHERE "wowheadId"=17204));
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
