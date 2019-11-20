@@ -90,7 +90,7 @@ export default function Pagelogin({ apolloClient }: Props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Connexion
         </Typography>
         <div className={classes.form}>
           <TextField
@@ -155,7 +155,7 @@ export default function Pagelogin({ apolloClient }: Props) {
               })
             }
           >
-            Sign In
+            Se connecter
           </Button>
           <div>{message}</div>
           <Grid container={true}>
@@ -166,7 +166,7 @@ export default function Pagelogin({ apolloClient }: Props) {
             </Grid> */}
             <Grid item={true}>
               <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Pas de compte ? Genère ton mot de passe"}
               </Link>
             </Grid>
           </Grid>

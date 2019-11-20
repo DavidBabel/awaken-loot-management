@@ -60,7 +60,7 @@ export default function Pagelogin({ apolloClient }: Props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Register
+          Générer son lmot de passe
         </Typography>
         <div className={classes.form}>
           Rentre juste un mot de passe :<br />8 caractères minimum
@@ -78,8 +78,8 @@ export default function Pagelogin({ apolloClient }: Props) {
               setPassword(e.target.value)
             }
           />
-          Envoie le hash de ton mot de passe crypté à Devilhunter sur Discord
-          pour qu'il t'ouvre ton accès.
+          Envoie le hash de ton mot de passe crypté à <b>Devilhunter</b> sur
+          Discord pour qu'il t'ouvre ton accès.
           <br />
           C'est indecryptable. Donc ne le perd pas, on ne peut pas le récupérer.
           <TextField
@@ -90,7 +90,9 @@ export default function Pagelogin({ apolloClient }: Props) {
             name="hashpassword"
             autoFocus={true}
             value={
-              password && password.length > 8 ? md5(password + CONFIG.SALT) : ""
+              password && password.length >= 8
+                ? md5(password + CONFIG.SALT)
+                : "Rentrez un mot de passe plus long"
             }
             onChange={() => {}}
           />
@@ -102,7 +104,7 @@ export default function Pagelogin({ apolloClient }: Props) {
             </Grid> */}
             <Grid item={true}>
               <Link href="/login" variant="body2">
-                {"Already have an account ? Sign In"}
+                {"Déjà un compte ? Connecte toi."}
               </Link>
             </Grid>
           </Grid>

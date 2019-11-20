@@ -107,19 +107,19 @@ export function Menu() {
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
             <ListItem button={true} onClick={resetToken}>
-              <ListItemText primary="Disconnect" />
+              <ListItemText primary="Se déconnecter" />
             </ListItem>
           </List>
         </>
       ) : (
         <List>
-          <ListSubheader>Please connect</ListSubheader>
+          <ListSubheader>Connectez vous</ListSubheader>
           <Link href="/login">
             <ListItem
               button={true}
               className={route === "/login" ? classes.selected : ""}
             >
-              <ListItemText primary="Login page" />
+              <ListItemText primary="Se connecter" />
             </ListItem>
           </Link>
         </List>
