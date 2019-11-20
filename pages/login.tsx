@@ -144,8 +144,8 @@ export default function Pagelogin({ apolloClient }: Props) {
                     token: jwtInfos.jwt
                   });
                   // localStorage.setItem('token', jwtInfos.jwt);
-                  setCookie({}, "member", payload, {
-                    maxAge: 30 * 24 * 60 * 60,
+                  setCookie({}, CONFIG.COOKIE_NAME, payload, {
+                    maxAge: CONFIG.COOKIE_LIFE,
                     path: "/"
                   });
                   // tslint:disable-next-line:no-console
