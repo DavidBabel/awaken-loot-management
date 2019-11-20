@@ -33,7 +33,8 @@ CREATE TABLE "Merit" (
   "name" varchar,
   "comment" varchar DEFAULT '',
   "value" int,
-  "active" boolean DEFAULT true
+  "active" boolean DEFAULT true,
+  "classId" int DEFAULT NULL
 );
 comment on table "Merit" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Merit" ("id");
@@ -151,6 +152,7 @@ ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
+ALTER TABLE "Merit" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "ClassItem" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");
 ALTER TABLE "ClassItem" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "Items" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
