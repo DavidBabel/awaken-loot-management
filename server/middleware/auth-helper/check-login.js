@@ -28,8 +28,9 @@ async function checkLogin(username, password) {
 
   if (
     result.password &&
-    result.password.trim().length > 6 &&
+    result.password.trim().length > 0 &&
     password &&
+    password.trim().length > 6 &&
     result.password === password
   ) {
     console.log(`Success login : ${result}`);
