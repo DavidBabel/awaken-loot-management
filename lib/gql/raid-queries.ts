@@ -80,7 +80,7 @@ export const ALL_RAIDS = gql`
             }
           }
         }
-        lootsByRaidId {
+        lootsByRaidId(condition: { active: true }) {
           totalCount
         }
       }
