@@ -103,9 +103,9 @@ const useStyles = makeStyles({
     border: "4px solid",
     zIndex: 1
   },
-  epic: { borderColor: "#a335ee", backgroundColor: "#a335ee" },
-  rare: { borderColor: "#0070dd", backgroundColor: "#0070dd" },
-  commun: { borderColor: "#1ad900", backgroundColor: "#1ad900" },
+  epic: { borderColor: "#a335ee" },
+  rare: { borderColor: "#0070dd" },
+  commun: { borderColor: "#1ad900" },
   allLoot: { borderColor: "grey" }
 });
 export default function LootWindow(props) {
