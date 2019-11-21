@@ -234,7 +234,8 @@ export default function AddLootDialog({
       setPlayerIdToAdd("");
       if (
         !allPlayers.some(
-          (player: Player) => player.name === newPlayerInputValue
+          (player: Player) =>
+            player.name.toLowerCase() === newPlayerInputValue.toLowerCase()
         )
       ) {
         createPlayer({
