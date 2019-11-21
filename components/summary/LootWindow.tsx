@@ -29,6 +29,7 @@ interface Props {
   lootLvl: number | "all";
   iconClientPos: ElementPosition;
   classColor: string;
+  totalRaid: number;
   closeLootWindow(playerName: string, lootLvl: number): any;
 }
 
@@ -86,9 +87,25 @@ const useStyles = makeStyles({
       marginLeft: "5px"
     }
   },
-  epic: { borderColor: "#a335ee" },
-  rare: { borderColor: "#0070dd" },
-  commun: { borderColor: "#1ad900" },
+  wowHeadItem: {
+    position: "relative",
+    "& span:nth-child(1)": { marginLeft: 20 }
+  },
+  pastilleLootLvl: {
+    position: "absolute",
+    width: 12,
+    height: 12,
+    left: "12px",
+    top: 0,
+    bottom: 0,
+    margin: "auto",
+    borderRadius: "50%",
+    border: "4px solid",
+    zIndex: 1
+  },
+  epic: { backgroundColor: "a335ee!important", borderColor: "#a335ee" },
+  rare: { borderColor: "#0070dd!important", backgroundColor: "0070dd" },
+  commun: { borderColor: "#1ad900!important", backgroundColor: "1ad900" },
   allLoot: { borderColor: "grey" }
 });
 export default function LootWindow(props) {
@@ -98,7 +115,8 @@ export default function LootWindow(props) {
     playerName,
     lootLvl,
     iconClientPos,
-    lootData
+    lootData,
+    totalRaid
   } = props;
   const lootWindowElem = React.useRef(null);
   const headerElem = React.useRef(null);
@@ -202,7 +220,7 @@ export default function LootWindow(props) {
             : lootLvl === 3
             ? "Qualité: haute"
             : "Tous les loots"
-        })`}
+        }) - Total Raid: ${totalRaid}`}
         <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
         </div>
@@ -218,9 +236,28 @@ export default function LootWindow(props) {
           <TableBody>
             {lootData.map(loot => (
               <TableRow
-                key={loot.raidByRaidId.date + loot.itemByItemId.wowheadId}
+                key={
+                  "lootedItem" +
+                  loot.raidByRaidId.date +
+                  loot.itemByItemId.wowheadId
+                }
               >
-                <TableCell>
+                <TableCell className={classes.wowHeadItem}>
+                  <div
+                    className={
+                      classes.pastilleLootLvl +
+                      " " +
+                      classes.root +
+                      " " +
+                      (loot.itemByItemId.lootLevel === 1
+                        ? classes.commun
+                        : loot.itemByItemId.lootLevel === 2
+                        ? classes.rare
+                        : loot.itemByItemId.lootLevel === 3
+                        ? classes.epic
+                        : classes.allLoot)
+                    }
+                  />
                   <a
                     onClick={e => {
                       e.preventDefault();

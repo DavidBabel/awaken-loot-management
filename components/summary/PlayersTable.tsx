@@ -127,7 +127,7 @@ export default function PlayersTable(props: Props) {
     const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
       raid => !raid.passed
     ).length;
-    player.playerMeritsByPlayerId.nodes.map(merit => {
+    player.playerMeritsByPlayerId.nodes.forEach(merit => {
       if (merit.validated) {
         maxMerit += merit.meritByMeritId.value;
       }
@@ -150,7 +150,7 @@ export default function PlayersTable(props: Props) {
     } else {
       [...player.raidPlayersByPlayerId.nodes]
         .filter(raid => !raid.passed)
-        .map(raid => {
+        .forEach(raid => {
           const currentRaidDate = new Date(raid.raidByRaidId.date);
           if (currentRaidDate > lastRaidDate) {
             lastRaidDate = currentRaidDate;
@@ -159,20 +159,18 @@ export default function PlayersTable(props: Props) {
     }
 
     let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
-    if (
-      totalLootLevel1 === 0 &&
-      totalLootLevel2 === 0 &&
-      totalLootLevel3 === 0
-    ) {
-      lastLootDate = null;
-    } else {
-      player.lootsByPlayerId.nodes.map(loot => {
+    player.lootsByPlayerId.nodes.forEach(loot => {
+      if (loot.itemByItemId.lootLevel !== 1 && loot.active) {
         const currentLootDate = new Date(loot.raidByRaidId.date);
         if (currentLootDate > lastLootDate) {
           lastLootDate = currentLootDate;
         }
-      });
+      }
+    });
+    if (lastLootDate === new Date("2010-01-01")) {
+      lastLootDate = null;
     }
+
     // const dateOptions = {
     //   year: "numeric",
     //   month: "long",
@@ -267,8 +265,11 @@ export default function PlayersTable(props: Props) {
                 "Last raid",
                 "",
                 ""
-              ].map((columnName: ColumnName) => (
-                <StyledTableCell key={columnName} align="center">
+              ].map((columnName: ColumnName, index: number) => (
+                <StyledTableCell
+                  key={"col" + index + columnName}
+                  align="center"
+                >
                   <Button
                     className={classes.headButton}
                     variant={"text"}

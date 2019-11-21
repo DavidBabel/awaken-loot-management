@@ -159,7 +159,8 @@ export default function PageIndex() {
     lootData: Loot,
     lootLvl: number,
     iconClientPos: ElementPosition,
-    classColor: string
+    classColor: string,
+    totalRaid: number
   ) {
     const nameFound = lootWindows.find(element => {
       // check si la fenetre correspondant à ce name est deja ouverte
@@ -169,7 +170,14 @@ export default function PageIndex() {
       setLootWindows(prevState => {
         return [
           ...prevState,
-          { playerName, lootData, lootLvl, iconClientPos, classColor }
+          {
+            playerName,
+            lootData,
+            lootLvl,
+            iconClientPos,
+            classColor,
+            totalRaid
+          }
         ];
       });
     }
@@ -297,13 +305,14 @@ export default function PageIndex() {
       </TabPanel>
       {lootWindows.map(lootWindow => (
         <LootWindow
-          key={lootWindow.playerName + lootWindow.lootLvl}
+          key={"lootWindow" + lootWindow.playerName + lootWindow.lootLvl}
           playerName={lootWindow.playerName}
           lootData={lootWindow.lootData}
           lootLvl={lootWindow.lootLvl}
           iconClientPos={lootWindow.iconClientPos}
           closeLootWindow={closeLootWindow}
           classColor={lootWindow.classColor}
+          totalRaid={lootWindow.totalRaid}
         />
       ))}
     </div>
