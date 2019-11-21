@@ -24,9 +24,6 @@ export function getDurationBetween(
     Date.parse(date1) - Date.parse(date2) > 0
       ? Date.parse(date1) - Date.parse(date2)
       : Date.parse(date2) - Date.parse(date1);
-  if (durationTimestamp === 0) {
-    return 0;
-  }
   return durationFormat === "D"
     ? Math.floor(durationTimestamp / 1000 / 60 / 24 / 60)
     : durationFormat === "H"
