@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { CircularProgress } from "@material-ui/core";
 import { useState } from "react";
 import { Merit, Mutation } from "../../lib/generatedTypes";
 import {
@@ -29,8 +30,14 @@ export function MeritLine({
   // value,
   // active,
   playerMeritsByMeritId: { nodes },
-  playerId
-}: Merit & { playerId: number }) {
+  playerId,
+  refetchMerits,
+  parentLoading
+}: Merit & {
+  playerId: number;
+  refetchMerits: () => void;
+  parentLoading: boolean;
+}) {
   const merit = nodes[0];
   let meritState: Checkbox3State = EMPTY;
   if (merit) {
@@ -62,12 +69,16 @@ export function MeritLine({
 
   function setUserMerit(nextState: Checkbox3State) {
     if (nextState === EMPTY) {
+      console.log("merit.id");
+      console.log(merit.id);
       deleteMerit({
         variables: {
           id: merit.id
         }
-      });
+      }).then(refetchMerits);
     } else if (nextState === SUBMITTED) {
+      console.log("id => meritId");
+      console.log(id);
       createMerit({
         variables: {
           date: formatDate(new Date()),
@@ -75,18 +86,21 @@ export function MeritLine({
           playerId,
           validated: false
         }
-      });
+      }).then(refetchMerits);
     } else if (nextState === VALIDATED) {
+      console.log("id :");
+      console.log(id);
+      console.log("merit.id :");
+      console.log(merit.id);
       updateMerit({
         variables: {
-          // TODO debug this, the IDs are wrong
-          id,
+          id: merit.id,
           date: formatDate(new Date()),
           meritId: id,
           playerId,
           validated: true
         }
-      });
+      }).then(refetchMerits);
     }
   }
 
@@ -94,19 +108,29 @@ export function MeritLine({
     loadingCreateMerit || loadingUpdateMerit || loadingDeleteMerit;
   const error = errorCreateMerit || errorUpdateMerit || errorDeleteMerit;
 
-  if (loading || error) {
+  if (error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
   return (
-    <div title={merit && getDate(merit.date)}>
-      <Checkbox3
-        onClick={(state: Checkbox3State) => {
-          setUserMerit(state);
-          setState(state);
-        }}
-        state={currentState}
-      />
+    <div title={merit && `ajouté le ${getDate(merit.date)}`}>
+      {id} - {(merit && merit.id) || "X"} -
+      {loading ? (
+        <CircularProgress
+          style={{ margin: 2 }}
+          disableShrink={true}
+          size={20}
+        />
+      ) : (
+        <Checkbox3
+          disabled={loading || parentLoading}
+          onClick={(state: Checkbox3State) => {
+            setUserMerit(state);
+            setState(state);
+          }}
+          state={currentState}
+        />
+      )}
       {name}: {meritState}
     </div>
   );

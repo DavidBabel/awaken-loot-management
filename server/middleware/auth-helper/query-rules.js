@@ -1,22 +1,61 @@
-const { gql } = require("apollo-boost");
+const { ADMIN, CLASS_MASTER, GUEST, OFFICER, PLAYER } = require("./roles");
 
 /**
- *
- * @param {{username: string, playerLevel: string}} user
- * @param {any} parsedRequest // TODO tru to type this
+ * @param {string} role
  */
-function playerItself(user = {}, parsedRequest) {
-  const { username, playerLevel = GUEST } = user;
+function isMoreThanPlayer(role) {
+  return role === ADMIN || role === OFFICER || role === CLASS_MASTER;
+}
 
-  // console.log("username :");
-  // console.log(username);
+/**
+ * @param {{username: string, role: string, userid: number}} user
+ * @param {any} parsedRequest
+ * @param {Object} variables
+ */
+function playerItselfOnly(user = {}, parsedRequest, variables) {
+  const { userid, username, role = GUEST } = user;
 
-  // console.log("parsedRequest :");
-  // console.dir(parsedRequest, { depth: null, colors: true, showHidden: false });
+  if (isMoreThanPlayer(role)) {
+    return true;
+  }
 
-  return true;
+  if (
+    role !== GUEST &&
+    variables &&
+    variables.playerId &&
+    variables.playerId === userid
+  ) {
+    return true;
+  }
+
+  throw new Error(`Awaken: player ${username} can only edit himself`);
+}
+
+/**
+ * @param {{username: string, role: string, userid: number}} user
+ * @param {any} parsedRequest
+ * @param {Object} variables
+ */
+function playerCanOnlyCreateDisabledMerit(user = {}, parsedRequest, variables) {
+  const { userid, username, role = GUEST } = user;
+
+  if (isMoreThanPlayer(role)) {
+    return true;
+  }
+
+  if (
+    role !== GUEST &&
+    variables &&
+    variables.validated &&
+    variables.validated === false
+  ) {
+    return true;
+  }
+
+  throw new Error(`Awaken: player ${username} can only create disabled merits`);
 }
 
 module.exports = {
-  playerItself
+  playerCanOnlyCreateDisabledMerit,
+  playerItselfOnly
 };

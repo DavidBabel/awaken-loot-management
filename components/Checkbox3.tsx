@@ -6,6 +6,7 @@ export type Checkbox3State = 0 | 1 | 2;
 
 interface Props {
   state: Checkbox3State;
+  disabled?: boolean;
   onClick: (state: Checkbox3State) => void;
 }
 
@@ -19,7 +20,7 @@ const GreenCheckbox = withStyles({
   checked: {}
 })(props => <MaterialCheckbox color="default" {...props} />);
 
-export function Checkbox3({ state, onClick }: Props) {
+export function Checkbox3({ disabled = false, state, onClick }: Props) {
   let Checkbox: React.ComponentType<CheckboxProps>;
   switch (state) {
     case 0:
@@ -41,6 +42,7 @@ export function Checkbox3({ state, onClick }: Props) {
 
   return (
     <Checkbox
+      disabled={disabled}
       onClick={() => {
         const nextState = (state + 1) % 3;
         onClick(nextState as Checkbox3State);

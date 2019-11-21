@@ -158,7 +158,7 @@ VALUES
 
 (-25, 'Malus', 'J‘ai mal saisie un mérite et je me suis fait chopper', ''),
 (-10, 'Malus', 'Je suis arriver en retard en raid', ''),
-(-10, 'Malus', 'J‘ai fais wipe le raid', '')
+(-10, 'Malus', 'J‘ai fais wipe le raid', '');
 -- (-10, 'Malus', 'J‘ai fais wipe le raid', ''),
 
 INSERT INTO "Merit" ("value", "classId", "categorie", "name", "comment")
@@ -182,7 +182,7 @@ VALUES
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Druide'),
 'Merite de Classe',
-'Jouer au mouseover', ''),
+'Jouer au mouseover (druide)', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Voleur'),
 'Merite de Classe',
@@ -194,7 +194,7 @@ VALUES
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Chaman'),
 'Merite de Classe',
-'Jouer au mouseover', ''),
+'Jouer au mouseover (chaman)', ''),
 -- (15,
 -- (SELECT id FROM "Classes" WHERE "name"='Chaman'),
 -- 'Merite de Classe',

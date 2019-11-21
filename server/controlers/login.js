@@ -12,6 +12,7 @@ module.exports = async function loginRoute(req, res) {
   if (req.body && account) {
     const payload = {
       role: account.role,
+      userid: account.id,
       username: account.name
     };
     res

@@ -16,10 +16,13 @@ export default function PageEditPlayer() {
 
   // TODO state filter active
 
-  const { loading, data, error } = useQuery<Query, Variables>(PLAYER_MERIT, {
-    variables: { playerId }
-  });
-  if (loading || error) {
+  const { loading, data, error, refetch } = useQuery<Query, Variables>(
+    PLAYER_MERIT,
+    {
+      variables: { playerId }
+    }
+  );
+  if (!data || !data.allMerits || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
@@ -50,12 +53,21 @@ export default function PageEditPlayer() {
           <div key={`${meritCategorieName}`}>
             <Typography gutterBottom={true} variant="h5" /* component="h2" */>
               {meritCategorieName}
+              {/* {loading && (
+                <CircularProgress
+                  style={{ margin: 2 }}
+                  disableShrink={true}
+                  size={24}
+                />
+              )} */}
             </Typography>
             {currentCategorie.map((merit: Merit) => (
               <MeritLine
                 key={`${merit.name}-${merit.categorie}-merit`}
                 {...merit}
                 playerId={playerId}
+                refetchMerits={refetch}
+                parentLoading={loading}
               />
             ))}
           </div>

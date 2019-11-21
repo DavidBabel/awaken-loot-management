@@ -47,7 +47,7 @@ CREATE TABLE "PlayerMerit" (
   "date" varchar,
   "validated" boolean DEFAULT false
 );
-comment on table "PlayerMerit" is E'@omit delete';
+-- comment on table "PlayerMerit" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 
