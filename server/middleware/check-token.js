@@ -15,18 +15,28 @@ module.exports = function(req, res, next) {
     try {
       req.user = jwt.verify(req.headers.authorization, CONFIG.JWT_SECRET);
     } catch (err) {
-      return res.status(401).json({
-        error: {
-          msg: "Failed to authenticate token!"
-        }
-      });
+      return (
+        res
+          // .clearCookie(CONFIG.COOKIE_NAME)
+          .status(401)
+          .json({
+            error: {
+              msg: "Failed to authenticate token!"
+            }
+          })
+      );
     }
   } else {
-    return res.status(401).json({
-      error: {
-        msg: "No token!"
-      }
-    });
+    return (
+      res
+        // .clearCookie(CONFIG.COOKIE_NAME)
+        .status(401)
+        .json({
+          error: {
+            msg: "No token!"
+          }
+        })
+    );
   }
   return next();
 };

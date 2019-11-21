@@ -110,20 +110,34 @@ VALUES
 (03, 'Communauté', 'Avoir le même nom sur le Discord qu‘en jeu', ''),
 (02, 'Communauté', 'Avoir un micro correctement configuré sur Discord', ''),
 
+(05, 'Communauté', 'Est un ancien Awaken (Nostalrius)', ''),
+(05, 'Communauté', 'A rejoint Awaken avant le 27 août (Classic)', ''),
+(05, 'Communauté', 'A rejoint Awaken il y a plus de 3 mois', ''),
+(05, 'Communauté', 'A rejoint Awaken il y a plus de 6 mois', ''),
+(05, 'Communauté', 'A rejoint Awaken il y a plus d‘un an', ''),
+
 (05, 'Communauté', '50 messages sur le forum', ''),
 (05, 'Communauté', '200 messages sur le forum', ''),
 (05, 'Communauté', '500 messages sur le forum', ''),
 
 
-(15, 'Farm Guilde', 'Semaine courante', ''),
-(15, 'Farm Guilde', 'Semaine précédente', ''),
-(15, 'Farm Guilde', 'Semaine antépénultième', ''),
+-- (15, 'Farm Guilde', 'Semaine courante', ''),
+-- (15, 'Farm Guilde', 'Semaine précédente', ''),
+-- (15, 'Farm Guilde', 'Semaine antépénultième', ''),
+
+(07, 'Farm Guilde', 'A fourni un lotus noir à la guilde', ''),
+(07, 'Farm Guilde', 'A fourni plusieurs lotus noir à la guilde', ''),
+
+(07, 'Farm Guilde', 'Est un artisant de la guilde', 'Dépeuceur 315 / TDC Spé / Couture / Forge / Enchantement'),
 
 
 (05, 'Raid', 'Quintessence aquatique', ''),
+(05, 'Raid', 'Toujours une Quintessence aquatique dans le sac', ''),
 
-(10, 'Raid', 'Toujours sous consommables', 'Boss + Trash'),
-(07, 'Raid', 'Sous consommables quand nécessaire', 'A ajouter si "Toujours sous consommables"'),
+(05, 'Raid', 'Possède les addons de raid obligatoires', ''),
+
+(05, 'Raid', 'Toujours sous consommables', 'Boss + Trash'),
+(05, 'Raid', 'Sous consommables quand nécessaire', 'A ajouter si "Toujours sous consommables"'),
 (03, 'Raid', 'La bouffe, c‘est déjà pas mal', ''),
 (03, 'Raid', '300 en bandages', ''),
 
@@ -136,23 +150,62 @@ VALUES
 (10, 'Raid', 'Stuff +140 résistance nature unbuff', ''),
 (10, 'Raid', 'Stuff +140 résistance givre unbuff', ''),
 
-(10, 'Raid', 'Avoir son sac Onyxia', ''),
-
-(15, 'Merite de Classe', 'Démoniste : Avoir 150+ résist ombre unbuff', ''),
-(15, 'Merite de Classe', 'Mage : Avoir le pain rang max', ''),
-(15, 'Merite de Classe', 'Prêtre : Avoir sa suite de fauve', ''),
-(15, 'Merite de Classe', 'Shadow Prêtre : Avoir son anathème enchantée', ''),
-(15, 'Merite de Classe', 'Druide : Jouer au mouseover', ''),
-(15, 'Merite de Classe', 'Voleur : Avoir un stuff 140+ RN unbuff', ''),
-(15, 'Merite de Classe', 'Chasseur : Avoir son arc épique', ''),
-(15, 'Merite de Classe', 'Chaman : Jouer au mouseover', ''),
-(15, 'Merite de Classe', 'Chamélio : Avoir sa Crépuscule', ''),
-(15, 'Merite de Classe', 'Guerrier DD : Avoir un stuff avec 380+ def', ''),
-(15, 'Merite de Classe', 'Guerrier tank : Avoir 200+ RF unbuff', ''),
+(10, 'Raid', 'Avoir un sac Onyxia', ''),
+(5, 'Raid', 'Avoir deux sacs Onyxia', ''),
+(5, 'Raid', 'Avoir trois sacs Onyxia', ''),
+(5, 'Raid', 'Avoir quatres sacs Onyxia', ''),
 
 
 (-25, 'Malus', 'J‘ai mal saisie un mérite et je me suis fait chopper', ''),
 (-10, 'Malus', 'Je suis arriver en retard en raid', ''),
 (-10, 'Malus', 'J‘ai fais wipe le raid', '')
 -- (-10, 'Malus', 'J‘ai fais wipe le raid', ''),
+
+INSERT INTO "Merit" ("value", "classId", "categorie", "name", "comment")
+VALUES
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Démoniste'),
+'Merite de Classe',
+'Avoir 200+ résist ombre unbuff', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Mage'),
+'Merite de Classe',
+'Avoir le pain rang max', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Prêtre'),
+'Merite de Classe',
+'Avoir sa suite de fauve', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Prêtre'),
+'Merite de Classe',
+'Avoir son anathème enchantée', 'Shadow uniquement'),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Druide'),
+'Merite de Classe',
+'Jouer au mouseover', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Voleur'),
+'Merite de Classe',
+'Avoir un stuff 140+ RN unbuff', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Chasseur'),
+'Merite de Classe',
+'Avoir son arc épique', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Chaman'),
+'Merite de Classe',
+'Jouer au mouseover', ''),
+-- (15,
+-- (SELECT id FROM "Classes" WHERE "name"='Chaman'),
+-- 'Merite de Classe',
+-- 'Avoir sa Crépuscule', 'Chaman amélio uniquement'),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Guerrier DPS'),
+'Merite de Classe',
+'Avoir un stuff avec 390+ def', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'),
+'Merite de Classe',
+'Avoir 200+ RF unbuff', '')
+
 ;

@@ -12,11 +12,12 @@ import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { role } from "../../lib/role-level";
+import CONFIG from "../../server/config";
 
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
-  destroyCookie({}, "member");
+  destroyCookie({}, CONFIG.COOKIE_NAME);
   Router.push("/login");
 }
 const useStyles = makeStyles({
