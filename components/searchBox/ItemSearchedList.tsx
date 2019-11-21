@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core/";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ClassAvatar from "../../components/ClassAvatar";
+import { BossItem, Item } from "../../lib/generatedTypes";
 import { normalizeText } from "../../lib/utils/string";
 
 interface Props {
@@ -75,9 +76,21 @@ export default function ItemSearchedList({
   const classes = useStyles({ listHeight });
   const results =
     searched.length !== 0 &&
-    items.filter(
-      item => normalizeText(item.name).indexOf(normalizeText(searched)) !== -1
-    );
+    items.filter((item: Item) => {
+      const search = normalizeText(searched);
+      const itemName = normalizeText(item.name);
+
+      const hasName = itemName.indexOf(search) !== -1;
+
+      const bossesFound = item.bossItemsByItemId.nodes.filter(
+        (bossItem: BossItem) => {
+          const bossName = normalizeText(bossItem.bossByBossId.name);
+          return bossName.indexOf(search) !== -1;
+        }
+      );
+
+      return hasName || bossesFound.length > 0;
+    });
   return (
     <List
       className={classes.root}

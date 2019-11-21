@@ -41,6 +41,13 @@ export const ALL_ITEMS = gql`
           name
           id
         }
+        bossItemsByItemId {
+          nodes {
+            bossByBossId {
+              name
+            }
+          }
+        }
       }
     }
   }
