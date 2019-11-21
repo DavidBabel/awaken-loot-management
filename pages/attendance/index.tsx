@@ -49,8 +49,10 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "& .MuiTableCell-root": {
         border: "solid 1px #212121",
-        position: "relative",
         padding: "5px 5px"
+      },
+      "& .MuiTableCell-body": {
+        position: "relative"
       },
       "& td.MuiTableCell-root:not(.perc-cell)": {
         cursor: "pointer"

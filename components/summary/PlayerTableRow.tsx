@@ -129,7 +129,8 @@ export default function PlayerTableRow({
                       top: iconElem.current.getBoundingClientRect().top,
                       left: iconElem.current.getBoundingClientRect().left
                     },
-                    classColor
+                    classColor,
+                    rowData.totalRaid
                   );
                 }}
                 className={classes.viewIcon + " " + classes.epic}
@@ -163,7 +164,8 @@ export default function PlayerTableRow({
                       top: iconElem.current.getBoundingClientRect().top,
                       left: iconElem.current.getBoundingClientRect().left
                     },
-                    classColor
+                    classColor,
+                    rowData.totalRaid
                   );
                 }}
                 className={classes.viewIcon + " " + classes.rare}
@@ -197,7 +199,8 @@ export default function PlayerTableRow({
                       top: iconElem.current.getBoundingClientRect().top,
                       left: iconElem.current.getBoundingClientRect().left
                     },
-                    classColor
+                    classColor,
+                    rowData.totalRaid
                   );
                 }}
                 className={classes.viewIcon + " " + classes.commun}
@@ -247,7 +250,8 @@ export default function PlayerTableRow({
                       top: iconElem.current.getBoundingClientRect().top,
                       left: iconElem.current.getBoundingClientRect().left
                     },
-                    classColor
+                    classColor,
+                    rowData.totalRaid
                   );
                 }}
                 className={classes.viewIcon + " " + classes.allLootColor}
@@ -282,13 +286,14 @@ export default function PlayerTableRow({
         </Link>
       </StyledTableCell>
       <StyledTableCell align="center" className={classes.link}>
-        <Link href={`https://ironforge.pro/players/Sulfuron/${rowData.name}/`}>
-          <a target="_blank">
-            <Button variant="contained" color="primary">
-              Stuff
-            </Button>
-          </a>
-        </Link>
+        <a
+          target="_blank"
+          href={`https://ironforge.pro/players/Sulfuron/${rowData.name}`}
+        >
+          <Button variant="contained" color="primary">
+            Stuff
+          </Button>
+        </a>
       </StyledTableCell>
     </StyledTableRow>
   );
