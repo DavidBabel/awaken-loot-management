@@ -188,7 +188,7 @@ export default function PageIndex() {
         <TextField
           autoComplete="off"
           id="outlined-item"
-          label="Item"
+          label="Item ou Boss"
           className={classes.textField}
           value={itemInputValue}
           onChange={searchItemInputChange}
