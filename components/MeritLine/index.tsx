@@ -69,16 +69,12 @@ export function MeritLine({
 
   function setUserMerit(nextState: Checkbox3State) {
     if (nextState === EMPTY) {
-      console.log("merit.id");
-      console.log(merit.id);
       deleteMerit({
         variables: {
           id: merit.id
         }
       }).then(refetchMerits);
     } else if (nextState === SUBMITTED) {
-      console.log("id => meritId");
-      console.log(id);
       createMerit({
         variables: {
           date: formatDate(new Date()),
@@ -88,10 +84,6 @@ export function MeritLine({
         }
       }).then(refetchMerits);
     } else if (nextState === VALIDATED) {
-      console.log("id :");
-      console.log(id);
-      console.log("merit.id :");
-      console.log(merit.id);
       updateMerit({
         variables: {
           id: merit.id,
