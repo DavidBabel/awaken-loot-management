@@ -59,7 +59,7 @@ export function Menu() {
                 button={true}
                 className={route === "/items" ? classes.selected : ""}
               >
-                <ListItemText primary="Répartition des Items" />
+                <ListItemText primary="Liste des Items" />
               </ListItem>
             </Link>
           </List>
@@ -72,7 +72,7 @@ export function Menu() {
                 button={true}
                 className={route === "/summary" ? classes.selected : ""}
               >
-                <ListItemText primary="Résumé / loots" />
+                <ListItemText primary="Liste des joueurs" />
               </ListItem>
             </Link>
             <Link href="/attendance">
