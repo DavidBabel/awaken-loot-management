@@ -1,6 +1,6 @@
 import { Checkbox as MaterialCheckbox, withStyles } from "@material-ui/core";
 import { CheckboxProps } from "@material-ui/core/Checkbox";
-import { green } from "@material-ui/core/colors";
+import { green, yellow } from "@material-ui/core/colors";
 
 export type Checkbox3State = 0 | 1 | 2;
 
@@ -20,6 +20,16 @@ const GreenCheckbox = withStyles({
   checked: {}
 })(props => <MaterialCheckbox color="default" {...props} />);
 
+const YellowCheckbox = withStyles({
+  root: {
+    color: yellow[500],
+    "&$checked": {
+      color: yellow[700]
+    }
+  },
+  checked: {}
+})(props => <MaterialCheckbox color="default" {...props} />);
+
 export function Checkbox3({ disabled = false, state, onClick }: Props) {
   let Checkbox: React.ComponentType<CheckboxProps>;
   switch (state) {
@@ -30,7 +40,7 @@ export function Checkbox3({ disabled = false, state, onClick }: Props) {
       break;
     case 1:
       Checkbox = (props: CheckboxProps) => (
-        <MaterialCheckbox checked={true} indeterminate={true} {...props} />
+        <YellowCheckbox checked={true} indeterminate={true} {...props} />
       );
       break;
     case 2:

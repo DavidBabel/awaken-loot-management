@@ -6,9 +6,13 @@ export const PLAYER_MERIT = gql`
       nodes {
         id
         name
+        value
         comment
         categorie
         active
+        classByClassId {
+          name
+        }
         playerMeritsByMeritId(condition: { playerId: $playerId }) {
           nodes {
             id
@@ -33,6 +37,9 @@ export const ALL_MERITS = gql`
           comment
           categorie
           active
+          classByClassId {
+            name
+          }
         }
       }
     }
