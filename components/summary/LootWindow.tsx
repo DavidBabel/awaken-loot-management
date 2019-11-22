@@ -11,6 +11,7 @@ import Link from "next/link";
 import React from "react";
 import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
+import { getDurationBetween } from "../../lib/utils/date";
 
 declare global {
   interface Window {
@@ -79,7 +80,11 @@ const useStyles = makeStyles({
       color: "#bf1313"
     }
   },
+
   raidButtonCell: {
+    "& span": {
+      textTransform: "none"
+    },
     "& a": {
       textDecoration: "none"
     },
@@ -273,8 +278,11 @@ export default function LootWindow(props) {
                     as={`/raid/edit/${loot.raidByRaidId.id}`}
                   >
                     <a target="_blank">
-                      <Button variant="contained" color="primary">
-                        {loot.raidByRaidId.date}
+                      <Button variant="outlined" color="primary">
+                        {`Il y a ${getDurationBetween(
+                          new Date().toString(),
+                          loot.raidByRaidId.date
+                        )} jours`}
                         <VisibilityIcon />
                       </Button>
                     </a>
