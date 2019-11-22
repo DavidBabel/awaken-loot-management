@@ -1,10 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { MeritLine } from "../../../components/MeritLine";
+import MemberContext from "../../../lib/context/member";
 import { Merit, Query } from "../../../lib/generatedTypes";
 import { PLAYER_MERIT } from "../../../lib/gql/merit-queries";
+import { role } from "../../../lib/role-level";
 
 interface Variables {
   playerId: number;
@@ -12,6 +15,7 @@ interface Variables {
 
 export default function PageEditPlayer() {
   const router = useRouter();
+  const member = useContext(MemberContext);
   const playerId = parseInt(String(router.query.playerId));
 
   // TODO state filter active
@@ -44,6 +48,13 @@ export default function PageEditPlayer() {
     },
     {}
   );
+
+  // TODO beautiful that
+  if (member.level <= role.player && member.userid !== playerId) {
+    return (
+      <div>Seul les officiers et les joueurs eux même peuvent s'éditer</div>
+    );
+  }
 
   return (
     <div>

@@ -85,16 +85,38 @@ export function Menu() {
             </Link>
           </List>
 
+          {member.level >= role.player && (
+            <>
+              <Divider />
+              <List>
+                <ListSubheader>Mon compte</ListSubheader>
+
+                <Link href={`/player/edit/${member.userid}`}>
+                  <ListItem
+                    button={true}
+                    className={
+                      route.startsWith("/player/edit") ? classes.selected : ""
+                    }
+                  >
+                    <ListItemText primary="Mon mérite" />
+                  </ListItem>
+                </Link>
+              </List>
+            </>
+          )}
+
           {member.level >= role.admin && (
             <>
               <Divider />
               <List>
                 <ListSubheader>Admin</ListSubheader>
 
-                <Link href="/editplayers">
+                <Link href="/admin/editplayers">
                   <ListItem
                     button={true}
-                    className={route === "/editplayers" ? classes.selected : ""}
+                    className={
+                      route === "/admin/editplayers" ? classes.selected : ""
+                    }
                   >
                     <ListItemText primary="Editer joueurs" />
                   </ListItem>
