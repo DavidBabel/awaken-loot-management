@@ -20,14 +20,16 @@ const useStyles = makeStyles({
   }
 });
 interface Props {
+  children?: React.ReactNode;
   playerClass: string;
   prio?: boolean;
 }
-export default function classAvatar({ playerClass, prio }: Props) {
+export default function classAvatar({ children, playerClass, prio }: Props) {
   const classes = useStyles("");
 
   return (
     <Grid container={true} justify="center" alignItems="center">
+      {children}
       <Avatar
         alt={playerClass + "avatar"}
         src={getClassImageUrl(playerClass)}
