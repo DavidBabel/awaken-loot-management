@@ -59,7 +59,22 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  logo: {
+    width: 44,
+    height: 44,
+    display: "flex",
+    alignItems: "center",
+    // borderRadius: "50%",
+    // border: "2px solid white",
+    // padding: 5,
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
   drawerPaper: {
     position: "relative",
@@ -109,6 +124,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1000000,
     transition: "left 0.2s ease-in-out"
   },
+
   hidden: {
     left: -drawerWidth,
     transition: "left 0.2s ease-in-out"
@@ -166,7 +182,10 @@ export function Dashboard({ children }: Props) {
             noWrap={true}
             className={classes.title}
           >
-            Awaken Loot Management
+            <span>Awaken Loot Management</span>
+            <div className={classes.logo}>
+              <img alt="awaken logo" src="/icon/white_icon.svg" width="100%" />
+            </div>
           </Typography>
           {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
