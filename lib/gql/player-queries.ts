@@ -82,6 +82,7 @@ export const ONE_PLAYER = gql`
       nodes {
         id
         name
+        specialisation
         active
         classByClassId {
           id

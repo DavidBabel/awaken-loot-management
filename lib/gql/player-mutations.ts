@@ -45,3 +45,15 @@ export const UPDATE_PLAYER = gql`
     }
   }
 `;
+
+export const UPDATE_PLAYER_SPE = gql`
+  mutation MyMutation($playerId: Int!, $speLink: String) {
+    updatePlayerById(
+      input: { playerPatch: { specialisation: $speLink }, id: $playerId }
+    ) {
+      player {
+        id
+      }
+    }
+  }
+`;

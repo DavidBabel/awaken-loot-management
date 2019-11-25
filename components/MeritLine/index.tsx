@@ -31,7 +31,7 @@ interface Props extends Merit {
 
 export function MeritLine({
   id, // id of merit
-  // categorie,
+  categorie,
   name,
   comment,
   value,
@@ -154,8 +154,10 @@ export function MeritLine({
                   state={currentState}
                 />
               )}
-              {classByClassId && <b>{classByClassId.name}:</b>} {name} ({value}{" "}
-              pts) {comment && "*"} {debug && `: ${meritState}`}
+              <b>
+                {classByClassId && `${classByClassId.name} →`} {categorie} :
+              </b>{" "}
+              {name} ({value} pts) {comment && "*"} {debug && `: ${meritState}`}
             </span>
           </Tooltip>
         </span>

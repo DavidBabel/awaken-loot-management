@@ -23,7 +23,7 @@ import TextField from "@material-ui/core/TextField";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Link from "next/link";
-import React, { ReactNode, useContext } from "react";
+import React, { ReactNode, useContext, useEffect } from "react";
 import ItemsCarousel from "react-items-carousel";
 import uuidv4 from "uuid/v4";
 import ClassAvatar from "../../components/ClassAvatar";
@@ -42,6 +42,7 @@ import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
 import { byDate } from "../../lib/utils/sorter";
+import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
   interface Window {
@@ -195,13 +196,7 @@ export default function PageIndex() {
     setLoadingRender(false);
   }, []);
   React.useEffect(() => {
-    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
-      try {
-        setTimeout(() => {
-          window.$WowheadPower.refreshLinks();
-        }, 150);
-      } catch (e) {}
-    }
+    setTimeout(refreshWowhead, 150);
   }, [itemCurrentlySelected, itemInputValue]);
   const [updateRaidLink] = useMutation<Mutation, UpdateRaidLinkVariables>(
     UPDATE_RAID_LINK

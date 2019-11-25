@@ -101,6 +101,18 @@ export function Menu() {
                     <ListItemText primary="Mon mérite" />
                   </ListItem>
                 </Link>
+                <Link href={`/player/specialisation/${member.userid}`}>
+                  <ListItem
+                    button={true}
+                    className={
+                      route.startsWith("/player/specialisation")
+                        ? classes.selected
+                        : ""
+                    }
+                  >
+                    <ListItemText primary="Ma spécialisation" />
+                  </ListItem>
+                </Link>
               </List>
             </>
           )}

@@ -134,10 +134,6 @@ VALUES
 (true, 05, 'Communauté', '1000 messages sur le forum', ''),
 
 
--- (true, 15, 'Farm Guilde', 'Semaine courante', ''),
--- (true, 15, 'Farm Guilde', 'Semaine précédente', ''),
--- (true, 15, 'Farm Guilde', 'Semaine antépénultième', ''),
-
 (true, 07, 'Farm Guilde', 'A fourni un lotus noir à la guilde', ''),
 (true, 07, 'Farm Guilde', 'A fourni plusieurs lotus noir à la guilde', ''),
 
@@ -182,45 +178,49 @@ VALUES
 INSERT INTO "Merit" ("value", "classId", "categorie", "name", "comment")
 VALUES
 (15,
-(SELECT id FROM "Classes" WHERE "name"='Démoniste'),
-'Merite de Classe - Epique',
-'Avoir 200+ résist ombre unbuff', ''),
-(15,
 (SELECT id FROM "Classes" WHERE "name"='Mage'),
 'Merite de Classe',
 'Avoir le pain et l‘eau rang max', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Mage'),
+'Merite de Classe',
+'Avoir son pipot de bruyère', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Prêtre'),
+'Merite de Classe',
+'Avoir sa bénédiction / Anathème enchantée', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Prêtre'),
 'Merite de Classe',
 'Avoir sa suite de fauve', ''),
 (15,
-(SELECT id FROM "Classes" WHERE "name"='Prêtre'),
+(SELECT id FROM "Classes" WHERE "name"='Druide'),
 'Merite de Classe',
-'Avoir son anathème enchantée', 'Shadow uniquement'),
+'Jouer au mouseover', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Druide'),
 'Merite de Classe',
-'Jouer au mouseover (druide)', ''),
+'Avoir sa suite de fauve', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Voleur'),
 'Merite de Classe',
 'Avoir un stuff 140+ RN unbuff', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Voleur'),
+'Merite de Classe',
+'Avoir un stuff 140+ RF unbuff', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Chasseur'),
 'Merite de Classe',
 'Avoir son arc épique', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Chasseur'),
-'Merite de Classe - Epique',
-'Solote Hache trippe', ''),
-(15,
-(SELECT id FROM "Classes" WHERE "name"='Chasseur'),
-'Merite de Classe - Légendaire',
-'Solote Hache trippe', ''),
+'Merite de Classe',
+'Avoir un stuff 140+ RN unbuff', ''),
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Chaman'),
 'Merite de Classe',
-'Jouer au mouseover (chaman)', ''),
+'Jouer au mouseover', ''),
 -- (15,
 -- (SELECT id FROM "Classes" WHERE "name"='Chaman'),
 -- 'Merite de Classe',
@@ -232,10 +232,29 @@ VALUES
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'),
 'Merite de Classe',
-'Avoir 200+ RF unbuff', ''),
+'Avoir 230+ RF unbuff', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'),
+'Merite de Classe',
+'Avoir un stuff avec 420+ def', '')
+;
+
+INSERT INTO "Merit" ("value", "classId", "categorie", "name", "comment")
+VALUES
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Démoniste'),
+'Merite de Classe - Epique',
+'Avoir 200+ résist ombre unbuff', ''),
+(15,
+(SELECT id FROM "Classes" WHERE "name"='Chasseur'),
+'Merite de Classe - Epique',
+'Solote Hache trippe', '')
+;
+
+INSERT INTO "Merit" ("value", "classId", "categorie", "name", "comment")
+VALUES
 (15,
 (SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'),
 'Merite de Classe - Légendaire',
-'Avoir 200+ RF unbuff', '')
-
+'Avoir sa Thunderfury', '')
 ;

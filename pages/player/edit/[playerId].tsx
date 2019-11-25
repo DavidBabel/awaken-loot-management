@@ -148,6 +148,11 @@ export default function PageEditPlayer() {
           })}
         </div>
         <style jsx>{`
+          @media (max-width: 1024px) {
+            .fastMenu {
+              display: none;
+            }
+          }
           .fastMenu {
             cursor: pointer;
             position: fixed;

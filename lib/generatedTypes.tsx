@@ -1240,6 +1240,7 @@ export type Player = Node & {
   password?: Maybe<Scalars["String"]>;
   active?: Maybe<Scalars["Boolean"]>;
   inRoster?: Maybe<Scalars["Boolean"]>;
+  specialisation?: Maybe<Scalars["String"]>;
   /** Reads a single `Class` that is related to this `Player`. */
   classByClassId?: Maybe<Class>;
   /** Reads and enables pagination through a set of `PlayerMerit`. */
@@ -1296,6 +1297,8 @@ export type PlayerCondition = {
   active?: Maybe<Scalars["Boolean"]>;
   /** Checks for equality with the object’s `inRoster` field. */
   inRoster?: Maybe<Scalars["Boolean"]>;
+  /** Checks for equality with the object’s `specialisation` field. */
+  specialisation?: Maybe<Scalars["String"]>;
 };
 
 /** An input for mutations affecting `Player` */
@@ -1307,6 +1310,7 @@ export type PlayerInput = {
   password?: Maybe<Scalars["String"]>;
   active?: Maybe<Scalars["Boolean"]>;
   inRoster?: Maybe<Scalars["Boolean"]>;
+  specialisation?: Maybe<Scalars["String"]>;
 };
 
 export type PlayerMerit = Node & {
@@ -1407,6 +1411,7 @@ export type PlayerPatch = {
   password?: Maybe<Scalars["String"]>;
   active?: Maybe<Scalars["Boolean"]>;
   inRoster?: Maybe<Scalars["Boolean"]>;
+  specialisation?: Maybe<Scalars["String"]>;
 };
 
 /** A connection to a list of `Player` values. */
@@ -1448,6 +1453,8 @@ export enum PlayersOrderBy {
   ActiveDesc = "ACTIVE_DESC",
   InRosterAsc = "IN_ROSTER_ASC",
   InRosterDesc = "IN_ROSTER_DESC",
+  SpecialisationAsc = "SPECIALISATION_ASC",
+  SpecialisationDesc = "SPECIALISATION_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
