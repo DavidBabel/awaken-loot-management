@@ -48,10 +48,12 @@ interface CreatePlayerVariables {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dialog: {
-      "& .MuiDialog-paperWidthLg": {
-        maxWidth: "1000px",
-        width: "100%",
-        margin: 0
+      [theme.breakpoints.down("sm")]: {
+        "& .MuiDialog-paperWidthLg": {
+          maxWidth: "1000px",
+          width: "100%",
+          margin: 0
+        }
       }
     },
     lootInfoSelects: {

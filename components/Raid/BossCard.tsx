@@ -273,6 +273,7 @@ export function BossCard({
                   <ListItem
                     className={
                       classes.lootRow +
+                      " " +
                       (loot.lastActionType === "delete"
                         ? classes.lootDeleted
                         : "")
