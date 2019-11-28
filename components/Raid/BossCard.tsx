@@ -49,7 +49,7 @@ interface UpdateLootVariables {
   lastActionDate: string;
   actionType: string;
 }
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
     position: "relative",
     width: 500,
@@ -57,6 +57,9 @@ const useStyles = makeStyles({
     margin: "10px",
     backgroundColor: "white",
     paddingBottom: "40px",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "10px"
+    },
     boxShadow: "0 0 20px 0 rgba(0,0,0,0.35)"
   },
   header: {
@@ -75,13 +78,20 @@ const useStyles = makeStyles({
   cardContent: {
     maxHeight: 300,
     height: "auto",
-    overflow: "auto"
+    overflow: "auto",
+    [theme.breakpoints.down("sm")]: {
+      padding: "10px 0px",
+      maxHeight: 320
+    }
   },
   cardActions: {
     position: "absolute",
     bottom: 0,
     right: 10,
     margin: "auto"
+  },
+  lootRow: {
+    [theme.breakpoints.down("sm")]: {}
   },
   itemCell: {
     width: 240,
@@ -120,7 +130,7 @@ const useStyles = makeStyles({
   lootDeleted: {
     backgroundColor: "rgba(0,0,0,0.2)"
   }
-});
+}));
 
 export function BossCard({
   id,
@@ -262,9 +272,10 @@ export function BossCard({
                 >
                   <ListItem
                     className={
-                      loot.lastActionType === "delete"
+                      classes.lootRow +
+                      (loot.lastActionType === "delete"
                         ? classes.lootDeleted
-                        : ""
+                        : "")
                     }
                     divider={true}
                     role={undefined}

@@ -47,6 +47,13 @@ interface CreatePlayerVariables {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    dialog: {
+      "& .MuiDialog-paperWidthLg": {
+        maxWidth: "1000px",
+        width: "100%",
+        margin: 0
+      }
+    },
     lootInfoSelects: {
       display: "flex",
       justifyContent: "space-between",
@@ -64,7 +71,14 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: "24px",
       height: "34px",
       padding: 5,
-      alignSelf: "flex-start"
+      alignSelf: "flex-start",
+
+      [theme.breakpoints.down("sm")]: {
+        "& *": {
+          fontSize: 10,
+          lineHeight: "12px"
+        }
+      }
     },
     fleche: {
       margin: "0px 15px",
@@ -85,6 +99,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       width: "100%"
     },
+
     dialogActions: {
       marginTop: 10
     },
@@ -332,6 +347,7 @@ export default function AddLootDialog({
         <AddIcon />
       </Fab>
       <Dialog
+        className={classes.dialog}
         maxWidth={"lg"}
         open={open}
         keepMounted={true}

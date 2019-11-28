@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
     height: "calc(100vh - 105px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 20px)"
+    },
     backgroundColor: theme.palette.background.paper,
     "& .MuiTabs-indicator": {
       height: "3px"
@@ -72,6 +75,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& .Mui-selected": {
       backgroundColor: "#d2d4d6",
       color: "black"
+    },
+    [theme.breakpoints.down("sm")]: {
+      "& .MuiBox-root": {
+        padding: 5
+      }
     }
   },
   tab: {
@@ -111,6 +119,9 @@ export default function PageIndex() {
   const classes = useStyles("");
   const [value, setValue] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState([]);
+  const [onMobile, setOnMobile] = React.useState(
+    typeof window === "undefined" ? false : window.innerWidth < 900
+  );
   const {
     loading: loadingPlayers,
     data: dataPlayers,
@@ -124,7 +135,20 @@ export default function PageIndex() {
 
   const loading = loadingPlayers || loadingAllMerits;
   const error = errorPlayers || errorAllMerits;
-
+  function handleResize() {
+    if (window) {
+      if (window.innerWidth < 900 && !onMobile) {
+        setOnMobile(true);
+      } else if (window.innerWidth >= 900 && onMobile) {
+        setOnMobile(false);
+      }
+    }
+  }
+  React.useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
@@ -195,6 +219,7 @@ export default function PageIndex() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
+
   return (
     <div className={`${classes.root} ${classes["indicator_" + value]}`}>
       <AppBar position="static" color="default">
@@ -313,6 +338,7 @@ export default function PageIndex() {
           closeLootWindow={closeLootWindow}
           classColor={lootWindow.classColor}
           totalRaid={lootWindow.totalRaid}
+          onMobile={onMobile}
         />
       ))}
     </div>

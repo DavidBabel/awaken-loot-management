@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   }
 });
 
-export function Menu() {
+export function Menu({ handleDrawerClose }) {
   const classes = useStyles("");
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
@@ -43,6 +43,7 @@ export function Menu() {
             <Link href="/raid">
               <ListItem
                 button={true}
+                onClick={handleDrawerClose}
                 className={
                   route
                     ? route === "/raid"
@@ -57,6 +58,7 @@ export function Menu() {
             <Link href="/items">
               <ListItem
                 button={true}
+                onClick={handleDrawerClose}
                 className={route === "/items" ? classes.selected : ""}
               >
                 <ListItemText primary="Liste des Items" />
@@ -70,6 +72,7 @@ export function Menu() {
             <Link href="/summary">
               <ListItem
                 button={true}
+                onClick={handleDrawerClose}
                 className={route === "/summary" ? classes.selected : ""}
               >
                 <ListItemText primary="Liste des joueurs" />
@@ -78,6 +81,7 @@ export function Menu() {
             <Link href="/attendance">
               <ListItem
                 button={true}
+                onClick={handleDrawerClose}
                 className={route === "/attendance" ? classes.selected : ""}
               >
                 <ListItemText primary="Présence en raid" />
@@ -94,6 +98,7 @@ export function Menu() {
                 <Link href="/editplayers">
                   <ListItem
                     button={true}
+                    onClick={handleDrawerClose}
                     className={route === "/editplayers" ? classes.selected : ""}
                   >
                     <ListItemText primary="Editer joueurs" />
@@ -107,7 +112,13 @@ export function Menu() {
 
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
-            <ListItem button={true} onClick={resetToken}>
+            <ListItem
+              button={true}
+              onClick={() => {
+                resetToken();
+                handleDrawerClose();
+              }}
+            >
               <ListItemText primary="Se déconnecter" />
             </ListItem>
           </List>
@@ -118,6 +129,7 @@ export function Menu() {
           <Link href="/login">
             <ListItem
               button={true}
+              onClick={handleDrawerClose}
               className={route === "/login" ? classes.selected : ""}
             >
               <ListItemText primary="Se connecter" />

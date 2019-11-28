@@ -36,7 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       padding: "10px 0",
       marginBottom: 35,
-      position: "relative"
+      position: "relative",
+      textAlign: "center",
+      [theme.breakpoints.down("sm")]: {
+        marginBottom: 45,
+        width: "100%"
+      }
     },
     raidTitle: {
       fontSize: 22,
@@ -70,13 +75,29 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       top: "20px",
       left: "-180px",
-      zIndex: 4
+      zIndex: 4,
+      [theme.breakpoints.down("sm")]: {
+        "& .MuiButtonBase-root ": { width: "120px", padding: 4 },
+        "& *": {
+          fontSize: 12
+        },
+        top: "70px",
+        left: "5px"
+      }
     },
     nextBtn: {
       position: "absolute",
       top: "20px",
       right: "-160px",
-      zIndex: 4
+      zIndex: 4,
+      [theme.breakpoints.down("sm")]: {
+        "& .MuiButtonBase-root ": { width: "120px", padding: 4 },
+        "& *": {
+          fontSize: 12
+        },
+        top: "70px",
+        right: "5px"
+      }
     },
     showDeleted: {
       position: "absolute",
@@ -180,17 +201,13 @@ export default function PageRaidView() {
               className={classes.previousBtn}
               style={{ textDecoration: "none" }}
             >
-              <Button variant="outlined" color="primary">
-                Raid précedent
-              </Button>
+              <Button variant="contained">Raid précedent</Button>
             </a>
           </Link>
         )}
         <Link href="/raid/edit/[id]" as={`/raid/edit/${currentRaid.id + 1}`}>
           <a className={classes.nextBtn} style={{ textDecoration: "none" }}>
-            <Button variant="outlined" color="primary">
-              Raid suivant
-            </Button>
+            <Button variant="contained">Raid suivant</Button>
           </a>
         </Link>
       </Paper>
