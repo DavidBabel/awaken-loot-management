@@ -69,9 +69,6 @@ const useStyles = makeStyles(theme => ({
     height: 44,
     display: "flex",
     alignItems: "center",
-    // borderRadius: "50%",
-    // border: "2px solid white",
-    // padding: 5,
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
@@ -91,10 +88,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: 0,
-    [theme.breakpoints.up("sm")]: {
-      width: 0
-    }
+    width: 0
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -104,7 +98,15 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
+  },
+  grid: {
+    width: "100%",
+    margin: 0
   },
   paper: {
     padding: theme.spacing(2),
@@ -137,7 +139,7 @@ interface Props {
 
 export function Dashboard({ children }: Props) {
   const classes = useStyles({});
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -195,11 +197,11 @@ export function Dashboard({ children }: Props) {
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
         open={open}
+        onClose={handleDrawerClose}
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
@@ -207,7 +209,7 @@ export function Dashboard({ children }: Props) {
           </IconButton>
         </div>
         <Divider />
-        <Menu />
+        <Menu handleDrawerClose={handleDrawerClose} />
         {/* <List>{mainListItems}</List> */}
         {/* <Divider /> */}
         {/* <List>{secondaryListItems}</List> */}
@@ -215,7 +217,7 @@ export function Dashboard({ children }: Props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container={true} spacing={3}>
+          <Grid container={true} spacing={3} className={classes.grid}>
             {children}
           </Grid>
         </Container>

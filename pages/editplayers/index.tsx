@@ -17,11 +17,19 @@ import { Query } from "../../lib/generatedTypes";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { byAlphabet } from "../../lib/utils/sorter";
 
-const useStyles = makeStyles({
-  root: { width: "100%" },
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 8
+    }
+  },
   paper: {
     width: "100%",
     maxHeight: "calc(100vh - 160px)",
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: "calc(100vh - 110px)"
+    },
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "rgba(0,0,0,0.6)",
@@ -31,18 +39,33 @@ const useStyles = makeStyles({
       boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
     },
     "&::-webkit-scrollbar": {
-      width: "10px"
+      width: "10px",
+      height: "10px",
+      [theme.breakpoints.down("sm")]: {
+        width: "5px",
+        height: "5px"
+      }
     }
   },
   addPlayerBtn: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15
+    marginBottom: 15,
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: 8
+    }
   },
   table: {
     "& .MuiTableCell-head": { backgroundColor: "#4d4d4d", color: "white" },
-    "& .MuiTableCell-root:not(.MuiTableCell-head)": { position: "relative" },
+    "& .MuiTableCell-root:not(.MuiTableCell-head)": {
+      position: "relative"
+    },
+    "& .MuiTableCell-root": {
+      [theme.breakpoints.down("sm")]: {
+        padding: "0px 10px"
+      }
+    },
     "& .MuiTableRow-root:nth-child(even)": {
       backgroundColor: "rgba(0,0,0,0.05)"
     }
@@ -56,7 +79,7 @@ const useStyles = makeStyles({
     justifyContent: "flex-end",
     lineHeight: "48px"
   }
-});
+}));
 
 export default function PageIndex() {
   const classes = useStyles("");

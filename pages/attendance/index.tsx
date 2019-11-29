@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      height: "calc(100vh - 160px)"
+      height: "calc(100vh - 160px)",
+      [theme.breakpoints.down("sm")]: {
+        height: "calc(100vh - 56px)"
+      }
     },
     tableWrapper: {
       position: "relative",
@@ -37,15 +40,24 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "&::-webkit-scrollbar": {
         width: "10px",
-        height: "10px"
+        height: "10px",
+        [theme.breakpoints.down("sm")]: {
+          width: "5px",
+          height: "5px"
+        }
       }
     },
     table: {
+      "& *": {
+        [theme.breakpoints.down("sm")]: {
+          fontSize: 12
+        }
+      },
       minWidth: 650,
       "& .MuiTableCell-head": {
         backgroundColor: "#242424",
         color: "white",
-        minWidth: 60
+        minWidth: 20
       },
       "& .MuiTableCell-root": {
         border: "solid 1px #212121",
@@ -55,7 +67,8 @@ const useStyles = makeStyles((theme: Theme) =>
         position: "relative"
       },
       "& td.MuiTableCell-root:not(.perc-cell)": {
-        cursor: "pointer"
+        cursor: "pointer",
+        padding: 0
       },
       "& .MuiTableCell-root:hover .MuiSvgIcon-root": {
         visibility: "visible",
@@ -81,6 +94,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     legende: {
       display: "flex",
+      [theme.breakpoints.down("sm")]: {
+        display: "none"
+      },
       alignItems: "center",
       justifyContent: "center",
       flexWrap: "wrap",
@@ -103,6 +119,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     attPercentage: {
       minWidth: 60,
+      [theme.breakpoints.down("sm")]: {
+        minWidth: 46
+      },
       backgroundColor: "#242424",
       color: "white"
     },
