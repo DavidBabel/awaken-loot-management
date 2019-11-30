@@ -11,9 +11,9 @@ import Router, { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { role } from "../../lib/role-level";
 import CONFIG from "../../server/config";
-
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
@@ -34,6 +34,7 @@ export function Menu({ handleDrawerClose }) {
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
   const { route } = useRouter();
+  const onMobile = useOnMobile();
   return (
     <div>
       {isConnected ? (
@@ -43,7 +44,9 @@ export function Menu({ handleDrawerClose }) {
             <Link href="/raid">
               <ListItem
                 button={true}
-                onClick={handleDrawerClose}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={
                   route
                     ? route === "/raid"
@@ -58,7 +61,9 @@ export function Menu({ handleDrawerClose }) {
             <Link href="/items">
               <ListItem
                 button={true}
-                onClick={handleDrawerClose}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/items" ? classes.selected : ""}
               >
                 <ListItemText primary="Liste des Items" />
@@ -72,7 +77,9 @@ export function Menu({ handleDrawerClose }) {
             <Link href="/summary">
               <ListItem
                 button={true}
-                onClick={handleDrawerClose}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/summary" ? classes.selected : ""}
               >
                 <ListItemText primary="Liste des joueurs" />
@@ -81,7 +88,9 @@ export function Menu({ handleDrawerClose }) {
             <Link href="/attendance">
               <ListItem
                 button={true}
-                onClick={handleDrawerClose}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/attendance" ? classes.selected : ""}
               >
                 <ListItemText primary="Présence en raid" />
@@ -98,7 +107,9 @@ export function Menu({ handleDrawerClose }) {
                 <Link href="/editplayers">
                   <ListItem
                     button={true}
-                    onClick={handleDrawerClose}
+                    onClick={() => {
+                      handleDrawerClose(onMobile);
+                    }}
                     className={route === "/editplayers" ? classes.selected : ""}
                   >
                     <ListItemText primary="Editer joueurs" />
@@ -116,7 +127,7 @@ export function Menu({ handleDrawerClose }) {
               button={true}
               onClick={() => {
                 resetToken();
-                handleDrawerClose();
+                handleDrawerClose(onMobile);
               }}
             >
               <ListItemText primary="Se déconnecter" />
@@ -129,7 +140,9 @@ export function Menu({ handleDrawerClose }) {
           <Link href="/login">
             <ListItem
               button={true}
-              onClick={handleDrawerClose}
+              onClick={() => {
+                handleDrawerClose(onMobile);
+              }}
               className={route === "/login" ? classes.selected : ""}
             >
               <ListItemText primary="Se connecter" />

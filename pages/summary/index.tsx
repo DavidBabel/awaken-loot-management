@@ -14,6 +14,7 @@ import { Query } from "../../lib/generatedTypes";
 import { Loot } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -119,9 +120,7 @@ export default function PageIndex() {
   const classes = useStyles("");
   const [value, setValue] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState([]);
-  const [onMobile, setOnMobile] = React.useState(
-    typeof window === "undefined" ? false : window.innerWidth < 900
-  );
+  const onMobile = useOnMobile();
   const {
     loading: loadingPlayers,
     data: dataPlayers,
@@ -135,20 +134,7 @@ export default function PageIndex() {
 
   const loading = loadingPlayers || loadingAllMerits;
   const error = errorPlayers || errorAllMerits;
-  function handleResize() {
-    if (window) {
-      if (window.innerWidth < 900 && !onMobile) {
-        setOnMobile(true);
-      } else if (window.innerWidth >= 900 && onMobile) {
-        setOnMobile(false);
-      }
-    }
-  }
-  React.useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  });
+
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }

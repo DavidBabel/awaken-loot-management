@@ -21,6 +21,8 @@ import React from "react";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
 
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -139,12 +141,15 @@ interface Props {
 
 export function Dashboard({ children }: Props) {
   const classes = useStyles({});
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const onMobile = useOnMobile();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerClose = clickFromMobile => {
+    if (clickFromMobile === undefined || clickFromMobile) {
+      setOpen(false);
+    }
   };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -201,6 +206,7 @@ export function Dashboard({ children }: Props) {
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
         open={open}
+        variant={onMobile ? "temporary" : "permanent"}
         onClose={handleDrawerClose}
       >
         <div className={classes.toolbarIcon}>
