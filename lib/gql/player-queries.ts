@@ -124,6 +124,7 @@ export const ONE_PLAYER = gql`
             raidId
             raidByRaidId {
               id
+              active
               date
               donjonId
               donjonByDonjonId {

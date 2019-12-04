@@ -16,7 +16,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect } from "react";
 // import { getCurrentYear } from "../../lib/utils/date";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
@@ -141,7 +141,7 @@ interface Props {
 
 export function Dashboard({ children }: Props) {
   const classes = useStyles({});
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const onMobile = useOnMobile();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -152,7 +152,11 @@ export function Dashboard({ children }: Props) {
     }
   };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+  useEffect(() => {
+    if (!onMobile) {
+      setOpen(true);
+    }
+  }, [onMobile]);
   if (
     global.hasOwnProperty("window") &&
     window &&

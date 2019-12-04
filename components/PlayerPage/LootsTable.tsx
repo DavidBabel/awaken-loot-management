@@ -22,13 +22,26 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: "100%",
       marginTop: theme.spacing(3),
-      overflowX: "auto"
+      overflowX: "auto",
+      [theme.breakpoints.down("sm")]: {
+        "& *": { fontSize: 12 },
+        "& span": {
+          whiteSpace: "nowrap"
+        },
+        "& a": {
+          display: "flex",
+          alignItems: "center"
+        }
+      }
     },
     hidden: {
       display: "none"
     },
     tableWrapper: {
       maxHeight: "calc(100vh - 300px)",
+      [theme.breakpoints.down("sm")]: {
+        maxHeight: "calc(100vh - 240px)"
+      },
       overflow: "auto",
       "& a": {
         textDecoration: "none"
@@ -38,9 +51,15 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     table: {
-      minWidth: 650
+      minWidth: 350
     },
-    link: { "& a": { textDecoration: "none", color: "white" } }
+    link: {
+      "& a": { textDecoration: "none", color: "white" },
+      "& button": {
+        fontSize: 12,
+        whiteSpace: "nowrap"
+      }
+    }
   })
 );
 
@@ -92,7 +111,7 @@ export default function LootsTable({ loots, hidden }: Props) {
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <div className={classes.tableWrapper}>
-        <Table className={classes.table} stickyHeader={true}>
+        <Table className={classes.table} stickyHeader={true} size="small">
           <TableHead>
             <TableRow>
               <TableCell>Loot</TableCell>
