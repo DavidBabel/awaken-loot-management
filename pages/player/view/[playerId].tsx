@@ -14,26 +14,43 @@ import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 import { Query } from "../../../lib/generatedTypes";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "calc(100vh - 140px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 60px)"
+    },
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
     margin: "0px auto"
   },
-  tabs: {
+  tabsAndContent: {
     width: "80%",
+    [theme.breakpoints.down("sm")]: {
+      width: "95%"
+    },
     flexGrow: 0,
     height: "48px",
     margin: "10px auto"
   },
+  tabs: {
+    "& .MuiTabs-flexContainer": {
+      alignItems: "center!important" as "alignItems"
+    },
+    "& *": { fontSize: 12 }
+  },
   nickname: {
     fontSize: "18px",
     fontWeight: "bold"
+  },
+  stuffBtn: {
+    "& a": {
+      textDecoration: "none"
+    }
   }
-});
+}));
 interface Variables {
   playerId: number;
 }
@@ -62,28 +79,32 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
   const raids = currentPlayer.raidPlayersByPlayerId.nodes;
   const merits = currentPlayer.playerMeritsByPlayerId.nodes;
 
+  const lootNb = loots.filter(loot => loot.active).length;
+  const raidNb = raids.filter(raid => raid.raidByRaidId.active).length;
+  const meritNb = merits.filter(merit => merit.meritByMeritId.active).length;
+
   return (
     <div className={classes.root}>
       <ClassAvatar playerClass={currentPlayer.classByClassId.name} />
       <span className={classes.nickname}>{currentPlayer.name}</span>
-      <Paper className={classes.tabs}>
+      <Paper className={classes.tabsAndContent}>
         <Tabs
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
-          textColor="primary"
           centered={true}
+          className={classes.tabs}
         >
-          <Tab label="Merits" />
-          <Tab label="Loots" />
-          <Tab label="Raids" />
-          <div style={{ marginTop: 6 }}>
+          <Tab label={`Merits(${meritNb})`} />
+          <Tab label={`Loots(${lootNb})`} />
+          <Tab label={`Raids(${raidNb})`} />
+          <div className={classes.stuffBtn}>
             <a
               target="_blank"
               href={`https://ironforge.pro/players/Sulfuron/${currentPlayer.name}/`}
             >
               <Button variant="contained" color="primary">
-                voir l'équipement
+                STUFF
               </Button>
             </a>
           </div>
