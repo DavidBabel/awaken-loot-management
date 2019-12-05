@@ -55,10 +55,13 @@ interface LootsByLvl {
   level2: number;
   level3: number;
 }
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "100%",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 130px)"
+    },
     marginTop: "10px",
     overflowX: "auto",
     "& .MuiTableCell-head": {
@@ -68,6 +71,9 @@ const useStyles = makeStyles({
   },
   tableWrapper: {
     maxHeight: "calc(100vh - 200px)",
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: "calc(100vh - 130px)"
+    },
     overflow: "auto"
   },
   table: {
@@ -82,7 +88,7 @@ const useStyles = makeStyles({
   hidden: {
     opacity: 0
   }
-});
+}));
 
 type ColumnName =
   | "Pseudo"

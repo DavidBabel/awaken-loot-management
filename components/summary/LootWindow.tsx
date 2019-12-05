@@ -11,6 +11,7 @@ import Link from "next/link";
 import React from "react";
 import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
+import { getDurationBetween } from "../../lib/utils/date";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
@@ -31,14 +32,18 @@ interface Props {
   iconClientPos: ElementPosition;
   classColor: string;
   totalRaid: number;
+  onMobile: boolean;
   closeLootWindow(playerName: string, lootLvl: number): any;
 }
 
 const useStyles = makeStyles({
   root: {
     position: "absolute",
+    top: "0px",
+    left: "0px",
+    width: (props: Props) => (props.onMobile ? "100%" : "auto"),
+    height: (props: Props) => (props.onMobile ? "100%" : "auto"),
     backgroundColor: "#E6E8EB",
-    borderRadius: "4px",
     border: "solid 2px",
     boxShadow: "2px 2px 15px -1px rgba(0,0,0,0.75)",
     zIndex: 10000,
@@ -47,13 +52,13 @@ const useStyles = makeStyles({
     }
   },
   tableWrapper: {
-    maxHeight: 300,
+    maxHeight: (props: Props) => (props.onMobile ? "100vh" : 300),
     overflow: "auto",
     "& a": {
       textDecoration: "none"
     },
     "& a span": {
-      margin: "0px 5px 0px 0px"
+      margin: "0px 15px 0px 0px"
     }
   },
   header: {
@@ -80,23 +85,44 @@ const useStyles = makeStyles({
       color: "#bf1313"
     }
   },
+
   raidButtonCell: {
+    "& *": { textAlign: "center", margin: "0px!important" },
+    padding: "5px!important",
+
+    "& span": {
+      textTransform: "none",
+      whiteSpace: "nowrap",
+      fontSize: (props: Props) => (props.onMobile ? 12 : 14)
+    },
     "& a": {
       textDecoration: "none"
     },
     "& .MuiSvgIcon-root": {
-      marginLeft: "5px"
+      marginLeft: "5px",
+      fontSize: 18
     }
   },
   wowHeadItem: {
     position: "relative",
-    "& span:nth-child(1)": { marginLeft: 20 }
+    padding: 0,
+    "& a": {
+      display: (props: Props) => (props.onMobile ? "flex" : "auto"),
+      alignItems: "center"
+    },
+    "& span:nth-child(1)": {
+      marginLeft: 20
+    },
+    "& span:nth-child(2)": {
+      paddingLeft: (props: Props) => (props.onMobile ? 10 : 0),
+      width: "100%"
+    }
   },
   pastilleLootLvl: {
     position: "absolute",
-    width: 12,
+    width: "12px",
     height: 12,
-    left: "12px",
+    left: "5px",
     top: 0,
     bottom: 0,
     margin: "auto",
@@ -117,10 +143,12 @@ export default function LootWindow(props) {
     lootLvl,
     iconClientPos,
     lootData,
-    totalRaid
+    totalRaid,
+    onMobile
   } = props;
   const lootWindowElem = React.useRef(null);
   const headerElem = React.useRef(null);
+
   function makeDraggable(elem: HTMLElement) {
     let pos1 = 0;
     let pos2 = 0;
@@ -171,10 +199,13 @@ export default function LootWindow(props) {
       closeLootWindow(playerName, lootLvl);
     }
   }
+
   useEffect(() => {
-    makeDraggable(lootWindowElem.current);
-    lootWindowElem.current.style.top = iconClientPos.top + "px";
-    lootWindowElem.current.style.left = iconClientPos.left + 50 + "px";
+    if (!onMobile) {
+      makeDraggable(lootWindowElem.current);
+      lootWindowElem.current.style.top = iconClientPos.top + "px";
+      lootWindowElem.current.style.left = iconClientPos.left + 50 + "px";
+    }
     if (lootWindowElem.current.animate) {
       lootWindowElem.current.animate(
         [
@@ -242,8 +273,6 @@ export default function LootWindow(props) {
                     className={
                       classes.pastilleLootLvl +
                       " " +
-                      classes.root +
-                      " " +
                       (loot.itemByItemId.lootLevel === 1
                         ? classes.commun
                         : loot.itemByItemId.lootLevel === 2
@@ -268,9 +297,12 @@ export default function LootWindow(props) {
                     as={`/raid/edit/${loot.raidByRaidId.id}`}
                   >
                     <a target="_blank">
-                      <Button variant="contained" color="primary">
-                        {loot.raidByRaidId.date}
-                        <VisibilityIcon />
+                      <Button variant="outlined" color="primary">
+                        {`Il y a ${getDurationBetween(
+                          new Date().toString(),
+                          loot.raidByRaidId.date
+                        )} jours`}
+                        {!onMobile && <VisibilityIcon />}
                       </Button>
                     </a>
                   </Link>

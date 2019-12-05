@@ -14,6 +14,7 @@ import { Query } from "../../lib/generatedTypes";
 import { Loot } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,6 +63,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
     height: "calc(100vh - 105px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 20px)"
+    },
     backgroundColor: theme.palette.background.paper,
     "& .MuiTabs-indicator": {
       height: "3px"
@@ -72,6 +76,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     "& .Mui-selected": {
       backgroundColor: "#d2d4d6",
       color: "black"
+    },
+    [theme.breakpoints.down("sm")]: {
+      "& .MuiBox-root": {
+        padding: 5
+      }
     }
   },
   tab: {
@@ -111,6 +120,7 @@ export default function PageIndex() {
   const classes = useStyles("");
   const [value, setValue] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState([]);
+  const onMobile = useOnMobile();
   const {
     loading: loadingPlayers,
     data: dataPlayers,
@@ -195,6 +205,7 @@ export default function PageIndex() {
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
+
   return (
     <div className={`${classes.root} ${classes["indicator_" + value]}`}>
       <AppBar position="static" color="default">
@@ -313,6 +324,7 @@ export default function PageIndex() {
           closeLootWindow={closeLootWindow}
           classColor={lootWindow.classColor}
           totalRaid={lootWindow.totalRaid}
+          onMobile={onMobile}
         />
       ))}
     </div>

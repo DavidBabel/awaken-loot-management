@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
       height: "calc(100vh - 150px)",
+      [theme.breakpoints.down("sm")]: {
+        height: "calc(100vh - 60px)"
+      },
       "& *": {
         textDecoration: "none"
       }

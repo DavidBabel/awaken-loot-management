@@ -29,6 +29,11 @@ const StyledTableRow = withStyles((theme: Theme) =>
     root: {
       "&:nth-of-type(odd)": {
         backgroundColor: theme.palette.background.default
+      },
+      "& .MuiTableCell-body": {
+        [theme.breakpoints.down("sm")]: {
+          padding: "8px 10px"
+        }
       }
     }
   })

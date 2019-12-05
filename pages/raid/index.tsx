@@ -53,14 +53,21 @@ interface UpdateRaidLinkVariables {
   raidId: number;
   linkId: string;
 }
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    height: "calc(100vh - 130px)"
+
+    height: "calc(100vh - 130px)",
+    [theme.breakpoints.down("sm")]: {
+      padding: 2
+    }
   },
   topPapers: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
   boxTitle: { margin: "10px 20px" },
   boxTitleLastRaids: { margin: "10px 20px", paddingTop: 10 },
@@ -83,6 +90,10 @@ const useStyles = makeStyles({
   lastRaidsPaper: {
     width: "100%",
     height: "calc(100vh - 360px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 75px)",
+      marginTop: 10
+    },
     marginTop: 20
   },
   lastRaidsPaperHeader: {
@@ -93,6 +104,9 @@ const useStyles = makeStyles({
   },
   tableWrapper: {
     maxHeight: "calc(100vh - 425px)",
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: "calc(100vh - 135px)"
+    },
     overflow: "auto",
     "&::-webkit-scrollbar-thumb": {
       backgroundColor: "#3F51B5",
@@ -102,11 +116,23 @@ const useStyles = makeStyles({
       boxShadow: "inset 0 0 6px rgba(0,0,0,0.15)"
     },
     "&::-webkit-scrollbar": {
-      width: "10px"
+      width: "10px",
+      height: "10px",
+      [theme.breakpoints.down("sm")]: {
+        width: "5px",
+        height: "5px"
+      }
     },
     position: "relative"
   },
-  table: {},
+  table: {
+    "& .MuiTableRow-root:nth-child(even)": {
+      backgroundColor: "rgba(0,0,0,0.06)"
+    },
+    "& .MuiTableCell-stickyHeader": {
+      backgroundColor: "#dedede"
+    }
+  },
   textField: {
     margin: "15px 5px",
     maxWidth: "200px",
@@ -177,7 +203,7 @@ const useStyles = makeStyles({
   hidden: {
     display: "none"
   }
-});
+}));
 
 export default function PageIndex() {
   const member = useContext(MemberContext);

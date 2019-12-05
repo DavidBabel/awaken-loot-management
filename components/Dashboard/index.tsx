@@ -16,10 +16,12 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect } from "react";
 // import { getCurrentYear } from "../../lib/utils/date";
 // import { mainListItems, secondaryListItems } from "./listItems";
 import { Menu } from "../Menu/Menu";
+
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
 
 const drawerWidth = 240;
 
@@ -59,7 +61,19 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  logo: {
+    width: 44,
+    height: 44,
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
   drawerPaper: {
     position: "relative",
@@ -76,10 +90,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: 0,
-    [theme.breakpoints.up("sm")]: {
-      width: 0
-    }
+    width: 0
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -89,7 +100,15 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
+  },
+  grid: {
+    width: "100%",
+    margin: 0
   },
   paper: {
     padding: theme.spacing(2),
@@ -109,6 +128,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1000000,
     transition: "left 0.2s ease-in-out"
   },
+
   hidden: {
     left: -drawerWidth,
     transition: "left 0.2s ease-in-out"
@@ -121,15 +141,22 @@ interface Props {
 
 export function Dashboard({ children }: Props) {
   const classes = useStyles({});
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const onMobile = useOnMobile();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerClose = clickFromMobile => {
+    if (clickFromMobile === undefined || clickFromMobile) {
+      setOpen(false);
+    }
   };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+  useEffect(() => {
+    if (!onMobile) {
+      setOpen(true);
+    }
+  }, [onMobile]);
   if (
     global.hasOwnProperty("window") &&
     window &&
@@ -166,7 +193,10 @@ export function Dashboard({ children }: Props) {
             noWrap={true}
             className={classes.title}
           >
-            Awaken Loot Management
+            <span>Awaken Loot Management</span>
+            <div className={classes.logo}>
+              <img alt="awaken logo" src="/icon/white_icon.svg" width="100%" />
+            </div>
           </Typography>
           {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -176,11 +206,12 @@ export function Dashboard({ children }: Props) {
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
         classes={{
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
         open={open}
+        variant={onMobile ? "temporary" : "permanent"}
+        onClose={handleDrawerClose}
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
@@ -188,7 +219,7 @@ export function Dashboard({ children }: Props) {
           </IconButton>
         </div>
         <Divider />
-        <Menu />
+        <Menu handleDrawerClose={handleDrawerClose} />
         {/* <List>{mainListItems}</List> */}
         {/* <Divider /> */}
         {/* <List>{secondaryListItems}</List> */}
@@ -196,7 +227,7 @@ export function Dashboard({ children }: Props) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container={true} spacing={3}>
+          <Grid container={true} spacing={3} className={classes.grid}>
             {children}
           </Grid>
         </Container>

@@ -11,10 +11,10 @@ import Router, { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
+import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { role } from "../../lib/role-level";
 import { isProduction } from "../../lib/utils/env";
 import CONFIG from "../../server/config";
-
 // import { AppVersion } from '../AppVersion';
 
 function resetToken() {
@@ -30,11 +30,12 @@ const useStyles = makeStyles({
   }
 });
 
-export function Menu() {
+export function Menu({ handleDrawerClose }) {
   const classes = useStyles("");
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
   const { route } = useRouter();
+  const onMobile = useOnMobile();
   return (
     <div>
       {isConnected ? (
@@ -44,6 +45,9 @@ export function Menu() {
             <Link href="/raid">
               <ListItem
                 button={true}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={
                   route
                     ? route === "/raid"
@@ -58,9 +62,12 @@ export function Menu() {
             <Link href="/items">
               <ListItem
                 button={true}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/items" ? classes.selected : ""}
               >
-                <ListItemText primary="Répartition des Items" />
+                <ListItemText primary="Liste des Items" />
               </ListItem>
             </Link>
           </List>
@@ -71,14 +78,20 @@ export function Menu() {
             <Link href="/summary">
               <ListItem
                 button={true}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/summary" ? classes.selected : ""}
               >
-                <ListItemText primary="Résumé / loots" />
+                <ListItemText primary="Liste des joueurs" />
               </ListItem>
             </Link>
             <Link href="/attendance">
               <ListItem
                 button={true}
+                onClick={() => {
+                  handleDrawerClose(onMobile);
+                }}
                 className={route === "/attendance" ? classes.selected : ""}
               >
                 <ListItemText primary="Présence en raid" />
@@ -132,6 +145,9 @@ export function Menu() {
                 <Link href="/admin/editplayers">
                   <ListItem
                     button={true}
+                    onClick={() => {
+                      handleDrawerClose(onMobile);
+                    }}
                     className={
                       route === "/admin/editplayers" ? classes.selected : ""
                     }
@@ -147,7 +163,13 @@ export function Menu() {
 
           <List>
             <ListSubheader>Connected as {member.name}</ListSubheader>
-            <ListItem button={true} onClick={resetToken}>
+            <ListItem
+              button={true}
+              onClick={() => {
+                resetToken();
+                handleDrawerClose(onMobile);
+              }}
+            >
               <ListItemText primary="Se déconnecter" />
             </ListItem>
           </List>
@@ -158,6 +180,9 @@ export function Menu() {
           <Link href="/login">
             <ListItem
               button={true}
+              onClick={() => {
+                handleDrawerClose(onMobile);
+              }}
               className={route === "/login" ? classes.selected : ""}
             >
               <ListItemText primary="Se connecter" />

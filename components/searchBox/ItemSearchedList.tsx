@@ -12,7 +12,7 @@ import { normalizeText } from "../../lib/utils/string";
 interface Props {
   listHeight: string;
 }
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
       width: "100%",
@@ -29,7 +29,11 @@ const useStyles = makeStyles(() =>
       "&::-webkit-scrollbar": {
         width: "10px"
       },
-      margin: "2px 0px"
+      margin: "2px 0px",
+      [theme.breakpoints.down("sm")]: {
+        margin: "10px 0px"
+      },
+      padding: "0px 5px"
     },
     resultText: {
       padding: 3,

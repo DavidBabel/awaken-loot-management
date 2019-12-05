@@ -23,10 +23,13 @@ declare global {
   }
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "calc(100vh - 110px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "calc(100vh - 50px)"
+    },
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -37,13 +40,19 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     width: "80%",
+
     height: "100px",
     flexShrink: 0,
     "&:nth-child(1)": {
       borderRight: " 1px solid #E0E0E0"
     },
     position: "relative",
-    marginBottom: "20px"
+    marginBottom: "20px",
+
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: 0,
+      marginTop: 10
+    }
   },
   textField: {
     width: "60%"
@@ -87,7 +96,7 @@ const useStyles = makeStyles({
     color: "white",
     backgroundColor: "#DC004E"
   }
-});
+}));
 
 export default function PageIndex() {
   const classes = useStyles("");
