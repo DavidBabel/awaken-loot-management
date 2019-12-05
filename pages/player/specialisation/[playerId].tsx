@@ -170,7 +170,7 @@ export default function PageEditPlayer() {
           </div>
         </Paper>
       </Container>
-      {DefaultSnackBar}
+      <DefaultSnackBar />
     </>
   );
 }

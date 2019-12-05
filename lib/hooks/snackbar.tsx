@@ -14,7 +14,7 @@ export function useSnackBar(): {
     event: React.SyntheticEvent | React.MouseEvent,
     reason?: string
   ) => void;
-  DefaultSnackBar: React.ReactNode;
+  DefaultSnackBar: React.ComponentType<{}>;
 } {
   const [snackBarOpen, setSnackBarOpen] = useState<boolean>(false);
   const [snackBarMessage, setSnackBarMessage] = useState<string>("");
@@ -79,6 +79,6 @@ export function useSnackBar(): {
     setSnackBarBackgroundColor,
     openSnackBar,
     closeSnackBar,
-    DefaultSnackBar: <DefaultSnackBar />
+    DefaultSnackBar
   };
 }
