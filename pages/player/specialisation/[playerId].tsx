@@ -99,7 +99,10 @@ export default function PageEditPlayer() {
   // tslint:disable:no-console
   function updateSpe() {
     if (!isValidWowheadUrl()) {
-      openSnackBar("Votre url n'a pas l'air d'être valide", "error");
+      openSnackBar(
+        "L'url de votre spécialisation n'a pas l'air d'être valide",
+        "error"
+      );
       return;
     }
     updatePlayerSpe({
