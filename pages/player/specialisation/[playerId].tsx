@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import {
   Button,
   Container,
+  Grid,
   Paper,
   TextField,
   Typography
@@ -20,6 +21,8 @@ import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
 import { refreshWowhead } from "../../../lib/utils/wowhead-refresh";
 
+import { useSnackBar } from "../../../lib/hooks/snackbar";
+
 interface QueryVariables {
   playerId: number;
 }
@@ -33,6 +36,10 @@ const useStyles = makeStyles({
     width: "90%",
     padding: "20px 35px",
     flexShrink: 0
+  },
+  speContainer: {
+    textAlign: "center",
+    minHeight: 500
   }
 });
 
@@ -42,6 +49,8 @@ export default function PageEditPlayer() {
   const playerId = parseInt(String(router.query.playerId));
   const classes = useStyles("");
   const [currentSpe, setSpe] = useState("");
+
+  const { openSnackBar, DefaultSnackBar } = useSnackBar();
 
   // TODO state filter active
 
@@ -56,6 +65,17 @@ export default function PageEditPlayer() {
     UPDATE_PLAYER_SPE
   );
 
+  function getSpecUrl() {
+    return currentPlayer.specialisation.replace(
+      "talent-calc/",
+      "talent-calc/embed/"
+    );
+  }
+
+  function isValidWowheadUrl() {
+    return currentSpe.startsWith("https://classic.wowhead.com/talent-calc");
+  }
+
   useEffect(() => {
     setSpe(data.allPlayers.nodes[0].specialisation);
   }, [data]);
@@ -66,15 +86,7 @@ export default function PageEditPlayer() {
 
   const currentPlayer = data.allPlayers.nodes[0];
 
-  if (member.level <= role.player && member.userid !== playerId) {
-    // TODO beautiful that
-    return (
-      <div>Seul les officiers et les joueurs eux même peuvent s'éditer</div>
-    );
-  }
-
   if (currentPlayer.active === false) {
-    // TODO beautiful that
     return <div>Ce joueur est désactivé</div>;
   }
 
@@ -86,8 +98,8 @@ export default function PageEditPlayer() {
 
   // tslint:disable:no-console
   function updateSpe() {
-    if (!currentSpe.startsWith("https://classic.wowhead.com/talent-calc")) {
-      // TODO manage errors and messages
+    if (!isValidWowheadUrl()) {
+      openSnackBar("Votre url n'a pas l'air d'être valide", "error");
       return;
     }
     updatePlayerSpe({
@@ -96,47 +108,69 @@ export default function PageEditPlayer() {
         speLink: currentSpe
       }
     })
-      .then(() => window.location.reload())
+      .then(() => {
+        openSnackBar("Succès", "success");
+        window.location.reload();
+      })
       .catch(() => {
         console.log("errors");
       });
   }
   useEffect(refreshWowhead);
 
-  return (
-    <Container>
-      <Typography gutterBottom={true} variant="h3">
-        <ClassAvatar playerClass={currentPlayer.classByClassId.name}>
-          Spécialisation de {currentPlayer.name}
-        </ClassAvatar>
-      </Typography>
+  const wowHeadLink = isValidWowheadUrl()
+    ? currentSpe
+    : "https://classic.wowhead.com/talent-calc/";
 
-      <Paper className={classes.paper}>
-        <Typography>
-          Vous pouvez éditer votre spécialisation{" "}
-          <a target="_blank" href="https://classic.wowhead.com/talent-calc/">
-            sur wowhead
-          </a>{" "}
-          et copier le liens dans le champ suivant :
+  return (
+    <>
+      <Container>
+        <Typography gutterBottom={true} variant="h3">
+          <ClassAvatar playerClass={currentPlayer.classByClassId.name}>
+            Spécialisation de {currentPlayer.name}
+          </ClassAvatar>
         </Typography>
 
-        <TextField
-          style={{ width: "60%" }}
-          value={currentSpe}
-          onChange={handleChangePlayerSpe}
-        />
-        <Button onClick={updateSpe} color="primary" variant="outlined">
-          Mettre à jour
-        </Button>
-      </Paper>
-      <a
-        href={currentPlayer.specialisation.replace(
-          "talent-calc/",
-          "talent-calc/embed/"
-        )}
-      >
-        loading spécialisation ...
-      </a>
-    </Container>
+        <Paper className={classes.paper}>
+          {(member.level > role.player || member.userid !== playerId) && (
+            <>
+              <Typography>
+                Vous pouvez éditer votre spécialisation{" "}
+                <a target="_blank" href={wowHeadLink}>
+                  sur wowhead
+                </a>{" "}
+                et copier le lien de votre navigateur dans le champ suivant :
+              </Typography>
+              <Grid container style={{ marginBottom: 40, marginTop: 15 }}>
+                <Grid item xs={9}>
+                  <TextField
+                    style={{ width: "95%" }}
+                    value={currentSpe}
+                    onChange={handleChangePlayerSpe}
+                  />
+                </Grid>
+                <Grid item xs={3}>
+                  <Button
+                    onClick={updateSpe}
+                    color="primary"
+                    variant="outlined"
+                  >
+                    Mettre à jour
+                  </Button>
+                </Grid>
+              </Grid>
+            </>
+          )}
+          <div className={classes.speContainer}>
+            {currentPlayer.specialisation ? (
+              <a href={getSpecUrl()}>loading spécialisation ...</a>
+            ) : (
+              "Ce joueur n'a pas encore rempli sa spécialisation"
+            )}
+          </div>
+        </Paper>
+      </Container>
+      {DefaultSnackBar}
+    </>
   );
 }

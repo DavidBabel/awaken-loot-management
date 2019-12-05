@@ -192,10 +192,10 @@ export default function PageIndex() {
   const [loadingRender, setLoadingRender] = React.useState<boolean>(true);
   const [raidChecked, setRaidChecked] = React.useState<number[]>([]);
   const [loadingLink, setLoadingLink] = React.useState<boolean>(false);
-  React.useEffect(() => {
+  useEffect(() => {
     setLoadingRender(false);
   }, []);
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(refreshWowhead, 150);
   }, [itemCurrentlySelected, itemInputValue]);
   const [updateRaidLink] = useMutation<Mutation, UpdateRaidLinkVariables>(
