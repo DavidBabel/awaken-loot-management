@@ -40,6 +40,7 @@ export interface PlayerTableRowDatas {
   lastRaidDate: string;
   playerId: number;
   playerLoots: any;
+  hasPlayerSpe: boolean;
 }
 
 interface Props {
@@ -83,30 +84,6 @@ const useStyles = makeStyles({
   }
 });
 
-function createData(
-  name: string,
-  merit: number,
-  totalLoot: number,
-  totalLootByLvl: LootsByLvl,
-  totalRaid: number,
-  lastLootDate: string,
-  lastRaidDate: string,
-  playerId: number,
-  playerLoots: any
-) {
-  return {
-    name,
-    merit,
-    totalLoot,
-    totalLootByLvl,
-    totalRaid,
-    lastLootDate,
-    lastRaidDate,
-    playerId,
-    playerLoots
-  };
-}
-
 type ColumnName =
   | "Pseudo"
   | "Merit"
@@ -118,90 +95,93 @@ type ColumnName =
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
 
-  const rowsData = props.players.map((player: Player) => {
-    let maxMerit = 0;
-    let totalLootLevel1 = 0;
-    let totalLootLevel2 = 0;
-    let totalLootLevel3 = 0;
-    let totalLoot = 0;
-    const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
-      raid => !raid.passed
-    ).length;
-    player.playerMeritsByPlayerId.nodes.forEach(merit => {
-      if (merit.validated) {
-        maxMerit += merit.meritByMeritId.value;
-      }
-    });
-    player.lootsByPlayerId.nodes.forEach(loot => {
-      if (loot.active) {
-        if (loot.itemByItemId.lootLevel === 1) {
-          totalLootLevel1 += 1;
-        } else if (loot.itemByItemId.lootLevel === 2) {
-          totalLootLevel2 += 1;
-        } else if (loot.itemByItemId.lootLevel === 3) {
-          totalLootLevel3 += 1;
+  const rowsData = props.players.map(
+    (player: Player): PlayerTableRowDatas => {
+      let maxMerit = 0;
+      let totalLootLevel1 = 0;
+      let totalLootLevel2 = 0;
+      let totalLootLevel3 = 0;
+      let totalLoot = 0;
+      const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
+        raid => !raid.passed
+      ).length;
+      player.playerMeritsByPlayerId.nodes.forEach(merit => {
+        if (merit.validated) {
+          maxMerit += merit.meritByMeritId.value;
         }
-      }
-    });
-    totalLoot = totalLootLevel3 + totalLootLevel2;
-    let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
-    if (totalRaid === 0) {
-      lastRaidDate = null;
-    } else {
-      [...player.raidPlayersByPlayerId.nodes]
-        .filter(raid => !raid.passed)
-        .forEach(raid => {
-          const currentRaidDate = new Date(raid.raidByRaidId.date);
-          if (currentRaidDate > lastRaidDate) {
-            lastRaidDate = currentRaidDate;
+      });
+      player.lootsByPlayerId.nodes.forEach(loot => {
+        if (loot.active) {
+          if (loot.itemByItemId.lootLevel === 1) {
+            totalLootLevel1 += 1;
+          } else if (loot.itemByItemId.lootLevel === 2) {
+            totalLootLevel2 += 1;
+          } else if (loot.itemByItemId.lootLevel === 3) {
+            totalLootLevel3 += 1;
           }
-        });
-    }
-
-    let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
-    player.lootsByPlayerId.nodes.forEach(loot => {
-      if (loot.itemByItemId.lootLevel !== 1 && loot.active) {
-        const currentLootDate = new Date(loot.raidByRaidId.date);
-        if (currentLootDate > lastLootDate) {
-          lastLootDate = currentLootDate;
         }
+      });
+      totalLoot = totalLootLevel3 + totalLootLevel2;
+      let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
+      if (totalRaid === 0) {
+        lastRaidDate = null;
+      } else {
+        [...player.raidPlayersByPlayerId.nodes]
+          .filter(raid => !raid.passed)
+          .forEach(raid => {
+            const currentRaidDate = new Date(raid.raidByRaidId.date);
+            if (currentRaidDate > lastRaidDate) {
+              lastRaidDate = currentRaidDate;
+            }
+          });
       }
-    });
-    if (lastLootDate === new Date("2010-01-01")) {
-      lastLootDate = null;
-    }
 
-    // const dateOptions = {
-    //   year: "numeric",
-    //   month: "long",
-    //   day: "numeric"
-    // };
-    return createData(
-      player.name,
-      Math.round((maxMerit * 100) / props.maxMeritValue),
-      totalLoot,
-      {
-        level1: totalLootLevel1,
-        level2: totalLootLevel2,
-        level3: totalLootLevel3
-      },
-      totalRaid,
-      lastLootDate ? formatDate(lastLootDate) : "Aucun",
-      lastRaidDate ? formatDate(lastRaidDate) : "Aucun",
-      player.id,
-      [...player.lootsByPlayerId.nodes]
-        .sort((a: any, b: any) => {
-          if (new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)) {
-            return -1;
+      let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
+      player.lootsByPlayerId.nodes.forEach(loot => {
+        if (loot.itemByItemId.lootLevel !== 1 && loot.active) {
+          const currentLootDate = new Date(loot.raidByRaidId.date);
+          if (currentLootDate > lastLootDate) {
+            lastLootDate = currentLootDate;
           }
-          if (new Date(b.raidByRaidId.date) > new Date(a.raidByRaidId.date)) {
-            return 1;
-          }
-          return 0;
-        })
-        .filter(loot => loot.active)
-    );
-  });
+        }
+      });
+      if (lastLootDate === new Date("2010-01-01")) {
+        lastLootDate = null;
+      }
+
+      // const dateOptions = {
+      //   year: "numeric",
+      //   month: "long",
+      //   day: "numeric"
+      // };
+      return {
+        name: player.name,
+        merit: Math.round((maxMerit * 100) / props.maxMeritValue),
+        totalLoot,
+        totalLootByLvl: {
+          level1: totalLootLevel1,
+          level2: totalLootLevel2,
+          level3: totalLootLevel3
+        },
+        totalRaid,
+        lastLootDate: lastLootDate ? formatDate(lastLootDate) : "Aucun",
+        lastRaidDate: lastRaidDate ? formatDate(lastRaidDate) : "Aucun",
+        playerId: player.id,
+        hasPlayerSpe: Boolean(player.specialisation),
+        playerLoots: [...player.lootsByPlayerId.nodes]
+          .sort((a: any, b: any) => {
+            if (new Date(a.raidByRaidId.date) > new Date(b.raidByRaidId.date)) {
+              return -1;
+            }
+            if (new Date(b.raidByRaidId.date) > new Date(a.raidByRaidId.date)) {
+              return 1;
+            }
+            return 0;
+          })
+          .filter(loot => loot.active)
+      };
+    }
+  );
   rowsData.sort((a, b) => b.merit - a.merit);
   const [rows, setRows] = React.useState(rowsData);
   const [orderedBy, setOrderedBy] = React.useState<ColumnName>("Total Loot");
@@ -263,7 +243,6 @@ export default function PlayersTable(props: Props) {
                 "Total raid",
                 "Last loot",
                 "Last raid",
-                "",
                 ""
               ].map((columnName: ColumnName, index: number) => (
                 <StyledTableCell

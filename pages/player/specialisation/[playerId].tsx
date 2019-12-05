@@ -73,6 +73,9 @@ export default function PageEditPlayer() {
   }
 
   function isValidWowheadUrl() {
+    if (!currentSpe) {
+      return false;
+    }
     return currentSpe.startsWith("https://classic.wowhead.com/talent-calc");
   }
 
