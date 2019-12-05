@@ -12,6 +12,7 @@ import { destroyCookie } from "nookies";
 import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { role } from "../../lib/role-level";
+import { isProduction } from "../../lib/utils/env";
 import CONFIG from "../../server/config";
 
 // import { AppVersion } from '../AppVersion';
@@ -91,16 +92,21 @@ export function Menu() {
               <List>
                 <ListSubheader>Mon compte</ListSubheader>
 
-                <Link href={`/player/edit/${member.userid}`}>
-                  <ListItem
-                    button={true}
-                    className={
-                      route.startsWith("/player/edit") ? classes.selected : ""
-                    }
-                  >
-                    <ListItemText primary="Mon mérite" />
-                  </ListItem>
-                </Link>
+                {!isProduction() && (
+                  <Link href={`/player/merit/${member.userid}`}>
+                    <ListItem
+                      button={true}
+                      className={
+                        route.startsWith("/player/merit")
+                          ? classes.selected
+                          : ""
+                      }
+                    >
+                      <ListItemText primary="Mon mérite" />
+                    </ListItem>
+                  </Link>
+                )}
+
                 <Link href={`/player/specialisation/${member.userid}`}>
                   <ListItem
                     button={true}
