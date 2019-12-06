@@ -1,5 +1,3 @@
-import { IconButton, Snackbar, SnackbarContent } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import { Dispatch, SetStateAction, useState } from "react";
 
 export function useSnackBar(): {
@@ -14,7 +12,6 @@ export function useSnackBar(): {
     event: React.SyntheticEvent | React.MouseEvent,
     reason?: string
   ) => void;
-  DefaultSnackBar: React.ComponentType<{}>;
 } {
   const [snackBarOpen, setSnackBarOpen] = useState<boolean>(false);
   const [snackBarMessage, setSnackBarMessage] = useState<string>("");
@@ -41,35 +38,6 @@ export function useSnackBar(): {
     setSnackBarOpen(false);
   };
 
-  function DefaultSnackBar() {
-    return (
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
-    );
-  }
-
   return {
     snackBarOpen,
     setSnackBarOpen,
@@ -78,7 +46,6 @@ export function useSnackBar(): {
     snackBarBackgroundColor,
     setSnackBarBackgroundColor,
     openSnackBar,
-    closeSnackBar,
-    DefaultSnackBar
+    closeSnackBar
   };
 }

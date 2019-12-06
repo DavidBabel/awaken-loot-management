@@ -12,7 +12,7 @@ module.exports = function(req, res, next) {
       return next();
     }
 
-    if (req.user && checkRights(req.user, req.body)) {
+    if (req.user && checkRights(req.user, req.body.query)) {
       return next();
     }
   }

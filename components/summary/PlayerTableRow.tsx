@@ -7,7 +7,6 @@ import {
   withStyles
 } from "@material-ui/core/styles";
 
-import { ButtonGroup } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -85,10 +84,7 @@ const useStyles = makeStyles({
   commun: { color: "#1ad900", borderColor: "#1ad900" },
   allLootColor: { color: "grey", borderColor: "grey" },
   noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
-  link: {
-    "& button a": { textDecoration: "none", color: "#1976d2" },
-    "& button:disabled a": { textDecoration: "none", color: "grey" }
-  }
+  link: { "& a": { textDecoration: "none", color: "white" } }
 });
 
 interface Props {
@@ -286,44 +282,23 @@ export default function PlayerTableRow({
       <StyledTableCell align="center">{rowData.lastLootDate}</StyledTableCell>
       <StyledTableCell align="center">{rowData.lastRaidDate}</StyledTableCell>
       <StyledTableCell align="center" className={classes.link}>
-        <ButtonGroup
-          size="small"
-          color="primary"
-          aria-label="outlined primary button group"
+        <Link href="/player/view/[id]" as={`/player/view/${rowData.playerId}`}>
+          <a target="_blank">
+            <Button variant="contained" color="primary">
+              Details
+            </Button>
+          </a>
+        </Link>
+      </StyledTableCell>
+      <StyledTableCell align="center" className={classes.link}>
+        <a
+          target="_blank"
+          href={`https://ironforge.pro/players/Sulfuron/${rowData.name}`}
         >
-          <Button disabled={!rowData.hasPlayerSpe}>
-            <Link
-              href="/player/specialisation/[id]"
-              as={`/player/specialisation/${rowData.playerId}`}
-            >
-              <a target="_blank">Spé</a>
-            </Link>
+          <Button variant="contained" color="primary">
+            Stuff
           </Button>
-          <Button>
-            <a
-              target="_blank"
-              href={`https://ironforge.pro/players/Sulfuron/${rowData.name}`}
-            >
-              Stuff
-            </a>
-          </Button>
-          <Button>
-            <a
-              target="_blank"
-              href={`https://classic.warcraftlogs.com/character/eu/sulfuron/${rowData.name}`}
-            >
-              Perf
-            </a>
-          </Button>
-          <Button>
-            <Link
-              href="/player/view/[id]"
-              as={`/player/view/${rowData.playerId}`}
-            >
-              <a target="_blank">Details</a>
-            </Link>
-          </Button>
-        </ButtonGroup>
+        </a>
       </StyledTableCell>
     </StyledTableRow>
   );

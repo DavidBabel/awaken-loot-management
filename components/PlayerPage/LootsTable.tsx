@@ -10,7 +10,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
 import { getDate } from "../../lib/utils/date";
-import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
   interface Window {
@@ -102,7 +101,13 @@ export default function LootsTable({ loots, hidden }: Props) {
         loot.raidByRaidId.id
       )
     );
-  useEffect(refreshWowhead);
+  useEffect(() => {
+    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+      try {
+        window.$WowheadPower.refreshLinks();
+      } catch (e) {}
+    }
+  });
   return (
     <Paper className={classes.root + " " + (hidden ? classes.hidden : "")}>
       <div className={classes.tableWrapper}>

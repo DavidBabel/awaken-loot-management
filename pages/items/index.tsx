@@ -15,7 +15,6 @@ import { LoadingAndError } from "../../components/LoadingAndErrors";
 import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
 import { Item, Player, Query } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
-import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
   interface Window {
@@ -109,7 +108,11 @@ export default function PageIndex() {
   useEffect(() => {
     refreshWowheadTimeout = setTimeout(() => {
       clearTimeout(refreshWowheadTimeout);
-      refreshWowhead();
+      if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
+        try {
+          window.$WowheadPower.refreshLinks();
+        } catch (e) {}
+      }
     }, 100);
   }, [itemInputValue, itemInfoOpened]);
   const {

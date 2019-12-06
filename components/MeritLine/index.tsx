@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/react-hooks";
-import { CircularProgress, Tooltip } from "@material-ui/core";
 import { useState } from "react";
 import { Merit, Mutation } from "../../lib/generatedTypes";
 import {
@@ -22,27 +21,16 @@ interface Variables {
   validated: boolean;
 }
 
-interface Props extends Merit {
-  isOfficer: boolean;
-  playerId: number;
-  refetchMerits: () => void;
-  parentLoading: boolean;
-}
-
 export function MeritLine({
   id, // id of merit
-  categorie,
+  // categorie,
   name,
-  comment,
-  value,
-  active,
+  // comment,
+  // value,
+  // active,
   playerMeritsByMeritId: { nodes },
-  classByClassId,
-  playerId,
-  refetchMerits,
-  parentLoading,
-  isOfficer
-}: Props) {
+  playerId
+}: Merit & { playerId: number }) {
   const merit = nodes[0];
   let meritState: Checkbox3State = EMPTY;
   if (merit) {
@@ -56,28 +44,29 @@ export function MeritLine({
 
   const [currentState, setState] = useState(meritState);
 
+  // TODO : lock for player itself and class master
   const [
     createMerit,
     { loading: loadingCreateMerit, error: errorCreateMerit }
   ] = useMutation<Mutation, Variables>(CREATE_PLAYER_MERIT);
+  // TODO lock for class master
   const [
     updateMerit,
     { loading: loadingUpdateMerit, error: errorUpdateMerit }
   ] = useMutation<Mutation, Variables & { id: number }>(UPDATE_PLAYER_MERIT);
+  // TODO : lock for player itself and class master
   const [
     deleteMerit,
     { loading: loadingDeleteMerit, error: errorDeleteMerit }
   ] = useMutation<Mutation, { id: number }>(DELETE_PLAYER_MERIT);
 
   function setUserMerit(nextState: Checkbox3State) {
-    setState(nextState);
-
     if (nextState === EMPTY) {
       deleteMerit({
         variables: {
           id: merit.id
         }
-      }).then(refetchMerits);
+      });
     } else if (nextState === SUBMITTED) {
       createMerit({
         variables: {
@@ -86,17 +75,18 @@ export function MeritLine({
           playerId,
           validated: false
         }
-      }).then(refetchMerits);
+      });
     } else if (nextState === VALIDATED) {
       updateMerit({
         variables: {
-          id: merit.id,
+          // TODO debug this, the IDs are wrong
+          id,
           date: formatDate(new Date()),
           meritId: id,
           playerId,
           validated: true
         }
-      }).then(refetchMerits);
+      });
     }
   }
 
@@ -104,64 +94,20 @@ export function MeritLine({
     loadingCreateMerit || loadingUpdateMerit || loadingDeleteMerit;
   const error = errorCreateMerit || errorUpdateMerit || errorDeleteMerit;
 
-  if (error) {
+  if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
-  if (!active) {
-    return null;
-  }
-
-  function handleClick(newState: Checkbox3State) {
-    if (isOfficer) {
-      setUserMerit(newState);
-    } else {
-      switch (currentState) {
-        case EMPTY:
-          setUserMerit(SUBMITTED);
-          break;
-        case SUBMITTED:
-        case VALIDATED:
-          setUserMerit(EMPTY);
-          break;
-      }
-    }
-  }
-
-  const debug = false;
 
   return (
-    <div>
-      <Tooltip
-        title={(merit && `ajouté le ${getDate(merit.date)}`) || ""}
-        placement="left"
-      >
-        <span>
-          <Tooltip title={comment || ""} placement="right">
-            <span>
-              {debug && `${id} - ${(merit && merit.id) || "X"}`}
-              {loading ? (
-                <div style={{ width: 42, height: 42, display: "inline-block" }}>
-                  <CircularProgress
-                    style={{ margin: "4px 10px", marginBottom: -1 }}
-                    disableShrink={true}
-                    size={22}
-                  />
-                </div>
-              ) : (
-                <Checkbox3
-                  disabled={loading || parentLoading}
-                  onClick={handleClick}
-                  state={currentState}
-                />
-              )}
-              <b>
-                {classByClassId && `${classByClassId.name} →`} {categorie} :
-              </b>{" "}
-              {name} ({value} pts) {comment && "*"} {debug && `: ${meritState}`}
-            </span>
-          </Tooltip>
-        </span>
-      </Tooltip>
+    <div title={merit && getDate(merit.date)}>
+      <Checkbox3
+        onClick={(state: Checkbox3State) => {
+          setUserMerit(state);
+          setState(state);
+        }}
+        state={currentState}
+      />
+      {name}: {meritState}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React from "react";
 
 export interface MemberInfos {
-  userid: number;
   name: string;
   role: string;
   level: number;
@@ -9,7 +8,6 @@ export interface MemberInfos {
 }
 
 const MemberContext = React.createContext<MemberInfos>({
-  userid: -1,
   name: "",
   role: "guest",
   level: 0,

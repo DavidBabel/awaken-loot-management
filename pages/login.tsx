@@ -138,7 +138,6 @@ export default function Pagelogin({ apolloClient }: Props) {
                   setMessage("LoggedIn");
                   const memberInfos: any = jwt.decode(jwtInfos.jwt);
                   const payload = JSON.stringify({
-                    userid: memberInfos.userid,
                     name: username,
                     role: memberInfos.role,
                     level: role[memberInfos.role] || 0,
