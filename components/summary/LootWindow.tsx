@@ -12,6 +12,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
 import { getDurationBetween } from "../../lib/utils/date";
+import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
   interface Window {
@@ -220,13 +221,7 @@ export default function LootWindow(props) {
       );
     }
   }, []);
-  useEffect(() => {
-    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
-      try {
-        window.$WowheadPower.refreshLinks();
-      } catch (e) {}
-    }
-  });
+  useEffect(refreshWowhead);
   return (
     <div
       className={

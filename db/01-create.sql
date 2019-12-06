@@ -21,7 +21,8 @@ CREATE TABLE "Players" (
   "role" varchar DEFAULT 'player',
   "password" varchar,
   "active" boolean DEFAULT true,
-  "inRoster" boolean DEFAULT false
+  "inRoster" boolean DEFAULT false,
+  "specialisation" varchar
 );
 comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
@@ -47,7 +48,7 @@ CREATE TABLE "PlayerMerit" (
   "date" varchar,
   "validated" boolean DEFAULT false
 );
-comment on table "PlayerMerit" is E'@omit delete';
+-- comment on table "PlayerMerit" is E'@omit delete';
 CREATE UNIQUE INDEX ON "PlayerMerit" ("id");
 
 

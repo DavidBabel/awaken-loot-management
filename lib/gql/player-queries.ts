@@ -23,6 +23,7 @@ export const ALL_PLAYERS = gql`
         classId
         role
         password
+        specialisation
         classByClassId {
           id
           color
@@ -82,6 +83,8 @@ export const ONE_PLAYER = gql`
       nodes {
         id
         name
+        specialisation
+        active
         classByClassId {
           id
           color

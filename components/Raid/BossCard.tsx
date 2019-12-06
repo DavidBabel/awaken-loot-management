@@ -36,6 +36,7 @@ import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
 import { getBossImageUrl } from "../../lib/utils/image";
+import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 declare global {
   interface Window {
@@ -231,13 +232,7 @@ export function BossCard({
       }
     }
   };
-  useEffect(() => {
-    if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
-      try {
-        window.$WowheadPower.refreshLinks();
-      } catch (e) {}
-    }
-  }, [looted]);
+  useEffect(refreshWowhead, [looted]);
   return (
     <>
       <Card className={classes.card}>
