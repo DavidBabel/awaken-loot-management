@@ -13,6 +13,7 @@ import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { role } from "../../lib/role-level";
+import { isProduction } from "../../lib/utils/env";
 import CONFIG from "../../server/config";
 // import { AppVersion } from '../AppVersion';
 
@@ -98,19 +99,58 @@ export function Menu({ handleDrawerClose }) {
             </Link>
           </List>
 
+          {member.level >= role.player && (
+            <>
+              <Divider />
+              <List>
+                <ListSubheader>Mon compte</ListSubheader>
+
+                {!isProduction() && (
+                  <Link href={`/player/merit/${member.userid}`}>
+                    <ListItem
+                      button={true}
+                      className={
+                        route.startsWith("/player/merit")
+                          ? classes.selected
+                          : ""
+                      }
+                    >
+                      <ListItemText primary="Mon mérite" />
+                    </ListItem>
+                  </Link>
+                )}
+
+                <Link href={`/player/specialisation/${member.userid}`}>
+                  <ListItem
+                    button={true}
+                    className={
+                      route.startsWith("/player/specialisation")
+                        ? classes.selected
+                        : ""
+                    }
+                  >
+                    <ListItemText primary="Ma spécialisation" />
+                  </ListItem>
+                </Link>
+              </List>
+            </>
+          )}
+
           {member.level >= role.admin && (
             <>
               <Divider />
               <List>
                 <ListSubheader>Admin</ListSubheader>
 
-                <Link href="/editplayers">
+                <Link href="/admin/editplayers">
                   <ListItem
                     button={true}
                     onClick={() => {
                       handleDrawerClose(onMobile);
                     }}
-                    className={route === "/editplayers" ? classes.selected : ""}
+                    className={
+                      route === "/admin/editplayers" ? classes.selected : ""
+                    }
                   >
                     <ListItemText primary="Editer joueurs" />
                   </ListItem>
