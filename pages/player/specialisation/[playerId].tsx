@@ -76,7 +76,7 @@ export default function PageEditPlayer() {
     if (!currentSpe) {
       return false;
     }
-    return currentSpe.startsWith("https://classic.wowhead.com/talent-calc");
+    return currentSpe.startsWith("https://fr.classic.wowhead.com/talent-calc");
   }
 
   useEffect(() => {
@@ -126,7 +126,7 @@ export default function PageEditPlayer() {
 
   const wowHeadLink = isValidWowheadUrl()
     ? currentSpe
-    : "https://classic.wowhead.com/talent-calc/";
+    : "https://fr.classic.wowhead.com/talent-calc/";
 
   return (
     <>
