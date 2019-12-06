@@ -7,3 +7,4 @@ schema.gql
 .env
 db/backups/*
 !db/backups/.keepit
+*.log
