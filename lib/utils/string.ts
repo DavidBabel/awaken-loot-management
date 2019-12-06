@@ -5,3 +5,9 @@ export function normalizeText(str: string) {
     .replace(/\-/g, " ")
     .toLowerCase();
 }
+
+export function stringToId(str: string) {
+  return normalizeText(str)
+    .replace(/\//g, "")
+    .replace(/\s+/g, "-");
+}

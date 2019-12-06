@@ -24,10 +24,10 @@ const logger = winston.createLogger({
  * @param {Function} next
  */
 module.exports = function(req, res, next) {
-  const playerLevel = req.user.role;
+  // const playerLevel = req.user.role;
   const gqlRequest = req.body.query;
 
-  const parsedRequest = gql(gqlRequest);
+  // const parsedRequest = gql(gqlRequest);
 
   if (req.body) {
     if (!req.body.query) {

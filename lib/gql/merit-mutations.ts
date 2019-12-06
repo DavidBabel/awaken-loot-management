@@ -4,8 +4,8 @@ export const UPDATE_PLAYER_MERIT = gql`
   mutation UpdatePlayerMerit(
     $id: Int!
     $date: String
-    $meritId: Int
-    $playerId: Int
+    $meritId: Int!
+    $playerId: Int!
     $validated: Boolean
   ) {
     updatePlayerMeritById(
@@ -30,8 +30,8 @@ export const UPDATE_PLAYER_MERIT = gql`
 export const CREATE_PLAYER_MERIT = gql`
   mutation CreatePlayerMerit(
     $date: String
-    $meritId: Int
-    $playerId: Int
+    $meritId: Int!
+    $playerId: Int!
     $validated: Boolean
   ) {
     createPlayerMerit(
