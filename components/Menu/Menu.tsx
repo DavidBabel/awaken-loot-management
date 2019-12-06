@@ -35,7 +35,7 @@ export function Menu({ handleDrawerClose }) {
   const member = useContext(MemberContext);
   const isConnected = member.level > role.guest;
   const { route } = useRouter();
-  const onMobile = useOnMobile();
+  const onMobile = useOnMobile(false);
   return (
     <div>
       {isConnected ? (
