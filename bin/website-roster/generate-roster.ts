@@ -1,4 +1,4 @@
-type Prios = "prio" | "ouvert" | "faible" | "fermé";
+type Prios = "prio" | "ouvert" | "faible" | "profil++";
 interface Roster {
   name: string;
   shivtrIcon: string;
@@ -11,25 +11,47 @@ const roster: Roster[] = [
     name: "Prêtre",
     shivtrIcon: "16",
     prepend: "H",
-    prio: "fermé"
+    prio: "profil++"
   },
-  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "fermé" },
+  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "prio" },
   { name: "Chaman", shivtrIcon: "18", prepend: "R", prio: "ouvert" },
-  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "fermé" },
-  { name: "Démoniste", shivtrIcon: "20", prepend: "", prio: "fermé" },
-  { name: "Voleur", shivtrIcon: "15", prepend: "", prio: "fermé" },
+  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "profil++" },
+  {
+    name: "Démoniste",
+    shivtrIcon: "20",
+    prepend: "",
+    prio: "profil++"
+  },
+  { name: "Voleur", shivtrIcon: "15", prepend: "", prio: "profil++" },
   { name: "Chasseur", shivtrIcon: "14", prepend: "", prio: "faible" },
-  { name: "Guerrier Tank", shivtrIcon: "12", prepend: "", prio: "fermé" },
-  { name: "Guerrier DPS", shivtrIcon: "17", prepend: "", prio: "fermé" }
+  {
+    name: "Guerrier Tank",
+    shivtrIcon: "12",
+    prepend: "",
+    prio: "profil++"
+  },
+  {
+    name: "Guerrier DPS",
+    shivtrIcon: "17",
+    prepend: "",
+    prio: "profil++"
+  }
 ];
 
-const recrutement: Prios[] = ["prio", "ouvert", "faible", "fermé"];
+const recrutement: Prios[] = ["prio", "ouvert", "faible", "profil++"];
 
 const colors: { [key in Prios]: string } = {
   prio: "94ff6f",
   ouvert: "35cc00",
   faible: "acacac",
-  fermé: "892602"
+  ["profil++"]: "892602"
+};
+
+const title: { [key in Prios]: string } = {
+  prio: "Recrutement prioritaire",
+  ouvert: "Recrutement ouvert",
+  faible: "Recrutement des derniers joueurs",
+  ["profil++"]: "Profil de joueur exceptionnel uniquement"
 };
 
 function capitalize(str: string) {
@@ -50,7 +72,9 @@ function html(content: string[]) {
 
 function getClass(classe: Roster) {
   return `
-<div class="recruit" style="line-height: 16px; margin-bottom: 2px;">
+<div class="recruit" style="line-height: 16px; margin-bottom: 2px;" title="${
+    title[classe.prio]
+  }">
   <small
     class="recruit-status other_text"
     style="float: right; color: #${colors[classe.prio]}; font-weight: bold;"
