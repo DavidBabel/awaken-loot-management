@@ -138,7 +138,8 @@ export default function PageEditPlayer() {
         </Typography>
 
         <Paper className={classes.paper}>
-          {(member.level > role.player || member.userid !== playerId) && (
+          {(member.level >= role.class_master ||
+            member.userid === playerId) && (
             <>
               <Typography>
                 Vous pouvez éditer votre spécialisation{" "}
