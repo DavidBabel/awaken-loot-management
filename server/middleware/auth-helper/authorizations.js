@@ -3,7 +3,8 @@
 const { gql } = require("apollo-boost");
 const {
   playerItselfOnly,
-  playerCanOnlyCreateDisabledMerit
+  playerCanOnlyCreateDisabledMerit,
+  playerCanOnlyEditSpecialisation
 } = require("./query-rules");
 const { ADMIN, CLASS_MASTER, GUEST, OFFICER, PLAYER } = require("./roles");
 
@@ -43,7 +44,7 @@ const rights = {
   updateLoot: NO_ONE,
   updateLootById: OFFICER_MIN,
   updatePlayer: NO_ONE,
-  updatePlayerById: ADMIN_MIN,
+  updatePlayerById: PLAYER_MIN,
   updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: CLASSMASTER_MIN,
   updateRaid: NO_ONE,
@@ -54,7 +55,8 @@ const rights = {
 
 const constraints = {
   createPlayerMerit: [playerItselfOnly, playerCanOnlyCreateDisabledMerit],
-  deletePlayerMeritById: [playerItselfOnly]
+  deletePlayerMeritById: [playerItselfOnly],
+  updatePlayerById: [playerItselfOnly, playerCanOnlyEditSpecialisation]
 };
 
 /**
