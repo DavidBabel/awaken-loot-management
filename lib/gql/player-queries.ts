@@ -22,6 +22,7 @@ export const ALL_PLAYERS = gql`
         inRoster
         classId
         role
+        password
         specialisation
         classByClassId {
           id
