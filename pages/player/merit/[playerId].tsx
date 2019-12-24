@@ -148,7 +148,7 @@ export default function PageEditPlayer() {
           })}
         </div>
         <style jsx>{`
-          @media (max-width: 1024px) {
+          @media (max-width: 1280px) {
             .fastMenu {
               display: none;
             }
@@ -156,8 +156,8 @@ export default function PageEditPlayer() {
           .fastMenu {
             cursor: pointer;
             position: fixed;
-            right: 120px;
-            top: 180px;
+            right: 270px;
+            top: 230px;
           }
           .fastMenu div:hover .linkTitle {
             text-decoration: underline;
