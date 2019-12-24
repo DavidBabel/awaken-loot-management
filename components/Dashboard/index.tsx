@@ -137,14 +137,12 @@ const useStyles = makeStyles(theme => ({
 
 interface Props {
   children: React.ReactNode;
-  userAgent: string | null;
+  isMobile: boolean;
 }
 
-export function Dashboard({ children, userAgent }: Props) {
+export function Dashboard({ children, isMobile }: Props) {
   const classes = useStyles({});
-  const onMobile = useOnMobile(
-    userAgent ? userAgent.toLowerCase().indexOf("mobi") !== -1 : false
-  );
+  const onMobile = useOnMobile(isMobile);
   const [open, setOpen] = React.useState(!onMobile);
   const handleDrawerOpen = () => {
     setOpen(true);

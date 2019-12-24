@@ -10,27 +10,21 @@ import { Header } from "../components/page/Header";
 import MemberContext from "../lib/context/member";
 
 class AppWithApollo extends App {
-  static async getInitialProps(args) {
-    const userAgent = args.ctx.req
-      ? args.ctx.req.headers["user-agent"]
-      : navigator.userAgent;
-    return {
-      userAgent
-    };
-  }
+  // static async getInitialProps(args) {
+  //   const userAgent = args.ctx.req
+  //     ? args.ctx.req.headers["user-agent"]
+  //     : navigator.userAgent;
+  //   return {
+  //     userAgent
+  //   };
+  // }
   render() {
-    const {
-      Component,
-      pageProps,
-      apolloClient,
-      memberInfos = {},
-      userAgent
-    } = this.props;
+    const { Component, pageProps, apolloClient, memberInfos = {} } = this.props;
     return (
       <ApolloProvider client={apolloClient}>
         <Header />
         <MemberContext.Provider value={memberInfos}>
-          <Dashboard userAgent={userAgent}>
+          <Dashboard isMobile={false}>
             <Component {...pageProps} apolloClient={apolloClient} />
           </Dashboard>
           {/* <BottomNav /> */}
