@@ -34,7 +34,7 @@ const roster: Roster[] = [
     name: "Guerrier DPS",
     shivtrIcon: "17",
     prepend: "",
-    prio: "profil++"
+    prio: "ouvert"
   }
 ];
 

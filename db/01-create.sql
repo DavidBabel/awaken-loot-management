@@ -35,7 +35,8 @@ CREATE TABLE "Merit" (
   "comment" varchar DEFAULT '',
   "value" int,
   "active" boolean DEFAULT true,
-  "classId" int DEFAULT NULL
+  "classId" int DEFAULT NULL,
+  "order" int
 );
 comment on table "Merit" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Merit" ("id");

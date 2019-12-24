@@ -1777,15 +1777,16 @@ VALUES
 (false, 05, 'T3 / R14', 'Arme distance / relique / totem', ''),
 
 
-(true, 10, 'Spécialisation', 'Publiée sur le forum', 'https://fr.classic.wowhead.com/talent-calc'),
+(true, 10, 'Spécialisation', 'Publiée sur cet outil', 'https://fr.classic.wowhead.com/talent-calc'),
 (true, 15, 'Spécialisation', 'PvE HL', ''),
 (true, 5, 'Spécialisation', '100% PvE', 'Tous les points les plus opti au raid'),
 (true, 10, 'Spécialisation', 'Pas une spé hybride', 'Pour tous les healers qui ne jouent pas tank ou DPS'),
 
 
-(true, 05, 'Grade', 'Avoir le grade Maître de classe', 'également pour les Officiers'),
+(true, 05, 'Grade', 'Avoir le grade Membre', 'également pour les Raideur'),
 (true, 05, 'Grade', 'Avoir le grade Raideur', 'également pour les Vétérans'),
 (true, 05, 'Grade', 'Avoir le grade Vétéran', 'également pour les Maîtres de classe'),
+(true, 05, 'Grade', 'Avoir le grade Maître de classe', 'également pour les Officiers'),
 (true, 05, 'Grade', 'Avoir le grade Officier', 'également pour le GM'),
 (true, 05, 'Grade', 'Avoir le grade GM', ''),
 
@@ -1793,7 +1794,7 @@ VALUES
 (true, 05, 'Communauté', 'Présenté sur les forums', ''),
 (true, 05, 'Communauté', 'Photo dans le trombinoscope', ''),
 (true, 03, 'Communauté', 'Signer la charte de guilde', ''),
-(true, 05, 'Communauté', 'Porter le tabard de guilde', ''),
+(true, 15, 'Communauté', 'Porter le tabard de guilde', ''),
 (true, 03, 'Communauté', 'Avoir un avatar sur le forum', ''),
 (true, 03, 'Communauté', 'Avoir exactement le même pseudo sur le forum qu‘en jeu', ''),
 (true, 03, 'Communauté', 'Avoir un avatar sur le Discord', ''),
