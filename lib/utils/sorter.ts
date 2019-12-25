@@ -33,6 +33,7 @@ export function byValue(accessor: string, orderDesc: boolean = true) {
   return (a: any, b: any) =>
     orderDesc ? a[accessor] - b[accessor] : b[accessor] - a[accessor];
 }
+
 export function byAlphabet(accessor: string, orderDesc: boolean = true) {
   return (a: any, b: any) =>
     orderDesc

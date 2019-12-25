@@ -11,6 +11,7 @@ import { Merit, Query } from "../../../lib/generatedTypes";
 import { PLAYER_MERIT } from "../../../lib/gql/merit-queries";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
+import { byValue } from "../../../lib/utils/sorter";
 import { stringToId } from "../../../lib/utils/string";
 
 interface Variables {
@@ -198,7 +199,7 @@ export default function PageEditPlayer() {
               )} */}
               </Typography>
               <div>
-                {currentCategorie.map((merit: Merit) => (
+                {currentCategorie.sort(byValue("order")).map((merit: Merit) => (
                   <MeritLine
                     key={`${merit.name}-${merit.categorie}-merit`}
                     {...merit}

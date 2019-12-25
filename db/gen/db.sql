@@ -1684,7 +1684,7 @@ VALUES
 INSERT INTO "Merit" ("order", "active", "value", "categorie", "name", "comment")
 VALUES
 
-(1, true, 10, 'Enchantements', 'Casque', 'libram ou ZG'),
+(14, true, 10, 'Enchantements', 'Casque', 'libram ou ZG'),
 (2, true, 15, 'Enchantements', 'Epaulettes', 'exalté ZG ou +5 all resist'),
 (3, true, 05, 'Enchantements', 'Cape', ''),
 (4, true, 10, 'Enchantements', 'Plastron', ''),
