@@ -1,4 +1,10 @@
  -- SAFE BEGIN FOR CONCAT
+
+
+-- ===========================
+-- ======== MC ===============
+-- ===========================
+
 -- SELECT 1 AS "Trash";
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
@@ -518,3 +524,416 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Ragnaros'),(SELECT id FROM "Items" WHERE "wowheadId"=17204)),
 ((SELECT id FROM "Bosses" WHERE "name"='Lucifron'),(SELECT id FROM "Items" WHERE "wowheadId"=18875)),
 ((SELECT id FROM "Bosses" WHERE "name"='Shazzrah'),(SELECT id FROM "Items" WHERE "wowheadId"=18875));
+
+
+-- ===========================
+-- ======== BWL ==============
+-- ===========================
+
+
+-- SELECT 1 AS "Trashs";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Maillet draconique',19358,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cape de puissance draconique',19436,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bottes de la pensée pure',19437,(SELECT id FROM "Classes" WHERE "name"='')),
+('Vengeresse draconique',19354,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bottes de blizzard de Ringo',19438,(SELECT id FROM "Classes" WHERE "name"='')),
+('Pourpoint d‘ombre entrelacé',19439,(SELECT id FROM "Classes" WHERE "name"='')),
+('Trancheuse du destin',19362,(SELECT id FROM "Classes" WHERE "name"='')),
+('Récolteur d‘essence',19435,(SELECT id FROM "Classes" WHERE "name"='')),
+('Anneau de sombre domination',19434,(SELECT id FROM "Classes" WHERE "name"=''));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19358)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19436)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19437)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19354)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19438)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19439)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19362)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19435)),
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=3),(SELECT id FROM "Items" WHERE "wowheadId"=19434));
+
+
+
+-- SELECT 1 AS "Razorgore";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Manchettes de transcendance',16926,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Brassards de traqueur de dragon',16935,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Brassards Rougecroc',16911,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Bracelets de courroux',16959,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Gants de l‘évolution rapide',19369,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gemme imprégnée d‘arcanes',19336,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Le Livre noir',19337,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Manchettes de Vent du néant',16918,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Mantelet de la cabale de l‘Aile noire',19370,(SELECT id FROM "Classes" WHERE "name"='')),
+('Brassards de Némésis',16934,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Brassards de Stormrage',16904,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Manchettes du jugement',16951,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Brise-échine',19335,(SELECT id FROM "Classes" WHERE "name"='')),
+('Brassards des dix tempêtes',16943,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('La lame indomptée',19334,(SELECT id FROM "Classes" WHERE "name"=''));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16926)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16935)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16911)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16959)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19369)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19336)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19337)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16918)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19370)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16934)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16904)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16951)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19335)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=16943)),
+((SELECT id FROM "Bosses" WHERE "name"='Razorgore'),(SELECT id FROM "Items" WHERE "wowheadId"=19334));
+
+
+-- SELECT 1 AS "Vaelastrasz";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Baudrier de courroux',16960,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Ceinture de Stormrage',16903,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Ceinture Rougecroc',16910,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Ceinture de Némésis',16933,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Ceinture de Vent du néant',16818,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Pendentif du dragon déchu',19371,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gemme de vivacité d‘esprit',19339,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Ceinture de transcendance',16925,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Ceinture de traqueur de dragon',16936,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Heaume de la rage infinie',19372,(SELECT id FROM "Classes" WHERE "name"='')),
+('Rune de transformation',19340,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Lame croc-de-dragon',19346,(SELECT id FROM "Classes" WHERE "name"='')),
+('Ceinture du jugement',16952,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Ceinture des dix tempêtes',16944,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('Protecteur en écailles de dragon rouge',19348,(SELECT id FROM "Classes" WHERE "name"=''));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16960)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16903)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16910)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16933)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16818)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19371)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19339)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16925)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16936)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19372)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19340)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19346)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16952)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=16944)),
+((SELECT id FROM "Bosses" WHERE "name"='Vaelastrasz'),(SELECT id FROM "Items" WHERE "wowheadId"=19348));
+
+
+-- SELECT 1 AS "Broodlord Lashlayer";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Bottes de Vent du néant',16912,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Espauliers de rejeton noir',19373,(SELECT id FROM "Classes" WHERE "name"='')),
+('Sandales de courroux',16965,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Bottes de Némésis',16927,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Bottes de transcendance',16919,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Bottes de traqueur de dragon',16941,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Totem venimeux',19342,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Bottes Rougecroc',16906,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Gemme donneuse de vie',19341,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Sandales du jugement',16957,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Bottes de Stormrage',16898,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Brassards de précision des arcanes',19374,(SELECT id FROM "Classes" WHERE "name"='')),
+('Frappe-coeur',19350,(SELECT id FROM "Classes" WHERE "name"='')),
+('Maladath, lame runique du Vol noir',19351,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bottes des dix tempêtes',16949,(SELECT id FROM "Classes" WHERE "name"='Chaman'));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16912)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19373)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16965)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16927)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16919)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16941)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19342)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16906)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19341)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16957)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16898)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19374)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19350)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=19351)),
+((SELECT id FROM "Bosses" WHERE "name"='Broodlord Lashlayer'),(SELECT id FROM "Items" WHERE "wowheadId"=16949));
+
+
+-- SELECT 1 AS "Firemaw";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Robe de cendre noire',19399,(SELECT id FROM "Classes" WHERE "name"='')),
+('Etreinte Gueule-de-feu',19400,(SELECT id FROM "Classes" WHERE "name"='')),
+('Griffe du drake noir',19365,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cape gueule-de-feu',19398,(SELECT id FROM "Classes" WHERE "name"='')),
+('Parchemin de lumière aveuglante',19343,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Garde-mains de transcendance',16920,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Ceinture en cuir de dragon tendu',19396,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cuissards du croisé déchu',19402,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gantelets de courroux',16964,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Espauliers griffe-de-drake',19394,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bague de Blackrock',19397,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gantelets de traqueur de dragon',16940,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Gants de Némésis',16928,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Gants de Vent du néant',16913,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Cristal d‘alignement sur la nature',19344,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('Cuissards rivetés de Primaliste',19401,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gants Rougecroc',16907,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Garde-mains de Stormrage',16899,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Bâton focalisateur de l‘Aile de l‘ombre',19355,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gemme de récupération',19395,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gantelets du jugement',16956,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Fendoir griffe-de-drake',19353,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gantelets des dix tempêtes',16948,(SELECT id FROM "Classes" WHERE "name"='Chaman'));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19399)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19400)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19365)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19398)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19343)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16920)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19396)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19402)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16964)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19394)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19397)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16940)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16928)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16913)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19344)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19401)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16907)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16899)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19355)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19395)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16956)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=19353)),
+((SELECT id FROM "Bosses" WHERE "name"='Firemaw'),(SELECT id FROM "Items" WHERE "wowheadId"=16948));
+
+-- SELECT 1 AS "Ebonroc";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Egide de préservation',19345,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Anneau de Concentration forcée',19403,(SELECT id FROM "Classes" WHERE "name"='')),
+('Gants de la flamme d‘ébène',19407,(SELECT id FROM "Classes" WHERE "name"='')),
+('Talisman croc-de-drake',19406,(SELECT id FROM "Classes" WHERE "name"='')),
+('Rempart béni de Malfurion',19405,(SELECT id FROM "Classes" WHERE "name"='')),
+('Canon à main Souffle-de-dragon',19368,(SELECT id FROM "Classes" WHERE "name"=''));
+-- ('Gantelets de courroux',16964,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+-- ('Gants de Vent du néant',16913,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+-- ('Bague de Blackrock',19397,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Gants de Némésis',16928,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+-- ('Ceinture en cuir de dragon tendu',19396,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Gantelets de traqueur de dragon',16940,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+-- ('Garde-mains de transcendance',16920,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+-- ('Gemme de récupération',19395,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Fendoir griffe-de-drake',19353,(SELECT id FROM "Classes" WHERE "name"=''));
+-- ('Gantelets du jugement',16956,(SELECT id FROM "Classes" WHERE "name"='Paladin'));
+-- ('Garde-mains de Stormrage',16899,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+-- ('Gants Rougecroc',16907,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+-- ('Espauliers griffe-de-drake',19394,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Bâton focalisateur de l‘Aile de l‘ombre',19355,(SELECT id FROM "Classes" WHERE "name"=''));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19345)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19403)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19407)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19406)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19405)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19368)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16964)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16913)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19397)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16928)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19396)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16940)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16920)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19395)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19353)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16956)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16899)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16907)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19394)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=19355)),
+((SELECT id FROM "Bosses" WHERE "name"='Ebonroc'),(SELECT id FROM "Items" WHERE "wowheadId"=16948));
+
+
+-- SELECT 1 AS "Flamegor";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Voile de la pensée pure',19430,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cercle de la force appliquée',19432,(SELECT id FROM "Classes" WHERE "name"='')),
+('Jambières en tisse-braise',19433,(SELECT id FROM "Classes" WHERE "name"='')),
+('Scarabée d‘obstruction de Styleen',19431,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Ceinture en cuir de dragon tendu',19396,(SELECT id FROM "Classes" WHERE "name"='')),
+('Toucher du dragon',19367,(SELECT id FROM "Classes" WHERE "name"='')),
+('Prophète de malheur',19357,(SELECT id FROM "Classes" WHERE "name"=''));
+-- ('Garde-mains de transcendance',16920,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+-- ('Gantelets du jugement',16956,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+-- ('Gants Rougecroc',16907,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+-- ('Gantelets de courroux',16964,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+-- ('Gants de Vent du néant',16913,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+-- ('Garde-mains de Stormrage',16899,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+-- ('Gemme de récupération',19395,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Bague de Blackrock',19397,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Gantelets de traqueur de dragon',16940,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+-- ('Gants de Némésis',16928,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+-- ('Espauliers griffe-de-drake',19394,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Bâton focalisateur de l‘Aile de l‘ombre',19355,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Fendoir griffe-de-drake',19353,(SELECT id FROM "Classes" WHERE "name"='')),
+-- ('Gantelets des dix tempêtes',16948,(SELECT id FROM "Classes" WHERE "name"='Chaman'));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19430)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19432)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19433)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19431)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19396)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19367)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19357)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16920)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16956)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16907)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16964)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16913)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16899)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19395)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19397)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16940)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16928)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19394)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19355)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=19353)),
+((SELECT id FROM "Bosses" WHERE "name"='Flamegor'),(SELECT id FROM "Items" WHERE "wowheadId"=16948));
+
+
+-- SELECT 1 AS "Chromaggus";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Mantelet de Vent du néant',16917,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Protège-épaules en cuir de dragon tendu',19389,(SELECT id FROM "Classes" WHERE "name"='')),
+('Spallières de traqueur de dragon',16937,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Torsade d‘Angelista',19388,(SELECT id FROM "Classes" WHERE "name"='')),
+('Espauliers de courroux',16961,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Bottes chromatiques',19387,(SELECT id FROM "Classes" WHERE "name"='')),
+('Espauliers de Stormrage',16902,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Espauliers de transcendance',16924,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Gants en cuir de dragon tendu',19390,(SELECT id FROM "Classes" WHERE "name"='')),
+('Spallières de Némésis',16932,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Spallières Rougecroc',16832,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Geta chatoyantes',19391,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cape brochée d‘élémentium',19386,(SELECT id FROM "Classes" WHERE "name"='')),
+('Ceinturon du croisé déchu',19392,(SELECT id FROM "Classes" WHERE "name"='')),
+('Jambières surpuissantes',19385,(SELECT id FROM "Classes" WHERE "name"='')),
+('Spallières du jugement',16953,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Epée trempée chromatiquement',19352,(SELECT id FROM "Classes" WHERE "name"='')),
+('Griffe de Chromaggus',19347,(SELECT id FROM "Classes" WHERE "name"='')),
+('Sangle rivetée de Primaliste',19393,(SELECT id FROM "Classes" WHERE "name"='')),
+('Ashjre‘thul, arbalète de châtiment',19361,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bouclier en élémentium renforcé',19349,(SELECT id FROM "Classes" WHERE "name"='')),
+('Epaulettes des dix tempêtes',16945,(SELECT id FROM "Classes" WHERE "name"='Chaman'));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16917)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19389)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16937)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19388)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16961)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19387)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16902)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16924)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19390)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16932)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16832)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19391)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19386)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19392)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19385)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16953)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19352)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19347)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19393)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19361)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=19349)),
+((SELECT id FROM "Bosses" WHERE "name"='Chromaggus'),(SELECT id FROM "Items" WHERE "wowheadId"=16945));
+
+
+-- SELECT 1 AS "Nefarian";
+
+INSERT INTO "Items" ("name","wowheadId","classId")
+VALUES
+('Tête de Nefarian',19002,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cape du seigneur des couvées',19378,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bottes de la Flamme d‘ombre',19381,(SELECT id FROM "Classes" WHERE "name"='')),
+('Chaîne de Therazane',19380,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cuirasse de traqueur de dragon',16942,(SELECT id FROM "Classes" WHERE "name"='Chasseur')),
+('Robe de Vent du néant',16916,(SELECT id FROM "Classes" WHERE "name"='Mage')),
+('Bague de rétorsion d‘Archimtiros',19376,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cuirasse de courroux',16966,(SELECT id FROM "Classes" WHERE "name"='Guerrier')),
+('Plastron Rougecroc',16905,(SELECT id FROM "Classes" WHERE "name"='Voleur')),
+('Robe de Némésis',16931,(SELECT id FROM "Classes" WHERE "name"='Démoniste')),
+('Robe de transcendance',16923,(SELECT id FROM "Classes" WHERE "name"='Prêtre')),
+('Anneau d‘élémentium pur',19382,(SELECT id FROM "Classes" WHERE "name"='')),
+('Larme de Neltharion',19379,(SELECT id FROM "Classes" WHERE "name"='')),
+('Robe de Stormrage',16897,(SELECT id FROM "Classes" WHERE "name"='Druide')),
+('Mish‘undare, coiffure du flagelleur mental',19375,(SELECT id FROM "Classes" WHERE "name"='')),
+('Talisman de perfidie de Prestor',19377,(SELECT id FROM "Classes" WHERE "name"='')),
+('Bâton de la Flamme d‘ombre',19356,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cuirasse du jugement',16958,(SELECT id FROM "Classes" WHERE "name"='Paladin')),
+('Ashkandi, Grande épée de la Confrérie',19364,(SELECT id FROM "Classes" WHERE "name"='')),
+('Crul‘shorukh, Trancheuse du chaos',19363,(SELECT id FROM "Classes" WHERE "name"='')),
+('Lok‘amir il Romathis',19360,(SELECT id FROM "Classes" WHERE "name"='')),
+('Cuirasse des dix tempêtes',16950,(SELECT id FROM "Classes" WHERE "name"='Chaman')),
+('Tête de Nefarian',19003,(SELECT id FROM "Classes" WHERE "name"=''));
+
+INSERT INTO "BossItem" ("bossId","itemId")
+VALUES
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19002)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19378)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19381)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19380)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16942)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16916)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19376)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16966)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16905)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16931)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16923)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19382)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19379)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16897)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19375)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19377)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19356)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16958)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19364)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19363)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19360)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=16950)),
+((SELECT id FROM "Bosses" WHERE "name"='Nefarian'),(SELECT id FROM "Items" WHERE "wowheadId"=19003));

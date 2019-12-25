@@ -1,0 +1,77 @@
+[
+  {
+    "id": "16960",
+    "text": "Baudrier de courroux",
+    "class": "Guerrier"
+  },
+  {
+    "id": "16903",
+    "text": "Ceinture de Stormrage",
+    "class": "Druide"
+  },
+  {
+    "id": "16910",
+    "text": "Ceinture Rougecroc",
+    "class": "Voleur"
+  },
+  {
+    "id": "16933",
+    "text": "Ceinture de Némésis",
+    "class": "Démoniste"
+  },
+  {
+    "id": "16818",
+    "text": "Ceinture de Vent du néant",
+    "class": "Mage"
+  },
+  {
+    "id": "19371",
+    "text": "Pendentif du dragon déchu",
+    "class": ""
+  },
+  {
+    "id": "19339",
+    "text": "Gemme de vivacité d'esprit",
+    "class": "Mage"
+  },
+  {
+    "id": "16925",
+    "text": "Ceinture de transcendance",
+    "class": "Prêtre"
+  },
+  {
+    "id": "16936",
+    "text": "Ceinture de traqueur de dragon",
+    "class": "Chasseur"
+  },
+  {
+    "id": "19372",
+    "text": "Heaume de la rage infinie",
+    "class": ""
+  },
+  {
+    "id": "19340",
+    "text": "Rune de transformation",
+    "class": "Druide"
+  },
+  {
+    "id": "19346",
+    "text": "Lame croc-de-dragon",
+    "class": ""
+  },
+  {
+    "id": "16952",
+    "text": "Ceinture du jugement",
+    "class": "Paladin"
+  },
+  {
+    "id": "16944",
+    "text": "Ceinture des dix tempêtes",
+    "class": "Chaman"
+  },
+  {
+    "id": "19348",
+    "text": "Protecteur en écailles de dragon rouge",
+    "class": ""
+  }
+]

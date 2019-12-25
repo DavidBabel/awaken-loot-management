@@ -36,8 +36,8 @@ VALUES
 (1,'Onyxia', (SELECT id FROM "Donjons" WHERE "shortName"='Ony'), 'https://i.imgur.com/Ux2zdP0.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
-(2,'Razorgore the Untamed', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(3,'Vaelastrasz the Corrupt', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
+(2,'Razorgore', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
+(3,'Vaelastrasz', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 (4,'Broodlord Lashlayer', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 (5,'Firemaw', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 (6,'Ebonroc', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),

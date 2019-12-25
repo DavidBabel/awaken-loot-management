@@ -170,6 +170,11 @@ VALUES
 (19, true, 5, 'Raid', 'Avoir trois sacs Onyxia', '', null),
 (20, true, 5, 'Raid', 'Avoir quatres sacs Onyxia', '', null),
 
+(21, true, 10, 'Raid', 'Exalté Hydraxiens', '', null),
+(22, true, 10, 'Raid', 'Exalté Gurubashi', '', null),
+(23, true, 10, 'Raid', 'Exalté Cercle cénarien', '', null),
+(24, true, 10, 'Raid', 'Exalté Progeniture de nozdormu', '', null),
+(25, true, 10, 'Raid', 'Exalté Aube d‘argent', '', null),
 
 (1, true, 5, 'PvP', 'Grade PvP 6 : Garde de Pierre : Accès aux potions', '', null),
 (2, true, 5, 'PvP', 'Grade PvP 10 : Equipement bleu', '', null),
