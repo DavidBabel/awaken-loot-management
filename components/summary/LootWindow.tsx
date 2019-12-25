@@ -240,7 +240,7 @@ export default function LootWindow(props) {
       <div className={classes.header} ref={headerElem}>
         {`${playerName.toUpperCase()} (${
           lootLvl === 1
-            ? "Qualité: médriocre"
+            ? "Qualité: médiocre"
             : lootLvl === 2
             ? "Qualité: normale"
             : lootLvl === 3
