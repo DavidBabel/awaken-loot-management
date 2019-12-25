@@ -995,6 +995,7 @@ export type Merit = Node & {
   active?: Maybe<Scalars['Boolean']>,
   classId?: Maybe<Scalars['Int']>,
   order?: Maybe<Scalars['Int']>,
+  delay?: Maybe<Scalars['Int']>,
   /** Reads a single `Class` that is related to this `Merit`. */
   classByClassId?: Maybe<Class>,
   /** Reads and enables pagination through a set of `PlayerMerit`. */
@@ -1030,6 +1031,8 @@ export type MeritCondition = {
   classId?: Maybe<Scalars['Int']>,
   /** Checks for equality with the object’s `order` field. */
   order?: Maybe<Scalars['Int']>,
+  /** Checks for equality with the object’s `delay` field. */
+  delay?: Maybe<Scalars['Int']>,
 };
 
 /** A connection to a list of `Merit` values. */
@@ -1073,6 +1076,8 @@ export enum MeritsOrderBy {
   ClassIdDesc = 'CLASS_ID_DESC',
   OrderAsc = 'ORDER_ASC',
   OrderDesc = 'ORDER_DESC',
+  DelayAsc = 'DELAY_ASC',
+  DelayDesc = 'DELAY_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }

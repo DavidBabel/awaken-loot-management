@@ -92,7 +92,7 @@ const useStyles = makeStyles(theme => ({
 
 type ColumnName =
   | "Pseudo"
-  | "Merit"
+  | "Merites"
   | "Total Loot"
   | "Total raid"
   | "Last loot"
@@ -199,7 +199,7 @@ export default function PlayersTable(props: Props) {
     if (colName === orderedBy) {
       currentlyOrderedDesc = !orderedDESC;
     }
-    if (colName === "Merit") {
+    if (colName === "Merites") {
       newRows.sort(byValue("merit", currentlyOrderedDesc));
     } else if (colName === "Total raid") {
       newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
@@ -244,8 +244,8 @@ export default function PlayersTable(props: Props) {
             <TableRow>
               {[
                 "Pseudo",
-                // "Merit",
                 "Total Loot",
+                "Merites",
                 "Total raid",
                 "Last loot",
                 "Last raid",

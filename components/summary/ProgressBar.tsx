@@ -4,7 +4,8 @@ import ProgressTooltip from "../../components/summary/ProgressTooltip";
 
 interface Props {
   classColor: string;
-  progress: string;
+  progress: number;
+  showed: boolean;
 }
 const useStyles = makeStyles({
   container: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   bar: {
     position: "relative",
     height: "10px",
-    width: "200px",
+    width: "160px",
     borderRadius: "4px",
     border: "1px solid transparent",
     backgroundColor: "#4D4D4D"
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ProgressBar(props) {
+export default function ProgressBar(props: Props) {
   const classes = useStyles(props);
   const fillerElem = React.useRef(null);
   React.useEffect(() => {

@@ -115,6 +115,9 @@ export function MeritLine({
     if (isOfficer) {
       setUserMerit(newState);
     } else {
+      if (categorie === "Malus") {
+        return;
+      }
       switch (currentState) {
         case EMPTY:
           setUserMerit(SUBMITTED);

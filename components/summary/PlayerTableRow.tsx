@@ -113,15 +113,7 @@ export default function PlayerTableRow({
       <StyledTableCell component="th" scope="row">
         {rowData.name}
       </StyledTableCell>
-      {false && (
-        <StyledTableCell className={classes.progressCell} align="center">
-          <ProgressBar
-            classColor={classColor}
-            progress={rowData.merit}
-            showed={showed}
-          />
-        </StyledTableCell>
-      )}
+
       <StyledTableCell align="center">
         <div className={classes.lootNumbers}>
           <div className={classes.numberAndEye + " " + classes.epic}>
@@ -281,6 +273,13 @@ export default function PlayerTableRow({
             )}
           </div>
         </div>
+      </StyledTableCell>
+      <StyledTableCell className={classes.progressCell} align="center">
+        <ProgressBar
+          classColor={classColor}
+          progress={rowData.merit}
+          showed={showed}
+        />
       </StyledTableCell>
       <StyledTableCell align="center">{rowData.totalRaid}</StyledTableCell>
       <StyledTableCell align="center">{rowData.lastLootDate}</StyledTableCell>

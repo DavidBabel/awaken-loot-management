@@ -143,7 +143,7 @@ export default function PageIndex() {
   const allMerits = dataAllMerits.allMerits.edges;
   let maxMeritValue = 0;
   allMerits.forEach(merit => {
-    if (merit.node.active) {
+    if (merit.node.active && merit.node.categorie !== "Malus") {
       maxMeritValue += merit.node.value;
     }
   });

@@ -79,7 +79,9 @@ export default function PageEditPlayer() {
       }
       stack[categorie].push(merit);
       // counter
-      sumOfAllMerits += merit.value;
+      if (merit.categorie !== "Malus") {
+        sumOfAllMerits += merit.value;
+      }
       const meritCalc = merit.playerMeritsByMeritId.nodes[0];
       if (meritCalc) {
         playerAllMerits += merit.value;
@@ -121,11 +123,22 @@ export default function PageEditPlayer() {
       </Typography>
 
       <Paper className={classes.paper}>
-        <Typography>
+        <Typography variant="h4" style={{ marginBottom: 30 }}>
           {playerApprovedMerits} / {sumOfAllMerits} points de mérite (+{" "}
           {playerAllMerits - playerApprovedMerits} à valider)
         </Typography>
+        <Typography style={{ marginBottom: 30 }}>
+          Pour faire valider vos mérites vous devez envoyer un message sur
+          discord
+          <br /> à votre maître de classe avec les preuves de votre mérite
+          (screenshots ou autre)
+          <br /> et le lien de cette page.
+        </Typography>
         <div className="fastMenu">
+          <b>
+            {playerApprovedMerits} / {sumOfAllMerits} pts (+{" "}
+            {playerAllMerits - playerApprovedMerits} à valider)
+          </b>
           {Object.keys(sortedMerits).map((meritCategorieName: string) => {
             const currentCategorieSize =
               sortedMerits[meritCategorieName].length;

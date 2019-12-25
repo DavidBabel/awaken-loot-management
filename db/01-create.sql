@@ -36,7 +36,8 @@ CREATE TABLE "Merit" (
   "value" int,
   "active" boolean DEFAULT true,
   "classId" int DEFAULT NULL,
-  "order" int
+  "order" int,
+  "delay" int
 );
 comment on table "Merit" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Merit" ("id");
