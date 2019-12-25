@@ -10,6 +10,7 @@ export const PLAYER_MERIT = gql`
         comment
         categorie
         order
+        delay
         active
         classByClassId {
           name
@@ -38,6 +39,7 @@ export const ALL_MERITS = gql`
           comment
           categorie
           order
+          delay
           active
           classByClassId {
             name
