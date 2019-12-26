@@ -6,6 +6,9 @@ export function formatDate(date: Date = new Date()) {
 }
 
 export function getDayMonth(date: Date | string = new Date()) {
+  if (date === "Aucun") {
+    return "Aucun";
+  }
   return getDate(date, "dd/MM");
 }
 

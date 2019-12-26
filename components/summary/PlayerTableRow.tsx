@@ -1,3 +1,5 @@
+import React from "react";
+
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import {
@@ -13,9 +15,9 @@ import TableRow from "@material-ui/core/TableRow";
 // import VisibilityIcon from "@material-ui/icons/Visibility";
 // import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
-import React from "react";
 import ProgressBar from "../../components/summary/ProgressBar";
 import { getDayMonth } from "../../lib/utils/date";
+import { LootButton } from "./LootButton";
 import { PlayerTableRowDatas } from "./PlayersTable";
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -47,6 +49,7 @@ const useStyles = makeStyles({
   lootNumbers: {
     display: "flex"
   },
+  // to remove
   numberAndEye: {
     border: "1px solid",
     borderRadius: "4px",
@@ -56,11 +59,13 @@ const useStyles = makeStyles({
     minWidth: "50px",
     backgroundColor: "white"
   },
+  // to remove
   viewIcon: {
     // marginLeft: "2px",
     margin: 0,
     padding: 0
   },
+  // to remove
   levelDescription: {
     position: "absolute",
     left: "20%",
@@ -70,22 +75,23 @@ const useStyles = makeStyles({
     backgroundColor: "white",
     fontSize: "12px"
   },
+  // to remove
   allLoot: {
     marginLeft: 15,
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
   },
+  // to remove
   badLootPlus: {
     fontSize: "10px",
     alignSelf: "flex-start",
     marginTop: 1,
     zIndex: 5
   },
-  epic: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
-  rare: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
-  commun: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
+  // to remove
   allLootColor: { color: "grey", borderColor: "grey" },
+  // to remove
   noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: {
     "& button a": { textDecoration: "none", color: "#1976d2" },
@@ -110,6 +116,21 @@ export default function PlayerTableRow({
 }: Props) {
   const classes = useStyles("");
   const iconElem = React.useRef(null);
+
+  function simpleOpenLootWindow(lootLevel: number) {
+    return openLootWindow(
+      rowData.name,
+      lootData.filter(loot => loot.itemByItemId.lootLevel === lootLevel),
+      lootLevel,
+      {
+        top: iconElem.current.getBoundingClientRect().top,
+        left: iconElem.current.getBoundingClientRect().left
+      },
+      classColor,
+      rowData.totalRaid
+    );
+  }
+
   return (
     <StyledTableRow>
       <StyledTableCell component="th" scope="row">
@@ -118,108 +139,14 @@ export default function PlayerTableRow({
 
       <StyledTableCell align="center">
         <div className={classes.lootNumbers}>
-          <div className={classes.numberAndEye + " " + classes.epic}>
-            {rowData.totalLootByLvl.level3 > 0 ? (
-              <IconButton
-                ref={iconElem}
-                onClick={() => {
-                  openLootWindow(
-                    rowData.name,
-                    lootData.filter(loot => loot.itemByItemId.lootLevel === 3),
-                    3,
-                    {
-                      top: iconElem.current.getBoundingClientRect().top,
-                      left: iconElem.current.getBoundingClientRect().left
-                    },
-                    classColor,
-                    rowData.totalRaid
-                  );
-                }}
-                className={classes.viewIcon + " " + classes.epic}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level3}
-              </IconButton>
-            ) : (
-              <IconButton
-                ref={iconElem}
-                className={classes.viewIcon + " " + classes.noLoot}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level3}
-              </IconButton>
-            )}
-          </div>
-          <div className={classes.numberAndEye + " " + classes.rare}>
-            {rowData.totalLootByLvl.level2 > 0 ? (
-              <IconButton
-                ref={iconElem}
-                onClick={() => {
-                  openLootWindow(
-                    rowData.name,
-                    lootData.filter(loot => loot.itemByItemId.lootLevel === 2),
-                    2,
-                    {
-                      top: iconElem.current.getBoundingClientRect().top,
-                      left: iconElem.current.getBoundingClientRect().left
-                    },
-                    classColor,
-                    rowData.totalRaid
-                  );
-                }}
-                className={classes.viewIcon + " " + classes.rare}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level2}
-              </IconButton>
-            ) : (
-              <IconButton
-                ref={iconElem}
-                className={classes.viewIcon + " " + classes.noLoot}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level2}
-              </IconButton>
-            )}
-          </div>
-          <div className={classes.numberAndEye + " " + classes.commun}>
-            {rowData.totalLootByLvl.level1 > 0 ? (
-              <IconButton
-                ref={iconElem}
-                onClick={() => {
-                  openLootWindow(
-                    rowData.name,
-                    lootData.filter(loot => loot.itemByItemId.lootLevel === 1),
-                    1,
-                    {
-                      top: iconElem.current.getBoundingClientRect().top,
-                      left: iconElem.current.getBoundingClientRect().left
-                    },
-                    classColor,
-                    rowData.totalRaid
-                  );
-                }}
-                className={classes.viewIcon + " " + classes.commun}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level1}
-              </IconButton>
-            ) : (
-              <IconButton
-                ref={iconElem}
-                className={classes.viewIcon + " " + classes.noLoot}
-                color="primary"
-                aria-label="View loots"
-              >
-                {rowData.totalLootByLvl.level1}
-              </IconButton>
-            )}
-          </div>
+          {[/* 4,  */ 3, 2, 1].map((lootLevel: number) => (
+            <LootButton
+              key={`loots-${rowData.name}-${lootLevel}`}
+              onClick={() => simpleOpenLootWindow(lootLevel)}
+              lootLevel={lootLevel}
+              lootCount={rowData.totalLootByLvl[`level${lootLevel}`]}
+            />
+          ))}
           <div
             className={
               classes.numberAndEye +
