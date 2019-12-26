@@ -42,7 +42,8 @@ const useStyles = makeStyles({
   level3: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
   level2: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
   level1: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
-  allLootColor: { color: "grey", borderColor: "grey" },
+  levelall: { fontSize: 16, color: "grey", backgroundColor: "grey" },
+  // allLootColor: { color: "grey", borderColor: "grey" },
   noLoot: { fontSize: 16, color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: {
     "& button a": { textDecoration: "none", color: "#1976d2" },
@@ -51,7 +52,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  lootLevel: number;
+  lootLevel: number | "all";
   lootCount: number;
   onClick: () => void;
 }

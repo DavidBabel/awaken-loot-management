@@ -117,15 +117,18 @@ export default function PlayerTableRow({
   const classes = useStyles("");
   const iconElem = React.useRef(null);
 
-  function simpleOpenLootWindow(lootLevel: number) {
+  function simpleOpenLootWindow(lootLevel: number | "all") {
+    const all = lootLevel === "all";
+    const lootDataToKeep = all
+      ? lootData
+      : lootData.filter(loot => loot.itemByItemId.lootLevel === lootLevel);
+
+    const { top, left } = iconElem.current.getBoundingClientRect();
     return openLootWindow(
       rowData.name,
-      lootData.filter(loot => loot.itemByItemId.lootLevel === lootLevel),
+      lootDataToKeep,
       lootLevel,
-      {
-        top: iconElem.current.getBoundingClientRect().top,
-        left: iconElem.current.getBoundingClientRect().left
-      },
+      { top, left },
       classColor,
       rowData.totalRaid
     );
@@ -139,9 +142,9 @@ export default function PlayerTableRow({
 
       <StyledTableCell align="center">
         <div className={classes.lootNumbers}>
-          {[/* 4,  */ 3, 2, 1].map((lootLevel: number) => (
+          {[/* 4,  */ 3, 2, 1, "all"].map((lootLevel: number | "all") => (
             <LootButton
-              key={`loots-${rowData.name}-${lootLevel}`}
+              key={`lootbutton-${rowData.name}-${lootLevel}`}
               onClick={() => simpleOpenLootWindow(lootLevel)}
               lootLevel={lootLevel}
               lootCount={rowData.totalLootByLvl[`level${lootLevel}`]}
