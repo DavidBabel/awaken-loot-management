@@ -36,7 +36,7 @@ const rights = {
   createRaid: OFFICER_MIN,
   createRaidPlayer: CLASSMASTER_MIN,
   deletePlayerMerit: NO_ONE,
-  deletePlayerMeritById: CLASSMASTER_MIN,
+  deletePlayerMeritById: PLAYER_MIN,
   deleteRaidPlayer: NO_ONE,
   deleteRaidPlayerById: NO_ONE,
   updateClassItem: NO_ONE,
@@ -55,7 +55,6 @@ const rights = {
 
 const constraints = {
   createPlayerMerit: [playerItselfOnly, playerCanOnlyCreateDisabledMerit],
-  deletePlayerMeritById: [playerItselfOnly],
   updatePlayerById: [playerItselfOnly, playerCanOnlyEditSpecialisation]
 };
 

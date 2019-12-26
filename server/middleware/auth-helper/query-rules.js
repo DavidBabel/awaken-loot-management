@@ -46,12 +46,7 @@ function playerCanOnlyCreateDisabledMerit(user = {}, parsedRequest, variables) {
     return true;
   }
 
-  if (
-    role !== GUEST &&
-    variables &&
-    variables.validated &&
-    variables.validated === false
-  ) {
+  if (role !== GUEST && variables && variables.validated === false) {
     return true;
   }
 
