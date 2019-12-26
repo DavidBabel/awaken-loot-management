@@ -2547,7 +2547,8 @@ VALUES
 ('fucked-1'     , 1,  'player', null, false, false),
 ('Spydermatrix' , 2,  'player', null, true, false),
 ('Waira'        , 3,  'player', null, true, false),
-('Panou'        , 7,  'player', null, true, false)
+('Panou'        , 7,  'player', null, true, false),
+('Non Assigné'  , 5,  'player', null, false, false)
 ;
 
 -- 1 - Prêtre

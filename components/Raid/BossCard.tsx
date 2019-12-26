@@ -37,6 +37,7 @@ import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
 import { getBossImageUrl } from "../../lib/utils/image";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
+import CONFIG from "../../server/config";
 
 declare global {
   interface Window {
@@ -233,6 +234,21 @@ export function BossCard({
     }
   };
   useEffect(refreshWowhead, [looted]);
+
+  function getClassColor(player: Player) {
+    if (player.id === parseInt(CONFIG.ID_UNASSIGNED)) {
+      return "white";
+    }
+    switch (player.classByClassId.id) {
+      case 1:
+        return "grey";
+      case 4:
+        return "#d4d000";
+      default:
+        return player.classByClassId.color;
+    }
+  }
+
   return (
     <>
       <Card className={classes.card}>
@@ -245,12 +261,13 @@ export function BossCard({
         <CardContent className={classes.cardContent} ref={bossCardContentElem}>
           <List>
             {looted.map((loot, index) => {
+              const currentPlayer = loot.playerByPlayerId;
+              const isUnassigned =
+                currentPlayer.id === parseInt(CONFIG.ID_UNASSIGNED);
               return (
                 <Tooltip
                   key={
-                    loot.itemByItemId.id +
-                    loot.playerByPlayerId.id +
-                    index.toString()
+                    loot.itemByItemId.id + currentPlayer.id + index.toString()
                   }
                   title={
                     loot.lastActionBy && loot.lastActionDate
@@ -289,33 +306,23 @@ export function BossCard({
                     </ListItemText>
                     <ListItemText
                       style={{
-                        borderColor:
-                          loot.playerByPlayerId.classByClassId.id !== 1
-                            ? loot.playerByPlayerId.classByClassId.id !== 4
-                              ? loot.playerByPlayerId.classByClassId.color
-                              : "#d4d000"
-                            : "grey"
+                        borderColor: getClassColor(currentPlayer),
+                        backgroundColor: isUnassigned ? "darkorange" : "white"
                       }}
                       className={classes.playerCell}
                       primary={
                         <Link
                           href="/player/view/[id]"
-                          as={`/player/view/${loot.playerByPlayerId.id}`}
+                          as={`/player/view/${currentPlayer.id}`}
                         >
                           <a
                             target="_blank"
                             style={{
-                              color:
-                                loot.playerByPlayerId.classByClassId.id !== 1
-                                  ? loot.playerByPlayerId.classByClassId.id !==
-                                    4
-                                    ? loot.playerByPlayerId.classByClassId.color
-                                    : "#d4d000"
-                                  : "grey",
+                              color: getClassColor(currentPlayer),
                               textDecoration: "none"
                             }}
                           >
-                            {loot.playerByPlayerId.name}
+                            {currentPlayer.name}
                           </a>
                         </Link>
                       }

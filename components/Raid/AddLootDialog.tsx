@@ -7,6 +7,7 @@ import {
   DialogTitle,
   Fab,
   FormControl,
+  Grid,
   IconButton,
   InputLabel,
   LinearProgress,
@@ -30,6 +31,7 @@ import { CREATE_LOOT } from "../../lib/gql/loot-mutations";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { formatDate } from "../../lib/utils/date";
+import CONFIG from "../../server/config";
 
 interface CreateLootVariables {
   playerId: number;
@@ -291,7 +293,7 @@ export default function AddLootDialog({
       }
     }
   };
-  const addLoot = newPlayerId => {
+  function addLoot(newPlayerId: any) {
     if (itemIdToAdd.length > 0 && (newPlayerId || playerIdToAdd)) {
       setAddLootIsLoading(true);
       setRestrictedClassIds([]);
@@ -333,7 +335,7 @@ export default function AddLootDialog({
     } else {
       openSnackBar("Selectionnez un item et un joueur.", "error");
     }
-  };
+  }
   const toggleSwitchRestrictPlayerList = () => {
     setRestrictPlayerList(!restrictPlayerList);
   };
@@ -502,35 +504,45 @@ export default function AddLootDialog({
               />
             ))}
         </div>
-        <DialogActions
-          classes={{
-            root: classes.dialogActions
-          }}
+        <Grid
+          container
+          style={{ marginLeft: 15, marginTop: 15, marginBottom: -15 }}
         >
           <div className={classes.switch}>
             {!showNewPlayerInput && (
               <>
                 <div onClick={toggleSwitchRestrictPlayerList}>
-                  Choix restreint:
+                  Voir toutes les classes:
                 </div>
                 <Switch
                   size="small"
-                  checked={restrictPlayerList}
+                  checked={!restrictPlayerList}
                   onChange={toggleSwitchRestrictPlayerList}
                 />{" "}
               </>
             )}
           </div>
           <div className={classes.switch}>
-            <div onClick={toggleSwitchNewPlayerInput}>Nouveau joueur:</div>
+            <div onClick={toggleSwitchNewPlayerInput}>
+              Créer un nouveau joueur:
+            </div>
             <Switch
               size="small"
               checked={showNewPlayerInput}
               onChange={toggleSwitchNewPlayerInput}
             />
           </div>
+        </Grid>
+        <DialogActions
+          classes={{
+            root: classes.dialogActions
+          }}
+        >
           <Button onClick={handleClose} color="primary">
             ANNULER
+          </Button>
+          <Button onClick={() => addLoot(CONFIG.ID_UNASSIGNED)} color="primary">
+            AJOUT NON ASSIGNÉ
           </Button>
           <Button
             onClick={() => {
@@ -538,7 +550,7 @@ export default function AddLootDialog({
             }}
             color="primary"
           >
-            AJOUTER
+            AJOUTER LE LOOT
           </Button>
         </DialogActions>
       </Dialog>
