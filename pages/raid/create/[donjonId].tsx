@@ -50,20 +50,21 @@ export default function PageCreateRaid() {
   const currentDonjon = donjonData.allDonjons.edges[0].node;
   return (
     <Container>
-      <Typography>Create a raid for</Typography>
+      <Typography>Créer un raid pour :</Typography>
       <Grid container={true}>
-        <Grid item={true}>
-          <Avatar
-            alt={currentDonjon.name}
-            src={
-              currentDonjon.cdnImage || getDonjonImageUrl(currentDonjon.name)
-            }
-          />
-        </Grid>
         <Grid item={true}>
           <Typography variant="h2" gutterBottom={true}>
             {currentDonjon.name} ({currentDonjon.shortName})
           </Typography>
+        </Grid>
+        <Grid item={true}>
+          <Avatar
+            alt={currentDonjon.name}
+            style={{ marginLeft: 60, width: 76, height: 76 }}
+            src={
+              currentDonjon?.cdnImage || getDonjonImageUrl(currentDonjon.name)
+            }
+          />
         </Grid>
       </Grid>
       <Grid container={true} alignItems="flex-end" spacing={5}>
@@ -76,25 +77,55 @@ export default function PageCreateRaid() {
             setSelectedDate={setSelectedDate}
           />
         </Grid>
-        <Grid item={true}>
-          <Button
-            disabled={isButtonDisabled}
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              setButtonDisabled(true);
-              createRaid({ variables: { date: selectedDate, donjonId } })
-                .then(({ data: { createRaid: { raid } } }) => {
+      </Grid>
+      <Grid container direction="column" style={{ width: 450, marginTop: 90 }}>
+        <Button
+          disabled={isButtonDisabled}
+          variant="outlined"
+          color="primary"
+          onClick={() => {
+            setButtonDisabled(true);
+            createRaid({ variables: { date: selectedDate, donjonId } })
+              .then(
+                ({
+                  data: {
+                    createRaid: { raid }
+                  }
+                }) => {
                   router.push(`/raid/edit/${raid.id}`);
-                })
-                .catch(err => {
-                  alert(`Did not work ${err}`);
-                });
-            }}
-          >
-            Create raid
-          </Button>
-        </Grid>
+                }
+              )
+              .catch(err => {
+                alert(`Did not work ${err}`);
+              });
+          }}
+        >
+          Créer le raid et l'afficher
+        </Button>
+
+        <Button
+          disabled={isButtonDisabled}
+          variant="outlined"
+          color="primary"
+          onClick={() => {
+            setButtonDisabled(true);
+            createRaid({ variables: { date: selectedDate, donjonId } })
+              .then(
+                ({
+                  data: {
+                    createRaid: { raid }
+                  }
+                }) => {
+                  router.push(`/raid`);
+                }
+              )
+              .catch(err => {
+                alert(`Did not work ${err}`);
+              });
+          }}
+        >
+          Créer le raid et revenir à la liste
+        </Button>
       </Grid>
     </Container>
   );

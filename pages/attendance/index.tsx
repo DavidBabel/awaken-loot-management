@@ -137,6 +137,9 @@ const useStyles = makeStyles((theme: Theme) =>
     rotation: {
       backgroundColor: "#b09000"
     },
+    inscritAbsent: {
+      backgroundColor: "#800080"
+    },
     pasDansGuilde: {
       backgroundColor: "#242424"
     }
@@ -186,6 +189,12 @@ export default function PageIndex() {
         <div className={classes.legendeItem}>
           <div className={classes.legendeSquare + " " + classes.rotation} />
           <span>En rotation / Backup</span>
+        </div>
+        <div className={classes.legendeItem}>
+          <div
+            className={classes.legendeSquare + " " + classes.inscritAbsent}
+          />
+          <span>Inscrit mais absent</span>
         </div>
         <div className={classes.legendeItem}>
           <div

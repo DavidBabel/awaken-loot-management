@@ -452,7 +452,7 @@ export default function PageIndex() {
           {member.level >= role.officer && (
             <Paper className={classes.createRaidPaper}>
               <Typography className={classes.boxTitle} variant="h6">
-                Create new raid
+                Creér un nouveau raid
               </Typography>
               <Divider />
               {loadingRender ? (

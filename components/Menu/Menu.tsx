@@ -70,6 +70,23 @@ export function Menu({ handleDrawerClose }) {
                 <ListItemText primary="Liste des Items" />
               </ListItem>
             </Link>
+            {member.level >= role.class_master && (
+              <Link href={`/player/view/${CONFIG.ID_UNASSIGNED}`}>
+                <ListItem
+                  button={true}
+                  onClick={() => {
+                    handleDrawerClose(onMobile);
+                  }}
+                  className={
+                    route === `/player/view/${CONFIG.ID_UNASSIGNED}`
+                      ? classes.selected
+                      : ""
+                  }
+                >
+                  <ListItemText primary="Items non assignés" />
+                </ListItem>
+              </Link>
+            )}
           </List>
           <Divider />
           <List>
