@@ -5,7 +5,7 @@ VALUES
 ('Onyxia Lair', 'Ony', true, 'https://i.imgur.com/qAm8tn5.jpg');
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
-('Blackwing Lair', 'BWL', false),
+('Blackwing Lair', 'BWL', true),
 ('Ahn‘Qiraj Temple', 'AQ40', false),
 ('Naxxramas', 'Naxx', false),
 ('Ahn‘Qiraj Ruins', 'AQ20', false),

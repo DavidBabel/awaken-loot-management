@@ -22,7 +22,7 @@ export function DatePicker({ selectedDate, setSelectedDate }: Props) {
         format="dd/MM/yyyy"
         margin="normal"
         id="date-picker-inline"
-        label="Date picker inline"
+        label="Saisir une date"
         value={actualDate}
         onChange={(newDate: Date) => {
           setSelectedDate(formatDate(newDate));
