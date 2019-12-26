@@ -29,14 +29,12 @@ const useStyles = makeStyles({
 export default function ProgressTooltip(props) {
   const classes = useStyles(props);
   const tooltipElem = React.useRef(null);
+  const progress = Math.max(0, props.progress);
   React.useEffect(() => {
     if (props.showed) {
       if (tooltipElem.current.animate) {
         tooltipElem.current.animate(
-          [
-            { left: "calc(0% - 25px)" },
-            { left: `calc(${props.progress}% - 25px)` }
-          ],
+          [{ left: "calc(0% - 25px)" }, { left: `calc(${progress}% - 25px)` }],
           {
             duration: 500,
             iterations: 1,
@@ -45,14 +43,14 @@ export default function ProgressTooltip(props) {
           }
         );
       } else {
-        tooltipElem.current.style.left = `calc(${props.progress}% - 25px)`;
+        tooltipElem.current.style.left = `calc(${progress}% - 25px)`;
       }
     }
   }, [props.showed]);
   return (
     <React.Fragment>
       <span ref={tooltipElem} className={classes.tooltip}>
-        {props.progress + "%"}
+        {progress + "%"}
       </span>{" "}
     </React.Fragment>
   );
