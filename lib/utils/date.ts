@@ -5,10 +5,17 @@ export function formatDate(date: Date = new Date()) {
   return format(date, DATE_FORMAT);
 }
 
-export function getDate(date: Date | string = new Date()) {
+export function getDayMonth(date: Date | string = new Date()) {
+  return getDate(date, "dd/MM");
+}
+
+export function getDate(
+  date: Date | string = new Date(),
+  output = "dd/MM/yyyy"
+) {
   const dateToTreat = typeof date === "string" ? date : formatDate(date);
   const finalDate = parseISO(dateToTreat);
-  return format(finalDate, "dd/MM/yyyy");
+  return format(finalDate, output);
 }
 
 export function getCurrentYear() {

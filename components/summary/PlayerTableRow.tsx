@@ -10,11 +10,12 @@ import {
 import { ButtonGroup } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+// import VisibilityIcon from "@material-ui/icons/Visibility";
+// import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
 import React from "react";
 import ProgressBar from "../../components/summary/ProgressBar";
+import { getDayMonth } from "../../lib/utils/date";
 import { PlayerTableRowDatas } from "./PlayersTable";
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -56,7 +57,8 @@ const useStyles = makeStyles({
     backgroundColor: "white"
   },
   viewIcon: {
-    marginLeft: "2px",
+    // marginLeft: "2px",
+    margin: 0,
     padding: 0
   },
   levelDescription: {
@@ -80,9 +82,9 @@ const useStyles = makeStyles({
     marginTop: 1,
     zIndex: 5
   },
-  epic: { color: "#a335ee", borderColor: "#a335ee" },
-  rare: { color: "#0070dd", borderColor: "#0070dd" },
-  commun: { color: "#1ad900", borderColor: "#1ad900" },
+  epic: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
+  rare: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
+  commun: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
   allLootColor: { color: "grey", borderColor: "grey" },
   noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: {
@@ -117,7 +119,6 @@ export default function PlayerTableRow({
       <StyledTableCell align="center">
         <div className={classes.lootNumbers}>
           <div className={classes.numberAndEye + " " + classes.epic}>
-            {rowData.totalLootByLvl.level3}
             {rowData.totalLootByLvl.level3 > 0 ? (
               <IconButton
                 ref={iconElem}
@@ -138,7 +139,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityIcon />
+                {rowData.totalLootByLvl.level3}
               </IconButton>
             ) : (
               <IconButton
@@ -147,12 +148,11 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityOffIcon />
+                {rowData.totalLootByLvl.level3}
               </IconButton>
             )}
           </div>
           <div className={classes.numberAndEye + " " + classes.rare}>
-            {rowData.totalLootByLvl.level2}
             {rowData.totalLootByLvl.level2 > 0 ? (
               <IconButton
                 ref={iconElem}
@@ -173,7 +173,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityIcon />
+                {rowData.totalLootByLvl.level2}
               </IconButton>
             ) : (
               <IconButton
@@ -182,12 +182,11 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityOffIcon />
+                {rowData.totalLootByLvl.level2}
               </IconButton>
             )}
           </div>
           <div className={classes.numberAndEye + " " + classes.commun}>
-            {rowData.totalLootByLvl.level1}
             {rowData.totalLootByLvl.level1 > 0 ? (
               <IconButton
                 ref={iconElem}
@@ -208,7 +207,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityIcon />
+                {rowData.totalLootByLvl.level1}
               </IconButton>
             ) : (
               <IconButton
@@ -217,7 +216,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityOffIcon />
+                {rowData.totalLootByLvl.level1}
               </IconButton>
             )}
           </div>
@@ -259,7 +258,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityIcon />
+                {/* <VisibilityIcon /> */}
               </IconButton>
             ) : (
               <IconButton
@@ -268,7 +267,7 @@ export default function PlayerTableRow({
                 color="primary"
                 aria-label="View loots"
               >
-                <VisibilityOffIcon />
+                {/* <VisibilityOffIcon /> */}
               </IconButton>
             )}
           </div>
@@ -282,8 +281,12 @@ export default function PlayerTableRow({
         />
       </StyledTableCell>
       <StyledTableCell align="center">{rowData.totalRaid}</StyledTableCell>
-      <StyledTableCell align="center">{rowData.lastLootDate}</StyledTableCell>
-      <StyledTableCell align="center">{rowData.lastRaidDate}</StyledTableCell>
+      <StyledTableCell align="center">
+        {getDayMonth(rowData.lastLootDate)}
+      </StyledTableCell>
+      <StyledTableCell align="center">
+        {getDayMonth(rowData.lastRaidDate)}
+      </StyledTableCell>
       <StyledTableCell align="center" className={classes.link}>
         <ButtonGroup
           size="small"
@@ -319,7 +322,7 @@ export default function PlayerTableRow({
               href="/player/view/[id]"
               as={`/player/view/${rowData.playerId}`}
             >
-              <a target="_blank">Details</a>
+              <a target="_blank">Infos</a>
             </Link>
           </Button>
         </ButtonGroup>

@@ -94,7 +94,7 @@ type ColumnName =
   | "Pseudo"
   | "Merites"
   | "Total Loot"
-  | "Total raid"
+  | "Total raids"
   | "Last loot"
   | "Last raid";
 
@@ -107,6 +107,7 @@ export default function PlayersTable(props: Props) {
       let totalLootLevel1 = 0;
       let totalLootLevel2 = 0;
       let totalLootLevel3 = 0;
+      // let totalLootLevel4 = 0;
       let totalLoot = 0;
       const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
         raid => !raid.passed
@@ -201,7 +202,7 @@ export default function PlayersTable(props: Props) {
     }
     if (colName === "Merites") {
       newRows.sort(byValue("merit", currentlyOrderedDesc));
-    } else if (colName === "Total raid") {
+    } else if (colName === "Total raids") {
       newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
     } else if (colName === "Total Loot") {
       newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
@@ -246,15 +247,12 @@ export default function PlayersTable(props: Props) {
                 "Pseudo",
                 "Total Loot",
                 "Merites",
-                "Total raid",
+                "Total raids",
                 "Last loot",
                 "Last raid",
-                ""
+                "Infos"
               ].map((columnName: ColumnName, index: number) => (
-                <StyledTableCell
-                  key={"col" + index + columnName}
-                  align="center"
-                >
+                <StyledTableCell key={"col" + index + columnName}>
                   <Button
                     className={classes.headButton}
                     variant={"text"}
