@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import {
   createStyles,
   makeStyles,
@@ -12,8 +11,6 @@ import {
 import { ButtonGroup } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-// import VisibilityIcon from "@material-ui/icons/Visibility";
-// import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import Link from "next/link";
 import ProgressBar from "../../components/summary/ProgressBar";
 import { getDayMonth } from "../../lib/utils/date";
@@ -49,50 +46,6 @@ const useStyles = makeStyles({
   lootNumbers: {
     display: "flex"
   },
-  // to remove
-  numberAndEye: {
-    border: "1px solid",
-    borderRadius: "4px",
-    padding: 4,
-    margin: 3,
-    position: "relative",
-    minWidth: "50px",
-    backgroundColor: "white"
-  },
-  // to remove
-  viewIcon: {
-    // marginLeft: "2px",
-    margin: 0,
-    padding: 0
-  },
-  // to remove
-  levelDescription: {
-    position: "absolute",
-    left: "20%",
-    top: "-30%",
-    width: "60%",
-    height: "60%",
-    backgroundColor: "white",
-    fontSize: "12px"
-  },
-  // to remove
-  allLoot: {
-    marginLeft: 15,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  // to remove
-  badLootPlus: {
-    fontSize: "10px",
-    alignSelf: "flex-start",
-    marginTop: 1,
-    zIndex: 5
-  },
-  // to remove
-  allLootColor: { color: "grey", borderColor: "grey" },
-  // to remove
-  noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
   link: {
     "& button a": { textDecoration: "none", color: "#1976d2" },
     "& button:disabled a": { textDecoration: "none", color: "grey" }
@@ -123,12 +76,12 @@ export default function PlayerTableRow({
       ? lootData
       : lootData.filter(loot => loot.itemByItemId.lootLevel === lootLevel);
 
-    const { top, left } = iconElem.current.getBoundingClientRect();
+    const { top, right } = iconElem.current.getBoundingClientRect();
     return openLootWindow(
       rowData.name,
       lootDataToKeep,
       lootLevel,
-      { top, left },
+      { top, left: right },
       classColor,
       rowData.totalRaid
     );
@@ -141,66 +94,16 @@ export default function PlayerTableRow({
       </StyledTableCell>
 
       <StyledTableCell align="center">
-        <div className={classes.lootNumbers}>
-          {[/* 4,  */ 3, 2, 1, "all"].map((lootLevel: number | "all") => (
+        <div className={classes.lootNumbers} ref={iconElem}>
+          {[3, 2, 1, "all"].map((lootLevel: number | "all") => (
             <LootButton
               key={`lootbutton-${rowData.name}-${lootLevel}`}
               onClick={() => simpleOpenLootWindow(lootLevel)}
               lootLevel={lootLevel}
               lootCount={rowData.totalLootByLvl[`level${lootLevel}`]}
+              lootLowLevelCount={rowData.totalLootByLvl.levellow}
             />
           ))}
-          <div
-            className={
-              classes.numberAndEye +
-              " " +
-              classes.allLoot +
-              " " +
-              classes.allLootColor
-            }
-          >
-            <div className={classes.levelDescription}>All</div>
-            <span>{rowData.totalLoot}</span>
-            {rowData.totalLootByLvl.level1 ? (
-              <span className={classes.badLootPlus}>
-                {"+" + rowData.totalLootByLvl.level1}
-              </span>
-            ) : (
-              ""
-            )}
-            {rowData.totalLoot > 0 ? (
-              <IconButton
-                ref={iconElem}
-                onClick={() => {
-                  openLootWindow(
-                    rowData.name,
-                    lootData,
-                    "all",
-                    {
-                      top: iconElem.current.getBoundingClientRect().top,
-                      left: iconElem.current.getBoundingClientRect().left
-                    },
-                    classColor,
-                    rowData.totalRaid
-                  );
-                }}
-                className={classes.viewIcon + " " + classes.allLootColor}
-                color="primary"
-                aria-label="View loots"
-              >
-                {/* <VisibilityIcon /> */}
-              </IconButton>
-            ) : (
-              <IconButton
-                ref={iconElem}
-                className={classes.viewIcon + " " + classes.noLoot}
-                color="primary"
-                aria-label="View loots"
-              >
-                {/* <VisibilityOffIcon /> */}
-              </IconButton>
-            )}
-          </div>
         </div>
       </StyledTableCell>
       <StyledTableCell className={classes.progressCell} align="center">

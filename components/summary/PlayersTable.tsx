@@ -54,6 +54,8 @@ interface LootsByLvl {
   level1: number;
   level2: number;
   level3: number;
+  levelall: number;
+  levellow: number;
 }
 const useStyles = makeStyles(theme => ({
   root: {
@@ -168,7 +170,9 @@ export default function PlayersTable(props: Props) {
         totalLootByLvl: {
           level1: totalLootLevel1,
           level2: totalLootLevel2,
-          level3: totalLootLevel3
+          level3: totalLootLevel3,
+          levelall: totalLootLevel1 + totalLootLevel2 + totalLootLevel3,
+          levellow: totalLootLevel1
         },
         totalRaid,
         lastLootDate: lastLootDate ? formatDate(lastLootDate) : "Aucun",
