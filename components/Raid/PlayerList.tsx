@@ -69,7 +69,7 @@ function parseWarcraftLogs(content: string) {
     const [, dps] = content.match(/DPS:	(.*)/);
 
     const playersFound = (tanks + healers + dps)
-      .split(/(?=[A-ZØáÁÀÂÄÅÆÇŒÉÈÊËƒíÍÌÎÏñÑóÓÒÔÖúÚÙÛýÝ])/)
+      .split(/(?=[A-ZØÁÁÀÂÄÅÆÇŒÉÈÊËƑÍÌÎÏÑÑÓÓÒÔÖÚÚÙÛÝÝ])/)
       .filter((value, index, self) => {
         return self.indexOf(value) === index;
       })
