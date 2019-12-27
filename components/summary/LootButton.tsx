@@ -36,18 +36,18 @@ const useStyles = makeStyles(
       marginTop: 1,
       zIndex: 5
     },
-    level3: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
-    level2: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
-    level1: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
-    levelall: { fontSize: 16, color: "grey", backgroundColor: "grey" },
+    level3: { color: "white", backgroundColor: "#a335ee" },
+    level2: { color: "white", backgroundColor: "#0070dd" },
+    level1: { color: "white", backgroundColor: "#1ad900" },
+    levelall: { color: "white", backgroundColor: "grey" },
     // allLootColor: { color: "grey", borderColor: "grey" },
-    noLoot: { fontSize: 16, color: "rgba(0,0,0,0.3)", cursor: "auto" },
+    noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
     link: {
       "& button a": { textDecoration: "none", color: "#1976d2" },
       "& button:disabled a": { textDecoration: "none", color: "grey" }
     }
   },
-  { name: "LootButton" }
+  { name: "MuiLootButton" }
 );
 
 interface Props {
@@ -70,25 +70,13 @@ export function LootButton({
   return (
     <div
       className={cn({
-        ["LootButton-number"]: true,
-        ["LootButton-allLoot"]: isAllLoot,
-        ["LootButton-allLootColor"]: isAllLoot,
-        ["LootButton-noLoot"]: !hasLoots,
-        [`LootButton-level${lootLevel}`]: hasLoots
+        ["MuiLootButton-number"]: true,
+        ["MuiLootButton-allLoot"]: isAllLoot,
+        ["MuiLootButton-allLootColor"]: isAllLoot,
+        ["MuiLootButton-noLoot"]: !hasLoots,
+        [`MuiLootButton-level${lootLevel}`]: hasLoots
       })}
     >
-      {isAllLoot && (
-        <>
-          <div className={classes.levelDescription}>All</div>
-          <span>{lootCount - lootLowLevelCount}</span>
-          {lootLowLevelCount > 0 && (
-            <span className={classes.badLootPlus}>
-              {"+" + lootLowLevelCount}
-            </span>
-          )}
-        </>
-      )}
-
       <IconButton
         onClick={() => {
           if (hasLoots) {
@@ -96,13 +84,25 @@ export function LootButton({
           }
         }}
         className={cn({
-          ["LootButton-noLoot"]: !hasLoots,
-          [`LootButton-level${lootLevel}`]: hasLoots
+          ["MuiLootButton-noLoot"]: !hasLoots,
+          [`MuiLootButton-level${lootLevel}`]: hasLoots
         })}
         color="primary"
         aria-label="View loots"
       >
-        {lootCount}
+        {isAllLoot ? (
+          <>
+            <div className={classes.levelDescription}>All</div>
+            <span>{lootCount - lootLowLevelCount}</span>
+            {lootLowLevelCount > 0 && (
+              <span className={classes.badLootPlus}>
+                {"+" + lootLowLevelCount}
+              </span>
+            )}
+          </>
+        ) : (
+          lootCount
+        )}
       </IconButton>
     </div>
   );
