@@ -6,6 +6,10 @@ import cn from "classnames";
 
 const useStyles = makeStyles(
   {
+    // root: {
+    //   padding: "0 !important",
+    //   margin: "0 !important"
+    // },
     number: {
       border: "1px solid",
       borderRadius: "4px",
@@ -36,12 +40,12 @@ const useStyles = makeStyles(
       marginTop: 1,
       zIndex: 5
     },
-    level3: { color: "white", backgroundColor: "#a335ee" },
-    level2: { color: "white", backgroundColor: "#0070dd" },
-    level1: { color: "white", backgroundColor: "#1ad900" },
-    levelall: { color: "white", backgroundColor: "grey" },
-    // allLootColor: { color: "grey", borderColor: "grey" },
-    noLoot: { color: "rgba(0,0,0,0.3)", cursor: "auto" },
+    level3: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
+    level2: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
+    level1: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
+    levelall: { fontSize: 16, color: "white", backgroundColor: "grey" },
+    // allLootColor: {   fontSize: 16, color: "grey", borderColor: "grey" },
+    noLoot: { fontSize: 16, color: "rgba(0,0,0,0.3)", cursor: "auto" },
     link: {
       "& button a": { textDecoration: "none", color: "#1976d2" },
       "& button:disabled a": { textDecoration: "none", color: "grey" }
