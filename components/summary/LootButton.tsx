@@ -1,51 +1,52 @@
 import React from "react";
 
-import { IconButton } from "@material-ui/core";
+// import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cn from "classnames";
 
 const useStyles = makeStyles(
   {
     // root: {
-    //   padding: "0 !important",
-    //   margin: "0 !important"
+    //   position: "relative"
     // },
     number: {
+      cursor: "pointer",
       border: "1px solid",
-      borderRadius: "4px",
-      padding: 4,
-      margin: 3,
+      // borderRadius: 4,
+      // padding: 4,
+      // margin: 3,
       position: "relative",
-      minWidth: "50px",
+      minWidth: 30,
       backgroundColor: "white"
     },
     levelDescription: {
-      // position: "absolute",
-      // left: "20%",
-      // top: "-30%",
-      // width: "60%",
-      // height: "60%",
-      // backgroundColor: "white",
-      // fontSize: "12px"
+      position: "absolute",
+      right: 0,
+      top: "-55%",
+      width: 20,
+      height: 15,
+      backgroundColor: "grey",
+      fontSize: 10,
+      borderRadius: 4
     },
     allLoot: {
-      marginLeft: 15,
+      marginLeft: 5,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     },
     badLootPlus: {
-      fontSize: "10px",
+      fontSize: 10,
       alignSelf: "flex-start",
       marginTop: 1,
       zIndex: 5
     },
-    level3: { fontSize: 16, color: "white", backgroundColor: "#a335ee" },
-    level2: { fontSize: 16, color: "white", backgroundColor: "#0070dd" },
-    level1: { fontSize: 16, color: "white", backgroundColor: "#1ad900" },
-    levelall: { fontSize: 16, color: "white", backgroundColor: "grey" },
-    // allLootColor: {   fontSize: 16, color: "grey", borderColor: "grey" },
-    noLoot: { fontSize: 16, color: "rgba(0,0,0,0.3)", cursor: "auto" },
+    level3: { fontSize: 15, color: "white", backgroundColor: "#a335ee" },
+    level2: { fontSize: 15, color: "white", backgroundColor: "#0070dd" },
+    level1: { fontSize: 15, color: "white", backgroundColor: "#1ad900" },
+    levelall: { fontSize: 15, color: "white", backgroundColor: "grey" },
+    // allLootColor: {   fontSize: 15, color: "grey", borderColor: "grey" },
+    noLoot: { fontSize: 15, color: "rgba(0,0,0,0.3)", cursor: "auto" },
     link: {
       "& button a": { textDecoration: "none", color: "#1976d2" },
       "& button:disabled a": { textDecoration: "none", color: "grey" }
@@ -81,7 +82,7 @@ export function LootButton({
         [`MuiLootButton-level${lootLevel}`]: hasLoots
       })}
     >
-      <IconButton
+      <div
         onClick={() => {
           if (hasLoots) {
             onClick();
@@ -107,7 +108,7 @@ export function LootButton({
         ) : (
           lootCount
         )}
-      </IconButton>
+      </div>
     </div>
   );
 }
