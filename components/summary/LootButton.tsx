@@ -21,7 +21,7 @@ const useStyles = makeStyles(
     },
     levelDescription: {
       position: "absolute",
-      right: 0,
+      right: -1,
       top: "-55%",
       width: 20,
       height: 15,
@@ -30,7 +30,7 @@ const useStyles = makeStyles(
       borderRadius: 4
     },
     allLoot: {
-      marginLeft: 5,
+      // marginLeft: 5,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -41,10 +41,30 @@ const useStyles = makeStyles(
       marginTop: 1,
       zIndex: 5
     },
-    level3: { fontSize: 15, color: "white", backgroundColor: "#a335ee" },
-    level2: { fontSize: 15, color: "white", backgroundColor: "#0070dd" },
-    level1: { fontSize: 15, color: "white", backgroundColor: "#1ad900" },
-    levelall: { fontSize: 15, color: "white", backgroundColor: "grey" },
+    level3: {
+      fontSize: 15,
+      color: "white",
+      backgroundColor: "#a335ee",
+      borderColor: "#a335ee"
+    },
+    level2: {
+      fontSize: 15,
+      color: "white",
+      backgroundColor: "#0070dd",
+      borderColor: "#0070dd"
+    },
+    level1: {
+      fontSize: 15,
+      color: "white",
+      backgroundColor: "#1ad900",
+      borderColor: "#1ad900"
+    },
+    levelall: {
+      fontSize: 15,
+      color: "white",
+      backgroundColor: "grey",
+      borderColor: "grey"
+    },
     // allLootColor: {   fontSize: 15, color: "grey", borderColor: "grey" },
     noLoot: { fontSize: 15, color: "rgba(0,0,0,0.3)", cursor: "auto" },
     link: {
