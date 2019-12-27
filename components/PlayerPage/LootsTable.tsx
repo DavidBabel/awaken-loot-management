@@ -12,12 +12,6 @@ import { Loot } from "../../lib/generatedTypes";
 import { getDate } from "../../lib/utils/date";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
-declare global {
-  interface Window {
-    $WowheadPower: any;
-  }
-}
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

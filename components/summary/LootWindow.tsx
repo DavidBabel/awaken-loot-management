@@ -14,12 +14,6 @@ import { Loot } from "../../lib/generatedTypes";
 import { getDurationBetween } from "../../lib/utils/date";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
-declare global {
-  interface Window {
-    $WowheadPower: any;
-  }
-}
-
 interface ElementPosition {
   top: number;
   left: number;
@@ -76,7 +70,7 @@ const useStyles = makeStyles({
   cross: {
     position: "absolute",
     top: "2px",
-    right: "2px",
+    left: "2px",
     cursor: "pointer",
     backgroundColor: "#E6E8EB",
     height: "24px",
