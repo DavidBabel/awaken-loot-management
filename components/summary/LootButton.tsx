@@ -28,7 +28,7 @@ const useStyles = makeStyles(
       position: "absolute",
       right: -1,
       top: "-55%",
-      width: 20,
+      width: 30,
       height: 15,
       backgroundColor: "grey",
       fontSize: 10,
@@ -63,6 +63,7 @@ const useStyles = makeStyles(
     },
     levelall: {
       marginLeft: 4,
+      marginRight: 6,
       backgroundColor: "grey",
       color: "white",
       minWidth: 40
@@ -74,7 +75,7 @@ const useStyles = makeStyles(
 interface Props {
   lootLevel: number | "all";
   lootCount: number;
-  lootLowLevelCount: number;
+  lootLowLevelCount?: number;
   onClick: () => void;
 }
 
@@ -104,7 +105,7 @@ export function LootButton({
     >
       {isAllLoot ? (
         <>
-          <div className={classes.description}>All</div>
+          <div className={classes.description}>Total</div>
           <span className={classes.levelAllNumber}>
             {lootCount - lootLowLevelCount}
           </span>

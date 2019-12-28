@@ -96,7 +96,7 @@ export default function PageSummary() {
   }));
 
   const classes = useStyles("");
-  const [currentPage, setCurrentPage] = React.useState(0);
+  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState<LootWindowProps[]>([]);
   const onMobile = useOnMobile(false);
 
@@ -171,14 +171,16 @@ export default function PageSummary() {
   }
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
-    setCurrentPage(newValue);
+    setCurrentTabIndex(newValue);
   }
 
   return (
-    <div className={`${classes.root} ${classes["indicator_" + currentPage]}`}>
+    <div
+      className={`${classes.root} ${classes["indicator_" + currentTabIndex]}`}
+    >
       <AppBar position="static" color="default">
         <Tabs
-          value={currentPage}
+          value={currentTabIndex}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -205,11 +207,11 @@ export default function PageSummary() {
         return (
           <TabPanel
             key={`summary-content-tab-${playerClass}`}
-            value={currentPage}
+            value={currentTabIndex}
             index={index}
           >
             <PlayersTable
-              showed={currentPage === index}
+              showed={currentTabIndex === index}
               classColor={getClassColor(playerClass)}
               players={currentPlayers}
               maxMeritValue={maxMeritValue}

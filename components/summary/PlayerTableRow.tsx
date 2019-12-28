@@ -13,9 +13,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
 import ProgressBar from "../../components/summary/ProgressBar";
+import { Loot } from "../../lib/generatedTypes";
 import { getDayMonth } from "../../lib/utils/date";
 import { LootButton } from "./LootButton";
 import { PlayerTableRowDatas } from "./PlayersTable";
+
+// CONFIG
+const LIMIT_LOOTLEVEL_TO_COUNT = 2;
+const ENABLED_LOOT_LEVELS = [4, 3, 2, 1];
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +29,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
     }
   })
 )(TableCell);
+
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -38,6 +44,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
     }
   })
 )(TableRow);
+
 const useStyles = makeStyles({
   progressCell: {
     width: "200px",
@@ -57,7 +64,7 @@ interface Props {
   classColor: string;
   showed: boolean;
   openLootWindow: any;
-  lootData: any;
+  lootData: Loot[];
 }
 
 export default function PlayerTableRow({
@@ -69,6 +76,15 @@ export default function PlayerTableRow({
 }: Props) {
   const classes = useStyles("");
   const iconElem = React.useRef(null);
+
+  let totalAllLoots = 0;
+  let totalBadLoots = 0;
+  rowData.totalLootByLevel.forEach((totalLootThisLevel, index) => {
+    totalAllLoots += totalLootThisLevel;
+    if (index < LIMIT_LOOTLEVEL_TO_COUNT) {
+      totalBadLoots += totalLootThisLevel;
+    }
+  });
 
   function simpleOpenLootWindow(lootLevel: number | "all") {
     const all = lootLevel === "all";
@@ -95,15 +111,20 @@ export default function PlayerTableRow({
 
       <StyledTableCell align="center">
         <div className={classes.lootNumbers} ref={iconElem}>
-          {[3, 2, 1, "all"].map((lootLevel: number | "all") => (
+          {ENABLED_LOOT_LEVELS.map((lootLevel: number) => (
             <LootButton
               key={`lootbutton-${rowData.name}-${lootLevel}`}
               onClick={() => simpleOpenLootWindow(lootLevel)}
               lootLevel={lootLevel}
-              lootCount={rowData.totalLootByLvl[`level${lootLevel}`]}
-              lootLowLevelCount={rowData.totalLootByLvl.levellow}
+              lootCount={rowData.totalLootByLevel[lootLevel]}
             />
           ))}
+          <LootButton
+            onClick={() => simpleOpenLootWindow("all")}
+            lootLevel={"all"}
+            lootCount={totalAllLoots}
+            lootLowLevelCount={totalBadLoots}
+          />
         </div>
       </StyledTableCell>
       <StyledTableCell className={classes.progressCell} align="center">

@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { Player } from "../../lib/generatedTypes";
+import { Loot, Player } from "../../lib/generatedTypes";
 import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
 import PlayerTableRow from "./PlayerTableRow";
@@ -33,13 +33,12 @@ const StyledTableCell = withStyles((theme: Theme) =>
 export interface PlayerTableRowDatas {
   name: string;
   merit: number;
-  totalLoot: number;
-  totalLootByLvl: LootsByLvl;
+  totalLootByLevel: number[];
   totalRaid: number;
   lastLootDate: string;
   lastRaidDate: string;
   playerId: number;
-  playerLoots: any;
+  playerLoots: Loot[];
   hasPlayerSpe: boolean;
 }
 
@@ -50,13 +49,7 @@ interface Props {
   maxMeritValue: number;
   openLootWindow: any;
 }
-interface LootsByLvl {
-  level1: number;
-  level2: number;
-  level3: number;
-  levelall: number;
-  levellow: number;
-}
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -94,23 +87,31 @@ const useStyles = makeStyles(theme => ({
 
 type ColumnName =
   | "Pseudo"
-  | "Merites"
   | "Total Loot"
+  | "Merites"
   | "Total raids"
   | "Last loot"
-  | "Last raid";
+  | "Last raid"
+  | "Infos";
 
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
 
+  const columns: ColumnName[] = [
+    "Pseudo",
+    "Total Loot",
+    "Merites",
+    "Total raids",
+    "Last loot",
+    "Last raid",
+    "Infos"
+  ];
+
   const rowsData = props.players.map(
     (player: Player): PlayerTableRowDatas => {
       let maxMerit = 0;
-      let totalLootLevel1 = 0;
-      let totalLootLevel2 = 0;
-      let totalLootLevel3 = 0;
-      // let totalLootLevel4 = 0;
-      let totalLoot = 0;
+      const totalLootByLevel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
       const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
         raid => !raid.passed
       ).length;
@@ -121,16 +122,9 @@ export default function PlayersTable(props: Props) {
       });
       player.lootsByPlayerId.nodes.forEach(loot => {
         if (loot.active) {
-          if (loot.itemByItemId.lootLevel === 1) {
-            totalLootLevel1 += 1;
-          } else if (loot.itemByItemId.lootLevel === 2) {
-            totalLootLevel2 += 1;
-          } else if (loot.itemByItemId.lootLevel === 3) {
-            totalLootLevel3 += 1;
-          }
+          totalLootByLevel[loot.itemByItemId.lootLevel] += 1;
         }
       });
-      totalLoot = totalLootLevel3 + totalLootLevel2;
       let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
       if (totalRaid === 0) {
         lastRaidDate = null;
@@ -158,22 +152,10 @@ export default function PlayersTable(props: Props) {
         lastLootDate = null;
       }
 
-      // const dateOptions = {
-      //   year: "numeric",
-      //   month: "long",
-      //   day: "numeric"
-      // };
       return {
         name: player.name,
         merit: Math.round((maxMerit * 100) / props.maxMeritValue),
-        totalLoot,
-        totalLootByLvl: {
-          level1: totalLootLevel1,
-          level2: totalLootLevel2,
-          level3: totalLootLevel3,
-          levelall: totalLootLevel1 + totalLootLevel2 + totalLootLevel3,
-          levellow: totalLootLevel1
-        },
+        totalLootByLevel,
         totalRaid,
         lastLootDate: lastLootDate ? formatDate(lastLootDate) : "Aucun",
         lastRaidDate: lastRaidDate ? formatDate(lastRaidDate) : "Aucun",
@@ -204,19 +186,27 @@ export default function PlayersTable(props: Props) {
     if (colName === orderedBy) {
       currentlyOrderedDesc = !orderedDESC;
     }
-    if (colName === "Merites") {
-      newRows.sort(byValue("merit", currentlyOrderedDesc));
-    } else if (colName === "Total raids") {
-      newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
-    } else if (colName === "Total Loot") {
-      newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
-    } else if (colName === "Pseudo") {
-      newRows.sort(byAlphabet("name", currentlyOrderedDesc));
-    } else if (colName === "Last loot") {
-      newRows.sort(byDate("lastLootDate", currentlyOrderedDesc));
-    } else if (colName === "Last raid") {
-      newRows.sort(byDate("lastRaidDate", currentlyOrderedDesc));
+    switch (colName) {
+      case "Merites":
+        newRows.sort(byValue("merit", currentlyOrderedDesc));
+        break;
+      case "Total raids":
+        newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
+        break;
+      case "Total Loot":
+        newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
+        break;
+      case "Pseudo":
+        newRows.sort(byAlphabet("name", currentlyOrderedDesc));
+        break;
+      case "Last loot":
+        newRows.sort(byDate("lastLootDate", currentlyOrderedDesc));
+        break;
+      case "Last raid":
+        newRows.sort(byDate("lastRaidDate", currentlyOrderedDesc));
+        break;
     }
+
     if (colName === orderedBy) {
       setOrderedDESC(prevState => !prevState);
     }
@@ -247,15 +237,7 @@ export default function PlayersTable(props: Props) {
         <Table className={classes.table} stickyHeader={true}>
           <TableHead>
             <TableRow>
-              {[
-                "Pseudo",
-                "Total Loot",
-                "Merites",
-                "Total raids",
-                "Last loot",
-                "Last raid",
-                "Infos"
-              ].map((columnName: ColumnName, index: number) => (
+              {columns.map((columnName: ColumnName, index: number) => (
                 <StyledTableCell key={"col" + index + columnName}>
                   <Button
                     className={classes.headButton}
