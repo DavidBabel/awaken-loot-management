@@ -62,7 +62,7 @@ const useStyles = makeStyles(
       border: "1px solid rgba(0,0,0,0.15)"
     },
     levelall: {
-      marginLeft: 4,
+      marginLeft: 5,
       marginRight: 6,
       backgroundColor: "grey",
       color: "white",
