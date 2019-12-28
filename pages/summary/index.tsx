@@ -18,8 +18,8 @@ import { useOnMobile } from "../../lib/hooks/mobilecheck";
 
 interface TabPanelProps {
   children?: React.ReactNode;
-  index: any;
-  value: any;
+  index: number;
+  value: number;
 }
 
 function TabPanel(props: TabPanelProps) {
@@ -116,11 +116,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export default function PageIndex() {
+export default function PageSummary() {
   const classes = useStyles("");
-  const [value, setValue] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState([]);
   const onMobile = useOnMobile(false);
+
   const {
     loading: loadingPlayers,
     data: dataPlayers,
@@ -190,6 +191,8 @@ export default function PageIndex() {
           }
         ];
       });
+    } else {
+      closeLootWindow(playerName, lootLvl);
     }
   }
   function closeLootWindow(playerName: string, lootLvl: number) {
@@ -203,14 +206,14 @@ export default function PageIndex() {
   }
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
-    setValue(newValue);
+    setCurrentPage(newValue);
   }
 
   return (
-    <div className={`${classes.root} ${classes["indicator_" + value]}`}>
+    <div className={`${classes.root} ${classes["indicator_" + currentPage]}`}>
       <AppBar position="static" color="default">
         <Tabs
-          value={value}
+          value={currentPage}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -233,81 +236,81 @@ export default function PageIndex() {
           <Tab className={classes.tab} label="Guerrier DPS" {...a11yProps(8)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={currentPage} index={0}>
         <PlayersTable
-          showed={value === 0}
+          showed={currentPage === 0}
           classColor={classColors.druide}
           players={druides}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={currentPage} index={1}>
         <PlayersTable
-          showed={value === 1}
+          showed={currentPage === 1}
           classColor={classColors.chasseur}
           players={chasseurs}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={currentPage} index={2}>
         <PlayersTable
-          showed={value === 2}
+          showed={currentPage === 2}
           classColor={classColors.mage}
           players={mages}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel value={currentPage} index={3}>
         <PlayersTable
-          showed={value === 3}
+          showed={currentPage === 3}
           classColor={classColors.pretre}
           players={pretres}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={currentPage} index={4}>
         <PlayersTable
-          showed={value === 4}
+          showed={currentPage === 4}
           classColor={classColors.voleur}
           players={voleurs}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={5}>
+      <TabPanel value={currentPage} index={5}>
         <PlayersTable
-          showed={value === 5}
+          showed={currentPage === 5}
           classColor={classColors.chaman}
           players={chamans}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={6}>
+      <TabPanel value={currentPage} index={6}>
         <PlayersTable
-          showed={value === 6}
+          showed={currentPage === 6}
           classColor={classColors.demoniste}
           players={demonistes}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={7}>
+      <TabPanel value={currentPage} index={7}>
         <PlayersTable
-          showed={value === 7}
+          showed={currentPage === 7}
           classColor={classColors.guerrierTank}
           players={guerriersTank}
           maxMeritValue={maxMeritValue}
           openLootWindow={openLootWindow}
         />
       </TabPanel>
-      <TabPanel value={value} index={8}>
+      <TabPanel value={currentPage} index={8}>
         <PlayersTable
-          showed={value === 8}
+          showed={currentPage === 8}
           classColor={classColors.guerrierDD}
           players={guerriersDps}
           maxMeritValue={maxMeritValue}
