@@ -26,7 +26,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ProgressTooltip(props) {
+interface Props {
+  progress: number;
+  showed: boolean;
+}
+
+export default function ProgressTooltip(props: Props) {
   const classes = useStyles(props);
   const tooltipElem = React.useRef(null);
   const progress = Math.max(0, props.progress);
