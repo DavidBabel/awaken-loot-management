@@ -15,7 +15,9 @@ import { getDurationBetween } from "../../lib/utils/date";
 import {
   lootColorLevel1,
   lootColorLevel2,
-  lootColorLevel3
+  lootColorLevel3,
+  lootColorLevel4,
+  lootColorLevel5
 } from "../../lib/utils/loot-colors";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
@@ -23,16 +25,18 @@ interface ElementPosition {
   top: number;
   left: number;
 }
-interface Props {
-  key: string;
+
+export interface LootWindowProps {
   playerName: string;
-  lootData: Loot;
+  lootData: Loot[];
   lootLvl: number | "all";
   iconClientPos: ElementPosition;
   classColor: string;
   totalRaid: number;
+}
+interface Props extends LootWindowProps {
   onMobile: boolean;
-  closeLootWindow(playerName: string, lootLvl: number): any;
+  closeLootWindow: (playerName: string, lootLvl: number | "all") => void;
 }
 
 const useStyles = makeStyles({
@@ -129,12 +133,14 @@ const useStyles = makeStyles({
     border: "4px solid",
     zIndex: 1
   },
-  epic: { borderColor: lootColorLevel3 },
-  rare: { borderColor: lootColorLevel2 },
-  commun: { borderColor: lootColorLevel1 },
+  lootlevel5: { borderColor: lootColorLevel5 },
+  lootlevel4: { borderColor: lootColorLevel4 },
+  lootlevel3: { borderColor: lootColorLevel3 },
+  lootlevel2: { borderColor: lootColorLevel2 },
+  lootlevel1: { borderColor: lootColorLevel1 },
   allLoot: { borderColor: "grey" }
 });
-export default function LootWindow(props) {
+export default function LootWindow(props: Props) {
   const classes = useStyles(props);
   const {
     closeLootWindow,
@@ -223,17 +229,7 @@ export default function LootWindow(props) {
   useEffect(refreshWowhead);
   return (
     <div
-      className={
-        classes.root +
-        " " +
-        (lootLvl === 1
-          ? classes.commun
-          : lootLvl === 2
-          ? classes.rare
-          : lootLvl === 3
-          ? classes.epic
-          : classes.allLoot)
-      }
+      className={classes.root + " " + classes[`lootlevel${lootLvl}`]}
       ref={lootWindowElem}
     >
       <div className={classes.header} ref={headerElem}>
@@ -272,13 +268,7 @@ export default function LootWindow(props) {
                     className={
                       classes.pastilleLootLvl +
                       " " +
-                      (loot.itemByItemId.lootLevel === 1
-                        ? classes.commun
-                        : loot.itemByItemId.lootLevel === 2
-                        ? classes.rare
-                        : loot.itemByItemId.lootLevel === 3
-                        ? classes.epic
-                        : classes.allLoot)
+                      classes[`lootlevel${loot.itemByItemId.lootLevel}`]
                     }
                   />
                   <a
