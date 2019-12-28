@@ -19,7 +19,7 @@ import { LootButton } from "./LootButton";
 import { PlayerTableRowDatas } from "./PlayersTable";
 
 // CONFIG
-const LIMIT_LOOTLEVEL_TO_COUNT = 2;
+export const LIMIT_LOOTLEVEL_TO_COUNT = 2;
 const ENABLED_LOOT_LEVELS = [4, 3, 2, 1];
 
 const StyledTableCell = withStyles((theme: Theme) =>

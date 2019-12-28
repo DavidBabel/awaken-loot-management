@@ -10,7 +10,9 @@ import { BossItem, Item } from "../../lib/generatedTypes";
 import {
   lootColorLevel1,
   lootColorLevel2,
-  lootColorLevel3
+  lootColorLevel3,
+  lootColorLevel4,
+  lootColorLevel5
 } from "../../lib/utils/loot-colors";
 import { normalizeText } from "../../lib/utils/string";
 
@@ -58,19 +60,23 @@ const useStyles = makeStyles(theme =>
       textAlign: "center",
       position: "absolute",
       left: "0px",
-      top: "0px"
+      top: "0px",
+      color: "white"
     },
     lootLevel1: {
-      backgroundColor: lootColorLevel1,
-      color: "white"
+      backgroundColor: lootColorLevel1
     },
     lootLevel2: {
-      backgroundColor: lootColorLevel2,
-      color: "white"
+      backgroundColor: lootColorLevel2
     },
     lootLevel3: {
-      backgroundColor: lootColorLevel3,
-      color: "white"
+      backgroundColor: lootColorLevel3
+    },
+    lootLevel4: {
+      backgroundColor: lootColorLevel4
+    },
+    lootLevel5: {
+      backgroundColor: lootColorLevel5
     }
   })
 );

@@ -20,7 +20,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Loot, Player } from "../../lib/generatedTypes";
 import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
-import PlayerTableRow from "./PlayerTableRow";
+import PlayerTableRow, { LIMIT_LOOTLEVEL_TO_COUNT } from "./PlayerTableRow";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +33,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
 export interface PlayerTableRowDatas {
   name: string;
   merit: number;
+  totalCountableLoot: number;
   totalLootByLevel: number[];
   totalRaid: number;
   lastLootDate: string;
@@ -110,6 +111,7 @@ export default function PlayersTable(props: Props) {
   const rowsData = props.players.map(
     (player: Player): PlayerTableRowDatas => {
       let maxMerit = 0;
+      let totalCountableLoot = 0;
       const totalLootByLevel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
       const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
@@ -122,7 +124,11 @@ export default function PlayersTable(props: Props) {
       });
       player.lootsByPlayerId.nodes.forEach(loot => {
         if (loot.active) {
-          totalLootByLevel[loot.itemByItemId.lootLevel] += 1;
+          const currentLootLevel = loot.itemByItemId.lootLevel;
+          totalLootByLevel[currentLootLevel] += 1;
+          if (currentLootLevel >= LIMIT_LOOTLEVEL_TO_COUNT) {
+            totalCountableLoot += 1;
+          }
         }
       });
       let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
@@ -155,6 +161,7 @@ export default function PlayersTable(props: Props) {
       return {
         name: player.name,
         merit: Math.round((maxMerit * 100) / props.maxMeritValue),
+        totalCountableLoot,
         totalLootByLevel,
         totalRaid,
         lastLootDate: lastLootDate ? formatDate(lastLootDate) : "Aucun",
@@ -194,7 +201,7 @@ export default function PlayersTable(props: Props) {
         newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
         break;
       case "Total Loot":
-        newRows.sort(byValue("totalLoot", currentlyOrderedDesc));
+        newRows.sort(byValue("totalCountableLoot", currentlyOrderedDesc));
         break;
       case "Pseudo":
         newRows.sort(byAlphabet("name", currentlyOrderedDesc));
