@@ -3,23 +3,28 @@ import React from "react";
 // import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cn from "classnames";
+import {
+  lootColorLevel1,
+  lootColorLevel2,
+  lootColorLevel3,
+  lootColorLevel4
+} from "../../lib/utils/loot-color";
 
 const useStyles = makeStyles(
   {
-    // root: {
-    //   position: "relative"
-    // },
-    number: {
+    buttonContainer: {
       cursor: "pointer",
-      border: "1px solid",
-      // borderRadius: 4,
-      // padding: 4,
-      // margin: 3,
+      fontWeight: "bold",
+      border: "1px solid transparent",
       position: "relative",
+      paddingTop: 2,
+      paddingBottom: 1,
       minWidth: 30,
-      backgroundColor: "white"
+      backgroundColor: "white",
+      fontSize: 15,
+      color: "white"
     },
-    levelDescription: {
+    description: {
       position: "absolute",
       right: -1,
       top: "-55%",
@@ -29,47 +34,38 @@ const useStyles = makeStyles(
       fontSize: 10,
       borderRadius: 4
     },
-    allLoot: {
-      // marginLeft: 5,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    badLootPlus: {
+    exposant: {
       fontSize: 10,
-      alignSelf: "flex-start",
-      marginTop: 1,
-      zIndex: 5
+      position: "absolute",
+      right: 0,
+      top: 0
+    },
+    level4: {
+      backgroundColor: lootColorLevel4
     },
     level3: {
-      fontSize: 15,
-      color: "white",
-      backgroundColor: "#a335ee",
-      borderColor: "#a335ee"
+      backgroundColor: lootColorLevel3
     },
     level2: {
-      fontSize: 15,
-      color: "white",
-      backgroundColor: "#0070dd",
-      borderColor: "#0070dd"
+      backgroundColor: lootColorLevel2
     },
     level1: {
-      fontSize: 15,
-      color: "white",
-      backgroundColor: "#1ad900",
-      borderColor: "#1ad900"
+      backgroundColor: lootColorLevel1
+    },
+    levelAllNumber: {
+      position: "absolute",
+      right: 14,
+      textAlign: "right"
+    },
+    noLoot: {
+      color: "rgba(0,0,0,0.3)",
+      border: "1px solid rgba(0,0,0,0.15)"
     },
     levelall: {
-      fontSize: 15,
-      color: "white",
+      marginLeft: 4,
       backgroundColor: "grey",
-      borderColor: "grey"
-    },
-    // allLootColor: {   fontSize: 15, color: "grey", borderColor: "grey" },
-    noLoot: { fontSize: 15, color: "rgba(0,0,0,0.3)", cursor: "auto" },
-    link: {
-      "& button a": { textDecoration: "none", color: "#1976d2" },
-      "& button:disabled a": { textDecoration: "none", color: "grey" }
+      color: "white",
+      minWidth: 40
     }
   },
   { name: "MuiLootButton" }
@@ -92,43 +88,33 @@ export function LootButton({
   const hasLoots = lootCount > 0;
   const isAllLoot = lootLevel === "all";
 
+  function handleClick() {
+    if (hasLoots) {
+      onClick();
+    }
+  }
+
   return (
     <div
-      className={cn({
-        ["MuiLootButton-number"]: true,
-        ["MuiLootButton-allLoot"]: isAllLoot,
-        ["MuiLootButton-allLootColor"]: isAllLoot,
+      onClick={handleClick}
+      className={cn("MuiLootButton-buttonContainer", {
         ["MuiLootButton-noLoot"]: !hasLoots,
-        [`MuiLootButton-level${lootLevel}`]: hasLoots
+        [`MuiLootButton-level${lootLevel}`]: hasLoots || isAllLoot
       })}
     >
-      <div
-        onClick={() => {
-          if (hasLoots) {
-            onClick();
-          }
-        }}
-        className={cn({
-          ["MuiLootButton-noLoot"]: !hasLoots,
-          [`MuiLootButton-level${lootLevel}`]: hasLoots
-        })}
-        color="primary"
-        aria-label="View loots"
-      >
-        {isAllLoot ? (
-          <>
-            <div className={classes.levelDescription}>All</div>
-            <span>{lootCount - lootLowLevelCount}</span>
-            {lootLowLevelCount > 0 && (
-              <span className={classes.badLootPlus}>
-                {"+" + lootLowLevelCount}
-              </span>
-            )}
-          </>
-        ) : (
-          lootCount
-        )}
-      </div>
+      {isAllLoot ? (
+        <>
+          <div className={classes.description}>All</div>
+          <span className={classes.levelAllNumber}>
+            {lootCount - lootLowLevelCount}
+          </span>
+          {lootLowLevelCount > 0 && (
+            <span className={classes.exposant}>{"+" + lootLowLevelCount}</span>
+          )}
+        </>
+      ) : (
+        lootCount
+      )}
     </div>
   );
 }
