@@ -8,7 +8,7 @@ import {
   lootColorLevel2,
   lootColorLevel3,
   lootColorLevel4
-} from "../../lib/utils/loot-color";
+} from "../../lib/utils/loot-colors";
 
 const useStyles = makeStyles(
   {

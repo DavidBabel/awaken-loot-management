@@ -7,6 +7,11 @@ import {
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ClassAvatar from "../../components/ClassAvatar";
 import { BossItem, Item } from "../../lib/generatedTypes";
+import {
+  lootColorLevel1,
+  lootColorLevel2,
+  lootColorLevel3
+} from "../../lib/utils/loot-colors";
 import { normalizeText } from "../../lib/utils/string";
 
 interface Props {
@@ -56,15 +61,15 @@ const useStyles = makeStyles(theme =>
       top: "0px"
     },
     lootLevel1: {
-      backgroundColor: "#1AD900",
+      backgroundColor: lootColorLevel1,
       color: "white"
     },
     lootLevel2: {
-      backgroundColor: "#0070DD",
+      backgroundColor: lootColorLevel2,
       color: "white"
     },
     lootLevel3: {
-      backgroundColor: "#A335EE",
+      backgroundColor: lootColorLevel3,
       color: "white"
     }
   })

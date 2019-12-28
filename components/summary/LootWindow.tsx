@@ -12,6 +12,11 @@ import React from "react";
 import { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
 import { getDurationBetween } from "../../lib/utils/date";
+import {
+  lootColorLevel1,
+  lootColorLevel2,
+  lootColorLevel3
+} from "../../lib/utils/loot-colors";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 interface ElementPosition {
@@ -124,9 +129,9 @@ const useStyles = makeStyles({
     border: "4px solid",
     zIndex: 1
   },
-  epic: { borderColor: "#a335ee" },
-  rare: { borderColor: "#0070dd" },
-  commun: { borderColor: "#1ad900" },
+  epic: { borderColor: lootColorLevel3 },
+  rare: { borderColor: lootColorLevel2 },
+  commun: { borderColor: lootColorLevel1 },
   allLoot: { borderColor: "grey" }
 });
 export default function LootWindow(props) {
