@@ -36,6 +36,7 @@ export function ClassItemCard({
     })
   );
   const styleClasses = useStyles("");
+
   return (
     <div>
       <div />

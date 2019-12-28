@@ -17,12 +17,6 @@ import { Item, Player, Query } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
-declare global {
-  interface Window {
-    $WowheadPower: any;
-  }
-}
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",

@@ -44,11 +44,6 @@ import { getDate } from "../../lib/utils/date";
 import { byDate } from "../../lib/utils/sorter";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
-declare global {
-  interface Window {
-    $WowheadPower: any;
-  }
-}
 interface UpdateRaidLinkVariables {
   raidId: number;
   linkId: string;

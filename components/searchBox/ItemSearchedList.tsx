@@ -7,6 +7,13 @@ import {
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import ClassAvatar from "../../components/ClassAvatar";
 import { BossItem, Item } from "../../lib/generatedTypes";
+import {
+  lootColorLevel1,
+  lootColorLevel2,
+  lootColorLevel3,
+  lootColorLevel4,
+  lootColorLevel5
+} from "../../lib/utils/loot-colors";
 import { normalizeText } from "../../lib/utils/string";
 
 interface Props {
@@ -53,19 +60,23 @@ const useStyles = makeStyles(theme =>
       textAlign: "center",
       position: "absolute",
       left: "0px",
-      top: "0px"
+      top: "0px",
+      color: "white"
     },
     lootLevel1: {
-      backgroundColor: "#1AD900",
-      color: "white"
+      backgroundColor: lootColorLevel1
     },
     lootLevel2: {
-      backgroundColor: "#0070DD",
-      color: "white"
+      backgroundColor: lootColorLevel2
     },
     lootLevel3: {
-      backgroundColor: "#A335EE",
-      color: "white"
+      backgroundColor: lootColorLevel3
+    },
+    lootLevel4: {
+      backgroundColor: lootColorLevel4
+    },
+    lootLevel5: {
+      backgroundColor: lootColorLevel5
     }
   })
 );

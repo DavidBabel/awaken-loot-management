@@ -39,11 +39,6 @@ import { getBossImageUrl } from "../../lib/utils/image";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 import CONFIG from "../../server/config";
 
-declare global {
-  interface Window {
-    $WowheadPower: any;
-  }
-}
 interface UpdateLootVariables {
   id: number;
   active: boolean;
@@ -178,11 +173,9 @@ export function BossCard({
     setCurrentLootToBeUpdated({ loot, actionType });
     setUpdateLootConfirm(true);
     setTimeout(() => {
-      if (window.$WowheadPower && window.$WowheadPower.refreshLinks) {
-        try {
-          window.$WowheadPower.refreshLinks();
-        } catch (e) {}
-      }
+      try {
+        window.$WowheadPower.refreshLinks();
+      } catch (e) {}
     }, 50);
   };
   const closeUpdateLootConfirm = () => {
