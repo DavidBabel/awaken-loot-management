@@ -20,7 +20,7 @@ interface Variables {
 
 const useStyles = makeStyles({
   paper: {
-    width: "90%",
+    width: "97%",
     padding: "20px 35px",
     flexShrink: 0
   }
@@ -170,8 +170,8 @@ export default function PageEditPlayer() {
           .fastMenu {
             cursor: pointer;
             position: fixed;
-            right: 270px;
-            top: 230px;
+            left: 70%;
+            top: 25%;
           }
           .fastMenu div:hover .linkTitle {
             text-decoration: underline;
