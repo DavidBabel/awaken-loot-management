@@ -125,7 +125,7 @@ VALUES
 (8, true, 05, 'Communauté - forum', '1000 messages sur le forum', '', null),
 
 (1, true, 05, 'Ancienneté', 'Est un ancien Awaken (Nostalrius)', '', null),
-(2, true, 05, 'Ancienneté', 'A rejoint Awaken avant le 27 août (Classic)', '', null),
+(2, true, 05, 'Ancienneté', 'A rejoint Awaken avant le 10 septembre (début de Classic)', '', null),
 (3, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus de 3 mois', '', null),
 (4, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus de 6 mois', '', null),
 (5, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus d‘un an', '', null),

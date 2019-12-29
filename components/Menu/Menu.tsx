@@ -40,7 +40,7 @@ export function Menu({ handleDrawerClose }) {
       {isConnected ? (
         <>
           <List>
-            <ListSubheader>Raids</ListSubheader>
+            <ListSubheader>Raids & Items</ListSubheader>
             <Link href="/raid">
               <ListItem
                 button={true}

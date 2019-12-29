@@ -138,7 +138,8 @@ CREATE TABLE "RaidPlayers" (
     "id" SERIAL PRIMARY KEY,
     "playerId" int NOT NULL,
     "raidId" int NOT NULL,
-    "passed" boolean DEFAULT false
+    "passed" boolean DEFAULT false, -- deprecated, do not use anymore
+    "status" int
   );
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "RaidPlayers" ("id");
