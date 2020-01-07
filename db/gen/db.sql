@@ -2108,18 +2108,18 @@ VALUES
 INSERT INTO "Merit" ("order", "active", "value", "categorie", "name", "comment", "delay")
 VALUES
 
-(1, true, 10, 'Enchantements', 'Casque', 'libram ou ZG', null),
-(2, true, 15, 'Enchantements', 'Epaulettes', 'exalté ZG ou +5 all resist', null),
-(3, true, 05, 'Enchantements', 'Cape', '', null),
-(4, true, 10, 'Enchantements', 'Plastron', '', null),
-(5, true, 10, 'Enchantements', 'Bracelet', '', null),
-(6, true, 10, 'Enchantements', 'Gants', '', null),
-(7, true, 10, 'Enchantements', 'Pantalon', 'libram ou ZG', null),
-(8, true, 10, 'Enchantements', 'Bottes', '', null),
+(1, true, 10, 'Enchantements (actuels)', 'Casque', 'libram ou ZG', null),
+(2, true, 15, 'Enchantements (actuels)', 'Epaulettes', 'exalté ZG ou +5 all resist', null),
+(3, true, 05, 'Enchantements (actuels)', 'Cape', '', null),
+(4, true, 10, 'Enchantements (actuels)', 'Plastron', '', null),
+(5, true, 10, 'Enchantements (actuels)', 'Bracelet', '', null),
+(6, true, 10, 'Enchantements (actuels)', 'Gants', '', null),
+(7, true, 10, 'Enchantements (actuels)', 'Pantalon', 'libram ou ZG', null),
+(8, true, 10, 'Enchantements (actuels)', 'Bottes', '', null),
 
-(9, true, 10, 'Enchantements', 'Arme droite', '', null),
-(10, true, 10, 'Enchantements', 'Arme gauche', 'automatique pour les armes 2 mains', null),
-(11, true, 05, 'Enchantements', 'Arme distance', '', null),
+(9, true, 10, 'Enchantements (actuels)', 'Arme droite', '', null),
+(10, true, 10, 'Enchantements (actuels)', 'Arme gauche', 'automatique pour les armes 2 mains', null),
+(11, true, 05, 'Enchantements (actuels)', 'Arme distance', '', null),
 
 (1, true, 10, 'Equipement Pré-raid', 'Casque', '', null),
 (2, true, 10, 'Equipement Pré-raid', 'Collier', '', null),
@@ -2231,7 +2231,7 @@ VALUES
 (8, true, 05, 'Communauté - forum', '1000 messages sur le forum', '', null),
 
 (1, true, 05, 'Ancienneté', 'Est un ancien Awaken (Nostalrius)', '', null),
-(2, true, 05, 'Ancienneté', 'A rejoint Awaken avant le 27 août (Classic)', '', null),
+(2, true, 05, 'Ancienneté', 'A rejoint Awaken avant le 10 septembre (début de Classic)', '', null),
 (3, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus de 3 mois', '', null),
 (4, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus de 6 mois', '', null),
 (5, true, 05, 'Ancienneté', 'A rejoint Awaken il y a plus d‘un an', '', null),
@@ -2265,7 +2265,6 @@ VALUES
 (12, true, 5, 'Raid', 'Avoir trois sacs Onyxia', '', null),
 (13, true, 5, 'Raid', 'Avoir quatres sacs Onyxia', '', null),
 
-<<<<<<< HEAD
 (21, true, 10, 'Raid', 'Exalté Hydraxiens', '', null),
 (22, true, 10, 'Raid', 'Exalté Gurubashi', '', null),
 (23, true, 10, 'Raid', 'Exalté Cercle cénarien', '', null),
@@ -2277,17 +2276,11 @@ VALUES
 (3, true, 5, 'PvE', 'J‘ai tué C‘thun chez Awaken', '', null),
 (4, true, 10, 'PvE', 'J‘ai tué Kel Thuzad chez Awaken', '', null),
 
-(1, true, 5, 'PvP', 'Grade PvP 6 : Garde de Pierre : Accès aux potions', '', null),
-(2, true, 5, 'PvP', 'Grade PvP 10 : Equipement bleu', '', null),
-(3, true, 5, 'PvP', 'Grade PvP 13 : Equipement épique', '', null),
-(4, true, 10, 'PvP', 'Grade PvP 14 : Armes épiques', '', null),
-=======
 (1, true, 10, 'Réputations de raids', 'Exalté Hydraxiens', '', null),
 (2, true, 10, 'Réputations de raids', 'Exalté Gurubashi', '', null),
 (3, true, 10, 'Réputations de raids', 'Exalté Cercle cénarien', '', null),
 (4, true, 10, 'Réputations de raids', 'Exalté Progeniture de nozdormu', '', null),
 (5, true, 10, 'Réputations de raids', 'Exalté Aube d‘argent', '', null),
->>>>>>> wip big refacto attendance
 
 (1, true, 10, 'PvP', 'Exalté Altérac (Equipement pré-raid épique)', '', null),
 (2, true, 5, 'PvP', 'Grade PvP 6 : Garde de Pierre : Accès aux potions', '', null),
