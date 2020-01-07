@@ -112,7 +112,7 @@ VALUES
 (1, true, 05, 'Communauté', 'Présenté sur les forums', '', null),
 (2, true, 05, 'Communauté', 'Photo dans le trombinoscope', '', null),
 (3, true, 02, 'Communauté', 'Avoir un chat et avoir posté sa photo', 'dans le chabinoscope', null),
-(4, true, 03, 'Communauté', 'Signer la charte de guilde', '', null),
+(4, true, 15, 'Communauté', 'Signer la charte de guilde', '', null),
 (5, true, 15, 'Communauté', 'Porter le tabard de guilde', '', null),
 (6, true, 03, 'Communauté', 'Avoir un avatar sur le forum', '', null),
 (7, true, 03, 'Communauté', 'Avoir exactement le même pseudo sur le forum qu‘en jeu', '', null),
@@ -175,6 +175,11 @@ VALUES
 (23, true, 10, 'Raid', 'Exalté Cercle cénarien', '', null),
 (24, true, 10, 'Raid', 'Exalté Progeniture de nozdormu', '', null),
 (25, true, 10, 'Raid', 'Exalté Aube d‘argent', '', null),
+
+(1, true, 5, 'PvE', 'J‘ai tué Ragnaros chez Awaken', '', null),
+(2, true, 5, 'PvE', 'J‘ai tué Nefarian chez Awaken', '', null),
+(3, true, 5, 'PvE', 'J‘ai tué C‘thun chez Awaken', '', null),
+(4, true, 10, 'PvE', 'J‘ai tué Kel Thuzad chez Awaken', '', null),
 
 (1, true, 5, 'PvP', 'Grade PvP 6 : Garde de Pierre : Accès aux potions', '', null),
 (2, true, 5, 'PvP', 'Grade PvP 10 : Equipement bleu', '', null),

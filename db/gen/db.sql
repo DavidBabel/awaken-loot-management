@@ -199,10 +199,10 @@ VALUES
 INSERT INTO "Donjons" ("name", "shortName", "active", "cdnImage")
 VALUES
 ('Molten Core', 'MC', true, 'https://i.imgur.com/FKs4REK.jpg'),
-('Onyxia Lair', 'Ony', true, 'https://i.imgur.com/qAm8tn5.jpg');
+('Onyxia Lair', 'Ony', true, 'https://i.imgur.com/qAm8tn5.jpg'),
+('Blackwing Lair', 'BWL', true, 'https://i.imgur.com/WxgXIlO.jpg');
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
-('Blackwing Lair', 'BWL', true),
 ('Ahn‘Qiraj Temple', 'AQ40', false),
 ('Naxxramas', 'Naxx', false),
 ('Ahn‘Qiraj Ruins', 'AQ20', false),
@@ -210,10 +210,10 @@ VALUES
 
 INSERT INTO "Bosses" ("order", "name", "donjonId", "cdnImage" )
 VALUES
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg');
+(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg'),
+(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/IYtebGa.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx')),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
@@ -230,17 +230,17 @@ VALUES
 (9,'Golemagg the Incinerator', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/Nix8hZT.jpg'),
 (10,'Majordomo Executus', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/0ZJ2fES.jpg'),
 (11,'Ragnaros', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/506Pznv.jpg'),
-(1,'Onyxia', (SELECT id FROM "Donjons" WHERE "shortName"='Ony'), 'https://i.imgur.com/Ux2zdP0.jpg');
+(1,'Onyxia', (SELECT id FROM "Donjons" WHERE "shortName"='Ony'), 'https://i.imgur.com/Ux2zdP0.jpg'),
+(2,'Razorgore', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/NBARXNz.jpg'),
+(3,'Vaelastrasz', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/6j7ZiWI.jpg'),
+(4,'Broodlord Lashlayer', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/sVOCSBZ.jpg'),
+(5,'Firemaw', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/qhpVr40.jpg'),
+(6,'Ebonroc', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'),'https://i.imgur.com/90eRZ3w.jpg'),
+(7,'Flamegor', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/YBrkObW.jpg'),
+(8,'Chromaggus', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'),'https://i.imgur.com/YOBr2D3.jpg'),
+(9,'Nefarian', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/WxgXIlO.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
-(2,'Razorgore', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(3,'Vaelastrasz', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(4,'Broodlord Lashlayer', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(5,'Firemaw', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(6,'Ebonroc', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(7,'Flamegor', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(8,'Chromaggus', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
-(9,'Nefarian', (SELECT id FROM "Donjons" WHERE "shortName"='BWL')),
 (2,'The Prophet Skeram', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 (3,'Battleguard Sartura', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
 (4,'Fankriss the Unyielding', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40')),
