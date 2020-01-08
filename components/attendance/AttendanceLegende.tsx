@@ -36,18 +36,20 @@ export function AttendanceLegende() {
 
   return (
     <div className={classes.legende}>
-      {raidStatusList.map((raidStatus: RaidStatus) => (
-        <div
-          className={classes.legendeItem}
-          key={`legend-attendance-${raidStatus.id}`}
-        >
+      {raidStatusList
+        .filter(rs => rs.inLegend !== false)
+        .map((raidStatus: RaidStatus) => (
           <div
-            style={{ backgroundColor: raidStatus.color }}
-            className={classes.legendeSquare}
-          />
-          <span>{raidStatus.label}</span>
-        </div>
-      ))}
+            className={classes.legendeItem}
+            key={`legend-attendance-${raidStatus.id}`}
+          >
+            <div
+              style={{ backgroundColor: raidStatus.color }}
+              className={classes.legendeSquare}
+            />
+            <span>{raidStatus.label}</span>
+          </div>
+        ))}
     </div>
   );
 }

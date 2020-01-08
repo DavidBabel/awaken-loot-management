@@ -1,45 +1,62 @@
+export type RaidStatusKey =
+  | "present"
+  | "absent"
+  | "pasDansGuilde"
+  | "inAnotherId"
+  | "rotation"
+  | "inscritAbsent";
+
 export interface RaidStatus {
   label: string;
+  key: RaidStatusKey;
   id: number;
   color: string;
   isSettable: boolean;
+  inLegend?: boolean;
 }
 
 export const raidStatusList: RaidStatus[] = [
   {
     label: "Présent",
+    key: "present",
     id: 0,
     color: "#106010",
     isSettable: true
   },
   {
-    label: "Absent",
+    label: "Dans un raid lié",
+    key: "inAnotherId",
     id: 1,
-    color: "#b00000",
-    isSettable: false
-  },
-  {
-    label: "Présent dans un raid lié",
-    id: 2,
     color: "#474747",
     isSettable: false
   },
   {
-    label: "En rotation / Backup",
+    label: "Absent/Malade",
+    key: "absent",
+    id: 2,
+    color: "#b00000",
+    isSettable: false
+  },
+  {
+    label: "En rotation/Backup",
+    key: "rotation",
     id: 3,
     color: "#b09000",
     isSettable: true
   },
   {
     label: "Inscrit mais absent",
+    key: "inscritAbsent",
     id: 4,
     color: "#800080",
     isSettable: true
   },
   {
     label: "Pas encore en raid",
+    key: "pasDansGuilde",
     id: 5,
     color: "#242424",
-    isSettable: true
+    isSettable: true,
+    inLegend: false
   }
 ];

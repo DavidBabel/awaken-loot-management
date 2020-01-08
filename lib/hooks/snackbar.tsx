@@ -2,6 +2,8 @@ import { IconButton, Snackbar, SnackbarContent } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Dispatch, SetStateAction, useState } from "react";
 
+export type OpenSnackBar = (msg: string, action: "error" | "success") => void;
+
 export function useSnackBar(): {
   snackBarOpen: boolean;
   setSnackBarOpen: Dispatch<SetStateAction<boolean>>;
@@ -9,7 +11,7 @@ export function useSnackBar(): {
   setSnackBarMessage: Dispatch<SetStateAction<string>>;
   snackBarBackgroundColor: string;
   setSnackBarBackgroundColor: Dispatch<SetStateAction<string>>;
-  openSnackBar: (msg: string, action: "error" | "success") => void;
+  openSnackBar: OpenSnackBar;
   closeSnackBar: (
     event: React.SyntheticEvent | React.MouseEvent,
     reason?: string
@@ -21,7 +23,10 @@ export function useSnackBar(): {
   const [snackBarBackgroundColor, setSnackBarBackgroundColor] = useState<
     string
   >("#D32F2F");
-  const openSnackBar = (msg: string, action: "error" | "success") => {
+  const openSnackBar: OpenSnackBar = (
+    msg: string,
+    action: "error" | "success"
+  ) => {
     if (action === "error") {
       setSnackBarBackgroundColor("#D32F2F");
     } else {

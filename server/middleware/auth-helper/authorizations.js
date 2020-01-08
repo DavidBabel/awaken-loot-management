@@ -8,7 +8,7 @@ const {
 } = require("./query-rules");
 const { ADMIN, CLASS_MASTER, GUEST, OFFICER, PLAYER } = require("./roles");
 
-const NO_ONE = [];
+// const NO_ONE = [];
 const ADMIN_MIN = [ADMIN];
 const OFFICER_MIN = [ADMIN, OFFICER];
 const CLASSMASTER_MIN = [ADMIN, OFFICER, CLASS_MASTER];
@@ -35,22 +35,22 @@ const rights = {
   createPlayerMerit: PLAYER_MIN,
   createRaid: OFFICER_MIN,
   createRaidPlayer: CLASSMASTER_MIN,
-  deletePlayerMerit: NO_ONE,
+  // deletePlayerMerit: NO_ONE,
   deletePlayerMeritById: PLAYER_MIN,
-  deleteRaidPlayer: NO_ONE,
-  deleteRaidPlayerById: NO_ONE,
-  updateClassItem: NO_ONE,
+  // deleteRaidPlayer: NO_ONE,
+  // deleteRaidPlayerById: NO_ONE,
+  // updateClassItem: NO_ONE,
   updateClassItemById: OFFICER_MIN,
-  updateLoot: NO_ONE,
+  // updateLoot: NO_ONE,
   updateLootById: OFFICER_MIN,
-  updatePlayer: NO_ONE,
+  // updatePlayer: NO_ONE,
   updatePlayerById: PLAYER_MIN,
-  updatePlayerMerit: NO_ONE,
+  // updatePlayerMerit: NO_ONE,
   updatePlayerMeritById: CLASSMASTER_MIN,
-  updateRaid: NO_ONE,
+  // updateRaid: NO_ONE,
   updateRaidById: OFFICER_MIN,
-  updateRaidPlayer: NO_ONE,
-  updateRaidPlayerById: OFFICER_MIN
+  // updateRaidPlayer: NO_ONE,
+  updateRaidPlayerById: CLASSMASTER_MIN
 };
 
 const constraints = {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { useQuery } from "@apollo/react-hooks";
 import {
@@ -12,6 +12,10 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { AttendanceLegende } from "../../components/attendance/AttendanceLegende";
 import { AttendanceLine } from "../../components/attendance/AttendanceLine";
 import { AttendanceTableRaidHeaders } from "../../components/attendance/AttendanceTableRaidHeaders";
+import {
+  ChangeAttendanceDialog,
+  ChangeAttendanceDialogProps
+} from "../../components/attendance/ChangeAttendanceDialog";
 import { CustomAttendanceTable } from "../../components/attendance/CustomAttendanceTable";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import MemberContext from "../../lib/context/member";
@@ -38,11 +42,21 @@ export default function PageIndex() {
   const classes = useStyles("");
   const member = useContext(MemberContext);
   const { openSnackBar, DefaultSnackBar } = useSnackBar();
+  const defaultDialog = {
+    isOpen: false,
+    raidPlayer: null,
+    raid: null,
+    player: null
+  };
+  const [dialogProps, setDialogProps] = useState<ChangeAttendanceDialogProps>(
+    defaultDialog
+  );
 
   const {
     loading: loadingAllRaids,
     data: dataAllRaids,
-    error: errorAllRaids
+    error: errorAllRaids,
+    refetch: refetchRaids
   } = useQuery<Query>(ALL_RAIDS);
   const {
     loading: loadingPlayers,
@@ -83,6 +97,7 @@ export default function PageIndex() {
               <AttendanceLine
                 key={`attendance-line-${player.id}`}
                 player={player}
+                openAttendanceDialog={setDialogProps}
                 raids={allRaids}
                 openSnackBar={openSnackBar}
                 isAllowedToChange={member.level >= role.class_master}
@@ -91,6 +106,12 @@ export default function PageIndex() {
           </TableBody>
         </CustomAttendanceTable>
       </Paper>
+      <ChangeAttendanceDialog
+        {...dialogProps}
+        openSnackBar={openSnackBar}
+        refetchRaids={refetchRaids}
+        closeDialog={() => setDialogProps(defaultDialog)}
+      />
       <DefaultSnackBar />
     </>
   );

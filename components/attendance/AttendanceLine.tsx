@@ -1,56 +1,28 @@
-import {
-  createStyles,
-  makeStyles,
-  TableCell,
-  TableRow,
-  Theme
-} from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
-import { Player, Raid } from "../../lib/generatedTypes";
+import { TableRow } from "@material-ui/core";
+import { Player, Raid, RaidPlayer } from "../../lib/generatedTypes";
+import { OpenSnackBar } from "../../lib/hooks/snackbar";
+import { AttendanceCell } from "./AttendanceCell";
+import { ChangeAttendanceDialogCallback } from "./ChangeAttendanceDialog";
 import { getFirstRaidDate } from "./helpers";
 import { PlayerAttendanceName } from "./PlayerAttendanceName";
 import { PlayerAttendancePercentage } from "./PlayerAttendancePercentage";
+import { RaidStatusKey, raidStatusList } from "./raid-status";
 
 interface Props {
   player: Player;
   raids: Raid[];
-  openSnackBar: (msg: string, action: "error" | "success") => void;
+  openSnackBar: OpenSnackBar;
   isAllowedToChange: boolean;
+  openAttendanceDialog: ChangeAttendanceDialogCallback;
 }
-
-// TODO backend authorisations
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    // TODO old, to remove
-    absent: {
-      backgroundColor: "#b00000"
-    },
-    present: {
-      backgroundColor: "#106010"
-    },
-    inAnotherId: {
-      backgroundColor: "#474747"
-    },
-    rotation: {
-      backgroundColor: "#b09000"
-    },
-    inscritAbsent: {
-      backgroundColor: "#800080"
-    },
-    pasDansGuilde: {
-      backgroundColor: "#242424"
-    }
-  })
-);
 
 export function AttendanceLine({
   player,
   raids,
   openSnackBar,
-  isAllowedToChange
+  isAllowedToChange,
+  openAttendanceDialog
 }: Props) {
-  const classes = useStyles("");
-
   const firstRaidDate = getFirstRaidDate(player);
   let raidsNb = 0;
   const raidLinkIds = [];
@@ -90,58 +62,49 @@ export function AttendanceLine({
         totalRaidPlayed={totalRaidPlayed}
         totalRaids={raidsNb}
       />
-      {raids.map(raid => {
+      {raids.map((raid: Raid) => {
         if (raid.raidPlayersByRaidId.nodes.length > 0) {
-          let absent = true;
-          let inAnotherId = false;
-          const enRotation = false;
-          let pasEncoreDansGuilde = false;
+          let currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
+            (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id
+          );
 
-          if (new Date(raid.date) >= firstRaidDate) {
-            raid.raidPlayersByRaidId.nodes.forEach(raidPlayer => {
-              if (raidPlayer && raidPlayer.playerByPlayerId.id === player.id) {
-                absent = false;
-                // if (raidPlayer.passed) {
-                //   enRotation = true;
-                // }
-              }
-            });
-          } else {
-            pasEncoreDansGuilde = true;
-            absent = false;
+          // DO NOT WORK HERE
+          if (currentRaidPlayer?.status === -1) {
+            currentRaidPlayer = null;
           }
-          if (absent) {
-            if (
-              raid.linkBetweenRaids &&
-              raidLinkedIdsPresent.indexOf(raid.linkBetweenRaids) !== -1
-            ) {
-              inAnotherId = true;
-              absent = false;
+
+          let status: RaidStatusKey = "absent";
+
+          if (new Date(raid.date) < firstRaidDate) {
+            status = "pasDansGuilde";
+          } else if (currentRaidPlayer) {
+            status = "present";
+            if (currentRaidPlayer.status > 0) {
+              status = raidStatusList[currentRaidPlayer.status].key;
             }
+          } else if (
+            raid.linkBetweenRaids &&
+            raidLinkedIdsPresent.includes(raid.linkBetweenRaids)
+          ) {
+            status = "inAnotherId";
           }
+
           return (
-            <TableCell
+            <AttendanceCell
+              canChange={isAllowedToChange}
+              status={status}
               onClick={() => {
                 if (isAllowedToChange) {
-                  openSnackBar("Coucou", "success");
+                  openAttendanceDialog({
+                    isOpen: true,
+                    raidPlayer: currentRaidPlayer,
+                    player,
+                    raid
+                  });
                 }
               }}
               key={`cell-attendance-${player.id}-${raid.id}`}
-              // style={{backgroundColor: /* raidPlayer.status */}}
-              className={
-                absent
-                  ? classes.absent
-                  : inAnotherId
-                  ? classes.inAnotherId
-                  : enRotation
-                  ? classes.rotation
-                  : pasEncoreDansGuilde
-                  ? classes.pasDansGuilde
-                  : classes.present
-              }
-            >
-              {isAllowedToChange && <SettingsIcon />}
-            </TableCell>
+            />
           );
         }
         return null;
