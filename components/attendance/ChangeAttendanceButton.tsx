@@ -61,11 +61,19 @@ export function ChangeAttendanceButton({ onClick, current }: Props) {
 
   return (
     <div className={classes.legende}>
-      {current > 0 && (
-        <QuickButton label="Reset (automatique)" color={"black"} />
-      )}
-      {[3, 4]
-        .filter(num => num !== current)
+      {[0, 2, 3, 4]
+        .filter(num => {
+          /*    if (num === 0 && typeof current === "undefined") {
+            return false;
+          } else  */ if (
+            num === 2 &&
+            typeof current === "undefined"
+          ) {
+            return false;
+          } else {
+            return num !== current;
+          }
+        })
         .map((raidStatusNumber: number) => {
           const currentRaidStatus = raidStatusList[raidStatusNumber];
           return (

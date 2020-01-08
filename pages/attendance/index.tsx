@@ -46,7 +46,8 @@ export default function PageIndex() {
     isOpen: false,
     raidPlayer: null,
     raid: null,
-    player: null
+    player: null,
+    setLoading: () => {}
   };
   const [dialogProps, setDialogProps] = useState<ChangeAttendanceDialogProps>(
     defaultDialog
@@ -99,7 +100,6 @@ export default function PageIndex() {
                 player={player}
                 openAttendanceDialog={setDialogProps}
                 raids={allRaids}
-                openSnackBar={openSnackBar}
                 isAllowedToChange={member.level >= role.class_master}
               />
             ))}

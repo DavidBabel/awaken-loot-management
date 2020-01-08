@@ -1,6 +1,5 @@
 import { TableRow } from "@material-ui/core";
 import { Player, Raid, RaidPlayer } from "../../lib/generatedTypes";
-import { OpenSnackBar } from "../../lib/hooks/snackbar";
 import { AttendanceCell } from "./AttendanceCell";
 import { ChangeAttendanceDialogCallback } from "./ChangeAttendanceDialog";
 import { getFirstRaidDate } from "./helpers";
@@ -11,7 +10,6 @@ import { RaidStatusKey, raidStatusList } from "./raid-status";
 interface Props {
   player: Player;
   raids: Raid[];
-  openSnackBar: OpenSnackBar;
   isAllowedToChange: boolean;
   openAttendanceDialog: ChangeAttendanceDialogCallback;
 }
@@ -19,7 +17,6 @@ interface Props {
 export function AttendanceLine({
   player,
   raids,
-  openSnackBar,
   isAllowedToChange,
   openAttendanceDialog
 }: Props) {
@@ -64,14 +61,9 @@ export function AttendanceLine({
       />
       {raids.map((raid: Raid) => {
         if (raid.raidPlayersByRaidId.nodes.length > 0) {
-          let currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
+          const currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
             (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id
           );
-
-          // DO NOT WORK HERE
-          if (currentRaidPlayer?.status === -1) {
-            currentRaidPlayer = null;
-          }
 
           let status: RaidStatusKey = "absent";
 
@@ -93,9 +85,10 @@ export function AttendanceLine({
             <AttendanceCell
               canChange={isAllowedToChange}
               status={status}
-              onClick={() => {
+              onClick={(setLoading: any) => {
                 if (isAllowedToChange) {
                   openAttendanceDialog({
+                    setLoading,
                     isOpen: true,
                     raidPlayer: currentRaidPlayer,
                     player,

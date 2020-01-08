@@ -31,6 +31,7 @@ export interface ChangeAttendanceDialogProps {
   raidPlayer?: RaidPlayer;
   player?: Player;
   raid?: Raid;
+  setLoading: any;
 }
 
 interface MoreProps {
@@ -66,7 +67,8 @@ export function ChangeAttendanceDialog({
   raid,
   closeDialog,
   refetchRaids,
-  openSnackBar
+  openSnackBar,
+  setLoading
 }: ChangeAttendanceDialogProps & MoreProps) {
   const classes = {} as any;
 
@@ -83,9 +85,11 @@ export function ChangeAttendanceDialog({
   // );
 
   function success() {
+    setLoading(false);
     openSnackBar(`Mis à jour correctement`, "success");
   }
   function fail() {
+    setLoading(false);
     openSnackBar("Mise à jour raté", "error");
   }
 
@@ -99,6 +103,7 @@ export function ChangeAttendanceDialog({
       <DialogContent className={classes.lootInfoSelects}>
         <ChangeAttendanceButton
           onClick={(newStatus: number = -1) => {
+            setLoading(true);
             if (raidPlayer) {
               updateRaidPlayer({
                 variables: {
