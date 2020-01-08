@@ -15,7 +15,7 @@ import { forwardRef, useContext, useState } from "react";
 import MemberContext from "../../lib/context/member";
 import { Mutation, Player, Query, RaidPlayer } from "../../lib/generatedTypes";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
-import { ADD_PLAYER_TO_RAID } from "../../lib/gql/raid-mutations";
+import { ADD_PLAYER_TO_RAID } from "../../lib/gql/attendance-mutation";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { useToggle } from "../../lib/hooks/toggle";
 import { role } from "../../lib/role-level";

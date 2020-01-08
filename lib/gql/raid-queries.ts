@@ -72,7 +72,7 @@ export const ALL_RAIDS = gql`
           totalCount
           nodes {
             id
-            passed
+            status
             playerByPlayerId {
               id
               name

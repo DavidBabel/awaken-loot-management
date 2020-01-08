@@ -22,6 +22,8 @@ import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
 import PlayerTableRow, { LIMIT_LOOTLEVEL_TO_COUNT } from "./PlayerTableRow";
 
+export const TABLE_SMALL_CASES = [false, false, false, true, true, true, true];
+
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     body: {
@@ -34,6 +36,7 @@ export interface PlayerTableRowDatas {
   name: string;
   merit: number;
   totalCountableLoot: number;
+  lootPerRaid: number;
   totalLootByLevel: number[];
   totalRaid: number;
   lastLootDate: string;
@@ -51,46 +54,57 @@ interface Props {
   openLootWindow: any;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    height: "100%",
-    [theme.breakpoints.down("sm")]: {
-      height: "calc(100vh - 130px)"
+const useStyles = makeStyles(theme => {
+  const arrowIcon = {
+    marginLeft: -3,
+    marginRight: -5,
+    width: 20,
+    height: 20
+  };
+  return {
+    root: {
+      width: "100%",
+      height: "100%",
+      [theme.breakpoints.down("sm")]: {
+        height: "calc(100vh - 130px)"
+      },
+      marginTop: "10px",
+      overflowX: "auto",
+      "& .MuiTableCell-head": {
+        backgroundColor: (props: Props) => `${props.classColor}`,
+        color: "black"
+      }
     },
-    marginTop: "10px",
-    overflowX: "auto",
-    "& .MuiTableCell-head": {
-      backgroundColor: (props: Props) => `${props.classColor}`,
-      color: "black"
+    tableWrapper: {
+      maxHeight: "calc(100vh - 200px)",
+      [theme.breakpoints.down("sm")]: {
+        maxHeight: "calc(100vh - 130px)"
+      },
+      overflow: "auto"
+    },
+    table: {
+      minWidth: 700
+    },
+    headButton: {
+      fontSize: "12px"
+    },
+    shown: {
+      opacity: 1,
+      ...arrowIcon
+    },
+    hidden: {
+      opacity: 0,
+      ...arrowIcon
     }
-  },
-  tableWrapper: {
-    maxHeight: "calc(100vh - 200px)",
-    [theme.breakpoints.down("sm")]: {
-      maxHeight: "calc(100vh - 130px)"
-    },
-    overflow: "auto"
-  },
-  table: {
-    minWidth: 700
-  },
-  headButton: {
-    fontSize: "12px"
-  },
-  shown: {
-    opacity: 1
-  },
-  hidden: {
-    opacity: 0
-  }
-}));
+  };
+});
 
 type ColumnName =
   | "Pseudo"
   | "Total Loot"
   | "Merites"
   | "Total raids"
+  | "%Loot/raid"
   | "Last loot"
   | "Last raid"
   | "Infos";
@@ -103,6 +117,7 @@ export default function PlayersTable(props: Props) {
     "Total Loot",
     "Merites",
     "Total raids",
+    "%Loot/raid",
     "Last loot",
     "Last raid",
     "Infos"
@@ -163,6 +178,10 @@ export default function PlayersTable(props: Props) {
         merit: Math.round((maxMerit * 100) / props.maxMeritValue),
         totalCountableLoot,
         totalLootByLevel,
+        lootPerRaid:
+          totalRaid > 0
+            ? Math.round((totalCountableLoot / totalRaid) * 100)
+            : 0,
         totalRaid,
         lastLootDate: lastLootDate ? formatDate(lastLootDate) : "Aucun",
         lastRaidDate: lastRaidDate ? formatDate(lastRaidDate) : "Aucun",
@@ -200,6 +219,9 @@ export default function PlayersTable(props: Props) {
       case "Total raids":
         newRows.sort(byValue("totalRaid", currentlyOrderedDesc));
         break;
+      case "%Loot/raid":
+        newRows.sort(byValue("lootPerRaid", currentlyOrderedDesc));
+        break;
       case "Total Loot":
         newRows.sort(byValue("totalCountableLoot", currentlyOrderedDesc));
         break;
@@ -225,14 +247,13 @@ export default function PlayersTable(props: Props) {
     if (!columnName) {
       return "";
     }
+    const classArrow =
+      orderedBy === columnName ? classes.shown : classes.hidden;
+
     return orderedBy === columnName && orderedDESC ? (
-      <KeyboardArrowUpIcon
-        className={orderedBy === columnName ? classes.shown : classes.hidden}
-      />
+      <KeyboardArrowUpIcon className={classArrow} />
     ) : (
-      <KeyboardArrowDownIcon
-        className={orderedBy === columnName ? classes.shown : classes.hidden}
-      />
+      <KeyboardArrowDownIcon className={classArrow} />
     );
   }
   React.useEffect(() => {
@@ -245,7 +266,11 @@ export default function PlayersTable(props: Props) {
           <TableHead>
             <TableRow>
               {columns.map((columnName: ColumnName, index: number) => (
-                <StyledTableCell key={"col" + index + columnName}>
+                <StyledTableCell
+                  key={"summary-col" + index + columnName}
+                  padding={TABLE_SMALL_CASES[index] ? "none" : "default"}
+                  // style={TABLE_SMALL_CASES[index] ? { fontSize: '4px !important' } : {}}
+                >
                   <Button
                     className={classes.headButton}
                     variant={"text"}

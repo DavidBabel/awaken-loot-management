@@ -227,21 +227,40 @@ export default function LootWindow(props: Props) {
     }
   }, []);
   useEffect(refreshWowhead);
+
+  function getLootLevelLabel(lootLevel: number | "all") {
+    let lootLevelLabel = "médiocre";
+
+    switch (lootLevel) {
+      case "all":
+        return "Tous les loots";
+        break;
+      case 2:
+        lootLevelLabel = "normale";
+        break;
+      case 3:
+        lootLevelLabel = "haute";
+        break;
+      case 4:
+        lootLevelLabel = "très haute";
+        break;
+      case 5:
+        lootLevelLabel = "exceptionnelle";
+        break;
+    }
+
+    return "Qualité: " + lootLevelLabel;
+  }
+
   return (
     <div
       className={classes.root + " " + classes[`lootlevel${lootLvl}`]}
       ref={lootWindowElem}
     >
       <div className={classes.header} ref={headerElem}>
-        {`${playerName.toUpperCase()} (${
-          lootLvl === 1
-            ? "Qualité: médiocre"
-            : lootLvl === 2
-            ? "Qualité: normale"
-            : lootLvl === 3
-            ? "Qualité: haute"
-            : "Tous les loots"
-        }) - Total Raid: ${totalRaid}`}
+        {`${playerName.toUpperCase()} (${getLootLevelLabel(
+          lootLvl
+        )}) - Total Raid: ${totalRaid}`}
         <div className={classes.cross} onClick={closeWindow}>
           <CloseIcon color="primary" />
         </div>

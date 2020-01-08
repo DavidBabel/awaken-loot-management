@@ -135,6 +135,7 @@ export default function PlayerTableRow({
         />
       </StyledTableCell>
       <StyledTableCell align="center">{rowData.totalRaid}</StyledTableCell>
+      <StyledTableCell align="center">{rowData.lootPerRaid}%</StyledTableCell>
       <StyledTableCell align="center">
         {getDayMonth(rowData.lastLootDate)}
       </StyledTableCell>

@@ -20,11 +20,22 @@ interface Variables {
 
 const useStyles = makeStyles({
   paper: {
-    width: "90%",
+    width: "97%",
     padding: "20px 35px",
     flexShrink: 0
   }
 });
+
+function scrollTo(elementId: string) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+function trimParenthesis(str: string) {
+  return str.split(" (")[0];
+}
 
 export default function PageEditPlayer() {
   const router = useRouter();
@@ -107,13 +118,6 @@ export default function PageEditPlayer() {
     return <div>Ce joueur est désactivé</div>;
   }
 
-  const scrollTo = (elementId: string) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
-
   return (
     <Container>
       <Typography gutterBottom={true} variant="h3">
@@ -153,7 +157,9 @@ export default function PageEditPlayer() {
                 key={`links-${meritCategorieName}`}
                 onClick={() => scrollTo(stringToId(meritCategorieName))}
               >
-                <span className="linkTitle">{meritCategorieName}</span>{" "}
+                <span className="linkTitle">
+                  {trimParenthesis(meritCategorieName)}
+                </span>{" "}
                 <span className="linkCount">
                   ({playerMeritCount}/{currentCategorieSize})
                 </span>
@@ -170,8 +176,8 @@ export default function PageEditPlayer() {
           .fastMenu {
             cursor: pointer;
             position: fixed;
-            right: 270px;
-            top: 230px;
+            left: 70%;
+            top: 25%;
           }
           .fastMenu div:hover .linkTitle {
             text-decoration: underline;
@@ -215,7 +221,10 @@ export default function PageEditPlayer() {
                 {currentCategorie.sort(byValue("order")).map((merit: Merit) => (
                   <MeritLine
                     key={`${merit.name}-${merit.categorie}-merit`}
-                    {...merit}
+                    {...{
+                      ...merit,
+                      categorie: trimParenthesis(merit.categorie)
+                    }}
                     playerId={playerId}
                     refetchMerits={refetch}
                     parentLoading={loading}
