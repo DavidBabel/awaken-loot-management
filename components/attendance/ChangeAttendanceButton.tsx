@@ -1,4 +1,5 @@
 import { Button, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { RaidPlayer } from "../../lib/generatedTypes";
 import { raidStatusList } from "./raid-status";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  current?: number;
+  currentRaidPlayer?: RaidPlayer;
   onClick: (newStatus?: number) => void;
 }
 
@@ -42,12 +43,16 @@ interface QuickButtonProps {
   color: string;
 }
 
-export function ChangeAttendanceButton({ onClick, current }: Props) {
+export function ChangeAttendanceButton({ onClick, currentRaidPlayer }: Props) {
   const classes = useStyles("");
 
   function QuickButton({ index, label, color }: QuickButtonProps) {
     return (
-      <Button onClick={() => onClick(index)}>
+      <Button
+        onClick={() => {
+          onClick(index);
+        }}
+      >
         <div className={classes.legendeItem}>
           <div
             style={{ backgroundColor: color }}
@@ -63,15 +68,16 @@ export function ChangeAttendanceButton({ onClick, current }: Props) {
     <div className={classes.legende}>
       {[0, 2, 3, 4]
         .filter(num => {
-          /*    if (num === 0 && typeof current === "undefined") {
-            return false;
-          } else  */ if (
-            num === 2 &&
-            typeof current === "undefined"
+          if (
+            num === 0 &&
+            currentRaidPlayer &&
+            currentRaidPlayer?.status === null
           ) {
             return false;
+          } else if (num === 2 && typeof currentRaidPlayer === "undefined") {
+            return false;
           } else {
-            return num !== current;
+            return num !== currentRaidPlayer?.status;
           }
         })
         .map((raidStatusNumber: number) => {

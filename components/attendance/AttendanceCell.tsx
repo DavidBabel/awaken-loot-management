@@ -12,14 +12,15 @@ interface Props {
 }
 
 export function AttendanceCell({ status, onClick, canChange }: Props) {
-  const idModifyable = canChange && status !== "pasDansGuilde";
+  const isModifyable =
+    canChange && status !== "pasDansGuilde" && status !== "inAnotherId";
   const currentRaidStatus = raidStatusList.find(rs => rs.key === status);
   const [isFetchLoading, setLoading] = useState(false);
 
   return (
     <TableCell
       onClick={() => {
-        if (idModifyable) {
+        if (isModifyable) {
           onClick(setLoading);
         }
       }}
@@ -27,9 +28,21 @@ export function AttendanceCell({ status, onClick, canChange }: Props) {
       // className={classes[status]}
     >
       {isFetchLoading && (
-        <CircularProgress disableShrink={true} color="secondary" size={24} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <CircularProgress
+            disableShrink={true}
+            style={{ color: "lightgrey" }}
+            size={22}
+          />
+        </div>
       )}
-      {idModifyable && <SettingsIcon />}
+      {isModifyable && <SettingsIcon />}
     </TableCell>
   );
 }

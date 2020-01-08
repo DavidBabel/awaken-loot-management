@@ -92,6 +92,9 @@ export function ChangeAttendanceDialog({
     setLoading(false);
     openSnackBar("Mise à jour raté", "error");
   }
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <Dialog className={classes.dialog} open={isOpen}>
@@ -129,7 +132,7 @@ export function ChangeAttendanceDialog({
                 .catch(fail);
             }
           }}
-          current={raidPlayer?.status}
+          currentRaidPlayer={raidPlayer}
         />
       </DialogContent>
 
