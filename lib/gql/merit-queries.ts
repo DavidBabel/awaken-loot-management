@@ -2,7 +2,7 @@ import { gql } from "apollo-boost";
 
 export const PLAYER_MERIT = gql`
   query OnePlayerMerit($playerId: Int) {
-    allMerits {
+    allMerits(condition: { active: true }) {
       nodes {
         id
         name
@@ -30,7 +30,7 @@ export const PLAYER_MERIT = gql`
 
 export const ALL_MERITS = gql`
   query AllMerits {
-    allMerits {
+    allMerits(condition: { active: true }) {
       edges {
         node {
           id
