@@ -128,6 +128,7 @@ export default function PlayersTable(props: Props) {
       let maxMerit = 0;
       let totalCountableLoot = 0;
       const totalLootByLevel = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const alreadyLooted: number[] = [];
 
       const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
         raid => !raid.passed
@@ -137,15 +138,7 @@ export default function PlayersTable(props: Props) {
           maxMerit += merit.meritByMeritId.value;
         }
       });
-      player.lootsByPlayerId.nodes.forEach(loot => {
-        if (loot.active) {
-          const currentLootLevel = loot.itemByItemId.lootLevel;
-          totalLootByLevel[currentLootLevel] += 1;
-          if (currentLootLevel >= LIMIT_LOOTLEVEL_TO_COUNT) {
-            totalCountableLoot += 1;
-          }
-        }
-      });
+
       let lastRaidDate = new Date("2010-01-01"); // je pars d'une date reculée
       if (totalRaid === 0) {
         lastRaidDate = null;
@@ -161,14 +154,27 @@ export default function PlayersTable(props: Props) {
       }
 
       let lastLootDate = new Date("2010-01-01"); // je pars d'une date reculée
+
       player.lootsByPlayerId.nodes.forEach(loot => {
-        if (loot.itemByItemId.lootLevel !== 1 && loot.active) {
-          const currentLootDate = new Date(loot.raidByRaidId.date);
-          if (currentLootDate > lastLootDate) {
-            lastLootDate = currentLootDate;
+        if (loot.active) {
+          const item = loot.itemByItemId;
+          if (!alreadyLooted.includes(item.id)) {
+            alreadyLooted.push(item.id);
+            const currentLootLevel = loot.itemByItemId.lootLevel;
+            totalLootByLevel[currentLootLevel] += 1;
+            if (currentLootLevel >= LIMIT_LOOTLEVEL_TO_COUNT) {
+              totalCountableLoot += 1;
+            }
+          }
+          if (loot.itemByItemId.lootLevel !== 1) {
+            const currentLootDate = new Date(loot.raidByRaidId.date);
+            if (currentLootDate > lastLootDate) {
+              lastLootDate = currentLootDate;
+            }
           }
         }
       });
+
       if (lastLootDate === new Date("2010-01-01")) {
         lastLootDate = null;
       }

@@ -5,12 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import LootsTable from "../../../components/PlayerPage/LootsTable";
 import MeritsTable from "../../../components/PlayerPage/MeritsTable";
 import RaidsTable from "../../../components/PlayerPage/RaidsTable";
+import MemberContext from "../../../lib/context/member";
 import { Query } from "../../../lib/generatedTypes";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 
@@ -58,6 +59,7 @@ interface Variables {
 export default function PageSeePlayer(/*{ playerId }: Props */) {
   const classes = useStyles("");
   const [value, setValue] = useState(1);
+  const member = useContext(MemberContext);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -108,6 +110,15 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
               </Button>
             </a>
           </div>
+          {member.level >= role.class_master && (
+            <div className={classes.stuffBtn}>
+              <a target="_blank" href={`/player/merit/${currentPlayer.id}`}>
+                <Button variant="contained" color="primary">
+                  Validez ses mérites
+                </Button>
+              </a>
+            </div>
+          )}
         </Tabs>
         <MeritsTable hidden={value !== 0} merits={merits} />
         <LootsTable hidden={value !== 1} loots={loots} />
