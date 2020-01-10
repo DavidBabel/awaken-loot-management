@@ -14,6 +14,7 @@ import RaidsTable from "../../../components/PlayerPage/RaidsTable";
 import MemberContext from "../../../lib/context/member";
 import { Query } from "../../../lib/generatedTypes";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
+import { role } from "../../../lib/role-level";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -111,10 +112,11 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
             </a>
           </div>
           {member.level >= role.class_master && (
-            <div className={classes.stuffBtn}>
+            <div className={classes.stuffBtn} style={{ marginLeft: 10 }}>
               <a target="_blank" href={`/player/merit/${currentPlayer.id}`}>
                 <Button variant="contained" color="primary">
-                  Validez ses mérites
+                  Valider les mérites
+
                 </Button>
               </a>
             </div>
