@@ -116,6 +116,7 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
               <a target="_blank" href={`/player/merit/${currentPlayer.id}`}>
                 <Button variant="contained" color="primary">
                   Valider les mérites
+
                 </Button>
               </a>
             </div>

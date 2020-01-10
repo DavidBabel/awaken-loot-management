@@ -2311,7 +2311,6 @@ VALUES
 (11, true, -40, 'Malus', 'J‘ai fais wipe le raid sur une bombe', 'Vael/Gueedon au cours des deux derniers mois', 60),
 (12, true, -40, 'Malus', 'J‘ai fais dépop les techniciens autour de Vael', 'au cours des deux derniers mois', 60),
 (13, true, -40, 'Malus', 'J‘ai loot l‘or de raid à la place d‘un officier','au cours des deux derniers mois', 60);
-
 -- added after release :
 -- (13, true, -40, 'Malus', 'J‘ai loot l‘or de raid à la place d‘un officier','au cours des deux derniers mois', 60);
 
