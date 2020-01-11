@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import {
+  Switch,
   Table,
   TableBody,
   TableCell,
@@ -9,12 +10,13 @@ import {
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import AddPlayer from "../../components/editPlayers/AddPlayer";
-import ChangePasswordOrRole from "../../components/editPlayers/ChangePasswordOrRole";
+import EditPlayerField from "../../components/editPlayers/EditPlayerField";
 import InRosterAndActiveSwitch from "../../components/editPlayers/InRosterAndActiveSwitch";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Player } from "../../lib/generatedTypes";
 import { Query } from "../../lib/generatedTypes";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { useToggle } from "../../lib/hooks/toggle";
 import { byAlphabet } from "../../lib/utils/sorter";
 
 const useStyles = makeStyles(theme => ({
@@ -73,16 +75,12 @@ const useStyles = makeStyles(theme => ({
   nameCell: {
     textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
     backgroundColor: "#4D4D4D"
-  },
-  passwordOrRole: {
-    display: "flex",
-    justifyContent: "flex-end",
-    lineHeight: "48px"
   }
 }));
 
 export default function PageIndex() {
   const classes = useStyles("");
+  const [hideDisabled, toggleHideDisabled] = useToggle(true);
   const { loading, data, error, refetch: refetchAllPlayers } = useQuery<Query>(
     ALL_PLAYERS
   );
@@ -90,11 +88,22 @@ export default function PageIndex() {
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
-  const allPlayers = data.allPlayers.nodes.sort(byAlphabet("name", false));
+  let allPlayers = data.allPlayers.nodes.sort(byAlphabet("name", false));
+
+  if (hideDisabled) {
+    allPlayers = allPlayers.filter(player => player.active);
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.addPlayerBtn}>
         <AddPlayer {...{ allPlayers, refetchAllPlayers }} />
+        &nbsp;&nbsp;&nbsp;&nbsp;Joueurs désactivés
+        <Switch
+          size="small"
+          checked={!hideDisabled}
+          onChange={toggleHideDisabled}
+        />
       </div>
       <Paper className={classes.paper}>
         <Table
@@ -108,6 +117,7 @@ export default function PageIndex() {
               <TableCell>Name</TableCell>
               <TableCell align="right">Class</TableCell>
               <TableCell align="right">Role</TableCell>
+              <TableCell align="right">Reroll de</TableCell>
               <TableCell align="right">Crypted Pass</TableCell>
               <TableCell align="center">Active</TableCell>
               <TableCell align="center">In roster</TableCell>
@@ -115,7 +125,7 @@ export default function PageIndex() {
           </TableHead>
           <TableBody>
             {allPlayers.map((player: Player) => (
-              <TableRow key={player.id}>
+              <TableRow key={`row-table-players-${player.id}`}>
                 <TableCell
                   className={classes.nameCell}
                   component="th"
@@ -126,31 +136,27 @@ export default function PageIndex() {
                 >
                   {player.name}
                 </TableCell>
-                <TableCell align="right">
-                  {player.classByClassId.name}
-                </TableCell>
-                <TableCell align="right">
-                  <div className={classes.passwordOrRole}>
-                    {player.role}
-                    {
-                      <ChangePasswordOrRole
-                        playerId={player.id}
-                        accessor={"role"}
-                      />
-                    }
-                  </div>
-                </TableCell>
-                <TableCell align="right">
-                  <div className={classes.passwordOrRole}>
-                    {player.password}
-                    {
-                      <ChangePasswordOrRole
-                        playerId={player.id}
-                        accessor={"password"}
-                      />
-                    }
-                  </div>
-                </TableCell>
+                <EditPlayerField
+                  label={player.classByClassId.name}
+                  playerId={player.id}
+                  accessor={"classId"}
+                />
+                <EditPlayerField
+                  playerId={player.id}
+                  accessor={"role"}
+                  label={player.role}
+                />
+                <EditPlayerField
+                  playerId={player.id}
+                  accessor={"rerollOf"}
+                  label={player.rerollOf}
+                />
+                <EditPlayerField
+                  playerId={player.id}
+                  accessor={"password"}
+                  label={Boolean(player.password) ? "oui" : "-"}
+                />
+
                 <TableCell align="center">
                   <InRosterAndActiveSwitch
                     active={player.active}

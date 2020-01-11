@@ -22,7 +22,8 @@ CREATE TABLE "Players" (
   "password" varchar,
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false,
-  "specialisation" varchar
+  "specialisation" varchar,
+  "rerollOf" varchar
 );
 comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
@@ -174,7 +175,11 @@ VALUES
 ('Chaman',        '#0070DE'),
 ('Guerrier Tank', '#C79C6E'),
 ('Guerrier DPS',  '#C41F3B'),
-('Paladin',       '#F58CBA');
+('Paladin',       '#F58CBA'),
+('Prêtre Ombre',  '#FFFFFF'),
+('Druide Feral',  '#FF7D0A'),
+('Chaman Amélio', '#0070DE')
+;
 
 -- INSERT INTO
 --   "Slots" ( "name")
