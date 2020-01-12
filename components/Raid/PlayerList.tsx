@@ -154,7 +154,7 @@ export default function PlayerList({
         <ClassAvatar playerClass={className} />
         {classPlayers.map((player: RaidPlayer) => (
           <Link
-            key={player.playerByPlayerId.name}
+            key={`playerlist${player.playerByPlayerId.name}`}
             href="/player/view/[id]"
             as={`/player/view/${player.playerByPlayerId.id}`}
           >

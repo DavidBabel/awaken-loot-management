@@ -123,7 +123,7 @@ export default function PageRoster() {
           <br />
 
           {classesToDisplay.map(c => (
-            <div key={c.name} style={{ margin: 2 }}>
+            <div key={`roster-class-${c.name}`} style={{ margin: 2 }}>
               <div style={{ color: "#aaaaaa" }}>
                 <img
                   style={{ marginBottom: -5, marginRight: 6 }}

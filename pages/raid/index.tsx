@@ -363,7 +363,7 @@ export default function PageIndex() {
         {columns.length > 0
           ? columns.map(column => (
               <div
-                key={column.classWhoLooted}
+                key={`raidwholoot-${column.classWhoLooted}`}
                 className={classes.whoLootedColumn}
               >
                 <div className={classes.lootedNbChip}>
@@ -372,7 +372,7 @@ export default function PageIndex() {
                 <ClassAvatar playerClass={column.classWhoLooted} />
 
                 {column.playersWhoLooted.map(player => (
-                  <div key={player.id}>{player.name}</div>
+                  <div key={`playerwholoot-${player.id}`}>{player.name}</div>
                 ))}
               </div>
             ))
@@ -486,7 +486,10 @@ export default function PageIndex() {
                   children={donjons
                     .filter(({ node: donjon }) => donjon.active)
                     .map(({ node: donjon }) => (
-                      <CreateRaid key={donjon.name} {...donjon} />
+                      <CreateRaid
+                        key={`create-raid-${donjon.name}`}
+                        {...donjon}
+                      />
                     ))}
                 />
               </div>

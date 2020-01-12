@@ -6,9 +6,9 @@ import {
   ListItemText,
   ListSubheader
   // ListItemAvatar
-} from '@material-ui/core';
+} from "@material-ui/core";
 // import Link from 'next/link';
-import { Boss, BossItem } from '../../lib/generatedTypes';
+import { Boss, BossItem } from "../../lib/generatedTypes";
 // import Router from 'next/router';
 // import { destroyCookie } from 'nookies';
 
@@ -22,9 +22,9 @@ export function BossMenu({ boss, onItemSelect }: Props) {
   return (
     <List
       style={{
-        borderRight: '1px solid #E0E0E0',
+        borderRight: "1px solid #E0E0E0",
         width: 400,
-        height: '100vh',
+        height: "100vh",
         marginRight: 30
       }}
     >
@@ -33,7 +33,10 @@ export function BossMenu({ boss, onItemSelect }: Props) {
       {bossItems.map((bossItem: BossItem) => {
         const item = bossItem.itemByItemId;
         return (
-          <ListItem key={`item-${boss.name}-${item.name}`} button={true}>
+          <ListItem
+            key={`itembossmenu-${boss.name}-${item.name}`}
+            button={true}
+          >
             {/* <ListItemAvatar /> */}
             <Button onClick={() => onItemSelect(item.id)}>
               <ListItemText primary={item.name} />

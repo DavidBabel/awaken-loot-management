@@ -64,7 +64,7 @@ export function ItemCard({
       }
     } = loot;
     countLootByClass[currentClass] = (countLootByClass[currentClass] || 0) + 1;
-    return <LootCard key={boss + wowheadId + loot.id} {...loot} />;
+    return <LootCard key={`lootcard${boss + wowheadId + loot.id}`} {...loot} />;
   });
 
   return (

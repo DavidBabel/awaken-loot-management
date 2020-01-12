@@ -19,7 +19,7 @@ export function PlayerAttendanceName({ player }: Props) {
             textDecoration: "none"
           }}
         >
-          {player.name}
+          {player.name} {player.rerollOf && "(R)"}
         </a>
       </Link>
     </TableCell>

@@ -164,7 +164,7 @@ export default function PageIndex() {
         {columns.length > 0
           ? columns.map(column => (
               <div
-                key={column.classWhoLooted}
+                key={`lootedclassitem-${column.classWhoLooted}`}
                 className={classes.whoLootedColumn}
               >
                 <div className={classes.lootedNbChip}>
@@ -173,7 +173,7 @@ export default function PageIndex() {
                 <ClassAvatar playerClass={column.classWhoLooted} />
 
                 {column.playersWhoLooted.map((player: Player) => (
-                  <div key={player.id}>{player.name}</div>
+                  <div key={`playerwholoot-${player.id}`}>{player.name}</div>
                 ))}
               </div>
             ))

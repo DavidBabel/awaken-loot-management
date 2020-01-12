@@ -32,7 +32,7 @@ export default function PagePlayerList() {
       </TableHead>
       <TableBody>
         {players.map(player => (
-          <TableRow key={player.name}>
+          <TableRow key={`rowold-${player.name}`}>
             <TableCell /* component="th"  */ scope="row">
               {player.name}
             </TableCell>
