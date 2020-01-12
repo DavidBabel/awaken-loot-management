@@ -106,7 +106,7 @@ export default function PlayerTableRow({
 
   const classIcon = rowData.isHybrid && (
     <img
-      style={{ width: 14, marginBottom: -2, marginRight: 2 }}
+      style={{ width: 14, marginBottom: -2, marginRight: 2, borderRadius: 3 }}
       src={getClassImageUrl(rowData.className)}
       alt={rowData.className}
     />
