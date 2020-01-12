@@ -204,7 +204,7 @@ export default function AddPlayer({
           >
             {wowClasses.map(wowClass => {
               return (
-                <MenuItem key={wowClass.id} value={wowClass.id}>
+                <MenuItem key={`wow-class-${wowClass.id}`} value={wowClass.id}>
                   {wowClass.name}
                 </MenuItem>
               );

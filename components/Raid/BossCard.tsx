@@ -259,9 +259,9 @@ export function BossCard({
                 currentPlayer.id === parseInt(CONFIG.ID_UNASSIGNED);
               return (
                 <Tooltip
-                  key={
-                    loot.itemByItemId.id + currentPlayer.id + index.toString()
-                  }
+                  key={`tooltip-${loot.itemByItemId.id +
+                    currentPlayer.id +
+                    index.toString()}`}
                   title={
                     loot.lastActionBy && loot.lastActionDate
                       ? `${

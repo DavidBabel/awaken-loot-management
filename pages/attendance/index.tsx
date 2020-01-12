@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import {
   Paper,
+  Switch,
   TableBody,
   TableCell,
   TableHead,
@@ -23,6 +24,7 @@ import { Player, Query } from "../../lib/generatedTypes";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { useSnackBar } from "../../lib/hooks/snackbar";
+import { useToggle } from "../../lib/hooks/toggle";
 import { role } from "../../lib/role-level";
 import { byValue } from "../../lib/utils/sorter";
 
@@ -42,6 +44,8 @@ export default function PageIndex() {
   const classes = useStyles("");
   const member = useContext(MemberContext);
   const { openSnackBar, DefaultSnackBar } = useSnackBar();
+  const [hideRerolls, toggleHideRerolls] = useToggle(true);
+
   const defaultDialog = {
     isOpen: false,
     raidPlayer: null,
@@ -73,13 +77,27 @@ export default function PageIndex() {
   }
   const allRaids = dataAllRaids.allRaids.nodes;
   const players = dataPlayers.allPlayers.nodes
-    .filter((p: Player) => p.active)
+    .filter((p: Player) => {
+      if (!p.active) {
+        return false;
+      }
+      if (p.rerollOf && hideRerolls) {
+        return false;
+      }
+      return true;
+    })
     .sort(byValue("classId"));
 
   return (
     <>
       <Paper className={classes.root}>
         <AttendanceLegende />
+        &nbsp;&nbsp;&nbsp;&nbsp;Voir rerolls
+        <Switch
+          size="small"
+          checked={!hideRerolls}
+          onChange={toggleHideRerolls}
+        />
         <CustomAttendanceTable>
           <TableHead>
             <TableRow>

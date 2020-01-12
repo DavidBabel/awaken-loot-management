@@ -45,7 +45,7 @@ export default function PlayerSearchedList({ searched, players }) {
     >
       {results &&
         results.map(result => (
-          <ListItem key={result.id} button={true}>
+          <ListItem key={`listitemsearched-${result.id}`} button={true}>
             <Link href="/player/view/[id]" as={`/player/view/${result.id}`}>
               <ListItemText
                 className={classes.resultText}

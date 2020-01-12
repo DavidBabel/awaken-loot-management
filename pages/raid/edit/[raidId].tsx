@@ -250,7 +250,7 @@ export default function PageRaidView() {
           });
           return (
             <BossCard
-              key={boss.id}
+              key={`bosscard-raid-${boss.id}`}
               {...boss}
               donjonShortName={donjonShortName}
               looted={lootedForThisBoss}

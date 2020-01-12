@@ -53,7 +53,7 @@ export function AttendanceLine({
   });
 
   return (
-    <TableRow key={player.id + player.name}>
+    <TableRow key={`attendance-table-row${player.id + player.name}`}>
       <PlayerAttendanceName player={player} />
       <PlayerAttendancePercentage
         totalRaidPlayed={totalRaidPlayed}

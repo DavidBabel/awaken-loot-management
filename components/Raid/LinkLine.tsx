@@ -81,7 +81,7 @@ export default function LinkLine({
       />
       {state.btnsOffsetsTop.map(btnOffsetTop => (
         <div
-          key={"btn" + btnOffsetTop}
+          key={"btnlinkline" + btnOffsetTop}
           className={classes.horizontalLine}
           style={{
             width: 20 + decalage * 10 + "px",

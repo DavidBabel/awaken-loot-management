@@ -81,7 +81,7 @@ export default function RaidsTable({ raids, hidden }) {
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.donjonName + row.date}>
+              <TableRow key={`donjonname-${row.donjonName + row.date}`}>
                 <TableCell /* component="th" */ scope="row">
                   {row.donjonName}
                 </TableCell>

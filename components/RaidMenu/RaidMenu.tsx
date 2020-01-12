@@ -38,7 +38,7 @@ export function RaidMenu({ raid, bosses, onBossSelect, goToLoots }: Props) {
       <Divider />
       <ListSubheader>{raid.donjonByDonjonId.name} bosses</ListSubheader>
       {bosses.map((boss: Boss) => (
-        <ListItem key={`menu-${boss.name}`} button={true}>
+        <ListItem key={`menuraidmenu-${boss.name}`} button={true}>
           {/* <ListItemAvatar /> */}
           <Button onClick={() => onBossSelect(boss.id)}>
             <ListItemText primary={boss.name} />

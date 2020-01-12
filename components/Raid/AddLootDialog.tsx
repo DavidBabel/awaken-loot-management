@@ -431,7 +431,10 @@ export default function AddLootDialog({
                 }>
                 {wowClasses.map(wowClass => {
                   return (
-                    <MenuItem key={wowClass.id} value={wowClass.id}>
+                    <MenuItem
+                      key={`menuitem-classlist${wowClass.id}`}
+                      value={wowClass.id}
+                    >
                       {wowClass.name}
                     </MenuItem>
                   );
@@ -472,7 +475,7 @@ export default function AddLootDialog({
                           borderLeft: "solid 4px " + playerColor,
                           margin: 2
                         }}
-                        key={player.id}
+                        key={`addlootplayer-${player.id}`}
                         value={player.id}
                       >
                         {player.name}
@@ -489,10 +492,8 @@ export default function AddLootDialog({
               itemToAdd.itemByItemId.classItemsByItemId.nodes.map(
                 playerClass => (
                   <ClassAvatar
-                    key={
-                      playerClass.classByClassId.id +
-                      itemToAdd.itemByItemId.name
-                    }
+                    key={`classavatar${playerClass.classByClassId.id +
+                      itemToAdd.itemByItemId.name}`}
                     playerClass={playerClass.classByClassId.name}
                     prio={playerClass.prio}
                   />

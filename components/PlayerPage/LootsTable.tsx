@@ -110,7 +110,7 @@ export default function LootsTable({ loots, hidden }: Props) {
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow key={row.wowheadId + row.raidId}>
+              <TableRow key={`everyitem-${row.wowheadId + row.raidId}`}>
                 <TableCell /* component="th" */ scope="row">
                   <a
                     onClick={e => {

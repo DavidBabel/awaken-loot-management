@@ -123,7 +123,7 @@ export default function ItemSearchedList({
           });
           return (
             <ListItem
-              key={result.id}
+              key={`listitemline-${result.id}`}
               button={true}
               onClick={() => {
                 setItemCurrentlySelected(result);
@@ -146,7 +146,8 @@ export default function ItemSearchedList({
               {!result.classByClassId ? (
                 result.classItemsByItemId.nodes.map(playerClass => (
                   <ListItemAvatar
-                    key={playerClass.classByClassId.id + result.name}
+                    key={`listitemavatar-${playerClass.classByClassId.id +
+                      result.name}`}
                   >
                     <ClassAvatar
                       playerClass={playerClass.classByClassId.name}
