@@ -166,19 +166,19 @@ ALTER TABLE "BossItem" ADD FOREIGN KEY ("bossId") REFERENCES "Bosses" ("id");
 ALTER TABLE "Bosses" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id"); -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Classes" ("name", "color")
 VALUES
-('Prêtre',        '#FFFFFF'),
-('Mage',          '#69CCF0'),
-('Démoniste',     '#9482C9'),
-('Voleur',        '#FFF569'),
-('Druide',        '#FF7D0A'),
-('Chasseur',      '#ABD473'),
-('Chaman',        '#0070DE'),
-('Guerrier Tank', '#C79C6E'),
-('Guerrier DPS',  '#C41F3B'),
-('Paladin',       '#F58CBA'),
-('Prêtre Ombre',  '#FFFFFF'),
-('Druide Feral',  '#FF7D0A'),
-('Chaman Amélio', '#0070DE')
+('Prêtre',        '#FFFFFF'), -- 1
+('Mage',          '#69CCF0'), -- 2
+('Démoniste',     '#9482C9'), -- 3
+('Voleur',        '#FFF569'), -- 4
+('Druide',        '#FF7D0A'), -- 5
+('Chasseur',      '#ABD473'), -- 6
+('Chaman',        '#0070DE'), -- 7
+('Guerrier Tank', '#C79C6E'), -- 8
+('Guerrier DPS',  '#C41F3B'), -- 9
+('Paladin',       '#F58CBA'), -- 10
+('Prêtre Ombre',  '#FFFFFF'), -- 11
+('Druide Feral',  '#FF7D0A'), -- 12
+('Chaman Amélio', '#0070DE')  -- 13
 ;
 
 -- INSERT INTO
@@ -1220,6 +1220,24 @@ VALUES
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
+
+
+--
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman Amélio'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre Ombre'), false),
+--
+
+
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=
@@ -2443,7 +2461,7 @@ VALUES
 ('Cocobanjo'    , 4,  'player', null, true, true),
 ('Nozil'        , 6,  'player', '950382a04140bcdab437600b0928ec63', true, true),
 ('Oscuro'       , 9,  'player', null, true, true),
-('Paffë'        , 5,  'player', null, true, true),
+('Paffë'        , 12,  'player', null, true, true),
 ('Skwäsh'       , 1,  'player', '2f8b09d7750539ba0d7853cd1eae78ee', true, true),
 ('Tàel'         , 3,  'player', null, true, true),
 ('Ragegoriath'  , 8,  'player', 'e3b557b6f939ad38f1610dd5102b1ee7', true, true),
@@ -2479,7 +2497,7 @@ VALUES
 ('Lyaxus'       , 7,  'player', null, false, false),
 ('Lykwette'     , 8,  'player', null, true, false),
 ('Lylith'       , 1,  'player', null, true, false),
-('Mergueztguez' , 7,  'player', null, true, false),
+('Mergueztguez' , 13,  'player', null, true, false),
 ('Minatrix'     , 2,  'player', null, true, false),
 ('Need'         , 1,  'player', 'b1d38a948caf22ca343d9efc2d36729e', true, false),
 ('Nérull'       , 4,  'player', null, false, false),
@@ -2490,7 +2508,7 @@ VALUES
 ('Qweakzor'     , 6,  'player', null, true, false),
 ('Ràys'         , 4,  'player', null, true, false),
 ('Rektall'      , 3,  'player', null, true, false),
-('Skau'         , 1,  'player', null, true, false),
+('Skau'         , 11,  'player', null, true, false),
 ('Sprawl'       , 8,  'player', null, false, false),
 ('Størmfury'    , 5,  'player', null, false, false),
 ('Suprême'      , 3,  'player', null, true, false),

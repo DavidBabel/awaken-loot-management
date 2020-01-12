@@ -2,6 +2,24 @@
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
+
+
+--
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman Amélio'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de puissance de sort'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre Ombre'), false),
+--
+
+
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=

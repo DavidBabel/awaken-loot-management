@@ -200,9 +200,9 @@ export default function PageSummary() {
         </Tabs>
       </AppBar>
 
-      {playerClasses.map((playerClass, index) => {
-        const currentPlayers: Player[] = players.filter(
-          player => player.classByClassId.name === playerClass
+      {playerClasses.map((playerClass: string, index) => {
+        const currentPlayers: Player[] = players.filter(player =>
+          player.classByClassId.name.includes(playerClass)
         );
         return (
           <TabPanel
