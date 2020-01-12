@@ -22,7 +22,8 @@ CREATE TABLE "Players" (
   "password" varchar,
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false,
-  "specialisation" varchar
+  "specialisation" varchar,
+  "rerollOf" varchar
 );
 comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players" ("id");

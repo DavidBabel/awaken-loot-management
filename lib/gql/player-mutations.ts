@@ -18,9 +18,11 @@ export const UPDATE_PLAYER = gql`
     $id: Int!
     $active: Boolean
     $inRoster: Boolean
+    $classId: Int
     $name: String
     $password: String
     $role: String
+    $rerollOf: String
   ) {
     updatePlayerById(
       input: {
@@ -28,9 +30,11 @@ export const UPDATE_PLAYER = gql`
         playerPatch: {
           active: $active
           inRoster: $inRoster
+          classId: $classId
           name: $name
           password: $password
           role: $role
+          rerollOf: $rerollOf
         }
       }
     ) {
@@ -39,8 +43,10 @@ export const UPDATE_PLAYER = gql`
         active
         name
         inRoster
+        classId
         password
         role
+        rerollOf
       }
     }
   }

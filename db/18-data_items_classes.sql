@@ -2,6 +2,7 @@
 -- molten core hors set
 INSERT INTO "ClassItem" ("itemId","classId","prio")
 VALUES
+
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=

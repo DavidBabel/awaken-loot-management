@@ -34,6 +34,9 @@ const StyledTableCell = withStyles((theme: Theme) =>
 
 export interface PlayerTableRowDatas {
   name: string;
+  rerollOf: string;
+  isHybrid: boolean;
+  className: string;
   merit: number;
   totalCountableLoot: number;
   lootPerRaid: number;
@@ -181,6 +184,9 @@ export default function PlayersTable(props: Props) {
 
       return {
         name: player.name,
+        rerollOf: player.rerollOf,
+        isHybrid: player.classByClassId.id > 10,
+        className: player.classByClassId.name,
         merit: Math.round((maxMerit * 100) / props.maxMeritValue),
         totalCountableLoot,
         totalLootByLevel,

@@ -15,6 +15,7 @@ import Link from "next/link";
 import ProgressBar from "../../components/summary/ProgressBar";
 import { Loot } from "../../lib/generatedTypes";
 import { getDayMonth } from "../../lib/utils/date";
+import { getClassImageUrl } from "../../lib/utils/image";
 import { LootButton } from "./LootButton";
 import { PlayerTableRowDatas } from "./PlayersTable";
 
@@ -103,10 +104,43 @@ export default function PlayerTableRow({
     );
   }
 
+  const classIcon = rowData.isHybrid && (
+    <img
+      style={{ width: 14, marginBottom: -2, marginRight: 2 }}
+      src={getClassImageUrl(rowData.className)}
+      alt={rowData.className}
+    />
+  );
+
   return (
-    <StyledTableRow>
+    <StyledTableRow
+      style={{
+        backgroundColor: rowData.isHybrid
+          ? "#DCF0FF"
+          : rowData.rerollOf
+          ? "#FFF29E"
+          : "transparent"
+      }}
+    >
       <StyledTableCell component="th" scope="row">
-        {rowData.name}
+        {rowData.rerollOf ? (
+          <>
+            <div>
+              {
+                <i>
+                  {classIcon} {rowData.name}
+                </i>
+              }
+            </div>
+            <div>
+              (<i>{rowData.rerollOf}</i>)
+            </div>
+          </>
+        ) : (
+          <>
+            {classIcon} {rowData.name}
+          </>
+        )}
       </StyledTableCell>
 
       <StyledTableCell align="center">

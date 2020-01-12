@@ -21,6 +21,7 @@ export const ALL_PLAYERS = gql`
         active
         inRoster
         classId
+        rerollOf
         role
         password
         specialisation
@@ -85,6 +86,7 @@ export const ONE_PLAYER = gql`
         name
         specialisation
         active
+        rerollOf
         classByClassId {
           id
           color
