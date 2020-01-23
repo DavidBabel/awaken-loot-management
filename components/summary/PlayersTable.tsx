@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import {
   Button,
@@ -17,7 +17,9 @@ import {
 } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import MemberContext from "../../lib/context/member";
 import { Loot, Player } from "../../lib/generatedTypes";
+import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
 import PlayerTableRow, { LIMIT_LOOTLEVEL_TO_COUNT } from "./PlayerTableRow";
@@ -114,17 +116,20 @@ type ColumnName =
 
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
+  const member = useContext(MemberContext);
 
   const columns: ColumnName[] = [
     "Pseudo",
     "Total Loot",
     "Merites",
     "Total raids",
-    "%Loot/raid",
     "Last loot",
     "Last raid",
     "Infos"
   ];
+  if (member.level >= role.class_master) {
+    columns.splice(4, 0, "%Loot/raid");
+  }
 
   const rowsData = props.players.map(
     (player: Player): PlayerTableRowDatas => {
