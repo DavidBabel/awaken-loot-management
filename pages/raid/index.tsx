@@ -145,11 +145,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "50%",
-    height: "177px",
-    "&:nth-child(1)": {
-      borderRight: " 1px solid #E0E0E0"
-    }
+    width: "100%",
+    height: "177px"
   },
   itemInfoDialog: {
     "& a": {
