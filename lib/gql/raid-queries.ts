@@ -55,6 +55,30 @@ export const ONE_DONJON = gql`
   }
 `;
 
+export const ALL_RAIDS_LIGHT = gql`
+  query AllRaids {
+    allRaids(orderBy: DATE_DESC) {
+      nodes {
+        id
+        date
+        title
+        linkBetweenRaids
+        donjonByDonjonId {
+          id
+          name
+          shortName
+        }
+        raidPlayersByRaidId {
+          totalCount
+        }
+        lootsByRaidId(condition: { active: true }) {
+          totalCount
+        }
+      }
+    }
+  }
+`;
+
 export const ALL_RAIDS = gql`
   query AllRaids {
     allRaids(orderBy: DATE_DESC) {

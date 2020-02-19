@@ -39,7 +39,7 @@ import { Mutation, Query, Raid } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
-import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
+import { ALL_DONJONS, ALL_RAIDS_LIGHT } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
 import { getDonjonImageUrl } from "../../lib/utils/image";
@@ -233,7 +233,7 @@ export default function PageIndex() {
     loading: loadingRaids,
     data: dataRaids,
     error: errorRaids
-  } = useQuery<Query>(ALL_RAIDS);
+  } = useQuery<Query>(ALL_RAIDS_LIGHT);
   // const {
   //   loading: loadingPlayers,
   //   data: dataPlayers,
