@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import {
+  Avatar,
   Button,
   Checkbox,
   Container,
@@ -31,16 +32,17 @@ import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
 import LinkLine from "../../components/Raid/LinkLine";
 import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
-import PlayerSearchedList from "../../components/searchBox/PlayerSearchedList";
+// import PlayerSearchedList from "../../components/searchBox/PlayerSearchedList";
 import MemberContext from "../../lib/context/member";
 import { Item } from "../../lib/generatedTypes";
 import { Mutation, Query, Raid } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
-import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+// import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
 import { ALL_DONJONS, ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
+import { getDonjonImageUrl } from "../../lib/utils/image";
 import { byDate } from "../../lib/utils/sorter";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
@@ -204,7 +206,7 @@ export default function PageIndex() {
   const member = useContext(MemberContext);
   const classes = useStyles("");
   const [activeItemIndex, setActiveItemIndex] = React.useState<number>(0);
-  const [playerInputValue, setPlayerInputValue] = React.useState<string>("");
+  // const [playerInputValue, setPlayerInputValue] = React.useState<string>("");
   const [itemInputValue, setItemInputValue] = React.useState<string>("");
   const [itemInfoOpened, setItemInfoOpened] = React.useState<boolean>(false);
   const [itemCurrentlySelected, setItemCurrentlySelected] = React.useState<
@@ -232,20 +234,23 @@ export default function PageIndex() {
     data: dataRaids,
     error: errorRaids
   } = useQuery<Query>(ALL_RAIDS);
-  const {
-    loading: loadingPlayers,
-    data: dataPlayers,
-    error: errorPlayers
-  } = useQuery<Query>(ALL_PLAYERS);
+  // const {
+  //   loading: loadingPlayers,
+  //   data: dataPlayers,
+  //   error: errorPlayers
+  // } = useQuery<Query>(ALL_PLAYERS);
   const {
     loading: loadingItems,
     data: dataItems,
     error: errorItems
   } = useQuery<Query>(ALL_ITEMS);
 
-  const loading =
-    loadingDonjons || loadingRaids || loadingPlayers || loadingItems;
-  const error = errorDonjons || errorRaids || errorPlayers || errorItems;
+  // const loading =
+  //   loadingDonjons || loadingRaids || loadingPlayers || loadingItems;
+  // const error = errorDonjons || errorRaids || errorPlayers || errorItems;
+
+  const loading = loadingDonjons || loadingRaids || loadingItems;
+  const error = errorDonjons || errorRaids || errorItems;
 
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
@@ -253,7 +258,7 @@ export default function PageIndex() {
 
   const donjons = dataDonjons.allDonjons.edges;
   const raids = dataRaids.allRaids.nodes;
-  const players = dataPlayers.allPlayers.nodes;
+  // const players = dataPlayers.allPlayers.nodes;
   const items = dataItems.allItems.nodes;
 
   raids.sort(byDate("date"));
@@ -318,11 +323,11 @@ export default function PageIndex() {
     }
   });
 
-  const searchPlayerInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setPlayerInputValue(event.target.value);
-  };
+  // const searchPlayerInputChange = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   setPlayerInputValue(event.target.value);
+  // };
   const searchItemInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -507,7 +512,7 @@ export default function PageIndex() {
             </Typography>
             <Divider />
             <div className={classes.searchContainer}>
-              <div className={classes.searchBox}>
+              {/* <div className={classes.searchBox}>
                 <TextField
                   autoComplete="off"
                   id="outlined-player"
@@ -522,7 +527,7 @@ export default function PageIndex() {
                   searched={playerInputValue}
                   players={players}
                 />
-              </div>
+              </div> */}
               <div className={classes.searchBox}>
                 <TextField
                   autoComplete="off"
@@ -583,7 +588,19 @@ export default function PageIndex() {
                 {raids.map((raid: Raid) => {
                   return (
                     <TableRow key={`raid-${raid.id}`}>
-                      <TableCell>{raid.donjonByDonjonId.name}</TableCell>
+                      <TableCell>
+                        <div style={{ display: "flex" }}>
+                          <Avatar
+                            alt={raid.donjonByDonjonId.name}
+                            style={{ marginRight: 13, width: 25, height: 25 }}
+                            src={
+                              raid.donjonByDonjonId?.cdnImage ||
+                              getDonjonImageUrl(raid.donjonByDonjonId.name)
+                            }
+                          />
+                          {raid.donjonByDonjonId.name}
+                        </div>
+                      </TableCell>
                       <TableCell>{getDate(raid.date)}</TableCell>
                       <TableCell>{raid.title}</TableCell>
                       <TableCell>
