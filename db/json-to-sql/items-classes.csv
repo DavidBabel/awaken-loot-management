@@ -1,5 +1,3 @@
-
-
 Collier d‘illumination
 Prêtre, false
 Mage, true
@@ -14,6 +12,7 @@ Anneau épais en sombrefer
 Guerrier Tank, true
 Guerrier DPS, false
 Druide, false
+Druide Feral, true
 
 Jambières de Tempête de mana
 Druide, false
@@ -61,8 +60,9 @@ Voleur, true
 
 Corde de mana enflammé
 Prêtre, false
+Prêtre Ombre, false
 Mage, true
-Démoniste, true
+Démoniste, false
 
 Gantelets de garde des flammes
 Guerrier Tank, false
@@ -145,7 +145,7 @@ Guerrier DPS, false
 
 Bâton de domination
 Prêtre, false
-Druide, false
+Druide, true
 Chaman, false
 Mage, true
 Démoniste, true
@@ -185,6 +185,7 @@ Démoniste, true
 Epaulières de garde du feu
 Guerrier DPS, false
 Voleur, false
+Druide Feral, false
 
 Gants de la flamme hypnotique
 Mage, false
@@ -225,13 +226,15 @@ Chaman, false
 
 Anneau de Précisia
 Chasseur, true
-Guerrier DPS, true
-Guerrier Tank, false
+Guerrier DPS, false
+Guerrier Tank, true
 Voleur, true
+Druide Feral, false
 
 Cape sang-de-dragon
 Guerrier DPS, false
 Guerrier Tank, true
+Druide Feral, true
 
 Essence de la Flamme pure
 Prêtre, false
@@ -652,3 +655,4 @@ Lok‘amir il Romathis
 Druide, true
 Prêtre, false
 Prêtre Ombre, false
+

@@ -42,6 +42,10 @@ VALUES
   'Anneau épais en sombrefer'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau épais en sombrefer'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), true),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de Tempête de mana'
@@ -163,11 +167,15 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
+  'Prêtre Ombre'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Corde de mana enflammé'
+  ),(SELECT id FROM "Classes" WHERE "name"=
   'Mage'), true),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), false),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de garde des flammes'
@@ -373,7 +381,7 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), true),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
@@ -474,6 +482,10 @@ VALUES
   'Epaulières de garde du feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), false),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Epaulières de garde du feu'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), false),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de la flamme hypnotique'
@@ -574,15 +586,19 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), false),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Anneau de Précisia'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), false),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape sang-de-dragon'
@@ -592,6 +608,10 @@ VALUES
   'Cape sang-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier Tank'), true),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Cape sang-de-dragon'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Druide Feral'), true),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
