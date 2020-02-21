@@ -59,7 +59,9 @@ export default function PageSummary() {
 
   const classTabStyles = playerClasses.reduce((stack, playerClass, index) => {
     stack[`indicator_${index}`] = {
-      "& .MuiTabs-indicator": { backgroundColor: getClassColor(playerClass) }
+      "& .MuiTabs-indicator": {
+        backgroundColor: getClassColor(playerClass, true)
+      }
     };
     return stack;
   }, {});
@@ -212,7 +214,7 @@ export default function PageSummary() {
           >
             <PlayersTable
               showed={currentTabIndex === index}
-              classColor={getClassColor(playerClass)}
+              classColor={getClassColor(playerClass, true)}
               players={currentPlayers}
               maxMeritValue={maxMeritValue}
               openLootWindow={openLootWindow}
