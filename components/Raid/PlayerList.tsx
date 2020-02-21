@@ -145,8 +145,8 @@ export default function PlayerList({
   } = useSnackBar();
 
   function displayClass(className: string, raidPlayers: RaidPlayer[]) {
-    const classPlayers = raidPlayers.filter(
-      player => player.playerByPlayerId.classByClassId.name === className
+    const classPlayers = raidPlayers.filter(player =>
+      player.playerByPlayerId.classByClassId.name.includes(className)
     );
 
     return (

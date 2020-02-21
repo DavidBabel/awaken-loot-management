@@ -34,6 +34,7 @@ import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
+import { getClassColor } from "../../lib/utils/class-colors";
 import { formatDate } from "../../lib/utils/date";
 import { getBossImageUrl } from "../../lib/utils/image";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
@@ -228,19 +229,19 @@ export function BossCard({
   };
   useEffect(refreshWowhead, [looted]);
 
-  function getClassColor(player: Player) {
-    if (player.id === parseInt(CONFIG.ID_UNASSIGNED)) {
-      return "white";
-    }
-    switch (player.classByClassId.id) {
-      case 1:
-        return "grey";
-      case 4:
-        return "#d4d000";
-      default:
-        return player.classByClassId.color;
-    }
-  }
+  // function getClassColor(player: Player) {
+  //   if (player.id === parseInt(CONFIG.ID_UNASSIGNED)) {
+  //     return "white";
+  //   }
+  //   switch (player.classByClassId.id) {
+  //     case 1:
+  //       return "grey";
+  //     case 4:
+  //       return "#d4d000";
+  //     default:
+  //       return player.classByClassId.color;
+  //   }
+  // }
 
   return (
     <>
@@ -299,7 +300,9 @@ export function BossCard({
                     </ListItemText>
                     <ListItemText
                       style={{
-                        borderColor: getClassColor(currentPlayer),
+                        borderColor: getClassColor(
+                          currentPlayer.classByClassId.name
+                        ),
                         backgroundColor: isUnassigned ? "darkorange" : "white"
                       }}
                       className={classes.playerCell}
@@ -311,7 +314,9 @@ export function BossCard({
                           <a
                             target="_blank"
                             style={{
-                              color: getClassColor(currentPlayer),
+                              color: getClassColor(
+                                currentPlayer.classByClassId.name
+                              ),
                               textDecoration: "none"
                             }}
                           >

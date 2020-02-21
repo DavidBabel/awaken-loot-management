@@ -88,7 +88,10 @@ export default function AddPlayer({
     { id: 6, name: "Chasseur" },
     { id: 7, name: "Chaman" },
     { id: 8, name: "Guerrier Tank" },
-    { id: 9, name: "Guerrier DPS" }
+    { id: 9, name: "Guerrier DPS" },
+    { id: 11, name: "Prêtre Ombre" },
+    { id: 12, name: "Druide Feral" },
+    { id: 13, name: "Chaman Amélio" }
   ];
   const handleOpen = (): void => {
     setOpen(true);

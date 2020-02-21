@@ -254,6 +254,7 @@ export const ONE_RAID = gql`
               classId
               classByClassId {
                 id
+                name
                 color
               }
             }
