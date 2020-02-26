@@ -11,11 +11,11 @@ const roster: Roster[] = [
     name: "Prêtre",
     shivtrIcon: "16",
     prepend: "H",
-    prio: "profil++"
+    prio: "faible"
   },
-  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "faible" },
+  { name: "Druide", shivtrIcon: "22", prepend: "R", prio: "ouvert" },
   { name: "Chaman", shivtrIcon: "18", prepend: "R", prio: "profil++" },
-  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "profil++" },
+  { name: "Mage", shivtrIcon: "19", prepend: "", prio: "faible" },
   {
     name: "Démoniste",
     shivtrIcon: "20",
@@ -28,13 +28,13 @@ const roster: Roster[] = [
     name: "Guerrier Tank",
     shivtrIcon: "12",
     prepend: "",
-    prio: "faible"
+    prio: "profil++"
   },
   {
     name: "Guerrier DPS",
     shivtrIcon: "17",
     prepend: "",
-    prio: "prio"
+    prio: "faible"
   }
 ];
 
