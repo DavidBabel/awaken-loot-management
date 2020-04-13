@@ -122,11 +122,11 @@ export default function Roster() {
       {currentRoster.map((classe: Roster, index: number) => {
         return (
           <div key={classe.name}>
-            <img
-              src={`http://cloudfront.shivtr.com/game_classes/${classe.shivtrIcon}/out.png`}
-              alt=""
-            />{" "}
             <div style={{ width: 140, display: "inline-block" }}>
+              <img
+                src={`http://cloudfront.shivtr.com/game_classes/${classe.shivtrIcon}/out.png`}
+                alt=""
+              />{" "}
               {classe.name}:
             </div>
             {recrutement.map((prio: Prios) => (
