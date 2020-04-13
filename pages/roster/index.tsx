@@ -1,5 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useState } from "react";
+import { getClassImageUrl } from "../../lib/utils/image";
 
 type Prios = "prio" | "ouvert" | "faible" | "profil++";
 interface Roster {
@@ -124,7 +125,8 @@ export default function Roster() {
           <div key={classe.name}>
             <div style={{ width: 140, display: "inline-block" }}>
               <img
-                src={`http://cloudfront.shivtr.com/game_classes/${classe.shivtrIcon}/out.png`}
+                style={{ width: 18, height: 18 }}
+                src={getClassImageUrl(classe.name)}
                 alt=""
               />{" "}
               {classe.name}:
