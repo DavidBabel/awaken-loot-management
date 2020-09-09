@@ -293,7 +293,7 @@ export default function PlayerList({
           )}
         </DialogContent>
         <DialogActions>
-          {member.level > role.officer && (
+          {member.level >= role.officer && (
             <Button onClick={toggleDisplayImportPlayerArea} color="primary">
               {displayImportPlayerArea
                 ? "Fermer l‘import de joueurs"
