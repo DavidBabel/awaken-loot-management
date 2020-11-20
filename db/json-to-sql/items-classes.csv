@@ -1,3 +1,5 @@
+# MC / Ony
+
 Collier d‘illumination
 Prêtre, false
 Mage, true
@@ -22,7 +24,7 @@ Prêtre, false
 Robe du pouvoir volatil
 Prêtre, false
 Mage, false
-Démoniste, true
+Démoniste, false
 
 Cuissards d‘Attise-flammes
 Guerrier Tank, true
@@ -78,6 +80,7 @@ Druide, false
 Chaman, false
 Mage, true
 Démoniste, true
+Prêtre Ombre, true
 
 Vieux gants en cuir du Magma
 Voleur, true
@@ -262,6 +265,7 @@ Druide, false
 Chaman, false
 Mage, true
 Démoniste, true
+Prêtre Ombre, true
 
 Arrache-moelle
 Chaman, false
@@ -416,7 +420,8 @@ Guerrier Tank, false
 Guerrier DPS, false
 
 Lame croc-de-dragon
-Voleur, false
+Voleur, true
+Guerrier Tank, true
 
 Protecteur en écailles de dragon rouge
 Chaman, true
@@ -471,7 +476,7 @@ Guerrier DPS, false
 
 Espauliers griffe-de-drake
 Guerrier DPS, true
-Guerrier Tank, false
+Guerrier Tank, true
 
 Bague de Blackrock
 Prêtre Ombre, false
@@ -507,8 +512,8 @@ Talisman croc-de-drake
 Chasseur, false
 Voleur, true
 Guerrier DPS, true
-Guerrier Tank, false
-Druide Feral, false
+Guerrier Tank, true
+Druide Feral, true
 
 Rempart béni de Malfurion
 Druide Feral, false
@@ -626,7 +631,7 @@ Druide, true
 Chaman, false
 
 Larme de Neltharion
-Prêtre Ombre, false
+Prêtre Ombre, true
 Mage, true
 Démoniste, true
 
@@ -654,5 +659,2323 @@ Guerrier Tank, false
 Lok‘amir il Romathis
 Druide, true
 Prêtre, false
+Prêtre Ombre, true
+
+# AQ
+
+Bottes de la volonté inexorable
+Guerrier DPS, false
+Guerrier Tank, true
+
+Garde-poignets en écailles de hanneton
+Chasseur, false
+Voleur, true
+Druide, false
+Guerrier DPS, false
+Druide Feral, true
+
+Cape de concentré de haine
+Guerrier Tank, true
+Guerrier DPS, false
+Chasseur, false
+Voleur, true
+Druide Feral, true
+
+Epaulières du barrage
+Chasseur, false
+Chaman, false
+
+Plastron d‘annihilation
+Guerrier Tank, false
+Guerrier DPS, true
+
+Anneau de pensée foisonnante
+Mage, false
+Démoniste, false
 Prêtre Ombre, false
+
+Pendentif du gardien qiraji
+Guerrier Tank, true
+Guerrier DPS, false
+Druide Feral, true
+
+Amulette de vile sauvegarde
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Voleur, false
+Druide Feral, false
+
+Bâton des prophètes qiraji
+Mage, false
+Démoniste, true
+Prêtre Ombre, false
+
+Marteau de Ji‘zhi
+Chaman, false
+Druide, false
+
+Bottes du prophète déchu
+Chaman, false
+
+
+Ceinture qiraji en peau épaisse
+Voleur, false
+Druide Feral, true
+
+Robe du garde de guerre
+Mage, false
+Démoniste, false
+Prêtre Ombre, false
+
+Bottes recomposées
+Chaman, false
+Druide, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Collier de pureté
+Chaman, false
+Druide, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gants de coercition
+Guerrier DPS, false
+Chasseur, false
+Voleur, true
+Druide Feral, false
+
+Casque des lianes rampantes
+Chaman, false
+Druide, false
+
+Gantelets de détermination inébranlable
+Guerrier Tank, true
+Guerrier DPS, false
+
+Jambières de l‘essaim purulent
+Mage, true
+Démoniste, false
+
+Insigne de garde-essaim
+Guerrier DPS, false
+Chasseur, false
+Voleur, false
+
+Pouvoir de Sartura
+Chaman, false
+Druide, false
+Prêtre, false
+
+Griffe de silithide
+Guerrier DPS, false
+Chasseur, true
+Voleur, false
+
+Jambières de fureur qiraji en écailles
+Chaman, false
+
+Tenue de parade impériale qiraji
+Chaman, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+
+Armes impériales qiraji
+Guerrier Tank, true
+Guerrier DPS, true
+Chasseur, false
+Voleur, true
+
+Robe du saint gardien
+Chaman, false
+Druide, false
+Prêtre, false
+
+Corselet en carapace de silithide
+Guerrier Tank, false
+Guerrier DPS, false
+
+Bottes de tunnelière de la ruche
+Guerrier Tank, false
+Guerrier DPS, false
+Druide Feral, true
+
+Cape des secrets inexprimables
+Démoniste, false
+
+Collier barbelé
+Guerrier Tank, false
+Guerrier DPS, true
+Chasseur, false
+Voleur, false
+Druide Feral, false
+
+Espauliers de l‘Implacable
+Guerrier Tank, true
+Guerrier DPS, false
+
+Fétiche du ravageur des sables
+Guerrier DPS, false
+Mage, false
+Démoniste, false
+
+Mantelet de vengeance cruelle
+Voleur, false
+Druide Feral, false
+
+Jambières de ravageur des sables en écailles
+Chasseur, false
+
+Guisarme du ravageur des sables
+Chasseur, false
+
+Ancien éventreur qiraji
+Guerrier DPS, false
+Voleur, false
+
+Totem de vie
+Chaman, false
+
+Manchettes de domination qiraji
+Chaman, false
+Mage, false
+Démoniste, false
+
+Manchettes de commandement qiraji
+Guerrier Tank, false
+Guerrier DPS, true
+Voleur, true
+Prêtre Ombre, true
+
+Anneau du martyr
+Chaman, false
+Druide, false
+Prêtre, false
+
+Gantelets en peau de guêpe
+Chaman, false
+Druide, false
+
+Garde-poignets de profanateur de ruche
+Guerrier Tank, false
+Guerrier DPS, true
+
+Cape de la Ruche d‘or
+Guerrier Tank, false
+Druide Feral, false
+
+Gants du messie
+Chaman, true
+Druide, false
+Prêtre, false
+
+Aiguillon d‘Huhuran
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Voleur, false
+
+Gilet d‘exécution rapide
+Guerrier DPS, false
+Voleur, false
+Druide Feral, true
+
+Anneau du dévoré
+Chaman, false
+Druide, false
+Prêtre, false
+
+Scarabée pétrifié
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinture de la triade
+Guerrier Tank, false
+Guerrier DPS, true
+
+Robe du triumvirat
+Chaman, false
+Druide, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Semblance du dévoreur
+Voleur, false
+Druide Feral, true
+
+Baguette de noblesse qiraji
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Toucher d‘Angelista
+Guerrier Tank, false
+Druide Feral, false
+
+Mantelet ternaire
+Chaman, false
+Druide, false
+Prêtre, true
+
+Cape de la trinité
+Mage, false
+Démoniste, false
+
+Mantelet de la puissance phrénique
+Mage, true
+Démoniste, false
+
+Anneau de ténèbres d‘Ukko
+Démoniste, false
+
+Gantelets couverts de bile
+Guerrier DPS, false
+Voleur, false
+Druide Feral, false
+
+Mantelet de la fureur du désert
+Chaman, false
+
+Bottes du héros déchu
+Guerrier Tank, false
+Guerrier DPS, false
+
+Charme d‘Angelista
+Chaman, false
+Druide, false
+Prêtre, false
+
+Gants d‘Ebru
+Chaman, false
+Druide, false
+
+Gantelets éclaboussés de vase
+Guerrier Tank, false
+Guerrier DPS, false
+
+Gantelets de Kalimdor
+Chaman, false
+
+Anneau de fureur qiraji
+Guerrier DPS, true
+Chasseur, false
+Voleur, false
+
+Idole de santé
+Druide, true
+Druide Feral, false
+
+Fémur de silithide aiguisé
+Mage, false
+Démoniste, false
+
+Jambières couvertes de vase
+Chasseur, true
+Chaman, false
+
+Broche scarabée
+Chaman, false
+Druide, false
+Prêtre, false
+
+Diadème de Vek‘lor
+Chaman, false
+Voleur, false
+
+Bottes de l‘épiphanie
+Mage, false
+Démoniste, false
+Prêtre Ombre, false
+
+Gants de dévastation de Vek‘lor
+Chasseur, false
+Chaman, false
+
+Ceinture royale qiraji
+Guerrier Tank, true
+Guerrier DPS, false
+
+Brassards d‘exécution quiraji
+Guerrier DPS, false
+Chasseur, false
+Voleur, true
+Druide Feral, true
+
+Sceptre royal de Vek‘lor
+Mage, true
+Démoniste, true
+Prêtre Ombre, false
+
+Anneau de l‘empereur Vek‘lor
+Guerrier Tank, false
+Druide Feral, true
+
+Diadème de Vek‘nilash
+Guerrier Tank, false
+Démoniste, false
+Prêtre Ombre, false
+
+Gants du temple caché
+Guerrier DPS, false
+Chasseur, false
+Voleur, false
+Druide Feral, true
+
+Ceinture régénérante de Vek‘nilash
+Chaman, false
+Druide, false
+
+Amulette de Vek‘nilash
+Mage, true
+Démoniste, true
+Prêtre Ombre, false
+
+Bracelets de rédemption royale
+Chaman, false
+Druide, true
+Prêtre, true
+
+Vengeance de Kalimdor
+Guerrier Tank, false
+Guerrier DPS, false
+
+Torsade de l‘empereur déchu
+Chaman, false
+
+Peau du Grand ver des sables
+Chaman, true
+Démoniste, false
+
+Peau intacte d‘Ouro
+Guerrier Tank, true
+Guerrier DPS, false
+Voleur, true
+Mage, false
+Prêtre, false
+
+Larve du Grand ver
+Guerrier Tank, false
+Guerrier DPS, false
+Voleur, false
+
+Chapeau égaré de Don Rigoberto
+Chaman, false
+Druide, false
+Prêtre, false
+
+La Carapace du fouisseur
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Brassards de fouisseur
+Mage, false
+Démoniste, false
+Prêtre Ombre, true
+
+Bouclier en écailles de ver
+Chaman, false
+
+Jom Gabbar
+Guerrier DPS, false
+Chasseur, true
+Voleur, false
+
+Oeil de C‘Thun
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, true
+Voleur, false
+Druide, true
+Druide Feral, false
+Mage, false
+Démoniste, true
+Prêtre, true
+Prêtre Ombre, true
+
+Carcasse du Dieu très ancien
+Druide, false
+Mage, true
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, true
+
+Carapace du Dieu très ancien
+Guerrier Tank, true
+Guerrier DPS, false
+Chasseur, false
+Chaman, true
+Voleur, true
+
+Corde de pédoncule cintrée
+Mage, true
+Démoniste, true
+Prêtre Ombre, false
+
+Cape de clarté
+Chaman, false
+Druide, false
+Prêtre, false
+
+Anneau du tueur de dieu
+Guerrier Tank, false
+Chasseur, true
+Voleur, false
+Druide Feral, false
+
+Gantelets d‘annihilation
+Guerrier Tank, false
+Guerrier DPS, true
+
+Gantelets du sombre orage
+Mage, false
+Démoniste, false
+Prêtre Ombre, false
+
+Marque de C‘Thun
+Guerrier Tank, false
+Druide Feral, false
+
+Cape du Dévoré
+Mage, false
+Démoniste, false
+Prêtre Ombre, false
+
+Tentacule de C‘Thun vaincu
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Torsade du Dieu très ancien
+Chaman, false
+Druide, false
+Prêtre, true
+
+Ceinture d‘agonie sans fin
+Guerrier DPS, false
+Voleur, true
+Druide Feral, true
+
+Sceptre du faux prophète
+Chaman, false
+Druide, false
+Prêtre, false
+
+Sombre doloire de la démence
+Guerrier Tank, false
+Guerrier DPS, true
+
+Aiguillon de la mort
+Guerrier Tank, false
+Guerrier DPS, false
+Voleur, true
+
+
+# NAXX
+
+Anneau de la flamme éternelle
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Atours de nécrochevalier
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinture du Grand croisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinturon de furie élémentaire
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Espauliers de furie élémentaire
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Jambières de furie élémentaire
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Jambières du Grand croisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Présage funeste
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Servobras égaré
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Spallières du Grand croisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Targe stygienne
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Tunique en peau de goule
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Brassards désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Manchettes désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Protège-poignets désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bague des prières inexaucées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Larme de givre
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gemme de Nérubis
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cape en soie de démon des cryptes
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Garde-poignets de vengeance
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+L‘Etreinte de la veuve
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Protège-épaules polaires
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Remords de la veuve
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Espauliers plaie-de-glace
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Pendentif de la pierre pernicieuse
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gants désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Garde-mains désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gantelets désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Baiser de l‘araignée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Lame en peine
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Pendentif des noms oubliés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Croc de Maexxna
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Robe de toile cristalline
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinturon désacralisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinture désacralisée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Sangle désacralisée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cape du Fléau
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Coeur frigide de Noth
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bague de l‘inévitable
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bague du grêlon
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Hachette de l‘os brisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Libram de lumière
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Totem de l‘eau courante
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cuissots de carnage
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Camail glacécaille
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Chapeau de précepteur
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Heaume plaie-de-glace
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Collier de nécropsie
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cuissards désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cuissots désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Jambières désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bague des forces contre-nature
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+L‘oeil de Nérub
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de ferveur spirituelle
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bâton de soufre
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Reflet d‘Horreb
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Protège-épaules désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Espauliers désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Spallières désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cape de suture
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bague de réanimation
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Baguette des Parques
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cisailleuse
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Le Porte-peste
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Spallières glacécaille
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Injecteur de toxines
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+La fin des rêves
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Rosée du crépuscule
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Mantelet glacial
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Claymore de puissance impie
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Collier perdu de Gluth
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Main de pouvoir digérée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Pacte de la mort
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Solerets désacralisés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Mantelet couvert de gel
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Sandales désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bottes désacralisées
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Heaume désacralisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Couvre-chef désacralisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Diadème désacralisé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Jambières de polarité
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Pic du crépuscule
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Oeil de diminution
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Fustigatrice
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Thorax d‘abomination blindé
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Baguette de la mort murmurante
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Chevalière du défenseur déchu
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Idole de longévité
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Ceinturon du mentor
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Voile de l‘éclipse
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Iblis, lame du Séraphin déchu
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Coiffure glaciale
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Manchettes du moissonneur d‘âmes
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Torque de sadique
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bottes de déplacement
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Casque polaire
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cordâme
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cordialité du pardon
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cuirasse désacralisée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Jambières de l‘Apocalypse
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Maillet du croisé racheté
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Porte-cendres corrompue
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Robe désacralisée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Sceau des damnés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Tunique désacralisée
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Pouvoir du Fléau
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Puissance du Fléau
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Oeil du mort
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Voile d‘assujettissement
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Griffe du wyrm de givre
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Le Visage de la mort
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Blason de tueur
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Oeil droit de Saphiron
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Glyphe de déviation
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+L‘essence contenue de Saphiron
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cape de la nécropole
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Oeil gauche de Saphiron
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Le phylactère de Kel‘Thuzad
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de la faucheuse d‘os
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gemme des innocents enchaînés
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Puissance de Menethil
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de rédemption
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau du cuirassier
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de Brise-terre
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Détrôneuse
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Talisman bouillonnant de Stormrage
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de givrefeu
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de traqueur des cryptes
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Cherche-âme
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Marteau du Néant distordu
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de foi
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Doigt du destin
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de pestecoeur
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Gressil, Aube de la ruine
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Anneau de marcherêve
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+Bouclier de condamnation
+Guerrier Tank, false
+Guerrier DPS, false
+Chasseur, false
+Chaman, false
+Voleur, false
+Druide, false
+Druide Feral, false
+Mage, false
+Démoniste, false
+Prêtre, false
+Prêtre Ombre, false
+
+
 
