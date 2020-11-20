@@ -1,0 +1,87 @@
+[
+  {
+    "id": "22813",
+    "text": "Claymore de puissance impie",
+    "class": ""
+  },
+  {
+    "id": "22981",
+    "text": "Collier perdu de Gluth",
+    "class": ""
+  },
+  {
+    "id": "22994",
+    "text": "Main de pouvoir digérée",
+    "class": ""
+  },
+  {
+    "id": "22354",
+    "text": "Espauliers désacralisés",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "23075",
+    "text": "Pacte de la mort",
+    "class": ""
+  },
+  {
+    "id": "22358",
+    "text": "Solerets désacralisés",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22983",
+    "text": "Mantelet couvert de gel",
+    "class": ""
+  },
+  {
+    "id": "22363",
+    "text": "Ceinturon désacralisé",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22369",
+    "text": "Manchettes désacralisées",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22355",
+    "text": "Brassards désacralisées",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22361",
+    "text": "Spallières désacralisées",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22372",
+    "text": "Sandales désacralisées",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22368",
+    "text": "Protège-épaules désacralisés",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22365",
+    "text": "Bottes désacralisées",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22370",
+    "text": "Ceinture désacralisée",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22362",
+    "text": "Protège-poignets désacralisés",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22356",
+    "text": "Sangle désacralisée",
+    "class": "Guerrier, Voleur"
+  }
+]

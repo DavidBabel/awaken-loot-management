@@ -1,0 +1,42 @@
+[
+  {
+    "id": "22354",
+    "text": "Espauliers désacralisés",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22361",
+    "text": "Spallières désacralisées",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22368",
+    "text": "Protège-épaules désacralisés",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22967",
+    "text": "Spallières glacécaille",
+    "class": ""
+  },
+  {
+    "id": "22810",
+    "text": "Injecteur de toxines",
+    "class": ""
+  },
+  {
+    "id": "22988",
+    "text": "La fin des rêves",
+    "class": ""
+  },
+  {
+    "id": "22803",
+    "text": "Rosée du crépuscule",
+    "class": ""
+  },
+  {
+    "id": "22968",
+    "text": "Mantelet glacial",
+    "class": ""
+  }
+]

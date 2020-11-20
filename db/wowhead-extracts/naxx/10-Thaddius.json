@@ -1,0 +1,42 @@
+[
+  {
+    "id": "22353",
+    "text": "Heaume désacralisé",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22360",
+    "text": "Couvre-chef désacralisé",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22367",
+    "text": "Diadème désacralisé",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "23070",
+    "text": "Jambières de polarité",
+    "class": ""
+  },
+  {
+    "id": "22801",
+    "text": "Pic du crépuscule",
+    "class": ""
+  },
+  {
+    "id": "23001",
+    "text": "Oeil de diminution",
+    "class": ""
+  },
+  {
+    "id": "22808",
+    "text": "Fustigatrice",
+    "class": ""
+  },
+  {
+    "id": "23000",
+    "text": "Thorax d'abomination blindé",
+    "class": ""
+  }
+]

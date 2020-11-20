@@ -1,0 +1,42 @@
+[
+  {
+    "id": "22369",
+    "text": "Manchettes désacralisées",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22355",
+    "text": "Brassards désacralisées",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22362",
+    "text": "Protège-poignets désacralisés",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22942",
+    "text": "L'Etreinte de la veuve",
+    "class": ""
+  },
+  {
+    "id": "22941",
+    "text": "Protège-épaules polaires",
+    "class": ""
+  },
+  {
+    "id": "22806",
+    "text": "Remords de la veuve",
+    "class": ""
+  },
+  {
+    "id": "22940",
+    "text": "Espauliers plaie-de-glace",
+    "class": ""
+  },
+  {
+    "id": "22943",
+    "text": "Pendentif de la pierre pernicieuse",
+    "class": ""
+  }
+]

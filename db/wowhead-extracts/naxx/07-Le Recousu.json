@@ -1,0 +1,42 @@
+[
+  {
+    "id": "22368",
+    "text": "Protège-épaules désacralisés",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22354",
+    "text": "Espauliers désacralisés",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22361",
+    "text": "Spallières désacralisées",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22960",
+    "text": "Cape de suture",
+    "class": ""
+  },
+  {
+    "id": "22961",
+    "text": "Bague de réanimation",
+    "class": ""
+  },
+  {
+    "id": "22820",
+    "text": "Baguette des Parques",
+    "class": ""
+  },
+  {
+    "id": "22815",
+    "text": "Cisailleuse",
+    "class": ""
+  },
+  {
+    "id": "22818",
+    "text": "Le Porte-peste",
+    "class": ""
+  }
+]

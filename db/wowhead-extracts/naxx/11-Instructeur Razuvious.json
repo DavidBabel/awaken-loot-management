@@ -1,0 +1,47 @@
+[
+  {
+    "id": "22372",
+    "text": "Sandales désacralisées",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22365",
+    "text": "Bottes désacralisées",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22358",
+    "text": "Solerets désacralisés",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "23009",
+    "text": "Baguette de la mort murmurante",
+    "class": ""
+  },
+  {
+    "id": "23018",
+    "text": "Chevalière du défenseur déchu",
+    "class": ""
+  },
+  {
+    "id": "23004",
+    "text": "Idole de longévité",
+    "class": ""
+  },
+  {
+    "id": "23219",
+    "text": "Ceinturon du mentor",
+    "class": ""
+  },
+  {
+    "id": "23017",
+    "text": "Voile de l'éclipse",
+    "class": ""
+  },
+  {
+    "id": "23014",
+    "text": "Iblis, lame du Séraphin déchu",
+    "class": ""
+  }
+]

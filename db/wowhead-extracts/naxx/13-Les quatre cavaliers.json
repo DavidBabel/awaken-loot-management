@@ -1,0 +1,47 @@
+[
+  {
+    "id": "22811",
+    "text": "Cordâme",
+    "class": ""
+  },
+  {
+    "id": "23027",
+    "text": "Cordialité du pardon",
+    "class": ""
+  },
+  {
+    "id": "22349",
+    "text": "Cuirasse désacralisée",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "23071",
+    "text": "Jambières de l'Apocalypse",
+    "class": ""
+  },
+  {
+    "id": "22809",
+    "text": "Maillet du croisé racheté",
+    "class": ""
+  },
+  {
+    "id": "22691",
+    "text": "Porte-cendres corrompue",
+    "class": ""
+  },
+  {
+    "id": "22351",
+    "text": "Robe désacralisée",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "23025",
+    "text": "Sceau des damnés",
+    "class": ""
+  },
+  {
+    "id": "22350",
+    "text": "Tunique désacralisée",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  }
+]

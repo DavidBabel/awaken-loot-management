@@ -1,0 +1,42 @@
+[
+  {
+    "id": "22355",
+    "text": "Brassards désacralisées",
+    "class": "Guerrier, Voleur"
+  },
+  {
+    "id": "22369",
+    "text": "Manchettes désacralisées",
+    "class": "Démoniste, Mage, Prêtre"
+  },
+  {
+    "id": "22362",
+    "text": "Protège-poignets désacralisés",
+    "class": "Chaman, Chasseur, Druide, Paladin"
+  },
+  {
+    "id": "22939",
+    "text": "Bague des prières inexaucées",
+    "class": ""
+  },
+  {
+    "id": "22935",
+    "text": "Larme de givre",
+    "class": ""
+  },
+  {
+    "id": "22937",
+    "text": "Gemme de Nérubis",
+    "class": ""
+  },
+  {
+    "id": "22938",
+    "text": "Cape en soie de démon des cryptes",
+    "class": ""
+  },
+  {
+    "id": "22936",
+    "text": "Garde-poignets de vengeance",
+    "class": ""
+  }
+]
