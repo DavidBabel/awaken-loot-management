@@ -1367,9 +1367,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
-('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
-('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
+('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Bague des prières inexaucées',22939,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Larme de givre',22935,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Gemme de Nérubis',22937,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1392,9 +1392,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
--- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
--- ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
+-- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+-- ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('L‘Etreinte de la veuve',22942,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Protège-épaules polaires',22941,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Remords de la veuve',22806,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1417,9 +1417,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Gants désacralisés',22371,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
-('Garde-mains désacralisés',22364,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
-('Gantelets désacralisés',22357,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+('Gants désacralisés',22371,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+('Garde-mains désacralisés',22364,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+('Gantelets désacralisés',22357,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Baiser de l‘araignée',22954,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Lame en peine',22807,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Pendentif des noms oubliés',22947,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1442,9 +1442,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
-('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
-('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Cape du Fléau',23030,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Coeur frigide de Noth',23029,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Bague de l‘inévitable',23031,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1471,11 +1471,11 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
--- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
--- ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+-- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+-- ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Cuissots de carnage',23068,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Camail glacécaille',23033,(SELECT id FROM "Classes" WHERE "name"=''), 0),
--- ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+-- ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Chapeau de précepteur',23035,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Heaume plaie-de-glace',23019,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Collier de nécropsie',23036,(SELECT id FROM "Classes" WHERE "name"=''), 0);
@@ -1496,9 +1496,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Cuissards désacralisés',22359,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
-('Cuissots désacralisés',22352,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
-('Jambières désacralisées',22366,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+('Cuissards désacralisés',22359,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+('Cuissots désacralisés',22352,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+('Jambières désacralisées',22366,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Bague des forces contre-nature',23038,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('L‘oeil de Nérub',23039,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Anneau de ferveur spirituelle',23037,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1521,9 +1521,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
-('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
-('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
+('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Cape de suture',22960,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Bague de réanimation',22961,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Baguette des Parques',22820,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1546,9 +1546,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
--- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
--- ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
--- ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+-- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+-- ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+-- ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Spallières glacécaille',22967,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Injecteur de toxines',22810,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('La fin des rêves',22988,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1574,20 +1574,20 @@ VALUES
 ('Claymore de puissance impie',22813,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Collier perdu de Gluth',22981,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Main de pouvoir digérée',22994,(SELECT id FROM "Classes" WHERE "name"=''), 0),
--- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+-- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Pacte de la mort',23075,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Mantelet couvert de gel',22983,(SELECT id FROM "Classes" WHERE "name"=''), 0),
--- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
--- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
--- ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
-('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
-('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0);
--- ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
--- ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0);
+-- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+-- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+-- ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5);
+-- ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+-- ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1614,9 +1614,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Heaume désacralisé',22353,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
-('Couvre-chef désacralisé',22360,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
-('Diadème désacralisé',22367,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+('Heaume désacralisé',22353,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
+('Couvre-chef désacralisé',22360,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+('Diadème désacralisé',22367,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Jambières de polarité',23070,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Pic du crépuscule',22801,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Oeil de diminution',23001,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1639,9 +1639,9 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
--- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
--- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+-- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
+-- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Baguette de la mort murmurante',23009,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Chevalière du défenseur déchu',23018,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Idole de longévité',23004,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1666,11 +1666,11 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
--- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
--- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0),
+-- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
+-- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Coiffure glaciale',23032,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Manchettes du moissonneur d‘âmes',23021,(SELECT id FROM "Classes" WHERE "name"=''), 0),
--- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+-- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Torque de sadique',23023,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Bottes de déplacement',23073,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Casque polaire',23020,(SELECT id FROM "Classes" WHERE "name"=''), 0);
@@ -1693,13 +1693,13 @@ INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Cordâme',22811,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Cordialité du pardon',23027,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cuirasse désacralisée',22349,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 0),
+('Cuirasse désacralisée',22349,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Jambières de l‘Apocalypse',23071,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Maillet du croisé racheté',22809,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 ('Porte-cendres corrompue',22691,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Robe désacralisée',22351,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+('Robe désacralisée',22351,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Sceau des damnés',23025,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Tunique désacralisée',22350,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 0);
+('Tunique désacralisée',22350,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES

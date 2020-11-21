@@ -1,0 +1,6 @@
+- forcer la majuscule sur l'ajout de joueurs
+- autoriser le renommage des joueurs pour Devilhunter
+- mettre à jour AQ en ligne
+- saisir items naxx
+- clean base présence : recommencer à partir de naxx
+- gérer les différents niveaux d'item (décaler les couleurs ?)
