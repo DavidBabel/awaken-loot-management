@@ -1229,15 +1229,14 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Anneau du chaos de Rytssin',21836,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Atours d‘ascension royale',21838,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants de l‘immortel',21888,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Marteau de guerre d‘anubisath',21837,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Neretzek, le Buveur de sang',21856,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Fragment de l‘étoile tombée',21891,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Anneau du chaos de Rytssin',21836,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Atours d‘ascension royale',21838,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Gants de l‘immortel',21888,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Marteau de guerre d‘anubisath',21837,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Neretzek, le Buveur de sang',21856,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Fragment de l‘étoile tombée',21891,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Gants de la prophétie rachetée',21889,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 0),
-('Plans : Lame feuille-de-saule',22389,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1248,28 +1247,27 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=21856)),
 ((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=21891)),
 ((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=21889)),
-((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=21890)),
-((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=22389));
+((SELECT id FROM "Bosses" WHERE "name"='Trashs' AND "donjonId"=4),(SELECT id FROM "Items" WHERE "wowheadId"=21890));
 
 
 
 -- SELECT 1 AS "The Prophet Skeram";
 
-INSERT INTO "Items" ("name","wowheadId","classId","lootLevel"))
+INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 ('Bottes de la volonté inexorable',21706,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Garde-poignets en écailles de hanneton',21708,(SELECT id FROM "Classes" WHERE "name"=''), 3),
-('Jambières d‘immersion',21698,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape de concentré de haine',21701,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Epaulières du barrage',21699,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Plastron d‘annihilation',21814,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de pensée foisonnante',21707,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Pendentif du gardien qiraji',21700,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Amulette de vile sauvegarde',21702,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Jambières d‘immersion',21698,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Cape de concentré de haine',21701,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Epaulières du barrage',21699,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Plastron d‘annihilation',21814,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Anneau de pensée foisonnante',21707,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Pendentif du gardien qiraji',21700,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Amulette de vile sauvegarde',21702,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Bottes de la prophétie rédemptrice',21704,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bâton des prophètes qiraji',21128,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Marteau de Ji‘zhi',21703,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes du prophète déchu',21705,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Bâton des prophètes qiraji',21128,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Marteau de Ji‘zhi',21703,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Bottes du prophète déchu',21705,(SELECT id FROM "Classes" WHERE "name"=''), 2);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1291,21 +1289,21 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Ceinture qiraji en peau épaisse',21675,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Robe du garde de guerre',21671,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes recomposées',21648,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Collier de pureté',21678,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants de coercition',21672,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Casque des lianes rampantes',21669,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets de détermination inébranlable',21674,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Jambières de l‘essaim purulent',21676,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Insigne de garde-essaim',21670,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Pouvoir de Sartura',21666,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Ceinture qiraji en peau épaisse',21675,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Robe du garde de guerre',21671,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Bottes recomposées',21648,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Collier de pureté',21678,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Gants de coercition',21672,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Casque des lianes rampantes',21669,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Gantelets de détermination inébranlable',21674,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Jambières de l‘essaim purulent',21676,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Insigne de garde-essaim',21670,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Pouvoir de Sartura',21666,(SELECT id FROM "Classes" WHERE "name"=''), 5),
 ('Cuissards de lumière flamboyante',21667,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Griffe de silithide',21673,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Jambières de fureur qiraji en écailles',21668,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Griffe de silithide',21673,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Jambières de fureur qiraji en écailles',21668,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1329,19 +1327,19 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Robe du saint gardien',21663,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Corselet en carapace de silithide',21652,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes de tunnelière de la ruche',21645,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape des secrets inexprimables',21627,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Collier barbelé',21664,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Espauliers de l‘Implacable',21639,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Fétiche du ravageur des sables',21647,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Mantelet de vengeance cruelle',21665,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Jambières de ravageur des sables en écailles',21651,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Guisarme du ravageur des sables',21635,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Robe du saint gardien',21663,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Corselet en carapace de silithide',21652,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Bottes de tunnelière de la ruche',21645,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Cape des secrets inexprimables',21627,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Collier barbelé',21664,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Espauliers de l‘Implacable',21639,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Fétiche du ravageur des sables',21647,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Mantelet de vengeance cruelle',21665,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Jambières de ravageur des sables en écailles',21651,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Guisarme du ravageur des sables',21635,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Libram de grâce',22402,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ancien éventreur qiraji',21650,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Totem de vie',22396,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Ancien éventreur qiraji',21650,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Totem de vie',22396,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
@@ -1367,14 +1365,14 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Manchettes de domination qiraji',20932,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Manchettes de commandement qiraji',20928,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau du martyr',21620,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets en peau de guêpe',21617,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Garde-poignets de profanateur de ruche',21618,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape de la Ruche d‘or',21621,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants du messie',21619,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Aiguillon d‘Huhuran',21616,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Manchettes de domination qiraji',20932,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Manchettes de commandement qiraji',20928,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Anneau du martyr',21620,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Gantelets en peau de guêpe',21617,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Garde-poignets de profanateur de ruche',21618,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Cape de la Ruche d‘or',21621,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Gants du messie',21619,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Aiguillon d‘Huhuran',21616,(SELECT id FROM "Classes" WHERE "name"=''), 2);
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
@@ -1395,35 +1393,35 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Gilet d‘exécution rapide',21680,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau du dévoré',21681,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Scarabée pétrifié',21685,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ceinture de la triade',21692,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Robe du triumvirat',21696,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Semblance du dévoreur',21693,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Baguette de noblesse qiraji',21603,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Toucher d‘Angelista',21695,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Mantelet ternaire',21694,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape de la trinité',21697,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Gilet d‘exécution rapide',21680,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Anneau du dévoré',21681,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Scarabée pétrifié',21685,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Ceinture de la triade',21692,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Robe du triumvirat',21696,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Semblance du dévoreur',21693,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Baguette de noblesse qiraji',21603,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Toucher d‘Angelista',21695,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Mantelet ternaire',21694,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Cape de la trinité',21697,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Mantelet de la puissance phrénique',21686,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de ténèbres d‘Ukko',21687,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Mantelet de la puissance phrénique',21686,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Anneau de ténèbres d‘Ukko',21687,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 -- ('Toucher d‘Angelista',21695,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Cape de la trinité',21697,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets couverts de bile',21682,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Gantelets couverts de bile',21682,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Mantelet de la croisade du désert',21683,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Ceinture de la triade',21692,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Robe du triumvirat',21696,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Mantelet de la fureur du désert',21684,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Mantelet de la fureur du désert',21684,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 -- ('Mantelet ternaire',21694,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Semblance du dévoreur',21693,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes du héros déchu',21688,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Charme d‘Angelista',21690,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants d‘Ebru',21689,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets éclaboussés de vase',21691,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Bottes du héros déchu',21688,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Charme d‘Angelista',21690,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Gants d‘Ebru',21689,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Gantelets éclaboussés de vase',21691,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 -- ('Robe du triumvirat',21696,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Ceinture de la triade',21692,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Semblance du dévoreur',21693,(SELECT id FROM "Classes" WHERE "name"=''), 0),
@@ -1480,13 +1478,13 @@ INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 -- ('Manchettes de commandement qiraji',20928,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Manchettes de domination qiraji',20932,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets de Kalimdor',21624,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de fureur qiraji',21677,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Idole de santé',22399,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Fémur de silithide aiguisé',21622,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Gantelets de Kalimdor',21624,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Anneau de fureur qiraji',21677,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Idole de santé',22399,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Fémur de silithide aiguisé',21622,(SELECT id FROM "Classes" WHERE "name"=''), 5),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Jambières couvertes de vase',21626,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Broche scarabée',21625,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Jambières couvertes de vase',21626,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Broche scarabée',21625,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
 INSERT INTO "BossItem" ("bossId","itemId")
@@ -1506,23 +1504,23 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Diadème de Vek‘lor',20930,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes de l‘épiphanie',21600,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants de dévastation de Vek‘lor',21599,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ceinture royale qiraji',21598,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Brassards d‘exécution quiraji',21602,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Sceptre royal de Vek‘lor',21597,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de l‘empereur Vek‘lor',21601,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Diadème de Vek‘lor',20930,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Bottes de l‘épiphanie',21600,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Gants de dévastation de Vek‘lor',21599,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Ceinture royale qiraji',21598,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Brassards d‘exécution quiraji',21602,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Sceptre royal de Vek‘lor',21597,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Anneau de l‘empereur Vek‘lor',21601,(SELECT id FROM "Classes" WHERE "name"=''), 4),
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Diadème de Vek‘nilash',20926,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gants du temple caché',21605,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ceinture régénérante de Vek‘nilash',21609,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Amulette de Vek‘nilash',21608,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bracelets de rédemption royale',21604,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Diadème de Vek‘nilash',20926,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Gants du temple caché',21605,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Ceinture régénérante de Vek‘nilash',21609,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Amulette de Vek‘nilash',21608,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Bracelets de rédemption royale',21604,(SELECT id FROM "Classes" WHERE "name"=''), 4),
 ('Ceinture de l‘empereur déchu',21606,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Vengeance de Kalimdor',21679,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Torsade de l‘empereur déchu',21607,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Vengeance de Kalimdor',21679,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Torsade de l‘empereur déchu',21607,(SELECT id FROM "Classes" WHERE "name"=''), 2);
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
@@ -1552,14 +1550,14 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Peau du Grand ver des sables',20931,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Peau intacte d‘Ouro',20927,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Larve du Grand ver',23557,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Chapeau égaré de Don Rigoberto',21615,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('La Carapace du fouisseur',23558,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Brassards de fouisseur',21611,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bouclier en écailles de ver',21610,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Jom Gabbar',23570,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Peau du Grand ver des sables',20931,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Peau intacte d‘Ouro',20927,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Larve du Grand ver',23557,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Chapeau égaré de Don Rigoberto',21615,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('La Carapace du fouisseur',23558,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Brassards de fouisseur',21611,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Bouclier en écailles de ver',21610,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Jom Gabbar',23570,(SELECT id FROM "Classes" WHERE "name"=''), 5);
 -- ('Tenue de parade impériale qiraji',21237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
 -- ('Armes impériales qiraji',21232,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
@@ -1580,22 +1578,22 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Oeil de C‘Thun',21221,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Carcasse du Dieu très ancien',20933,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Carapace du Dieu très ancien',20929,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Corde de pédoncule cintrée',22730,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape de clarté',21583,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau du tueur de dieu',21596,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets d‘annihilation',21581,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gantelets du sombre orage',21585,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Marque de C‘Thun',22732,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape du Dévoré',22731,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Tentacule de C‘Thun vaincu',21579,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Torsade du Dieu très ancien',21582,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ceinture d‘agonie sans fin',21586,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Sceptre du faux prophète',21839,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Sombre doloire de la démence',21134,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Aiguillon de la mort',21126,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Oeil de C‘Thun',21221,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Carcasse du Dieu très ancien',20933,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Carapace du Dieu très ancien',20929,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Corde de pédoncule cintrée',22730,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Cape de clarté',21583,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Anneau du tueur de dieu',21596,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Gantelets d‘annihilation',21581,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Gantelets du sombre orage',21585,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Marque de C‘Thun',22732,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Cape du Dévoré',22731,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Tentacule de C‘Thun vaincu',21579,(SELECT id FROM "Classes" WHERE "name"=''), 2),
+('Torsade du Dieu très ancien',21582,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Ceinture d‘agonie sans fin',21586,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Sceptre du faux prophète',21839,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Sombre doloire de la démence',21134,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Aiguillon de la mort',21126,(SELECT id FROM "Classes" WHERE "name"=''), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -3766,6 +3764,11 @@ VALUES
   'Lok‘amir il Romathis'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), true),
+
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Gants du prophète déchu'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), false),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la volonté inexorable'
@@ -9235,52 +9238,49 @@ VALUES
   'Voile de l‘éclipse'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Iblis'), lame du Séraphin déchu),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier Tank'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chasseur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chaman'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide Feral'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Mage'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Démoniste'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
 
@@ -11173,52 +11173,49 @@ VALUES
   'Anneau de pestecoeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Gressil'), Aube de la ruine),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier Tank'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chasseur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chaman'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide Feral'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Mage'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Démoniste'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
 

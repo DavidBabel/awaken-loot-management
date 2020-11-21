@@ -1684,6 +1684,11 @@ VALUES
   'Prêtre Ombre'), true),
 
   ((SELECT id FROM "Items" WHERE "name"=
+  'Gants du prophète déchu'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chaman'), false),
+
+  ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la volonté inexorable'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false),
@@ -7151,52 +7156,49 @@ VALUES
   'Voile de l‘éclipse'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Iblis'), lame du Séraphin déchu),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier Tank'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chasseur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chaman'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide Feral'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Mage'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Démoniste'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
+  'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
 
@@ -9089,52 +9091,49 @@ VALUES
   'Anneau de pestecoeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Gressil'), Aube de la ruine),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier Tank'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chasseur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Chaman'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Voleur'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Druide Feral'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Mage'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Démoniste'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre'), false),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
+  'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Prêtre Ombre'), false),
 

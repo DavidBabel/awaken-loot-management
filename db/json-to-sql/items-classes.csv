@@ -663,6 +663,9 @@ Prêtre Ombre, true
 
 # AQ
 
+Gants du prophète déchu
+Chaman, false
+
 Bottes de la volonté inexorable
 Guerrier DPS, false
 Guerrier Tank, true
@@ -2379,7 +2382,7 @@ Démoniste, false
 Prêtre, false
 Prêtre Ombre, false
 
-Iblis, lame du Séraphin déchu
+Iblis! lame du Séraphin déchu
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
@@ -2938,7 +2941,7 @@ Démoniste, false
 Prêtre, false
 Prêtre Ombre, false
 
-Gressil, Aube de la ruine
+Gressil! Aube de la ruine
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
