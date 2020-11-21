@@ -9,7 +9,7 @@ VALUES`;
 function oneLine(itemName, classe, prio) {
   return `
   ((SELECT id FROM "Items" WHERE "name"=
-  '${itemName.replace('!',',')}'
+  '${itemName}'
   ),(SELECT id FROM "Classes" WHERE "name"=
   '${classe}'), ${String(prio)}),`;
 }
