@@ -1,19 +1,16 @@
-import React from "react";
-
+import { useQuery } from "@apollo/react-hooks";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import PlayersTable from "../../components/summary/PlayersTable";
-
-import { useQuery } from "@apollo/react-hooks";
+import React from "react";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import LootWindow, {
   LootWindowProps
 } from "../../components/summary/LootWindow";
-import { Player, Query } from "../../lib/generatedTypes";
-import { Loot } from "../../lib/generatedTypes";
+import PlayersTable from "../../components/summary/PlayersTable";
+import { Loot, Player, Query } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";

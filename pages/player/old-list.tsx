@@ -6,7 +6,6 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { Query } from "../../lib/generatedTypes";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";

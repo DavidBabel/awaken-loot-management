@@ -1,5 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
-
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import {
   Button,
@@ -11,17 +9,16 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
+import React, { useContext, useEffect, useState } from "react";
 import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import MemberContext from "../../../lib/context/member";
 import { Mutation, Query } from "../../../lib/generatedTypes";
-
 import { UPDATE_PLAYER_SPE } from "../../../lib/gql/player-mutations";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
+import { useSnackBar } from "../../../lib/hooks/snackbar";
 import { role } from "../../../lib/role-level";
 import { refreshWowhead } from "../../../lib/utils/wowhead-refresh";
-
-import { useSnackBar } from "../../../lib/hooks/snackbar";
 
 interface QueryVariables {
   playerId: number;

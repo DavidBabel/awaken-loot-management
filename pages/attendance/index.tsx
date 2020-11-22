@@ -1,5 +1,3 @@
-import React, { useContext, useState } from "react";
-
 import { useQuery } from "@apollo/react-hooks";
 import {
   Paper,
@@ -10,6 +8,7 @@ import {
   TableRow
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import React, { useContext, useState } from "react";
 import { AttendanceLegende } from "../../components/attendance/AttendanceLegende";
 import { AttendanceLine } from "../../components/attendance/AttendanceLine";
 import { AttendanceTableRaidHeaders } from "../../components/attendance/AttendanceTableRaidHeaders";
