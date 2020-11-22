@@ -62,6 +62,8 @@ export default function EditPlayerField({ playerId, label, accessor }: Props) {
     snackBarMessage
   } = useSnackBar();
 
+  const isNumberField = "classId" === accessor;
+
   const handleOpen = (): void => {
     setOpen(true);
   };
@@ -73,29 +75,29 @@ export default function EditPlayerField({ playerId, label, accessor }: Props) {
   };
   const confirm = () => {
     setLoading(true);
-    if (input.length > 0) {
-      const finalInput = "classId" === accessor ? parseInt(input) : input;
+    // if (input.length > 0) {
+    const finalInput = isNumberField ? parseInt(input) : input;
 
-      updatePlayer({
-        variables: {
-          id: playerId,
-          [accessor]: finalInput
-        }
+    updatePlayer({
+      variables: {
+        id: playerId,
+        [accessor]: finalInput === "" ? null : finalInput
+      }
+    })
+      .then(resp => {
+        openSnackBar(accessor + " modifié avec succès", "success");
+        setOpen(false);
+        setLoading(false);
       })
-        .then(resp => {
-          openSnackBar(accessor + " modifié avec succès", "success");
-          setOpen(false);
-          setLoading(false);
-        })
-        .catch(err => {
-          openSnackBar(err.message, "error");
-          setOpen(false);
-          setLoading(false);
-        });
-    } else {
-      openSnackBar("Veuillez remplir le champ", "error");
-      setLoading(false);
-    }
+      .catch(err => {
+        openSnackBar(err.message, "error");
+        setOpen(false);
+        setLoading(false);
+      });
+    // } else {
+    //   openSnackBar("Veuillez remplir le champ", "error");
+    //   setLoading(false);
+    // }
   };
   return (
     <TableCell align="right">
@@ -129,6 +131,7 @@ export default function EditPlayerField({ playerId, label, accessor }: Props) {
                 onChange={handleChange}
                 margin="dense"
                 variant="outlined"
+                type={isNumberField ? "number" : "text"}
               />
             )}
             {"classId" === accessor && (

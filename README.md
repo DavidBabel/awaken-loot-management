@@ -41,20 +41,22 @@ Suivre ce tutorial pour installer postgres et configurer les variables d'environ
 Il est important de bien configurer les variables d'environement PATH comme indiqué dans le lien ci dessus pour pouvoir utiliser la commande "psql" dans l'invite de commandes Windows.
 
 Lors de la première utilisation:
-  1. Se connecter a l'interface postgres: "psql -U postgres"
-  2. Créer la base de donnée: "CREATE DATABASE test;" (ne pas oublier le ";")
-  3. Naviguer jusqu'au fichier "db.sql" dans "db/gen/". 
-      Pour cela, utiliser les commandes: 
-        * "\\! cd" pour connaitre le dossier actuel.
-        * "\cd .." pour aller au dossier précedent.
-        * "\cd c:" pour changer de disque dur.
-        * "\cd xxx/xxxx/xxx/xxx/" pour choisir le chemin.
-        * "\i db.sql" pour injecter toutes les données dans la base.
-   4. Se connecter a la db: "\c test"
-        
+
+1. Se connecter a l'interface postgres: "psql -U postgres"
+2. Créer la base de donnée: "CREATE DATABASE test;" (ne pas oublier le ";")
+3. Naviguer jusqu'au fichier "db.sql" dans "db/gen/".
+   Pour cela, utiliser les commandes:
+   - "\\! cd" pour connaitre le dossier actuel.
+   - "\cd .." pour aller au dossier précedent.
+   - "\cd c:" pour changer de disque dur.
+   - "\cd xxx/xxxx/xxx/xxx/" pour choisir le chemin.
+   - "\i db.sql" pour injecter toutes les données dans la base.
+4. Se connecter a la db: "\c test"
+
 Lors des autres utilisations:
-  1. se connecter a l'interface postgres: "-psql -U postgres"
-  2. Se connecter a la db: "\c test"
+
+1. se connecter a l'interface postgres: "-psql -U postgres"
+2. Se connecter a la db: "\c test"
 
 ## windows
 
@@ -85,7 +87,7 @@ npm run reset
 npm run dev
 
 # et pour fabriquer les requêtes GraphQL, on lance graphiQL sans aucune restriction d'accès
-npm run gqp
+npm run gql
 ```
 
 Le site devrait être disponible sur http://localhost:8000
