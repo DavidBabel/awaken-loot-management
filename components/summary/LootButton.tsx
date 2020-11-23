@@ -1,13 +1,14 @@
-import React from "react";
-
 // import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cn from "classnames";
+import React from "react";
 import {
   lootColorLevel1,
   lootColorLevel2,
   lootColorLevel3,
-  lootColorLevel4
+  lootColorLevel4,
+  lootColorLevel5,
+  lootColorLevel6
 } from "../../lib/utils/loot-colors";
 
 const useStyles = makeStyles(
@@ -39,6 +40,12 @@ const useStyles = makeStyles(
       position: "absolute",
       right: 0,
       top: 0
+    },
+    level6: {
+      backgroundColor: lootColorLevel6
+    },
+    level5: {
+      backgroundColor: lootColorLevel5
     },
     level4: {
       backgroundColor: lootColorLevel4

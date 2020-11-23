@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-
+import { ButtonGroup } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {
   createStyles,
@@ -7,11 +6,10 @@ import {
   Theme,
   withStyles
 } from "@material-ui/core/styles";
-
-import { ButtonGroup } from "@material-ui/core";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
+import React, { useContext } from "react";
 import ProgressBar from "../../components/summary/ProgressBar";
 import MemberContext from "../../lib/context/member";
 import { Loot } from "../../lib/generatedTypes";
@@ -23,7 +21,7 @@ import { PlayerTableRowDatas } from "./PlayersTable";
 
 // CONFIG
 export const LIMIT_LOOTLEVEL_TO_COUNT = 2;
-const ENABLED_LOOT_LEVELS = [4, 3, 2, 1];
+const ENABLED_LOOT_LEVELS = [6, 5, 4, 3, 2, 1];
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
