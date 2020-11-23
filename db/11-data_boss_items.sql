@@ -949,7 +949,8 @@ VALUES
 ('Neretzek, le Buveur de sang',21856,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Fragment de l‘étoile tombée',21891,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Gants de la prophétie rachetée',21889,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3);
+('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3),
+('Plans : Lame feuille-de-saule',22389,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
