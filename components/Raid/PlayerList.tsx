@@ -279,7 +279,8 @@ export default function PlayerList({
                           setWarcraftLogsContent("");
                           toggleDisplayImportPlayerArea();
                         })
-                        .catch(() => {
+                        .catch(e => {
+                          console.log(e);
                           openSnackBar("Quelque chose n‘a pas marché", "error");
                         });
                     }
@@ -288,6 +289,70 @@ export default function PlayerList({
                 >
                   Importer les joueurs dans ce raid
                 </Button>
+                {member.name === "Devilhunter" && (
+                  <>
+                    <br />
+                    <Button
+                      onClick={() => {
+                        if (!warcraftLogsContent) {
+                          return;
+                        }
+                        const playerList = parseWarcraftLogs(
+                          warcraftLogsContent
+                        );
+                        if (playerList.length === 0) {
+                          return;
+                        }
+
+                        const alreadyExistingPlayers = players.map(
+                          p => p.playerByPlayerId.name
+                        );
+
+                        const nonExistingPlayers: string[] = extractNonExistingPlayers(
+                          playerList,
+                          allPlayers
+                        );
+
+                        console.log(alreadyExistingPlayers);
+                        const queries = playerList
+                          .filter(p => !alreadyExistingPlayers.includes(p))
+                          .filter(p => !nonExistingPlayers.includes(p))
+                          .map(currentPlayerName => {
+                            console.log(currentPlayerName);
+                            return createRaidPlayer({
+                              variables: {
+                                raidId,
+                                playerId: getPlayerId(
+                                  currentPlayerName,
+                                  allPlayers
+                                )
+                              }
+                            });
+                          });
+                        Promise.all(queries)
+                          .then(() => {
+                            openSnackBar(
+                              "Liste des joueurs importé avec succès",
+                              "success"
+                            );
+                            refetchOneRaid();
+                            setWarcraftLogsContent("");
+                            toggleDisplayImportPlayerArea();
+                          })
+                          .catch(e => {
+                            console.log(e);
+                            openSnackBar(
+                              "Quelque chose n‘a pas marché",
+                              "error"
+                            );
+                          });
+                      }}
+                      color="primary"
+                    >
+                      Importer uniquement les joueurs connus
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           )}
