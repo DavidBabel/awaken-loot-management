@@ -6,7 +6,17 @@ export function getClassImageUrl(className: string) {
 }
 
 export function getDonjonImageUrl(donjonName: string) {
-  return `/img/donjon/${donjonName.toLowerCase().replace(/\s/g, "-")}.jpg`;
+  return `/img/donjon/${donjonName
+    .toLowerCase()
+    .replace("‘", "-")
+    .replace(/\s/g, "-")}.jpg`;
+}
+
+export function getDonjonIconUrl(donjonName: string) {
+  return `/img/donjon/icons/${donjonName
+    .toLowerCase()
+    .replace("‘", "-")
+    .replace(/\s/g, "-")}.png`;
 }
 
 export function getBossImageUrl(donjonShortname: string, bossName: string) {

@@ -41,7 +41,7 @@ import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
 import { ALL_DONJONS, ALL_RAIDS_LIGHT } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
-import { getDonjonImageUrl } from "../../lib/utils/image";
+import { getDonjonIconUrl } from "../../lib/utils/image";
 import { byDate } from "../../lib/utils/sorter";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
@@ -571,7 +571,7 @@ export default function PageIndex() {
                 <TableRow>
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
-                  <TableCell>Saisie Loot</TableCell>
+                  <TableCell>Saisie Loot &amp; joueurs</TableCell>
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>
@@ -591,7 +591,7 @@ export default function PageIndex() {
                             style={{ marginRight: 13, width: 25, height: 25 }}
                             src={
                               raid.donjonByDonjonId?.cdnImage ||
-                              getDonjonImageUrl(raid.donjonByDonjonId.name)
+                              getDonjonIconUrl(raid.donjonByDonjonId.name)
                             }
                           />
                           {raid.donjonByDonjonId.name}
