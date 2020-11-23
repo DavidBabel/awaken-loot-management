@@ -303,7 +303,8 @@ export function BossCard({
                         borderColor: getClassColor(
                           currentPlayer.classByClassId.name
                         ),
-                        backgroundColor: isUnassigned ? "darkorange" : "white"
+                        backgroundColor: isUnassigned ? "darkorange" : "white",
+                        color: isUnassigned ? "white" : "darkorange"
                       }}
                       className={classes.playerCell}
                       primary={
