@@ -571,7 +571,7 @@ export default function PageIndex() {
                 <TableRow>
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
-                  <TableCell>Master Loot</TableCell>
+                  <TableCell>Saisie Loot</TableCell>
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
                   <TableCell>{""}</TableCell>

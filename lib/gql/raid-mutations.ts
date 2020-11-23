@@ -1,8 +1,10 @@
 import { gql } from "apollo-boost";
 
 export const CREATE_RAID = gql`
-  mutation CreateRaid($date: String, $donjonId: Int!) {
-    createRaid(input: { raid: { date: $date, donjonId: $donjonId } }) {
+  mutation CreateRaid($date: String, $donjonId: Int!, $title: string) {
+    createRaid(
+      input: { raid: { date: $date, donjonId: $donjonId, title: $title } }
+    ) {
       raid {
         id
       }
