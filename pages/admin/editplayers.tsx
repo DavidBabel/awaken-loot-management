@@ -70,10 +70,6 @@ const useStyles = makeStyles(theme => ({
     "& .MuiTableRow-root:nth-child(even)": {
       backgroundColor: "rgba(0,0,0,0.05)"
     }
-  },
-  nameCell: {
-    textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
-    backgroundColor: "#4D4D4D"
   }
 }));
 
@@ -125,7 +121,7 @@ export default function PageIndex() {
           <TableBody>
             {allPlayers.map((player: Player) => (
               <TableRow key={`row-table-players-${player.id}`}>
-                <TableCell
+                {/* <TableCell
                   className={classes.nameCell}
                   component="th"
                   scope="row"
@@ -134,7 +130,13 @@ export default function PageIndex() {
                   }}
                 >
                   {player.name}
-                </TableCell>
+                </TableCell> */}
+                <EditPlayerField
+                  label={player.name}
+                  playerId={player.id}
+                  classColor={player.classByClassId.color}
+                  accessor={"name"}
+                />
                 <EditPlayerField
                   label={player.classByClassId.name}
                   playerId={player.id}

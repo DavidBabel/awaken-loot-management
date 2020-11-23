@@ -37,6 +37,10 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "flex-end",
     lineHeight: "48px"
+  },
+  nameCell: {
+    textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
+    backgroundColor: "#4D4D4D"
   }
 });
 
@@ -44,9 +48,15 @@ interface Props {
   playerId: number;
   label: string;
   accessor: string;
+  classColor?: string;
 }
 
-export default function EditPlayerField({ playerId, label, accessor }: Props) {
+export default function EditPlayerField({
+  playerId,
+  label,
+  accessor,
+  classColor
+}: Props) {
   const classes = useStyles("");
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -99,12 +109,27 @@ export default function EditPlayerField({ playerId, label, accessor }: Props) {
     //   setLoading(false);
     // }
   };
+
+  const headerStyles: any = classColor
+    ? {
+        className: classes.nameCell,
+        component: "th",
+        scope: "row",
+        style: {
+          color: classColor
+        }
+      }
+    : {};
   return (
-    <TableCell align="right">
+    <TableCell align="right" {...headerStyles}>
       <div className={classes.container}>
         {label}
 
-        <IconButton className={classes.button} onClick={handleOpen}>
+        <IconButton
+          style={classColor ? { color: "white" } : {}}
+          className={classes.button}
+          onClick={handleOpen}
+        >
           <CreateIcon />
         </IconButton>
         <Dialog
