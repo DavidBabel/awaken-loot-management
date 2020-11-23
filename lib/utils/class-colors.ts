@@ -3,7 +3,7 @@ const classColors = {
   ["Chasseur"]: "#ABD473",
   ["Mage"]: "#69CCF0",
   ["Prêtre"]: "grey",
-  ["Voleur"]: "rgba(255,245,105)",
+  ["Voleur"]: "rgba(255,230,0)",
   ["Chaman"]: "#0070DE",
   ["Démoniste"]: "#9482C9",
   ["Guerrier Tank"]: "#C79C6E",
