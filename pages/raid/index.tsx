@@ -441,6 +441,8 @@ export default function PageIndex() {
     }
   };
 
+  const zero = <b style={{ color: "red" }}>0</b>;
+
   return (
     <>
       <Container className={classes.root}>
@@ -600,14 +602,10 @@ export default function PageIndex() {
                       <TableCell>{getDate(raid.date)}</TableCell>
                       <TableCell>{raid.title}</TableCell>
                       <TableCell>
-                        {raid.lootsByRaidId
-                          ? raid.lootsByRaidId.totalCount
-                          : "0"}
+                        {raid.lootsByRaidId?.totalCount || zero}
                       </TableCell>
                       <TableCell>
-                        {raid.raidPlayersByRaidId
-                          ? raid.raidPlayersByRaidId.totalCount
-                          : "0"}
+                        {raid.raidPlayersByRaidId?.totalCount || zero}
                       </TableCell>
                       <TableCell>
                         <Link
