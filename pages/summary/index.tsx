@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Switch } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -14,6 +15,7 @@ import { Loot, Player, Query } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
+import { useToggle } from "../../lib/hooks/toggle";
 import { getClassColor } from "../../lib/utils/class-colors";
 
 interface TabPanelProps {
@@ -97,6 +99,8 @@ export default function PageSummary() {
   const classes = useStyles("");
   const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
   const [lootWindows, setLootWindows] = React.useState<LootWindowProps[]>([]);
+  const [shouldHideReroll, toggleShouldHideReroll] = useToggle(true);
+
   const onMobile = useOnMobile(false);
 
   const {
@@ -177,6 +181,12 @@ export default function PageSummary() {
     <div
       className={`${classes.root} ${classes["indicator_" + currentTabIndex]}`}
     >
+      &nbsp;&nbsp;&nbsp;&nbsp;Voir les rerolls
+      <Switch
+        size="small"
+        checked={!shouldHideReroll}
+        onChange={toggleShouldHideReroll}
+      />
       <AppBar position="static" color="default">
         <Tabs
           value={currentTabIndex}
@@ -198,7 +208,6 @@ export default function PageSummary() {
           ))}
         </Tabs>
       </AppBar>
-
       {playerClasses.map((playerClass: string, index) => {
         const currentPlayers: Player[] = players.filter(player =>
           player.classByClassId.name.includes(playerClass)
@@ -210,6 +219,7 @@ export default function PageSummary() {
             index={index}
           >
             <PlayersTable
+              shouldHideReroll={shouldHideReroll}
               showed={currentTabIndex === index}
               classColor={getClassColor(playerClass, true)}
               players={currentPlayers}

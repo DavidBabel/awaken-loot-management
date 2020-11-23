@@ -38,6 +38,11 @@ const useStyles = makeStyles({
     justifyContent: "flex-end",
     lineHeight: "48px"
   },
+  containerHead: {
+    display: "flex",
+    justifyContent: "flex-start",
+    lineHeight: "48px"
+  },
   nameCell: {
     textShadow: "1px 1px 1px rgba(0,0,0,0.8)",
     backgroundColor: "#4D4D4D"
@@ -72,6 +77,7 @@ export default function EditPlayerField({
     snackBarMessage
   } = useSnackBar();
 
+  const isNameColumn = classColor;
   const isNumberField = "classId" === accessor;
 
   const handleOpen = (): void => {
@@ -110,23 +116,24 @@ export default function EditPlayerField({
     // }
   };
 
-  const headerStyles: any = classColor
+  const headerStyles: any = isNameColumn
     ? {
         className: classes.nameCell,
         component: "th",
         scope: "row",
         style: {
           color: classColor
-        }
+        },
+        align: "left"
       }
-    : {};
+    : { align: "right" };
   return (
-    <TableCell align="right" {...headerStyles}>
-      <div className={classes.container}>
+    <TableCell {...headerStyles}>
+      <div className={isNameColumn ? classes.containerHead : classes.container}>
         {label}
 
         <IconButton
-          style={classColor ? { color: "white" } : {}}
+          style={classColor ? { color: "lightgrey" } : {}}
           className={classes.button}
           onClick={handleOpen}
         >

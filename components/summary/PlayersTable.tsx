@@ -1,5 +1,3 @@
-import React, { useContext } from "react";
-
 import {
   Button,
   Paper,
@@ -17,6 +15,7 @@ import {
 } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import React, { useContext } from "react";
 import MemberContext from "../../lib/context/member";
 import { Loot, Player } from "../../lib/generatedTypes";
 import { role } from "../../lib/role-level";
@@ -52,6 +51,7 @@ export interface PlayerTableRowDatas {
 }
 
 interface Props {
+  shouldHideReroll: boolean;
   showed: boolean;
   classColor: string;
   players: Player[];
@@ -304,16 +304,23 @@ export default function PlayersTable(props: Props) {
           </TableHead>
           <TableBody>
             <>
-              {rows.map((row: PlayerTableRowDatas) => (
-                <PlayerTableRow
-                  key={`player-table-${row.name}`}
-                  rowData={row}
-                  classColor={props.classColor}
-                  showed={props.showed}
-                  lootData={row.playerLoots}
-                  openLootWindow={props.openLootWindow}
-                />
-              ))}
+              {rows
+                .filter(p => {
+                  if (p.rerollOf && props.shouldHideReroll) {
+                    return false;
+                  }
+                  return true;
+                })
+                .map((row: PlayerTableRowDatas) => (
+                  <PlayerTableRow
+                    key={`player-table-${row.name}`}
+                    rowData={row}
+                    classColor={props.classColor}
+                    showed={props.showed}
+                    lootData={row.playerLoots}
+                    openLootWindow={props.openLootWindow}
+                  />
+                ))}
             </>
           </TableBody>
         </Table>
