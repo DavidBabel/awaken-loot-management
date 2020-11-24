@@ -57,7 +57,7 @@ export const ONE_DONJON = gql`
 
 export const ALL_RAIDS_LIGHT = gql`
   query AllRaids {
-    allRaids(orderBy: DATE_DESC) {
+    allRaids(orderBy: DATE_DESC, condition: { active: true }) {
       nodes {
         id
         date
@@ -81,7 +81,7 @@ export const ALL_RAIDS_LIGHT = gql`
 
 export const ALL_RAIDS = gql`
   query AllRaids {
-    allRaids(orderBy: DATE_DESC) {
+    allRaids(orderBy: DATE_DESC, condition: { active: true }) {
       nodes {
         id
         date

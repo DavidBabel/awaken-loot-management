@@ -23,6 +23,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
 import React, { ReactNode, useContext, useEffect } from "react";
 import ItemsCarousel from "react-items-carousel";
@@ -37,7 +38,12 @@ import MemberContext from "../../lib/context/member";
 import { Item, Mutation, Query, Raid } from "../../lib/generatedTypes";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
-import { UPDATE_RAID_LINK } from "../../lib/gql/raid-mutations";
+import {
+  UPDATE_RAID_ACTIVE,
+  UPDATE_RAID_LINK,
+  UpdateRaidActiveVariables,
+  UpdateRaidLinkVariables
+} from "../../lib/gql/raid-mutations";
 import { ALL_DONJONS, ALL_RAIDS_LIGHT } from "../../lib/gql/raid-queries";
 import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
@@ -45,10 +51,6 @@ import { getDonjonIconUrl } from "../../lib/utils/image";
 import { byDate } from "../../lib/utils/sorter";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
-interface UpdateRaidLinkVariables {
-  raidId: number;
-  linkId: string;
-}
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -220,6 +222,9 @@ export default function PageIndex() {
   const [updateRaidLink] = useMutation<Mutation, UpdateRaidLinkVariables>(
     UPDATE_RAID_LINK
   );
+  const [updateRaidActive] = useMutation<Mutation, UpdateRaidActiveVariables>(
+    UPDATE_RAID_ACTIVE
+  );
   const {
     loading: loadingDonjons,
     data: dataDonjons,
@@ -228,7 +233,8 @@ export default function PageIndex() {
   const {
     loading: loadingRaids,
     data: dataRaids,
-    error: errorRaids
+    error: errorRaids,
+    refetch: refetchAllRaidsLights
   } = useQuery<Query>(ALL_RAIDS_LIGHT);
   // const {
   //   loading: loadingPlayers,
@@ -571,6 +577,9 @@ export default function PageIndex() {
             <Table className={classes.table} size="small" stickyHeader={true}>
               <TableHead>
                 <TableRow>
+                  {member.name === "Devilhunter" && (
+                    <TableCell style={{ width: "20px", padding: "0 0 0 0" }} />
+                  )}
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
                   <TableCell>Saisie Loot &amp; joueurs</TableCell>
@@ -586,6 +595,27 @@ export default function PageIndex() {
                 {raids.map((raid: Raid) => {
                   return (
                     <TableRow key={`raid-${raid.id}`}>
+                      {member.name === "Devilhunter" && (
+                        <TableCell
+                          style={{ width: "20px", padding: "0 0 0 0" }}
+                        >
+                          <IconButton
+                            key="close"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={() =>
+                              updateRaidActive({
+                                variables: {
+                                  raidId: raid.id,
+                                  active: false
+                                }
+                              }).then(() => refetchAllRaidsLights())
+                            }
+                          >
+                            <CloseIcon />
+                          </IconButton>
+                        </TableCell>
+                      )}
                       <TableCell>
                         <div style={{ display: "flex" }}>
                           <Avatar

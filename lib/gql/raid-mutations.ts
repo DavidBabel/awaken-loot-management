@@ -22,6 +22,26 @@ export const UPDATE_RAID_TITLE = gql`
   }
 `;
 
+export interface UpdateRaidActiveVariables {
+  raidId: number;
+  active: boolean;
+}
+
+export const UPDATE_RAID_ACTIVE = gql`
+  mutation updateRaidActive($raidId: Int!, $active: Boolean!) {
+    updateRaidById(input: { raidPatch: { active: $active }, id: $raidId }) {
+      raid {
+        active
+      }
+    }
+  }
+`;
+
+export interface UpdateRaidLinkVariables {
+  raidId: number;
+  linkId: string;
+}
+
 export const UPDATE_RAID_LINK = gql`
   mutation UpdateRaidLink($raidId: Int!, $linkId: String!) {
     updateRaidById(
