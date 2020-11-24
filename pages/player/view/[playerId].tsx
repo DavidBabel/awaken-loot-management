@@ -15,6 +15,7 @@ import MemberContext from "../../../lib/context/member";
 import { Query } from "../../../lib/generatedTypes";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
+import CONFIG from "../../../server/config";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -86,42 +87,47 @@ export default function PageSeePlayer(/*{ playerId }: Props */) {
   const raidNb = raids.filter(raid => raid.raidByRaidId.active).length;
   const meritNb = merits.filter(merit => merit.meritByMeritId.active).length;
 
+  const isRealPlayer = currentPlayer.id !== parseInt(CONFIG.ID_UNASSIGNED);
+
   return (
     <div className={classes.root}>
-      <ClassAvatar playerClass={currentPlayer.classByClassId.name} />
+      {isRealPlayer && (
+        <ClassAvatar playerClass={currentPlayer.classByClassId.name} />
+      )}
       <span className={classes.nickname}>{currentPlayer.name}</span>
       <Paper className={classes.tabsAndContent}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          centered={true}
-          className={classes.tabs}
-        >
-          <Tab label={`Merits(${meritNb})`} />
-          <Tab label={`Loots(${lootNb})`} />
-          <Tab label={`Raids(${raidNb})`} />
-          <div className={classes.stuffBtn}>
-            <a
-              target="_blank"
-              href={`https://ironforge.pro/players/Sulfuron/${currentPlayer.name}/`}
-            >
-              <Button variant="contained" color="primary">
-                STUFF
-              </Button>
-            </a>
-          </div>
-          {member.level >= role.class_master && (
-            <div className={classes.stuffBtn} style={{ marginLeft: 10 }}>
-              <a target="_blank" href={`/player/merit/${currentPlayer.id}`}>
+        {isRealPlayer && (
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            centered={true}
+            className={classes.tabs}
+          >
+            <Tab label={`Merits(${meritNb})`} />
+            <Tab label={`Loots(${lootNb})`} />
+            <Tab label={`Raids(${raidNb})`} />
+            <div className={classes.stuffBtn}>
+              <a
+                target="_blank"
+                href={`https://ironforge.pro/players/Sulfuron/${currentPlayer.name}/`}
+              >
                 <Button variant="contained" color="primary">
-                  Valider les mérites
-
+                  STUFF
                 </Button>
               </a>
             </div>
-          )}
-        </Tabs>
+            {member.level >= role.class_master && (
+              <div className={classes.stuffBtn} style={{ marginLeft: 10 }}>
+                <a target="_blank" href={`/player/merit/${currentPlayer.id}`}>
+                  <Button variant="contained" color="primary">
+                    Valider les mérites
+                  </Button>
+                </a>
+              </div>
+            )}
+          </Tabs>
+        )}
         <MeritsTable hidden={value !== 0} merits={merits} />
         <LootsTable hidden={value !== 1} loots={loots} />
         <RaidsTable hidden={value !== 2} raids={raids} />
