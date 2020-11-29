@@ -27,22 +27,24 @@ import { ApolloQueryResult } from "apollo-boost";
 import { useContext, useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import MemberContext from "../../lib/context/member";
-import { BossItem, Mutation, Player, Query } from "../../lib/generatedTypes";
-import { CREATE_LOOT } from "../../lib/gql/loot-mutations";
+import {
+  BossItem,
+  Loot,
+  Mutation,
+  Player,
+  Query
+} from "../../lib/generatedTypes";
+import {
+  CREATE_LOOT,
+  CreateLootVariables,
+  UPDATE_LOOT,
+  UpdateLootVariables
+} from "../../lib/gql/loot-mutations";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { formatDate } from "../../lib/utils/date";
 import CONFIG from "../../server/config";
 
-interface CreateLootVariables {
-  playerId: number;
-  itemId: number;
-  raidId: number;
-  bossId: number;
-  lastActionBy: string;
-  lastActionDate: string;
-  lastActionType: string;
-}
 interface CreatePlayerVariables {
   classId: number;
   name: string;
@@ -112,29 +114,42 @@ const useStyles = makeStyles((theme: Theme) =>
     newPlayerInput: { alignSelf: "flex-end" },
     linearProgress: {
       marginBottom: 10
+    },
+    unasignedLink: {
+      color: "white",
+      textDecoration: "none",
+      cursor: "pointer",
+      display: "flex",
+      height: 46,
+      alignItems: "center",
+      justifyContent: "center"
     }
   })
 );
 
-export default function AddLootDialog({
-  allPlayers,
-  loots,
-  raidId,
-  bossId,
-  bossName,
-  refetchOneRaid,
-  refetchAllPlayers,
-  scrollDown
-}: {
+interface Props {
   allPlayers: Player[];
   loots: BossItem[];
+  preSelectedLoot?: Loot;
   raidId: number;
   bossId: number;
   bossName: string;
   refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
   scrollDown: () => void;
-}) {
+}
+
+export default function AddLootDialog({
+  allPlayers,
+  loots,
+  preSelectedLoot,
+  raidId,
+  bossId,
+  bossName,
+  refetchOneRaid,
+  refetchAllPlayers,
+  scrollDown
+}: Props) {
   const member = useContext(MemberContext);
   const classes = useStyles("");
   //   const [loading, setLoading] = useState<boolean>(false);
@@ -152,9 +167,11 @@ export default function AddLootDialog({
   const [selectClassOpened, setSelectClassOpened] = useState<boolean>(false);
   const [selectItemOpened, setSelectItemOpened] = useState<boolean>(false);
   const [createLoot] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
+  const [updateLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
   const [createPlayer] = useMutation<Mutation, CreatePlayerVariables>(
     CREATE_PLAYER
   );
+
   const {
     snackBarOpen,
     snackBarBackgroundColor,
@@ -174,8 +191,12 @@ export default function AddLootDialog({
     { id: 8, name: "Guerrier Tank" },
     { id: 9, name: "Guerrier DPS" }
   ];
+
   const handleOpen = (): void => {
     setOpen(true);
+    if (preSelectedLoot) {
+      setSelectPlayerOpened(true);
+    }
   };
 
   const handleClose = (): void => {
@@ -197,14 +218,12 @@ export default function AddLootDialog({
   const handleOpenSelectClass = (): void => {
     setSelectClassOpened(true);
   };
-  const handleChangeSelectItem = (
-    event: React.ChangeEvent<{ value: string }>
-  ): void => {
+  function setItemIdToAddInForm(value: string) {
     setPlayerIdToAdd("");
-    setItemIdToAdd(event.target.value.toString());
+    setItemIdToAdd(value.toString());
     if (loots.length > 0) {
       const itemChosen = loots.filter(
-        item => item.itemByItemId.id === parseInt(event.target.value)
+        item => item.itemByItemId.id === parseInt(value)
       );
       if (itemChosen.length > 0) {
         setItemToAdd(itemChosen[0]);
@@ -221,7 +240,15 @@ export default function AddLootDialog({
         }
       }
     }
+  }
+  const handleChangeSelectItem = (
+    event: React.ChangeEvent<{ value: string }>
+  ): void => {
+    setItemIdToAddInForm(event.target.value);
   };
+  if (preSelectedLoot && !itemToAdd) {
+    setItemIdToAddInForm(preSelectedLoot.itemByItemId.id.toString());
+  }
   const handleChangeSelectClass = (
     event: React.ChangeEvent<{ value: string }>
   ): void => {
@@ -311,6 +338,19 @@ export default function AddLootDialog({
         }
       })
         .then(resp => {
+          if (preSelectedLoot) {
+            updateLoot({
+              variables: {
+                id: preSelectedLoot.id,
+                active: false,
+                lastActionBy: member.name,
+                lastActionDate: formatDate(),
+                actionType: "delete"
+              }
+            }).catch(err => {
+              openSnackBar(err.message, "error");
+            });
+          }
           setOpen(false);
           setAddLootIsLoading(false);
           setItemIdToAdd("");
@@ -349,9 +389,15 @@ export default function AddLootDialog({
 
   return (
     <div>
-      <Fab size="small" color="primary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
+      {preSelectedLoot ? (
+        <a onClick={handleOpen} className={classes.unasignedLink}>
+          Non assigné
+        </a>
+      ) : (
+        <Fab size="small" color="primary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
+      )}
       <Dialog
         className={classes.dialog}
         maxWidth={"lg"}
@@ -551,16 +597,21 @@ export default function AddLootDialog({
           <Button onClick={handleClose} color="primary">
             ANNULER
           </Button>
-          <Button onClick={() => addLoot(CONFIG.ID_UNASSIGNED)} color="primary">
-            AJOUT NON ASSIGNÉ
-          </Button>
+          {!preSelectedLoot && (
+            <Button
+              onClick={() => addLoot(CONFIG.ID_UNASSIGNED)}
+              color="primary"
+            >
+              AJOUT NON ASSIGNÉ
+            </Button>
+          )}
           <Button
             onClick={() => {
               showNewPlayerInput ? addNewPlayerAndLoot() : addLoot(null);
             }}
             color="primary"
           >
-            AJOUTER LE LOOT
+            {preSelectedLoot ? "REATTRIBUER LE LOOT" : "AJOUTER LE LOOT"}
           </Button>
         </DialogActions>
       </Dialog>

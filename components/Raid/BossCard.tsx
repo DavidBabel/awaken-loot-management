@@ -31,7 +31,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import AddLootDialog from "../../components/Raid/AddLootDialog";
 import MemberContext from "../../lib/context/member";
 import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
-import { UPDATE_LOOT } from "../../lib/gql/loot-mutations";
+import { UPDATE_LOOT, UpdateLootVariables } from "../../lib/gql/loot-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
 import { getClassColor } from "../../lib/utils/class-colors";
@@ -40,13 +40,6 @@ import { getBossImageUrl } from "../../lib/utils/image";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 import CONFIG from "../../server/config";
 
-interface UpdateLootVariables {
-  id: number;
-  active: boolean;
-  lastActionBy: string;
-  lastActionDate: string;
-  actionType: string;
-}
 const useStyles = makeStyles(theme => ({
   card: {
     position: "relative",
@@ -229,20 +222,6 @@ export function BossCard({
   };
   useEffect(refreshWowhead, [looted]);
 
-  // function getClassColor(player: Player) {
-  //   if (player.id === parseInt(CONFIG.ID_UNASSIGNED)) {
-  //     return "white";
-  //   }
-  //   switch (player.classByClassId.id) {
-  //     case 1:
-  //       return "grey";
-  //     case 4:
-  //       return "#d4d000";
-  //     default:
-  //       return player.classByClassId.color;
-  //   }
-  // }
-
   return (
     <>
       <Card className={classes.card}>
@@ -298,35 +277,73 @@ export function BossCard({
                         {loot.itemByItemId.name}
                       </a>
                     </ListItemText>
-                    <ListItemText
-                      style={{
-                        borderColor: getClassColor(
-                          currentPlayer.classByClassId.name
-                        ),
-                        backgroundColor: isUnassigned ? "darkorange" : "white"
-                      }}
-                      className={classes.playerCell}
-                      primary={
-                        <Link
-                          href="/player/view/[id]"
-                          as={`/player/view/${currentPlayer.id}`}
-                        >
-                          <a
-                            target="_blank"
-                            style={{
-                              color: isUnassigned
-                                ? "white"
-                                : getClassColor(
-                                    currentPlayer.classByClassId.name
-                                  ),
-                              textDecoration: "none"
-                            }}
+                    {isUnassigned ? (
+                      <ListItemText
+                        style={{
+                          borderColor: "darkorange",
+                          backgroundColor: "darkorange"
+                        }}
+                        className={classes.playerCell}
+                        primary={
+                          member.level >= role.officer ? (
+                            <AddLootDialog
+                              preSelectedLoot={loot}
+                              allPlayers={allPlayers}
+                              raidId={raidId}
+                              bossId={id}
+                              bossName={name}
+                              loots={loots}
+                              refetchOneRaid={refetchOneRaid}
+                              refetchAllPlayers={refetchAllPlayers}
+                              scrollDown={scrollDown}
+                            />
+                          ) : (
+                            <Link
+                              href="/player/view/[id]"
+                              as={`/player/view/${currentPlayer.id}`}
+                            >
+                              <a
+                                target="_blank"
+                                style={{
+                                  color: "white",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                {currentPlayer.name}
+                              </a>
+                            </Link>
+                          )
+                        }
+                      />
+                    ) : (
+                      <ListItemText
+                        style={{
+                          borderColor: getClassColor(
+                            currentPlayer.classByClassId.name
+                          ),
+                          backgroundColor: "white"
+                        }}
+                        className={classes.playerCell}
+                        primary={
+                          <Link
+                            href="/player/view/[id]"
+                            as={`/player/view/${currentPlayer.id}`}
                           >
-                            {currentPlayer.name}
-                          </a>
-                        </Link>
-                      }
-                    />
+                            <a
+                              target="_blank"
+                              style={{
+                                color: getClassColor(
+                                  currentPlayer.classByClassId.name
+                                ),
+                                textDecoration: "none"
+                              }}
+                            >
+                              {currentPlayer.name}
+                            </a>
+                          </Link>
+                        }
+                      />
+                    )}
                     {member.level >= role.officer && (
                       <ListItemSecondaryAction>
                         <IconButton

@@ -1600,7 +1600,7 @@ Démoniste, false
 Prêtre, false
 
 Bottes désacralisées
-Chasseur, false
+Chasseur, true
 Chaman, false
 Druide, true
 
@@ -1610,7 +1610,7 @@ Voleur, false
 
 Couvre-chef désacralisé
 Chasseur, true
-Chaman, false
+Chaman, true
 Druide, true
 
 Diadème désacralisé
@@ -1820,7 +1820,7 @@ Guerrier DPS, true
 # Chaman, false
 
 # Anneau du cuirassier
-# Guerrier Tank, false
+# Guerrier Tank, true
 # Guerrier DPS, false
 
 # Anneau de Brise-terre
@@ -1865,7 +1865,7 @@ Prêtre Ombre, false
 # Anneau de pestecoeur
 # Démoniste, false
 
-Gressil. Aube de la ruine | Rotation rogue épée / War DD non orc
+Gressil. Aube de la ruine | Rotation rogue épée / War DD
 Guerrier DPS, false
 Voleur, false
 

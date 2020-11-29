@@ -25,7 +25,7 @@ VALUES
 ('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', false, false),
 ('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', false, false),
 ('classMaster'  , 1,  'classMaster', '71c0665585d07663b6955dd9d43fa209', true, false),
-('player'       , 1,  'player', '0cd8250454e6003c270680b4fca3583c', true, false),
+('player'       , 1,  'player', '28d1fc4380e4adb521742bdd6ad260b9', true, false),
 ('Lums'         , 7,  'player', null, true, true),
 ('Deiv'         , 1,  'player', '5a29ca97ad30bb6484a3832042ff7f2b', true, true),
 ('Krigen'       , 8,  'player', '1ce82060116628e67b6dfa004ce8d70a', true, true),

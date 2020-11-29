@@ -1,6 +1,5 @@
-- forcer la majuscule sur l'ajout de joueurs
-- autoriser le renommage des joueurs pour Devilhunter
-- mettre à jour AQ en ligne
-- saisir items naxx
-- clean base présence : recommencer à partir de naxx
-- gérer les différents niveaux d'item (décaler les couleurs ?)
+- refaire l'assignation de loots rapide
+- rendre mieux compatible sur téléphone
+- faire une autre page d'acceuil
+- rendre les liens maj clicables
+- finir l'autre complete des boss

@@ -4126,7 +4126,7 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false, NULL),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
@@ -4152,7 +4152,7 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false, NULL),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
@@ -4729,11 +4729,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false, 'Rotation rogue épée / War DD non orc'),
+  'Guerrier DPS'), false, 'Rotation rogue épée / War DD'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false, 'Rotation rogue épée / War DD non orc'),
+  'Voleur'), false, 'Rotation rogue épée / War DD'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bouclier de condamnation'

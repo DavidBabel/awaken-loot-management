@@ -1,5 +1,15 @@
 import { gql } from "apollo-boost";
 
+export interface CreateLootVariables {
+  playerId: number;
+  itemId: number;
+  raidId: number;
+  bossId: number;
+  lastActionBy: string;
+  lastActionDate: string;
+  lastActionType: string;
+}
+
 export const CREATE_LOOT = gql`
   mutation CreateLoot(
     $playerId: Int!
@@ -33,6 +43,14 @@ export const CREATE_LOOT = gql`
     }
   }
 `;
+
+export interface UpdateLootVariables {
+  id: number;
+  active: boolean;
+  lastActionBy: string;
+  lastActionDate: string;
+  actionType: string;
+}
 
 export const UPDATE_LOOT = gql`
   mutation updateLoot(
