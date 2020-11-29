@@ -2,9 +2,12 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemText
+  ListItemText,
+  Tooltip,
+  Typography
 } from "@material-ui/core/";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { BossItem, Item } from "../../lib/generatedTypes";
 import {
@@ -12,7 +15,8 @@ import {
   lootColorLevel2,
   lootColorLevel3,
   lootColorLevel4,
-  lootColorLevel5
+  lootColorLevel5,
+  lootColorLevel6
 } from "../../lib/utils/loot-colors";
 import { normalizeText } from "../../lib/utils/string";
 
@@ -77,6 +81,9 @@ const useStyles = makeStyles(theme =>
     },
     lootLevel5: {
       backgroundColor: lootColorLevel5
+    },
+    lootLevel6: {
+      backgroundColor: lootColorLevel6
     }
   })
 );
@@ -114,63 +121,77 @@ export default function ItemSearchedList({
       aria-label="item list"
     >
       {results &&
-        results.map(result => {
-          let lootedNb = 0;
-          result.lootsByItemId.nodes.forEach(loot => {
-            if (loot.active && loot.playerByPlayerId.active) {
-              lootedNb++;
-            }
-          });
-          return (
-            <ListItem
-              key={`listitemline-${result.id}`}
-              button={true}
-              onClick={() => {
-                setItemCurrentlySelected(result);
-                handleOpenItemInfo(true);
-              }}
-            >
-              <ListItemText
-                className={classes.resultText}
-                primary={
-                  <a
-                    onClick={e => {
-                      e.preventDefault();
-                    }}
-                    href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
-                  >
-                    {result.name}
-                  </a>
-                }
-              />
-              {!result.classByClassId ? (
-                result.classItemsByItemId.nodes.map(playerClass => (
-                  <ListItemAvatar
-                    key={`listitemavatar-${playerClass.classByClassId.id +
-                      result.name}`}
-                  >
-                    <ClassAvatar
-                      playerClass={playerClass.classByClassId.name}
-                      prio={playerClass.prio}
-                    />
+        (results.length === 0 ? (
+          <Typography>Aucun résultat trouvé</Typography>
+        ) : (
+          results.map(result => {
+            let lootedNb = 0;
+            result.lootsByItemId.nodes.forEach(loot => {
+              if (loot.active && loot.playerByPlayerId.active) {
+                lootedNb++;
+              }
+            });
+            return (
+              <ListItem
+                key={`listitemline-${result.id}`}
+                button={true}
+                onClick={() => {
+                  setItemCurrentlySelected(result);
+                  handleOpenItemInfo(true);
+                }}
+              >
+                <ListItemText
+                  className={classes.resultText}
+                  primary={
+                    <>
+                      <a
+                        onClick={e => {
+                          e.preventDefault();
+                        }}
+                        href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
+                      >
+                        {result.name}
+                      </a>
+                      {result.classItemsByItemId?.nodes[0]?.comment && (
+                        <Tooltip
+                          placement="top"
+                          title={result.classItemsByItemId?.nodes[0]?.comment}
+                        >
+                          <b>*</b>
+                        </Tooltip>
+                      )}
+                    </>
+                  }
+                />
+                {!result.classByClassId ? (
+                  result.classItemsByItemId.nodes.map(playerClass => (
+                    <ListItemAvatar
+                      key={`listitemavatar-${playerClass.classByClassId.id +
+                        result.name}`}
+                    >
+                      <ClassAvatar
+                        playerClass={playerClass.classByClassId.name}
+                        prio={playerClass.prio}
+                      />
+                    </ListItemAvatar>
+                  ))
+                ) : (
+                  <ListItemAvatar>
+                    <ClassAvatar playerClass={result.classByClassId.name} />
                   </ListItemAvatar>
-                ))
-              ) : (
-                <ListItemAvatar>
-                  <ClassAvatar playerClass={result.classByClassId.name} />
-                </ListItemAvatar>
-              )}
-              <ListItemText
-                className={
-                  classes.lootLevel +
-                  " " +
-                  classes["lootLevel" + result.lootLevel]
-                }
-                primary={lootedNb}
-              />
-            </ListItem>
-          );
-        })}
+                )}
+                <ListItemText
+                  className={
+                    classes.lootLevel +
+                    " " +
+                    classes["lootLevel" + result.lootLevel]
+                  }
+                  primary={lootedNb}
+                />
+              </ListItem>
+            );
+          })
+        ))}
     </List>
   );
 }

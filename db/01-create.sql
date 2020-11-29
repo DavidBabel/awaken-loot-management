@@ -86,7 +86,8 @@ CREATE TABLE "ClassItem" (
   "id" SERIAL PRIMARY KEY,
   "classId" int NOT NULL,
   "itemId" int NOT NULL,
-  "prio" boolean NOT NULL
+  "prio" boolean NOT NULL,
+  "comment" varchar
 );
 comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");

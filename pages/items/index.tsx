@@ -194,6 +194,14 @@ export default function PageIndex() {
           margin="dense"
           variant="outlined"
         />
+        <Typography>
+          <i>
+            <b style={{ color: "grey" }}>* : </b>
+            <span style={{ color: "lightgrey" }}>
+              item avec des conditions d'attribution spéciales
+            </span>
+          </i>
+        </Typography>
       </Paper>{" "}
       <ItemSearchedList
         listHeight={"auto"}

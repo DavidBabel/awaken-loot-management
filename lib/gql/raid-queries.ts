@@ -147,6 +147,7 @@ export const ONE_RAID = gql`
                           color
                           name
                         }
+                        comment
                       }
                     }
                     classByClassId {

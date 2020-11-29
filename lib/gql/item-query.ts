@@ -35,6 +35,7 @@ export const ALL_ITEMS = gql`
               id
               name
             }
+            comment
           }
         }
         classByClassId {

@@ -10,7 +10,7 @@ import PlayerList from "../../../components/Raid/PlayerList";
 import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
 import MemberContext from "../../../lib/context/member";
 import { Player, Query, RaidPlayer } from "../../../lib/generatedTypes";
-import { ALL_PLAYERS } from "../../../lib/gql/player-queries";
+import { ALL_ACTIVE_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
 import { useToggle } from "../../../lib/hooks/toggle";
 import { role } from "../../../lib/role-level";
@@ -131,7 +131,7 @@ export default function PageRaidView() {
     data: dataPlayers,
     error: errorPlayers,
     refetch: refetchAllPlayers
-  } = useQuery<Query>(ALL_PLAYERS);
+  } = useQuery<Query>(ALL_ACTIVE_PLAYERS);
 
   const error = errorOneRaid || errorPlayers;
   const loading = loadingOneRaid || loadingPlayers;

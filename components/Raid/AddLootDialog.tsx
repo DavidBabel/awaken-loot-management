@@ -16,7 +16,8 @@ import {
   Snackbar,
   SnackbarContent,
   Switch,
-  TextField
+  TextField,
+  Typography
 } from "@material-ui/core/";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
@@ -97,6 +98,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     selectClass: { marginLeft: 10 },
+    note: { textAlign: "center" },
     lootToAddAvatars: {
       position: "relative",
       display: "flex",
@@ -428,7 +430,6 @@ export default function AddLootDialog({
                 value={classIdToAdd}
                 onChange={handleChangeSelectClass}
               >
-                }>
                 {wowClasses.map(wowClass => {
                   return (
                     <MenuItem
@@ -486,6 +487,14 @@ export default function AddLootDialog({
             </FormControl>
           )}
         </DialogContent>
+        {itemToAdd?.itemByItemId?.classItemsByItemId?.nodes[0]?.comment && (
+          <div className={classes.note}>
+            <Typography>
+              <b>Note:</b>{" "}
+              {itemToAdd?.itemByItemId?.classItemsByItemId?.nodes[0]?.comment}
+            </Typography>
+          </div>
+        )}
         <div className={classes.lootToAddAvatars}>
           {itemToAdd &&
             (!itemToAdd.itemByItemId.classByClassId ? (

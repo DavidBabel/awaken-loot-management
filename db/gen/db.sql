@@ -86,7 +86,8 @@ CREATE TABLE "ClassItem" (
   "id" SERIAL PRIMARY KEY,
   "classId" int NOT NULL,
   "itemId" int NOT NULL,
-  "prio" boolean NOT NULL
+  "prio" boolean NOT NULL,
+  "comment" varchar
 );
 comment on table "ClassItem" is E'@omit delete';
 CREATE UNIQUE INDEX ON "ClassItem" ("id");
@@ -208,7 +209,7 @@ VALUES
 ('Onyxia Lair', 'Ony', true, 'https://i.imgur.com/qAm8tn5.jpg'),
 ('Blackwing Lair', 'BWL', true, 'https://i.imgur.com/WxgXIlO.jpg'),
 ('Ahn‘Qiraj Temple', 'AQ40', true, 'https://i.imgur.com/xcxosZp.jpg'),
-('Naxxramas', 'Naxx', true, 'https://i.imgur.com/xcxosZp.jpg');
+('Naxxramas', 'Naxx', true, 'https://i.imgur.com/Q3eYYuY.jpg');
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
 ('Ahn‘Qiraj Ruins', 'AQ20', false),
@@ -219,7 +220,7 @@ VALUES
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg'),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/IYtebGa.jpg'),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/qUIqnbw.jpeg'),
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/qUIqnbw.jpeg');
+(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/XTZRDLJ.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
@@ -249,14 +250,14 @@ VALUES
 (9,'Nefarian', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/WxgXIlO.jpg'),
 
 (2,'The Prophet Skeram', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/gSwLuy2.jpeg'),
-(3,'Battleguard Sartura', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/se6Qgrb.jpeg'),
-(4,'Fankriss the Unyielding', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/gM8ib24.jpeg'),
-(5,'Princess Huhuran', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/vHRzlkt.jpeg'),
-(6,'Silithid Royalty', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/2knCdlO.jpeg'),
-(7,'Viscidus', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/j1KT7Gz.jpeg'),
-(8,'The Twin Emperors', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/JGfdjNS.jpeg'),
+(4,'Battleguard Sartura', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/se6Qgrb.jpeg'),
+(5,'Fankriss the Unyielding', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/gM8ib24.jpeg'),
+(6,'Princess Huhuran', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/vHRzlkt.jpeg'),
+(3,'Silithid Royalty', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/2knCdlO.jpeg'),
+(10,'Viscidus', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/j1KT7Gz.jpeg'),
+(7,'The Twin Emperors', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/JGfdjNS.jpeg'),
 (9,'Ouro', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/sdZ0S62.jpeg'),
-(10,'C‘thun', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/EI9VfWi.jpeg');
+(8,'C‘thun', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/EI9VfWi.jpeg');
 
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
@@ -1236,7 +1237,8 @@ VALUES
 ('Neretzek, le Buveur de sang',21856,(SELECT id FROM "Classes" WHERE "name"=''), 2),
 ('Fragment de l‘étoile tombée',21891,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Gants de la prophétie rachetée',21889,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3);
+('Gants du prophète déchu',21890,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3),
+('Plans : Lame feuille-de-saule',22389,(SELECT id FROM "Classes" WHERE "name"=''), 0);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1621,18 +1623,18 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Anneau de la flamme éternelle',23237,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Atours de nécrochevalier',23069,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 0),
+('Anneau de la flamme éternelle',23237,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Atours de nécrochevalier',23069,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 3),
 ('Ceinture du Grand croisé',23666,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Ceinturon de furie élémentaire',23663,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Espauliers de furie élémentaire',23664,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 0),
-('Jambières de furie élémentaire',23665,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 0),
+('Ceinturon de furie élémentaire',23663,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Espauliers de furie élémentaire',23664,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3),
+('Jambières de furie élémentaire',23665,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 3),
 ('Jambières du Grand croisé',23668,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Présage funeste',23044,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Servobras égaré',23221,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Présage funeste',23044,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Servobras égaré',23221,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Spallières du Grand croisé',23667,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Targe stygienne',23238,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Tunique en peau de goule',23226,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Targe stygienne',23238,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Tunique en peau de goule',23226,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1657,11 +1659,11 @@ VALUES
 ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
-('Bague des prières inexaucées',22939,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Larme de givre',22935,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Gemme de Nérubis',22937,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape en soie de démon des cryptes',22938,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Garde-poignets de vengeance',22936,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Bague des prières inexaucées',22939,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Larme de givre',22935,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Gemme de Nérubis',22937,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Cape en soie de démon des cryptes',22938,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Garde-poignets de vengeance',22936,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1682,11 +1684,11 @@ VALUES
 -- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 -- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 -- ('Protège-poignets désacralisés',22362,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
-('L‘Etreinte de la veuve',22942,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Protège-épaules polaires',22941,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Remords de la veuve',22806,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Espauliers plaie-de-glace',22940,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Pendentif de la pierre pernicieuse',22943,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('L‘Etreinte de la veuve',22942,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Protège-épaules polaires',22941,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Remords de la veuve',22806,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Espauliers plaie-de-glace',22940,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Pendentif de la pierre pernicieuse',22943,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1707,11 +1709,11 @@ VALUES
 ('Gants désacralisés',22371,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Garde-mains désacralisés',22364,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Gantelets désacralisés',22357,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Baiser de l‘araignée',22954,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Lame en peine',22807,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Pendentif des noms oubliés',22947,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Croc de Maexxna',22804,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Robe de toile cristalline',23220,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Baiser de l‘araignée',22954,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Lame en peine',22807,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Pendentif des noms oubliés',22947,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Croc de Maexxna',22804,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Robe de toile cristalline',23220,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1732,13 +1734,13 @@ VALUES
 ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Cape du Fléau',23030,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Coeur frigide de Noth',23029,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bague de l‘inévitable',23031,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bague du grêlon',23028,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Hachette de l‘os brisé',22816,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Cape du Fléau',23030,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Coeur frigide de Noth',23029,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Bague de l‘inévitable',23031,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Bague du grêlon',23028,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Hachette de l‘os brisé',22816,(SELECT id FROM "Classes" WHERE "name"=''), 6),
 ('Libram de lumière',23006,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Totem de l‘eau courante',23005,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Totem de l‘eau courante',23005,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1760,12 +1762,12 @@ INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 -- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 -- ('Ceinture désacralisée',22370,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
-('Cuissots de carnage',23068,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Camail glacécaille',23033,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Cuissots de carnage',23068,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Camail glacécaille',23033,(SELECT id FROM "Classes" WHERE "name"=''), 4),
 -- ('Sangle désacralisée',22356,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Chapeau de précepteur',23035,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Heaume plaie-de-glace',23019,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Collier de nécropsie',23036,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Chapeau de précepteur',23035,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Heaume plaie-de-glace',23019,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Collier de nécropsie',23036,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1786,11 +1788,11 @@ VALUES
 ('Cuissards désacralisés',22359,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Cuissots désacralisés',22352,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Jambières désacralisées',22366,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
-('Bague des forces contre-nature',23038,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('L‘oeil de Nérub',23039,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de ferveur spirituelle',23037,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bâton de soufre',22800,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Reflet d‘Horreb',23042,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Bague des forces contre-nature',23038,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('L‘oeil de Nérub',23039,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Anneau de ferveur spirituelle',23037,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Bâton de soufre',22800,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Reflet d‘Horreb',23042,(SELECT id FROM "Classes" WHERE "name"=''), 3);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1811,11 +1813,11 @@ VALUES
 ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
-('Cape de suture',22960,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bague de réanimation',22961,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Baguette des Parques',22820,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cisailleuse',22815,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Le Porte-peste',22818,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Cape de suture',22960,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Bague de réanimation',22961,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Baguette des Parques',22820,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Cisailleuse',22815,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Le Porte-peste',22818,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1836,11 +1838,11 @@ VALUES
 -- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 -- ('Spallières désacralisées',22361,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 -- ('Protège-épaules désacralisés',22368,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
-('Spallières glacécaille',22967,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Injecteur de toxines',22810,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('La fin des rêves',22988,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Rosée du crépuscule',22803,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Mantelet glacial',22968,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Spallières glacécaille',22967,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Injecteur de toxines',22810,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('La fin des rêves',22988,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Rosée du crépuscule',22803,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Mantelet glacial',22968,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1858,13 +1860,13 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Claymore de puissance impie',22813,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Collier perdu de Gluth',22981,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Main de pouvoir digérée',22994,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Claymore de puissance impie',22813,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Collier perdu de Gluth',22981,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Main de pouvoir digérée',22994,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 -- ('Espauliers désacralisés',22354,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Pacte de la mort',23075,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Pacte de la mort',23075,(SELECT id FROM "Classes" WHERE "name"=''), 5),
 ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Mantelet couvert de gel',22983,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Mantelet couvert de gel',22983,(SELECT id FROM "Classes" WHERE "name"=''), 6),
 -- ('Ceinturon désacralisé',22363,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 -- ('Manchettes désacralisées',22369,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 -- ('Brassards désacralisées',22355,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
@@ -1904,11 +1906,11 @@ VALUES
 ('Heaume désacralisé',22353,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
 ('Couvre-chef désacralisé',22360,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 ('Diadème désacralisé',22367,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
-('Jambières de polarité',23070,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Pic du crépuscule',22801,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Oeil de diminution',23001,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Fustigatrice',22808,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Thorax d‘abomination blindé',23000,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Jambières de polarité',23070,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Pic du crépuscule',22801,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Oeil de diminution',23001,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Fustigatrice',22808,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Thorax d‘abomination blindé',23000,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1929,12 +1931,12 @@ VALUES
 -- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 -- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
 -- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Baguette de la mort murmurante',23009,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Chevalière du défenseur déchu',23018,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Idole de longévité',23004,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Ceinturon du mentor',23219,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Voile de l‘éclipse',23017,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Iblis, lame du Séraphin déchu',23014,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Baguette de la mort murmurante',23009,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Chevalière du défenseur déchu',23018,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Idole de longévité',23004,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Ceinturon du mentor',23219,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Voile de l‘éclipse',23017,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Iblis, lame du Séraphin déchu',23014,(SELECT id FROM "Classes" WHERE "name"=''), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1955,12 +1957,12 @@ INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
 -- ('Sandales désacralisées',22372,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
 -- ('Bottes désacralisées',22365,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5),
-('Coiffure glaciale',23032,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Manchettes du moissonneur d‘âmes',23021,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Coiffure glaciale',23032,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Manchettes du moissonneur d‘âmes',23021,(SELECT id FROM "Classes" WHERE "name"=''), 6),
 -- ('Solerets désacralisés',22358,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Torque de sadique',23023,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Bottes de déplacement',23073,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Casque polaire',23020,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Torque de sadique',23023,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Bottes de déplacement',23073,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Casque polaire',23020,(SELECT id FROM "Classes" WHERE "name"=''), 4);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -1978,14 +1980,14 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Cordâme',22811,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cordialité du pardon',23027,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Cordâme',22811,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('Cordialité du pardon',23027,(SELECT id FROM "Classes" WHERE "name"=''), 3),
 ('Cuirasse désacralisée',22349,(SELECT id FROM "Classes" WHERE "name"='Guerrier, Voleur'), 5),
-('Jambières de l‘Apocalypse',23071,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Maillet du croisé racheté',22809,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Porte-cendres corrompue',22691,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Jambières de l‘Apocalypse',23071,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Maillet du croisé racheté',22809,(SELECT id FROM "Classes" WHERE "name"=''), 3),
+('Porte-cendres corrompue',22691,(SELECT id FROM "Classes" WHERE "name"=''), 5),
 ('Robe désacralisée',22351,(SELECT id FROM "Classes" WHERE "name"='Démoniste, Mage, Prêtre'), 5),
-('Sceau des damnés',23025,(SELECT id FROM "Classes" WHERE "name"=''), 0),
+('Sceau des damnés',23025,(SELECT id FROM "Classes" WHERE "name"=''), 5),
 ('Tunique désacralisée',22350,(SELECT id FROM "Classes" WHERE "name"='Chaman, Chasseur, Druide, Paladin'), 5);
 
 INSERT INTO "BossItem" ("bossId","itemId")
@@ -2005,18 +2007,20 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Pouvoir du Fléau',23548,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Puissance du Fléau',23545,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Oeil du mort',23047,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Voile d‘assujettissement',23045,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Griffe du wyrm de givre',23242,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Le Visage de la mort',23043,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Blason de tueur',23041,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Oeil droit de Saphiron',23048,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Glyphe de déviation',23040,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('L‘essence contenue de Saphiron',23046,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Cape de la nécropole',23050,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Oeil gauche de Saphiron',23049,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Pouvoir du Fléau',23548,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Puissance du Fléau',23545,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Résistance du Fléau',23547,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Robustesse du Fléau',23549,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Oeil du mort',23047,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Voile d‘assujettissement',23045,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Griffe du wyrm de givre',23242,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Le Visage de la mort',23043,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Blason de tueur',23041,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Oeil droit de Saphiron',23048,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Glyphe de déviation',23040,(SELECT id FROM "Classes" WHERE "name"=''), 4),
+('L‘essence contenue de Saphiron',23046,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Cape de la nécropole',23050,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Oeil gauche de Saphiron',23049,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -2038,25 +2042,27 @@ VALUES
 
 INSERT INTO "Items" ("name","wowheadId","classId","lootLevel")
 VALUES
-('Le phylactère de Kel‘Thuzad',22520,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de la faucheuse d‘os',23060,(SELECT id FROM "Classes" WHERE "name"='Voleur'), 0),
-('Gemme des innocents enchaînés',23057,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Puissance de Menethil',22798,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de rédemption',23066,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 0),
-('Anneau du cuirassier',23059,(SELECT id FROM "Classes" WHERE "name"='Guerrier'), 0),
-('Anneau de Brise-terre',23065,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 0),
-('Détrôneuse',22802,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Talisman bouillonnant de Stormrage',23053,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de givrefeu',23062,(SELECT id FROM "Classes" WHERE "name"='Mage'), 0),
-('Anneau de traqueur des cryptes',23067,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 0),
-('Cherche-âme',22799,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Marteau du Néant distordu',23056,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de foi',23061,(SELECT id FROM "Classes" WHERE "name"='Prêtre'), 0),
-('Doigt du destin',22821,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de pestecoeur',23063,(SELECT id FROM "Classes" WHERE "name"='Démoniste'), 0),
-('Gressil, Aube de la ruine',23054,(SELECT id FROM "Classes" WHERE "name"=''), 0),
-('Anneau de marcherêve',23064,(SELECT id FROM "Classes" WHERE "name"='Druide'), 0),
-('Bouclier de condamnation',22819,(SELECT id FROM "Classes" WHERE "name"=''), 0);
+('Anneau de la faucheuse d‘os',23060,(SELECT id FROM "Classes" WHERE "name"='Voleur'), 5),
+('Anneau de rédemption',23066,(SELECT id FROM "Classes" WHERE "name"='Paladin'), 5),
+('Anneau du cuirassier',23059,(SELECT id FROM "Classes" WHERE "name"='Guerrier Tank'), 5),
+('Anneau de Brise-terre',23065,(SELECT id FROM "Classes" WHERE "name"='Chaman'), 5),
+('Anneau de traqueur des cryptes',23067,(SELECT id FROM "Classes" WHERE "name"='Chasseur'), 5),
+('Anneau de foi',23061,(SELECT id FROM "Classes" WHERE "name"='Prêtre'), 5),
+('Anneau de givrefeu',23062,(SELECT id FROM "Classes" WHERE "name"='Mage'), 5),
+('Anneau de pestecoeur',23063,(SELECT id FROM "Classes" WHERE "name"='Démoniste'), 5),
+('Anneau de marcherêve',23064,(SELECT id FROM "Classes" WHERE "name"='Druide'), 5),
+('Le phylactère de Kel‘Thuzad',22520,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Gemme des innocents enchaînés',23057,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Puissance de Menethil',22798,(SELECT id FROM "Classes" WHERE "name"=''), 5),
+('Détrôneuse',22802,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Talisman bouillonnant de Stormrage',23053,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Cherche-âme',22799,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Marteau du Néant distordu',23056,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Doigt du destin',22821,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Gressil, Aube de la ruine',23054,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Bouclier de condamnation',22819,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Le Froid dévorant',23577,(SELECT id FROM "Classes" WHERE "name"=''), 6),
+('Esclavagiste nérubien',22812,(SELECT id FROM "Classes" WHERE "name"=''), 6);
 
 INSERT INTO "BossItem" ("bossId","itemId")
 VALUES
@@ -2078,9236 +2084,4769 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23063)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23054)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23064)),
-((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22819));
+((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22819)),
+((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23577)),
+((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22812));
 
 
 -- safe comment
 -- THIS FILE IS GENERATED
-INSERT INTO "ClassItem" ("itemId","classId","prio")
+INSERT INTO "ClassItem" ("itemId","classId","prio","comment")
 VALUES
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘illumination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de puissance de sort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de puissance de sort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de puissance de sort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau épais en sombrefer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau épais en sombrefer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau épais en sombrefer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau épais en sombrefer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de Tempête de mana'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de Tempête de mana'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de Tempête de mana'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du pouvoir volatil'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du pouvoir volatil'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du pouvoir volatil'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards d‘Attise-flammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards d‘Attise-flammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Trembleterre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Trembleterre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Trembleterre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Marque du Frappeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marque du Frappeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marque du Frappeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Médaillon de Puissance inébranlable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Médaillon de Puissance inébranlable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Médaillon de Puissance inébranlable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe droite d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe droite d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe droite d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Grimoire de runes de feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Grimoire de runes de feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Grimoire de runes de feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de frappe rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de frappe rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de frappe rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de mana enflammé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de garde des flammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de garde des flammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame à tranchant d‘obsidienne'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame à tranchant d‘obsidienne'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de pouvoir éphémère'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Vieux gants en cuir du Magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Vieux gants en cuir du Magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes durcies dans le magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes durcies dans le magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières de la Terre profonde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Solerets du Marcheflammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Solerets du Marcheflammes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Dague ensorceleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dague ensorceleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dague ensorceleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dague ensorceleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dague ensorceleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ecraseur cramoisi'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ecraseur cramoisi'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ecraseur cramoisi'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de stabilité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de stabilité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pantalon en écailles de salamandre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pantalon en écailles de salamandre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau d‘Aurastone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau d‘Aurastone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau d‘Aurastone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Déchireur de Gutgore'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Déchireur de Gutgore'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Disque Drillborer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Disque Drillborer'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame de brutalité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame de brutalité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame de brutalité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau de l‘archimagus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau de l‘archimagus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau de l‘archimagus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau de l‘archimagus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau de l‘archimagus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Frappe-ténèbres'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Frappe-ténèbres'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Magelame de Chante-azur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Magelame de Chante-azur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lance-grenaille explosif'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lance-grenaille explosif'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lance-grenaille explosif'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de cautérisation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de cautérisation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de cautérisation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape ignifugée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape ignifugée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape ignifugée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Dent de chien du magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dent de chien du magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Dent de chien du magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Drague-lave de Finkle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Drague-lave de Finkle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Echarpe des secrets murmurés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Echarpe des secrets murmurés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Epaulières de garde du feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Epaulières de garde du feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Epaulières de garde du feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de la flamme hypnotique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de la flamme hypnotique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de vrai vol'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de vrai vol'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Grèves du Coeur du Magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Grèves du Coeur du Magma'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières de croissance sauvage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières de croissance sauvage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame de la perdition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame de la perdition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Sulfuras'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Couronne de destruction'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Couronne de destruction'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Couronne de destruction'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Précisia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape sang-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape sang-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape sang-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Essence de la Flamme pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Voile de brume'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Voile de brume'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Voile de brume'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon d‘assaut'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon d‘assaut'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier du Seigneur du Feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Arrache-moelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Arrache-moelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Arrache-moelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fragment de la Flamme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fléau de Bonereaver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fléau de Bonereaver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fléau de Bonereaver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Défenseur de Malistar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Défenseur de Malistar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête d‘Onyxia'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien Grimoire de Cornerstone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien Grimoire de Cornerstone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien Grimoire de Cornerstone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien Grimoire de Cornerstone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien Grimoire de Cornerstone'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de lien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de lien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de lien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Drapé de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Drapé de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Drapé de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Drapé de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Drapé de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier d‘Eskhandar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Eclat de l‘Ecaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Eclat de l‘Ecaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Eclat de l‘Ecaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Eclat de l‘Ecaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Eclat de l‘Ecaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Porte-mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Porte-mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Vis‘kag le Saigneur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Vis‘kag le Saigneur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Vis‘kag le Saigneur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Maillet draconique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Maillet draconique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de puissance draconique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de puissance draconique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Vengeresse draconique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de blizzard de Ringo'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pourpoint d‘ombre entrelacé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Trancheuse du destin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Trancheuse du destin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Récolteur d‘essence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Récolteur d‘essence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Récolteur d‘essence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Récolteur d‘essence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de sombre domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de sombre domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de sombre domination'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de l‘évolution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de l‘évolution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de l‘évolution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de l‘évolution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la cabale de l‘Aile noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la cabale de l‘Aile noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la cabale de l‘Aile noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Brise-échine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brise-échine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'La lame indomptée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La lame indomptée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du dragon déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du dragon déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du dragon déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume de la rage infinie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume de la rage infinie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame croc-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame croc-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Protecteur en écailles de dragon rouge'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protecteur en écailles de dragon rouge'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers de rejeton noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers de rejeton noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de précision des arcanes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de précision des arcanes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de précision des arcanes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Frappe-coeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Frappe-coeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Frappe-coeur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Maladath, lame runique du Vol noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Maladath, lame runique du Vol noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Maladath, lame runique du Vol noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de cendre noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de cendre noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de cendre noire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Etreinte Gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Etreinte Gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Etreinte Gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Etreinte Gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe du drake noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe du drake noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe du drake noir'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape gueule-de-feu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards du croisé déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers griffe-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers griffe-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de Blackrock'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de Blackrock'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de Blackrock'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de Blackrock'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards rivetés de Primaliste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton focalisateur de l‘Aile de l‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton focalisateur de l‘Aile de l‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de récupération'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de récupération'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de récupération'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fendoir griffe-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Concentration forcée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Concentration forcée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de Concentration forcée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de la flamme d‘ébène'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de la flamme d‘ébène'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman croc-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman croc-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman croc-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman croc-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman croc-de-drake'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Rempart béni de Malfurion'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Canon à main Souffle-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Canon à main Souffle-de-dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de la pensée pure'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cercle de la force appliquée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cercle de la force appliquée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cercle de la force appliquée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cercle de la force appliquée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières en tisse-braise'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières en tisse-braise'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée d‘obstruction de Styleen'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée d‘obstruction de Styleen'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher du dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher du dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher du dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher du dragon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Prophète de malheur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Prophète de malheur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman Amélio'), false),
+  'Chaman Amélio'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes chromatiques'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes chromatiques'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants en cuir de dragon tendu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Geta chatoyantes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape brochée d‘élémentium'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape brochée d‘élémentium'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon du croisé déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières surpuissantes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières surpuissantes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Epée trempée chromatiquement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Epée trempée chromatiquement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de Chromaggus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de Chromaggus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de Chromaggus'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sangle rivetée de Primaliste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ashjre‘thul, arbalète de châtiment'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bouclier en élémentium renforcé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bouclier en élémentium renforcé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête de Nefarian'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête de Nefarian'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête de Nefarian'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête de Nefarian'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tête de Nefarian'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du seigneur des couvées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du seigneur des couvées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du seigneur des couvées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la Flamme d‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la Flamme d‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la Flamme d‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Chaîne de Therazane'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de rétorsion d‘Archimtiros'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de rétorsion d‘Archimtiros'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau d‘élémentium pur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau d‘élémentium pur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau d‘élémentium pur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de Neltharion'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de Neltharion'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de Neltharion'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mish‘undare, coiffure du flagelleur mental'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mish‘undare, coiffure du flagelleur mental'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mish‘undare, coiffure du flagelleur mental'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de perfidie de Prestor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman de perfidie de Prestor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de la Flamme d‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de la Flamme d‘ombre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ashkandi, Grande épée de la Confrérie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ashkandi, Grande épée de la Confrérie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Crul‘shorukh, Trancheuse du chaos'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Crul‘shorukh, Trancheuse du chaos'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lok‘amir il Romathis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lok‘amir il Romathis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lok‘amir il Romathis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du prophète déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la volonté inexorable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de la volonté inexorable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets en écailles de hanneton'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets en écailles de hanneton'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets en écailles de hanneton'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets en écailles de hanneton'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets en écailles de hanneton'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de concentré de haine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de concentré de haine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de concentré de haine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de concentré de haine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de concentré de haine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Epaulières du barrage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Epaulières du barrage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Plastron d‘annihilation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Plastron d‘annihilation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de pensée foisonnante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de pensée foisonnante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de pensée foisonnante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du gardien qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du gardien qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif du gardien qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de vile sauvegarde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de vile sauvegarde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de vile sauvegarde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de vile sauvegarde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de vile sauvegarde'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton des prophètes qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton des prophètes qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton des prophètes qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau de Ji‘zhi'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau de Ji‘zhi'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes du prophète déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture qiraji en peau épaisse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture qiraji en peau épaisse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du garde de guerre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du garde de guerre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du garde de guerre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes recomposées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de pureté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de coercition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de coercition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de coercition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de coercition'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Casque des lianes rampantes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Casque des lianes rampantes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de détermination inébranlable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de détermination inébranlable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘essaim purulent'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘essaim purulent'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Insigne de garde-essaim'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Insigne de garde-essaim'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Insigne de garde-essaim'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir de Sartura'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir de Sartura'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir de Sartura'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de silithide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de silithide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe de silithide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de fureur qiraji en écailles'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tenue de parade impériale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tenue de parade impériale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tenue de parade impériale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tenue de parade impériale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tenue de parade impériale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du saint gardien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du saint gardien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du saint gardien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Corselet en carapace de silithide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corselet en carapace de silithide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de tunnelière de la ruche'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de tunnelière de la ruche'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de tunnelière de la ruche'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape des secrets inexprimables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier barbelé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier barbelé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier barbelé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier barbelé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier barbelé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers de l‘Implacable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers de l‘Implacable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fétiche du ravageur des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fétiche du ravageur des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fétiche du ravageur des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de vengeance cruelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de vengeance cruelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de ravageur des sables en écailles'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Guisarme du ravageur des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien éventreur qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ancien éventreur qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Totem de vie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de domination qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de domination qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de domination qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de commandement qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de commandement qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de commandement qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes de commandement qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du martyr'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du martyr'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du martyr'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets en peau de guêpe'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets en peau de guêpe'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de profanateur de ruche'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de profanateur de ruche'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la Ruche d‘or'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la Ruche d‘or'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du messie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du messie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du messie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon d‘Huhuran'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon d‘Huhuran'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon d‘Huhuran'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon d‘Huhuran'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gilet d‘exécution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gilet d‘exécution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gilet d‘exécution rapide'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Scarabée pétrifié'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture de la triade'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture de la triade'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe du triumvirat'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Semblance du dévoreur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Semblance du dévoreur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de noblesse qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de noblesse qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de noblesse qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de noblesse qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Toucher d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet ternaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet ternaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet ternaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la trinité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la trinité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la puissance phrénique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la puissance phrénique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de ténèbres d‘Ukko'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets couverts de bile'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets couverts de bile'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets couverts de bile'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet de la fureur du désert'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes du héros déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes du héros déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Charme d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Charme d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Charme d‘Angelista'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants d‘Ebru'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants d‘Ebru'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets éclaboussés de vase'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets éclaboussés de vase'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets de Kalimdor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de fureur qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de fureur qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de fureur qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Idole de santé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Idole de santé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fémur de silithide aiguisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fémur de silithide aiguisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières couvertes de vase'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières couvertes de vase'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Broche scarabée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Broche scarabée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Broche scarabée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de l‘épiphanie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de l‘épiphanie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de l‘épiphanie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de dévastation de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants de dévastation de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture royale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture royale qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards d‘exécution quiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards d‘exécution quiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards d‘exécution quiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards d‘exécution quiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre royal de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre royal de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre royal de Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de l‘empereur Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de l‘empereur Vek‘lor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du temple caché'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du temple caché'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du temple caché'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants du temple caché'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture régénérante de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture régénérante de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Amulette de Vek‘nilash'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bracelets de rédemption royale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bracelets de rédemption royale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bracelets de rédemption royale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Vengeance de Kalimdor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Vengeance de Kalimdor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade de l‘empereur déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau du Grand ver des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau du Grand ver des sables'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau intacte d‘Ouro'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau intacte d‘Ouro'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau intacte d‘Ouro'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau intacte d‘Ouro'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Peau intacte d‘Ouro'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Larve du Grand ver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larve du Grand ver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larve du Grand ver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau égaré de Don Rigoberto'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau égaré de Don Rigoberto'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau égaré de Don Rigoberto'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La Carapace du fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards de fouisseur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bouclier en écailles de ver'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jom Gabbar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jom Gabbar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jom Gabbar'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Carcasse du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carcasse du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carcasse du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carcasse du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carcasse du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), true),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Carapace du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), true),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carapace du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carapace du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carapace du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Carapace du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de pédoncule cintrée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), true),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de pédoncule cintrée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), true),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Corde de pédoncule cintrée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de clarté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de clarté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de clarté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du tueur de dieu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du tueur de dieu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du tueur de dieu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau du tueur de dieu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets d‘annihilation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets d‘annihilation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets du sombre orage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets du sombre orage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets du sombre orage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Marque de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marque de C‘Thun'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Dévoré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tentacule de C‘Thun vaincu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), true),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture d‘agonie sans fin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture d‘agonie sans fin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture d‘agonie sans fin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre du faux prophète'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre du faux prophète'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceptre du faux prophète'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sombre doloire de la démence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sombre doloire de la démence'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), true),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Aiguillon de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de la flamme éternelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de la flamme éternelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la flamme éternelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Atours de nécrochevalier'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Atours de nécrochevalier'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Atours de nécrochevalier'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Atours de nécrochevalier'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Atours de nécrochevalier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon de furie élémentaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers de furie élémentaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de furie élémentaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de furie élémentaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Présage funeste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Présage funeste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Présage funeste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Présage funeste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Servobras égaré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Servobras égaré'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Servobras égaré'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières du Grand croisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Targe stygienne'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Targe stygienne'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Targe stygienne'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Targe stygienne'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique en peau de goule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique en peau de goule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique en peau de goule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique en peau de goule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Brassards désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Brassards désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-poignets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-poignets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-poignets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-poignets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague des prières inexaucées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague des prières inexaucées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague des prières inexaucées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des prières inexaucées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de givre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de givre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Larme de givre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Larme de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de Nérubis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de Nérubis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme de Nérubis'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme de Nérubis'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape en soie de démon des cryptes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape en soie de démon des cryptes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape en soie de démon des cryptes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape en soie de démon des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de vengeance'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-poignets de vengeance'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-poignets de vengeance'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘Etreinte de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘Etreinte de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘Etreinte de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘Etreinte de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules polaires'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules polaires'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules polaires'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Remords de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Remords de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Remords de la veuve'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Remords de la veuve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers plaie-de-glace'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers plaie-de-glace'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif de la pierre pernicieuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif de la pierre pernicieuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif de la pierre pernicieuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif de la pierre pernicieuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gants désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gants désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-mains désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-mains désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Garde-mains désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Garde-mains désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gantelets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gantelets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Baiser de l‘araignée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, 'Premier pour Paffë puis rotation Tank / Rogue / DD'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baiser de l‘araignée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, 'Premier pour Paffë puis rotation Tank / Rogue / DD'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baiser de l‘araignée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Voleur'), false, 'Premier pour Paffë puis rotation Tank / Rogue / DD'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baiser de l‘araignée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baiser de l‘araignée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, 'Premier pour Paffë puis rotation Tank / Rogue / DD'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame en peine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, 'Rotation Mage / Démonistes'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame en peine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, 'Rotation Mage / Démonistes'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Lame en peine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Lame en peine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, 'Rotation Mage / Démonistes'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif des noms oubliés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif des noms oubliés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pendentif des noms oubliés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pendentif des noms oubliés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Croc de Maexxna'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Croc de Maexxna'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de toile cristalline'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de toile cristalline'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe de toile cristalline'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe de toile cristalline'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinture désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinture désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sangle désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, 'Première à Fllas'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sangle désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sangle désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, 'Première à Fllas'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coeur frigide de Noth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de l‘inévitable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de l‘inévitable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de l‘inévitable'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de l‘inévitable'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague du grêlon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Hachette de l‘os brisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, 'War Tank Orcs'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Hachette de l‘os brisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), true, 'War Tank Orcs'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Hachette de l‘os brisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Hachette de l‘os brisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), false, 'War Tank Orcs'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Libram de lumière'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Libram de lumière'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Totem de l‘eau courante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Totem de l‘eau courante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots de carnage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots de carnage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots de carnage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Camail glacécaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Camail glacécaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Camail glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chapeau de précepteur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chapeau de précepteur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chapeau de précepteur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chapeau de précepteur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chapeau de précepteur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chapeau de précepteur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume plaie-de-glace'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume plaie-de-glace'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume plaie-de-glace'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de nécropsie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de nécropsie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier de nécropsie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier de nécropsie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissards désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuissots désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague des forces contre-nature'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague des forces contre-nature'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague des forces contre-nature'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘oeil de Nérub'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘oeil de Nérub'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de ferveur spirituelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de ferveur spirituelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Anneau de ferveur spirituelle'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de ferveur spirituelle'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de soufre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de soufre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bâton de soufre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bâton de soufre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
+  'Prêtre'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Reflet d‘Horreb'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Protège-épaules désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Protège-épaules désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Espauliers désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Espauliers désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de suture'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de suture'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de suture'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de suture'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de réanimation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de réanimation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bague de réanimation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette des Parques'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette des Parques'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette des Parques'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette des Parques'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cisailleuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cisailleuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, 'Prio Orc'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Le Porte-peste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Le Porte-peste'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Porte-peste'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières glacécaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Spallières glacécaille'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Spallières glacécaille'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Injecteur de toxines'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Injecteur de toxines'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Injecteur de toxines'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Injecteur de toxines'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'La fin des rêves'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Druide Feral'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'La fin des rêves'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'La fin des rêves'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Rosée du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Rosée du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Rosée du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Rosée du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet glacial'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet glacial'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet glacial'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet glacial'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Claymore de puissance impie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Claymore de puissance impie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Claymore de puissance impie'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Claymore de puissance impie'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier perdu de Gluth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Collier perdu de Gluth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Collier perdu de Gluth'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Main de pouvoir digérée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Main de pouvoir digérée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Main de pouvoir digérée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Main de pouvoir digérée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pacte de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pacte de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Solerets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Solerets désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Solerets désacralisés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet couvert de gel'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Mantelet couvert de gel'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Mantelet couvert de gel'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sandales désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sandales désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sandales désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sandales désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes désacralisées'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes désacralisées'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Heaume désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Heaume désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Couvre-chef désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Couvre-chef désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Diadème désacralisé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Diadème désacralisé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de polarité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, 'Rotation Mage / Démo'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de polarité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, 'Rotation Mage / Démo'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de polarité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de polarité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, 'Rotation Mage / Démo'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pic du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pic du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pic du crépuscule'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pic du crépuscule'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de diminution'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de diminution'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil de diminution'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil de diminution'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Fustigatrice'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fustigatrice'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Fustigatrice'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Fustigatrice'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Thorax d‘abomination blindé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Thorax d‘abomination blindé'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Thorax d‘abomination blindé'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de la mort murmurante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Prêtre'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Baguette de la mort murmurante'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Baguette de la mort murmurante'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Chevalière du défenseur déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chevalière du défenseur déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Chevalière du défenseur déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Chevalière du défenseur déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Idole de longévité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Idole de longévité'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Idole de longévité'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon du mentor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, 'Sauf tanks 8/8 T3'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon du mentor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Ceinturon du mentor'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, 'Sauf tanks 8/8 T3'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de l‘éclipse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de l‘éclipse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de l‘éclipse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile de l‘éclipse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, 'War DD non orcs / Rogues épées'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, 'War DD non orcs / Rogues épées'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Iblis, lame du Séraphin déchu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Iblis, lame du Séraphin déchu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, 'War DD non orcs / Rogues épées'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Coiffure glaciale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coiffure glaciale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coiffure glaciale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coiffure glaciale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coiffure glaciale'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Coiffure glaciale'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes du moissonneur d‘âmes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Manchettes du moissonneur d‘âmes'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Manchettes du moissonneur d‘âmes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Démoniste'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Torque de sadique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torque de sadique'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Torque de sadique'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de déplacement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Voleur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Bottes de déplacement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bottes de déplacement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Casque polaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Casque polaire'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Casque polaire'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordâme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordâme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordâme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordâme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordialité du pardon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordialité du pardon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cordialité du pardon'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cordialité du pardon'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuirasse désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuirasse désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cuirasse désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Jambières de l‘Apocalypse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Maillet du croisé racheté'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Maillet du croisé racheté'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chaman'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Porte-cendres corrompue'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Porte-cendres corrompue'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Porte-cendres corrompue'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Porte-cendres corrompue'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Chasseur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Robe désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Robe désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau des damnés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sceau des damnés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Sceau des damnés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Démoniste'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Tunique désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Tunique désacralisée'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Pouvoir du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Pouvoir du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Puissance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Puissance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Puissance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Prêtre Ombre'), false, NULL),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Résistance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Résistance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Résistance du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
+  'Prêtre'), false, NULL),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Robustesse du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Robustesse du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
+  'Robustesse du Fléau'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance du Fléau'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil du mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil du mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil du mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil du mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile d‘assujettissement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile d‘assujettissement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile d‘assujettissement'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Voile d‘assujettissement'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe du wyrm de givre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Griffe du wyrm de givre'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Griffe du wyrm de givre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Le Visage de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Le Visage de la mort'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le Visage de la mort'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Blason de tueur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Blason de tueur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Blason de tueur'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Blason de tueur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil droit de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Glyphe de déviation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Glyphe de déviation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Glyphe de déviation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘essence contenue de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, 'Rotation Mage Démo'),
   ((SELECT id FROM "Items" WHERE "name"=
   'L‘essence contenue de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'L‘essence contenue de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Démoniste'), false, 'Rotation Mage Démo'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la nécropole'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la nécropole'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape de la nécropole'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cape de la nécropole'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil gauche de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil gauche de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil gauche de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Oeil gauche de Saphiron'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Le phylactère de Kel‘Thuzad'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Le phylactère de Kel‘Thuzad'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Chasseur'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Le phylactère de Kel‘Thuzad'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Le phylactère de Kel‘Thuzad'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de la faucheuse d‘os'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme des innocents enchaînés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme des innocents enchaînés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gemme des innocents enchaînés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gemme des innocents enchaînés'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Puissance de Menethil'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Puissance de Menethil'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Puissance de Menethil'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de rédemption'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau du cuirassier'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de Brise-terre'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Guerrier DPS'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), false, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Chasseur'), true, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Détrôneuse'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), true, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman bouillonnant de Stormrage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier Tank'), false, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman bouillonnant de Stormrage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier DPS'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman bouillonnant de Stormrage'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Talisman bouillonnant de Stormrage'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de givrefeu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de traqueur des cryptes'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Druide Feral'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cherche-âme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cherche-âme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cherche-âme'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Cherche-âme'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau du Néant distordu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, 'Rotation Prêtre / Chaman / Druide'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau du Néant distordu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Druide'), false, 'Rotation Prêtre / Chaman / Druide'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Marteau du Néant distordu'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Marteau du Néant distordu'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de foi'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre'), false, 'Rotation Prêtre / Chaman / Druide'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Doigt du destin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Mage'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Doigt du destin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Démoniste'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Doigt du destin'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Doigt du destin'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de pestecoeur'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Prêtre Ombre'), false, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Guerrier DPS'), false, 'Rotation rogue épée / War DD non orc'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Gressil, Aube de la ruine'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Gressil, Aube de la ruine'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
-
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Anneau de marcherêve'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false),
+  'Voleur'), false, 'Rotation rogue épée / War DD non orc'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bouclier de condamnation'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false),
+  'Chaman'), false, NULL),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
+  'Le Froid dévorant'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false),
+  'Guerrier Tank'), false, 'Rotation Tank / War DD / Rogue'),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
+  'Le Froid dévorant'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false),
+  'Guerrier DPS'), false, 'Rotation Tank / War DD / Rogue'),
   ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
+  'Le Froid dévorant'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false),
+  'Voleur'), false, 'Rotation Tank / War DD / Rogue'),
+
   ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
+  'Esclavagiste nérubien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Mage'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Démoniste'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false),
-  ((SELECT id FROM "Items" WHERE "name"=
-  'Bouclier de condamnation'
-  ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre Ombre'), false); -- SAFE BEGIN FOR CONCAT
+  'Chasseur'), true, NULL); -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Merit" ("order", "active", "value", "categorie", "name", "comment", "delay")
 VALUES
 
@@ -11381,24 +6920,24 @@ VALUES
 (16, true, 05, 'Equipement palier 2 (T2 / MC BiS / BWL / R13)', 'Arme gauche', 'automatique pour les armes 2 mains', null),
 (17, true, 05, 'Equipement palier 2 (T2 / MC BiS / BWL / R13)', 'Arme distance / relique / totem', '', null),
 
-(1, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Casque', '', null),
-(2, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Collier', '', null),
-(3, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Epaulettes', '', null),
-(4, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Cape', '', null),
-(5, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Plastron', '', null),
-(6, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bracelet', '', null),
-(7, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Gants', '', null),
-(8, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Ceinture', '', null),
-(9, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Pantalon', '', null),
-(10, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bottes', '', null),
-(11, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Anneau 1', '', null),
-(12, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Anneau 2', '', null),
-(13, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bijou 1', '', null),
-(14, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bijou 2', '', null),
+(1, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Casque', '', null),
+(2, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Collier', '', null),
+(3, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Epaulettes', '', null),
+(4, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Cape', '', null),
+(5, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Plastron', '', null),
+(6, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bracelet', '', null),
+(7, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Gants', '', null),
+(8, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Ceinture', '', null),
+(9, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Pantalon', '', null),
+(10, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bottes', '', null),
+(11, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Anneau 1', '', null),
+(12, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Anneau 2', '', null),
+(13, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bijou 1', '', null),
+(14, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Bijou 2', '', null),
 
-(15, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme droite', '', null),
-(16, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme gauche', 'automatique pour les armes 2 mains', null),
-(17, false, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme distance / relique / totem', '', null),
+(15, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme droite', '', null),
+(16, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme gauche', 'automatique pour les armes 2 mains', null),
+(17, true, 05, 'Equipement palier 3 (T3 / Naxx / AQ BiS)', 'Arme distance / relique / totem', '', null),
 
 (1, true, 10, 'Spécialisation', 'Publiée sur cet outil et à jour', 'https://fr.classic.wowhead.com/talent-calc', null),
 (2, true, 15, 'Spécialisation', 'Validée par le Maître de classe', 'Pas une spé PvP', null),
@@ -11461,7 +7000,7 @@ VALUES
 
 (7, true, 10, 'Raid', 'Stuff +140 résistance feu unbuff', '', null),
 (8, true, 10, 'Raid', 'Stuff +140 résistance nature unbuff', '', null),
-(9, false, 10, 'Raid', 'Stuff +140 résistance givre unbuff', '', null),
+(9, true, 10, 'Raid', 'Stuff +140 résistance givre unbuff', '', null),
 
 (10, true, 10, 'Raid', 'Avoir un sac Onyxia', '', null),
 (11, true, 5, 'Raid', 'Avoir deux sacs Onyxia', '', null),

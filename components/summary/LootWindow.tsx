@@ -8,8 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import CloseIcon from "@material-ui/icons/Close";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Link from "next/link";
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Loot } from "../../lib/generatedTypes";
 import { getDurationBetween } from "../../lib/utils/date";
 import {
@@ -17,7 +16,8 @@ import {
   lootColorLevel2,
   lootColorLevel3,
   lootColorLevel4,
-  lootColorLevel5
+  lootColorLevel5,
+  lootColorLevel6
 } from "../../lib/utils/loot-colors";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
@@ -133,6 +133,7 @@ const useStyles = makeStyles({
     border: "4px solid",
     zIndex: 1
   },
+  lootlevel6: { borderColor: lootColorLevel6 },
   lootlevel5: { borderColor: lootColorLevel5 },
   lootlevel4: { borderColor: lootColorLevel4 },
   lootlevel3: { borderColor: lootColorLevel3 },

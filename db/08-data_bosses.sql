@@ -5,7 +5,7 @@ VALUES
 ('Onyxia Lair', 'Ony', true, 'https://i.imgur.com/qAm8tn5.jpg'),
 ('Blackwing Lair', 'BWL', true, 'https://i.imgur.com/WxgXIlO.jpg'),
 ('Ahn‘Qiraj Temple', 'AQ40', true, 'https://i.imgur.com/xcxosZp.jpg'),
-('Naxxramas', 'Naxx', true, 'https://i.imgur.com/xcxosZp.jpg');
+('Naxxramas', 'Naxx', true, 'https://i.imgur.com/Q3eYYuY.jpg');
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
 ('Ahn‘Qiraj Ruins', 'AQ20', false),
@@ -16,7 +16,7 @@ VALUES
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg'),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/IYtebGa.jpg'),
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/qUIqnbw.jpeg'),
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/qUIqnbw.jpeg');
+(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/XTZRDLJ.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),

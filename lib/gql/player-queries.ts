@@ -12,6 +12,72 @@ export const ALL_CLASSES = gql`
   }
 `;
 
+export const ALL_ACTIVE_PLAYERS = gql`
+  query AllActivePlayers {
+    allPlayers(condition: { active: true }) {
+      nodes {
+        id
+        name
+        active
+        inRoster
+        classId
+        rerollOf
+        role
+        password
+        specialisation
+        classByClassId {
+          id
+          color
+          name
+        }
+        playerMeritsByPlayerId {
+          nodes {
+            id
+            validated
+            date
+            meritByMeritId {
+              id
+              name
+              value
+              active
+              categorie
+              comment
+            }
+          }
+        }
+        lootsByPlayerId {
+          nodes {
+            id
+            active
+            itemByItemId {
+              id
+              wowheadId
+              name
+              lootLevel
+            }
+            raidByRaidId {
+              id
+              date
+            }
+          }
+        }
+        raidPlayersByPlayerId {
+          nodes {
+            id
+            passed
+            raidId
+            raidByRaidId {
+              id
+              date
+              donjonId
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const ALL_PLAYERS = gql`
   query AllPlayers {
     allPlayers {

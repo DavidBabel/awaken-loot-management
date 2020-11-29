@@ -13,7 +13,7 @@ import LootWindow, {
 import PlayersTable from "../../components/summary/PlayersTable";
 import { Loot, Player, Query } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
-import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { ALL_ACTIVE_PLAYERS } from "../../lib/gql/player-queries";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { useToggle } from "../../lib/hooks/toggle";
 import { getClassColor } from "../../lib/utils/class-colors";
@@ -107,7 +107,7 @@ export default function PageSummary() {
     loading: loadingPlayers,
     data: dataPlayers,
     error: errorPlayers
-  } = useQuery<Query>(ALL_PLAYERS);
+  } = useQuery<Query>(ALL_ACTIVE_PLAYERS);
   const {
     loading: loadingAllMerits,
     data: dataAllMerits,

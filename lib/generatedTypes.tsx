@@ -277,6 +277,7 @@ export type ClassItem = Node & {
   classId: Scalars['Int'],
   itemId: Scalars['Int'],
   prio: Scalars['Boolean'],
+  comment?: Maybe<Scalars['String']>,
   /** Reads a single `Class` that is related to this `ClassItem`. */
   classByClassId?: Maybe<Class>,
   /** Reads a single `Item` that is related to this `ClassItem`. */
@@ -296,6 +297,8 @@ export type ClassItemCondition = {
   itemId?: Maybe<Scalars['Int']>,
   /** Checks for equality with the object’s `prio` field. */
   prio?: Maybe<Scalars['Boolean']>,
+  /** Checks for equality with the object’s `comment` field. */
+  comment?: Maybe<Scalars['String']>,
 };
 
 /** An input for mutations affecting `ClassItem` */
@@ -304,6 +307,7 @@ export type ClassItemInput = {
   classId: Scalars['Int'],
   itemId: Scalars['Int'],
   prio: Scalars['Boolean'],
+  comment?: Maybe<Scalars['String']>,
 };
 
 /** Represents an update to a `ClassItem`. Fields that are set will be updated. */
@@ -312,6 +316,7 @@ export type ClassItemPatch = {
   classId?: Maybe<Scalars['Int']>,
   itemId?: Maybe<Scalars['Int']>,
   prio?: Maybe<Scalars['Boolean']>,
+  comment?: Maybe<Scalars['String']>,
 };
 
 /** A connection to a list of `ClassItem` values. */
@@ -347,6 +352,8 @@ export enum ClassItemsOrderBy {
   ItemIdDesc = 'ITEM_ID_DESC',
   PrioAsc = 'PRIO_ASC',
   PrioDesc = 'PRIO_DESC',
+  CommentAsc = 'COMMENT_ASC',
+  CommentDesc = 'COMMENT_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }

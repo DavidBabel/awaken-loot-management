@@ -510,10 +510,10 @@ Démoniste, false
 
 Talisman croc-de-drake
 Chasseur, false
-Voleur, true
-Guerrier DPS, true
+Voleur, false
+Guerrier DPS, false
 Guerrier Tank, true
-Druide Feral, true
+Druide Feral, false
 
 Rempart béni de Malfurion
 Druide Feral, false
@@ -1213,26 +1213,10 @@ Voleur, true
 # NAXX
 
 Anneau de la flamme éternelle
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
+Mage, true
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Atours de nécrochevalier
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
 Prêtre, false
@@ -1252,43 +1236,13 @@ Prêtre, false
 Prêtre Ombre, false
 
 Ceinturon de furie élémentaire
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Espauliers de furie élémentaire
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Jambières de furie élémentaire
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Jambières du Grand croisé
 Guerrier Tank, false
@@ -1305,29 +1259,12 @@ Prêtre Ombre, false
 
 Présage funeste
 Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Servobras égaré
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Spallières du Grand croisé
 Guerrier Tank, false
@@ -1345,586 +1282,220 @@ Prêtre Ombre, false
 Targe stygienne
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Tunique en peau de goule
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide Feral, true
 
 Brassards désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
+Guerrier Tank, true
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Manchettes désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Prêtre, true
 
 Protège-poignets désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
+Chasseur, true
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Bague des prières inexaucées
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Larme de givre
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Gemme de Nérubis
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Cape en soie de démon des cryptes
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide Feral, true
 
 Garde-poignets de vengeance
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
 L‘Etreinte de la veuve
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Protège-épaules polaires
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Voleur, true
 
 Remords de la veuve
-Guerrier Tank, false
+Guerrier Tank, true
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Espauliers plaie-de-glace
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
 Pendentif de la pierre pernicieuse
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Gants désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Prêtre, true
 
 Garde-mains désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
+Chasseur, true
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide, true
 
 Gantelets désacralisés
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Voleur, true
 
-Baiser de l‘araignée
+Baiser de l‘araignée | Premier pour Paffë puis rotation Tank / Rogue / DD
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide Feral, true
 
-Lame en peine
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Lame en peine | Rotation Mage / Démonistes
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Pendentif des noms oubliés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Croc de Maexxna
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Robe de toile cristalline
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
 Ceinturon désacralisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
+Chasseur, true
+Chaman, true
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Ceinture désacralisée
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
+Mage, true
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Prêtre, true
 
-Sangle désacralisée
+Sangle désacralisée | Première à Fllas
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Voleur, true
 
 Cape du Fléau
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Coeur frigide de Noth
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Bague de l‘inévitable
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
 Bague du grêlon
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
+Chaman, true
 Voleur, false
-Druide, false
+Druide, true
 Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
+Prêtre, true
 Prêtre Ombre, false
 
-Hachette de l‘os brisé
+Hachette de l‘os brisé | War Tank Orcs
 Guerrier Tank, false
-Guerrier DPS, false
+Guerrier DPS, true
 Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Libram de lumière
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Totem de l‘eau courante
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Cuissots de carnage
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
 Camail glacécaille
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Chasseur, true
 
 Chapeau de précepteur
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
+Prêtre Ombre, true
 
 Heaume plaie-de-glace
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
 Collier de nécropsie
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Cuissards désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Cuissots désacralisés
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Voleur, true
 
 Jambières désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
+Mage, true
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Prêtre, true
 
 Bague des forces contre-nature
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 L‘oeil de Nérub
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Anneau de ferveur spirituelle
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Bâton de soufre
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Reflet d‘Horreb
@@ -1941,1044 +1512,375 @@ Prêtre, false
 Prêtre Ombre, false
 
 Protège-épaules désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Démoniste, true
+Prêtre, true
 
 Espauliers désacralisés
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Spallières désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Cape de suture
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Bague de réanimation
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
+Chasseur, true
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Baguette des Parques
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
-Cisailleuse
-Guerrier Tank, false
+Cisailleuse | Prio Orc
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Le Porte-peste
-Guerrier Tank, false
+Guerrier Tank, true
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Spallières glacécaille
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Chasseur, true
 
 Injecteur de toxines
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 La fin des rêves
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
 Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Prêtre Ombre, true
 
 Rosée du crépuscule
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Mantelet glacial
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Claymore de puissance impie
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Collier perdu de Gluth
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Main de pouvoir digérée
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Pacte de la mort
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Solerets désacralisés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
+Guerrier Tank, true
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Mantelet couvert de gel
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
+Mage, true
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Sandales désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Bottes désacralisées
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide, true
 
 Heaume désacralisé
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Couvre-chef désacralisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
+Chasseur, true
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide, true
 
 Diadème désacralisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
-Jambières de polarité
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Jambières de polarité | Rotation Mage / Démo
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Pic du crépuscule
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Oeil de diminution
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
 Fustigatrice
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Thorax d‘abomination blindé
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
 Baguette de la mort murmurante
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Prêtre, true
 Prêtre Ombre, false
 
 Chevalière du défenseur déchu
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide Feral, true
 
 Idole de longévité
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
+Druide, true
 Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-Ceinturon du mentor
+Ceinturon du mentor | Sauf tanks 8/8 T3
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Voile de l‘éclipse
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
-Iblis. lame du Séraphin déchu
-Guerrier Tank, false
+Iblis. lame du Séraphin déchu | War DD non orcs / Rogues épées
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Coiffure glaciale
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
+Mage, true
+Démoniste, true
 Prêtre, false
-Prêtre Ombre, false
 
 Manchettes du moissonneur d‘âmes
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
+Mage, true
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Torque de sadique
-Guerrier Tank, false
+Guerrier Tank, true
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Bottes de déplacement
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
 Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Casque polaire
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Voleur, true
 
 Cordâme
-Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Cordialité du pardon
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Cuirasse désacralisée
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Jambières de l‘Apocalypse
-Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Druide Feral, true
 
 Maillet du croisé racheté
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Porte-cendres corrompue
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Robe désacralisée
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Sceau des damnés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Démoniste, true
 
 Tunique désacralisée
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Pouvoir du Fléau
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
+Chasseur, true
+Voleur, true
 
 Puissance du Fléau
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
+
+Résistance du Fléau
+Chaman, false
+Druide, false
+Prêtre, false
+
+Robustesse du Fléau
+Guerrier Tank, true
+Guerrier DPS, false
+Druide Feral, true
 
 Oeil du mort
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Voile d‘assujettissement
-Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Griffe du wyrm de givre
-Guerrier Tank, false
-Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Le Visage de la mort
-Guerrier Tank, false
+Guerrier Tank, true
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Blason de tueur
-Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Oeil droit de Saphiron
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
 Glyphe de déviation
-Guerrier Tank, false
+Guerrier Tank, true
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-L‘essence contenue de Saphiron
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
+L‘essence contenue de Saphiron | Rotation Mage Démo
 Mage, false
 Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
 Cape de la nécropole
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Oeil gauche de Saphiron
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
 Mage, false
 Démoniste, false
-Prêtre, false
 Prêtre Ombre, false
 
 Le phylactère de Kel‘Thuzad
-Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-Anneau de la faucheuse d‘os
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de la faucheuse d‘os
+# Chasseur, false
 
 Gemme des innocents enchaînés
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
 Puissance de Menethil
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Guerrier DPS, true
 
-Anneau de rédemption
+# Anneau de rédemption
+# Chaman, false
+
+# Anneau du cuirassier
+# Guerrier Tank, false
+# Guerrier DPS, false
+
+# Anneau de Brise-terre
+# Chaman, false
+
+Détrôneuse | 2 rogues / 1 tank / 1 hunt puis roll de classe
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Anneau du cuirassier
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Anneau de Brise-terre
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Détrôneuse
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+Chasseur, true
+Voleur, true
 
 Talisman bouillonnant de Stormrage
 Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
+Guerrier DPS, true
 Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-Anneau de givrefeu
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de givrefeu
+# Mage, false
 
-Anneau de traqueur des cryptes
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de traqueur des cryptes
+# Chasseur, false
 
 Cherche-âme
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
-Marteau du Néant distordu
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
+Marteau du Néant distordu | Rotation Prêtre / Chaman / Druide
 Chaman, false
-Voleur, false
 Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
 Prêtre, false
-Prêtre Ombre, false
 
-Anneau de foi
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de foi
+# Prêtre, true
+# Prêtre Ombre, false
 
 Doigt du destin
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
+Mage, true
+Démoniste, true
 Prêtre Ombre, false
 
-Anneau de pestecoeur
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de pestecoeur
+# Démoniste, false
 
-Gressil. Aube de la ruine
-Guerrier Tank, false
+Gressil. Aube de la ruine | Rotation rogue épée / War DD non orc
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-Anneau de marcherêve
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
+# Anneau de marcherêve
+# Druide, true
+# Druide Feral, false
 
 Bouclier de condamnation
+Chaman, false
+
+Le Froid dévorant | Rotation Tank / War DD / Rogue
 Guerrier Tank, false
 Guerrier DPS, false
-Chasseur, false
-Chaman, false
 Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
 
-
+Esclavagiste nérubien
+Chasseur, true
 
