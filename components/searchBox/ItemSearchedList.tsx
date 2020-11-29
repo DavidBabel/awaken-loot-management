@@ -97,7 +97,7 @@ export default function ItemSearchedList({
 }) {
   const classes = useStyles({ listHeight });
   const results =
-    searched.length !== 0 &&
+    searched.length >= 3 &&
     items.filter((item: Item) => {
       const search = normalizeText(searched);
       const itemName = normalizeText(item.name);
