@@ -13,10 +13,10 @@ VALUES
 
 INSERT INTO "Bosses" ("order", "name", "donjonId", "cdnImage" )
 VALUES
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg'),
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/IYtebGa.jpg'),
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/qUIqnbw.jpeg'),
-(1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/XTZRDLJ.jpg');
+(1, 'Trashs MC', (SELECT id FROM "Donjons" WHERE "shortName"='MC'), 'https://i.imgur.com/PPjBWCy.jpg'),
+(1, 'Trashs BWL', (SELECT id FROM "Donjons" WHERE "shortName"='BWL'), 'https://i.imgur.com/IYtebGa.jpg'),
+(1, 'Trashs AQ', (SELECT id FROM "Donjons" WHERE "shortName"='AQ40'), 'https://i.imgur.com/qUIqnbw.jpeg'),
+(1, 'Trashs Naxx', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'), 'https://i.imgur.com/XTZRDLJ.jpg');
 INSERT INTO "Bosses" ("order", "name", "donjonId" )
 VALUES
 (1, 'Trashs', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
@@ -74,12 +74,12 @@ VALUES
 (15,'Saphiron', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx')),
 (16,'Kel‘Thuzad', (SELECT id FROM "Donjons" WHERE "shortName"='Naxx'));
 
-INSERT INTO "Bosses" ("order", "name", "donjonId" )
-VALUES
-(2,'Kurinnaxx', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-(3,'General Rajaxx', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-(4,'Moam', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-(5,'Buru the Gorger', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-(6,'Ayamiss the Hunter', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
-(7,'Ossirian the Unscarred', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20'));
+-- INSERT INTO "Bosses" ("order", "name", "donjonId" )
+-- VALUES
+-- (2,'Kurinnaxx', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
+-- (3,'General Rajaxx', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
+-- (4,'Moam', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
+-- (5,'Buru the Gorger', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
+-- (6,'Ayamiss the Hunter', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20')),
+-- (7,'Ossirian the Unscarred', (SELECT id FROM "Donjons" WHERE "shortName"='AQ20'));
 -- REDO ZG

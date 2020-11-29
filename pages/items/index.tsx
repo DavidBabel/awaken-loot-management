@@ -8,11 +8,13 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import React, { ReactNode, useEffect, useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
 import { Item, Player, Query } from "../../lib/generatedTypes";
+import { ALL_BOSSES } from "../../lib/gql/bosses-query";
 import { ALL_ITEMS } from "../../lib/gql/item-query";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
@@ -110,9 +112,19 @@ export default function PageIndex() {
     data: dataItems,
     error: errorItems
   } = useQuery<Query>(ALL_ITEMS);
+  const {
+    loading: loadingBosses,
+    data: dataBosses,
+    error: errorBosses
+  } = useQuery<Query>(ALL_BOSSES);
 
-  if (loadingItems || errorItems) {
-    return <LoadingAndError loading={loadingItems} error={errorItems} />;
+  if (loadingItems || errorItems || loadingBosses || errorBosses) {
+    return (
+      <LoadingAndError
+        loading={loadingItems || loadingBosses}
+        error={errorItems || errorBosses}
+      />
+    );
   }
 
   const items = dataItems.allItems.nodes;
@@ -180,19 +192,27 @@ export default function PageIndex() {
       </div>
     );
   };
+
   return (
     <div className={classes.root}>
       <Paper className={classes.searchBox}>
         <Typography>Tapez votre recherche:</Typography>
-        <TextField
-          autoComplete="off"
+        <Autocomplete
           id="outlined-item"
-          label="Item ou Boss"
           className={classes.textField}
           value={itemInputValue}
-          onChange={searchItemInputChange}
-          margin="dense"
-          variant="outlined"
+          // onChange={searchItemInputChange}
+          options={dataBosses.allBosses.nodes.map(boss => boss.name)}
+          renderInput={params => (
+            <TextField
+              {...params}
+              // value={itemInputValue}
+              onChange={searchItemInputChange}
+              label="Item ou Boss"
+              margin="dense"
+              variant="outlined"
+            />
+          )}
         />
         <Typography>
           <i>
