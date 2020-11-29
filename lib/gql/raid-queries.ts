@@ -132,6 +132,7 @@ export const ONE_RAID = gql`
               bossItemsByBossId {
                 nodes {
                   id
+                  itemId
                   itemByItemId {
                     id
                     wowheadId

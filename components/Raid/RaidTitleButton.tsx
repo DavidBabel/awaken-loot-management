@@ -86,7 +86,7 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
         aria-describedby="update title window"
       >
         <DialogTitle id="update-title-dialog">
-          Qui était le Master Loot de ce raid ?
+          Qui a fait la saisie des loots de ce raid ?
         </DialogTitle>
         <DialogContent>
           {loading ? (
@@ -95,7 +95,7 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
             <TextField
               autoComplete="off"
               id="outlined-title-input"
-              label="Master loot"
+              label="Saisie des loots"
               value={titleInput}
               onChange={handleChange}
               margin="dense"

@@ -29,6 +29,7 @@ import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import AddLootDialog from "../../components/Raid/AddLootDialog";
+import AddUnasignedDialog from "../../components/Raid/AddUnasignedDialog";
 import MemberContext from "../../lib/context/member";
 import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT, UpdateLootVariables } from "../../lib/gql/loot-mutations";
@@ -306,7 +307,7 @@ export function BossCard({
                                 target="_blank"
                                 style={{
                                   color: "white",
-                                  textDecoration: "none",
+                                  textDecoration: "none"
                                 }}
                               >
                                 {currentPlayer.name}
@@ -374,6 +375,15 @@ export function BossCard({
         </CardContent>
         {member.level >= role.officer && (
           <CardActions disableSpacing={true} className={classes.cardActions}>
+            <AddUnasignedDialog
+              raidId={raidId}
+              bossId={id}
+              bossName={name}
+              bossItems={loots}
+              refetchOneRaid={refetchOneRaid}
+              scrollDown={scrollDown}
+            />
+            &nbsp;&nbsp;
             <AddLootDialog
               allPlayers={allPlayers}
               raidId={raidId}
