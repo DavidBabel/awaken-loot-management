@@ -1,27 +1,23 @@
-import AppBar from "@material-ui/core/AppBar";
-// import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-// import List from "@material-ui/core/List";
-// import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import {
+  AppBar,
+  Container,
+  CssBaseline,
+  Divider,
+  Drawer,
+  Grid,
+  Hidden,
+  IconButton,
+  Link,
+  makeStyles,
+  Toolbar,
+  Typography
+} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
-// import NotificationsIcon from "@material-ui/icons/Notifications";
 import clsx from "clsx";
 import React, { useEffect } from "react";
-// import { getCurrentYear } from "../../lib/utils/date";
-// import { mainListItems, secondaryListItems } from "./listItems";
-import { Menu } from "../Menu/Menu";
-
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
+import { Menu } from "../Menu/Menu";
 
 const drawerWidth = 240;
 
@@ -232,19 +228,21 @@ export function Dashboard({ children, isMobile }: Props) {
             {children}
           </Grid>
         </Container>
-        <Typography
-          className={classes.copyright + " " + (!open && classes.hidden)}
-          variant="body2"
-          color="textSecondary"
-          align="center"
-        >
-          {"Copyright © "}
-          <Link color="inherit" href="http://awaken.se/">
-            Awaken loot manager
-          </Link>{" "}
-          {new Date().getFullYear()}
-          {". Developpé par Thorsen et Devilhunter."}
-        </Typography>
+        <Hidden smDown>
+          <Typography
+            className={classes.copyright + " " + (!open && classes.hidden)}
+            variant="body2"
+            color="textSecondary"
+            align="center"
+          >
+            {"Copyright © "}
+            <Link color="inherit" href="http://awaken.se/">
+              Awaken loot manager
+            </Link>{" "}
+            {new Date().getFullYear()}
+            {". Developpé par Thorsen et Devilhunter."}
+          </Typography>
+        </Hidden>
       </main>
     </div>
   );

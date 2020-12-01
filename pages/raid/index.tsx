@@ -14,30 +14,21 @@ import {
   Typography
 } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import withWidth, { WithWidthProps } from "@material-ui/core/withWidth";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
-import React, { ReactNode, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import ItemsCarousel from "react-items-carousel";
 import uuidv4 from "uuid/v4";
-import ClassAvatar from "../../components/ClassAvatar";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
 import LinkLine from "../../components/Raid/LinkLine";
-import ItemSearchedList from "../../components/searchBox/ItemSearchedList";
-// import PlayerSearchedList from "../../components/searchBox/PlayerSearchedList";
 import MemberContext from "../../lib/context/member";
-import { Item, Mutation, Query, Raid } from "../../lib/generatedTypes";
-import { ALL_ITEMS } from "../../lib/gql/item-query";
-// import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { Mutation, Query, Raid } from "../../lib/generatedTypes";
 import {
   UPDATE_RAID_ACTIVE,
   UPDATE_RAID_LINK,
@@ -49,7 +40,6 @@ import { role } from "../../lib/role-level";
 import { getDate } from "../../lib/utils/date";
 import { getDonjonIconUrl } from "../../lib/utils/image";
 import { byDate } from "../../lib/utils/sorter";
-import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,10 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
   topPapers: {
     display: "flex",
-    justifyContent: "space-between",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+    justifyContent: "space-between"
   },
   boxTitle: { margin: "10px 20px" },
   boxTitleLastRaids: { margin: "10px 20px", paddingTop: 10 },
@@ -73,17 +60,13 @@ const useStyles = makeStyles(theme => ({
     width: "100%"
   },
   createRaidCards: {
-    padding: "10px 100px"
+    padding: "10px 100px",
+    textAlign: "center"
   },
   createRaidPaper: {
-    width: "50%",
-    marginRight: 20,
+    width: "100%",
     maxHeight: "230px",
     flexShrink: 0
-  },
-  searchPlayerPaper: {
-    width: "50%",
-    maxHeight: "230px"
   },
   lastRaidsPaper: {
     width: "100%",
@@ -136,45 +119,6 @@ const useStyles = makeStyles(theme => ({
     maxWidth: "200px",
     height: 40
   },
-  searchContainer: {
-    width: "100%",
-    display: "flex",
-    height: "177px"
-  },
-  searchBox: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "177px"
-  },
-  itemInfoDialog: {
-    "& a": {
-      textDecoration: "none"
-    },
-    "& a span": {
-      margin: "0px 5px 0px 0px"
-    }
-  },
-  whoLootedContainer: {
-    display: "flex",
-    justifyContent: "center",
-    margin: 20
-  },
-  whoLootedColumn: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: 5,
-    border: "solid 1px rgba(0,0,0,0.2)",
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: "4px",
-    padding: 10,
-    width: 120,
-    boxShadow: "0 0 20px 0 rgba(0,0,0,0.15)"
-  },
   lootedNbChip: {
     position: "absolute",
     top: "10px",
@@ -200,25 +144,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PageIndex() {
+export default withWidth()(function PageIndex(props: WithWidthProps) {
+  const { width: pageWidth } = props;
   const member = useContext(MemberContext);
   const classes = useStyles("");
   const [activeItemIndex, setActiveItemIndex] = React.useState<number>(0);
-  // const [playerInputValue, setPlayerInputValue] = React.useState<string>("");
-  const [itemInputValue, setItemInputValue] = React.useState<string>("");
-  const [itemInfoOpened, setItemInfoOpened] = React.useState<boolean>(false);
-  const [itemCurrentlySelected, setItemCurrentlySelected] = React.useState<
-    Item
-  >(null);
   const [loadingRender, setLoadingRender] = React.useState<boolean>(true);
   const [raidChecked, setRaidChecked] = React.useState<number[]>([]);
   const [loadingLink, setLoadingLink] = React.useState<boolean>(false);
   useEffect(() => {
     setLoadingRender(false);
   }, []);
-  useEffect(() => {
-    setTimeout(refreshWowhead, 150);
-  }, [itemCurrentlySelected, itemInputValue]);
   const [updateRaidLink] = useMutation<Mutation, UpdateRaidLinkVariables>(
     UPDATE_RAID_LINK
   );
@@ -236,32 +172,26 @@ export default function PageIndex() {
     error: errorRaids,
     refetch: refetchAllRaidsLights
   } = useQuery<Query>(ALL_RAIDS_LIGHT);
-  // const {
-  //   loading: loadingPlayers,
-  //   data: dataPlayers,
-  //   error: errorPlayers
-  // } = useQuery<Query>(ALL_PLAYERS);
-  const {
-    loading: loadingItems,
-    data: dataItems,
-    error: errorItems
-  } = useQuery<Query>(ALL_ITEMS);
 
-  // const loading =
-  //   loadingDonjons || loadingRaids || loadingPlayers || loadingItems;
-  // const error = errorDonjons || errorRaids || errorPlayers || errorItems;
-
-  const loading = loadingDonjons || loadingRaids || loadingItems;
-  const error = errorDonjons || errorRaids || errorItems;
+  const loading = loadingDonjons || loadingRaids;
+  const error = errorDonjons || errorRaids;
 
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
 
+  function getNumberOfCarouselItems() {
+    if (pageWidth === "xs") {
+      return 1;
+    }
+    if (pageWidth === "md" || pageWidth === "sm") {
+      return 2;
+    }
+    return 3;
+  }
+
   const donjons = dataDonjons.allDonjons.edges;
   const raids = dataRaids.allRaids.nodes;
-  // const players = dataPlayers.allPlayers.nodes;
-  const items = dataItems.allItems.nodes;
 
   raids.sort(byDate("date"));
 
@@ -325,68 +255,6 @@ export default function PageIndex() {
     }
   });
 
-  // const searchPlayerInputChange = (
-  //   event: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setPlayerInputValue(event.target.value);
-  // };
-  const searchItemInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setItemInputValue(event.target.value);
-  };
-  const handleCloseItemInfo = () => {
-    setItemInfoOpened(false);
-  };
-  const handleOpenItemInfo = () => {
-    setItemInfoOpened(true);
-  };
-  const makeWhoLootedList = (item): ReactNode => {
-    const classesWhoLooted = [];
-    const columns = [];
-    item.lootsByItemId.nodes.forEach(loot => {
-      if (
-        classesWhoLooted.indexOf(loot.playerByPlayerId.classByClassId.name) ===
-        -1
-      ) {
-        classesWhoLooted.push(loot.playerByPlayerId.classByClassId.name);
-      }
-    });
-    classesWhoLooted.forEach(classWhoLooted => {
-      const column = {
-        classWhoLooted,
-        playersWhoLooted: []
-      };
-      item.lootsByItemId.nodes.forEach(loot => {
-        if (loot.playerByPlayerId.classByClassId.name === classWhoLooted) {
-          column.playersWhoLooted.push(loot.playerByPlayerId);
-        }
-      });
-      columns.push(column);
-    });
-
-    return (
-      <div className={classes.whoLootedContainer}>
-        {columns.length > 0
-          ? columns.map(column => (
-              <div
-                key={`raidwholoot-${column.classWhoLooted}`}
-                className={classes.whoLootedColumn}
-              >
-                <div className={classes.lootedNbChip}>
-                  {column.playersWhoLooted.length}
-                </div>
-                <ClassAvatar playerClass={column.classWhoLooted} />
-
-                {column.playersWhoLooted.map(player => (
-                  <div key={`playerwholoot-${player.id}`}>{player.name}</div>
-                ))}
-              </div>
-            ))
-          : "Pas looté"}
-      </div>
-    );
-  };
   const handleCheck = (raidId: number) => (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -473,8 +341,9 @@ export default function PageIndex() {
               >
                 <ItemsCarousel
                   infiniteLoop={true}
+                  style={{ maxWidth: 200 }}
                   gutter={20}
-                  numberOfCards={1}
+                  numberOfCards={getNumberOfCarouselItems()}
                   activeItemIndex={activeItemIndex}
                   requestToChangeActive={setActiveItemIndex}
                   activePosition={"center"}
@@ -504,55 +373,6 @@ export default function PageIndex() {
               </div>
             </Paper>
           )}
-          <Paper
-            className={classes.searchPlayerPaper}
-            style={{
-              width: member.level < role.officer ? "100%" : "50%",
-              height: member.level < role.officer ? "230px" : "auto"
-            }}
-          >
-            <Typography className={classes.boxTitle} variant="h6">
-              Search
-            </Typography>
-            <Divider />
-            <div className={classes.searchContainer}>
-              {/* <div className={classes.searchBox}>
-                <TextField
-                  autoComplete="off"
-                  id="outlined-player"
-                  label="Player"
-                  className={classes.textField}
-                  value={playerInputValue}
-                  onChange={searchPlayerInputChange}
-                  margin="dense"
-                  variant="outlined"
-                />
-                <PlayerSearchedList
-                  searched={playerInputValue}
-                  players={players}
-                />
-              </div> */}
-              <div className={classes.searchBox}>
-                <TextField
-                  autoComplete="off"
-                  id="outlined-item"
-                  label="Item"
-                  className={classes.textField}
-                  value={itemInputValue}
-                  onChange={searchItemInputChange}
-                  margin="dense"
-                  variant="outlined"
-                />
-                <ItemSearchedList
-                  listHeight={"100px"}
-                  searched={itemInputValue}
-                  items={items}
-                  setItemCurrentlySelected={setItemCurrentlySelected}
-                  handleOpenItemInfo={handleOpenItemInfo}
-                />
-              </div>
-            </div>
-          </Paper>
         </div>
         <Paper className={classes.lastRaidsPaper}>
           <div className={classes.lastRaidsPaperHeader}>
@@ -702,38 +522,10 @@ export default function PageIndex() {
           </div>
         </Paper>
       </Container>
-      <Dialog
-        className={classes.itemInfoDialog}
-        maxWidth={"lg"}
-        open={itemInfoOpened}
-        onClose={handleCloseItemInfo}
-        aria-labelledby="item-dialog-title"
-        aria-describedby="item-dialog-description"
-      >
-        <DialogTitle id="item-dialog-title">
-          {itemCurrentlySelected && (
-            <a
-              onClick={e => {
-                e.preventDefault();
-              }}
-              href={`https://fr.classic.wowhead.com/item=${itemCurrentlySelected.wowheadId}`}
-            >
-              {itemCurrentlySelected.name}
-            </a>
-          )}
-        </DialogTitle>
-        <DialogContent>
-          {itemCurrentlySelected && makeWhoLootedList(itemCurrentlySelected)}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseItemInfo} color="primary">
-            FERMER
-          </Button>
-        </DialogActions>
-      </Dialog>
     </>
   );
-}
+});
+
 // TODO
 // helper getAll (object , key) sur le graphql
 

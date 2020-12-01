@@ -115,7 +115,6 @@ export default function PageIndex() {
               <TableCell align="right">Reroll de</TableCell>
               <TableCell align="right">Crypted Pass</TableCell>
               <TableCell align="center">Active</TableCell>
-              <TableCell align="center">In roster</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -163,13 +162,6 @@ export default function PageIndex() {
                     active={player.active}
                     playerId={player.id}
                     accessor={"active"}
-                  />
-                </TableCell>
-                <TableCell align="center">
-                  <InRosterAndActiveSwitch
-                    active={player.inRoster}
-                    playerId={player.id}
-                    accessor={"inRoster"}
                   />
                 </TableCell>
               </TableRow>

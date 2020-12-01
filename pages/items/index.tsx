@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Hidden } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -194,15 +195,17 @@ export default function PageIndex() {
           margin="dense"
           variant="outlined"
         />
-        <Typography>
-          <i>
-            <b style={{ color: "grey" }}>* : </b>
-            <span style={{ color: "lightgrey" }}>
-              item avec des conditions d'attribution spéciales
-            </span>
-          </i>
-        </Typography>
-      </Paper>{" "}
+        <Hidden smDown>
+          <Typography>
+            <i>
+              <b style={{ color: "grey" }}>* : </b>
+              <span style={{ color: "lightgrey" }}>
+                item avec des conditions d'attribution spéciales
+              </span>
+            </i>
+          </Typography>
+        </Hidden>
+      </Paper>
       <ItemSearchedList
         listHeight={"auto"}
         searched={itemInputValue}

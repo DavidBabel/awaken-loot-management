@@ -117,7 +117,9 @@ export default function Roster() {
     <div>
       <div>
         Merci de vérifier l'état actuel du recrutement sur le site de guilde :{" "}
-        <a href="http://awaken.se/">http://awaken.se/</a>
+        <a target="_blank" href="http://awaken.se/">
+          http://awaken.se/
+        </a>
       </div>
       <br />
       {currentRoster.map((classe: Roster, index: number) => {

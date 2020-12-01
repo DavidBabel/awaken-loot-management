@@ -51,7 +51,8 @@ interface JwtToken {
 function tryToLogin(
   username: string,
   password: string,
-  callback: (jwtInfos: JwtToken) => void
+  callback: (jwtInfos: JwtToken) => void,
+  callbackError: () => void
 ) {
   const passwordSalted = md5(password + CONFIG.SALT);
   // tslint:disable-next-line:no-console
@@ -68,7 +69,11 @@ function tryToLogin(
     })
   })
     .then(response => response.json())
-    .then(callback);
+    .then(callback)
+    .catch(error => {
+      console.log(error);
+      callbackError();
+    });
 }
 
 interface Props {
@@ -131,29 +136,36 @@ export default function Pagelogin({ apolloClient }: Props) {
             color="primary"
             className={classes.submit}
             onClick={() =>
-              tryToLogin(username, password, jwtInfos => {
-                if (jwtInfos.error) {
-                  setMessage("NOT WORKING");
-                } else {
-                  setMessage("LoggedIn");
-                  const memberInfos: any = jwt.decode(jwtInfos.jwt);
-                  const payload = JSON.stringify({
-                    userid: memberInfos.userid,
-                    name: username,
-                    role: memberInfos.role,
-                    level: role[memberInfos.role] || 0,
-                    token: jwtInfos.jwt
-                  });
-                  // localStorage.setItem('token', jwtInfos.jwt);
-                  setCookie({}, CONFIG.COOKIE_NAME, payload, {
-                    maxAge: CONFIG.COOKIE_LIFE,
-                    path: "/"
-                  });
-                  // tslint:disable-next-line:no-console
-                  // apolloClient.resetStore();
-                  Router.push("/raid?reload");
+              tryToLogin(
+                username,
+                password,
+                jwtInfos => {
+                  if (jwtInfos.error) {
+                    setMessage("NOT WORKING");
+                  } else {
+                    setMessage("LoggedIn");
+                    const memberInfos: any = jwt.decode(jwtInfos.jwt);
+                    const payload = JSON.stringify({
+                      userid: memberInfos.userid,
+                      name: username,
+                      role: memberInfos.role,
+                      level: role[memberInfos.role] || 0,
+                      token: jwtInfos.jwt
+                    });
+                    // localStorage.setItem('token', jwtInfos.jwt);
+                    setCookie({}, CONFIG.COOKIE_NAME, payload, {
+                      maxAge: CONFIG.COOKIE_LIFE,
+                      path: "/"
+                    });
+                    // tslint:disable-next-line:no-console
+                    // apolloClient.resetStore();
+                    Router.push("/?reload");
+                  }
+                },
+                () => {
+                  setMessage("Impossible de se connecter");
                 }
-              })
+              )
             }
           >
             Se connecter

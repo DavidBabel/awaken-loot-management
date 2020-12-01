@@ -60,17 +60,18 @@ export default function Pagelogin({ apolloClient }: Props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Générer son lmot de passe
+          Générer son mot de passe
         </Typography>
         <div className={classes.form}>
-          Rentre juste un mot de passe :<br />8 caractères minimum
+          Rentre juste un mot de passe :<br />
+          <b>8 caractères minimum</b>
           <TextField
             variant="outlined"
             margin="normal"
             required={true}
             fullWidth={true}
             name="password"
-            label="Password"
+            label="Mot de passe"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -80,6 +81,7 @@ export default function Pagelogin({ apolloClient }: Props) {
           />
           Envoie le hash de ton mot de passe crypté à <b>Devilhunter</b> sur
           Discord pour qu'il t'ouvre ton accès.
+          <br />
           <br />
           C'est indecryptable. Donc ne le perd pas, on ne peut pas le récupérer.
           <TextField
@@ -96,6 +98,11 @@ export default function Pagelogin({ apolloClient }: Props) {
             }
             onChange={() => {}}
           />
+          <br />
+          Une fois que ton compte sera créé il faudra utiliser ton pseudo exact
+          de jeu et ton mdp pour te connecter (pas le hash)
+          <br />
+          <br />
           <Grid container={true}>
             {/* <Grid item={true} xs={true}>
               <Link href="#" variant="body2">
