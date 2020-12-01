@@ -1,5 +1,3 @@
-- refaire l'assignation de loots rapide
-- rendre mieux compatible sur téléphone
 - faire une autre page d'acceuil
-- rendre les liens maj clicables
+
 - finir l'autre complete des boss
