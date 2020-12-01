@@ -7,7 +7,8 @@ SET search_path TO public;
 CREATE TABLE "Classes" (
   "id" SERIAL PRIMARY KEY,
   "color" varchar,
-  "name" varchar
+  "name" varchar,
+  "cdnImage" varchar
 );
 comment on table "Classes" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Classes" ("id");
@@ -118,7 +119,8 @@ CREATE TABLE "Donjons" (
   "name" varchar,
   "shortName" varchar,
   "active" boolean DEFAULT false,
-  "cdnImage" varchar
+  "cdnImage" varchar,
+  "cdnIconImage" varchar
 );
 comment on table "Donjons" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Donjons" ("id");

@@ -14,6 +14,7 @@ export const PLAYER_MERIT = gql`
         active
         classByClassId {
           name
+          cdnImage
         }
         playerMeritsByMeritId(condition: { playerId: $playerId }) {
           nodes {

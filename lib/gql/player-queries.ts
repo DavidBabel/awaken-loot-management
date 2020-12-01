@@ -6,6 +6,7 @@ export const ALL_CLASSES = gql`
       nodes {
         id
         color
+        cdnImage
         name
       }
     }
@@ -28,6 +29,7 @@ export const ALL_ACTIVE_PLAYERS = gql`
         classByClassId {
           id
           color
+          cdnImage
           name
         }
         playerMeritsByPlayerId {
@@ -95,6 +97,7 @@ export const ALL_PLAYERS = gql`
           id
           color
           name
+          cdnImage
         }
         playerMeritsByPlayerId {
           nodes {
@@ -156,6 +159,7 @@ export const ONE_PLAYER = gql`
         classByClassId {
           id
           color
+          cdnImage
           name
         }
         playerMeritsByPlayerId {

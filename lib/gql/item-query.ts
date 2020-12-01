@@ -23,6 +23,7 @@ export const ALL_ITEMS = gql`
                 id
                 color
                 name
+                cdnImage
               }
             }
           }

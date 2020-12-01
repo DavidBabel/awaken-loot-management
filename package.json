@@ -15,6 +15,7 @@
     "dbl": "psql postgres://localhost:5432/test",
     "db-renew": "bin/db/renew-static-tables.sh",
     "db-reset-local": "bin/db/reset-local-db.sh",
+    "db-reset-local:windows": "sh bin/db/reset-local-db-win.sh",
     "db-items": "node db/json-to-sql/items-classes-to-sql.js",
     "types": "bin/generate-types.sh",
     "reset": "yarn db-reset-local && yarn types",
