@@ -2023,7 +2023,7 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false, NULL),
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Armes impériales qiraji'
   ),(SELECT id FROM "Classes" WHERE "name"=
