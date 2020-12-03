@@ -197,14 +197,14 @@ VALUES
 (3, true, -40, 'Malus', 'Je ne me suis pas inscrit en raid 2 fois', 'au cours du dernier mois', 30),
 (4, true, -20, 'Malus', 'Je suis arrivé en retard en raid sans prévenir', 'au cours du dernier mois', 30),
 (5, true, -50, 'Malus', 'J‘était inscrit au raid mais pas présent, sans prévenir', 'au cours des deux derniers mois', 60),
-(6, true, -20, 'Malus', 'J‘ai pris la parole de manière inapropriée en raid', 'au cours du dernier mois', 30),
+(6, true, -20, 'Malus', 'J‘ai pris la parole de manière inapropriée en raid ou sur discord', 'au cours du dernier mois', 30),
 (7, true, -50, 'Malus', 'J‘ai menti sur ma spé ou respé sans le dire à mon MDC', 'au cours des deux derniers mois', 60),
 (8, true, -30, 'Malus', 'Je suis venu en raid sans consommables', 'au cours du dernier mois', 30),
 (9, true, -30, 'Malus', 'Je suis venu en raid sans enchantements', 'au cours du dernier mois', 30),
 (10, true, -30, 'Malus', 'J‘ai pull un pack en mode kikoo', 'au cours du dernier mois', 30),
 (11, true, -40, 'Malus', 'J‘ai fais wipe le raid sur une bombe', 'Vael/Gueedon au cours des deux derniers mois', 60),
 (12, true, -40, 'Malus', 'J‘ai fais dépop les techniciens autour de Vael', 'au cours des deux derniers mois', 60),
-(13, true, -40, 'Malus', 'J‘ai loot l‘or de raid à la place d‘un officier','au cours des deux derniers mois', 60);
+(13, false, -40, 'Malus', 'J‘ai loot l‘or de raid à la place d‘un officier','au cours des deux derniers mois', 60);
 
 -- added after release :
 -- (13, true, -40, 'Malus', 'J‘ai loot l‘or de raid à la place d‘un officier','au cours des deux derniers mois', 60);
