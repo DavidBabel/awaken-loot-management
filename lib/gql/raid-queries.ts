@@ -168,6 +168,7 @@ export const ONE_RAID = gql`
         raidPlayersByRaidId {
           nodes {
             id
+            status
             playerByPlayerId {
               id
               name
@@ -187,20 +188,6 @@ export const ONE_RAID = gql`
                   raidByRaidId {
                     id
                     date
-                  }
-                }
-              }
-              raidPlayersByPlayerId {
-                nodes {
-                  id
-                  passed
-                  raidByRaidId {
-                    id
-                    date
-                    donjonByDonjonId {
-                      id
-                      name
-                    }
                   }
                 }
               }

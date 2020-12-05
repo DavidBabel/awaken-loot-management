@@ -195,7 +195,7 @@ export const ONE_PLAYER = gql`
         raidPlayersByPlayerId {
           nodes {
             id
-            passed
+            status
             raidId
             raidByRaidId {
               id

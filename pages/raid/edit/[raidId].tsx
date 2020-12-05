@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { getRaidStatusKeyFromId } from "../../../components/attendance/raid-status";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
@@ -155,6 +156,7 @@ export default function PageRaidView() {
   }
   const loots = currentRaid.lootsByRaidId.nodes;
   const currentRaidPlayers = currentRaid.raidPlayersByRaidId.nodes
+    .filter(rp => getRaidStatusKeyFromId(rp.status) === "present")
     .sort((a: RaidPlayer, b: RaidPlayer) =>
       a.playerByPlayerId.name > b.playerByPlayerId.name ? 1 : -1
     )
