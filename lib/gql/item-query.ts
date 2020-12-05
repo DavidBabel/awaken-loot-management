@@ -9,25 +9,6 @@ export const ALL_ITEMS = gql`
         name
         wowheadId
         classId
-        lootsByItemId {
-          nodes {
-            id
-            active
-            playerByPlayerId {
-              id
-              active
-              classId
-              inRoster
-              name
-              classByClassId {
-                id
-                color
-                name
-                cdnImage
-              }
-            }
-          }
-        }
         classItemsByItemId {
           nodes {
             id
@@ -49,6 +30,34 @@ export const ALL_ITEMS = gql`
               name
             }
           }
+        }
+        lootsByItemId {
+          totalCount
+        }
+      }
+    }
+  }
+`;
+
+export interface ItemLootVariables {
+  itemId: number;
+}
+
+export const ITEM_LOOT = gql`
+  query ItemLoot($itemId: Int) {
+    allLoots(condition: { itemId: $itemId }) {
+      nodes {
+        id
+        playerByPlayerId {
+          id
+          name
+          active
+          classByClassId {
+            name
+          }
+        }
+        raidByRaidId {
+          date
         }
       }
     }

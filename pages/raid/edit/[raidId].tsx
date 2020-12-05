@@ -181,7 +181,7 @@ export default function PageRaidView() {
             {getDate(currentRaid.date) +
               " | " +
               currentRaid.donjonByDonjonId.name +
-              (raidTitle ? " (" + raidTitle + ")" : "")}
+              (raidTitle ? " (saisie par " + raidTitle + ")" : "")}
           </div>
           {member.level >= role.officer && (
             <RaidTitleButton raid={currentRaid} setRaidTitle={setRaidTitle} />

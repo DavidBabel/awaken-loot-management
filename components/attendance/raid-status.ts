@@ -4,6 +4,7 @@ export type RaidStatusKey =
   | "pasDansGuilde"
   | "inAnotherId"
   | "rotation"
+  | "raidFutur"
   | "inscritAbsent";
 
 export interface RaidStatus {
@@ -50,6 +51,13 @@ export const raidStatusList: RaidStatus[] = [
     id: 4,
     color: "#800080",
     isSettable: true
+  },
+  {
+    label: "Raid futur",
+    key: "raidFutur",
+    id: 4,
+    color: "#3F51B5",
+    isSettable: false
   },
   {
     label: "Pas encore en raid",

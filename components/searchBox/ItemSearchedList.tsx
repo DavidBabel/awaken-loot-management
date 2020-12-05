@@ -125,12 +125,8 @@ export default function ItemSearchedList({
           <Typography>Aucun résultat trouvé</Typography>
         ) : (
           results.map(result => {
-            let lootedNb = 0;
-            result.lootsByItemId.nodes.forEach(loot => {
-              if (loot.active && loot.playerByPlayerId.active) {
-                lootedNb++;
-              }
-            });
+            const lootedNb = result.lootsByItemId.totalCount;
+
             return (
               <ListItem
                 key={`listitemline-${result.id}`}

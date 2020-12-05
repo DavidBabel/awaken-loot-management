@@ -9,16 +9,14 @@ interface Props {
 
 export function AttendanceTableRaidHeaders({ raid }: Props) {
   return (
-    raid.raidPlayersByRaidId.nodes.length > 0 && (
-      <Tooltip title={getDate(raid.date)} placement="bottom">
-        <TableCell
-          align="center"
-          style={{ cursor: "pointer" }}
-          onClick={() => Router.push("/raid/edit/" + raid.id)}
-        >
-          {raid.donjonByDonjonId.shortName}
-        </TableCell>
-      </Tooltip>
-    )
+    <Tooltip title={getDate(raid.date)} placement="bottom">
+      <TableCell
+        align="center"
+        style={{ cursor: "pointer", fontSize: 12, minWidth: 44 }}
+        onClick={() => Router.push("/raid/edit/" + raid.id)}
+      >
+        {raid.donjonByDonjonId.shortName}
+      </TableCell>
+    </Tooltip>
   );
 }

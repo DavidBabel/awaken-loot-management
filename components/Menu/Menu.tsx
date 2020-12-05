@@ -162,7 +162,7 @@ export function Menu({ handleDrawerClose }) {
                   }}
                   className={route === "/admin/roster" ? classes.selected : ""}
                 >
-                  <ListItemText primary="Editer roster" />
+                  <ListItemText primary="Editer roster (site)" />
                 </ListItemLink>
               </List>
             </>

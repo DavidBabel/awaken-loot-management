@@ -20,7 +20,7 @@ import { CustomAttendanceTable } from "../../components/attendance/CustomAttenda
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import MemberContext from "../../lib/context/member";
 import { Player, Query } from "../../lib/generatedTypes";
-import { ALL_PLAYERS } from "../../lib/gql/player-queries";
+import { ALL_ACTIVE_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_RAIDS } from "../../lib/gql/raid-queries";
 import { useSnackBar } from "../../lib/hooks/snackbar";
 import { useToggle } from "../../lib/hooks/toggle";
@@ -66,7 +66,7 @@ export default function PageIndex() {
     loading: loadingPlayers,
     data: dataPlayers,
     error: errorPlayers
-  } = useQuery<Query>(ALL_PLAYERS);
+  } = useQuery<Query>(ALL_ACTIVE_PLAYERS);
 
   const loading = loadingPlayers || loadingAllRaids;
   const error = errorPlayers || errorAllRaids;

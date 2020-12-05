@@ -60,47 +60,46 @@ export function AttendanceLine({
         totalRaids={raidsNb}
       />
       {raids.map((raid: Raid) => {
-        if (raid.raidPlayersByRaidId.nodes.length > 0) {
-          const currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
-            (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id
-          );
+        const currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
+          (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id
+        );
 
-          let status: RaidStatusKey = "absent";
+        let status: RaidStatusKey = "absent";
 
-          if (new Date(raid.date) < firstRaidDate) {
-            status = "pasDansGuilde";
-          } else if (currentRaidPlayer) {
-            status = "present";
-            if (currentRaidPlayer.status > 0) {
-              status = raidStatusList[currentRaidPlayer.status].key;
-            }
-          } else if (
-            raid.linkBetweenRaids &&
-            raidLinkedIdsPresent.includes(raid.linkBetweenRaids)
-          ) {
-            status = "inAnotherId";
+        if (new Date(raid.date) < firstRaidDate) {
+          status = "pasDansGuilde";
+        } else if (currentRaidPlayer) {
+          status = "present";
+          if (currentRaidPlayer.status > 0) {
+            status = raidStatusList[currentRaidPlayer.status].key;
           }
-
-          return (
-            <AttendanceCell
-              canChange={isAllowedToChange}
-              status={status}
-              onClick={(setLoading: any) => {
-                if (isAllowedToChange) {
-                  openAttendanceDialog({
-                    setLoading,
-                    isOpen: true,
-                    raidPlayer: currentRaidPlayer,
-                    player,
-                    raid
-                  });
-                }
-              }}
-              key={`cell-attendance-${player.id}-${raid.id}`}
-            />
-          );
+        } else if (
+          raid.linkBetweenRaids &&
+          raidLinkedIdsPresent.includes(raid.linkBetweenRaids)
+        ) {
+          status = "inAnotherId";
+        } else if (new Date(raid.date) > new Date()) {
+          status = "raidFutur";
         }
-        return null;
+
+        return (
+          <AttendanceCell
+            canChange={isAllowedToChange}
+            status={status}
+            onClick={(setLoading: any) => {
+              if (isAllowedToChange) {
+                openAttendanceDialog({
+                  setLoading,
+                  isOpen: true,
+                  raidPlayer: currentRaidPlayer,
+                  player,
+                  raid
+                });
+              }
+            }}
+            key={`cell-attendance-${player.id}-${raid.id}`}
+          />
+        );
       })}
     </TableRow>
   );
