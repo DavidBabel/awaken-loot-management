@@ -363,6 +363,7 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
                   chevronWidth={100}
                   children={donjons
                     .filter(({ node: donjon }) => donjon.active)
+                    .reverse()
                     .map(({ node: donjon }) => (
                       <CreateRaid
                         key={`create-raid-${donjon.name}`}
