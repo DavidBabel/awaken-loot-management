@@ -68,3 +68,10 @@ export const raidStatusList: RaidStatus[] = [
     inLegend: false
   }
 ];
+
+export function getRaidStatusKeyFromId(id: number) {
+  if (id === null) {
+    return "present";
+  }
+  return raidStatusList.find(status => status.id === id).key;
+}

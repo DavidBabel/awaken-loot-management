@@ -21,7 +21,7 @@ const alternativeColor = {
 
 export function getClassColor(classe: string, alternative: boolean = false) {
   // tslint:disable-next-line:no-console
-  console.log(classe);
+  // console.log(classe);
   if (alternative) {
     return alternativeColor[classe];
   } else {

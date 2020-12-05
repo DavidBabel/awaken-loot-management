@@ -28,6 +28,7 @@ export function AttendanceLine({
   raids.forEach(raid => {
     if (
       raid.raidPlayersByRaidId.nodes.length > 0 &&
+      new Date(raid.date) < new Date() &&
       new Date(raid.date) >= firstRaidDate
     ) {
       if (!raid.linkBetweenRaids) {

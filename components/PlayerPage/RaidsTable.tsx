@@ -60,7 +60,6 @@ export default function RaidsTable({ raids, hidden }) {
         ? -1
         : 1;
     })
-    .filter(raid => !raid.passed)
     .map(raid =>
       createData(
         raid.raidByRaidId.donjonByDonjonId.name,

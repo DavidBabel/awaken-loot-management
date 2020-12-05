@@ -44,9 +44,6 @@ export default function PageCreateRaid() {
   const [selectedDate, setSelectedDate] = useState(formatDate());
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
-  // tslint:disable-next-line:no-console
-  console.log(selectedDate);
-
   if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }

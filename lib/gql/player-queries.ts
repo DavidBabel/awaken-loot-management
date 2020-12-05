@@ -66,8 +66,8 @@ export const ALL_ACTIVE_PLAYERS = gql`
         raidPlayersByPlayerId {
           nodes {
             id
-            passed
             raidId
+            status
             raidByRaidId {
               id
               date
@@ -133,7 +133,7 @@ export const ALL_PLAYERS = gql`
         raidPlayersByPlayerId {
           nodes {
             id
-            passed
+            status
             raidId
             raidByRaidId {
               id

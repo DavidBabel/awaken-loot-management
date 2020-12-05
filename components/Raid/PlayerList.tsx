@@ -313,12 +313,12 @@ export default function PlayerList({
                           allPlayers
                         );
 
-                        console.log(alreadyExistingPlayers);
+                        // console.log(alreadyExistingPlayers);
                         const queries = playerList
                           .filter(p => !alreadyExistingPlayers.includes(p))
                           .filter(p => !nonExistingPlayers.includes(p))
                           .map(currentPlayerName => {
-                            console.log(currentPlayerName);
+                            // console.log(currentPlayerName);
                             return createRaidPlayer({
                               variables: {
                                 raidId,

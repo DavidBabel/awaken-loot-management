@@ -100,6 +100,6 @@ const output = roster
   .map(getClass);
 
 // tslint:disable-next-line:no-console
-console.log(html(output));
+// console.log(html(output));
 
 export {};

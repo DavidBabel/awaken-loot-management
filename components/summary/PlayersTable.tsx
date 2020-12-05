@@ -21,6 +21,7 @@ import { Loot, Player } from "../../lib/generatedTypes";
 import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
 import { byAlphabet, byDate, byValue } from "../../lib/utils/sorter";
+import { getRaidStatusKeyFromId } from "../attendance/raid-status";
 import PlayerTableRow, { LIMIT_LOOTLEVEL_TO_COUNT } from "./PlayerTableRow";
 
 export const TABLE_SMALL_CASES = [false, false, false, true, true, true, true];
@@ -139,7 +140,7 @@ export default function PlayersTable(props: Props) {
       const alreadyLooted: number[] = [];
 
       const totalRaid = [...player.raidPlayersByPlayerId.nodes].filter(
-        raid => !raid.passed
+        raid => getRaidStatusKeyFromId(raid.status) === "present"
       ).length;
       player.playerMeritsByPlayerId.nodes.forEach(merit => {
         if (merit.validated) {
@@ -152,7 +153,7 @@ export default function PlayersTable(props: Props) {
         lastRaidDate = null;
       } else {
         [...player.raidPlayersByPlayerId.nodes]
-          .filter(raid => !raid.passed)
+          .filter(raid => getRaidStatusKeyFromId(raid.status) === "present")
           .forEach(raid => {
             const currentRaidDate = new Date(raid.raidByRaidId.date);
             if (currentRaidDate > lastRaidDate) {
