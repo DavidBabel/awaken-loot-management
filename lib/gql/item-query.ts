@@ -45,7 +45,7 @@ export interface ItemLootVariables {
 
 export const ITEM_LOOT = gql`
   query ItemLoot($itemId: Int) {
-    allLoots(condition: { itemId: $itemId }, active: true) {
+    allLoots(condition: { itemId: $itemId, active: true }) {
       nodes {
         id
         playerByPlayerId {
