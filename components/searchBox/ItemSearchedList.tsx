@@ -20,7 +20,7 @@ import {
 } from "../../lib/utils/loot-colors";
 import { normalizeText } from "../../lib/utils/string";
 
-interface Props {
+interface StyleProps {
   listHeight: string;
 }
 const useStyles = makeStyles(theme =>
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme =>
       width: "100%",
       overflowY: "auto",
       overflowX: "hidden",
-      height: (props: Props) => props.listHeight,
+      height: (props: StyleProps) => props.listHeight,
       "&::-webkit-scrollbar-thumb": {
         backgroundColor: "#3F51B5",
         borderRadius: "2px"
@@ -88,13 +88,21 @@ const useStyles = makeStyles(theme =>
   })
 );
 
+interface Props {
+  items: Item[];
+  searched: string;
+  setItemCurrentlySelected: React.Dispatch<React.SetStateAction<Item>>;
+  handleOpenItemInfo: () => void;
+  listHeight: string;
+}
+
 export default function ItemSearchedList({
   searched,
   items,
   setItemCurrentlySelected,
   handleOpenItemInfo,
   listHeight
-}) {
+}: Props) {
   const classes = useStyles({ listHeight });
   const results =
     searched.length >= 3 &&
@@ -125,7 +133,8 @@ export default function ItemSearchedList({
           <Typography>Aucun résultat trouvé</Typography>
         ) : (
           results.map(result => {
-            const lootedNb = result.lootsByItemId.totalCount;
+            const lootedNb = result.lootsByItemId.nodes.filter(l => l.active)
+              .length;
 
             return (
               <ListItem
@@ -133,7 +142,7 @@ export default function ItemSearchedList({
                 button={true}
                 onClick={() => {
                   setItemCurrentlySelected(result);
-                  handleOpenItemInfo(true);
+                  handleOpenItemInfo();
                 }}
               >
                 <ListItemText

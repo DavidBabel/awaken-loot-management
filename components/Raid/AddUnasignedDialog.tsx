@@ -37,11 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       }
     },
-    lootInfoSelects: {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    },
     dialogActions: {
       marginTop: 10
     },
@@ -150,12 +145,12 @@ export default function AddUnasignedDialog({
         aria-describedby="add loot window"
       >
         <DialogTitle id="add-loot-dialog">
-          {"Ajouter des loots non assignés sur: " + bossName}
+          {"Ajouter des loots non assignés sur : " + bossName}
         </DialogTitle>
         {addLootIsLoading && (
           <LinearProgress className={classes.linearProgress} variant="query" />
         )}
-        <DialogContent className={classes.lootInfoSelects}>
+        <DialogContent>
           <FormControl>
             {bossItems.map(bossItem => {
               const itemId = bossItem.itemId;

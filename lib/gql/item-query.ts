@@ -32,6 +32,9 @@ export const ALL_ITEMS = gql`
           }
         }
         lootsByItemId {
+          nodes {
+            active
+          }
           totalCount
         }
       }
