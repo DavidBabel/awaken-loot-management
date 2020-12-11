@@ -248,6 +248,9 @@ export default function LootWindow(props: Props) {
       case 5:
         lootLevelLabel = "exceptionnelle";
         break;
+      case 6:
+        lootLevelLabel = "endgame rare";
+        break;
     }
 
     return "Qualité: " + lootLevelLabel;
