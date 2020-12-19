@@ -3798,11 +3798,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false, NULL),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots désacralisés'
@@ -4394,6 +4394,10 @@ VALUES
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
   'Guerrier DPS'), false, NULL),
+  ((SELECT id FROM "Items" WHERE "name"=
+  'Jambières de l‘Apocalypse'
+  ),(SELECT id FROM "Classes" WHERE "name"=
+  'Chasseur'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=

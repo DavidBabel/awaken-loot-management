@@ -1470,8 +1470,8 @@ Prêtre, false
 
 Cuissards désacralisés
 Chasseur, false
-Chaman, false
-Druide, false
+Chaman, true
+Druide, true
 
 Cuissots désacralisés
 Guerrier Tank, false
@@ -1709,6 +1709,7 @@ Voleur, false
 
 Jambières de l‘Apocalypse
 Guerrier DPS, false
+Chasseur, true
 Druide Feral, true
 
 Maillet du croisé racheté
