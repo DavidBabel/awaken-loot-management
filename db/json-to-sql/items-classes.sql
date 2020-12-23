@@ -3794,15 +3794,15 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), false, NULL),
+  'Chasseur'), true, 'Hunts: Alk / Krok / Loge'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), true, NULL),
+  'Chaman'), true, 'Hunts: Alk / Krok / Loge'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissards désacralisés'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), true, NULL),
+  'Druide'), true, 'Hunts: Alk / Krok / Loge'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cuissots désacralisés'
@@ -4393,15 +4393,15 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false, NULL),
+  'Guerrier DPS'), false, 'Hunts: Devil / Paren / Doriganne'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true, NULL),
+  'Chasseur'), true, 'Hunts: Devil / Paren / Doriganne'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Jambières de l‘Apocalypse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide Feral'), true, NULL),
+  'Druide Feral'), true, 'Hunts: Devil / Paren / Doriganne'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Maillet du croisé racheté'

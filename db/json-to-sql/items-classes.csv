@@ -1468,8 +1468,8 @@ Chaman, false
 Druide, false
 Prêtre, false
 
-Cuissards désacralisés
-Chasseur, false
+Cuissards désacralisés | Hunts: Alk / Krok / Loge
+Chasseur, true
 Chaman, true
 Druide, true
 
@@ -1707,7 +1707,7 @@ Cuirasse désacralisée
 Guerrier Tank, false
 Voleur, false
 
-Jambières de l‘Apocalypse
+Jambières de l‘Apocalypse | Hunts: Devil / Paren / Doriganne
 Guerrier DPS, false
 Chasseur, true
 Druide Feral, true
