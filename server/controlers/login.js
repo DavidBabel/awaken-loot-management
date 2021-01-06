@@ -10,10 +10,12 @@ const { checkLogin } = require("../middleware/auth-helper/check-login");
 module.exports = async function loginRoute(req, res) {
   const account = await checkLogin(req.body.username, req.body.password);
   if (req.body && account) {
+    console.log(account);
     const payload = {
       role: account.role,
       userid: account.id,
-      username: account.name
+      username: account.name,
+      discordId: account.discordId
     };
     res
       .json({

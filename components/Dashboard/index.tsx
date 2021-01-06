@@ -5,9 +5,7 @@ import {
   Divider,
   Drawer,
   Grid,
-  Hidden,
   IconButton,
-  Link,
   makeStyles,
   Toolbar,
   Typography
@@ -190,7 +188,7 @@ export function Dashboard({ children, isMobile }: Props) {
             noWrap={true}
             className={classes.title}
           >
-            <span>Awaken Loot Management</span>
+            <span>Awaken Raid Management</span>
             <div className={classes.logo}>
               <img alt="awaken logo" src="/icon/white_icon.svg" width="100%" />
             </div>
@@ -228,7 +226,7 @@ export function Dashboard({ children, isMobile }: Props) {
             {children}
           </Grid>
         </Container>
-        <Hidden smDown>
+        {/* <Hidden smDown>
           <Typography
             className={classes.copyright + " " + (!open && classes.hidden)}
             variant="body2"
@@ -237,12 +235,12 @@ export function Dashboard({ children, isMobile }: Props) {
           >
             {"Copyright © "}
             <Link color="inherit" href="http://awaken.se/">
-              Awaken loot manager
+              Awaken raid manager
             </Link>{" "}
             {new Date().getFullYear()}
             {". Developpé par Thorsen et Devilhunter."}
           </Typography>
-        </Hidden>
+        </Hidden> */}
       </main>
     </div>
   );

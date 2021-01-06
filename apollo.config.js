@@ -2,7 +2,7 @@ const CONFIG = require("./server/config");
 
 module.exports = {
   client: {
-    name: "Awaken Loot management",
+    name: "Awaken Raid management",
     includes: ["pages/**", "lib/**"],
     service: {
       name: "API",

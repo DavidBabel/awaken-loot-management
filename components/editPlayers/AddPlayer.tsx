@@ -18,6 +18,7 @@ import { Add as AddIcon } from "@material-ui/icons";
 import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import { useState } from "react";
+import { wowClasses } from "../../lib/constants/classes";
 import { Mutation, Player, Query } from "../../lib/generatedTypes";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
@@ -78,21 +79,7 @@ export default function AddPlayer({
     closeSnackBar,
     snackBarMessage
   } = useSnackBar();
-  const wowClasses = [
-    { id: 0, name: "-- Classe --" },
-    { id: 1, name: "Prêtre" },
-    { id: 2, name: "Mage" },
-    { id: 3, name: "Démoniste" },
-    { id: 4, name: "Voleur" },
-    { id: 5, name: "Druide" },
-    { id: 6, name: "Chasseur" },
-    { id: 7, name: "Chaman" },
-    { id: 8, name: "Guerrier Tank" },
-    { id: 9, name: "Guerrier DPS" },
-    { id: 11, name: "Prêtre Ombre" },
-    { id: 12, name: "Druide Feral" },
-    { id: 13, name: "Chaman Amélio" }
-  ];
+
   const handleOpen = (): void => {
     setOpen(true);
   };

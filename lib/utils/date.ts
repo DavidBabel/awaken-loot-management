@@ -1,4 +1,5 @@
-import { format, parseISO } from "date-fns";
+import { differenceInCalendarDays, format, parseISO } from "date-fns";
+import { fr } from "date-fns/locale";
 import { DATE_FORMAT } from "../../server/config";
 
 export function formatDate(date: Date = new Date()) {
@@ -41,4 +42,30 @@ export function getDurationBetween(
     : durationFormat === "S"
     ? Math.floor(durationTimestamp / 1000 / 60)
     : 0;
+}
+
+export function getRaidDateInfos(raidDate: string) {
+  const raidDateD = parseISO(raidDate);
+  const inDays = differenceInCalendarDays(raidDateD, new Date());
+  const isPast = inDays < 0;
+  const locked = inDays <= 2;
+  const plural = inDays > 1 || inDays < -1 ? "s" : "";
+  const dateText = format(raidDateD, "EEEE dd MMMM", { locale: fr });
+  const dayText =
+    inDays === 0
+      ? "Aujourd'hui"
+      : isPast
+      ? `Il y a ${String(inDays).replace("-", "")} jour${plural}`
+      : `Dans ${inDays} jour${plural}`;
+
+  const longDateText = `Le ${dateText} (${dayText})`;
+
+  return {
+    inDays,
+    isPast,
+    locked,
+    dayText,
+    dateText,
+    longDateText
+  };
 }

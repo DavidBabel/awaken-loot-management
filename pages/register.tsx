@@ -105,7 +105,6 @@ export default function Pagelogin({ apolloClient }: Props) {
           <br />
           Une fois que ton compte sera créé il faudra utiliser{" "}
           <b>ton pseudo exact</b> de jeu et <b>ton mdp</b> pour te connecter{" "}
-          <br />
           (pas le hash).
           <br />
           <br />

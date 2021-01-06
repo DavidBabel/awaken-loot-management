@@ -24,7 +24,9 @@ CREATE TABLE "Players" (
   "active" boolean DEFAULT true,
   "inRoster" boolean DEFAULT false,
   "specialisation" varchar,
-  "rerollOf" varchar
+  "rerollOf" varchar,
+  "mdcOf" int,
+  "discordId" varchar
 );
 comment on table "Players" is E'@omit delete';
 CREATE UNIQUE INDEX ON "Players" ("id");
@@ -129,6 +131,7 @@ CREATE UNIQUE INDEX ON "Donjons" ("id");
 CREATE TABLE "Raids" (
   "id" SERIAL PRIMARY KEY,
   "title" varchar,
+  "comment" varchar,
   "donjonId" int NOT NULL,
   "date" varchar,
   "linkBetweenRaids" varchar,
@@ -148,8 +151,20 @@ CREATE TABLE "RaidPlayers" (
 -- comment on table "RaidPlayers" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "RaidPlayers" ("id");
 
+CREATE TABLE "RaidPlayersSubs" (
+    "id" SERIAL PRIMARY KEY,
+    "playerId" int NOT NULL,
+    "raidId" int NOT NULL,
+    "status" int
+  );
+-- comment on table "RaidPlayers" is E'@omit create,update,delete';
+CREATE UNIQUE INDEX ON "RaidPlayersSubs" ("id");
+CREATE UNIQUE INDEX ON "RaidPlayersSubs" ("playerId", "raidId");
+
+
 
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
+ALTER TABLE "Players" ADD FOREIGN KEY ("mdcOf") REFERENCES "Classes" ("id");
 ALTER TABLE "Raids" ADD FOREIGN KEY ("donjonId") REFERENCES "Donjons" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
@@ -157,6 +172,8 @@ ALTER TABLE "Loots" ADD FOREIGN KEY ("itemId") REFERENCES "Items" ("id");
 ALTER TABLE "Loots" ADD FOREIGN KEY ("bossId") REFERENCES "Bosses" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
 ALTER TABLE "RaidPlayers" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
+ALTER TABLE "RaidPlayersSubs" ADD FOREIGN KEY ("raidId") REFERENCES "Raids" ("id");
+ALTER TABLE "RaidPlayersSubs" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
 ALTER TABLE "Players" ADD FOREIGN KEY ("classId") REFERENCES "Classes" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("meritId") REFERENCES "Merit" ("id");
 ALTER TABLE "PlayerMerit" ADD FOREIGN KEY ("playerId") REFERENCES "Players" ("id");
@@ -7165,9 +7182,11 @@ VALUES
 -- 10 - Paladin
 
 
+INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster", "discordId", "mdcOf")
+VALUES
+('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true, '310385000337899522', 6);
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
-('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
 ('awaken'       , 6,  'player', 'a4261bb727d95e6df608247a6559571f', false, true), -- awakentest
 ('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', false, false),
 ('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', false, false),

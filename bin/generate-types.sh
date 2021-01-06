@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export PGUSER=postgres
+
 postgraphile -c test --no-server --export-schema-graphql schema.gql
 graphql-codegen --config gen-types-config.yml
 rm schema.gql

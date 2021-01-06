@@ -1,8 +1,11 @@
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Paper from "@material-ui/core/Paper";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  Typography
+} from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import { ApolloError } from "apollo-boost";
 import Link from "next/link";
 import { useState } from "react";
@@ -64,9 +67,9 @@ export function LoadingAndError({ loading, error }: Props) {
         </Button>
         {showError && (
           <div>
-            <pre>
-              <code>{JSON.stringify(error, null, 2)}</code>
-            </pre>
+            <textarea style={{ width: 800, height: 400 }}>
+              {JSON.stringify(error, null, 2)}
+            </textarea>
           </div>
         )}
       </Paper>
@@ -74,9 +77,11 @@ export function LoadingAndError({ loading, error }: Props) {
   }
   if (loading) {
     return (
-      <Paper className={classes.root}>
-        <CircularProgress />
-      </Paper>
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <CircularProgress />
+        </Grid>
+      </Grid>
     );
   }
   return null;

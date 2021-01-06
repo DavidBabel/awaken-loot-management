@@ -7,6 +7,7 @@ const { postgraphile } = require("postgraphile");
 const checkRoleMiddleware = require("./middleware/check-role");
 const checkTokenMiddleware = require("./middleware/check-token");
 const loginControler = require("./controlers/login");
+const discordControler = require("./controlers/discord");
 
 const express = require("express");
 const next = require("next");
@@ -48,6 +49,8 @@ app
         }
       )
     );
+
+    server.post("/api/discord", checkTokenMiddleware, discordControler);
 
     server.get("*", (req, res) => {
       return handle(req, res);

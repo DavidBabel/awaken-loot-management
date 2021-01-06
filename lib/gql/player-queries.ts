@@ -90,6 +90,8 @@ export const ALL_PLAYERS = gql`
         inRoster
         classId
         rerollOf
+        mdcOf
+        discordId
         role
         password
         specialisation
@@ -147,6 +149,10 @@ export const ALL_PLAYERS = gql`
   }
 `;
 
+export interface OnePlayerQueryVariables {
+  playerId?: number;
+}
+
 export const ONE_PLAYER = gql`
   query getOnePlayer($playerId: Int) {
     allPlayers(condition: { id: $playerId }) {
@@ -156,6 +162,7 @@ export const ONE_PLAYER = gql`
         specialisation
         active
         rerollOf
+        discordId
         classByClassId {
           id
           color
@@ -207,6 +214,33 @@ export const ONE_PLAYER = gql`
                 shortName
                 name
               }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ONE_PLAYER_LIGHT = gql`
+  query getOnePlayer($playerId: Int) {
+    allPlayers(condition: { id: $playerId }) {
+      nodes {
+        id
+        name
+        specialisation
+        active
+        rerollOf
+        discordId
+        classByClassId {
+          id
+          color
+          cdnImage
+          name
+          playersByMdcOf {
+            nodes {
+              id
+              discordId
             }
           }
         }

@@ -5,13 +5,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
-import { TransitionProps } from "@material-ui/core/transitions";
 import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { forwardRef, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import MemberContext from "../../lib/context/member";
 import { Mutation, Player, Query, RaidPlayer } from "../../lib/generatedTypes";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
@@ -49,12 +47,12 @@ const useStyles = makeStyles({
   }
 });
 // tslint:disable-next-line:no-shadowed-variable
-const Transition = forwardRef<unknown, TransitionProps>(function Transition(
-  props,
-  ref
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = forwardRef<unknown, TransitionProps>(function Transition(
+//   props,
+//   ref
+// ) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 interface CreateRaidPlayerVariables {
   playerId: number;
@@ -179,7 +177,7 @@ export default function PlayerList({
         fullWidth={true}
         maxWidth={"lg"}
         open={open}
-        TransitionComponent={Transition}
+        // TransitionComponent={Transition}
         keepMounted={true}
         onClose={handleClose}
         aria-labelledby="alert-dialog-slide-title"

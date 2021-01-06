@@ -36,7 +36,7 @@ Et il suffit ensuite de démarrer le serveur depuis l'utilitaire (postgres.app s
 
 Installer Postgres pour windows: https://www.postgresql.org/download/windows/
 
-Suivre ce tutorial pour installer postgres et configurer les variables d'environement PATH: https://www.supinfo.com/articles/single/977-creer-une-base-donnees-avec-postgresql-windows
+Suivre ce tutorial pour installer postgres et configurer les variables d'environement PATH: https://sqlbackupandftp.com/blog/setting-windows-path-for-postgres-tools
 
 Il est important de bien configurer les variables d'environement PATH comme indiqué dans le lien ci dessus pour pouvoir utiliser la commande "psql" dans l'invite de commandes Windows.
 
@@ -57,6 +57,12 @@ Lors des autres utilisations:
 
 1. se connecter a l'interface postgres: "-psql -U postgres"
 2. Se connecter a la db: "\c test"
+
+Pour enlever le mot de passe des scripts:
+
+Editer ce fichier:
+`C:\Program Files\PostgreSQL\11\data\pg_hba.conf`
+et remplacer les "md5" par "trust"
 
 ## windows
 

@@ -23,6 +23,8 @@ export const UPDATE_PLAYER = gql`
     $password: String
     $role: String
     $rerollOf: String
+    $mdcOf: String
+    $discordId: String
   ) {
     updatePlayerById(
       input: {
@@ -35,6 +37,8 @@ export const UPDATE_PLAYER = gql`
           password: $password
           role: $role
           rerollOf: $rerollOf
+          mdcOf: $mdcOf
+          discordId: $discordId
         }
       }
     ) {
@@ -47,6 +51,8 @@ export const UPDATE_PLAYER = gql`
         password
         role
         rerollOf
+        mdcOf
+        discordId
       }
     }
   }

@@ -11,12 +11,12 @@ import LootWindow, {
   LootWindowProps
 } from "../../components/summary/LootWindow";
 import PlayersTable from "../../components/summary/PlayersTable";
+import { getClassColor } from "../../lib/constants/class-colors";
 import { Loot, Player, Query } from "../../lib/generatedTypes";
 import { ALL_MERITS } from "../../lib/gql/merit-queries";
 import { ALL_ACTIVE_PLAYERS } from "../../lib/gql/player-queries";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { useToggle } from "../../lib/hooks/toggle";
-import { getClassColor } from "../../lib/utils/class-colors";
 
 interface TabPanelProps {
   children?: React.ReactNode;

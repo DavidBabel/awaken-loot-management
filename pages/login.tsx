@@ -87,6 +87,9 @@ export default function Pagelogin({ apolloClient }: Props) {
 
   const classes = useStyles({});
 
+  const errorFirstLetterUppecase =
+    String(username).charAt(0) !== String(username.charAt(0)).toUpperCase();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -98,6 +101,11 @@ export default function Pagelogin({ apolloClient }: Props) {
           Connexion
         </Typography>
         <div className={classes.form}>
+          {errorFirstLetterUppecase && (
+            <Typography style={{ color: "red" }}>
+              Il faut utiliser votre pseudo avec une majuscule
+            </Typography>
+          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -112,6 +120,12 @@ export default function Pagelogin({ apolloClient }: Props) {
               setUsername(e.target.value)
             }
           />
+          {password.length >= 32 && (
+            <Typography style={{ color: "red" }}>
+              Attention il faut utiliser ton mot de passe pour te connecter, pas
+              le hash.
+            </Typography>
+          )}
           <TextField
             variant="outlined"
             margin="normal"
@@ -150,6 +164,7 @@ export default function Pagelogin({ apolloClient }: Props) {
                       name: username,
                       role: memberInfos.role,
                       level: role[memberInfos.role] || 0,
+                      discordId: memberInfos.discordId || null,
                       token: jwtInfos.jwt
                     });
                     // localStorage.setItem('token', jwtInfos.jwt);

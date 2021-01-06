@@ -26,6 +26,7 @@ import ForwardIcon from "@material-ui/icons/Forward";
 import { ApolloQueryResult } from "apollo-boost";
 import { useContext, useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
+import { wowClasses } from "../../lib/constants/classes";
 import MemberContext from "../../lib/context/member";
 import {
   BossItem,
@@ -179,18 +180,6 @@ export default function AddLootDialog({
     closeSnackBar,
     snackBarMessage
   } = useSnackBar();
-  const wowClasses = [
-    { id: 0, name: "-- Classe --" },
-    { id: 1, name: "Prêtre" },
-    { id: 2, name: "Mage" },
-    { id: 3, name: "Démoniste" },
-    { id: 4, name: "Voleur" },
-    { id: 5, name: "Druide" },
-    { id: 6, name: "Chasseur" },
-    { id: 7, name: "Chaman" },
-    { id: 8, name: "Guerrier Tank" },
-    { id: 9, name: "Guerrier DPS" }
-  ];
 
   const handleOpen = (): void => {
     setOpen(true);

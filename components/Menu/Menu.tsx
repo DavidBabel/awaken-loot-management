@@ -4,6 +4,7 @@ import {
   ListItem,
   ListItemText,
   ListSubheader,
+  ListSubheaderProps,
   makeStyles
 } from "@material-ui/core";
 import Router, { useRouter } from "next/router";
@@ -29,7 +30,11 @@ const useStyles = makeStyles({
 });
 
 function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
+  return <ListItem style={{ height: 30 }} button component="a" {...props} />;
+}
+
+function ListHead(props: ListSubheaderProps) {
+  return <ListSubheader style={{ height: 40 }} {...props} />;
 }
 
 export function Menu({ handleDrawerClose }) {
@@ -43,7 +48,7 @@ export function Menu({ handleDrawerClose }) {
       {isConnected ? (
         <>
           <List>
-            <ListSubheader>Raids & Items</ListSubheader>
+            <ListHead>Raids & Items</ListHead>
             <ListItemLink
               href="/raid"
               onClick={() => {
@@ -86,7 +91,7 @@ export function Menu({ handleDrawerClose }) {
           </List>
           <Divider />
           <List>
-            <ListSubheader>Joueurs</ListSubheader>
+            <ListHead>Joueurs</ListHead>
 
             <ListItemLink
               href="/summary"
@@ -113,7 +118,7 @@ export function Menu({ handleDrawerClose }) {
             <>
               <Divider />
               <List>
-                <ListSubheader>Mon compte</ListSubheader>
+                <ListHead>Mon personnage</ListHead>
 
                 <ListItemLink
                   href={`/player/merit/${member.userid}`}
@@ -134,36 +139,59 @@ export function Menu({ handleDrawerClose }) {
                 >
                   <ListItemText primary="Ma spécialisation" />
                 </ListItemLink>
+
+                {/* <ListItemLink
+                  href={`/player/raid`}
+                  className={
+                    route.startsWith("/player/raid") ? classes.selected : ""
+                  }
+                >
+                  <ListItemText primary="Mes inscriptions raid" />
+                </ListItemLink> */}
               </List>
             </>
           )}
 
-          {member.level >= role.admin && (
+          {member.level >= role.classMaster && (
             <>
               <Divider />
               <List>
-                <ListSubheader>Admin</ListSubheader>
-
-                <ListItemLink
-                  href="/admin/editplayers"
+                <ListHead>Management</ListHead>
+                {/* <ListItemLink
+                  href="/admin/raid"
                   onClick={() => {
                     handleDrawerClose(onMobile);
                   }}
-                  className={
-                    route === "/admin/editplayers" ? classes.selected : ""
-                  }
+                  className={route === "/admin/raid" ? classes.selected : ""}
                 >
-                  <ListItemText primary="Editer joueurs" />
-                </ListItemLink>
-                <ListItemLink
-                  href="/admin/roster"
-                  onClick={() => {
-                    handleDrawerClose(onMobile);
-                  }}
-                  className={route === "/admin/roster" ? classes.selected : ""}
-                >
-                  <ListItemText primary="Editer roster (site)" />
-                </ListItemLink>
+                  <ListItemText primary="Inscriptions joueurs" />
+                </ListItemLink> */}
+                {member.level >= role.classMaster && (
+                  <>
+                    <ListItemLink
+                      href="/admin/editplayers"
+                      onClick={() => {
+                        handleDrawerClose(onMobile);
+                      }}
+                      className={
+                        route === "/admin/editplayers" ? classes.selected : ""
+                      }
+                    >
+                      <ListItemText primary="Editer joueurs" />
+                    </ListItemLink>
+                    <ListItemLink
+                      href="/admin/roster"
+                      onClick={() => {
+                        handleDrawerClose(onMobile);
+                      }}
+                      className={
+                        route === "/admin/roster" ? classes.selected : ""
+                      }
+                    >
+                      <ListItemText primary="Editer roster (site)" />
+                    </ListItemLink>
+                  </>
+                )}
               </List>
             </>
           )}
@@ -171,8 +199,8 @@ export function Menu({ handleDrawerClose }) {
           <Divider />
 
           <List>
-            <ListSubheader>Connecté: {member.name}</ListSubheader>
-            <ListItem
+            <ListHead>Connecté: {member.name}</ListHead>
+            <ListItemLink
               button={true}
               onClick={() => {
                 resetToken();
@@ -180,12 +208,12 @@ export function Menu({ handleDrawerClose }) {
               }}
             >
               <ListItemText primary="Se déconnecter" />
-            </ListItem>
+            </ListItemLink>
           </List>
         </>
       ) : (
         <List>
-          <ListSubheader>Connectez vous</ListSubheader>
+          <ListHead>Connectez vous</ListHead>
 
           <ListItemLink
             href="/login"

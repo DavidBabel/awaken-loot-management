@@ -3,7 +3,7 @@ const classColors = {
   ["Chasseur"]: "#ABD473",
   ["Mage"]: "#69CCF0",
   ["Prêtre"]: "grey",
-  ["Voleur"]: "rgba(255,230,0)",
+  ["Voleur"]: "rgb(255, 230, 0)",
   ["Chaman"]: "#0070DE",
   ["Démoniste"]: "#9482C9",
   ["Guerrier Tank"]: "#C79C6E",
@@ -15,8 +15,8 @@ const classColors = {
 
 const alternativeColor = {
   ...classColors,
-  ["Prêtre"]: "rgba(255,255,255)",
-  ["Prêtre Ombre"]: "rgba(255,255,255)"
+  ["Prêtre"]: "rgb(255, 255, 255)",
+  ["Prêtre Ombre"]: "rgb(255, 255, 255)"
 };
 
 export function getClassColor(classe: string, alternative: boolean = false) {

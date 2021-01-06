@@ -1,10 +1,10 @@
-import Head from 'next/head';
+import Head from "next/head";
 // import './global.scss';
 
 export function Header() {
   return (
     <Head>
-      <title>Awaken loot manager</title>
+      <title>Awaken raid manager</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <script
         dangerouslySetInnerHTML={{

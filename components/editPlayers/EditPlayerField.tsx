@@ -78,7 +78,7 @@ export default function EditPlayerField({
   } = useSnackBar();
 
   const isNameColumn = classColor;
-  const isNumberField = "classId" === accessor;
+  const isClassNumberField = "classId" === accessor || "mdcOf" === accessor;
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -92,7 +92,7 @@ export default function EditPlayerField({
   const confirm = () => {
     setLoading(true);
     // if (input.length > 0) {
-    const finalInput = isNumberField ? parseInt(input) : input;
+    const finalInput = isClassNumberField ? parseInt(input) : input;
 
     updatePlayer({
       variables: {
@@ -163,10 +163,10 @@ export default function EditPlayerField({
                 onChange={handleChange}
                 margin="dense"
                 variant="outlined"
-                type={isNumberField ? "number" : "text"}
+                type={isClassNumberField ? "number" : "text"}
               />
             )}
-            {"classId" === accessor && (
+            {isClassNumberField && (
               <div>
                 <div>1 - Prêtre</div>
                 <div>2 - Mage</div>

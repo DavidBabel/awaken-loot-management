@@ -18,9 +18,11 @@
 -- 10 - Paladin
 
 
+INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster", "discordId", "mdcOf")
+VALUES
+('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true, '310385000337899522', 6);
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
-('Devilhunter'  , 6,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
 ('awaken'       , 6,  'player', 'a4261bb727d95e6df608247a6559571f', false, true), -- awakentest
 ('admin'        , 1,  'admin', '84ad2112b283ac8f9e59d062d531917b', false, false),
 ('officer'      , 1,  'officer', '071b8d0d37313edbaf88c5f8cc198a22', false, false),

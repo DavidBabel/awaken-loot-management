@@ -110,11 +110,14 @@ export default function PageIndex() {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell align="right">Class</TableCell>
-              <TableCell align="right">Role</TableCell>
-              <TableCell align="right">Reroll de</TableCell>
-              <TableCell align="right">Crypted Pass</TableCell>
+              <TableCell align="left">Class</TableCell>
+              <TableCell align="left">Role</TableCell>
+              <TableCell align="left">Reroll de</TableCell>
+              <TableCell align="left">Crypted Pass</TableCell>
+              <TableCell align="left">Discord</TableCell>
+              <TableCell align="left">mdc</TableCell>
               <TableCell align="center">Active</TableCell>
+              <TableCell align="center">Raideur</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -156,12 +159,28 @@ export default function PageIndex() {
                   accessor={"password"}
                   label={Boolean(player.password) ? "oui" : "-"}
                 />
-
+                <EditPlayerField
+                  playerId={player.id}
+                  accessor={"discordId"}
+                  label={Boolean(player.discordId) ? "oui" : "-"}
+                />
+                <EditPlayerField
+                  playerId={player.id}
+                  accessor={"mdcOf"}
+                  label={Boolean(player.mdcOf) ? "oui" : "-"}
+                />
                 <TableCell align="center">
                   <InRosterAndActiveSwitch
                     active={player.active}
                     playerId={player.id}
                     accessor={"active"}
+                  />
+                </TableCell>
+                <TableCell align="center">
+                  <InRosterAndActiveSwitch
+                    active={player.inRoster}
+                    playerId={player.id}
+                    accessor={"inRoster"}
                   />
                 </TableCell>
               </TableRow>

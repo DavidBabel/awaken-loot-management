@@ -8,3 +8,4 @@ schema.gql
 db/backups/*
 !db/backups/.keepit
 *.log
+lib/discord/test.js
