@@ -17,18 +17,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
-import { UPDATE_PLAYER } from "../../lib/gql/player-mutations";
+import {
+  UPDATE_PLAYER,
+  UpdatePlayerVariables
+} from "../../lib/gql/player-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
-
-interface UpdatePlayerVariables {
-  id: number;
-  active?: boolean;
-  name?: string;
-  inRoster?: boolean;
-  password?: string;
-  classId?: number;
-  role?: string;
-}
 
 const useStyles = makeStyles({
   button: { marginLeft: 5 },

@@ -3,16 +3,10 @@ import { CircularProgress, Switch } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
-import { UPDATE_PLAYER } from "../../lib/gql/player-mutations";
-
-interface UpdatePlayerVariables {
-  id: number;
-  active?: boolean;
-  name?: string;
-  inRoster?: boolean;
-  password?: string;
-  role?: string;
-}
+import {
+  UPDATE_PLAYER,
+  UpdatePlayerVariables
+} from "../../lib/gql/player-mutations";
 
 const useStyles = makeStyles({
   switch: { position: "relative" },

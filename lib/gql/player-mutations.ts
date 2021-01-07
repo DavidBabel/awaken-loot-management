@@ -13,6 +13,19 @@ export const CREATE_PLAYER = gql`
   }
 `;
 
+export interface UpdatePlayerVariables {
+  id: number;
+  active?: boolean;
+  inRoster?: boolean;
+  classId?: number;
+  name?: string;
+  password?: string;
+  role?: string;
+  rerollOf?: string;
+  mdcOf?: number;
+  discordId?: string;
+}
+
 export const UPDATE_PLAYER = gql`
   mutation UpdatePlayer(
     $id: Int!
@@ -23,7 +36,7 @@ export const UPDATE_PLAYER = gql`
     $password: String
     $role: String
     $rerollOf: String
-    $mdcOf: String
+    $mdcOf: Int
     $discordId: String
   ) {
     updatePlayerById(
