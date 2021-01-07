@@ -33,4 +33,7 @@ pg_dump $PROD_DB --data-only -t "public.\"Raids\"" > "./db/backups/$date/db-tabl
 echo -e $RED Backup RaidPlayers ... $NC
 pg_dump $PROD_DB --data-only -t "public.\"RaidPlayers\"" > "./db/backups/$date/db-table-raidplayers.sql"
 
+echo -e $RED Backup RaidPlayersSubs ... $NC
+pg_dump $PROD_DB --data-only -t "public.\"RaidPlayersSubs\"" > "./db/backups/$date/db-table-raidplayerssubs.sql"
+
 echo -e $RED Backup finished $NC

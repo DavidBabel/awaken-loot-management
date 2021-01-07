@@ -56,3 +56,6 @@ psql $PROD_DB < ./db/backups/$date/db-table-raidplayers.sql
 
 echo -e $RED Import loots ... $NC
 psql $PROD_DB < ./db/backups/$date/db-table-loots.sql
+
+echo -e $RED Import Raid Players Subs ... $NC
+psql $PROD_DB < ./db/backups/$date/db-table-raidplayerssubs.sql
