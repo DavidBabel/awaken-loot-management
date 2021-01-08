@@ -7,6 +7,6 @@ module.exports = {
   ID_UNASSIGNED: process.env.ID_UNASSIGNED || "166",
   JWT_SECRET: process.env.JWT_SECRET || "any",
   SALT: "this_is_awaken_and_we_will_kill_Kelthuzad",
-  SERVER_URL: process.env.SERVER_URL || "http://localhost:3000",
+  SERVER_URL: "https://" + process.env.SERVER_URL || "http://localhost:3000",
   DISCORD_TOKEN: process.env.DISCORD_TOKEN || ""
 };
