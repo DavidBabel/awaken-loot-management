@@ -33,7 +33,7 @@ export function discordMessageChangedMember(
       status
     ).toLowerCase()} pour le raid du ${dateText} à **${
       raid.donjonByDonjonId.name
-    }**. Voir : ${CONFIG.SERVER_URL}player/raid.
+    }**. Voir : ${CONFIG.SERVER_URL}/player/raid.
   `.trim();
   } else if (status === SubscribeStatus.Valide) {
     return `
@@ -41,7 +41,7 @@ export function discordMessageChangedMember(
         status
       ).toLowerCase()}** ta participation au raid du ${dateText} à **${
       raid.donjonByDonjonId.name
-    }**. Voir : ${CONFIG.SERVER_URL}player/raid.
+    }**. Voir : ${CONFIG.SERVER_URL}/player/raid.
     `.trim();
   } else if (status === SubscribeStatus.Present) {
     return `
@@ -49,7 +49,7 @@ export function discordMessageChangedMember(
         status
       ).toLowerCase()} au raid du ${dateText} à **${
       raid.donjonByDonjonId.name
-    }**. Voir : ${CONFIG.SERVER_URL}player/raid.
+    }**. Voir : ${CONFIG.SERVER_URL}/player/raid.
       Si ce n'est pas toi qui lui a demandé, contacte le rapidement.
     `.trim();
   } else if (status === SubscribeStatus.Absent) {
@@ -58,7 +58,7 @@ export function discordMessageChangedMember(
         status
       ).toLowerCase()} au raid du ${dateText} à **${
       raid.donjonByDonjonId.name
-    }**. Voir : ${CONFIG.SERVER_URL}player/raid.
+    }**. Voir : ${CONFIG.SERVER_URL}/player/raid.
       Si ce n'est pas toi qui lui a demandé, contacte le rapidement.
     `.trim();
   }
@@ -76,6 +76,6 @@ export function discordMessageSubMDC(
     status
   )}"** au raid du ${dateText} à **${raid.donjonByDonjonId.name}**. Voir: ${
     CONFIG.SERVER_URL
-  }admin/raid.
+  }/admin/raid.
   `.trim();
 }

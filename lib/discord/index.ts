@@ -8,7 +8,7 @@ export function sendDiscordMessage(
   if (!userId || !message) {
     return null;
   }
-  return fetch(`${CONFIG.SERVER_URL}api/discord`, {
+  return fetch(`${CONFIG.SERVER_URL}/api/discord`, {
     method: "POST",
     headers: {
       Accept: "application/json",
