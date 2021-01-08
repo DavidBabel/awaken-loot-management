@@ -1,5 +1,6 @@
 import "date-fns";
 import App from "next/app";
+import dynamic from "next/dynamic";
 import React from "react";
 import withApolloClient from "../lib/apollo-setup/with-apollo-client";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -34,4 +35,10 @@ class AppWithApollo extends App {
   }
 }
 
-export default withApolloClient(AppWithApollo);
+export default withApolloClient(
+  dynamic(() =>
+    Promise.resolve(AppWithApollo, {
+      ssr: false
+    })
+  )
+);

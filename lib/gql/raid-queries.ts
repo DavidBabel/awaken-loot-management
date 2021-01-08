@@ -69,6 +69,7 @@ export const ALL_RAIDS_LIGHT = gql`
           id
           name
           shortName
+          cdnIconImage
         }
         raidPlayersByRaidId {
           totalCount

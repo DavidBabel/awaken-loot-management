@@ -190,7 +190,12 @@ export function Dashboard({ children, isMobile }: Props) {
           >
             <span>Awaken Raid Management</span>
             <div className={classes.logo}>
-              <img alt="awaken logo" src="/icon/white_icon.svg" width="100%" />
+              {/* <img alt="awaken logo" src="/icon/white_icon.svg" width="100%" /> */}
+              <img
+                alt="awaken logo"
+                src="https://svgshare.com/i/Svi.svg"
+                width="100%"
+              />
             </div>
           </Typography>
           {/* <IconButton color="inherit">
