@@ -443,7 +443,7 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
                             alt={raid.donjonByDonjonId.name}
                             style={{ marginRight: 13, width: 25, height: 25 }}
                             src={
-                              raid.donjonByDonjonId?.cdnImage ||
+                              raid.donjonByDonjonId?.cdnIconImage ||
                               getDonjonIconUrl(raid.donjonByDonjonId.name)
                             }
                           />

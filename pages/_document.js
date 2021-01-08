@@ -12,7 +12,12 @@ class DocumentWithStyles extends Document {
             name="viewport"
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
-          <link rel="icon" type="image/png" href="/icon/favicon.png" />
+          {/* <link rel="icon" type="image/png" href="/icon/favicon.png" /> */}
+          <link
+            rel="icon"
+            type="image/png"
+            href="https://i.imgur.com/NQurgjs.png"
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
