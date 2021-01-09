@@ -8,15 +8,14 @@ import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { MeritLine } from "../../../components/MeritLine";
 import MemberContext from "../../../lib/context/member";
 import { Merit, Query } from "../../../lib/generatedTypes";
-import { PLAYER_MERIT } from "../../../lib/gql/merit-queries";
+import {
+  PLAYER_MERIT,
+  PlayerMeritVariables
+} from "../../../lib/gql/merit-queries";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
 import { byValue } from "../../../lib/utils/sorter";
 import { stringToId } from "../../../lib/utils/string";
-
-interface Variables {
-  playerId: number;
-}
 
 const useStyles = makeStyles({
   paper: {
@@ -48,16 +47,15 @@ export default function PageEditPlayer() {
   const {
     loading: loadingMerits,
     data: dataMerits,
-    error: errorMerits,
-    refetch
-  } = useQuery<Query, Variables>(PLAYER_MERIT, {
+    error: errorMerits
+  } = useQuery<Query, PlayerMeritVariables>(PLAYER_MERIT, {
     variables: { playerId }
   });
   const {
     loading: loadingPlayer,
     data: dataPlayer,
     error: errorPlayer
-  } = useQuery<Query, Variables>(ONE_PLAYER, {
+  } = useQuery<Query, PlayerMeritVariables>(ONE_PLAYER, {
     variables: { playerId }
   });
 
@@ -226,7 +224,6 @@ export default function PageEditPlayer() {
                       categorie: trimParenthesis(merit.categorie)
                     }}
                     playerId={playerId}
-                    refetchMerits={refetch}
                     parentLoading={loading}
                     isOfficer={member.level >= role.class_master}
                   />

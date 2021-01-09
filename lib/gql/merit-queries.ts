@@ -1,5 +1,9 @@
 import { gql } from "apollo-boost";
 
+export interface PlayerMeritVariables {
+  playerId: number;
+}
+
 export const PLAYER_MERIT = gql`
   query OnePlayerMerit($playerId: Int) {
     allMerits(condition: { active: true }) {

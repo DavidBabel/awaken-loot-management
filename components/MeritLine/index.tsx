@@ -25,7 +25,6 @@ interface Variables {
 interface Props extends Merit {
   isOfficer: boolean;
   playerId: number;
-  refetchMerits: () => void;
   parentLoading: boolean;
 }
 
@@ -39,7 +38,6 @@ export function MeritLine({
   playerMeritsByMeritId: { nodes },
   classByClassId,
   playerId,
-  refetchMerits,
   parentLoading,
   isOfficer
 }: Props) {
@@ -55,6 +53,7 @@ export function MeritLine({
   }
 
   const [currentState, setState] = useState(meritState);
+  const [currentPlayerMeritId, setCurrentPlayerMeritId] = useState(merit?.id);
 
   const [
     createMerit,
@@ -75,9 +74,11 @@ export function MeritLine({
     if (nextState === EMPTY) {
       deleteMerit({
         variables: {
-          id: merit.id
+          id: currentPlayerMeritId
         }
-      }).then(refetchMerits);
+      }).then(({ data }) => {
+        setCurrentPlayerMeritId(undefined);
+      });
     } else if (nextState === SUBMITTED) {
       createMerit({
         variables: {
@@ -86,17 +87,21 @@ export function MeritLine({
           playerId,
           validated: false
         }
-      }).then(refetchMerits);
+      }).then(({ data }) => {
+        setCurrentPlayerMeritId(data.createPlayerMerit.playerMerit.id);
+      });
     } else if (nextState === VALIDATED) {
       updateMerit({
         variables: {
-          id: merit.id,
+          id: currentPlayerMeritId,
           date: formatDate(new Date()),
           meritId: id,
           playerId,
           validated: true
         }
-      }).then(refetchMerits);
+      }).then(({ data }) => {
+        setCurrentPlayerMeritId(data.updatePlayerMeritById.playerMerit.id);
+      });
     }
   }
 
@@ -141,7 +146,7 @@ export function MeritLine({
         <span>
           <Tooltip title={comment || ""} placement="right">
             <span>
-              {debug && `${id} - ${(merit && merit.id) || "X"}`}
+              {debug && `${id} - ${currentPlayerMeritId || "X"}`}
               {loading ? (
                 <div style={{ width: 42, height: 42, display: "inline-block" }}>
                   <CircularProgress
