@@ -140,14 +140,16 @@ export function Menu({ handleDrawerClose }) {
                   <ListItemText primary="Ma spécialisation" />
                 </ListItemLink>
 
-                {/* <ListItemLink
-                  href={`/player/raid`}
-                  className={
-                    route.startsWith("/player/raid") ? classes.selected : ""
-                  }
-                >
-                  <ListItemText primary="Mes inscriptions raid" />
-                </ListItemLink> */}
+                {member.name === "Devilhunter" && (
+                  <ListItemLink
+                    href={`/player/raid`}
+                    className={
+                      route.startsWith("/player/raid") ? classes.selected : ""
+                    }
+                  >
+                    <ListItemText primary="Mes inscriptions raid" />
+                  </ListItemLink>
+                )}
               </List>
             </>
           )}
@@ -157,15 +159,17 @@ export function Menu({ handleDrawerClose }) {
               <Divider />
               <List>
                 <ListHead>Management</ListHead>
-                {/* <ListItemLink
-                  href="/admin/raid"
-                  onClick={() => {
-                    handleDrawerClose(onMobile);
-                  }}
-                  className={route === "/admin/raid" ? classes.selected : ""}
-                >
-                  <ListItemText primary="Inscriptions joueurs" />
-                </ListItemLink> */}
+                {member.name === "Devilhunter" && (
+                  <ListItemLink
+                    href="/admin/raid"
+                    onClick={() => {
+                      handleDrawerClose(onMobile);
+                    }}
+                    className={route === "/admin/raid" ? classes.selected : ""}
+                  >
+                    <ListItemText primary="Inscriptions joueurs" />
+                  </ListItemLink>
+                )}
                 {member.level >= role.classMaster && (
                   <>
                     <ListItemLink
