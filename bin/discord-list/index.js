@@ -15,7 +15,10 @@ DiscordClient.on("message", message => {
   let channelId;
   let channelName;
 
-  if (cmd.startsWith("check pi")) {
+  if (cmd.startsWith("check pr")) {
+    channelName = "Préparation";
+    channelId = "790299052159533058";
+  } else if (cmd.startsWith("check pi")) {
     channelName = "Pickup";
     channelId = "634181864118026249";
   } else if (cmd.startsWith("check th")) {
@@ -40,8 +43,8 @@ DiscordClient.on("message", message => {
   console.log("Selection du channel vocal: Raid -", channelName);
   const players = message.guild.channels
     .resolve(channelId)
-    .members.sort()
-    .map(member => member.nickname);
+    .members.map(member => member.nickname || member.user.username)
+    .sort();
 
   if (players.length > 0) {
     message.reply(
