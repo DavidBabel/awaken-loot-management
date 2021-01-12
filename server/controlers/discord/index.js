@@ -4,7 +4,7 @@ const DiscordClient = require("./client");
  * @param {Express.Request} req
  * @param {Express.Response} res
  */
-module.exports = async function loginRoute(req, res) {
+module.exports = async function discordRoute(req, res) {
   DiscordClient.users
     .fetch(req.body.discordId)
     .then(user => {

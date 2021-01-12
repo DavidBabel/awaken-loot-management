@@ -5312,6 +5312,13 @@ function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
+g-sheets-api@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/g-sheets-api/-/g-sheets-api-1.4.1.tgz#9469be94f1a90cfb7058cce9220778b6a1362350"
+  integrity sha512-kilr8ZGwqpX+JpxChWX2qIPic/MlG71sYOGd3jVdCCOOkbT8RPU1bZaISuLLf1rvx1CCyks2UNv+xEnsHIETMQ==
+  dependencies:
+    node-fetch "^2.6.1"
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
