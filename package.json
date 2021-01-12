@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
-    "discord": "node ./bin/discord-list/index.js",
+    "discord": "node ./server/controlers/discord/client.js",
     "gql": "node server/graphiql-dev.js",
     "db-backup": "bin/db/backup-prod.sh",
     "db-restore-backup": "bin/db/restore-db/restore-db-backup.sh",
