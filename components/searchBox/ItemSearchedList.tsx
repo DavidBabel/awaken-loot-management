@@ -10,6 +10,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { BossItem, Item } from "../../lib/generatedTypes";
+import { copyToClipboard } from "../../lib/utils/copy";
 import {
   lootColorLevel1,
   lootColorLevel2,
@@ -88,6 +89,38 @@ const useStyles = makeStyles(theme =>
   })
 );
 
+function getPriosText(item: Item) {
+  const prios = item.classByClassId ? [item.classByClassId.name] : [];
+  const nonPrio = [];
+
+  item.classItemsByItemId.nodes.forEach(playerClass => {
+    if (playerClass.prio) {
+      prios.push(playerClass.classByClassId.name);
+    } else {
+      nonPrio.push(playerClass.classByClassId.name);
+    }
+  });
+
+  const hasPrios = prios.length > 0;
+  const hasNonPrios = nonPrio.length > 0;
+
+  const nonPrioText = hasNonPrios && hasPrios ? "[Sans prio]" : "[PRIO]";
+
+  const prioLine = hasPrios ? `/o ${item.name} [PRIO] ${prios.join(", ")}` : "";
+  const nonPrioLine = hasNonPrios
+    ? `
+/o ${item.name} ${nonPrioText} ${nonPrio.join(", ")}`
+    : "";
+
+  const comment = item.classItemsByItemId?.nodes[0]?.comment;
+  const commentLine = comment
+    ? `
+/o ${item.name} [Commentaire] ${comment}`
+    : "";
+
+  return `${prioLine}${nonPrioLine}${commentLine}`.trim();
+}
+
 interface Props {
   items: Item[];
   searched: string;
@@ -132,7 +165,7 @@ export default function ItemSearchedList({
         (results.length === 0 ? (
           <Typography>Aucun résultat trouvé</Typography>
         ) : (
-          results.map(result => {
+          results.map((result: Item) => {
             const lootedNb = result.lootsByItemId.nodes.filter(l => l.active)
               .length;
 
@@ -140,6 +173,10 @@ export default function ItemSearchedList({
               <ListItem
                 key={`listitemline-${result.id}`}
                 button={true}
+                onContextMenu={e => {
+                  e.preventDefault();
+                  copyToClipboard(getPriosText(result));
+                }}
                 onClick={() => {
                   setItemCurrentlySelected(result);
                   handleOpenItemInfo();
@@ -168,7 +205,11 @@ export default function ItemSearchedList({
                     </>
                   }
                 />
-                {!result.classByClassId ? (
+                {result.classByClassId ? (
+                  <ListItemAvatar>
+                    <ClassAvatar playerClass={result.classByClassId.name} />
+                  </ListItemAvatar>
+                ) : (
                   result.classItemsByItemId.nodes.map(playerClass => (
                     <ListItemAvatar
                       key={`listitemavatar-${playerClass.classByClassId.id +
@@ -180,10 +221,6 @@ export default function ItemSearchedList({
                       />
                     </ListItemAvatar>
                   ))
-                ) : (
-                  <ListItemAvatar>
-                    <ClassAvatar playerClass={result.classByClassId.name} />
-                  </ListItemAvatar>
                 )}
                 <ListItemText
                   className={

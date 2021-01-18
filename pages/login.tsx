@@ -155,9 +155,9 @@ export default function Pagelogin({ apolloClient }: Props) {
                 password,
                 jwtInfos => {
                   if (jwtInfos.error) {
-                    setMessage("NOT WORKING");
+                    setMessage("IMPOSSIBLE DE SE CONNECTER");
                   } else {
-                    setMessage("LoggedIn");
+                    setMessage("Connecté");
                     const memberInfos: any = jwt.decode(jwtInfos.jwt);
                     const payload = JSON.stringify({
                       userid: memberInfos.userid,

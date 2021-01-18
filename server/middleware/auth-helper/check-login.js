@@ -27,6 +27,7 @@ async function checkLogin(username, password) {
   }
 
   if (
+    result &&
     result.password &&
     result.password.trim().length > 0 &&
     password &&

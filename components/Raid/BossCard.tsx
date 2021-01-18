@@ -99,7 +99,8 @@ const useStyles = makeStyles(theme => ({
   },
   playerCell: {
     width: 120,
-    lineHeight: "44px",
+    height: 44,
+    padding: "9px 0",
     margin: "0px 10px",
     textAlign: "center",
     backgroundColor: "#F5F5F5",
