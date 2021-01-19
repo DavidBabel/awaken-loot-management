@@ -31,10 +31,7 @@ export const ALL_ITEMS = gql`
             }
           }
         }
-        lootsByItemId {
-          nodes {
-            active
-          }
+        lootsByItemId(condition: { active: true }) {
           totalCount
         }
       }

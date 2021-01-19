@@ -166,8 +166,7 @@ export default function ItemSearchedList({
           <Typography>Aucun résultat trouvé</Typography>
         ) : (
           results.map((result: Item) => {
-            const lootedNb = result.lootsByItemId.nodes.filter(l => l.active)
-              .length;
+            const lootedNb = result.lootsByItemId.totalCount;
 
             return (
               <ListItem

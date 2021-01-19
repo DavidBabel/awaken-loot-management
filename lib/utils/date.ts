@@ -19,7 +19,14 @@ export function getDate(
 ) {
   const dateToTreat = typeof date === "string" ? date : formatDate(date);
   const finalDate = parseISO(dateToTreat);
-  return format(finalDate, output);
+  return format(finalDate, output, { locale: fr });
+}
+
+export function getDateText(date: Date | string = new Date()) {
+  return getDate(date, "EEEE d MMMM");
+}
+export function getDateTextYear(date: Date | string = new Date()) {
+  return getDate(date, "EEEE d MMMM yyyy");
 }
 
 export function getCurrentYear() {

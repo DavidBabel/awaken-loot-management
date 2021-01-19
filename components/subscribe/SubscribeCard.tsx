@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import { ApolloQueryResult } from "apollo-boost";
+import { useState } from "react";
 import {
   discordMessageSubMDC,
   discordMessageSubMember
@@ -54,6 +55,8 @@ export function SubscribeCard({
   const sub = raid.raidPlayersSubsByRaidId.nodes[0];
   const { isPast, locked, longDateText } = getRaidDateInfos(raid.date);
 
+  const [canClick, setCanClick] = useState(true);
+
   const disableNonInscrit =
     sub?.status && sub?.status !== SubscribeStatus.NonInscrit;
 
@@ -69,10 +72,11 @@ export function SubscribeCard({
     }
     return (
       <Button
-        disabled={disabled}
+        disabled={disabled || !canClick}
         color={isCurrentStatus ? "secondary" : "primary"}
         onClick={() => {
           if (!isCurrentStatus && !disabled && !lockedBtn) {
+            setCanClick(false);
             setRaidPlayerSub(
               {
                 raidPLayerSubId: sub?.id,
@@ -84,6 +88,10 @@ export function SubscribeCard({
               discordMessageSubMDC
             )
               .then(refetchRaids)
+              .then(() => {
+                setCanClick(!locked);
+              })
+
               .catch(e => {
                 console.log(e);
               });
@@ -127,9 +135,7 @@ export function SubscribeCard({
         <Grid item xs={4}>
           {isPast ? (
             <Typography>Ce raid est passé</Typography>
-          ) : locked ? (
-            <Typography>Inscription vérouillée, contacte ton MDC</Typography>
-          ) : sub?.status === SubscribeStatus.Valide ? (
+          ) : valide ? (
             <Tooltip
               title="Tu as déjà été validé pour ce raid, pour changer ta disponibilité, contacte ton MDC"
               placement="left"
@@ -143,7 +149,7 @@ export function SubscribeCard({
                 <SubButton status={SubscribeStatus.Valide} locked />
               </ButtonGroup>
             </Tooltip>
-          ) : sub?.status === SubscribeStatus.EnRotation ? (
+          ) : enRotation ? (
             <Tooltip
               title="Tu as déjà été mis en rotation pour ce raid, pour changer ta disponibilité, contacte ton MDC"
               placement="left"
@@ -157,6 +163,8 @@ export function SubscribeCard({
                 <SubButton status={SubscribeStatus.Valide} disabled />
               </ButtonGroup>
             </Tooltip>
+          ) : locked ? (
+            <Typography>Inscription vérouillée, contacte ton MDC</Typography>
           ) : (
             <ButtonGroup
               size="large"
@@ -170,6 +178,7 @@ export function SubscribeCard({
               />
               <SubButton status={SubscribeStatus.Present} disabled={locked} />
               <SubButton status={SubscribeStatus.Absent} disabled={locked} />
+              <SubButton status={SubscribeStatus.SiBesoin} disabled={locked} />
             </ButtonGroup>
           )}
         </Grid>

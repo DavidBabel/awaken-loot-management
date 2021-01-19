@@ -4,7 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
+  // CardMedia,
   Grid,
   Link
 } from "@material-ui/core";
@@ -22,7 +22,7 @@ function FastCard({ title, children, link }: Props) {
     <Grid item={true} xs={6}>
       <Card style={{ margin: 10, padding: 10 }}>
         <CardHeader title={title} />
-        <CardMedia />
+        {/* <CardMedia /> */}
         <CardContent>{children}</CardContent>
 
         <CardActions style={{ justifyContent: "flex-end" }}>

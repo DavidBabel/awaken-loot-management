@@ -1,14 +1,15 @@
-import { Button, ButtonProps, Grid } from "@material-ui/core/";
+import { Button, ButtonProps, Grid, Tooltip } from "@material-ui/core/";
 import React from "react";
 import { Player, Raid } from "../../lib/generatedTypes";
 import { hasSubMoved } from "../../lib/utils/subs";
 import { SubChange } from "../../pages/admin/raid";
-import { SubscribeStatus } from "./subscribe-status";
+import { getSubscribeLabel, SubscribeStatus } from "./subscribe-status";
 
 interface Props {
   players: Player[];
   iconUrl: string;
   raid: Raid;
+  isPast: boolean;
   playerClass: string;
   subChanges: SubChange[];
   currentStatus: SubscribeStatus;
@@ -43,26 +44,29 @@ export function SubPlayerList({
   iconUrl,
   subChanges,
   currentStatus,
+  isPast,
   playerClass,
   pushSubChanges
 }: Props) {
   function ActionButton({ player, status, from, ...props }: ActionButtonProps) {
     const isMoved = typeof from !== "undefined";
     return (
-      <Button
-        disabled={currentStatus === status}
-        variant="outlined"
-        onClick={() =>
-          pushSubChanges({
-            player,
-            raid,
-            status,
-            from: isMoved ? from : currentStatus
-          })
-        }
-        style={actionbuttonStyle}
-        {...props}
-      />
+      <Tooltip title={getSubscribeLabel(status)}>
+        <Button
+          disabled={currentStatus === status}
+          variant="outlined"
+          onClick={() =>
+            pushSubChanges({
+              player,
+              raid,
+              status,
+              from: isMoved ? from : currentStatus
+            })
+          }
+          style={actionbuttonStyle}
+          {...props}
+        />
+      </Tooltip>
     );
   }
 
@@ -86,7 +90,16 @@ export function SubPlayerList({
         status={SubscribeStatus.Present}
         from={from}
       >
-        P
+        D
+      </ActionButton>
+    );
+    const SiBesoin = () => (
+      <ActionButton
+        player={player}
+        status={SubscribeStatus.SiBesoin}
+        from={from}
+      >
+        SB
       </ActionButton>
     );
     const Rotation = () => (
@@ -124,36 +137,47 @@ export function SubPlayerList({
             {player.name}
           </span>
         </Grid>
-        <Grid item xs={6} style={{ textAlign: "right", paddingRight: 5 }}>
-          {currentStatus === SubscribeStatus.NonInscrit ? (
-            <>
-              <Absent />
-              <Present />
-            </>
-          ) : currentStatus === SubscribeStatus.Absent ? (
-            <>
-              <Absent />
-              <Present />
-            </>
-          ) : currentStatus === SubscribeStatus.Present ? (
-            <>
-              <Absent />
-              <Present />
-              <Rotation />
-              <Valide />
-            </>
-          ) : currentStatus === SubscribeStatus.EnRotation ? (
-            <>
-              <Rotation />
-              <Valide />
-            </>
-          ) : currentStatus === SubscribeStatus.Valide ? (
-            <>
-              <Rotation />
-              <Valide />
-            </>
-          ) : null}
-        </Grid>
+        {!isPast && (
+          <Grid item xs={6} style={{ textAlign: "right", paddingRight: 5 }}>
+            {currentStatus === SubscribeStatus.NonInscrit ? (
+              <>
+                <Absent />
+                <Present />
+                <SiBesoin />
+              </>
+            ) : currentStatus === SubscribeStatus.Absent ? (
+              <>
+                <Absent />
+                <Present />
+                <SiBesoin />
+              </>
+            ) : currentStatus === SubscribeStatus.SiBesoin ? (
+              <>
+                <Absent />
+                <Present />
+                <SiBesoin />
+              </>
+            ) : currentStatus === SubscribeStatus.Present ? (
+              <>
+                <Absent />
+                <Present />
+                <SiBesoin />
+                <Rotation />
+                <Valide />
+              </>
+            ) : currentStatus === SubscribeStatus.EnRotation ? (
+              <>
+                <Rotation />
+                <Valide />
+              </>
+            ) : currentStatus === SubscribeStatus.Valide ? (
+              <>
+                <Rotation />
+                <Valide />
+              </>
+            ) : null}
+          </Grid>
+        )}
       </Grid>
     );
   }

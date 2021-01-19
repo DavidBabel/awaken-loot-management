@@ -1,17 +1,20 @@
 import { gql } from "apollo-boost";
 
 export interface UserSubsVariables {
-  playerId: number;
+  playerId?: number;
+  raidId?: number;
 }
 
 export const USER_SUBS = gql`
-  query AllRaidPlayersSubs($playerId: Int) {
+  query AllRaidPlayersSubs($playerId: Int, $raidId: Int) {
     allRaids(first: 12, orderBy: DATE_DESC, condition: { active: true }) {
       nodes {
         active
         date
         id
-        raidPlayersSubsByRaidId(condition: { playerId: $playerId }) {
+        raidPlayersSubsByRaidId(
+          condition: { playerId: $playerId, raidId: $raidId }
+        ) {
           nodes {
             id
             status

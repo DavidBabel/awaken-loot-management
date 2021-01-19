@@ -1,5 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, CardMedia, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardMedia,
+  Grid,
+  ListItem,
+  Tooltip,
+  Typography
+} from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import React, { useEffect } from "react";
 import { wowClasses } from "../../lib/constants/classes";
@@ -19,6 +27,18 @@ interface Props extends Raid {
   subChanges: SubChange[];
   pushSubChanges: (sc: SubChange) => void;
   Emitter: any;
+}
+
+const actionbuttonStyle = {
+  margin: 2,
+  padding: 0,
+  width: 20,
+  maxWidth: 20,
+  minWidth: 20
+};
+
+function ListItemLink(props) {
+  return <ListItem style={{ height: 30 }} button component="a" {...props} />;
 }
 
 export function RaidCard({
@@ -74,16 +94,32 @@ export function RaidCard({
         <Grid item xs={12}>
           <Typography style={{ padding: "0px 6px" }}>
             {capitalizeFirstLetter(dateText)}
-            <br />
-            {dayText}
           </Typography>
         </Grid>
+        <Grid item xs={8}>
+          <Typography style={{ padding: "0px 6px" }}>{dayText}</Typography>
+        </Grid>
+        {!isPast && (
+          <>
+            <Grid item xs={4}>
+              <Tooltip title="Voir la compo">
+                <ListItemLink href={`/admin/raid/compo/${raid.id}`}>
+                  <Button style={actionbuttonStyle}>/</Button>
+                </ListItemLink>
+              </Tooltip>
+              <Tooltip title="ping les non inscrits">
+                <Button style={actionbuttonStyle}>🔔</Button>
+              </Tooltip>
+            </Grid>
+          </>
+        )}
         <Grid item xs={12}>
           <div>
             {[
               SubscribeStatus.Valide,
               SubscribeStatus.EnRotation,
               SubscribeStatus.Present,
+              SubscribeStatus.SiBesoin,
               SubscribeStatus.Absent,
               SubscribeStatus.NonInscrit
             ].map(statusEnum => {
@@ -128,6 +164,7 @@ export function RaidCard({
                         playerClass={wowClass.name}
                         iconUrl={wowClass.icon}
                         raid={raid}
+                        isPast={isPast}
                         players={playerSubs[wowClass.name][statusEnum]}
                         currentStatus={statusEnum}
                         subChanges={subChanges}

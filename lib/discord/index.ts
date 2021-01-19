@@ -5,7 +5,7 @@ export function sendDiscordMessage(
   message: string,
   token: string
 ) {
-  if (!userId || !message) {
+  if (!userId || !message || !token) {
     return null;
   }
   return fetch(`${CONFIG.SERVER_URL}/api/discord`, {

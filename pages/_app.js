@@ -34,8 +34,4 @@ class AppWithApollo extends App {
   }
 }
 
-export function reportWebVitals(metric) {
-  console.log(metric);
-}
-
 export default withApolloClient(AppWithApollo);

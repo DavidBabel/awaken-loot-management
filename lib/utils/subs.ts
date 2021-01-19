@@ -39,6 +39,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: 0,
         [SubscribeStatus.Present]: 0,
         [SubscribeStatus.Absent]: 0,
+        [SubscribeStatus.SiBesoin]: 0,
         [SubscribeStatus.Valide]: 0,
         [SubscribeStatus.EnRotation]: 0
       },
@@ -46,6 +47,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -53,6 +55,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -60,6 +63,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -67,6 +71,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -74,6 +79,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -81,6 +87,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -88,6 +95,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -95,6 +103,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -102,6 +111,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -109,6 +119,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -116,6 +127,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       },
@@ -123,6 +135,7 @@ export function formatDatas(
         [SubscribeStatus.NonInscrit]: [],
         [SubscribeStatus.Present]: [],
         [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
       }

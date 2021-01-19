@@ -1798,5 +1798,7 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23064)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22819)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23577)),
-((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22812));
+((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22812)),
+((SELECT id FROM "Bosses" WHERE "name"='Saphiron'),(SELECT id FROM "Items" WHERE "wowheadId"=23549)),
+((SELECT id FROM "Bosses" WHERE "name"='Saphiron'),(SELECT id FROM "Items" WHERE "wowheadId"=23547));
 

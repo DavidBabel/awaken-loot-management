@@ -55,7 +55,6 @@ export default function PlayerRaidPage() {
         <Grid item xs={12} key={`my-raid-${raid.id}`}>
           <SubscribeCard
             {...raid}
-            // player={{} as Player}
             player={player}
             setRaidPlayerSub={setRaidPlayerSub}
             refetchRaids={refetchRaids}

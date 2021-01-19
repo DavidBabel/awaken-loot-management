@@ -43,20 +43,31 @@ export function useChangeRaidPlayerSub() {
     ) => string
   ) {
     function afterUpdate() {
+      const promises: Array<Promise<any>> = [];
       if (discordMessageMember) {
-        sendDiscordMessage(
-          player.discordId,
-          discordMessageMember(raid, player.name, status),
-          member.token
+        promises.push(
+          sendDiscordMessage(
+            player.discordId,
+            discordMessageMember(raid, player.name, status),
+            member.token
+          )
         );
       }
-      if (discordMessageMDC) {
-        sendDiscordMessage(
-          player?.classByClassId?.playersByMdcOf?.nodes[0]?.discordId,
-          discordMessageMDC(raid, player.name, status),
-          member.token
-        );
+      if (
+        player?.classByClassId?.playersByMdcOf?.nodes[0]?.discordId !==
+        player.discordId
+      ) {
+        if (discordMessageMDC) {
+          promises.push(
+            sendDiscordMessage(
+              player?.classByClassId?.playersByMdcOf?.nodes[0]?.discordId,
+              discordMessageMDC(raid, player.name, status),
+              member.token
+            )
+          );
+        }
       }
+      return Promise.all(promises);
     }
     if (raidPLayerSubId) {
       console.log("try to update");
@@ -66,7 +77,7 @@ export function useChangeRaidPlayerSub() {
           status
         }
       })
-        .then(() => afterUpdate())
+        .then(afterUpdate)
         .catch(e => {
           // tslint:disable-next-line:no-console
           console.log(e);
@@ -76,7 +87,7 @@ export function useChangeRaidPlayerSub() {
       return createRaidPlayerSub({
         variables: { playerId: player.id, status, raidId: raid.id }
       })
-        .then(() => afterUpdate())
+        .then(afterUpdate)
         .catch(e => {
           // tslint:disable-next-line:no-console
           console.log(e);

@@ -122,5 +122,3 @@ DiscordClient.on("error", tryToLogin);
 tryToLogin();
 
 module.exports = DiscordClient;
-
-module.exports = {};
