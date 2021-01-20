@@ -7,6 +7,7 @@ export interface MemberInfos {
   level: number;
   discordId: string;
   token: string;
+  classId: number;
 }
 
 const MemberContext = React.createContext<MemberInfos>({
@@ -15,7 +16,8 @@ const MemberContext = React.createContext<MemberInfos>({
   role: "guest",
   level: 0,
   discordId: null,
-  token: null
+  token: null,
+  classId: null
 });
 
 export default MemberContext;

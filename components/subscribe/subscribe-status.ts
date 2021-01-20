@@ -2,6 +2,7 @@ export enum SubscribeStatus {
   NonInscrit,
   Present,
   Absent,
+  PresentSiBesoin,
   Valide,
   EnRotation,
   SiBesoin
@@ -19,6 +20,10 @@ const subStatus = [
   {
     id: 2,
     label: "Absent"
+  },
+  {
+    id: 5,
+    label: "Si besoin"
   },
   {
     id: 3,

@@ -31,22 +31,20 @@ export default function PlayerRaidPage() {
   const member = useContext(MemberContext);
 
   const [displayedClasses, setDisplayedClasses] = useState([
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
+    member.classId === 0,
+    member.classId === 1,
+    member.classId === 2,
+    member.classId === 3,
+    member.classId === 4,
+    member.classId === 5,
+    member.classId === 6,
+    member.classId === 7,
+    member.classId === 8,
+    member.classId === 9,
+    member.classId === 10,
+    member.classId === 11,
+    member.classId === 12,
+    member.classId === 13
   ]);
 
   const [subChanges, setSubChanges] = useState<SubChange[]>([]);

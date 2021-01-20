@@ -15,7 +15,8 @@ module.exports = async function loginRoute(req, res) {
       role: account.role,
       userid: account.id,
       username: account.name,
-      discordId: account.discordId
+      discordId: account.discordId,
+      classId: account.classId
     };
     res
       .json({

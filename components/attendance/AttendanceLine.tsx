@@ -4,7 +4,6 @@ import { AttendanceCell } from "./AttendanceCell";
 import { ChangeAttendanceDialogCallback } from "./ChangeAttendanceDialog";
 import { getFirstRaidDate } from "./helpers";
 import { PlayerAttendanceName } from "./PlayerAttendanceName";
-import { PlayerAttendancePercentage } from "./PlayerAttendancePercentage";
 import { RaidStatusKey, raidStatusList } from "./raid-status";
 
 interface Props {
@@ -56,10 +55,10 @@ export function AttendanceLine({
   return (
     <TableRow key={`attendance-table-row${player.id + player.name}`}>
       <PlayerAttendanceName player={player} />
-      <PlayerAttendancePercentage
+      {/* <PlayerAttendancePercentage
         totalRaidPlayed={totalRaidPlayed}
         totalRaids={raidsNb}
-      />
+      /> */}
       {raids.map((raid: Raid) => {
         const currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
           (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id

@@ -165,6 +165,7 @@ export default function Pagelogin({ apolloClient }: Props) {
                       role: memberInfos.role,
                       level: role[memberInfos.role] || 0,
                       discordId: memberInfos.discordId || null,
+                      classId: memberInfos.classId,
                       token: jwtInfos.jwt
                     });
                     // localStorage.setItem('token', jwtInfos.jwt);

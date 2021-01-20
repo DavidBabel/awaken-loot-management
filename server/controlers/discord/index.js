@@ -5,7 +5,7 @@ const DiscordClient = require("./client");
  * @param {Express.Response} res
  */
 module.exports = async function discordRoute(req, res) {
-  if (DiscordClient && DiscordClient.users) {
+  try {
     DiscordClient.users
       .fetch(req.body.discordId)
       .then(user => {
@@ -17,8 +17,7 @@ module.exports = async function discordRoute(req, res) {
         console.log("unable to send message to ", req.body.discordId, e);
         res.json({ result: "error" }).send();
       });
-  } else {
-    console.log(DiscordClient.users);
-    res.json({ result: "no users" }).send();
+  } catch (error) {
+    console.log(error);
   }
 };
