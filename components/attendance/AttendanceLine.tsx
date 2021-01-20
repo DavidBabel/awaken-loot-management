@@ -4,6 +4,7 @@ import { AttendanceCell } from "./AttendanceCell";
 import { ChangeAttendanceDialogCallback } from "./ChangeAttendanceDialog";
 import { getFirstRaidDate } from "./helpers";
 import { PlayerAttendanceName } from "./PlayerAttendanceName";
+// import { PlayerAttendancePercentage } from "./PlayerAttendancePercentage";
 import { RaidStatusKey, raidStatusList } from "./raid-status";
 
 interface Props {
@@ -20,9 +21,9 @@ export function AttendanceLine({
   openAttendanceDialog
 }: Props) {
   const firstRaidDate = getFirstRaidDate(player);
-  let raidsNb = 0;
+  // let raidsNb = 0;
   const raidLinkIds = [];
-  const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
+  // const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
   const raidLinkedIdsPresent = [];
   raids.forEach(raid => {
     if (
@@ -31,11 +32,11 @@ export function AttendanceLine({
       new Date(raid.date) >= firstRaidDate
     ) {
       if (!raid.linkBetweenRaids) {
-        raidsNb++;
+        // raidsNb++;
       } else {
         if (raidLinkIds.indexOf(raid.linkBetweenRaids) === -1) {
           raidLinkIds.push(raid.linkBetweenRaids);
-          raidsNb++;
+          // raidsNb++;
         }
       }
     }
@@ -45,7 +46,7 @@ export function AttendanceLine({
           if (raidLinkedIdsPresent.indexOf(raid.linkBetweenRaids) === -1) {
             raidLinkedIdsPresent.push(raid.linkBetweenRaids);
           } else {
-            raidsNb++; // rare cas ou le joueur est présent dans plusieur raid linké entre eux
+            // raidsNb++; // rare cas ou le joueur est présent dans plusieur raid linké entre eux
           }
         }
       }
