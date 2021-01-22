@@ -1399,7 +1399,7 @@ Mage, true
 Démoniste, false
 Prêtre, true
 
-Sangle désacralisée | Première à Fllas
+Sangle désacralisée | Rogue puis Deep Prot 8 part
 Guerrier Tank, false
 Voleur, true
 
@@ -1656,7 +1656,7 @@ Idole de longévité
 Druide, true
 Druide Feral, false
 
-Ceinturon du mentor | Sauf tanks 8/8 T3
+Ceinturon du mentor | Non prios pour les tanks 8/8 T3
 Guerrier Tank, false
 Guerrier DPS, false
 
@@ -1828,7 +1828,7 @@ Guerrier DPS, true
 # Anneau de Brise-terre
 # Chaman, false
 
-Détrôneuse | 2 rogues / 1 tank / 1 hunt puis roll de classe
+Détrôneuse | 2 premiers chez les rogues
 Guerrier Tank, false
 Guerrier DPS, false
 Chasseur, true
