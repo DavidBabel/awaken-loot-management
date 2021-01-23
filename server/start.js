@@ -3,12 +3,16 @@
 
 require("dotenv").config();
 
-const { postgraphile } = require("postgraphile");
+const {
+  postgraphile
+  // , makePluginHook
+} = require("postgraphile");
 const checkRoleMiddleware = require("./middleware/check-role");
 const checkTokenMiddleware = require("./middleware/check-token");
 const loginControler = require("./controlers/login");
 const compoControler = require("./controlers/compo");
 const discordControler = require("./controlers/discord");
+// const PersistedOperationsPlugin = require("@graphile/persisted-operations");
 
 const express = require("express");
 const next = require("next");
@@ -16,6 +20,8 @@ const next = require("next");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const compression = require("compression");
+// const pluginHook = makePluginHook([PersistedOperationsPlugin]);
 
 const CONFIG = require("./config");
 
@@ -29,6 +35,7 @@ app
   .then(() => {
     const server = express();
 
+    server.use(compression());
     server.use(cors());
     server.use(bodyParser.json());
     server.use(cookieParser());
@@ -44,6 +51,8 @@ app
         "public",
         {
           // classicIds: true,
+          // persistedOperationsDirectory: `${__dirname}/.persisted_operations/`,
+          // pluginHook,
           enableQueryBatching: true,
           externalUrlBase: `/${CONFIG.GRAPHQL_ENDPOINT}`,
           graphqlRoute: "/"

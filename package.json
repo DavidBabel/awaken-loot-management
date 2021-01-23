@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "Unlicense",
   "scripts": {
-    "dev": "node server/start.js",
+    "dev": "source .env & node server/start.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/start.js",
     "loot": "node db/json-to-sql/from-json-to-base.js",
@@ -32,6 +32,7 @@
     "apollo-boost": "^0.4.7",
     "body-parser": "^1.19.0",
     "classnames": "^2.2.6",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "date-fns": "^2.8.1",

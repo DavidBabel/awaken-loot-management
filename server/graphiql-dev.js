@@ -9,8 +9,7 @@ const CONFIG = require("./config");
 
 const app = express();
 
-const databaseUrl =
-  process.env.DATABASE_URL || "postgres://localhost:5432/test";
+const databaseUrl = CONFIG.DATABASE_URL || "postgres://localhost:5432/test";
 
 app.use(
   postgraphile(databaseUrl, "public", {
