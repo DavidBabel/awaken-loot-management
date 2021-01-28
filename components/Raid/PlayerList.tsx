@@ -9,8 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { useContext, useState } from "react";
-import MemberContext from "../../lib/context/member";
+import { useState } from "react";
+import { useMemberContext } from "../../lib/context/member";
 import { Mutation, Player, Query, RaidPlayer } from "../../lib/generatedTypes";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ADD_PLAYER_TO_RAID } from "../../lib/gql/attendance-mutation";
@@ -121,7 +121,7 @@ export default function PlayerList({
   refetchOneRaid,
   refetchAllPlayers
 }: Props) {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const [createRaidPlayer] = useMutation<Mutation, CreateRaidPlayerVariables>(
     ADD_PLAYER_TO_RAID

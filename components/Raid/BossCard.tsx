@@ -27,11 +27,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddLootDialog from "../../components/Raid/AddLootDialog";
 import AddUnasignedDialog from "../../components/Raid/AddUnasignedDialog";
 import { getClassColor } from "../../lib/constants/class-colors";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT, UpdateLootVariables } from "../../lib/gql/loot-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
@@ -145,7 +145,7 @@ export function BossCard({
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
 }) {
   const classes = useStyles("");
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   const [updateLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);

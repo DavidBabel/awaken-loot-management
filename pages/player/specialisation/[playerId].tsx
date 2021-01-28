@@ -9,10 +9,10 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { Mutation, Query } from "../../../lib/generatedTypes";
 import { UPDATE_PLAYER_SPE } from "../../../lib/gql/player-mutations";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 
 export default function PageEditPlayer() {
   const router = useRouter();
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const playerId = parseInt(String(router.query.playerId));
   const classes = useStyles("");
   const [currentSpe, setSpe] = useState("");

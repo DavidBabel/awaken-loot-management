@@ -18,8 +18,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
 import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
-import React, { useContext, useState } from "react";
-import MemberContext from "../../lib/context/member";
+import React, { useState } from "react";
+import { useMemberContext } from "../../lib/context/member";
 import { BossItem, Mutation, Query } from "../../lib/generatedTypes";
 import { CREATE_LOOT, CreateLootVariables } from "../../lib/gql/loot-mutations";
 import { useSnackBar } from "../../lib/hooks/snackbar";
@@ -63,7 +63,7 @@ export default function AddUnasignedDialog({
   refetchOneRaid,
   scrollDown
 }: Props) {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const classes = useStyles("");
   const [open, setOpen] = useState<boolean>(false);
   const [itemsToAdd, setItemsToAdd] = useState<number[]>([]);

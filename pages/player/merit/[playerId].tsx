@@ -2,15 +2,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { Container, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { MeritLine } from "../../../components/MeritLine";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { Merit, Query } from "../../../lib/generatedTypes";
 import {
-  PLAYER_MERIT,
-  PlayerMeritVariables
+  PlayerMeritVariables,
+  PLAYER_MERIT
 } from "../../../lib/gql/merit-queries";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
@@ -38,7 +37,7 @@ function trimParenthesis(str: string) {
 
 export default function PageEditPlayer() {
   const router = useRouter();
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const playerId = parseInt(String(router.query.playerId));
   const classes = useStyles("");
 

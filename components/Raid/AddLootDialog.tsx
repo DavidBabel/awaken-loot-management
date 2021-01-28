@@ -24,10 +24,10 @@ import { Add as AddIcon } from "@material-ui/icons";
 import CloseIcon from "@material-ui/icons/Close";
 import ForwardIcon from "@material-ui/icons/Forward";
 import { ApolloQueryResult } from "apollo-boost";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { wowClasses } from "../../lib/constants/classes";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import {
   BossItem,
   Loot,
@@ -151,7 +151,7 @@ export default function AddLootDialog({
   refetchAllPlayers,
   scrollDown
 }: Props) {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const classes = useStyles("");
   //   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);

@@ -9,9 +9,9 @@ import {
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React from "react";
 import ProgressBar from "../../components/summary/ProgressBar";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { Loot } from "../../lib/generatedTypes";
 import { role } from "../../lib/role-level";
 import { getDayMonth } from "../../lib/utils/date";
@@ -77,7 +77,7 @@ export default function PlayerTableRow({
 }: Props) {
   const classes = useStyles("");
   const iconElem = React.useRef(null);
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   let totalAllLoots = 0;
   let totalBadLoots = 0;

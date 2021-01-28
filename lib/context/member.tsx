@@ -21,3 +21,5 @@ const MemberContext = React.createContext<MemberInfos>({
 });
 
 export default MemberContext;
+
+export const useMemberContext = () => React.useContext(MemberContext);

@@ -7,13 +7,13 @@ import {
   DialogTitle,
   IconButton,
   LinearProgress,
-  Snackbar,
-  SnackbarContent,
+  // Snackbar,
+  // SnackbarContent,
   TableCell,
   TextField
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
-import CloseIcon from "@material-ui/icons/Close";
+// import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
@@ -21,7 +21,8 @@ import {
   UPDATE_PLAYER,
   UpdatePlayerVariables
 } from "../../lib/gql/player-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
+import { showSuccessMessage } from "../../lib/utils/snackbar";
+// import { useSnackBar } from "../../lib/hooks/snackbar";
 
 const useStyles = makeStyles({
   button: { marginLeft: 5 },
@@ -62,13 +63,15 @@ export default function EditPlayerField({
   const [updatePlayer] = useMutation<Mutation, UpdatePlayerVariables>(
     UPDATE_PLAYER
   );
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
+
+  // const { addSnackBar } = useSnackBarsContext();
+  // const {
+  //   snackBarOpen,
+  //   snackBarBackgroundColor,
+  //   openSnackBar,
+  //   closeSnackBar,
+  //   snackBarMessage
+  // } = useSnackBar();
 
   const isNameColumn = classColor;
   const isClassNumberField = "classId" === accessor || "mdcOf" === accessor;
@@ -94,12 +97,13 @@ export default function EditPlayerField({
       }
     })
       .then(resp => {
-        openSnackBar(accessor + " modifié avec succès", "success");
+        // openSnackBar(accessor + " modifié avec succès", "success");
+        showSuccessMessage(accessor + " modifié avec succès");
         setOpen(false);
         setLoading(false);
       })
       .catch(err => {
-        openSnackBar(err.message, "error");
+        // openSnackBar(err.message, "error");
         setOpen(false);
         setLoading(false);
       });
@@ -194,7 +198,7 @@ export default function EditPlayerField({
             </Button>
           </DialogActions>
         </Dialog>
-        <Snackbar
+        {/* <Snackbar
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "center"
@@ -217,7 +221,7 @@ export default function EditPlayerField({
               </IconButton>
             ]}
           />
-        </Snackbar>
+        </Snackbar> */}
       </div>
     </TableCell>
   );

@@ -9189,6 +9189,11 @@ postgraphile-core@4.5.3:
     graphile-build "4.5.0"
     graphile-build-pg "4.5.3"
 
+postgraphile-plugin-connection-filter@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/postgraphile-plugin-connection-filter/-/postgraphile-plugin-connection-filter-2.1.1.tgz#590c650a79f7c551fa0950b0c6f8308930bae0d0"
+  integrity sha512-g2tInSqPFFKKf6jL5uL868HZm9//1L3HmOZAHc0QuRcV7jKMGuFivX1G3OXj8HBxbaSiCyxWUYjVdOYiNsJ4tQ==
+
 postgraphile@^4.5.5:
   version "4.5.5"
   resolved "https://registry.yarnpkg.com/postgraphile/-/postgraphile-4.5.5.tgz#06f44f3366162929543b257aca920367ba7a3317"

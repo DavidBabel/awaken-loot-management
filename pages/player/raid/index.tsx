@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Grid } from "@material-ui/core";
-import React, { useContext } from "react";
+import React from "react";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { SubscribeCard } from "../../../components/subscribe/SubscribeCard";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { Query } from "../../../lib/generatedTypes";
 import {
   ONE_PLAYER_LIGHT,
@@ -13,7 +13,7 @@ import { USER_SUBS, UserSubsVariables } from "../../../lib/gql/subs-queries";
 import { useChangeRaidPlayerSub } from "../../../lib/hooks/raid-player-sub";
 
 export default function PlayerRaidPage() {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const { loading, data, error, refetch } = useQuery<Query, UserSubsVariables>(
     USER_SUBS,
