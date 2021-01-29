@@ -3049,11 +3049,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false, NULL),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
