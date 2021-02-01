@@ -1411,8 +1411,8 @@ Voleur, false
 
 Coeur frigide de Noth
 Chaman, false
-Druide, false
-Prêtre, false
+Druide, true
+Prêtre, true
 
 Bague de l‘inévitable
 Mage, false
@@ -1780,8 +1780,8 @@ Voleur, false
 
 Oeil droit de Saphiron
 Chaman, false
-Druide, false
-Prêtre, false
+Druide, true
+Prêtre, true
 
 Glyphe de déviation
 Guerrier Tank, true

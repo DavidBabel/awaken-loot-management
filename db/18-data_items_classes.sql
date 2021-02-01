@@ -3639,11 +3639,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false, NULL),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de l‘inévitable'
@@ -4576,11 +4576,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false, NULL),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Glyphe de déviation'
