@@ -2,14 +2,15 @@ import { useQuery } from "@apollo/react-hooks";
 import { Container, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import ClassAvatar from "../../../components/ClassAvatar";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { MeritLine } from "../../../components/MeritLine";
 import { useMemberContext } from "../../../lib/context/member";
 import { Merit, Query } from "../../../lib/generatedTypes";
 import {
-  PlayerMeritVariables,
-  PLAYER_MERIT
+  PLAYER_MERIT,
+  PlayerMeritVariables
 } from "../../../lib/gql/merit-queries";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
 import { role } from "../../../lib/role-level";
@@ -58,6 +59,11 @@ export default function PageEditPlayer() {
     variables: { playerId }
   });
 
+  const [playerAllMerits, setPlayerAllMerits] = useState(0);
+  const [sumOfAllMerits, setSumOfAllMerits] = useState(0);
+  const [playerApprovedMerits, setPlayerApprovedMerits] = useState(0);
+  const [sortedMerits, setSortedMerits] = useState<SortedMerits>({});
+
   const loading = loadingMerits || loadingPlayer;
   const error = errorMerits || errorPlayer;
   if (!dataMerits || !dataMerits.allMerits || error) {
@@ -71,37 +77,57 @@ export default function PageEditPlayer() {
     [key: string]: Merit[];
   }
 
-  let sumOfAllMerits = 0;
-  let playerAllMerits = 0;
-  let playerApprovedMerits = 0;
+  function updateCalc({
+    meritsCount,
+    validatedMeritsCount
+  }: {
+    meritsCount?: number;
+    validatedMeritsCount?: number;
+  }) {
+    if (meritsCount) {
+      setPlayerAllMerits(playerAllMerits + meritsCount);
+    }
+    if (validatedMeritsCount) {
+      setPlayerApprovedMerits(playerApprovedMerits + validatedMeritsCount);
+    }
+  }
 
-  const sortedMerits: SortedMerits = userMerits.reduce(
-    (stack: SortedMerits, next: Merit) => {
-      if (next.active === false) {
-        return stack;
-      }
-      const categorie = next.categorie;
-      const merit = { ...next };
-      if (!stack[categorie]) {
-        stack[categorie] = [];
-      }
-      stack[categorie].push(merit);
-      // counter
-      if (merit.categorie !== "Malus") {
-        sumOfAllMerits += merit.value;
-      }
-      const meritCalc = merit.playerMeritsByMeritId.nodes[0];
-      if (meritCalc) {
-        playerAllMerits += merit.value;
-        if (meritCalc.validated) {
-          playerApprovedMerits += merit.value;
+  useEffect(() => {
+    let sumOfAllMeritsCalc = 0;
+    let playerAllMeritsCalc = 0;
+    let playerApprovedMeritsCalc = 0;
+    const sortedMeritsCalc: SortedMerits = userMerits.reduce(
+      (stack: SortedMerits, next: Merit) => {
+        if (next.active === false) {
+          return stack;
         }
-      }
-      // end of counter
-      return stack;
-    },
-    {}
-  );
+        const categorie = next.categorie;
+        const merit = { ...next };
+        if (!stack[categorie]) {
+          stack[categorie] = [];
+        }
+        stack[categorie].push(merit);
+        // counter
+        if (merit.categorie !== "Malus") {
+          sumOfAllMeritsCalc += merit.value;
+        }
+        const meritCalc = merit.playerMeritsByMeritId.nodes[0];
+        if (meritCalc) {
+          playerAllMeritsCalc += merit.value;
+          if (meritCalc.validated) {
+            playerApprovedMeritsCalc += merit.value;
+          }
+        }
+        // end of counter
+        return stack;
+      },
+      {}
+    );
+    setSortedMerits(sortedMeritsCalc);
+    setSumOfAllMerits(sumOfAllMeritsCalc);
+    setPlayerAllMerits(playerAllMeritsCalc);
+    setPlayerApprovedMerits(playerApprovedMeritsCalc);
+  }, []);
 
   if (member.level <= role.player && member.userid !== playerId) {
     // TODO beautiful that
@@ -225,6 +251,7 @@ export default function PageEditPlayer() {
                     playerId={playerId}
                     parentLoading={loading}
                     isOfficer={member.level >= role.class_master}
+                    updateCalc={updateCalc}
                   />
                 ))}
               </div>

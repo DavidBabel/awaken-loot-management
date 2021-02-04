@@ -4,8 +4,8 @@ export function showInfoMessage(message: string) {
   Emitter.emit("snackbar", { message, action: "info" });
 }
 export function showSuccessMessage(message: string) {
-  Emitter.emit("snackbar", { message, action: "sucess" });
+  Emitter.emit("snackbar", { message, action: "success" });
 }
 export function showErrorMessage(message: string) {
-  Emitter.emit("snackbar", { message, action: "info" });
+  Emitter.emit("snackbar", { message, action: "error" });
 }

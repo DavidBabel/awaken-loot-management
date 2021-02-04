@@ -5,23 +5,22 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   LinearProgress,
   MenuItem,
   Select,
-  Snackbar,
-  SnackbarContent,
   TextField
 } from "@material-ui/core/";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
-import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import { useState } from "react";
 import { wowClasses } from "../../lib/constants/classes";
 import { Mutation, Player, Query } from "../../lib/generatedTypes";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 
 interface CreatePlayerVariables {
   classId: number;
@@ -72,13 +71,6 @@ export default function AddPlayer({
   const [createPlayer] = useMutation<Mutation, CreatePlayerVariables>(
     CREATE_PLAYER
   );
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -124,31 +116,30 @@ export default function AddPlayer({
                 setOpen(false);
                 setIsLoading(false);
                 setNewPlayerInputValue("");
-                openSnackBar(
-                  newPlayerInputValue + " ajouté avec succès.",
-                  "success"
+                showSuccessMessage(
+                  newPlayerInputValue + " ajouté avec succès."
                 );
               })
               .catch(err => {
                 setOpen(false);
                 setIsLoading(false);
-                openSnackBar(err.message, "error");
+                showErrorMessage(err.message);
               });
           })
           .catch(err => {
             setOpen(false);
             setIsLoading(false);
-            openSnackBar(err.message, "error");
+            showErrorMessage(err.message);
           });
       } else {
         setIsLoading(false);
-        openSnackBar("Ce joueur existe déja.", "error");
+        showErrorMessage("Ce joueur existe déja.");
       }
     } else {
       if (newPlayerInputValue.length === 0) {
-        openSnackBar("Tapez le pseudo du joueur", "error");
+        showErrorMessage("Tapez le pseudo du joueur");
       } else {
-        openSnackBar("Selectionnez une classe", "error");
+        showErrorMessage("Selectionnez une classe");
       }
     }
   };
@@ -214,30 +205,6 @@ export default function AddPlayer({
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </>
   );
 }

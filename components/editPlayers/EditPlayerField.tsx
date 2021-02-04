@@ -7,13 +7,10 @@ import {
   DialogTitle,
   IconButton,
   LinearProgress,
-  // Snackbar,
-  // SnackbarContent,
   TableCell,
   TextField
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
-// import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
@@ -21,8 +18,7 @@ import {
   UPDATE_PLAYER,
   UpdatePlayerVariables
 } from "../../lib/gql/player-mutations";
-import { showSuccessMessage } from "../../lib/utils/snackbar";
-// import { useSnackBar } from "../../lib/hooks/snackbar";
+import { showSuccessMessage } from "../../lib/utils/snackbars/snackbarService";
 
 const useStyles = makeStyles({
   button: { marginLeft: 5 },
@@ -64,15 +60,6 @@ export default function EditPlayerField({
     UPDATE_PLAYER
   );
 
-  // const { addSnackBar } = useSnackBarsContext();
-  // const {
-  //   snackBarOpen,
-  //   snackBarBackgroundColor,
-  //   openSnackBar,
-  //   closeSnackBar,
-  //   snackBarMessage
-  // } = useSnackBar();
-
   const isNameColumn = classColor;
   const isClassNumberField = "classId" === accessor || "mdcOf" === accessor;
 
@@ -87,7 +74,6 @@ export default function EditPlayerField({
   };
   const confirm = () => {
     setLoading(true);
-    // if (input.length > 0) {
     const finalInput = isClassNumberField ? parseInt(input) : input;
 
     updatePlayer({
@@ -97,20 +83,14 @@ export default function EditPlayerField({
       }
     })
       .then(resp => {
-        // openSnackBar(accessor + " modifié avec succès", "success");
         showSuccessMessage(accessor + " modifié avec succès");
         setOpen(false);
         setLoading(false);
       })
       .catch(err => {
-        // openSnackBar(err.message, "error");
         setOpen(false);
         setLoading(false);
       });
-    // } else {
-    //   openSnackBar("Veuillez remplir le champ", "error");
-    //   setLoading(false);
-    // }
   };
 
   const headerStyles: any = isNameColumn
@@ -198,30 +178,6 @@ export default function EditPlayerField({
             </Button>
           </DialogActions>
         </Dialog>
-        {/* <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center"
-          }}
-          open={snackBarOpen}
-          autoHideDuration={3000}
-          onClose={closeSnackBar}
-        >
-          <SnackbarContent
-            style={{ backgroundColor: snackBarBackgroundColor }}
-            message={<span id="message-id">{snackBarMessage}</span>}
-            action={[
-              <IconButton
-                key="close"
-                aria-label="close"
-                color="inherit"
-                onClick={closeSnackBar}
-              >
-                <CloseIcon />
-              </IconButton>
-            ]}
-          />
-        </Snackbar> */}
       </div>
     </TableCell>
   );

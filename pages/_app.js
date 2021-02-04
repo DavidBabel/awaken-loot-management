@@ -8,17 +8,9 @@ import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/page/Header";
 // import { BottomNav } from "../components/page/BottomNavigation";
 import MemberContext from "../lib/context/member";
-import { SnackbarContainer } from "uno-material-ui";
+import { SnackbarContainer } from "../lib/utils/snackbars/SnackbarContainer";
 
 class AppWithApollo extends App {
-  // static async getInitialProps(args) {
-  //   const userAgent = args.ctx.req
-  //     ? args.ctx.req.headers["user-agent"]
-  //     : navigator.userAgent;
-  //   return {
-  //     userAgent
-  //   };
-  // }
   render() {
     const { Component, pageProps, apolloClient, memberInfos = {} } = this.props;
     return (
@@ -29,7 +21,6 @@ class AppWithApollo extends App {
             <Dashboard isMobile={false}>
               <Component {...pageProps} apolloClient={apolloClient} />
             </Dashboard>
-            {/* <BottomNav /> */}
           </MemberContext.Provider>
         </ApolloProvider>
         <SnackbarContainer />

@@ -27,7 +27,7 @@ import {
   lootColorLevel5,
   lootColorLevel6
 } from "../../lib/utils/loot-colors";
-import { normalizeText } from "../../lib/utils/string";
+import { normalizeTextWithStrip } from "../../lib/utils/string";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 
 interface StyleProps {
@@ -203,14 +203,14 @@ export default function PageItem() {
   const results =
     itemInputValue.length >= 3 &&
     items.filter((item: Item) => {
-      const search = normalizeText(itemInputValue);
-      const itemName = normalizeText(item.name);
+      const search = normalizeTextWithStrip(itemInputValue);
+      const itemName = normalizeTextWithStrip(item.name);
 
       const hasName = itemName.indexOf(search) !== -1;
 
       const bossesFound = item.bossItemsByItemId.nodes.filter(
         (bossItem: BossItem) => {
-          const bossName = normalizeText(bossItem.bossByBossId.name);
+          const bossName = normalizeTextWithStrip(bossItem.bossByBossId.name);
           return bossName.indexOf(search) !== -1;
         }
       );

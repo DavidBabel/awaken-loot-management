@@ -9,21 +9,20 @@ import {
   Fab,
   FormControl,
   FormControlLabel,
-  IconButton,
-  LinearProgress,
-  Snackbar,
-  SnackbarContent
+  LinearProgress
 } from "@material-ui/core/";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
-import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import React, { useState } from "react";
 import { useMemberContext } from "../../lib/context/member";
 import { BossItem, Mutation, Query } from "../../lib/generatedTypes";
 import { CREATE_LOOT, CreateLootVariables } from "../../lib/gql/loot-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
 import { formatDate } from "../../lib/utils/date";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 import CONFIG from "../../server/config";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -70,14 +69,6 @@ export default function AddUnasignedDialog({
   const [addLootIsLoading, setAddLootIsLoading] = useState<boolean>(false);
   const [createLoot] = useMutation<Mutation, CreateLootVariables>(CREATE_LOOT);
 
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
-
   function handleOpen() {
     setOpen(true);
   }
@@ -113,7 +104,7 @@ export default function AddUnasignedDialog({
       )
     )
       .then(() => {
-        openSnackBar(`Objets ajoutés`, "success");
+        showSuccessMessage("Objets ajoutés");
         setAddLootIsLoading(false);
         handleClose();
         refetchOneRaid()
@@ -121,11 +112,11 @@ export default function AddUnasignedDialog({
             scrollDown();
           })
           .catch(err => {
-            openSnackBar(err.message, "error");
+            showErrorMessage(err.message);
           });
       })
       .catch(err => {
-        openSnackBar(err.message, "error");
+        showErrorMessage(err.message);
         setAddLootIsLoading(false);
       });
   }
@@ -204,30 +195,6 @@ export default function AddUnasignedDialog({
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </div>
   );
 }
