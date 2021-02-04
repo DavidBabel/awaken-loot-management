@@ -1,5 +1,4 @@
-import React from "react";
-
+import { useMutation } from "@apollo/react-hooks";
 import {
   Button,
   Dialog,
@@ -7,9 +6,8 @@ import {
   DialogContent,
   DialogTitle
 } from "@material-ui/core/";
-
-import { useMutation } from "@apollo/react-hooks";
 import { ApolloQueryResult } from "apollo-boost";
+import React from "react";
 import {
   Mutation,
   Player,
@@ -22,8 +20,11 @@ import {
   // RESET_RAIDPLAYER_STATUS,
   UPDATE_RAIDPLAYER_STATUS
 } from "../../lib/gql/attendance-mutation";
-import { OpenSnackBar } from "../../lib/hooks/snackbar";
 import { getDate } from "../../lib/utils/date";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 import { ChangeAttendanceButton } from "./ChangeAttendanceButton";
 
 export interface ChangeAttendanceDialogProps {
@@ -36,7 +37,6 @@ export interface ChangeAttendanceDialogProps {
 
 interface MoreProps {
   closeDialog: () => void;
-  openSnackBar: OpenSnackBar;
   refetchRaids: (
     variables?: Record<string, any>
   ) => Promise<ApolloQueryResult<Query>>;
@@ -67,7 +67,6 @@ export function ChangeAttendanceDialog({
   raid,
   closeDialog,
   refetchRaids,
-  openSnackBar,
   setLoading
 }: ChangeAttendanceDialogProps & MoreProps) {
   const classes = {} as any;
@@ -86,11 +85,11 @@ export function ChangeAttendanceDialog({
 
   function success() {
     setLoading(false);
-    openSnackBar(`Mis à jour correctement`, "success");
+    showSuccessMessage("Mis à jour correctement");
   }
   function fail() {
     setLoading(false);
-    openSnackBar("Mise à jour raté", "error");
+    showErrorMessage("Mise à jour raté");
   }
   if (!isOpen) {
     return null;

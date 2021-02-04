@@ -22,7 +22,6 @@ import { useMemberContext } from "../../lib/context/member";
 import { Player, Query } from "../../lib/generatedTypes";
 import { ALL_ACTIVE_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_RAIDS } from "../../lib/gql/raid-queries";
-import { useSnackBar } from "../../lib/hooks/snackbar";
 import { useToggle } from "../../lib/hooks/toggle";
 import { role } from "../../lib/role-level";
 import { byValue } from "../../lib/utils/sorter";
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PageIndex() {
   const classes = useStyles("");
   const member = useMemberContext();
-  const { openSnackBar, DefaultSnackBar } = useSnackBar();
+
   const [hideRerolls, toggleHideRerolls] = useToggle(true);
 
   const defaultDialog = {
@@ -125,11 +124,9 @@ export default function PageIndex() {
       </Paper>
       <ChangeAttendanceDialog
         {...dialogProps}
-        openSnackBar={openSnackBar}
         refetchRaids={refetchRaids}
         closeDialog={() => setDialogProps(defaultDialog)}
       />
-      <DefaultSnackBar />
     </>
   );
 }

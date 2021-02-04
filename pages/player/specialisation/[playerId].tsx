@@ -16,8 +16,11 @@ import { useMemberContext } from "../../../lib/context/member";
 import { Mutation, Query } from "../../../lib/generatedTypes";
 import { UPDATE_PLAYER_SPE } from "../../../lib/gql/player-mutations";
 import { ONE_PLAYER } from "../../../lib/gql/player-queries";
-import { useSnackBar } from "../../../lib/hooks/snackbar";
 import { role } from "../../../lib/role-level";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../../lib/utils/snackbars/snackbarService";
 import { refreshWowhead } from "../../../lib/utils/wowhead-refresh";
 
 interface QueryVariables {
@@ -46,8 +49,6 @@ export default function PageEditPlayer() {
   const playerId = parseInt(String(router.query.playerId));
   const classes = useStyles("");
   const [currentSpe, setSpe] = useState("");
-
-  const { openSnackBar, DefaultSnackBar } = useSnackBar();
 
   // TODO state filter active
 
@@ -99,9 +100,8 @@ export default function PageEditPlayer() {
   // tslint:disable:no-console
   function updateSpe() {
     if (!isValidWowheadUrl()) {
-      openSnackBar(
-        "L'url de votre spécialisation n'a pas l'air d'être valide",
-        "error"
+      showErrorMessage(
+        "L'url de votre spécialisation n'a pas l'air d'être valide"
       );
       return;
     }
@@ -112,7 +112,7 @@ export default function PageEditPlayer() {
       }
     })
       .then(() => {
-        openSnackBar("Succès", "success");
+        showSuccessMessage("Succès");
         window.location.reload();
       })
       .catch(() => {
@@ -174,7 +174,6 @@ export default function PageEditPlayer() {
           </div>
         </Paper>
       </Container>
-      <DefaultSnackBar />
     </>
   );
 }
