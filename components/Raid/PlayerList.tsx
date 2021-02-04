@@ -1,22 +1,23 @@
 import { useMutation } from "@apollo/react-hooks";
-import { IconButton, Snackbar, SnackbarContent } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
-import CloseIcon from "@material-ui/icons/Close";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { useContext, useState } from "react";
-import MemberContext from "../../lib/context/member";
+import { useState } from "react";
+import { useMemberContext } from "../../lib/context/member";
 import { Mutation, Player, Query, RaidPlayer } from "../../lib/generatedTypes";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
 import { ADD_PLAYER_TO_RAID } from "../../lib/gql/attendance-mutation";
-import { useSnackBar } from "../../lib/hooks/snackbar";
 import { useToggle } from "../../lib/hooks/toggle";
 import { role } from "../../lib/role-level";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 import ClassAvatar from "../ClassAvatar";
 import AddPlayer from "../editPlayers/AddPlayer";
 
@@ -121,7 +122,7 @@ export default function PlayerList({
   refetchOneRaid,
   refetchAllPlayers
 }: Props) {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const [createRaidPlayer] = useMutation<Mutation, CreateRaidPlayerVariables>(
     ADD_PLAYER_TO_RAID
@@ -133,14 +134,6 @@ export default function PlayerList({
   );
   const [warcraftLogsContent, setWarcraftLogsContent] = useState("");
   const [playerToCreate, setPlayerToCreate] = useState<string[]>([]);
-
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
 
   function displayClass(className: string, raidPlayers: RaidPlayer[]) {
     const classPlayers = raidPlayers.filter(player =>
@@ -269,9 +262,8 @@ export default function PlayerList({
                         });
                       Promise.all(queries)
                         .then(() => {
-                          openSnackBar(
-                            "Liste des joueurs importé avec succès",
-                            "success"
+                          showSuccessMessage(
+                            "Liste des joueurs importé avec succès"
                           );
                           refetchOneRaid();
                           setWarcraftLogsContent("");
@@ -279,7 +271,7 @@ export default function PlayerList({
                         })
                         .catch(e => {
                           console.log(e);
-                          openSnackBar("Quelque chose n‘a pas marché", "error");
+                          showErrorMessage("Quelque chose n‘a pas marché");
                         });
                     }
                   }}
@@ -329,9 +321,8 @@ export default function PlayerList({
                           });
                         Promise.all(queries)
                           .then(() => {
-                            openSnackBar(
-                              "Liste des joueurs importé avec succès",
-                              "success"
+                            showSuccessMessage(
+                              "Liste des joueurs importé avec succès"
                             );
                             refetchOneRaid();
                             setWarcraftLogsContent("");
@@ -339,10 +330,7 @@ export default function PlayerList({
                           })
                           .catch(e => {
                             console.log(e);
-                            openSnackBar(
-                              "Quelque chose n‘a pas marché",
-                              "error"
-                            );
+                            showErrorMessage("Quelque chose n‘a pas marché");
                           });
                       }}
                       color="primary"
@@ -368,30 +356,6 @@ export default function PlayerList({
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </>
   );
 }

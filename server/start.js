@@ -13,6 +13,7 @@ const loginControler = require("./controlers/login");
 const compoControler = require("./controlers/compo");
 const discordControler = require("./controlers/discord");
 // const PersistedOperationsPlugin = require("@graphile/persisted-operations");
+const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
 
 const express = require("express");
 const next = require("next");
@@ -53,6 +54,10 @@ app
           // classicIds: true,
           // persistedOperationsDirectory: `${__dirname}/.persisted_operations/`,
           // pluginHook,
+          // @ts-ignore
+          appendPlugins: [ConnectionFilterPlugin],
+          connectionFilterComputedColumns: false, // default: true
+          connectionFilterSetofFunctions: false, // default: true
           enableQueryBatching: true,
           externalUrlBase: `/${CONFIG.GRAPHQL_ENDPOINT}`,
           graphqlRoute: "/"

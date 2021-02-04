@@ -18,26 +18,26 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   makeStyles,
-  Snackbar,
-  SnackbarContent,
   Tooltip
 } from "@material-ui/core";
 import CachedIcon from "@material-ui/icons/Cached";
-import CloseIcon from "@material-ui/icons/Close";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddLootDialog from "../../components/Raid/AddLootDialog";
 import AddUnasignedDialog from "../../components/Raid/AddUnasignedDialog";
 import { getClassColor } from "../../lib/constants/class-colors";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
 import { UPDATE_LOOT, UpdateLootVariables } from "../../lib/gql/loot-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
 import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
 import { getBossImageUrl } from "../../lib/utils/image";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
 import CONFIG from "../../server/config";
 
@@ -145,7 +145,7 @@ export function BossCard({
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
 }) {
   const classes = useStyles("");
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const bossCardContentElem = useRef(null);
   loots.sort((a, b) => (a.itemByItemId.name > b.itemByItemId.name ? 1 : -1));
   const [updateLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
@@ -157,13 +157,6 @@ export function BossCard({
   const [updateLootIsLoading, setUpdateLootIsLoading] = useState<boolean>(
     false
   );
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
 
   const openUpdateLootConfirm = (loot: Loot, actionType: string) => {
     setCurrentLootToBeUpdated({ loot, actionType });
@@ -189,20 +182,19 @@ export function BossCard({
       }
     })
       .then(resp => {
-        openSnackBar(
+        showSuccessMessage(
           "Loot " +
             (currentLootToBeUpdated.actionType === "delete"
               ? "supprimé"
               : "ajouté") +
-            " avec succès",
-          "success"
+            " avec succès"
         );
         setCurrentLootToBeUpdated(null);
         setUpdateLootConfirm(false);
         setUpdateLootIsLoading(false);
       })
       .catch(err => {
-        openSnackBar(err.message, "error");
+        showErrorMessage(err.message);
         setCurrentLootToBeUpdated(null);
         setUpdateLootConfirm(false);
         setUpdateLootIsLoading(false);
@@ -454,30 +446,6 @@ export function BossCard({
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </>
   );
 }

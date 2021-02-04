@@ -1,14 +1,14 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, FormControlLabel, FormGroup, Grid } from "@material-ui/core/";
 // import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ColoredSwitch } from "../../../components/ColoredSwitch";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { RaidCard } from "../../../components/subscribe/RaidCard";
 import { SubscribeStatus } from "../../../components/subscribe/subscribe-status";
 import { getClassColor } from "../../../lib/constants/class-colors";
 import { wowClasses } from "../../../lib/constants/classes";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { discordMessageChangedMember } from "../../../lib/discord/message-template";
 import { Query } from "../../../lib/generatedTypes";
 import { USER_SUBS } from "../../../lib/gql/subs-queries";
@@ -28,7 +28,7 @@ export interface SubChange extends RaidPlayerSub {
 export default function PlayerRaidPage() {
   // const router = useRouter();
   // const playerId = parseInt(String(router.query.playerId));
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const [displayedClasses, setDisplayedClasses] = useState([
     member.classId === 0,

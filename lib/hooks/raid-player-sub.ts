@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
-import { useContext } from "react";
 import { SubscribeStatus } from "../../components/subscribe/subscribe-status";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { sendDiscordMessage } from "../../lib/discord";
 import { Mutation, Player } from "../../lib/generatedTypes";
 import {
@@ -20,7 +19,7 @@ export interface RaidPlayerSub {
 }
 
 export function useChangeRaidPlayerSub() {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const [updateRaidPlayerSub] = useMutation<Mutation, UpdateSubsVariables>(
     UPDATE_RAID_PLAYER_SUB

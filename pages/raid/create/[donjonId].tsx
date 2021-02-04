@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Avatar, Button, Container, Grid, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { DatePicker } from "../../../components/DatePicker";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { Mutation, Query } from "../../../lib/generatedTypes";
 import { CREATE_RAID } from "../../../lib/gql/raid-mutations";
 import { ONE_DONJON } from "../../../lib/gql/raid-queries";
@@ -22,7 +22,7 @@ interface MutationVariables {
 
 export default function PageCreateRaid() {
   const router = useRouter();
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const donjonId = parseInt(String(router.query.donjonId));
 
   const {

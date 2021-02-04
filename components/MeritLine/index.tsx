@@ -26,6 +26,13 @@ interface Props extends Merit {
   isOfficer: boolean;
   playerId: number;
   parentLoading: boolean;
+  updateCalc: ({
+    meritsCount,
+    validatedMeritsCount
+  }: {
+    meritsCount?: number;
+    validatedMeritsCount?: number;
+  }) => void;
 }
 
 export function MeritLine({
@@ -39,7 +46,8 @@ export function MeritLine({
   classByClassId,
   playerId,
   parentLoading,
-  isOfficer
+  isOfficer,
+  updateCalc
 }: Props) {
   const merit = nodes[0];
   let meritState: Checkbox3State = EMPTY;
@@ -78,6 +86,7 @@ export function MeritLine({
         }
       }).then(({ data }) => {
         setCurrentPlayerMeritId(undefined);
+        updateCalc({ meritsCount: -value, validatedMeritsCount: -value });
       });
     } else if (nextState === SUBMITTED) {
       createMerit({
@@ -89,6 +98,7 @@ export function MeritLine({
         }
       }).then(({ data }) => {
         setCurrentPlayerMeritId(data.createPlayerMerit.playerMerit.id);
+        updateCalc({ meritsCount: +value });
       });
     } else if (nextState === VALIDATED) {
       updateMerit({
@@ -101,6 +111,7 @@ export function MeritLine({
         }
       }).then(({ data }) => {
         setCurrentPlayerMeritId(data.updatePlayerMeritById.playerMerit.id);
+        updateCalc({ validatedMeritsCount: +value });
       });
     }
   }

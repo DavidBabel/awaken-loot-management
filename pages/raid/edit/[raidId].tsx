@@ -3,13 +3,13 @@ import { Button, Paper, Switch } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getRaidStatusKeyFromId } from "../../../components/attendance/raid-status";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
 import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
-import MemberContext from "../../../lib/context/member";
+import { useMemberContext } from "../../../lib/context/member";
 import { Player, Query, RaidPlayer } from "../../../lib/generatedTypes";
 import { ALL_ACTIVE_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function PageRaidView() {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const classes = useStyles("");
   const router = useRouter();
   const raidId = parseInt(String(router.query.raidId));

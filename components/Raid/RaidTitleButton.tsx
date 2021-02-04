@@ -7,17 +7,17 @@ import {
   DialogTitle,
   IconButton,
   LinearProgress,
-  Snackbar,
-  SnackbarContent,
   TextField
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
-import CloseIcon from "@material-ui/icons/Close";
 import CreateIcon from "@material-ui/icons/Create";
 import { useState } from "react";
 import { Mutation } from "../../lib/generatedTypes";
 import { UPDATE_RAID_TITLE } from "../../lib/gql/raid-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 
 interface UpdateRaidTitleVariables {
   raidId: number;
@@ -35,13 +35,6 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
   const [updateRaidTitle] = useMutation<Mutation, UpdateRaidTitleVariables>(
     UPDATE_RAID_TITLE
   );
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -61,13 +54,13 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
       }
     })
       .then(resp => {
-        openSnackBar("Titre du raid modifié avec succès", "success");
+        showSuccessMessage("Titre du raid modifié avec succès");
         setRaidTitle(titleInput);
         setOpen(false);
         setLoading(false);
       })
       .catch(err => {
-        openSnackBar(err.message, "error");
+        showErrorMessage(err.message);
         setOpen(false);
         setLoading(false);
       });
@@ -112,30 +105,6 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </div>
   );
 }

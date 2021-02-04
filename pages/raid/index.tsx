@@ -21,13 +21,13 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import ItemsCarousel from "react-items-carousel";
 import uuidv4 from "uuid/v4";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
 import { CreateRaid } from "../../components/Raid/button";
 import LinkLine from "../../components/Raid/LinkLine";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { Mutation, Query, Raid } from "../../lib/generatedTypes";
 import {
   UPDATE_RAID_ACTIVE,
@@ -146,7 +146,7 @@ const useStyles = makeStyles(theme => ({
 
 export default withWidth()(function PageIndex(props: WithWidthProps) {
   const { width: pageWidth } = props;
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const classes = useStyles("");
   const [activeItemIndex, setActiveItemIndex] = React.useState<number>(0);
   const [loadingRender, setLoadingRender] = React.useState<boolean>(true);

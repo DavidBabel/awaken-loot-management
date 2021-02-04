@@ -8,26 +8,22 @@ import {
   Fab,
   FormControl,
   Grid,
-  IconButton,
   InputLabel,
   LinearProgress,
   MenuItem,
   Select,
-  Snackbar,
-  SnackbarContent,
   Switch,
   TextField,
   Typography
 } from "@material-ui/core/";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Add as AddIcon } from "@material-ui/icons";
-import CloseIcon from "@material-ui/icons/Close";
 import ForwardIcon from "@material-ui/icons/Forward";
 import { ApolloQueryResult } from "apollo-boost";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
 import { wowClasses } from "../../lib/constants/classes";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import {
   BossItem,
   Loot,
@@ -42,8 +38,11 @@ import {
   UpdateLootVariables
 } from "../../lib/gql/loot-mutations";
 import { CREATE_PLAYER } from "../../lib/gql/player-mutations";
-import { useSnackBar } from "../../lib/hooks/snackbar";
 import { formatDate } from "../../lib/utils/date";
+import {
+  showErrorMessage,
+  showSuccessMessage
+} from "../../lib/utils/snackbars/snackbarService";
 import CONFIG from "../../server/config";
 
 interface CreatePlayerVariables {
@@ -151,7 +150,7 @@ export default function AddLootDialog({
   refetchAllPlayers,
   scrollDown
 }: Props) {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const classes = useStyles("");
   //   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -172,14 +171,6 @@ export default function AddLootDialog({
   const [createPlayer] = useMutation<Mutation, CreatePlayerVariables>(
     CREATE_PLAYER
   );
-
-  const {
-    snackBarOpen,
-    snackBarBackgroundColor,
-    openSnackBar,
-    closeSnackBar,
-    snackBarMessage
-  } = useSnackBar();
 
   const handleOpen = (): void => {
     setOpen(true);
@@ -289,25 +280,25 @@ export default function AddLootDialog({
               .catch(err => {
                 setOpen(false);
                 setAddLootIsLoading(false);
-                openSnackBar(err.message, "error");
+                showErrorMessage(err.message);
               });
           })
           .catch(err => {
             setOpen(false);
             setAddLootIsLoading(false);
-            openSnackBar(err.message, "error");
+            showErrorMessage(err.message);
           });
       } else {
         setAddLootIsLoading(false);
-        openSnackBar("Ce joueur existe déja.", "error");
+        showErrorMessage("Ce joueur existe déja.");
       }
     } else {
       if (itemIdToAdd.length === 0) {
-        openSnackBar("Selectionnez un item", "error");
+        showErrorMessage("Selectionnez un item");
       } else if (newPlayerInputValue.length === 0) {
-        openSnackBar("Tapez le pseudo du joueur", "error");
+        showErrorMessage("Tapez le pseudo du joueur");
       } else {
-        openSnackBar("Selectionnez une classe", "error");
+        showErrorMessage("Selectionnez une classe");
       }
     }
   };
@@ -337,23 +328,22 @@ export default function AddLootDialog({
                 actionType: "delete"
               }
             }).catch(err => {
-              openSnackBar(err.message, "error");
+              showErrorMessage(err.message);
             });
           }
           setOpen(false);
           setAddLootIsLoading(false);
           setItemIdToAdd("");
           setPlayerIdToAdd("");
-          openSnackBar(
-            `${resp.data.createLoot.itemByItemId.name} assigné à ${resp.data.createLoot.playerByPlayerId.name}`,
-            "success"
+          showSuccessMessage(
+            `${resp.data.createLoot.itemByItemId.name} assigné à ${resp.data.createLoot.playerByPlayerId.name}`
           );
           refetchOneRaid()
             .then(() => {
               scrollDown();
             })
             .catch(err => {
-              openSnackBar(err.message, "error");
+              showErrorMessage(err.message);
             });
         })
         .catch(err => {
@@ -361,10 +351,10 @@ export default function AddLootDialog({
           setAddLootIsLoading(false);
           setItemIdToAdd("");
           setPlayerIdToAdd("");
-          openSnackBar(err.message, "error");
+          showErrorMessage(err.message);
         });
     } else {
-      openSnackBar("Selectionnez un item et un joueur.", "error");
+      showErrorMessage("Selectionnez un item et un joueur.");
     }
   }
   const toggleSwitchRestrictPlayerList = () => {
@@ -604,30 +594,6 @@ export default function AddLootDialog({
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={snackBarOpen}
-        autoHideDuration={3000}
-        onClose={closeSnackBar}
-      >
-        <SnackbarContent
-          style={{ backgroundColor: snackBarBackgroundColor }}
-          message={<span id="message-id">{snackBarMessage}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={closeSnackBar}
-            >
-              <CloseIcon />
-            </IconButton>
-          ]}
-        />
-      </Snackbar>
     </div>
   );
 }

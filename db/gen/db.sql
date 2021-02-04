@@ -2102,7 +2102,9 @@ VALUES
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23064)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22819)),
 ((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=23577)),
-((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22812));
+((SELECT id FROM "Bosses" WHERE "name"='Kel‘Thuzad'),(SELECT id FROM "Items" WHERE "wowheadId"=22812)),
+((SELECT id FROM "Bosses" WHERE "name"='Saphiron'),(SELECT id FROM "Items" WHERE "wowheadId"=23549)),
+((SELECT id FROM "Bosses" WHERE "name"='Saphiron'),(SELECT id FROM "Items" WHERE "wowheadId"=23547));
 
 
 -- safe comment
@@ -5715,11 +5717,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Sangle désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false, 'Première à Fllas'),
+  'Guerrier Tank'), false, 'Rogue puis Deep Prot 8 part'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Sangle désacralisée'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true, 'Première à Fllas'),
+  'Voleur'), true, 'Rogue puis Deep Prot 8 part'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Cape du Fléau'
@@ -6372,11 +6374,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon du mentor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false, 'Sauf tanks 8/8 T3'),
+  'Guerrier Tank'), false, 'Non prios pour les tanks 8/8 T3'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Ceinturon du mentor'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false, 'Sauf tanks 8/8 T3'),
+  'Guerrier DPS'), false, 'Non prios pour les tanks 8/8 T3'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Voile de l‘éclipse'
@@ -6770,19 +6772,19 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier Tank'), false, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
+  'Guerrier Tank'), false, '2 premiers chez les rogues'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Guerrier DPS'), false, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
+  'Guerrier DPS'), false, '2 premiers chez les rogues'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chasseur'), true, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
+  'Chasseur'), true, '2 premiers chez les rogues'),
   ((SELECT id FROM "Items" WHERE "name"=
   'Détrôneuse'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Voleur'), true, '2 rogues / 1 tank / 1 hunt puis roll de classe'),
+  'Voleur'), true, '2 premiers chez les rogues'),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Talisman bouillonnant de Stormrage'
@@ -7367,10 +7369,10 @@ VALUES
 (2, '2019-11-03'), -- 24 - all ony
 (2, '2019-11-05'), -- 24 - all ony
 (1, '2019-11-06'), -- 25
-(1, '2019-11-07'), -- 26
-(3, '2019-11-07'),
-(4, '2019-11-07'),
-(5, '2019-11-07');
+(1, '2021-11-07'), -- 26
+(3, '2021-11-07'),
+(4, '2021-11-07'),
+(5, '2021-11-07');
 
 -- 1 => Molten Core
 -- 2 => Onyxia Lair

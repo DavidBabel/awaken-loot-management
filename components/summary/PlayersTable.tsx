@@ -15,8 +15,8 @@ import {
 } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import React, { useContext } from "react";
-import MemberContext from "../../lib/context/member";
+import React from "react";
+import { useMemberContext } from "../../lib/context/member";
 import { Loot, Player } from "../../lib/generatedTypes";
 import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
@@ -117,7 +117,7 @@ type ColumnName =
 
 export default function PlayersTable(props: Props) {
   const classes = useStyles(props);
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   const columns: ColumnName[] = [
     "Pseudo",

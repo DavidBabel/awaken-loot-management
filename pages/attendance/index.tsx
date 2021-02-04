@@ -8,7 +8,7 @@ import {
   TableRow
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { AttendanceLegende } from "../../components/attendance/AttendanceLegende";
 import { AttendanceLine } from "../../components/attendance/AttendanceLine";
 import { AttendanceTableRaidHeaders } from "../../components/attendance/AttendanceTableRaidHeaders";
@@ -18,7 +18,7 @@ import {
 } from "../../components/attendance/ChangeAttendanceDialog";
 import { CustomAttendanceTable } from "../../components/attendance/CustomAttendanceTable";
 import { LoadingAndError } from "../../components/LoadingAndErrors";
-import MemberContext from "../../lib/context/member";
+import { useMemberContext } from "../../lib/context/member";
 import { Player, Query } from "../../lib/generatedTypes";
 import { ALL_ACTIVE_PLAYERS } from "../../lib/gql/player-queries";
 import { ALL_RAIDS } from "../../lib/gql/raid-queries";
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PageIndex() {
   const classes = useStyles("");
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const { openSnackBar, DefaultSnackBar } = useSnackBar();
   const [hideRerolls, toggleHideRerolls] = useToggle(true);
 

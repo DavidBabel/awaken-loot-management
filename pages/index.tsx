@@ -8,8 +8,8 @@ import {
   Grid,
   Link
 } from "@material-ui/core";
-import React, { useContext } from "react";
-import MemberContext from "../lib/context/member";
+import React from "react";
+import { useMemberContext } from "../lib/context/member";
 
 interface Props {
   title: string;
@@ -38,7 +38,7 @@ function FastCard({ title, children, link }: Props) {
 }
 
 export default function Accueil() {
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
 
   return (
     <Grid container={true}>

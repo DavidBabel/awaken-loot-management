@@ -9,8 +9,8 @@ import {
 } from "@material-ui/core";
 import Router, { useRouter } from "next/router";
 import { destroyCookie } from "nookies";
-import React, { useContext } from "react";
-import MemberContext from "../../lib/context/member";
+import React from "react";
+import { useMemberContext } from "../../lib/context/member";
 import { useOnMobile } from "../../lib/hooks/mobilecheck";
 import { role } from "../../lib/role-level";
 import CONFIG from "../../server/config";
@@ -39,7 +39,7 @@ function ListHead(props: ListSubheaderProps) {
 
 export function Menu({ handleDrawerClose }) {
   const classes = useStyles("");
-  const member = useContext(MemberContext);
+  const member = useMemberContext();
   const isConnected = member.level > role.guest;
   const { route } = useRouter();
   const onMobile = useOnMobile(false);
