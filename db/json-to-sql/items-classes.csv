@@ -1187,8 +1187,8 @@ Prêtre, false
 Prêtre Ombre, false
 
 Torsade du Dieu très ancien
-Chaman, false
-Druide, false
+Chaman, true
+Druide, true
 Prêtre, true
 
 Ceinture d‘agonie sans fin
@@ -1411,8 +1411,8 @@ Voleur, false
 
 Coeur frigide de Noth
 Chaman, false
-Druide, false
-Prêtre, false
+Druide, true
+Prêtre, true
 
 Bague de l‘inévitable
 Mage, false
@@ -1780,8 +1780,8 @@ Voleur, false
 
 Oeil droit de Saphiron
 Chaman, false
-Druide, false
-Prêtre, false
+Druide, true
+Prêtre, true
 
 Glyphe de déviation
 Guerrier Tank, true
