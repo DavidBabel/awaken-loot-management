@@ -10,7 +10,6 @@ const pg = require("knex")({
  * @param {string} password hashed
  */
 async function checkLogin(username, password) {
-  console.log(process.env.DATABASE_URL);
   let result = {};
   try {
     result = await pg
