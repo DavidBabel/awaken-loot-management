@@ -198,7 +198,8 @@ VALUES
 ('Paladin',       '#F58CBA', 'https://i.imgur.com/0ZZyrkG.jpg'), -- 10
 ('Prêtre Ombre',  '#FFFFFF', 'https://i.imgur.com/ZTGeN3S.jpg'), -- 11
 ('Druide Feral',  '#FF7D0A', 'https://i.imgur.com/x4tc57M.jpg'), -- 12
-('Chaman Amélio', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg')  -- 13
+('Chaman Amélio', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg'),  -- 13
+('Chaman Elementaire', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg')  -- 14
 ;
 
 -- INSERT INTO
@@ -5157,11 +5158,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Chaman'), false, NULL),
+  'Chaman'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Torsade du Dieu très ancien'
   ),(SELECT id FROM "Classes" WHERE "name"=
@@ -5747,11 +5748,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Coeur frigide de Noth'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false, NULL),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Bague de l‘inévitable'
@@ -6684,11 +6685,11 @@ VALUES
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Druide'), false, NULL),
+  'Druide'), true, NULL),
   ((SELECT id FROM "Items" WHERE "name"=
   'Oeil droit de Saphiron'
   ),(SELECT id FROM "Classes" WHERE "name"=
-  'Prêtre'), false, NULL),
+  'Prêtre'), true, NULL),
 
   ((SELECT id FROM "Items" WHERE "name"=
   'Glyphe de déviation'

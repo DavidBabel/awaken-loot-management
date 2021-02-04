@@ -158,6 +158,7 @@ export default function EditPlayerField({
                 <div>11 - Prêtre Ombre</div>
                 <div>12 - Druide Feral</div>
                 <div>13 - Chaman Amélio</div>
+                <div>14 - Chaman Elementaire</div>
               </div>
             )}
             {"role" === accessor && (

@@ -13,7 +13,8 @@ VALUES
 ('Paladin',       '#F58CBA', 'https://i.imgur.com/0ZZyrkG.jpg'), -- 10
 ('Prêtre Ombre',  '#FFFFFF', 'https://i.imgur.com/ZTGeN3S.jpg'), -- 11
 ('Druide Feral',  '#FF7D0A', 'https://i.imgur.com/x4tc57M.jpg'), -- 12
-('Chaman Amélio', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg')  -- 13
+('Chaman Amélio', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg'),  -- 13
+('Chaman Elementaire', '#0070DE', 'https://i.imgur.com/n1DjsUN.jpg')  -- 14
 ;
 
 -- INSERT INTO

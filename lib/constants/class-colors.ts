@@ -10,7 +10,8 @@ const classColors = {
   ["Guerrier DPS"]: "#C41F3B",
   ["Prêtre Ombre"]: "grey",
   ["Druide Feral"]: "#FF7D0A",
-  ["Chaman Amélio"]: "#0070DE"
+  ["Chaman Amélio"]: "#0070DE",
+  ["Chaman Elementaire"]: "#0070DE"
 };
 
 const alternativeColor = {

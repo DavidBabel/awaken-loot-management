@@ -42,9 +42,10 @@ export default function PlayerRaidPage() {
     member.classId === 8,
     member.classId === 9,
     member.classId === 10,
-    member.classId === 11,
-    member.classId === 12,
-    member.classId === 13
+    member.classId === 11 || member.classId === 3,
+    member.classId === 12 || member.classId === 8,
+    member.classId === 13 || member.classId === 9,
+    member.classId === 14 || member.classId === 2
   ]);
 
   const [subChanges, setSubChanges] = useState<SubChange[]>([]);

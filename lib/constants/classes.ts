@@ -11,7 +11,8 @@ const classesPerRaid = {
   // Paladin: 4,
   "Prêtre Ombre": 1,
   "Druide Feral": 1,
-  "Chaman Amélio": 0
+  "Chaman Amélio": 0,
+  "Chaman Elementaire": 0
 };
 
 const wowClasses = [
@@ -27,7 +28,12 @@ const wowClasses = [
   { id: 9, name: "Guerrier DPS", icon: "https://i.imgur.com/3d2GCGF.jpg" },
   { id: 11, name: "Prêtre Ombre", icon: "https://i.imgur.com/ZTGeN3S.jpg" },
   { id: 12, name: "Druide Feral", icon: "https://i.imgur.com/x4tc57M.jpg" },
-  { id: 13, name: "Chaman Amélio", icon: "https://i.imgur.com/n1DjsUN.jpg" }
+  { id: 13, name: "Chaman Amélio", icon: "https://i.imgur.com/n1DjsUN.jpg" },
+  {
+    id: 14,
+    name: "Chaman Elementaire",
+    icon: "https://i.imgur.com/M2UCg2s.jpg"
+  }
 ];
 
 export { classesPerRaid, wowClasses };

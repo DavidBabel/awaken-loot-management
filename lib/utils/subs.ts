@@ -138,6 +138,14 @@ export function formatDatas(
         [SubscribeStatus.SiBesoin]: [],
         [SubscribeStatus.Valide]: [],
         [SubscribeStatus.EnRotation]: []
+      },
+      "Chaman Elementaire": {
+        [SubscribeStatus.NonInscrit]: [],
+        [SubscribeStatus.Present]: [],
+        [SubscribeStatus.Absent]: [],
+        [SubscribeStatus.SiBesoin]: [],
+        [SubscribeStatus.Valide]: [],
+        [SubscribeStatus.EnRotation]: []
       }
     }
   );

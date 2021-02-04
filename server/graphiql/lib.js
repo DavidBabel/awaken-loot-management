@@ -7,7 +7,7 @@ function runServer(isDev = true) {
   const express = require("express");
   const { postgraphile } = require("postgraphile");
   const CONFIG = require("../config");
-  const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
+  // const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
 
   const app = express();
 
@@ -18,9 +18,9 @@ function runServer(isDev = true) {
     postgraphile(databaseUrl, "public", {
       // classicIds: true,
       // @ts-ignore
-      appendPlugins: [ConnectionFilterPlugin],
-      connectionFilterComputedColumns: false, // default: true
-      connectionFilterSetofFunctions: false, // default: true
+      // appendPlugins: [ConnectionFilterPlugin],
+      // connectionFilterComputedColumns: false, // default: true
+      // connectionFilterSetofFunctions: false, // default: true
       enableQueryBatching: true,
       enhanceGraphiql: true,
       graphiql: true,
