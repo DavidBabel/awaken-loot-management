@@ -1,6 +1,9 @@
 import { wowClasses } from "../constants/classes";
 
 export function getClassImageUrl(className: string) {
+  if (className === "Paladin") {
+    return "https://i.imgur.com/0ZZyrkG.jpg";
+  }
   const currentClasse = wowClasses.find(wc => wc.name === className);
   return currentClasse.icon;
 }
