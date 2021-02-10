@@ -10,7 +10,7 @@ interface SnackBarMessage {
   id: number;
 }
 
-const AUTO_DISMISS = 20000;
+const AUTO_DISMISS = 4000;
 let snackId = 0;
 
 export function SnackbarContainer() {
