@@ -149,15 +149,11 @@ function getPriosText(item: Item) {
 
   const prioLine = hasPrios ? `/o ${item.name} [PRIO] ${prios.join(", ")}` : "";
   const nonPrioLine = hasNonPrios
-    ? `
-/o ${item.name} ${nonPrioText} ${nonPrio.join(", ")}`
+    ? ` ${nonPrioText} ${nonPrio.join(", ")}`
     : "";
 
   const comment = item.classItemsByItemId?.nodes[0]?.comment;
-  const commentLine = comment
-    ? `
-/o ${item.name} [Commentaire] ${comment}`
-    : "";
+  const commentLine = comment ? ` [Commentaire] ${comment}` : "";
 
   return `${prioLine}${nonPrioLine}${commentLine}`.trim();
 }
