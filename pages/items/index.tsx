@@ -155,7 +155,7 @@ function getPriosText(item: Item) {
   const comment = item.classItemsByItemId?.nodes[0]?.comment;
   const commentLine = comment ? ` [Commentaire] ${comment}` : "";
 
-  return `${prioLine}${nonPrioLine}${commentLine}`.trim();
+  return `${item.name} ${prioLine}${nonPrioLine}${commentLine}`.trim();
 }
 
 export default function PageItem() {
