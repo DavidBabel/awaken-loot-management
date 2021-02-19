@@ -10,8 +10,12 @@ DiscordClient.on("ready", () => {
 
 DiscordClient.on("message", message => {
   try {
-    // BOT ID
-    if (message.member.id !== "787447821766885416") {
+    if (
+      message &&
+      message.member &&
+      message.member.id &&
+      message.member.id !== "787447821766885416" // BOT ID
+    ) {
       if (message.channel.id === "796362734081802250") {
         checkMemberInChan(message);
       } else if (message.channel.id === "811769354097917952") {
