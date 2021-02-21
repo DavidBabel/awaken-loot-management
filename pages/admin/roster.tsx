@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, Checkbox } from "@material-ui/core";
 import { useState } from "react";
 import { getClassImageUrl } from "../../lib/utils/image";
 
@@ -260,11 +260,15 @@ function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function html(content: string[]) {
+function html(content: string[], isTBC: boolean) {
+  const url = isTBC
+    ? "http://awaken.se/forums/2281974"
+    : "http://awaken.se/forums/2213013";
   return `
 <div class="inner_content">
   <div class="sc_padding">
     <div class="message">
+      <a href="${url}" target="_blank" style="display: block; text-align:center; color: #801a1a; margin-top: -18px; margin-bottom: 8px; font-size: 14px">>> Postuler <<</a>
       ${content.join("")}
     </div>
   </div>
@@ -317,6 +321,7 @@ function getClass(classe: Roster) {
 
 export default function Roster() {
   const [currentRoster, setRoster] = useState<Roster[]>(roster);
+  const [isTBC, setIsTBC] = useState(true);
 
   function loadFromSite() {
     try {
@@ -330,8 +335,14 @@ export default function Roster() {
         return r;
       });
       let prioKeptValue: Prios = "";
+      let isTBCtemp = false;
       parts.forEach(line => {
-        if (line.startsWith("recrut")) {
+        if (line.includes("tbc")) {
+          isTBCtemp = true;
+          return;
+        } else if (line.startsWith("recrut")) {
+          return;
+        } else if (line.includes("postule")) {
           return;
         } else if (!prioKeptValue) {
           prioKeptValue = line.trim() as Prios;
@@ -344,6 +355,7 @@ export default function Roster() {
         }
       });
 
+      setIsTBC(isTBCtemp);
       setRoster(newRoster);
     } catch (e) {
       // tslint:disable-next-line:no-console
@@ -381,10 +393,17 @@ export default function Roster() {
         placeholder="copier ici le roster du site"
       />
       <br />
-
       <Button variant="outlined" onClick={() => loadFromSite()}>
         Charger depuis le site
       </Button>
+      <br />
+      <Checkbox
+        checked={isTBC}
+        onClick={() => {
+          setIsTBC(!isTBC);
+        }}
+      />{" "}
+      Pour TBC
       <br />
       <br />
       {currentRoster.map((classe: Roster, index: number) => {
@@ -432,7 +451,7 @@ export default function Roster() {
             id="result"
             cols={150}
             rows={20}
-            value={html(output)}
+            value={html(output, isTBC)}
           />
           <div>
             <Button
