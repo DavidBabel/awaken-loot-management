@@ -4,7 +4,7 @@ export function getClassImageUrl(className: string) {
   if (className === "Paladin") {
     return "https://i.imgur.com/0ZZyrkG.jpg";
   }
-  const currentClasse = wowClasses.find(wc => wc.name === className);
+  const currentClasse = wowClasses.find(wc => wc.name.startsWith(className));
   return currentClasse.icon;
 }
 
