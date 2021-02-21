@@ -4,5 +4,6 @@ module.exports = {
   abominations: ["Le recousu", "Grobbulus", "Gluth", "Thaddius"],
   peste: ["Noth", "Heigan", "Horreb"],
   militaire: ["Razuvious", "Heigan", "4 Cavaliers"],
-  sommet: ["Saphiron", "Kel'Thuzad"]
+  saphiron: ["Saphiron"],
+  kt: ["Kel'Thuzad"]
 };

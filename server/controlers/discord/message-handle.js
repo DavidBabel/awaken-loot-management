@@ -128,12 +128,10 @@ function getAttribs(message) {
       bosses = AttribGrids.abominations;
     } else if (aile.startsWith("mi")) {
       bosses = AttribGrids.militaire;
-    } else if (
-      aile.startsWith("so") ||
-      aile.startsWith("sa") ||
-      aile.startsWith("k")
-    ) {
-      bosses = AttribGrids.sommet;
+    } else if (aile.startsWith("so") || aile.startsWith("sa")) {
+      bosses = AttribGrids.saphiron;
+    } else if (aile.startsWith("k")) {
+      bosses = AttribGrids.kt;
     } else {
       // console.log("Channel non trouvé pour la commande:", cmd);
       message.reply("Aile non trouvée");
