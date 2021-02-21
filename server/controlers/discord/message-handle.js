@@ -118,8 +118,44 @@ function getAttribs(message) {
   let bosses;
 
   if (cmd === "attrib") {
-    if (aile.startsWith("tr")) {
-      bosses = AttribGrids.trashs;
+    if (aile.startsWith("anu")) {
+      bosses = [AttribGrids.spider[0]];
+    } else if (aile.startsWith("fae")) {
+      bosses = [AttribGrids.spider[1]];
+    } else if (aile.startsWith("mae")) {
+      bosses = [AttribGrids.spider[2]];
+    } else if (
+      aile.startsWith("pat") ||
+      aile.startsWith("le re") ||
+      aile.startsWith("rec")
+    ) {
+      bosses = [AttribGrids.abominations[0]];
+    } else if (aile.startsWith("gro")) {
+      bosses = [AttribGrids.abominations[1]];
+    } else if (aile.startsWith("glu")) {
+      bosses = [AttribGrids.abominations[2]];
+    } else if (aile.startsWith("tad")) {
+      bosses = [AttribGrids.abominations[3]];
+    } else if (aile.startsWith("no")) {
+      bosses = [AttribGrids.peste[0]];
+    } else if (aile.startsWith("hei") || aile.startsWith("ei")) {
+      bosses = [AttribGrids.peste[1]];
+    } else if (
+      aile.startsWith("hor") ||
+      aile.startsWith("loa") ||
+      aile.startsWith("lao")
+    ) {
+      bosses = [AttribGrids.peste[2]];
+    } else if (aile.startsWith("ra")) {
+      bosses = [AttribGrids.militaire[0]];
+    } else if (aile.startsWith("go")) {
+      bosses = [AttribGrids.militaire[1]];
+    } else if (
+      aile.startsWith("cav") ||
+      aile.startsWith("qua") ||
+      aile.startsWith("4")
+    ) {
+      bosses = [AttribGrids.militaire[2]];
     } else if (aile.startsWith("ar") || aile.startsWith("sp")) {
       bosses = AttribGrids.spider;
     } else if (aile.startsWith("pe")) {
