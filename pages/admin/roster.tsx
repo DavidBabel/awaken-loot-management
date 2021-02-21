@@ -268,7 +268,7 @@ function html(content: string[], isTBC: boolean) {
 <div class="inner_content">
   <div class="sc_padding">
     <div class="message">
-      <a href="${url}" target="_blank" style="display: block; text-align:center; color: #801a1a; margin-top: -18px; margin-bottom: 8px; font-size: 14px">>> Postuler <<</a>
+      <a style="margin-left: 5px; margin-top:-16px; margin-bottom: 10px; width: 95%;" class="btn-primary" target="_blank" href="${url}" title="View News"><span style="margin: 10px 8px">Postuler</span></a>
       ${content.join("")}
     </div>
   </div>
