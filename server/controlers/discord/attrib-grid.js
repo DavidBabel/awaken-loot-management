@@ -3,7 +3,7 @@ module.exports = {
   spider: ["Anub'Rekhan", "Faerlina", "Maexxna"],
   abominations: ["Le recousu", "Grobbulus", "Gluth", "Thaddius"],
   peste: ["Noth", "Heigan", "Horreb"],
-  militaire: ["Razuvious", "Heigan", "4 Cavaliers"],
+  militaire: ["Razuvious", "Gothik", "4 Cavaliers"],
   saphiron: ["Saphiron"],
   kt: ["Kel'Thuzad"]
 };
