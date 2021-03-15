@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const GSheetReader = require("g-sheets-api");
 const AttribGrids = require("./attrib-grid.js");
 
+let lastSheetId;
+
 /**
  * @param {Discord.Message} message
  */
@@ -9,7 +11,15 @@ function getContent(message) {
   const [cmdTmp, optTmp, sheetUrl] = message.content.split(" ");
   const cmd = cmdTmp.toLowerCase();
   const opt = optTmp.toLowerCase();
-  const sheetId = sheetUrl.split("/d/")[1].split("/")[0];
+  let sheetId;
+  if (sheetUrl) {
+    sheetId = sheetUrl.split("/d/")[1].split("/")[0];
+    if (sheetId) {
+      lastSheetId = sheetId;
+    }
+  } else {
+    sheetId = lastSheetId;
+  }
 
   return [cmd, opt, sheetId];
 }
