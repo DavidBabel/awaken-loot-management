@@ -1,6 +1,10 @@
 const CONFIG = require("../../config.js");
 const Discord = require("discord.js");
-const { checkMemberInChan, getAttribs } = require("./message-handle");
+const {
+  checkMemberInChan,
+  getAttribs,
+  getContent
+} = require("./message-handle");
 const DiscordClient = new Discord.Client();
 
 DiscordClient.on("ready", () => {
@@ -16,9 +20,24 @@ DiscordClient.on("message", message => {
       message.member.id &&
       message.member.id !== "787447821766885416" // BOT ID
     ) {
-      if (message.channel.id === "796362734081802250") {
+      if (
+        message.channel.id === "821021499913535548" // gbid
+      ) {
+        const [cmd] = getContent(message);
+        if (cmd === "attrib") {
+          getAttribs(message);
+        } else if (cmd === "check") {
+          checkMemberInChan(message);
+        }
+      }
+
+      if (
+        message.channel.id === "796362734081802250" // awaken
+      ) {
         checkMemberInChan(message);
-      } else if (message.channel.id === "811769354097917952") {
+      } else if (
+        message.channel.id === "811769354097917952" // awaken
+      ) {
         getAttribs(message);
       }
     }

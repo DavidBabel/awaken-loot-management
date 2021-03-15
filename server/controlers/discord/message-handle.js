@@ -22,10 +22,15 @@ function checkMemberInChan(message) {
   let channelId;
   let channelName;
 
+  const inGbid = message.channel.id === "821021499913535548";
+
   if (cmd === "check") {
     if (chan.startsWith("pr")) {
       channelName = "Préparation";
-      channelId = "790299052159533058";
+      channelId = inGbid ? "690966680272240744" : "790299052159533058";
+    } else if (chan.startsWith("ra")) {
+      channelName = "Raid Naxx";
+      channelId = "691448259062792213";
     } else if (chan.startsWith("pi")) {
       channelName = "Pickup";
       channelId = "634181864118026249";
@@ -208,5 +213,6 @@ function getAttribs(message) {
 
 module.exports = {
   checkMemberInChan,
-  getAttribs
+  getAttribs,
+  getContent
 };
