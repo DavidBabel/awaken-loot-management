@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const GSheetReader = require("g-sheets-api");
 const AttribGrids = require("./attrib-grid.js");
 
+let lastSheetId;
+
 /**
  * @param {Discord.Message} message
  */
@@ -9,7 +11,15 @@ function getContent(message) {
   const [cmdTmp, optTmp, sheetUrl] = message.content.split(" ");
   const cmd = cmdTmp.toLowerCase();
   const opt = optTmp.toLowerCase();
-  const sheetId = sheetUrl.split("/d/")[1].split("/")[0];
+  let sheetId;
+  if (sheetUrl) {
+    sheetId = sheetUrl.split("/d/")[1].split("/")[0];
+    if (sheetId) {
+      lastSheetId = sheetId;
+    }
+  } else {
+    sheetId = lastSheetId;
+  }
 
   return [cmd, opt, sheetId];
 }
@@ -22,10 +32,15 @@ function checkMemberInChan(message) {
   let channelId;
   let channelName;
 
+  const inGbid = message.channel.id === "821021499913535548";
+
   if (cmd === "check") {
     if (chan.startsWith("pr")) {
       channelName = "Préparation";
-      channelId = "790299052159533058";
+      channelId = inGbid ? "690966680272240744" : "790299052159533058";
+    } else if (chan.startsWith("ra")) {
+      channelName = "Raid Naxx";
+      channelId = "691448259062792213";
     } else if (chan.startsWith("pi")) {
       channelName = "Pickup";
       channelId = "634181864118026249";
@@ -208,5 +223,6 @@ function getAttribs(message) {
 
 module.exports = {
   checkMemberInChan,
-  getAttribs
+  getAttribs,
+  getContent
 };
