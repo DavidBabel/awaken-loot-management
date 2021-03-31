@@ -7,6 +7,19 @@ let lastSheetId;
 /**
  * @param {Discord.Message} message
  */
+function isBot(message) {
+  return (
+    message.author.bot ||
+    (message &&
+      message.member &&
+      message.member.id &&
+      message.member.id === "787447821766885416")
+  ); // BOT ID
+}
+
+/**
+ * @param {Discord.Message} message
+ */
 function getContent(message) {
   const [cmdTmp, optTmp, sheetUrl] = message.content.split(" ");
   const cmd = cmdTmp.toLowerCase();
@@ -221,8 +234,62 @@ function getAttribs(message) {
   }
 }
 
+const allowedChars = "áÁàÀâÂäÄåÅæÆçÇœŒéÉèÈêÊëËƒíÍìÌîÎïÏñÑøØóÓòÒôÔöÖúÚùÙûÛÜýÝÿ";
+/**
+ * @param {String} string
+ */
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+/**
+ * @param {Discord.Message} message
+ */
+async function handleRenaming(message) {
+  const parts = message.content.split(" ");
+
+  if (parts.length !== 1) {
+    message.author.send(
+      "Tu dois saisir le pseudo exact du personnage que tu veux emmener, ni plus, ni moins. Boloss."
+    );
+    return;
+  }
+  const pseudoRaw = parts[0];
+  const regex = new RegExp(`^[a-zA-Z0-9${allowedChars}]+$`);
+  if (!regex.test(pseudoRaw)) {
+    message.author.send(
+      `Ton pseudo **${pseudoRaw}** n'a pas l'air d'être un pseudo WoW valide, tu es sûr de l'avoir bien saisi ?
+Si oui contacte Devilhunter.`
+    );
+    return;
+  }
+  const pseudoClean = capitalize(pseudoRaw);
+  if (pseudoClean !== pseudoRaw) {
+    message.author.send(
+      `Hey ! Ta touche MAJ elle est cassée ? Ca promet ...
+Tu as saisis **${pseudoRaw}** mais tu voulais peut être saisir **${pseudoClean}**, non ?
+Essaie encore, et surprends moi ...`
+    );
+    return;
+  }
+
+  try {
+    const user = message.guild.members.resolve(message.author.id);
+    await user.setNickname(pseudoClean);
+    const role = message.guild.roles.cache.find(
+      role => role.id === "819038968909529108"
+    );
+    await user.roles.remove(role);
+    await message.delete();
+  } catch (e) {
+    console.log("marcho pô", e);
+  }
+}
+
 module.exports = {
+  isBot,
   checkMemberInChan,
   getAttribs,
-  getContent
+  getContent,
+  handleRenaming
 };

@@ -3,7 +3,9 @@ const Discord = require("discord.js");
 const {
   checkMemberInChan,
   getAttribs,
-  getContent
+  getContent,
+  isBot,
+  handleRenaming
 } = require("./message-handle");
 const DiscordClient = new Discord.Client();
 
@@ -14,12 +16,7 @@ DiscordClient.on("ready", () => {
 
 DiscordClient.on("message", message => {
   try {
-    if (
-      message &&
-      message.member &&
-      message.member.id &&
-      message.member.id !== "787447821766885416" // BOT ID
-    ) {
+    if (!isBot(message)) {
       if (
         message.channel.id === "821021499913535548" // gbid
       ) {
@@ -29,6 +26,9 @@ DiscordClient.on("message", message => {
         } else if (cmd === "check") {
           checkMemberInChan(message);
         }
+      }
+      if (message.channel.id === "826659258149240832") {
+        handleRenaming(message);
       }
 
       if (
@@ -42,7 +42,8 @@ DiscordClient.on("message", message => {
       }
     }
   } catch (e) {
-    message.reply("something bad happened", e);
+    message.reply("Putain t'as tout pété, contacte Devilhunter");
+    console.log(e);
   }
 });
 
