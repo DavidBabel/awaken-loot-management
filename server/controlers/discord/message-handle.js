@@ -267,7 +267,7 @@ Si oui contacte Devilhunter.`
   if (pseudoClean !== pseudoRaw) {
     message.author.send(
       `Hey ! Ta touche MAJ elle est cassée ? Ca promet ...
-Tu as saisis **${pseudoRaw}** mais tu voulais peut être saisir **${pseudoClean}**, non ?
+Tu as saisi **${pseudoRaw}** mais tu voulais peut être saisir **${pseudoClean}**, non ?
 Essaie encore, et surprends moi ...`
     );
     return;
