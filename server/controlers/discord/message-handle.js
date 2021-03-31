@@ -252,6 +252,7 @@ async function handleRenaming(message) {
     message.author.send(
       "Tu dois saisir le pseudo exact du personnage que tu veux emmener, ni plus, ni moins. Boloss."
     );
+    await message.delete();
     return;
   }
   const pseudoRaw = parts[0];
@@ -261,6 +262,7 @@ async function handleRenaming(message) {
       `Ton pseudo **${pseudoRaw}** n'a pas l'air d'être un pseudo WoW valide, tu es sûr de l'avoir bien saisi ?
 Si oui contacte Devilhunter.`
     );
+    await message.delete();
     return;
   }
   const pseudoClean = capitalize(pseudoRaw);
@@ -270,6 +272,7 @@ Si oui contacte Devilhunter.`
 Tu as saisi **${pseudoRaw}** mais tu voulais peut être saisir **${pseudoClean}**, non ?
 Essaie encore, et surprends moi ...`
     );
+    await message.delete();
     return;
   }
 
@@ -283,6 +286,7 @@ Essaie encore, et surprends moi ...`
     await message.delete();
   } catch (e) {
     console.log("marcho pô", e);
+    await message.delete();
   }
 }
 
