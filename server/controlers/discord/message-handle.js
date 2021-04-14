@@ -234,7 +234,8 @@ function getAttribs(message) {
   }
 }
 
-const allowedChars = "áÁàÀâÂäÄåÅæÆçÇœŒéÉèÈêÊëËƒíÍìÌîÎïÏñÑøØóÓòÒôÔöÖúÚùÙûÛÜýÝÿ";
+const allowedChars =
+  "áÁàÀâÂäÄåÅæÆçÇœŒéÉèÈêÊëËƒíÍìÌîÎïÏñÑøØóÓòÒôÔöÖúÚùÙûÛÜýÝÿüÜ";
 /**
  * @param {String} string
  */
