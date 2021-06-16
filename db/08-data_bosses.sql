@@ -1,11 +1,13 @@
  -- SAFE BEGIN FOR CONCAT
 INSERT INTO "Donjons" ("name", "shortName", "active", "cdnImage", "cdnIconImage")
 VALUES
-('Molten Core', 'MC', true,        'https://i.imgur.com/FKs4REK.jpg', 'https://i.imgur.com/u8n2Xe9.png'),
-('Onyxia Lair', 'Ony', true,       'https://i.imgur.com/qAm8tn5.jpg', 'https://i.imgur.com/8C2ngSe.png'),
-('Blackwing Lair', 'BWL', true,    'https://i.imgur.com/WxgXIlO.jpg', 'https://i.imgur.com/eX3t188.png'),
-('Ahn‘Qiraj Temple', 'AQ40', true, 'https://i.imgur.com/zxsE1Xe.jpg', 'https://i.imgur.com/sOyUNjB.png'),
-('Naxxramas', 'Naxx', true,        'https://i.imgur.com/fm2yASp.jpg', 'https://i.imgur.com/VfxRbsm.png');
+('Molten Core', 'MC', false,        'https://i.imgur.com/FKs4REK.jpg', 'https://i.imgur.com/u8n2Xe9.png'),
+('Onyxia Lair', 'Ony', false,       'https://i.imgur.com/qAm8tn5.jpg', 'https://i.imgur.com/8C2ngSe.png'),
+('Blackwing Lair', 'BWL', false,    'https://i.imgur.com/WxgXIlO.jpg', 'https://i.imgur.com/eX3t188.png'),
+('Ahn‘Qiraj Temple', 'AQ40', false, 'https://i.imgur.com/zxsE1Xe.jpg', 'https://i.imgur.com/sOyUNjB.png'),
+('Naxxramas', 'Naxx', false,        'https://i.imgur.com/fm2yASp.jpg', 'https://i.imgur.com/VfxRbsm.png');
+('Repaire de Gruul', 'Gruul', true,        'https://i.imgur.com/fm2yASp.jpg', 'https://i.imgur.com/VfxRbsm.png');
+('Magtheridon', 'Magthe', true,        'https://i.imgur.com/fm2yASp.jpg', 'https://i.imgur.com/VfxRbsm.png');
 INSERT INTO "Donjons" ("name", "shortName", "active")
 VALUES
 ('Ahn‘Qiraj Ruins', 'AQ20', false),
