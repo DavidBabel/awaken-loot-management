@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: postgres-alm
+    image: postgres:11.12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=david123
+      - POSTGRES_DB=test
+    volumes:
+      - ../../db/gen/db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+  pgadmin4:
+    container_name: pgadmin4
+    image: thajeztah/pgadmin4
+    ports:
+      - 5050:5050
+    restart: unless-stopped

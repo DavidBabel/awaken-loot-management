@@ -6,6 +6,8 @@
     "node": "12.20"
   },
   "scripts": {
+    "setup": "docker-compose -f ./docker/alm/docker-compose.yml up -d",
+    "clear": "docker-compose -f ./docker/alm/docker-compose.yml down --volume",
     "dev": "source .env & node server/start.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/start.js",

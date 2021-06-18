@@ -27,6 +27,22 @@ Il faut absolument que les utilitaires de ligne de commande postgres soient dans
 Les fichiers SQL de base de données sont dans le dossier `db/` et doivent être ajoutés dans l'ordre
 C'est fait avec la commande `npm run reset` qui va concatener tous les fichiers SQL et les insérer dans la base. Attention! ça vide la base actuelle.
 
+### Via docker
+
+```bash
+yarn setup
+```
+
+Ensuite installer un cli suivant votre environnement.
+
+Et enfin créer le serveur dans pgadmin : https://dev.to/shree_j/how-to-install-and-run-psql-using-docker-41j2
+
+Pour clean la DB complètement faire :
+
+```bash
+yarn clear
+```
+
 ### Sur mac et linux
 
 C'est très facile, il suffit de télécharger l'utilitaire depuis https://www.postgresql.org/download/

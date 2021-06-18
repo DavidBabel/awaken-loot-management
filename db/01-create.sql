@@ -1,6 +1,8 @@
  -- SAFE BEGIN FOR CONCAT
 DROP SCHEMA public cascade;
 CREATE SCHEMA public;
+DROP DATABASE test;
+CREATE DATABASE test;
 
 SET search_path TO public;
 
