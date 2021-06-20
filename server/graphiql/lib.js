@@ -11,7 +11,9 @@ function runServer(isDev = true) {
 
   const app = express();
 
-  const dbUrl = isDev ? CONFIG.DATABASE_URL : process.env.PROD_DB;
+  const dbUrl = isDev
+    ? process.env.DATABASE_URL + "/" + process.env.DBNAME
+    : process.env.PROD_DB;
   const databaseUrl = dbUrl || "postgres://localhost:5432/test";
 
   app.use(

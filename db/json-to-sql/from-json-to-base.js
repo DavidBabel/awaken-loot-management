@@ -8,8 +8,7 @@ const bossLoots = require(path
 const bossId = `(SELECT id FROM "Bosses" WHERE "name"='${bossName}')`;
 
 const items = bossLoots.map(loot => {
-  const classId = `(SELECT id FROM "Classes" WHERE "name"='${loot.class}')`;
-  return `('${loot.text.replace("'", "‘")}',${loot.id},${classId})`;
+  return `('${loot.text.replace("'", "‘")}',${loot.id})`;
 });
 
 const bossItems = bossLoots.map(loot => {
@@ -18,7 +17,7 @@ const bossItems = bossLoots.map(loot => {
 });
 
 const request = `
-INSERT INTO "Items" ("name","wowheadId","classId")
+INSERT INTO "Items" ("name","wowheadId")
 VALUES
 ${items.join(",\n")};
 

@@ -4,15 +4,25 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getRaidStatusKeyFromId } from "../../../components/attendance/raid-status";
+import {
+  getRaidStatusKeyFromId,
+  getRaidStatusStringFromKey
+} from "../../../components/attendance/raid-status";
 import { LoadingAndError } from "../../../components/LoadingAndErrors";
 import { BossCard } from "../../../components/Raid/BossCard";
 import PlayerList from "../../../components/Raid/PlayerList";
 import RaidTitleButton from "../../../components/Raid/RaidTitleButton";
+import SoftResaList from "../../../components/Raid/SoftResaList";
 import { useMemberContext } from "../../../lib/context/member";
-import { Player, Query, RaidPlayer } from "../../../lib/generatedTypes";
+import {
+  BossItem,
+  Player,
+  Query,
+  RaidPlayer
+} from "../../../lib/generatedTypes";
 import { ALL_ACTIVE_PLAYERS } from "../../../lib/gql/player-queries";
 import { ONE_RAID } from "../../../lib/gql/raid-queries";
+import { SCORE_LOOT } from "../../../lib/gql/scoreloot-query";
 import { useToggle } from "../../../lib/hooks/toggle";
 import { role } from "../../../lib/role-level";
 import { getDate } from "../../../lib/utils/date";
@@ -109,6 +119,113 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface Score {
+  isApply: boolean;
+  malus: number;
+  bonus: {
+    [itemId: number]: number;
+  };
+}
+
+export interface LootScore {
+  [player: string]: Score;
+}
+
+const MALUS_CAP = -50;
+const BONUS_CAP = +30;
+
+function capMalus(currentMalus: number) {
+  currentMalus = Math.max(currentMalus, MALUS_CAP);
+  currentMalus = Math.min(currentMalus, 0);
+  return currentMalus;
+}
+
+function capBonus(currentBonus: number) {
+  return Math.min(currentBonus, BONUS_CAP);
+}
+
+function computeScore(players: Player[], currentRaidId: number) {
+  const output: LootScore = {};
+  players.forEach(player => {
+    const playerScore: Score = {
+      isApply: player.inRoster === false,
+      malus: 0,
+      bonus: {}
+    };
+    const malusByDate = {};
+    player.lootsByPlayerId.nodes.forEach(loot => {
+      const item = loot.itemByItemId;
+      const { date } = loot.raidByRaidId;
+      if (!malusByDate[date]) {
+        malusByDate[date] = 0;
+      }
+      if (!item.doesNotCount) {
+        if (item.lootLevel === 1) {
+          malusByDate[date] += -10;
+          if (player.name === "Myorekt") {
+            console.log(date, "-10");
+          }
+        } else {
+          malusByDate[date] += -20;
+          if (player.name === "Myorekt") {
+            console.log(date, "-20");
+          }
+        }
+      }
+    });
+
+    player.raidPlayersByPlayerId.nodes.forEach(raidPlayer => {
+      const { date } = raidPlayer.raidByRaidId;
+      if (!malusByDate[date]) {
+        malusByDate[date] = 0;
+      }
+      if (currentRaidId !== raidPlayer.raidId) {
+        if (
+          raidPlayer.status === null ||
+          raidPlayer.status === getRaidStatusStringFromKey("present")
+        ) {
+          malusByDate[date] += 10;
+          if (player.name === "Myorekt") {
+            console.log(date, "+10");
+          }
+        }
+        if (raidPlayer.status === getRaidStatusStringFromKey("rotation")) {
+          malusByDate[date] += 5;
+          if (player.name === "Myorekt") {
+            console.log(date, "+5");
+          }
+        }
+      }
+    });
+    if (player.name === "Myorekt") {
+      console.log(player.name, malusByDate);
+    }
+    Object.keys(malusByDate)
+      .sort()
+      .forEach(key => {
+        playerScore.malus = capMalus(playerScore.malus + malusByDate[key]);
+      });
+
+    if (player.name === "Myorekt") {
+      console.log(playerScore.malus);
+    }
+
+    player.softResasByPlayerId.nodes.forEach(softResa => {
+      if (!playerScore.bonus[softResa.itemId]) {
+        playerScore.bonus[softResa.itemId] = 0;
+      }
+      if (currentRaidId !== softResa.raidId) {
+        playerScore.bonus[softResa.itemId] = capBonus(
+          playerScore.bonus[softResa.itemId] + 5
+        );
+      }
+    });
+
+    output[player.name] = playerScore;
+  });
+  return output;
+}
+
 export default function PageRaidView() {
   const member = useMemberContext();
   const classes = useStyles("");
@@ -116,6 +233,7 @@ export default function PageRaidView() {
   const raidId = parseInt(String(router.query.raidId));
   const [raidTitle, setRaidTitle] = useState<string>("");
   const [playerListOpened, togglePlayerListOpened] = useToggle(false);
+  const [softResaListOpened, toggleSoftResaListOpened] = useToggle(false);
   const [showDeletedLoot, toggleShowDeletedLoot] = useToggle(false);
   const lootsAssigned = [];
 
@@ -134,8 +252,15 @@ export default function PageRaidView() {
     refetch: refetchAllPlayers
   } = useQuery<Query>(ALL_ACTIVE_PLAYERS);
 
-  const error = errorOneRaid || errorPlayers;
-  const loading = loadingOneRaid || loadingPlayers;
+  const {
+    loading: loadingScore,
+    data: dataScore,
+    error: errorScore,
+    refetch: refetchScore
+  } = useQuery<Query>(SCORE_LOOT);
+
+  const error = errorOneRaid || errorPlayers || errorScore;
+  const loading = loadingOneRaid || loadingPlayers || loadingScore;
 
   useEffect(() => {
     if (currentRaid) {
@@ -143,7 +268,7 @@ export default function PageRaidView() {
     }
   }, [dataOneRaid]);
 
-  if (loadingOneRaid || loadingPlayers || errorOneRaid || errorPlayers) {
+  if (loading || error) {
     return <LoadingAndError loading={loading} error={error} />;
   }
   const currentRaid = dataOneRaid.allRaids.nodes[0];
@@ -174,6 +299,16 @@ export default function PageRaidView() {
     });
   const bosses = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes;
   const donjonShortName = currentRaid.donjonByDonjonId.shortName;
+  const softResas = currentRaid.softResasByRaidId.nodes;
+  const allItems = currentRaid.donjonByDonjonId.bossesByDonjonId.nodes
+    .reduce((stack, next) => {
+      stack.push(...next.bossItemsByBossId.nodes);
+      return stack;
+    }, [] as BossItem[])
+    .map(bi => bi.itemByItemId);
+  const score = dataScore.allPlayers.nodes;
+
+  const lootsScore = computeScore(score, raidId);
 
   return (
     <div className={classes.root}>
@@ -189,14 +324,23 @@ export default function PageRaidView() {
             <RaidTitleButton raid={currentRaid} setRaidTitle={setRaidTitle} />
           )}
         </div>
-        <Button
-          className={classes.playerListBtn}
-          variant="contained"
-          color="primary"
-          onClick={togglePlayerListOpened}
-        >
-          JOUEURS
-        </Button>
+        <div className={classes.playerListBtn}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={togglePlayerListOpened}
+          >
+            JOUEURS
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={toggleSoftResaListOpened}
+          >
+            SOFT-RESA
+          </Button>
+        </div>
         {currentRaid.id - 1 !== 0 && (
           <Link href="/raid/edit/[id]" as={`/raid/edit/${currentRaid.id - 1}`}>
             <a
@@ -257,9 +401,13 @@ export default function PageRaidView() {
               donjonShortName={donjonShortName}
               looted={lootedForThisBoss}
               allPlayers={allPlayers}
+              currentRaidPlayers={currentRaidPlayers}
               raidId={raidId}
-              refetchOneRaid={refetchOneRaid}
+              refetchOneRaid={() => {
+                return Promise.all([refetchScore(), refetchOneRaid()]);
+              }}
               refetchAllPlayers={refetchAllPlayers}
+              lootScore={lootsScore}
             />
           );
         })}
@@ -270,8 +418,19 @@ export default function PageRaidView() {
         players={currentRaidPlayers}
         raidId={raidId}
         allPlayers={dataPlayers.allPlayers.nodes}
-        refetchOneRaid={refetchOneRaid}
+        refetchOneRaid={() => {
+          return Promise.all([refetchScore(), refetchOneRaid()]);
+        }}
         refetchAllPlayers={refetchAllPlayers}
+      />
+      <SoftResaList
+        handleClose={toggleSoftResaListOpened}
+        open={softResaListOpened}
+        softResas={softResas}
+        raidId={raidId}
+        allPlayers={dataPlayers.allPlayers.nodes}
+        allItems={allItems}
+        refetchOneRaid={refetchOneRaid}
       />
     </div>
   );

@@ -35,11 +35,12 @@ const rights = {
   createPlayerMerit: PLAYER_MIN,
   createRaid: OFFICER_MIN,
   createRaidPlayer: CLASSMASTER_MIN,
-  createRaidPlayersSub: PLAYER_MIN,
+  createSoftResa: OFFICER_MIN,
   // deletePlayerMerit: NO_ONE,
   deletePlayerMeritById: PLAYER_MIN,
   // deleteRaidPlayer: NO_ONE,
   // deleteRaidPlayerById: NO_ONE,
+  deleteSoftResaById: ADMIN_MIN,
   // updateClassItem: NO_ONE,
   updateClassItemById: OFFICER_MIN,
   // updateLoot: NO_ONE,
@@ -51,8 +52,7 @@ const rights = {
   // updateRaid: NO_ONE,
   updateRaidById: OFFICER_MIN,
   // updateRaidPlayer: NO_ONE,
-  updateRaidPlayerById: CLASSMASTER_MIN,
-  updateRaidPlayersSubById: PLAYER_MIN
+  updateRaidPlayerById: CLASSMASTER_MIN
 };
 
 const constraints = {

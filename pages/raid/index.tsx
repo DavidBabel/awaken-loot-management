@@ -403,9 +403,10 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
                   )}
                   <TableCell>Donjon</TableCell>
                   <TableCell>Date</TableCell>
-                  <TableCell>Saisie Loot &amp; joueurs</TableCell>
+                  <TableCell>Saisie des données</TableCell>
                   <TableCell>Nb loots</TableCell>
                   <TableCell>Nb Joueurs</TableCell>
+                  <TableCell>Nb SR</TableCell>
                   <TableCell>{""}</TableCell>
                   <TableCell>
                     {member.level >= role.officer ? "Lier" : "Liaisons"}
@@ -457,6 +458,9 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
                       </TableCell>
                       <TableCell>
                         {raid.raidPlayersByRaidId?.totalCount || zero}
+                      </TableCell>
+                      <TableCell>
+                        {raid.softResasByRaidId?.totalCount || zero}
                       </TableCell>
                       <TableCell>
                         <Link

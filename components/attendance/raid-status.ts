@@ -75,3 +75,6 @@ export function getRaidStatusKeyFromId(id: number) {
   }
   return raidStatusList.find(status => status.id === id).key;
 }
+export function getRaidStatusStringFromKey(key: string) {
+  return raidStatusList.find(status => status.key === key).id;
+}

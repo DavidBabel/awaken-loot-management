@@ -60,7 +60,7 @@ export default function RaidTitleButton({ raid, setRaidTitle }) {
         setLoading(false);
       })
       .catch(err => {
-        showErrorMessage(err.message);
+        showErrorMessage("Err110 - " + err.message);
         setOpen(false);
         setLoading(false);
       });

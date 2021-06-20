@@ -1,6 +1,8 @@
 const pg = require("knex")({
   client: "pg",
-  connection: process.env.DATABASE_URL || "postgres://localhost:5432/test",
+  connection:
+    process.env.DATABASE_URL + "/" + process.env.DBNAME ||
+    "postgres://localhost:5432/test",
   searchPath: ["public"]
 });
 

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+source .env
 set -e
 
 cat db/*.sql > db/gen/db.sql

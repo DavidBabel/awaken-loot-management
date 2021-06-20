@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source .env
 set -e
 
 RED='\033[0;31m'
@@ -57,5 +58,6 @@ psql $PROD_DB < ./db/backups/$date/db-table-raidplayers.sql
 echo -e $RED Import loots ... $NC
 psql $PROD_DB < ./db/backups/$date/db-table-loots.sql
 
-echo -e $RED Import Raid Players Subs ... $NC
-psql $PROD_DB < ./db/backups/$date/db-table-raidplayerssubs.sql
+echo -e $RED Import SoftResa ... $NC
+psql $PROD_DB < ./db/backups/$date/db-table-softresa.sql
+

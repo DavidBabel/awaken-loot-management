@@ -139,17 +139,6 @@ export function Menu({ handleDrawerClose }) {
                 >
                   <ListItemText primary="Ma spécialisation" />
                 </ListItemLink>
-
-                {member.name === "Devilhunter" && (
-                  <ListItemLink
-                    href={`/player/raid`}
-                    className={
-                      route.startsWith("/player/raid") ? classes.selected : ""
-                    }
-                  >
-                    <ListItemText primary="Mes inscriptions raid" />
-                  </ListItemLink>
-                )}
               </List>
             </>
           )}

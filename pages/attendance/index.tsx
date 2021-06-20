@@ -100,7 +100,7 @@ export default function PageIndex() {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              {/* <TableCell>Att. %</TableCell> */}
+              <TableCell>Att. %</TableCell>
               {allRaids.map(raid => (
                 <AttendanceTableRaidHeaders
                   raid={raid}

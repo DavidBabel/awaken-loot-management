@@ -112,11 +112,11 @@ export default function AddUnasignedDialog({
             scrollDown();
           })
           .catch(err => {
-            showErrorMessage(err.message);
+            showErrorMessage("Err50 - " + err.message);
           });
       })
       .catch(err => {
-        showErrorMessage(err.message);
+        showErrorMessage("Err51 - " + err.message);
         setAddLootIsLoading(false);
       });
   }
@@ -126,6 +126,7 @@ export default function AddUnasignedDialog({
       <Fab size="small" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
+
       <Dialog
         className={classes.dialog}
         maxWidth={"lg"}
@@ -146,20 +147,20 @@ export default function AddUnasignedDialog({
             {bossItems.map(bossItem => {
               const itemId = bossItem.itemId;
               const checked = itemsToAdd.includes(itemId);
-              let itemStyle = {
+              const itemStyle = {
                 margin: 1,
                 borderLeft: "4px solid transparent"
               };
-              if (bossItem.itemByItemId.classId) {
-                const playerColor =
-                  bossItem.itemByItemId.classId === 1
-                    ? "grey"
-                    : bossItem.itemByItemId.classByClassId.color;
-                itemStyle = {
-                  borderLeft: "solid 4px " + playerColor,
-                  margin: 1
-                };
-              }
+              // if (bossItem.itemByItemId.classId) {
+              //   const playerColor =
+              //     bossItem.itemByItemId.classId === 1
+              //       ? "grey"
+              //       : bossItem.itemByItemId.classByClassId.color;
+              //   itemStyle = {
+              //     borderLeft: "solid 4px " + playerColor,
+              //     margin: 1
+              //   };
+              // }
               return (
                 <FormControlLabel
                   key={`item-lists-${bossName}-${itemId}`}

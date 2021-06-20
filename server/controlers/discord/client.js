@@ -48,7 +48,10 @@ DiscordClient.on("message", message => {
 });
 
 function tryToLogin() {
-  return DiscordClient.login(CONFIG.DISCORD_TOKEN);
+  console.log("try to login to discord");
+  if (String(CONFIG.DISCORD_TOKEN).trim()) {
+    return DiscordClient.login(CONFIG.DISCORD_TOKEN);
+  }
 }
 
 DiscordClient.on("error", tryToLogin);

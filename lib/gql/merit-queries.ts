@@ -16,10 +16,6 @@ export const PLAYER_MERIT = gql`
         order
         delay
         active
-        classByClassId {
-          name
-          cdnImage
-        }
         playerMeritsByMeritId(condition: { playerId: $playerId }) {
           nodes {
             id
@@ -46,9 +42,6 @@ export const ALL_MERITS = gql`
           order
           delay
           active
-          classByClassId {
-            name
-          }
         }
       }
     }

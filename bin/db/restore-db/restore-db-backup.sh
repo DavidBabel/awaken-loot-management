@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source .env
 set -e
 
 RED='\033[0;31m'
@@ -9,7 +10,7 @@ date=$(date '+%Y-%m-%d-%H-%M-%S')
 
 FILE=./bin/db/restore-db/backup.sql
 if test -f "$FILE"; then
-  ./bin/db/backup-prod.sh
+  # ./bin/db/backup-prod.sh
 
   echo "$FILE exist, reverting DB"
 

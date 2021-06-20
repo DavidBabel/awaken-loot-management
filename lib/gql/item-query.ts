@@ -8,21 +8,15 @@ export const ALL_ITEMS = gql`
         lootLevel
         name
         wowheadId
-        classId
         classItemsByItemId {
           nodes {
             id
-            prio
             classByClassId {
               id
               name
             }
             comment
           }
-        }
-        classByClassId {
-          name
-          id
         }
         bossItemsByItemId {
           nodes {

@@ -43,7 +43,6 @@ export function MeritLine({
   value,
   active,
   playerMeritsByMeritId: { nodes },
-  classByClassId,
   playerId,
   parentLoading,
   isOfficer,
@@ -173,10 +172,8 @@ export function MeritLine({
                   state={currentState}
                 />
               )}
-              <b>
-                {classByClassId && `${classByClassId.name} →`} {categorie} :
-              </b>{" "}
-              {name} ({value} pts) {comment && "*"} {debug && `: ${meritState}`}
+              <b>{categorie} :</b> {name} ({value} pts) {comment && "*"}{" "}
+              {debug && `: ${meritState}`}
             </span>
           </Tooltip>
         </span>

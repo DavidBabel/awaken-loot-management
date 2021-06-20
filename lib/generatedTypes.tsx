@@ -167,16 +167,13 @@ export type Class = Node & {
   nodeId: Scalars["ID"];
   id: Scalars["Int"];
   color?: Maybe<Scalars["String"]>;
+  type?: Maybe<Scalars["String"]>;
   name?: Maybe<Scalars["String"]>;
   cdnImage?: Maybe<Scalars["String"]>;
   /** Reads and enables pagination through a set of `Player`. */
   playersByClassId: PlayersConnection;
   /** Reads and enables pagination through a set of `Player`. */
   playersByMdcOf: PlayersConnection;
-  /** Reads and enables pagination through a set of `Merit`. */
-  meritsByClassId: MeritsConnection;
-  /** Reads and enables pagination through a set of `Item`. */
-  itemsByClassId: ItemsConnection;
   /** Reads and enables pagination through a set of `ClassItem`. */
   classItemsByClassId: ClassItemsConnection;
 };
@@ -201,26 +198,6 @@ export type ClassPlayersByMdcOfArgs = {
   condition?: Maybe<PlayerCondition>;
 };
 
-export type ClassMeritsByClassIdArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<MeritsOrderBy>>;
-  condition?: Maybe<MeritCondition>;
-};
-
-export type ClassItemsByClassIdArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<ItemsOrderBy>>;
-  condition?: Maybe<ItemCondition>;
-};
-
 export type ClassClassItemsByClassIdArgs = {
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
@@ -237,6 +214,8 @@ export type ClassCondition = {
   id?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `color` field. */
   color?: Maybe<Scalars["String"]>;
+  /** Checks for equality with the object’s `type` field. */
+  type?: Maybe<Scalars["String"]>;
   /** Checks for equality with the object’s `name` field. */
   name?: Maybe<Scalars["String"]>;
   /** Checks for equality with the object’s `cdnImage` field. */
@@ -272,6 +251,8 @@ export enum ClassesOrderBy {
   IdDesc = "ID_DESC",
   ColorAsc = "COLOR_ASC",
   ColorDesc = "COLOR_DESC",
+  TypeAsc = "TYPE_ASC",
+  TypeDesc = "TYPE_DESC",
   NameAsc = "NAME_ASC",
   NameDesc = "NAME_DESC",
   CdnImageAsc = "CDN_IMAGE_ASC",
@@ -287,7 +268,6 @@ export type ClassItem = Node & {
   id: Scalars["Int"];
   classId: Scalars["Int"];
   itemId: Scalars["Int"];
-  prio: Scalars["Boolean"];
   comment?: Maybe<Scalars["String"]>;
   /** Reads a single `Class` that is related to this `ClassItem`. */
   classByClassId?: Maybe<Class>;
@@ -306,8 +286,6 @@ export type ClassItemCondition = {
   classId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `itemId` field. */
   itemId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `prio` field. */
-  prio?: Maybe<Scalars["Boolean"]>;
   /** Checks for equality with the object’s `comment` field. */
   comment?: Maybe<Scalars["String"]>;
 };
@@ -317,7 +295,6 @@ export type ClassItemInput = {
   id?: Maybe<Scalars["Int"]>;
   classId: Scalars["Int"];
   itemId: Scalars["Int"];
-  prio: Scalars["Boolean"];
   comment?: Maybe<Scalars["String"]>;
 };
 
@@ -326,7 +303,6 @@ export type ClassItemPatch = {
   id?: Maybe<Scalars["Int"]>;
   classId?: Maybe<Scalars["Int"]>;
   itemId?: Maybe<Scalars["Int"]>;
-  prio?: Maybe<Scalars["Boolean"]>;
   comment?: Maybe<Scalars["String"]>;
 };
 
@@ -361,8 +337,6 @@ export enum ClassItemsOrderBy {
   ClassIdDesc = "CLASS_ID_DESC",
   ItemIdAsc = "ITEM_ID_ASC",
   ItemIdDesc = "ITEM_ID_DESC",
-  PrioAsc = "PRIO_ASC",
-  PrioDesc = "PRIO_DESC",
   CommentAsc = "COMMENT_ASC",
   CommentDesc = "COMMENT_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
@@ -587,40 +561,42 @@ export type CreateRaidPlayerPayloadRaidPlayerEdgeArgs = {
   orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
 };
 
-/** All input for the create `RaidPlayersSub` mutation. */
-export type CreateRaidPlayersSubInput = {
+/** All input for the create `SoftResa` mutation. */
+export type CreateSoftResaInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `RaidPlayersSub` to be created by this mutation. */
-  raidPlayersSub: RaidPlayersSubInput;
+  /** The `SoftResa` to be created by this mutation. */
+  softResa: SoftResaInput;
 };
 
-/** The output of our create `RaidPlayersSub` mutation. */
-export type CreateRaidPlayersSubPayload = {
-  __typename?: "CreateRaidPlayersSubPayload";
+/** The output of our create `SoftResa` mutation. */
+export type CreateSoftResaPayload = {
+  __typename?: "CreateSoftResaPayload";
   /**
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `RaidPlayersSub` that was created by this mutation. */
-  raidPlayersSub?: Maybe<RaidPlayersSub>;
+  /** The `SoftResa` that was created by this mutation. */
+  softResa?: Maybe<SoftResa>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Player` that is related to this `RaidPlayersSub`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Raid` that is related to this `RaidPlayersSub`. */
+  /** Reads a single `Raid` that is related to this `SoftResa`. */
   raidByRaidId?: Maybe<Raid>;
-  /** An edge for our `RaidPlayersSub`. May be used by Relay 1. */
-  raidPlayersSubEdge?: Maybe<RaidPlayersSubsEdge>;
+  /** Reads a single `Player` that is related to this `SoftResa`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Item` that is related to this `SoftResa`. */
+  itemByItemId?: Maybe<Item>;
+  /** An edge for our `SoftResa`. May be used by Relay 1. */
+  softResaEdge?: Maybe<SoftResasEdge>;
 };
 
-/** The output of our create `RaidPlayersSub` mutation. */
-export type CreateRaidPlayersSubPayloadRaidPlayersSubEdgeArgs = {
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
+/** The output of our create `SoftResa` mutation. */
+export type CreateSoftResaPayloadSoftResaEdgeArgs = {
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
 };
 
 /** All input for the `deletePlayerMeritById` mutation. */
@@ -717,8 +693,8 @@ export type DeleteRaidPlayerPayloadRaidPlayerEdgeArgs = {
   orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
 };
 
-/** All input for the `deleteRaidPlayersSubById` mutation. */
-export type DeleteRaidPlayersSubByIdInput = {
+/** All input for the `deleteSoftResaById` mutation. */
+export type DeleteSoftResaByIdInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
@@ -727,41 +703,43 @@ export type DeleteRaidPlayersSubByIdInput = {
   id: Scalars["Int"];
 };
 
-/** All input for the `deleteRaidPlayersSub` mutation. */
-export type DeleteRaidPlayersSubInput = {
+/** All input for the `deleteSoftResa` mutation. */
+export type DeleteSoftResaInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The globally unique `ID` which will identify a single `RaidPlayersSub` to be deleted. */
+  /** The globally unique `ID` which will identify a single `SoftResa` to be deleted. */
   nodeId: Scalars["ID"];
 };
 
-/** The output of our delete `RaidPlayersSub` mutation. */
-export type DeleteRaidPlayersSubPayload = {
-  __typename?: "DeleteRaidPlayersSubPayload";
+/** The output of our delete `SoftResa` mutation. */
+export type DeleteSoftResaPayload = {
+  __typename?: "DeleteSoftResaPayload";
   /**
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `RaidPlayersSub` that was deleted by this mutation. */
-  raidPlayersSub?: Maybe<RaidPlayersSub>;
-  deletedRaidPlayersSubId?: Maybe<Scalars["ID"]>;
+  /** The `SoftResa` that was deleted by this mutation. */
+  softResa?: Maybe<SoftResa>;
+  deletedSoftResaId?: Maybe<Scalars["ID"]>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Player` that is related to this `RaidPlayersSub`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Raid` that is related to this `RaidPlayersSub`. */
+  /** Reads a single `Raid` that is related to this `SoftResa`. */
   raidByRaidId?: Maybe<Raid>;
-  /** An edge for our `RaidPlayersSub`. May be used by Relay 1. */
-  raidPlayersSubEdge?: Maybe<RaidPlayersSubsEdge>;
+  /** Reads a single `Player` that is related to this `SoftResa`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Item` that is related to this `SoftResa`. */
+  itemByItemId?: Maybe<Item>;
+  /** An edge for our `SoftResa`. May be used by Relay 1. */
+  softResaEdge?: Maybe<SoftResasEdge>;
 };
 
-/** The output of our delete `RaidPlayersSub` mutation. */
-export type DeleteRaidPlayersSubPayloadRaidPlayersSubEdgeArgs = {
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
+/** The output of our delete `SoftResa` mutation. */
+export type DeleteSoftResaPayloadSoftResaEdgeArgs = {
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
 };
 
 export type Donjon = Node & {
@@ -864,16 +842,16 @@ export type Item = Node & {
   id: Scalars["Int"];
   name?: Maybe<Scalars["String"]>;
   wowheadId?: Maybe<Scalars["Int"]>;
-  classId?: Maybe<Scalars["Int"]>;
   lootLevel?: Maybe<Scalars["Int"]>;
-  /** Reads a single `Class` that is related to this `Item`. */
-  classByClassId?: Maybe<Class>;
+  doesNotCount?: Maybe<Scalars["Boolean"]>;
   /** Reads and enables pagination through a set of `Loot`. */
   lootsByItemId: LootsConnection;
   /** Reads and enables pagination through a set of `ClassItem`. */
   classItemsByItemId: ClassItemsConnection;
   /** Reads and enables pagination through a set of `BossItem`. */
   bossItemsByItemId: BossItemsConnection;
+  /** Reads and enables pagination through a set of `SoftResa`. */
+  softResasByItemId: SoftResasConnection;
 };
 
 export type ItemLootsByItemIdArgs = {
@@ -906,6 +884,16 @@ export type ItemBossItemsByItemIdArgs = {
   condition?: Maybe<BossItemCondition>;
 };
 
+export type ItemSoftResasByItemIdArgs = {
+  first?: Maybe<Scalars["Int"]>;
+  last?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  before?: Maybe<Scalars["Cursor"]>;
+  after?: Maybe<Scalars["Cursor"]>;
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
+  condition?: Maybe<SoftResaCondition>;
+};
+
 /** A condition to be used against `Item` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type ItemCondition = {
   /** Checks for equality with the object’s `id` field. */
@@ -914,10 +902,10 @@ export type ItemCondition = {
   name?: Maybe<Scalars["String"]>;
   /** Checks for equality with the object’s `wowheadId` field. */
   wowheadId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `classId` field. */
-  classId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `lootLevel` field. */
   lootLevel?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `doesNotCount` field. */
+  doesNotCount?: Maybe<Scalars["Boolean"]>;
 };
 
 /** A connection to a list of `Item` values. */
@@ -951,10 +939,10 @@ export enum ItemsOrderBy {
   NameDesc = "NAME_DESC",
   WowheadIdAsc = "WOWHEAD_ID_ASC",
   WowheadIdDesc = "WOWHEAD_ID_DESC",
-  ClassIdAsc = "CLASS_ID_ASC",
-  ClassIdDesc = "CLASS_ID_DESC",
   LootLevelAsc = "LOOT_LEVEL_ASC",
   LootLevelDesc = "LOOT_LEVEL_DESC",
+  DoesNotCountAsc = "DOES_NOT_COUNT_ASC",
+  DoesNotCountDesc = "DOES_NOT_COUNT_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
@@ -1087,11 +1075,8 @@ export type Merit = Node & {
   comment?: Maybe<Scalars["String"]>;
   value?: Maybe<Scalars["Int"]>;
   active?: Maybe<Scalars["Boolean"]>;
-  classId?: Maybe<Scalars["Int"]>;
   order?: Maybe<Scalars["Int"]>;
   delay?: Maybe<Scalars["Int"]>;
-  /** Reads a single `Class` that is related to this `Merit`. */
-  classByClassId?: Maybe<Class>;
   /** Reads and enables pagination through a set of `PlayerMerit`. */
   playerMeritsByMeritId: PlayerMeritsConnection;
 };
@@ -1120,8 +1105,6 @@ export type MeritCondition = {
   value?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `active` field. */
   active?: Maybe<Scalars["Boolean"]>;
-  /** Checks for equality with the object’s `classId` field. */
-  classId?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `order` field. */
   order?: Maybe<Scalars["Int"]>;
   /** Checks for equality with the object’s `delay` field. */
@@ -1165,8 +1148,6 @@ export enum MeritsOrderBy {
   ValueDesc = "VALUE_DESC",
   ActiveAsc = "ACTIVE_ASC",
   ActiveDesc = "ACTIVE_DESC",
-  ClassIdAsc = "CLASS_ID_ASC",
-  ClassIdDesc = "CLASS_ID_DESC",
   OrderAsc = "ORDER_ASC",
   OrderDesc = "ORDER_DESC",
   DelayAsc = "DELAY_ASC",
@@ -1188,10 +1169,10 @@ export type Mutation = {
   createPlayer?: Maybe<CreatePlayerPayload>;
   /** Creates a single `RaidPlayer`. */
   createRaidPlayer?: Maybe<CreateRaidPlayerPayload>;
-  /** Creates a single `RaidPlayersSub`. */
-  createRaidPlayersSub?: Maybe<CreateRaidPlayersSubPayload>;
   /** Creates a single `Raid`. */
   createRaid?: Maybe<CreateRaidPayload>;
+  /** Creates a single `SoftResa`. */
+  createSoftResa?: Maybe<CreateSoftResaPayload>;
   /** Updates a single `ClassItem` using its globally unique id and a patch. */
   updateClassItem?: Maybe<UpdateClassItemPayload>;
   /** Updates a single `ClassItem` using a unique key and a patch. */
@@ -1212,14 +1193,14 @@ export type Mutation = {
   updateRaidPlayer?: Maybe<UpdateRaidPlayerPayload>;
   /** Updates a single `RaidPlayer` using a unique key and a patch. */
   updateRaidPlayerById?: Maybe<UpdateRaidPlayerPayload>;
-  /** Updates a single `RaidPlayersSub` using its globally unique id and a patch. */
-  updateRaidPlayersSub?: Maybe<UpdateRaidPlayersSubPayload>;
-  /** Updates a single `RaidPlayersSub` using a unique key and a patch. */
-  updateRaidPlayersSubById?: Maybe<UpdateRaidPlayersSubPayload>;
   /** Updates a single `Raid` using its globally unique id and a patch. */
   updateRaid?: Maybe<UpdateRaidPayload>;
   /** Updates a single `Raid` using a unique key and a patch. */
   updateRaidById?: Maybe<UpdateRaidPayload>;
+  /** Updates a single `SoftResa` using its globally unique id and a patch. */
+  updateSoftResa?: Maybe<UpdateSoftResaPayload>;
+  /** Updates a single `SoftResa` using a unique key and a patch. */
+  updateSoftResaById?: Maybe<UpdateSoftResaPayload>;
   /** Deletes a single `PlayerMerit` using its globally unique id. */
   deletePlayerMerit?: Maybe<DeletePlayerMeritPayload>;
   /** Deletes a single `PlayerMerit` using a unique key. */
@@ -1228,10 +1209,10 @@ export type Mutation = {
   deleteRaidPlayer?: Maybe<DeleteRaidPlayerPayload>;
   /** Deletes a single `RaidPlayer` using a unique key. */
   deleteRaidPlayerById?: Maybe<DeleteRaidPlayerPayload>;
-  /** Deletes a single `RaidPlayersSub` using its globally unique id. */
-  deleteRaidPlayersSub?: Maybe<DeleteRaidPlayersSubPayload>;
-  /** Deletes a single `RaidPlayersSub` using a unique key. */
-  deleteRaidPlayersSubById?: Maybe<DeleteRaidPlayersSubPayload>;
+  /** Deletes a single `SoftResa` using its globally unique id. */
+  deleteSoftResa?: Maybe<DeleteSoftResaPayload>;
+  /** Deletes a single `SoftResa` using a unique key. */
+  deleteSoftResaById?: Maybe<DeleteSoftResaPayload>;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1260,13 +1241,13 @@ export type MutationCreateRaidPlayerArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateRaidPlayersSubArgs = {
-  input: CreateRaidPlayersSubInput;
+export type MutationCreateRaidArgs = {
+  input: CreateRaidInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationCreateRaidArgs = {
-  input: CreateRaidInput;
+export type MutationCreateSoftResaArgs = {
+  input: CreateSoftResaInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1320,16 +1301,6 @@ export type MutationUpdateRaidPlayerByIdArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateRaidPlayersSubArgs = {
-  input: UpdateRaidPlayersSubInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationUpdateRaidPlayersSubByIdArgs = {
-  input: UpdateRaidPlayersSubByIdInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateRaidArgs = {
   input: UpdateRaidInput;
 };
@@ -1337,6 +1308,16 @@ export type MutationUpdateRaidArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateRaidByIdArgs = {
   input: UpdateRaidByIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateSoftResaArgs = {
+  input: UpdateSoftResaInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateSoftResaByIdArgs = {
+  input: UpdateSoftResaByIdInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -1360,13 +1341,13 @@ export type MutationDeleteRaidPlayerByIdArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteRaidPlayersSubArgs = {
-  input: DeleteRaidPlayersSubInput;
+export type MutationDeleteSoftResaArgs = {
+  input: DeleteSoftResaInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationDeleteRaidPlayersSubByIdArgs = {
-  input: DeleteRaidPlayersSubByIdInput;
+export type MutationDeleteSoftResaByIdArgs = {
+  input: DeleteSoftResaByIdInput;
 };
 
 /** An object with a globally unique `ID`. */
@@ -1413,8 +1394,8 @@ export type Player = Node & {
   lootsByPlayerId: LootsConnection;
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   raidPlayersByPlayerId: RaidPlayersConnection;
-  /** Reads and enables pagination through a set of `RaidPlayersSub`. */
-  raidPlayersSubsByPlayerId: RaidPlayersSubsConnection;
+  /** Reads and enables pagination through a set of `SoftResa`. */
+  softResasByPlayerId: SoftResasConnection;
 };
 
 export type PlayerPlayerMeritsByPlayerIdArgs = {
@@ -1447,14 +1428,14 @@ export type PlayerRaidPlayersByPlayerIdArgs = {
   condition?: Maybe<RaidPlayerCondition>;
 };
 
-export type PlayerRaidPlayersSubsByPlayerIdArgs = {
+export type PlayerSoftResasByPlayerIdArgs = {
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
   offset?: Maybe<Scalars["Int"]>;
   before?: Maybe<Scalars["Cursor"]>;
   after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
-  condition?: Maybe<RaidPlayersSubCondition>;
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
+  condition?: Maybe<SoftResaCondition>;
 };
 
 /** A condition to be used against `Player` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -1687,10 +1668,10 @@ export type Query = Node & {
   allPlayers?: Maybe<PlayersConnection>;
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   allRaidPlayers?: Maybe<RaidPlayersConnection>;
-  /** Reads and enables pagination through a set of `RaidPlayersSub`. */
-  allRaidPlayersSubs?: Maybe<RaidPlayersSubsConnection>;
   /** Reads and enables pagination through a set of `Raid`. */
   allRaids?: Maybe<RaidsConnection>;
+  /** Reads and enables pagination through a set of `SoftResa`. */
+  allSoftResas?: Maybe<SoftResasConnection>;
   bossItemById?: Maybe<BossItem>;
   bossById?: Maybe<Boss>;
   classItemById?: Maybe<ClassItem>;
@@ -1702,8 +1683,8 @@ export type Query = Node & {
   playerMeritById?: Maybe<PlayerMerit>;
   playerById?: Maybe<Player>;
   raidPlayerById?: Maybe<RaidPlayer>;
-  raidPlayersSubById?: Maybe<RaidPlayersSub>;
   raidById?: Maybe<Raid>;
+  softResaById?: Maybe<SoftResa>;
   /** Reads a single `BossItem` using its globally unique `ID`. */
   bossItem?: Maybe<BossItem>;
   /** Reads a single `Boss` using its globally unique `ID`. */
@@ -1726,10 +1707,10 @@ export type Query = Node & {
   player?: Maybe<Player>;
   /** Reads a single `RaidPlayer` using its globally unique `ID`. */
   raidPlayer?: Maybe<RaidPlayer>;
-  /** Reads a single `RaidPlayersSub` using its globally unique `ID`. */
-  raidPlayersSub?: Maybe<RaidPlayersSub>;
   /** Reads a single `Raid` using its globally unique `ID`. */
   raid?: Maybe<Raid>;
+  /** Reads a single `SoftResa` using its globally unique `ID`. */
+  softResa?: Maybe<SoftResa>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -1859,17 +1840,6 @@ export type QueryAllRaidPlayersArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryAllRaidPlayersSubsArgs = {
-  first?: Maybe<Scalars["Int"]>;
-  last?: Maybe<Scalars["Int"]>;
-  offset?: Maybe<Scalars["Int"]>;
-  before?: Maybe<Scalars["Cursor"]>;
-  after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
-  condition?: Maybe<RaidPlayersSubCondition>;
-};
-
-/** The root query type which gives access points into the data universe. */
 export type QueryAllRaidsArgs = {
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
@@ -1878,6 +1848,17 @@ export type QueryAllRaidsArgs = {
   after?: Maybe<Scalars["Cursor"]>;
   orderBy?: Maybe<Array<RaidsOrderBy>>;
   condition?: Maybe<RaidCondition>;
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllSoftResasArgs = {
+  first?: Maybe<Scalars["Int"]>;
+  last?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  before?: Maybe<Scalars["Cursor"]>;
+  after?: Maybe<Scalars["Cursor"]>;
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
+  condition?: Maybe<SoftResaCondition>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -1936,12 +1917,12 @@ export type QueryRaidPlayerByIdArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryRaidPlayersSubByIdArgs = {
+export type QueryRaidByIdArgs = {
   id: Scalars["Int"];
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryRaidByIdArgs = {
+export type QuerySoftResaByIdArgs = {
   id: Scalars["Int"];
 };
 
@@ -2001,12 +1982,12 @@ export type QueryRaidPlayerArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryRaidPlayersSubArgs = {
+export type QueryRaidArgs = {
   nodeId: Scalars["ID"];
 };
 
 /** The root query type which gives access points into the data universe. */
-export type QueryRaidArgs = {
+export type QuerySoftResaArgs = {
   nodeId: Scalars["ID"];
 };
 
@@ -2027,8 +2008,8 @@ export type Raid = Node & {
   lootsByRaidId: LootsConnection;
   /** Reads and enables pagination through a set of `RaidPlayer`. */
   raidPlayersByRaidId: RaidPlayersConnection;
-  /** Reads and enables pagination through a set of `RaidPlayersSub`. */
-  raidPlayersSubsByRaidId: RaidPlayersSubsConnection;
+  /** Reads and enables pagination through a set of `SoftResa`. */
+  softResasByRaidId: SoftResasConnection;
 };
 
 export type RaidLootsByRaidIdArgs = {
@@ -2051,14 +2032,14 @@ export type RaidRaidPlayersByRaidIdArgs = {
   condition?: Maybe<RaidPlayerCondition>;
 };
 
-export type RaidRaidPlayersSubsByRaidIdArgs = {
+export type RaidSoftResasByRaidIdArgs = {
   first?: Maybe<Scalars["Int"]>;
   last?: Maybe<Scalars["Int"]>;
   offset?: Maybe<Scalars["Int"]>;
   before?: Maybe<Scalars["Cursor"]>;
   after?: Maybe<Scalars["Cursor"]>;
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
-  condition?: Maybe<RaidPlayersSubCondition>;
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
+  condition?: Maybe<SoftResaCondition>;
 };
 
 /** A condition to be used against `Raid` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -2190,88 +2171,6 @@ export enum RaidPlayersOrderBy {
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
 
-export type RaidPlayersSub = Node & {
-  __typename?: "RaidPlayersSub";
-  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
-  nodeId: Scalars["ID"];
-  id: Scalars["Int"];
-  playerId: Scalars["Int"];
-  raidId: Scalars["Int"];
-  status?: Maybe<Scalars["Int"]>;
-  /** Reads a single `Player` that is related to this `RaidPlayersSub`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Raid` that is related to this `RaidPlayersSub`. */
-  raidByRaidId?: Maybe<Raid>;
-};
-
-/**
- * A condition to be used against `RaidPlayersSub` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type RaidPlayersSubCondition = {
-  /** Checks for equality with the object’s `id` field. */
-  id?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `playerId` field. */
-  playerId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `raidId` field. */
-  raidId?: Maybe<Scalars["Int"]>;
-  /** Checks for equality with the object’s `status` field. */
-  status?: Maybe<Scalars["Int"]>;
-};
-
-/** An input for mutations affecting `RaidPlayersSub` */
-export type RaidPlayersSubInput = {
-  id?: Maybe<Scalars["Int"]>;
-  playerId: Scalars["Int"];
-  raidId: Scalars["Int"];
-  status?: Maybe<Scalars["Int"]>;
-};
-
-/** Represents an update to a `RaidPlayersSub`. Fields that are set will be updated. */
-export type RaidPlayersSubPatch = {
-  id?: Maybe<Scalars["Int"]>;
-  playerId?: Maybe<Scalars["Int"]>;
-  raidId?: Maybe<Scalars["Int"]>;
-  status?: Maybe<Scalars["Int"]>;
-};
-
-/** A connection to a list of `RaidPlayersSub` values. */
-export type RaidPlayersSubsConnection = {
-  __typename?: "RaidPlayersSubsConnection";
-  /** A list of `RaidPlayersSub` objects. */
-  nodes: Array<Maybe<RaidPlayersSub>>;
-  /** A list of edges which contains the `RaidPlayersSub` and cursor to aid in pagination. */
-  edges: Array<RaidPlayersSubsEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `RaidPlayersSub` you could get from the connection. */
-  totalCount: Scalars["Int"];
-};
-
-/** A `RaidPlayersSub` edge in the connection. */
-export type RaidPlayersSubsEdge = {
-  __typename?: "RaidPlayersSubsEdge";
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars["Cursor"]>;
-  /** The `RaidPlayersSub` at the end of the edge. */
-  node?: Maybe<RaidPlayersSub>;
-};
-
-/** Methods to use when ordering `RaidPlayersSub`. */
-export enum RaidPlayersSubsOrderBy {
-  Natural = "NATURAL",
-  IdAsc = "ID_ASC",
-  IdDesc = "ID_DESC",
-  PlayerIdAsc = "PLAYER_ID_ASC",
-  PlayerIdDesc = "PLAYER_ID_DESC",
-  RaidIdAsc = "RAID_ID_ASC",
-  RaidIdDesc = "RAID_ID_DESC",
-  StatusAsc = "STATUS_ASC",
-  StatusDesc = "STATUS_DESC",
-  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
-  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
-}
-
 /** A connection to a list of `Raid` values. */
 export type RaidsConnection = {
   __typename?: "RaidsConnection";
@@ -2311,6 +2210,90 @@ export enum RaidsOrderBy {
   LinkBetweenRaidsDesc = "LINK_BETWEEN_RAIDS_DESC",
   ActiveAsc = "ACTIVE_ASC",
   ActiveDesc = "ACTIVE_DESC",
+  PrimaryKeyAsc = "PRIMARY_KEY_ASC",
+  PrimaryKeyDesc = "PRIMARY_KEY_DESC"
+}
+
+export type SoftResa = Node & {
+  __typename?: "SoftResa";
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars["ID"];
+  id: Scalars["Int"];
+  raidId: Scalars["Int"];
+  playerId: Scalars["Int"];
+  itemId: Scalars["Int"];
+  /** Reads a single `Raid` that is related to this `SoftResa`. */
+  raidByRaidId?: Maybe<Raid>;
+  /** Reads a single `Player` that is related to this `SoftResa`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Item` that is related to this `SoftResa`. */
+  itemByItemId?: Maybe<Item>;
+};
+
+/**
+ * A condition to be used against `SoftResa` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type SoftResaCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `raidId` field. */
+  raidId?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `playerId` field. */
+  playerId?: Maybe<Scalars["Int"]>;
+  /** Checks for equality with the object’s `itemId` field. */
+  itemId?: Maybe<Scalars["Int"]>;
+};
+
+/** An input for mutations affecting `SoftResa` */
+export type SoftResaInput = {
+  id?: Maybe<Scalars["Int"]>;
+  raidId: Scalars["Int"];
+  playerId: Scalars["Int"];
+  itemId: Scalars["Int"];
+};
+
+/** Represents an update to a `SoftResa`. Fields that are set will be updated. */
+export type SoftResaPatch = {
+  id?: Maybe<Scalars["Int"]>;
+  raidId?: Maybe<Scalars["Int"]>;
+  playerId?: Maybe<Scalars["Int"]>;
+  itemId?: Maybe<Scalars["Int"]>;
+};
+
+/** A connection to a list of `SoftResa` values. */
+export type SoftResasConnection = {
+  __typename?: "SoftResasConnection";
+  /** A list of `SoftResa` objects. */
+  nodes: Array<Maybe<SoftResa>>;
+  /** A list of edges which contains the `SoftResa` and cursor to aid in pagination. */
+  edges: Array<SoftResasEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `SoftResa` you could get from the connection. */
+  totalCount: Scalars["Int"];
+};
+
+/** A `SoftResa` edge in the connection. */
+export type SoftResasEdge = {
+  __typename?: "SoftResasEdge";
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars["Cursor"]>;
+  /** The `SoftResa` at the end of the edge. */
+  node?: Maybe<SoftResa>;
+};
+
+/** Methods to use when ordering `SoftResa`. */
+export enum SoftResasOrderBy {
+  Natural = "NATURAL",
+  IdAsc = "ID_ASC",
+  IdDesc = "ID_DESC",
+  RaidIdAsc = "RAID_ID_ASC",
+  RaidIdDesc = "RAID_ID_DESC",
+  PlayerIdAsc = "PLAYER_ID_ASC",
+  PlayerIdDesc = "PLAYER_ID_DESC",
+  ItemIdAsc = "ITEM_ID_ASC",
+  ItemIdDesc = "ITEM_ID_DESC",
   PrimaryKeyAsc = "PRIMARY_KEY_ASC",
   PrimaryKeyDesc = "PRIMARY_KEY_DESC"
 }
@@ -2617,52 +2600,54 @@ export type UpdateRaidPlayerPayloadRaidPlayerEdgeArgs = {
   orderBy?: Maybe<Array<RaidPlayersOrderBy>>;
 };
 
-/** All input for the `updateRaidPlayersSubById` mutation. */
-export type UpdateRaidPlayersSubByIdInput = {
+/** All input for the `updateSoftResaById` mutation. */
+export type UpdateSoftResaByIdInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** An object where the defined keys will be set on the `RaidPlayersSub` being updated. */
-  raidPlayersSubPatch: RaidPlayersSubPatch;
+  /** An object where the defined keys will be set on the `SoftResa` being updated. */
+  softResaPatch: SoftResaPatch;
   id: Scalars["Int"];
 };
 
-/** All input for the `updateRaidPlayersSub` mutation. */
-export type UpdateRaidPlayersSubInput = {
+/** All input for the `updateSoftResa` mutation. */
+export type UpdateSoftResaInput = {
   /**
    * An arbitrary string value with no semantic meaning. Will be included in the
    * payload verbatim. May be used to track mutations by the client.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The globally unique `ID` which will identify a single `RaidPlayersSub` to be updated. */
+  /** The globally unique `ID` which will identify a single `SoftResa` to be updated. */
   nodeId: Scalars["ID"];
-  /** An object where the defined keys will be set on the `RaidPlayersSub` being updated. */
-  raidPlayersSubPatch: RaidPlayersSubPatch;
+  /** An object where the defined keys will be set on the `SoftResa` being updated. */
+  softResaPatch: SoftResaPatch;
 };
 
-/** The output of our update `RaidPlayersSub` mutation. */
-export type UpdateRaidPlayersSubPayload = {
-  __typename?: "UpdateRaidPlayersSubPayload";
+/** The output of our update `SoftResa` mutation. */
+export type UpdateSoftResaPayload = {
+  __typename?: "UpdateSoftResaPayload";
   /**
    * The exact same `clientMutationId` that was provided in the mutation input,
    * unchanged and unused. May be used by a client to track mutations.
    */
   clientMutationId?: Maybe<Scalars["String"]>;
-  /** The `RaidPlayersSub` that was updated by this mutation. */
-  raidPlayersSub?: Maybe<RaidPlayersSub>;
+  /** The `SoftResa` that was updated by this mutation. */
+  softResa?: Maybe<SoftResa>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
-  /** Reads a single `Player` that is related to this `RaidPlayersSub`. */
-  playerByPlayerId?: Maybe<Player>;
-  /** Reads a single `Raid` that is related to this `RaidPlayersSub`. */
+  /** Reads a single `Raid` that is related to this `SoftResa`. */
   raidByRaidId?: Maybe<Raid>;
-  /** An edge for our `RaidPlayersSub`. May be used by Relay 1. */
-  raidPlayersSubEdge?: Maybe<RaidPlayersSubsEdge>;
+  /** Reads a single `Player` that is related to this `SoftResa`. */
+  playerByPlayerId?: Maybe<Player>;
+  /** Reads a single `Item` that is related to this `SoftResa`. */
+  itemByItemId?: Maybe<Item>;
+  /** An edge for our `SoftResa`. May be used by Relay 1. */
+  softResaEdge?: Maybe<SoftResasEdge>;
 };
 
-/** The output of our update `RaidPlayersSub` mutation. */
-export type UpdateRaidPlayersSubPayloadRaidPlayersSubEdgeArgs = {
-  orderBy?: Maybe<Array<RaidPlayersSubsOrderBy>>;
+/** The output of our update `SoftResa` mutation. */
+export type UpdateSoftResaPayloadSoftResaEdgeArgs = {
+  orderBy?: Maybe<Array<SoftResasOrderBy>>;
 };

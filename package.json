@@ -6,6 +6,8 @@
     "node": "12.20"
   },
   "scripts": {
+    "setup": "docker-compose -f ./docker/alm/docker-compose.yml up -d",
+    "clear": "docker-compose -f ./docker/alm/docker-compose.yml down --volume",
     "dev": "source .env & node server/start.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/start.js",
@@ -17,13 +19,12 @@
     "db-restore-backup": "bin/db/restore-db/restore-db-backup.sh",
     "db-prod-exec": "bin/db/inject-sql/inject-db-prod.sh",
     "db": "psql $PROD_DB",
-    "dbl": "psql postgres://localhost:5432/test",
+    "dbl": "psql $DATABASE_URL/$DBNAME",
     "db-renew": "bin/db/renew-static-tables.sh",
-    "db-reset-local": "sh bin/db/reset-local-db-win.sh",
+    "db-reset-local": "sh bin/db/reset-local-db.sh",
     "db-items": "node db/json-to-sql/items-classes-to-sql.js",
     "types": "sh bin/generate-types.sh",
     "reset": "yarn db-reset-local && yarn types",
-    "roster": "ts-node bin/website-roster/generate-roster.ts",
     "lint": "tslint --project ."
   },
   "dependencies": {

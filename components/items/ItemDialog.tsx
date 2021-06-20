@@ -94,7 +94,7 @@ export function ItemDialog({ isOpen, onClose, currentItem }: Props) {
             onClick={e => {
               e.preventDefault();
             }}
-            href={`https://fr.classic.wowhead.com/item=${currentItem.wowheadId}`}
+            href={`https://fr.tbc.wowhead.com/item=${currentItem.wowheadId}`}
           >
             {currentItem.name}
           </a>

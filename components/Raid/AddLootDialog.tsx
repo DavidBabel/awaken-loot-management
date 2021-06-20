@@ -5,7 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Fab,
+  // Fab,
   FormControl,
   Grid,
   InputLabel,
@@ -17,11 +17,12 @@ import {
   Typography
 } from "@material-ui/core/";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Add as AddIcon } from "@material-ui/icons";
+// import { Add as AddIcon } from "@material-ui/icons";
 import ForwardIcon from "@material-ui/icons/Forward";
 import { ApolloQueryResult } from "apollo-boost";
 import { useState } from "react";
 import ClassAvatar from "../../components/ClassAvatar";
+import { getClassColor } from "../../lib/constants/class-colors";
 import { wowClasses } from "../../lib/constants/classes";
 import { useMemberContext } from "../../lib/context/member";
 import {
@@ -29,7 +30,8 @@ import {
   Loot,
   Mutation,
   Player,
-  Query
+  Query,
+  RaidPlayer
 } from "../../lib/generatedTypes";
 import {
   CREATE_LOOT,
@@ -43,6 +45,7 @@ import {
   showErrorMessage,
   showSuccessMessage
 } from "../../lib/utils/snackbars/snackbarService";
+import { LootScore } from "../../pages/raid/edit/[raidId]";
 import CONFIG from "../../server/config";
 
 interface CreatePlayerVariables {
@@ -119,10 +122,9 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "white",
       textDecoration: "none",
       cursor: "pointer",
-      display: "flex",
       height: 46,
-      alignItems: "center",
-      justifyContent: "center"
+      lineHeight: "25px",
+      textAlign: "center"
     }
   })
 );
@@ -137,6 +139,8 @@ interface Props {
   refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
   scrollDown: () => void;
+  currentRaidPlayers: RaidPlayer[];
+  lootScore: LootScore;
 }
 
 export default function AddLootDialog({
@@ -148,7 +152,9 @@ export default function AddLootDialog({
   bossName,
   refetchOneRaid,
   refetchAllPlayers,
-  scrollDown
+  scrollDown,
+  lootScore,
+  currentRaidPlayers
 }: Props) {
   const member = useMemberContext();
   const classes = useStyles("");
@@ -170,6 +176,10 @@ export default function AddLootDialog({
   const [updateLoot] = useMutation<Mutation, UpdateLootVariables>(UPDATE_LOOT);
   const [createPlayer] = useMutation<Mutation, CreatePlayerVariables>(
     CREATE_PLAYER
+  );
+
+  const currentPlayerList = currentRaidPlayers.map(
+    crp => crp.playerByPlayerId.name
   );
 
   const handleOpen = (): void => {
@@ -207,17 +217,17 @@ export default function AddLootDialog({
       );
       if (itemChosen.length > 0) {
         setItemToAdd(itemChosen[0]);
-        if (itemChosen[0].itemByItemId.classByClassId) {
-          setRestrictedClassIds([itemChosen[0].itemByItemId.classByClassId.id]);
-        } else {
-          const classIds = [];
-          itemChosen[0].itemByItemId.classItemsByItemId.nodes.forEach(
-            playerClass => {
-              classIds.push(playerClass.classByClassId.id);
-            }
-          );
-          setRestrictedClassIds(classIds);
-        }
+        // if (itemChosen[0].itemByItemId.classByClassId) {
+        //   setRestrictedClassIds([itemChosen[0].itemByItemId.classByClassId.id]);
+        // } else {
+        const classIds = [];
+        itemChosen[0].itemByItemId.classItemsByItemId.nodes.forEach(
+          playerClass => {
+            classIds.push(playerClass.classByClassId.id);
+          }
+        );
+        setRestrictedClassIds(classIds);
+        // }
       }
     }
   }
@@ -280,25 +290,25 @@ export default function AddLootDialog({
               .catch(err => {
                 setOpen(false);
                 setAddLootIsLoading(false);
-                showErrorMessage(err.message);
+                showErrorMessage("Err30 - " + err.message);
               });
           })
           .catch(err => {
             setOpen(false);
             setAddLootIsLoading(false);
-            showErrorMessage(err.message);
+            showErrorMessage("Err31 - " + err.message);
           });
       } else {
         setAddLootIsLoading(false);
-        showErrorMessage("Ce joueur existe déja.");
+        showErrorMessage("Err32 - " + "Ce joueur existe déja.");
       }
     } else {
       if (itemIdToAdd.length === 0) {
-        showErrorMessage("Selectionnez un item");
+        showErrorMessage("Err30 - " + "Selectionnez un item");
       } else if (newPlayerInputValue.length === 0) {
-        showErrorMessage("Tapez le pseudo du joueur");
+        showErrorMessage("Err31 - " + "Tapez le pseudo du joueur");
       } else {
-        showErrorMessage("Selectionnez une classe");
+        showErrorMessage("Err32 - " + "Selectionnez une classe");
       }
     }
   };
@@ -328,7 +338,7 @@ export default function AddLootDialog({
                 actionType: "delete"
               }
             }).catch(err => {
-              showErrorMessage(err.message);
+              showErrorMessage("Err40 - " + err.message);
             });
           }
           setOpen(false);
@@ -343,7 +353,7 @@ export default function AddLootDialog({
               scrollDown();
             })
             .catch(err => {
-              showErrorMessage(err.message);
+              showErrorMessage("Err41 - " + err.message);
             });
         })
         .catch(err => {
@@ -351,10 +361,10 @@ export default function AddLootDialog({
           setAddLootIsLoading(false);
           setItemIdToAdd("");
           setPlayerIdToAdd("");
-          showErrorMessage(err.message);
+          showErrorMessage("Err42 - " + err.message);
         });
     } else {
-      showErrorMessage("Selectionnez un item et un joueur.");
+      showErrorMessage("Err43 - " + "Selectionnez un item et un joueur.");
     }
   }
   const toggleSwitchRestrictPlayerList = () => {
@@ -373,9 +383,10 @@ export default function AddLootDialog({
           Non assigné
         </a>
       ) : (
-        <Fab size="small" color="primary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
+        <></>
+        // <Fab size="small" color="primary" aria-label="add" onClick={handleOpen}>
+        //   <AddIcon />
+        // </Fab>
       )}
       <Dialog
         className={classes.dialog}
@@ -404,21 +415,21 @@ export default function AddLootDialog({
               onChange={handleChangeSelectItem}
             >
               {loots.map(item => {
-                let itemStyle = {
+                const itemStyle = {
                   margin: 2,
                   borderLeft: "4px solid transparent"
                 };
 
-                if (item.itemByItemId.classId) {
-                  const playerColor =
-                    item.itemByItemId.classId === 1
-                      ? "grey"
-                      : item.itemByItemId.classByClassId.color;
-                  itemStyle = {
-                    borderLeft: "solid 4px " + playerColor,
-                    margin: 2
-                  };
-                }
+                // if (item.itemByItemId.classId) {
+                //   const playerColor =
+                //     item.itemByItemId.classId === 1
+                //       ? "grey"
+                //       : item.itemByItemId.classByClassId.color;
+                //   itemStyle = {
+                //     borderLeft: "solid 4px " + playerColor,
+                //     margin: 2
+                //   };
+                // }
 
                 return (
                   <MenuItem
@@ -481,6 +492,11 @@ export default function AddLootDialog({
                 onChange={handleChangeSelectPlayer}
               >
                 {allPlayers
+                  // select only present players
+                  .filter((player: Player) =>
+                    currentPlayerList.includes(player.name)
+                  )
+                  // filter by class priority
                   .filter((player: Player) => {
                     if (
                       restrictedClassIds.length === 0 ||
@@ -491,20 +507,51 @@ export default function AddLootDialog({
                     return restrictedClassIds.indexOf(player.classId) !== -1;
                   })
                   .map((player: Player) => {
-                    const playerColor =
-                      player.classByClassId.id === 1
-                        ? "grey"
-                        : player.classByClassId.color;
+                    const playerScore = lootScore[player.name];
+                    let bonusMalus = 0;
+                    if (playerScore) {
+                      bonusMalus += playerScore.malus;
+                      if (playerScore.bonus[itemIdToAdd]) {
+                        bonusMalus += playerScore.bonus[itemIdToAdd];
+                      }
+                    }
+
+                    const bonusMalusToDisplay =
+                      bonusMalus === 0 ? (
+                        <></>
+                      ) : bonusMalus > 0 ? (
+                        <span
+                          style={{
+                            color: "green",
+                            position: "absolute",
+                            right: 20
+                          }}
+                        >
+                          {bonusMalus}
+                        </span>
+                      ) : (
+                        <span
+                          style={{
+                            color: "red",
+                            position: "absolute",
+                            right: 20
+                          }}
+                        >
+                          {bonusMalus}
+                        </span>
+                      );
                     return (
                       <MenuItem
                         style={{
-                          borderLeft: "solid 4px " + playerColor,
+                          borderLeft:
+                            "solid 4px " +
+                            getClassColor(player.classByClassId.name),
                           margin: 2
                         }}
                         key={`addlootplayer-${player.id}`}
                         value={player.id}
                       >
-                        {player.name}
+                        {player.name} {bonusMalusToDisplay}
                       </MenuItem>
                     );
                   })}
@@ -522,22 +569,20 @@ export default function AddLootDialog({
         )}
         <div className={classes.lootToAddAvatars}>
           {itemToAdd &&
-            (!itemToAdd.itemByItemId.classByClassId ? (
-              itemToAdd.itemByItemId.classItemsByItemId.nodes.map(
-                playerClass => (
-                  <ClassAvatar
-                    key={`classavatar${playerClass.classByClassId.id +
-                      itemToAdd.itemByItemId.name}`}
-                    playerClass={playerClass.classByClassId.name}
-                    prio={playerClass.prio}
-                  />
-                )
-              )
-            ) : (
+            // (!itemToAdd.itemByItemId.classByClassId ? (
+            itemToAdd.itemByItemId.classItemsByItemId.nodes.map(playerClass => (
               <ClassAvatar
-                playerClass={itemToAdd.itemByItemId.classByClassId.name}
+                key={`classavatar${playerClass.classByClassId.id +
+                  itemToAdd.itemByItemId.name}`}
+                playerClass={playerClass.classByClassId.name}
               />
-            ))}
+            ))
+          // ) : (
+          //   <ClassAvatar
+          //     playerClass={itemToAdd.itemByItemId.classByClassId.name}
+          //   />
+          // ))
+          }
         </div>
         <Grid
           container
@@ -590,7 +635,7 @@ export default function AddLootDialog({
             }}
             color="primary"
           >
-            {preSelectedLoot ? "REATTRIBUER LE LOOT" : "AJOUTER LE LOOT"}
+            {preSelectedLoot ? "ATTRIBUER LE LOOT" : "AJOUTER LE LOOT"}
           </Button>
         </DialogActions>
       </Dialog>

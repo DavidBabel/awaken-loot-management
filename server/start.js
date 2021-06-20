@@ -10,7 +10,6 @@ const {
 const checkRoleMiddleware = require("./middleware/check-role");
 const checkTokenMiddleware = require("./middleware/check-token");
 const loginControler = require("./controlers/login");
-const compoControler = require("./controlers/compo");
 const discordControler = require("./controlers/discord");
 // const PersistedOperationsPlugin = require("@graphile/persisted-operations");
 // const ConnectionFilterPlugin = require("postgraphile-plugin-connection-filter");
@@ -48,7 +47,8 @@ app
       checkTokenMiddleware,
       checkRoleMiddleware,
       postgraphile(
-        process.env.DATABASE_URL || "postgres://localhost:5432/test",
+        `${process.env.DATABASE_URL}/${process.env.DBNAME}` ||
+          "postgres://localhost:5432/test",
         "public",
         {
           // classicIds: true,
@@ -66,8 +66,6 @@ app
     );
 
     server.post("/api/discord", checkTokenMiddleware, discordControler);
-
-    server.get("/compo/:raidId", compoControler);
 
     server.get("*", (req, res) => {
       return handle(req, res);

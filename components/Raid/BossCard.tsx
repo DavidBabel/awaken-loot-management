@@ -29,7 +29,14 @@ import AddLootDialog from "../../components/Raid/AddLootDialog";
 import AddUnasignedDialog from "../../components/Raid/AddUnasignedDialog";
 import { getClassColor } from "../../lib/constants/class-colors";
 import { useMemberContext } from "../../lib/context/member";
-import { Boss, Loot, Mutation, Player, Query } from "../../lib/generatedTypes";
+import {
+  Boss,
+  Loot,
+  Mutation,
+  Player,
+  Query,
+  RaidPlayer
+} from "../../lib/generatedTypes";
 import { UPDATE_LOOT, UpdateLootVariables } from "../../lib/gql/loot-mutations";
 import { role } from "../../lib/role-level";
 import { formatDate } from "../../lib/utils/date";
@@ -39,6 +46,7 @@ import {
   showSuccessMessage
 } from "../../lib/utils/snackbars/snackbarService";
 import { refreshWowhead } from "../../lib/utils/wowhead-refresh";
+import { LootScore } from "../../pages/raid/edit/[raidId]";
 import CONFIG from "../../server/config";
 
 const useStyles = makeStyles(theme => ({
@@ -135,14 +143,18 @@ export function BossCard({
   refetchOneRaid,
   refetchAllPlayers,
   allPlayers,
-  cdnImage
+  currentRaidPlayers,
+  cdnImage,
+  lootScore
 }: Boss & {
   donjonShortName: string;
   looted: Loot[];
   raidId: number;
   allPlayers: Player[];
-  refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
+  currentRaidPlayers: RaidPlayer[];
+  refetchOneRaid: any;
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
+  lootScore: LootScore;
 }) {
   const classes = useStyles("");
   const member = useMemberContext();
@@ -193,8 +205,11 @@ export function BossCard({
         setUpdateLootConfirm(false);
         setUpdateLootIsLoading(false);
       })
+      .then(() => {
+        refetchOneRaid();
+      })
       .catch(err => {
-        showErrorMessage(err.message);
+        showErrorMessage("Err100 - " + err.message);
         setCurrentLootToBeUpdated(null);
         setUpdateLootConfirm(false);
         setUpdateLootIsLoading(false);
@@ -266,7 +281,7 @@ export function BossCard({
                         onClick={e => {
                           e.preventDefault();
                         }}
-                        href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                        href={`https://fr.tbc.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
                       >
                         {loot.itemByItemId.name}
                       </a>
@@ -290,6 +305,8 @@ export function BossCard({
                               refetchOneRaid={refetchOneRaid}
                               refetchAllPlayers={refetchAllPlayers}
                               scrollDown={scrollDown}
+                              currentRaidPlayers={currentRaidPlayers}
+                              lootScore={lootScore}
                             />
                           ) : (
                             <Link
@@ -366,17 +383,22 @@ export function BossCard({
             })}
           </List>
         </CardContent>
+
         {member.level >= role.officer && (
           <CardActions disableSpacing={true} className={classes.cardActions}>
-            <AddUnasignedDialog
-              raidId={raidId}
-              bossId={id}
-              bossName={name}
-              bossItems={loots}
-              refetchOneRaid={refetchOneRaid}
-              scrollDown={scrollDown}
-            />
-            &nbsp;&nbsp;
+            {currentRaidPlayers.length > 0 ? (
+              <AddUnasignedDialog
+                raidId={raidId}
+                bossId={id}
+                bossName={name}
+                bossItems={loots}
+                refetchOneRaid={refetchOneRaid}
+                scrollDown={scrollDown}
+              />
+            ) : (
+              <>Remplir la liste des joueurs pour saisir les loots.</>
+            )}
+            {/* &nbsp;&nbsp;
             <AddLootDialog
               allPlayers={allPlayers}
               raidId={raidId}
@@ -386,7 +408,7 @@ export function BossCard({
               refetchOneRaid={refetchOneRaid}
               refetchAllPlayers={refetchAllPlayers}
               scrollDown={scrollDown}
-            />
+            /> */}
           </CardActions>
         )}
       </Card>
@@ -423,7 +445,7 @@ export function BossCard({
                   onClick={e => {
                     e.preventDefault();
                   }}
-                  href={`https://fr.classic.wowhead.com/item=${currentLootToBeUpdated.loot.itemByItemId.wowheadId}`}
+                  href={`https://fr.tbc.wowhead.com/item=${currentLootToBeUpdated.loot.itemByItemId.wowheadId}`}
                 >
                   {currentLootToBeUpdated.loot.itemByItemId.name}
                 </a>

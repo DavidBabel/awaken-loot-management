@@ -78,7 +78,7 @@ export function ItemCard({
           onClick={e => {
             e.preventDefault();
           }}
-          href={`https://fr.classic.wowhead.com/item=${wowheadId}`}
+          href={`https://fr.tbc.wowhead.com/item=${wowheadId}`}
         >
           {name}
         </a>

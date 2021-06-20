@@ -116,7 +116,7 @@ export default function LootsTable({ loots, hidden }: Props) {
                     onClick={e => {
                       e.preventDefault();
                     }}
-                    href={`https://fr.classic.wowhead.com/item=${row.wowheadId}`}
+                    href={`https://fr.tbc.wowhead.com/item=${row.wowheadId}`}
                   >
                     {row.name}
                   </a>
