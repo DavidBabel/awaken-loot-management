@@ -52,7 +52,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.4",
     "md5": "^2.2.1",
-    "next": "^9.1.6",
+    "next": "^9.3.2",
     "next-routes": "^1.4.2",
     "nookies": "^2.0.8",
     "postgraphile": "^4.5.5",
