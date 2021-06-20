@@ -298,7 +298,7 @@ export default function LootWindow(props: Props) {
                     onClick={e => {
                       e.preventDefault();
                     }}
-                    href={`https://fr.classic.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
+                    href={`https://fr.tbc.wowhead.com/item=${loot.itemByItemId.wowheadId}`}
                   >
                     {loot.itemByItemId.name}
                   </a>

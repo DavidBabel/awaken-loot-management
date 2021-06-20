@@ -7,6 +7,7 @@ interface SnackBarMessage {
   message: string;
   action: "info" | "success" | "error";
   open: boolean;
+  // openedSince: Date;
   id: number;
 }
 
@@ -19,6 +20,7 @@ export function SnackbarContainer() {
   function grabMessage(payload: SnackBarMessage) {
     payload.id = snackId++;
     payload.open = true;
+    // payload.openedSince = new Date();
     const newMessages = [...snackMessages, payload];
     setSnackMessages(newMessages);
   }
@@ -52,6 +54,8 @@ export function SnackbarContainer() {
 
           const backgroundColor =
             snackMessage.action === "error" ? "#D32F2F" : "#43A047";
+
+          // setTimeout(closeSnackBarEvent, AUTO_DISMISS);
 
           return (
             <Snackbar

@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     width: "80%",
 
-    height: "100px",
+    height: "115px",
     flexShrink: 0,
     "&:nth-child(1)": {
       borderRight: " 1px solid #E0E0E0"
@@ -127,19 +127,23 @@ const useStyles = makeStyles(theme => ({
   },
   lootLevel6: {
     backgroundColor: lootColorLevel6
+  },
+  alignLeft: {
+    textAlign: "left",
+    width: "60%"
   }
 }));
 
 function getPriosText(item: Item) {
-  const prios = item.classByClassId ? [item.classByClassId.name] : [];
+  const prios = [];
   const nonPrio = [];
 
   item.classItemsByItemId.nodes.forEach(playerClass => {
-    if (playerClass.prio) {
-      prios.push(playerClass.classByClassId.name);
-    } else {
-      nonPrio.push(playerClass.classByClassId.name);
-    }
+    // if (playerClass.prio) {
+    //   prios.push(playerClass.classByClassId.name);
+    // } else {
+    nonPrio.push(playerClass.classByClassId.name);
+    // }
   });
 
   const hasPrios = prios.length > 0;
@@ -214,6 +218,25 @@ export default function PageItem() {
       return hasName || bossesFound.length > 0;
     });
 
+  function Search({ children }) {
+    return (
+      <span
+        style={{ marginRight: 10, cursor: "pointer" }}
+        onClick={() => setItemInputValue(children)}
+      >
+        {children}
+      </span>
+    );
+  }
+
+  function Block({ phase, children }) {
+    return (
+      <div className={classes.alignLeft}>
+        <b>P{phase}:</b>&nbsp;&nbsp;{children}
+      </div>
+    );
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.searchBox}>
@@ -228,6 +251,12 @@ export default function PageItem() {
           margin="dense"
           variant="outlined"
         />
+        <Block phase={1}>
+          <Search>Roi Maulgar</Search>
+          <Search>Gruul</Search>
+          <Search>Magtheridon</Search>
+        </Block>
+
         <Hidden smDown>
           <Typography>
             <i>
@@ -280,7 +309,7 @@ export default function PageItem() {
                           onClick={e => {
                             e.preventDefault();
                           }}
-                          href={`https://fr.classic.wowhead.com/item=${result.wowheadId}`}
+                          href={`https://fr.tbc.wowhead.com/item=${result.wowheadId}`}
                         >
                           {result.name}
                         </a>
@@ -295,23 +324,23 @@ export default function PageItem() {
                       </>
                     }
                   />
-                  {result.classByClassId ? (
-                    <ListItemAvatar>
-                      <ClassAvatar playerClass={result.classByClassId.name} />
+                  {// result.classByClassId ? (
+                  //   <ListItemAvatar>
+                  //     <ClassAvatar playerClass={result.classByClassId.name} />
+                  //   </ListItemAvatar>
+                  // ) : (
+                  result.classItemsByItemId.nodes.map(playerClass => (
+                    <ListItemAvatar
+                      key={`listitemavatar-${playerClass.classByClassId.id +
+                        result.name}`}
+                    >
+                      <ClassAvatar
+                        playerClass={playerClass.classByClassId.name}
+                      />
                     </ListItemAvatar>
-                  ) : (
-                    result.classItemsByItemId.nodes.map(playerClass => (
-                      <ListItemAvatar
-                        key={`listitemavatar-${playerClass.classByClassId.id +
-                          result.name}`}
-                      >
-                        <ClassAvatar
-                          playerClass={playerClass.classByClassId.name}
-                          prio={playerClass.prio}
-                        />
-                      </ListItemAvatar>
-                    ))
-                  )}
+                  ))
+                  // )
+                  }
                   <ListItemText
                     className={
                       classes.lootLevel +

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source .env
 set -e
 
 RED='\033[0;31m'

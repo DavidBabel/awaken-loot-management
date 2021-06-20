@@ -123,23 +123,23 @@ export default function AddPlayer({
               .catch(err => {
                 setOpen(false);
                 setIsLoading(false);
-                showErrorMessage(err.message);
+                showErrorMessage("Err18 - " + err.message);
               });
           })
           .catch(err => {
             setOpen(false);
             setIsLoading(false);
-            showErrorMessage(err.message);
+            showErrorMessage("Err19 - " + err.message);
           });
       } else {
         setIsLoading(false);
-        showErrorMessage("Ce joueur existe déja.");
+        showErrorMessage("Err20 - Ce joueur existe déja.");
       }
     } else {
       if (newPlayerInputValue.length === 0) {
-        showErrorMessage("Tapez le pseudo du joueur");
+        showErrorMessage("Err21 - Tapez le pseudo du joueur");
       } else {
-        showErrorMessage("Selectionnez une classe");
+        showErrorMessage("Err22 - Selectionnez une classe");
       }
     }
   };

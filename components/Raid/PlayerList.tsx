@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ApolloQueryResult } from "apollo-boost";
 import Link from "next/link";
 import { useState } from "react";
+import { getClassColor } from "../../lib/constants/class-colors";
 import { useMemberContext } from "../../lib/context/member";
 import { Mutation, Player, Query, RaidPlayer } from "../../lib/generatedTypes";
 // import { ALL_PLAYERS } from "../../lib/gql/player-queries";
@@ -80,6 +81,20 @@ function parseWarcraftLogs(content: string) {
   }
 }
 
+function parseExorsus(content: string) {
+  try {
+    return (
+      content
+        // @ts-ignore
+        .replaceAll("\n", " ")
+        .split(" ")
+        .map(e => e.trim())
+    );
+  } catch (error) {
+    return [];
+  }
+}
+
 function playerExists(playerName: string, allPlayers: Player[]) {
   return getPlayerId(playerName, allPlayers) > -1;
 }
@@ -109,7 +124,7 @@ interface Props {
   players: RaidPlayer[];
   allPlayers: Player[];
   raidId: number;
-  refetchOneRaid: () => Promise<ApolloQueryResult<Query>>;
+  refetchOneRaid: any;
   refetchAllPlayers: () => Promise<ApolloQueryResult<Query>>;
 }
 
@@ -129,10 +144,16 @@ export default function PlayerList({
   );
 
   const classes = useStyles("");
-  const [displayImportPlayerArea, toggleDisplayImportPlayerArea] = useToggle(
-    false
-  );
+  const [
+    displayImportPlayerAreaWL,
+    toggleDisplayImportPlayerAreaWL
+  ] = useToggle(false);
   const [warcraftLogsContent, setWarcraftLogsContent] = useState("");
+  const [
+    displayImportPlayerAreaExo,
+    toggleDisplayImportPlayerAreaExo
+  ] = useToggle(false);
+  const [exorsusContent, setExorsusContent] = useState("");
   const [playerToCreate, setPlayerToCreate] = useState<string[]>([]);
 
   function displayClass(className: string, raidPlayers: RaidPlayer[]) {
@@ -152,7 +173,10 @@ export default function PlayerList({
             <a
               target="_blank"
               style={{
-                color: player.playerByPlayerId.classByClassId.color
+                color: getClassColor(
+                  player.playerByPlayerId.classByClassId.name,
+                  true
+                )
               }}
             >
               {player.playerByPlayerId.name}
@@ -177,7 +201,7 @@ export default function PlayerList({
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {"Joueurs ayant participé à ce raid:"}
+          Joueurs ayant participé à ce raid: ({players.length})
         </DialogTitle>
         <DialogContent>
           <div className={classes.listRoot}>
@@ -188,10 +212,163 @@ export default function PlayerList({
             {displayClass("Druide", players)}
             {displayClass("Chasseur", players)}
             {displayClass("Chaman", players)}
-            {displayClass("Guerrier Tank", players)}
-            {displayClass("Guerrier DPS", players)}
+            {displayClass("Paladin", players)}
+            {displayClass("Guerrier", players)}
           </div>
-          {displayImportPlayerArea && (
+          {displayImportPlayerAreaExo && (
+            <div>
+              <textarea
+                style={{ maxWidth: 700, width: "60%", height: 350, margin: 25 }}
+                placeholder="Copier ici l'export vertical de Exorsus (ctrl + a / ctrl + c)"
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setExorsusContent(e.target.value)
+                }
+              >
+                {exorsusContent}
+              </textarea>
+              {playerToCreate.length > 0 && (
+                <div style={{ margin: 10 }}>
+                  Les joueurs suivants doivent être créés d'abord :
+                  <div style={{ margin: 10 }}>
+                    {playerToCreate.map(player => (
+                      <AddPlayer
+                        key={`create-player-${player}`}
+                        buttonLabel={`Créer ${player}`}
+                        initialName={player}
+                        allPlayers={allPlayers}
+                        refetchAllPlayers={() => {
+                          const withoutNewPLayer = playerToCreate.filter(
+                            x => x !== player
+                          );
+                          setPlayerToCreate(withoutNewPLayer);
+                          return refetchAllPlayers();
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <Button
+                  onClick={() => {
+                    if (!exorsusContent) {
+                      return;
+                    }
+                    const playerList = parseExorsus(exorsusContent);
+                    if (playerList.length === 0) {
+                      return;
+                    }
+
+                    const nonExistingPlayers: string[] = extractNonExistingPlayers(
+                      playerList,
+                      allPlayers
+                    );
+
+                    if (nonExistingPlayers.length > 0) {
+                      setPlayerToCreate(nonExistingPlayers);
+                    } else {
+                      const alreadyExistingPlayers = players.map(
+                        p => p.playerByPlayerId.name
+                      );
+                      const queries = playerList
+                        .filter(p => !alreadyExistingPlayers.includes(p))
+                        .map(currentPlayerName => {
+                          return createRaidPlayer({
+                            variables: {
+                              raidId,
+                              playerId: getPlayerId(
+                                currentPlayerName,
+                                allPlayers
+                              )
+                            }
+                          });
+                        });
+                      Promise.all(queries)
+                        .then(() => {
+                          showSuccessMessage(
+                            "Liste des joueurs importé avec succès"
+                          );
+                          refetchOneRaid();
+                          setExorsusContent("");
+                          toggleDisplayImportPlayerAreaExo();
+                        })
+                        .catch(e => {
+                          console.log(e);
+                          showErrorMessage(
+                            "Err60 - " + "Quelque chose n‘a pas marché"
+                          );
+                        });
+                    }
+                  }}
+                  color="primary"
+                >
+                  Importer les joueurs dans ce raid
+                </Button>
+                {member.name === "Devilhunter" && (
+                  <>
+                    <br />
+                    <Button
+                      onClick={() => {
+                        if (!exorsusContent) {
+                          return;
+                        }
+                        const playerList = parseExorsus(exorsusContent);
+                        if (playerList.length === 0) {
+                          return;
+                        }
+
+                        const alreadyExistingPlayers = players.map(
+                          p => p.playerByPlayerId.name
+                        );
+
+                        const nonExistingPlayers: string[] = extractNonExistingPlayers(
+                          playerList,
+                          allPlayers
+                        );
+
+                        // console.log(alreadyExistingPlayers);
+                        const queries = playerList
+                          .filter(p => !alreadyExistingPlayers.includes(p))
+                          .filter(p => !nonExistingPlayers.includes(p))
+                          .map(currentPlayerName => {
+                            // console.log(currentPlayerName);
+                            return createRaidPlayer({
+                              variables: {
+                                raidId,
+                                playerId: getPlayerId(
+                                  currentPlayerName,
+                                  allPlayers
+                                )
+                              }
+                            });
+                          });
+                        Promise.all(queries)
+                          .then(() => {
+                            showSuccessMessage(
+                              "Liste des joueurs importé avec succès"
+                            );
+                            refetchOneRaid();
+                            setExorsusContent("");
+                            toggleDisplayImportPlayerAreaExo();
+                          })
+                          .catch(e => {
+                            console.log(e);
+                            showErrorMessage(
+                              "Err61 - " + "Quelque chose n‘a pas marché"
+                            );
+                          });
+                      }}
+                      color="primary"
+                    >
+                      Importer uniquement les joueurs connus
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+          {displayImportPlayerAreaWL && (
             <div>
               <textarea
                 style={{ maxWidth: 700, width: "60%", height: 350, margin: 25 }}
@@ -267,11 +444,13 @@ export default function PlayerList({
                           );
                           refetchOneRaid();
                           setWarcraftLogsContent("");
-                          toggleDisplayImportPlayerArea();
+                          toggleDisplayImportPlayerAreaWL();
                         })
                         .catch(e => {
                           console.log(e);
-                          showErrorMessage("Quelque chose n‘a pas marché");
+                          showErrorMessage(
+                            "Err62 - " + "Quelque chose n‘a pas marché"
+                          );
                         });
                     }
                   }}
@@ -326,11 +505,13 @@ export default function PlayerList({
                             );
                             refetchOneRaid();
                             setWarcraftLogsContent("");
-                            toggleDisplayImportPlayerArea();
+                            toggleDisplayImportPlayerAreaWL();
                           })
                           .catch(e => {
                             console.log(e);
-                            showErrorMessage("Quelque chose n‘a pas marché");
+                            showErrorMessage(
+                              "Err64 - " + "Quelque chose n‘a pas marché"
+                            );
                           });
                       }}
                       color="primary"
@@ -345,10 +526,17 @@ export default function PlayerList({
         </DialogContent>
         <DialogActions>
           {member.level >= role.officer && (
-            <Button onClick={toggleDisplayImportPlayerArea} color="primary">
-              {displayImportPlayerArea
-                ? "Fermer l‘import de joueurs"
-                : "Importer des joueurs"}
+            <Button onClick={toggleDisplayImportPlayerAreaExo} color="primary">
+              {displayImportPlayerAreaExo
+                ? "Fermer l‘import de joueurs Exorsus"
+                : "Import manuel ou depuis Exorsus"}
+            </Button>
+          )}
+          {member.level >= role.officer && (
+            <Button onClick={toggleDisplayImportPlayerAreaWL} color="primary">
+              {displayImportPlayerAreaWL
+                ? "Fermer l‘import de joueurs WarcraftLogs"
+                : "Importer depuis WarcraftLogs"}
             </Button>
           )}
           <Button onClick={handleClose} color="primary">

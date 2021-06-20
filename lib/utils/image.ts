@@ -1,11 +1,8 @@
 import { wowClasses } from "../constants/classes";
 
 export function getClassImageUrl(className: string) {
-  if (className === "Paladin") {
-    return "https://i.imgur.com/0ZZyrkG.jpg";
-  }
   const currentClasse = wowClasses.find(wc => wc.name.startsWith(className));
-  return currentClasse.icon;
+  return currentClasse?.icon || "";
 }
 
 export function getDonjonImageUrl(donjonName: string) {

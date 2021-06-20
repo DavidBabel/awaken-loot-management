@@ -1,22 +1,15 @@
-const classColors = {
-  ["Druide"]: "#FF7D0A",
-  ["Chasseur"]: "#ABD473",
-  ["Mage"]: "#69CCF0",
-  ["Prêtre"]: "grey",
-  ["Voleur"]: "rgb(255, 230, 0)",
-  ["Chaman"]: "#0070DE",
-  ["Démoniste"]: "#9482C9",
-  ["Guerrier Tank"]: "#C79C6E",
-  ["Guerrier DPS"]: "#C41F3B",
-  ["Prêtre Ombre"]: "grey",
-  ["Druide Feral"]: "#FF7D0A",
-  ["Chaman Amélio"]: "#0070DE",
-  ["Chaman Elementaire"]: "#0070DE"
-};
+import { wowClasses } from "./classes";
+
+const classColors = wowClasses
+  .filter(wc => wc.id !== 0)
+  .reduce((stack, next) => {
+    stack[next.name] = next.color;
+    return stack;
+  }, {});
 
 const alternativeColor = {
   ...classColors,
-  ["Prêtre"]: "rgb(255, 255, 255)",
+  ["Prêtre Heal"]: "rgb(255, 255, 255)",
   ["Prêtre Ombre"]: "rgb(255, 255, 255)"
 };
 

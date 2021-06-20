@@ -77,6 +77,9 @@ export const ALL_RAIDS_LIGHT = gql`
         lootsByRaidId(condition: { active: true }) {
           totalCount
         }
+        softResasByRaidId {
+          totalCount
+        }
       }
     }
   }
@@ -140,12 +143,10 @@ export const ONE_RAID = gql`
                     id
                     wowheadId
                     name
-                    classId
                     classItemsByItemId {
                       nodes {
                         id
                         itemId
-                        prio
                         classByClassId {
                           id
                           color
@@ -154,11 +155,6 @@ export const ONE_RAID = gql`
                         }
                         comment
                       }
-                    }
-                    classByClassId {
-                      id
-                      color
-                      name
                     }
                   }
                 }
@@ -206,7 +202,6 @@ export const ONE_RAID = gql`
             itemByItemId {
               id
               name
-              classId
               lootLevel
               wowheadId
               bossItemsByItemId {
@@ -250,6 +245,19 @@ export const ONE_RAID = gql`
                 name
                 color
               }
+            }
+          }
+        }
+        softResasByRaidId {
+          nodes {
+            id
+            playerByPlayerId {
+              name
+              id
+            }
+            itemByItemId {
+              name
+              id
             }
           }
         }

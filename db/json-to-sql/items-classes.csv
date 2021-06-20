@@ -1,1888 +1,999 @@
-#https://docs.google.com/document/d/1x0tkSYmz49rqCvX8_QR1Xipn6SlWooJeqxRQYrlTii0/edit
-# MC / Ony
-
-Collier d‘illumination
-Prêtre, false
-Mage, true
-Démoniste, true
-
-Anneau de puissance de sort
-Prêtre, false
-Mage, true
-Démoniste, false
-
-Anneau épais en sombrefer
-Guerrier Tank, true
-Guerrier DPS, false
-Druide, false
-Druide Feral, true
-
-Jambières de Tempête de mana
-Druide, false
-Chaman, false
-Prêtre, false
-
-Robe du pouvoir volatil
-Prêtre, false
-Mage, false
-Démoniste, false
-
-Cuissards d‘Attise-flammes
-Guerrier Tank, true
-Guerrier DPS, false
-
-Trembleterre
-Guerrier Tank, false
-Guerrier DPS, false
-Chaman, false
-
-Marque du Frappeur
-Guerrier Tank, false
-Guerrier DPS, true
-Voleur, true
-
-Médaillon de Puissance inébranlable
-Guerrier Tank, true
-Guerrier DPS, false
-Druide, false
-
-Griffe droite d‘Eskhandar
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Grimoire de runes de feu
-Prêtre, false
-Mage, false
-Démoniste, false
-
-Anneau de frappe rapide
-Chasseur, false
-Guerrier DPS, true
-Voleur, true
-
-Corde de mana enflammé
-Prêtre, false
-Prêtre Ombre, false
-Mage, true
-Démoniste, false
-
-Gantelets de garde des flammes
-Guerrier Tank, false
-Guerrier DPS, true
-
-Lame à tranchant d‘obsidienne
-Guerrier Tank, false
-Guerrier DPS, true
-
-Talisman de pouvoir éphémère
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, true
-Démoniste, true
-Prêtre Ombre, true
-
-Vieux gants en cuir du Magma
-Voleur, true
-Guerrier DPS, false
-
-Bottes durcies dans le magma
-Guerrier Tank, false
-Guerrier DPS, false
-
-Spallières de la Terre profonde
-Chaman, true
-
-Solerets du Marcheflammes
-Chasseur, true
-Chaman, false
-
-Dague ensorceleuse
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, true
-Démoniste, true
-
-Ecraseur cramoisi
-Prêtre, true
-Mage, false
-Démoniste, false
-
-Garde-poignets de stabilité
-Voleur, false
-Guerrier DPS, true
-
-Pantalon en écailles de salamandre
-Druide, false
-Chaman, false
-
-Marteau d‘Aurastone
-Prêtre, false
-Druide, true
-Chaman, true
-
-Déchireur de Gutgore
-Voleur, true
-Guerrier DPS, false
-
-Disque Drillborer
-Guerrier Tank, true
-Guerrier DPS, false
-
-Lame de brutalité
-Chasseur, false
-Voleur, true
-Guerrier DPS, true
-
-Sceau de l‘archimagus
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, false
-Démoniste, false
-
-Frappe-ténèbres
-Guerrier Tank, false
-Guerrier DPS, false
-
-Bâton de domination
-Prêtre, false
-Druide, true
-Chaman, false
-Mage, true
-Démoniste, true
-
-Magelame de Chante-azur
-Mage, false
-Démoniste, false
-
-Lance-grenaille explosif
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Anneau de cautérisation
-Prêtre, false
-Druide, false
-Chaman, false
-
-Cape ignifugée
-Prêtre, false
-Druide, false
-Chaman, false
-
-Dent de chien du magma
-Chasseur, false
-Guerrier DPS, true
-Voleur, true
-
-Drague-lave de Finkle
-Druide, false
-Chaman, false
-
-Echarpe des secrets murmurés
-Prêtre, false
-Démoniste, true
-
-Epaulières de garde du feu
-Guerrier DPS, false
-Voleur, false
-Druide Feral, false
-
-Gants de la flamme hypnotique
-Mage, false
-Démoniste, false
-
-Garde-poignets de vrai vol
-Chasseur, true
-Chaman, false
-
-Grèves du Coeur du Magma
-Guerrier Tank, true
-Guerrier DPS, false
-
-Spallières de croissance sauvage
-Druide, false
-Chaman, false
-
-Oeil de Sulfuras
-Guerrier Tank, false
-Guerrier DPS, true
-Chaman, true
-
-Lame de la perdition
-Voleur, true
-Guerrier DPS, false
-
-Anneau de Sulfuras
-Prêtre, true
-Druide, true
-Chaman, true
-Mage, false
-Démoniste, false
-
-Couronne de destruction
-Chasseur, true
-Guerrier DPS, false
-Chaman, false
-
-Anneau de Précisia
-Chasseur, true
-Guerrier DPS, false
-Guerrier Tank, true
-Voleur, true
-Druide Feral, false
-
-Cape sang-de-dragon
-Guerrier DPS, false
-Guerrier Tank, true
-Druide Feral, true
-
-Essence de la Flamme pure
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, false
-Démoniste, false
-Guerrier DPS, false
-Guerrier Tank, false
-Voleur, false
-Chasseur, false
-
-Cape du Voile de brume
-Voleur, false
-Chasseur, true
-Guerrier Tank, false
-
-Ceinturon d‘assaut
-Guerrier DPS, true
-Guerrier Tank, false
-
-Collier du Seigneur du Feu
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, true
-Démoniste, true
-Prêtre Ombre, true
-
-Arrache-moelle
-Chaman, false
-Chaman Amélio, false
-Guerrier DPS, true
-
-Fragment de la Flamme
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, false
-Démoniste, false
-Guerrier DPS, false
-Guerrier Tank, false
-Voleur, false
-Chasseur, false
-Prêtre Ombre, false
-Druide Feral, false
-Chaman Amélio, false
-
-Fléau de Bonereaver
-Guerrier Tank, false
-Guerrier DPS, true
-Chaman Amélio, false
-
-Défenseur de Malistar
-Chaman, true
-Chaman Amélio, false
-
-# Onyxia
-Tête d‘Onyxia
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, false
-Démoniste, false
-Guerrier DPS, true
-Guerrier Tank, true
-Voleur, true
-Chasseur, true
-Prêtre Ombre, false
-Druide Feral, false
-Chaman Amélio, false
-
-Ancien Grimoire de Cornerstone
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, false
-Démoniste, false
-
-Anneau de lien
-Guerrier Tank, true
-Guerrier DPS, false
-Druide, false
-
-Drapé de Saphiron
-Prêtre, false
-Druide, false
-Chaman, false
-Mage, true
-Démoniste, true
-
-Collier d‘Eskhandar
-Guerrier Tank, true
-Guerrier DPS, false
-Druide, false
-
-Eclat de l‘Ecaille
-Prêtre, true
-Druide, true
-Chaman, true
-Mage, false
-Démoniste, false
-
-Porte-mort
-Guerrier Tank, false
-Guerrier DPS, true
-
-Vis‘kag le Saigneur
-Guerrier Tank, false
-Guerrier DPS, true
-Voleur, true
-
-
-# BWL
-
-
-Maillet draconique
-Guerrier DPS, false
-Druide, false
-
-Cape de puissance draconique
-Voleur, false
-Guerrier DPS, true
-
-Bottes de la pensée pure
-Prêtre, true
-Druide, true
-Chaman, false
-
-Vengeresse draconique
-Guerrier DPS, false
-
-Bottes de blizzard de Ringo
-Mage, false
-
-Pourpoint d‘ombre entrelacé
-Voleur, false
-
-Trancheuse du destin
-Chasseur, false
-Guerrier DPS, true
-
-Récolteur d‘essence
-Prêtre, true
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Anneau de sombre domination
-Prêtre, false
-Démoniste, true
-Prêtre Ombre, true
-
-Gants de l‘évolution rapide
-Prêtre, false
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Mantelet de la cabale de l‘Aile noire
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Brise-échine
-Guerrier Tank, true
-Druide Feral, false
-
-La lame indomptée
-Guerrier Tank, false
-Guerrier DPS, true
-
-Pendentif du dragon déchu
-Prêtre, false
-Druide, false
-Chaman, true
-
-Heaume de la rage infinie
-Guerrier Tank, false
-Guerrier DPS, false
-
-Lame croc-de-dragon
-Voleur, true
-Guerrier Tank, true
-
-Protecteur en écailles de dragon rouge
-Chaman, true
-Chaman Amélio, false
-
-Espauliers de rejeton noir
-Chaman, true
-Chaman Amélio, false
-
-Brassards de précision des arcanes
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Frappe-coeur
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Maladath. lame runique du Vol noir
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, true
-
-Robe de cendre noire
-Prêtre, false
-Druide, false
-Chaman, false
-
-Etreinte Gueule-de-feu
-Prêtre, false
-Prêtre Ombre, true
-Mage, true
-Démoniste, true
-
-Griffe du drake noir
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Cape gueule-de-feu
-Guerrier DPS, false
-Chasseur, false
-Voleur, true
-
-Ceinture en cuir de dragon tendu
-Voleur, false
-Druide Feral, true
-
-Cuissards du croisé déchu
-Guerrier DPS, false
-
-Espauliers griffe-de-drake
-Guerrier DPS, true
-Guerrier Tank, true
-
-Bague de Blackrock
-Prêtre Ombre, false
-Prêtre, false
-Druide, false
-Chaman, true
-
-Cuissards rivetés de Primaliste
-Chaman, false
-
-Bâton focalisateur de l‘Aile de l‘ombre
-Mage, false
-Démoniste, false
-
-Gemme de récupération
-Prêtre, false
-Druide, false
-Chaman, false
-
-Fendoir griffe-de-drake
-Guerrier DPS, true
-
-Anneau de Concentration forcée
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Gants de la flamme d‘ébène
-Prêtre Ombre, false
-Démoniste, false
-
-Talisman croc-de-drake
-Chasseur, false
-Voleur, false
-Guerrier DPS, false
-Guerrier Tank, true
-Druide Feral, false
-
-Rempart béni de Malfurion
-Druide Feral, false
-
-Canon à main Souffle-de-dragon
-Voleur, false
-Guerrier Tank, false
-
-Voile de la pensée pure
-Prêtre, false
-Druide, false
-Chaman, false
-
-Cercle de la force appliquée
-Chasseur, false
-Voleur, true
-Guerrier DPS, true
-Druide Feral, false
-
-Jambières en tisse-braise
-Chasseur, true
-Guerrier DPS, false
-
-Scarabée d‘obstruction de Styleen
-Guerrier DPS, false
-Guerrier Tank, true
-
-Toucher du dragon
-Prêtre, false
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Prophète de malheur
-Druide Feral, false
-Chaman Amélio, false
-
-Protège-épaules en cuir de dragon tendu
-Druide Feral, true
-Voleur, false
-
-Torsade d‘Angelista
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Bottes chromatiques
-Guerrier DPS, true
-Guerrier Tank, false
-
-Gants en cuir de dragon tendu
-Druide, false
-Chaman, false
-
-Geta chatoyantes
-Chaman, false
-
-Cape brochée d‘élémentium
-Guerrier Tank, false
-Druide Feral, false
-
-Ceinturon du croisé déchu
-Guerrier Tank, false
-
-Jambières surpuissantes
-Druide, false
-Prêtre, false
-
-Epée trempée chromatiquement
-Guerrier DPS, false
-Voleur, false
-
-Griffe de Chromaggus
-Chaman, true
-Mage, false
-Démoniste, false
-
-Sangle rivetée de Primaliste
-Chaman, false
-
-Ashjre‘thul. arbalète de châtiment
-Chasseur, false
-
-Bouclier en élémentium renforcé
-Guerrier Tank, true
-Guerrier DPS, false
-
-Tête de Nefarian
-Chasseur, false
-Voleur, true
-Guerrier DPS, true
-Guerrier Tank, false
-Prêtre Ombre, false
-
-Cape du seigneur des couvées
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Bottes de la Flamme d‘ombre
-Guerrier Tank, false
-Voleur, true
-Druide Feral, false
-
-Chaîne de Therazane
-Chaman, false
-
-Bague de rétorsion d‘Archimtiros
-Guerrier Tank, true
-Druide Feral, false
-
-Anneau d‘élémentium pur
-Prêtre, true
-Druide, true
-Chaman, false
-
-Larme de Neltharion
-Prêtre Ombre, true
-Mage, true
-Démoniste, true
-
-Mish‘undare. coiffure du flagelleur mental
-Prêtre Ombre, false
-Mage, false
-Démoniste, false
-
-Talisman de perfidie de Prestor
-Voleur, false
-Chasseur, false
-
-Bâton de la Flamme d‘ombre
-Mage, false
-Démoniste, false
-
-Ashkandi. Grande épée de la Confrérie
-Chasseur, true
-Guerrier DPS, false
-
-Crul‘shorukh. Trancheuse du chaos
-Guerrier DPS, true
-Guerrier Tank, false
-
-Lok‘amir il Romathis
-Druide, true
-Prêtre, false
-Prêtre Ombre, true
-
-# AQ
-
-Gants du prophète déchu
-Chaman, false
-
-Bottes de la volonté inexorable
-Guerrier DPS, false
-Guerrier Tank, true
-
-Garde-poignets en écailles de hanneton
-Chasseur, false
-Voleur, true
-Druide, false
-Guerrier DPS, false
-Druide Feral, true
-
-Cape de concentré de haine
-Guerrier Tank, true
-Guerrier DPS, false
-Chasseur, false
-Voleur, true
-Druide Feral, true
-
-Epaulières du barrage
-Chasseur, false
-Chaman, false
-
-Plastron d‘annihilation
-Guerrier Tank, false
-Guerrier DPS, true
-
-Anneau de pensée foisonnante
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Pendentif du gardien qiraji
-Guerrier Tank, true
-Guerrier DPS, false
-Druide Feral, true
-
-Amulette de vile sauvegarde
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-Druide Feral, false
-
-Bâton des prophètes qiraji
-Mage, false
-Démoniste, true
-Prêtre Ombre, false
-
-Marteau de Ji‘zhi
-Chaman, false
-Druide, false
-
-Bottes du prophète déchu
-Chaman, false
-
-
-Ceinture qiraji en peau épaisse
-Voleur, false
-Druide Feral, true
-
-Robe du garde de guerre
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Bottes recomposées
-Chaman, false
-Druide, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Collier de pureté
-Chaman, false
-Druide, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Gants de coercition
-Guerrier DPS, false
-Chasseur, false
-Voleur, true
-Druide Feral, false
-
-Casque des lianes rampantes
-Chaman, false
-Druide, false
-
-Gantelets de détermination inébranlable
-Guerrier Tank, true
-Guerrier DPS, false
-
-Jambières de l‘essaim purulent
-Mage, true
-Démoniste, false
-
-Insigne de garde-essaim
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Pouvoir de Sartura
-Chaman, false
-Druide, false
-Prêtre, false
-
-Griffe de silithide
-Guerrier DPS, false
-Chasseur, true
-Voleur, false
-
-Jambières de fureur qiraji en écailles
-Chaman, false
-
-Tenue de parade impériale qiraji
-Chaman, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-
-Armes impériales qiraji
-Guerrier Tank, true
-Guerrier DPS, true
-Chasseur, true
-Voleur, true
-
-Robe du saint gardien
-Chaman, false
-Druide, false
-Prêtre, false
-
-Corselet en carapace de silithide
-Guerrier Tank, false
-Guerrier DPS, false
-
-Bottes de tunnelière de la ruche
-Guerrier Tank, false
-Guerrier DPS, false
-Druide Feral, true
-
-Cape des secrets inexprimables
-Démoniste, false
-
-Collier barbelé
-Guerrier Tank, false
-Guerrier DPS, true
-Chasseur, false
-Voleur, false
-Druide Feral, false
-
-Espauliers de l‘Implacable
-Guerrier Tank, true
-Guerrier DPS, false
-
-Fétiche du ravageur des sables
-Guerrier DPS, false
-Mage, false
-Démoniste, false
-
-Mantelet de vengeance cruelle
-Voleur, false
-Druide Feral, false
-
-Jambières de ravageur des sables en écailles
-Chasseur, false
-
-Guisarme du ravageur des sables
-Chasseur, false
-
-Ancien éventreur qiraji
-Guerrier DPS, false
-Voleur, false
-
-Totem de vie
-Chaman, false
-
-Manchettes de domination qiraji
-Chaman, false
-Mage, false
-Démoniste, false
-
-Manchettes de commandement qiraji
-Guerrier Tank, false
-Guerrier DPS, true
-Voleur, true
-Prêtre Ombre, true
-
-Anneau du martyr
-Chaman, false
-Druide, false
-Prêtre, false
-
-Gantelets en peau de guêpe
-Chaman, false
-Druide, false
-
-Garde-poignets de profanateur de ruche
-Guerrier Tank, false
-Guerrier DPS, true
-
-Cape de la Ruche d‘or
-Guerrier Tank, false
-Druide Feral, false
-
-Gants du messie
-Chaman, true
-Druide, false
-Prêtre, false
-
-Aiguillon d‘Huhuran
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Gilet d‘exécution rapide
-Guerrier DPS, false
-Voleur, false
-Druide Feral, true
-
-Anneau du dévoré
-Chaman, false
-Druide, false
-Prêtre, false
-
-Scarabée pétrifié
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Ceinture de la triade
-Guerrier Tank, false
-Guerrier DPS, true
-
-Robe du triumvirat
-Chaman, false
-Druide, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Semblance du dévoreur
-Voleur, false
-Druide Feral, true
-
-Baguette de noblesse qiraji
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Toucher d‘Angelista
-Guerrier Tank, false
-Druide Feral, false
-
-Mantelet ternaire
-Chaman, false
-Druide, false
-Prêtre, true
-
-Cape de la trinité
-Mage, false
-Démoniste, false
-
-Mantelet de la puissance phrénique
-Mage, true
-Démoniste, false
-
-Anneau de ténèbres d‘Ukko
-Démoniste, false
-
-Gantelets couverts de bile
-Guerrier DPS, false
-Voleur, false
-Druide Feral, false
-
-Mantelet de la fureur du désert
-Chaman, false
-
-Bottes du héros déchu
-Guerrier Tank, false
-Guerrier DPS, false
-
-Charme d‘Angelista
-Chaman, false
-Druide, false
-Prêtre, false
-
-Gants d‘Ebru
-Chaman, false
-Druide, false
-
-Gantelets éclaboussés de vase
-Guerrier Tank, false
-Guerrier DPS, false
-
-Gantelets de Kalimdor
-Chaman, false
-
-Anneau de fureur qiraji
-Guerrier DPS, true
-Chasseur, false
-Voleur, false
-
-Idole de santé
-Druide, true
-Druide Feral, false
-
-Fémur de silithide aiguisé
-Mage, false
-Démoniste, false
-
-Jambières couvertes de vase
-Chasseur, true
-Chaman, false
-
-Broche scarabée
-Chaman, false
-Druide, false
-Prêtre, false
-
-Diadème de Vek‘lor
-Chaman, false
-Voleur, false
-
-Bottes de l‘épiphanie
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Gants de dévastation de Vek‘lor
-Chasseur, false
-Chaman, false
-
-Ceinture royale qiraji
-Guerrier Tank, true
-Guerrier DPS, false
-
-Brassards d‘exécution quiraji
-Guerrier DPS, false
-Chasseur, false
-Voleur, true
-Druide Feral, true
-
-Sceptre royal de Vek‘lor
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Anneau de l‘empereur Vek‘lor
-Guerrier Tank, false
-Druide Feral, true
-
-Diadème de Vek‘nilash
-Guerrier Tank, false
-Démoniste, false
-Prêtre Ombre, false
-
-Gants du temple caché
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-Druide Feral, true
-
-Ceinture régénérante de Vek‘nilash
-Chaman, false
-Druide, false
-
-Amulette de Vek‘nilash
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Bracelets de rédemption royale
-Chaman, false
-Druide, true
-Prêtre, true
-
-Vengeance de Kalimdor
-Guerrier Tank, false
-Guerrier DPS, false
-
-Torsade de l‘empereur déchu
-Chaman, false
-
-Peau du Grand ver des sables
-Chaman, true
-Démoniste, false
-
-Peau intacte d‘Ouro
-Guerrier Tank, true
-Guerrier DPS, false
-Voleur, true
-Mage, false
-Prêtre, false
-
-Larve du Grand ver
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Chapeau égaré de Don Rigoberto
-Chaman, false
-Druide, false
-Prêtre, false
-
-La Carapace du fouisseur
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Brassards de fouisseur
-Mage, false
-Démoniste, false
-Prêtre Ombre, true
-
-Bouclier en écailles de ver
-Chaman, false
-
-Jom Gabbar
-Guerrier DPS, false
-Chasseur, true
-Voleur, false
-
-Oeil de C‘Thun
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, true
-Voleur, false
-Druide, true
-Druide Feral, false
-Mage, false
-Démoniste, true
-Prêtre, true
-Prêtre Ombre, true
-
-Carcasse du Dieu très ancien
-Druide, false
-Mage, true
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, true
-
-Carapace du Dieu très ancien
-Guerrier Tank, true
-Guerrier DPS, false
-Chasseur, false
-Chaman, true
-Voleur, true
-
-Corde de pédoncule cintrée
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Cape de clarté
-Chaman, false
-Druide, false
-Prêtre, false
-
-Anneau du tueur de dieu
-Guerrier Tank, false
-Chasseur, true
-Voleur, false
-Druide Feral, false
-
-Gantelets d‘annihilation
-Guerrier Tank, false
-Guerrier DPS, true
-
-Gantelets du sombre orage
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Marque de C‘Thun
-Guerrier Tank, false
-Druide Feral, false
-
-Cape du Dévoré
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Tentacule de C‘Thun vaincu
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Torsade du Dieu très ancien
-Chaman, true
-Druide, true
-Prêtre, true
-
-Ceinture d‘agonie sans fin
-Guerrier DPS, false
-Voleur, true
-Druide Feral, true
-
-Sceptre du faux prophète
-Chaman, false
-Druide, false
-Prêtre, false
-
-Sombre doloire de la démence
-Guerrier Tank, false
-Guerrier DPS, true
-
-Aiguillon de la mort
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, true
-
-
-# NAXX
-
-Anneau de la flamme éternelle
-Mage, true
-Démoniste, false
-
-Atours de nécrochevalier
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Ceinture du Grand croisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Ceinturon de furie élémentaire
-Chaman, false
-
-Espauliers de furie élémentaire
-Chaman, false
-
-Jambières de furie élémentaire
-Chaman, false
-
-Jambières du Grand croisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Présage funeste
-Guerrier Tank, false
-Chasseur, false
-Voleur, false
-
-Servobras égaré
-Guerrier Tank, false
-Guerrier DPS, false
-
-Spallières du Grand croisé
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Targe stygienne
-Guerrier Tank, false
-Guerrier DPS, false
-Chaman, false
-
-Tunique en peau de goule
-Guerrier DPS, false
-Voleur, false
-Druide Feral, true
-
-Brassards désacralisées
-Guerrier Tank, true
-Voleur, false
-
-Manchettes désacralisées
-Mage, false
-Démoniste, false
-Prêtre, true
-
-Protège-poignets désacralisés
-Chasseur, true
-Chaman, false
-Druide, false
-
-Bague des prières inexaucées
-Chaman, false
-Druide, false
-Prêtre, false
-
-Larme de givre
-Chaman, false
-Druide, false
-Prêtre, false
-
-Gemme de Nérubis
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Cape en soie de démon des cryptes
-Guerrier Tank, false
-Guerrier DPS, false
-Druide Feral, true
-
-Garde-poignets de vengeance
-Guerrier Tank, false
-Guerrier DPS, true
-
-L‘Etreinte de la veuve
-Chaman, false
-Druide, false
-Prêtre, false
-
-Protège-épaules polaires
-Guerrier DPS, false
-Voleur, true
-
-Remords de la veuve
-Guerrier Tank, true
-Guerrier DPS, false
-Voleur, false
-
-Espauliers plaie-de-glace
-Guerrier Tank, false
-Guerrier DPS, true
-
-Pendentif de la pierre pernicieuse
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Gants désacralisés
-Mage, false
-Démoniste, false
-Prêtre, true
-
-Garde-mains désacralisés
-Chasseur, true
-Chaman, false
-Druide, true
-
-Gantelets désacralisés
-Guerrier Tank, false
-Voleur, true
-
-Baiser de l‘araignée | Premier pour Paffë puis rotation Tank / Rogue / DD
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-Druide Feral, true
-
-Lame en peine | Rotation Mage / Démonistes
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Pendentif des noms oubliés
-Chaman, false
-Druide, false
-Prêtre, false
-
-Croc de Maexxna
-Voleur, false
-
-Robe de toile cristalline
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Ceinturon désacralisé
-Chasseur, true
-Chaman, true
-Druide, false
-
-Ceinture désacralisée
-Mage, true
-Démoniste, false
-Prêtre, true
-
-Sangle désacralisée | Rogue puis Deep Prot 8 part
-Guerrier Tank, false
-Voleur, true
-
-Cape du Fléau
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Coeur frigide de Noth
-Chaman, false
-Druide, true
-Prêtre, true
-
-Bague de l‘inévitable
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Bague du grêlon
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, true
-Voleur, false
-Druide, true
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, true
-Prêtre Ombre, false
-
-Hachette de l‘os brisé | War Tank Orcs
-Guerrier Tank, false
-Guerrier DPS, true
-Chasseur, false
-
-Libram de lumière
-Chaman, false
-
-Totem de l‘eau courante
-Chaman, false
-
-Cuissots de carnage
-Guerrier Tank, false
-Guerrier DPS, true
-
-Camail glacécaille
-Guerrier DPS, false
-Chasseur, true
-
-Chapeau de précepteur
-Chaman, false
-Druide, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, true
-
-Heaume plaie-de-glace
-Guerrier Tank, false
-Guerrier DPS, true
-
-Collier de nécropsie
-Chaman, false
-Druide, false
-Prêtre, false
-
-Cuissards désacralisés | Hunts: Alk / Krok / Loge
-Chasseur, true
-Chaman, true
-Druide, true
-
-Cuissots désacralisés
-Guerrier Tank, false
-Voleur, true
-
-Jambières désacralisées
-Mage, true
-Démoniste, false
-Prêtre, true
-
-Bague des forces contre-nature
-Guerrier DPS, false
-Voleur, false
-
-L‘oeil de Nérub
-Chasseur, false
-
-Anneau de ferveur spirituelle
-Chaman, false
-Druide, false
-Prêtre, false
-
-Bâton de soufre
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Reflet d‘Horreb
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-Chaman, false
-Voleur, false
-Druide, false
-Druide Feral, false
-Mage, false
-Démoniste, false
-Prêtre, false
-Prêtre Ombre, false
-
-Protège-épaules désacralisés
-Mage, false
-Démoniste, true
-Prêtre, true
-
-Espauliers désacralisés
-Guerrier Tank, false
-Voleur, false
-
-Spallières désacralisées
-Chasseur, false
-Chaman, false
-Druide, false
-
-Cape de suture
-Chaman, false
-Druide, false
-Prêtre, false
-
-Bague de réanimation
-Chasseur, true
-Voleur, false
-
-Baguette des Parques
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Cisailleuse | Prio Orc
-Guerrier DPS, false
-
-Le Porte-peste
-Guerrier Tank, true
-Guerrier DPS, false
-
-Spallières glacécaille
-Guerrier DPS, false
-Chasseur, true
-
-Injecteur de toxines
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-La fin des rêves
-Druide Feral, false
-Prêtre Ombre, true
-
-Rosée du crépuscule
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Mantelet glacial
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Claymore de puissance impie
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-
-Collier perdu de Gluth
-Guerrier Tank, false
-Guerrier DPS, false
-
-Main de pouvoir digérée
-Chaman, false
-Druide, false
-Prêtre, false
-
-Pacte de la mort
-Chaman, false
-
-Solerets désacralisés
-Guerrier Tank, true
-Voleur, false
-
-Mantelet couvert de gel
-Mage, true
-Démoniste, false
-
-Sandales désacralisées
-Mage, false
-Démoniste, false
-Prêtre, false
-
-Bottes désacralisées
-Chasseur, true
-Chaman, false
-Druide, true
-
-Heaume désacralisé
-Guerrier Tank, false
-Voleur, false
-
-Couvre-chef désacralisé
-Chasseur, true
-Chaman, true
-Druide, true
-
-Diadème désacralisé
-Mage, false
-Démoniste, false
-Prêtre, false
-
-Jambières de polarité | Rotation Mage / Démo
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Pic du crépuscule
-Chaman, false
-Druide, false
-Prêtre, false
-
-Oeil de diminution
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Fustigatrice
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Thorax d‘abomination blindé
-Guerrier Tank, false
-Guerrier DPS, true
-
-Baguette de la mort murmurante
-Prêtre, true
-Prêtre Ombre, false
-
-Chevalière du défenseur déchu
-Guerrier Tank, false
-Guerrier DPS, false
-Druide Feral, true
-
-Idole de longévité
-Druide, true
-Druide Feral, false
-
-Ceinturon du mentor | Non prios pour les tanks 8/8 T3
-Guerrier Tank, false
-Guerrier DPS, false
-
-Voile de l‘éclipse
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Iblis. lame du Séraphin déchu | War DD non orcs / Rogues épées
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Coiffure glaciale
-Chaman, false
-Druide, false
-Mage, true
-Démoniste, true
-Prêtre, false
-
-Manchettes du moissonneur d‘âmes
-Mage, true
-Démoniste, false
-
-Torque de sadique
-Guerrier Tank, true
-Guerrier DPS, false
-
-Bottes de déplacement
-Voleur, false
-Druide Feral, false
-
-Casque polaire
-Guerrier DPS, false
-Voleur, true
-
-Cordâme
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Cordialité du pardon
-Chaman, false
-Druide, false
-Prêtre, false
-
-Cuirasse désacralisée
-Guerrier Tank, false
-Voleur, false
-
-Jambières de l‘Apocalypse | Hunts: Devil / Paren / Doriganne
-Guerrier DPS, false
-Chasseur, true
-Druide Feral, true
-
-Maillet du croisé racheté
-Chaman, false
-
-Porte-cendres corrompue
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, false
-
-Robe désacralisée
-Mage, false
-Démoniste, false
-Prêtre, false
-
-Sceau des damnés
-Mage, false
-Démoniste, true
-
-Tunique désacralisée
-Chasseur, false
-Chaman, false
-Druide, false
-
-Pouvoir du Fléau
-Guerrier Tank, false
-Guerrier DPS, true
-Chasseur, true
-Voleur, true
-
-Puissance du Fléau
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Résistance du Fléau
-Chaman, false
-Druide, false
-Prêtre, false
-
-Robustesse du Fléau
-Guerrier Tank, true
-Guerrier DPS, false
-Druide Feral, true
-
-Oeil du mort
-Chaman, false
-Druide, false
-Prêtre, false
-
-Voile d‘assujettissement
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Griffe du wyrm de givre
-Chasseur, false
-Voleur, false
-
-Le Visage de la mort
-Guerrier Tank, true
-Guerrier DPS, false
-
-Blason de tueur
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-Oeil droit de Saphiron
-Chaman, false
-Druide, true
-Prêtre, true
-
-Glyphe de déviation
-Guerrier Tank, true
-Guerrier DPS, false
-
-L‘essence contenue de Saphiron | Rotation Mage Démo
-Mage, false
-Démoniste, false
-
-Cape de la nécropole
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Oeil gauche de Saphiron
-Mage, false
-Démoniste, false
-Prêtre Ombre, false
-
-Le phylactère de Kel‘Thuzad
-Guerrier DPS, false
-Chasseur, false
-Voleur, false
-
-# Anneau de la faucheuse d‘os
-# Chasseur, false
-
-Gemme des innocents enchaînés
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Puissance de Menethil
-Guerrier Tank, false
-Guerrier DPS, true
-
-# Anneau de rédemption
-# Chaman, false
-
-# Anneau du cuirassier
-# Guerrier Tank, true
-# Guerrier DPS, false
-
-# Anneau de Brise-terre
-# Chaman, false
-
-Détrôneuse | 2 premiers chez les rogues
-Guerrier Tank, false
-Guerrier DPS, false
-Chasseur, true
-Voleur, true
-
-Talisman bouillonnant de Stormrage
-Guerrier Tank, false
-Guerrier DPS, true
-Druide Feral, false
-
-# Anneau de givrefeu
-# Mage, false
-
-# Anneau de traqueur des cryptes
-# Chasseur, false
-
-Cherche-âme
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-Marteau du Néant distordu | Rotation Prêtre / Chaman / Druide
-Chaman, false
-Druide, false
-Prêtre, false
-
-# Anneau de foi
-# Prêtre, true
-# Prêtre Ombre, false
-
-Doigt du destin
-Mage, true
-Démoniste, true
-Prêtre Ombre, false
-
-# Anneau de pestecoeur
-# Démoniste, false
-
-Gressil. Aube de la ruine | Rotation rogue épée / War DD
-Guerrier DPS, false
-Voleur, false
-
-# Anneau de marcherêve
-# Druide, true
-# Druide Feral, false
-
-Bouclier de condamnation
-Chaman, false
-
-Le Froid dévorant | Rotation Tank / War DD / Rogue
-Guerrier Tank, false
-Guerrier DPS, false
-Voleur, false
-
-Esclavagiste nérubien
-Chasseur, true
+# https://docs.google.com/document/d/1UzSvjPjsRW7RX_ujcFQht6_Tg5SwTlRMLQxzN9Oq71Q/edit
+# Grull Magthé
+
+-Espauliers du héros déchu
+Chasseur
+Mage
+Démoniste
+
+-Espauliers du champion déchu
+Chaman
+Paladin
+Voleur
+
+-Espauliers du défenseur déchu
+Druide
+Guerrier
+Prêtre
+
+-Poignets de guerre flèchelame
+Guerrier DPS
+Paladin Ret
+
+-Cape brutale de l‘ogre-magi
+Caster
+Paladin Tank
+
+-Marteau des naaru
+Guerrier DPS
+Paladin Ret
+Chaman Amélio
+Druide Féral
+
+-Ceinture d‘inspiration divine
+Caster
+
+-Heaume de guerre de Maulgar
+Chasseur
+Chaman Amélio
+
+-Masque maléfique des ombres
+DPS
+
+-Sautoir du repentir
+Paladin
+
+-Jambières du héros déchu
+Chasseur
+Mage
+Démoniste
+
+-Jambières du champion déchu
+Chaman
+Paladin
+Voleur
+
+-Jambières du défenseur déchu
+Druide
+Guerrier
+Prêtre
+
+-Bottes des Cisailles
+Chaman Elem
+
+-Ceinture cousue de Gronn
+DPS
+
+-Dent de Gruul
+Heal
+
+-Capuche du souffle de la nature
+Druide Heal
+Chaman Heal
+Paladin Heal
+
+-Collier de Cho‘gall
+Caster
+Paladin Tank
+
+-Gantelets de la perfection martiale
+Guerrier DPS
+Paladin Ret
+
+-Shuriken de négation
+Guerrier
+Voleur
+
+-Trophée Epine-de-dragon
+DPS
+
+-Défendeur de l‘héritage aldori
+Guerrier Tank
+Paladin Tank
+
+-Oeil de Gruul
+Heal
+
+-Gantelets du tueur de dragon
+Chasseur
+Chaman Amélio
+Paladin Ret
+
+-Hache des seigneurs gronns
+Chasseur
+Guerrier DPS
+Paladin Ret
+Chaman Amélio
+
+-Lame-magus Saignegueule
+Caster
+Paladin Tank
+
+-Sacoche de seigneur des abîmes
+Tous
+
+-Tête de Magtheridon
+Tous
+
+-Corselet du héros déchu
+Chasseur
+Mage
+Démoniste
+
+-Corselet du défenseur déchu
+Druide
+Guerrier
+Prêtre
+
+-Corselet du champion déchu
+Chaman
+Paladin
+Voleur
+
+-Bâton coeur-de-cristal à impulsions
+Heal
+
+-Grand heaume de tonnerre
+Guerrier
+Paladin Ret
+Paladin Tank
+
+-Oeil de Magtheridon
+Caster
+
+-Talisman karaborien
+Caster
+
+-Ceinturon du puits sans fond
+Paladin Ret
+Guerrier DPS
+
+-Baguette d‘oblitération érédar
+Mage
+Démoniste
+
+-Cape du traqueur des puits
+DPS
+
+-Ceinturon du puits de la terreur
+Chasseur
+Chaman Amélio
+Guerrier DPS
+Paladin Ret
+
+-Gants langue-de-vipère
+DPS
+
+-Couteau de brèche de la fosse
+Guerrier DPS
+Paladin Ret
+
+-Egide du redresseur de torts
+Chaman Heal
+Paladin Heal
+
+-Protège-mains de dévoreur d‘âmes
+Caster
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

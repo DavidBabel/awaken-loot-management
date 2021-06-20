@@ -89,7 +89,7 @@ export function ChangeAttendanceDialog({
   }
   function fail() {
     setLoading(false);
-    showErrorMessage("Mise à jour raté");
+    showErrorMessage("Err41 - Mise à jour raté");
   }
   if (!isOpen) {
     return null;

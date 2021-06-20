@@ -4,7 +4,7 @@ import { AttendanceCell } from "./AttendanceCell";
 import { ChangeAttendanceDialogCallback } from "./ChangeAttendanceDialog";
 import { getFirstRaidDate } from "./helpers";
 import { PlayerAttendanceName } from "./PlayerAttendanceName";
-// import { PlayerAttendancePercentage } from "./PlayerAttendancePercentage";
+import { PlayerAttendancePercentage } from "./PlayerAttendancePercentage";
 import { RaidStatusKey, raidStatusList } from "./raid-status";
 
 interface Props {
@@ -21,22 +21,30 @@ export function AttendanceLine({
   openAttendanceDialog
 }: Props) {
   const firstRaidDate = getFirstRaidDate(player);
-  // let raidsNb = 0;
+  let raidsNb = 0;
+  let totalRaidPlayed = 0;
   const raidLinkIds = [];
-  // const totalRaidPlayed = player.raidPlayersByPlayerId.nodes.length;
   const raidLinkedIdsPresent = [];
+
   raids.forEach(raid => {
+    if (
+      raid.raidPlayersByRaidId.nodes
+        .map(o => o.playerByPlayerId.id)
+        .includes(player.id)
+    ) {
+      totalRaidPlayed++;
+    }
     if (
       raid.raidPlayersByRaidId.nodes.length > 0 &&
       new Date(raid.date) < new Date() &&
       new Date(raid.date) >= firstRaidDate
     ) {
       if (!raid.linkBetweenRaids) {
-        // raidsNb++;
+        raidsNb++;
       } else {
         if (raidLinkIds.indexOf(raid.linkBetweenRaids) === -1) {
           raidLinkIds.push(raid.linkBetweenRaids);
-          // raidsNb++;
+          raidsNb++;
         }
       }
     }
@@ -46,7 +54,7 @@ export function AttendanceLine({
           if (raidLinkedIdsPresent.indexOf(raid.linkBetweenRaids) === -1) {
             raidLinkedIdsPresent.push(raid.linkBetweenRaids);
           } else {
-            // raidsNb++; // rare cas ou le joueur est présent dans plusieur raid linké entre eux
+            raidsNb++; // rare cas ou le joueur est présent dans plusieur raid linké entre eux
           }
         }
       }
@@ -56,10 +64,10 @@ export function AttendanceLine({
   return (
     <TableRow key={`attendance-table-row${player.id + player.name}`}>
       <PlayerAttendanceName player={player} />
-      {/* <PlayerAttendancePercentage
+      <PlayerAttendancePercentage
         totalRaidPlayed={totalRaidPlayed}
         totalRaids={raidsNb}
-      /> */}
+      />
       {raids.map((raid: Raid) => {
         const currentRaidPlayer = raid.raidPlayersByRaidId.nodes.find(
           (rp: RaidPlayer) => rp.playerByPlayerId.id === player.id

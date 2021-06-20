@@ -74,7 +74,7 @@ export default function PageEditPlayer() {
     if (!currentSpe) {
       return false;
     }
-    return currentSpe.startsWith("https://fr.classic.wowhead.com/talent-calc");
+    return currentSpe.startsWith("https://fr.tbc.wowhead.com/talent-calc");
   }
 
   useEffect(() => {
@@ -101,7 +101,8 @@ export default function PageEditPlayer() {
   function updateSpe() {
     if (!isValidWowheadUrl()) {
       showErrorMessage(
-        "L'url de votre spécialisation n'a pas l'air d'être valide"
+        "Err130 - " +
+          "L'url de votre spécialisation n'a pas l'air d'être valide"
       );
       return;
     }
@@ -123,7 +124,7 @@ export default function PageEditPlayer() {
 
   const wowHeadLink = isValidWowheadUrl()
     ? currentSpe
-    : "https://fr.classic.wowhead.com/talent-calc/";
+    : "https://fr.tbc.wowhead.com/talent-calc/";
 
   return (
     <>
