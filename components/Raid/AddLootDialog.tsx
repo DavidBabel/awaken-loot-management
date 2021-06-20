@@ -514,6 +514,9 @@ export default function AddLootDialog({
                       if (playerScore.bonus[itemIdToAdd]) {
                         bonusMalus += playerScore.bonus[itemIdToAdd];
                       }
+                      // if (playerScore.isApply) {
+                      //   bonusMalus -= 20;
+                      // }
                     }
 
                     const bonusMalusToDisplay =
@@ -551,7 +554,11 @@ export default function AddLootDialog({
                         key={`addlootplayer-${player.id}`}
                         value={player.id}
                       >
-                        {player.name} {bonusMalusToDisplay}
+                        {player.name}&nbsp;&nbsp;
+                        {playerScore.isApply && (
+                          <span style={{ color: "grey" }}>(A)</span>
+                        )}{" "}
+                        {bonusMalusToDisplay}
                       </MenuItem>
                     );
                   })}

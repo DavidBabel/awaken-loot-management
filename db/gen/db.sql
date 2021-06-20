@@ -1388,7 +1388,7 @@ VALUES
 
 INSERT INTO "Players" ("name", "classId", "role", "password", "active", "inRoster")
 VALUES
-('Non Assigné'  , 5,  'player', null, false, false),
+('Non Assigné'  , 9,  'player', null, false, false),
 ('Devilhawk'    , 17,  'admin', '71c0665585d07663b6955dd9d43fa209', true, true),
 ('awaken'       , 6,  'player', '71c0665585d07663b6955dd9d43fa209', false, true),
 ('admin'        , 1,  'admin', '71c0665585d07663b6955dd9d43fa209', false, false),
@@ -1407,7 +1407,7 @@ VALUES
 ('Dakilla',     9, 'officer', '827f4fb1af2ed8076d59aaa768311ba6', true, false),
 ('Dralnox',     6, 'player', null, true, false),
 ('Galah',       17, 'player', null, true, false),
-('Häkken',      16, 'player', null, true, false),
+('Häkken',      16, 'player', 'b850de7d249d9253ba37cd8401ebbc82', true, false),
 ('Harkana',     13, 'player', null, true, false),
 ('Jenova',      16, 'player', '6fc8899635d8a60cf9c38b03c12709f0', true, false),
 -- ('Kedry',       1, 'player', null, true, false),
@@ -1422,11 +1422,12 @@ VALUES
 ('Rajan',       3, 'player', null, true, false),
 ('Saprocky',    12, 'player', '4e1de04ae389f4aa72a282ea1a0a93e0', true, false),
 ('Sazio',       15, 'player', null, true, false),
-('Tohltahr',    17, 'player', null, true, false),
+('Tohltahr',    17, 'player', '65e3a848e61e38b08b84cd1dbb4e776c', true, false),
 ('Withoutmana', 16, 'player', null, true, false),
 ('Zaela',       1, 'player', 'af5eed1fb763606e8ef00cd491323a91', true, false),
 ('Zérra',       6, 'player', '676da35cd0c9f8b58bbd04b0a9e99072', true, false),
-('Zhorg',       17, 'player', null, true, false)
+('Zhorg',       17, 'player', null, true, false),
+('Rhyfèwl',     4, 'player', 'd8bbe79143501225968279e0446f66b5', true, false)
 ;
 
 -- 1   Guerrier Tank
