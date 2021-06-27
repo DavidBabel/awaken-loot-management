@@ -148,17 +148,6 @@ export function Menu({ handleDrawerClose }) {
               <Divider />
               <List>
                 <ListHead>Management</ListHead>
-                {member.level === role.admin && (
-                  <ListItemLink
-                    href="/admin/raid"
-                    onClick={() => {
-                      handleDrawerClose(onMobile);
-                    }}
-                    className={route === "/admin/raid" ? classes.selected : ""}
-                  >
-                    <ListItemText primary="Inscriptions joueurs" />
-                  </ListItemLink>
-                )}
                 {member.level >= role.classMaster && (
                   <>
                     <ListItemLink
