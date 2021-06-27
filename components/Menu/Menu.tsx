@@ -148,7 +148,7 @@ export function Menu({ handleDrawerClose }) {
               <Divider />
               <List>
                 <ListHead>Management</ListHead>
-                {member.name === "Devilhunter" && (
+                {member.level === role.admin && (
                   <ListItemLink
                     href="/admin/raid"
                     onClick={() => {

@@ -162,14 +162,8 @@ function computeScore(players: Player[], currentRaidId: number) {
       if (!item.doesNotCount) {
         if (item.lootLevel === 1) {
           malusByDate[date] += -10;
-          if (player.name === "Myorekt") {
-            console.log(date, "-10");
-          }
         } else {
           malusByDate[date] += -20;
-          if (player.name === "Myorekt") {
-            console.log(date, "-20");
-          }
         }
       }
     });
@@ -185,30 +179,17 @@ function computeScore(players: Player[], currentRaidId: number) {
           raidPlayer.status === getRaidStatusStringFromKey("present")
         ) {
           malusByDate[date] += 10;
-          if (player.name === "Myorekt") {
-            console.log(date, "+10");
-          }
         }
         if (raidPlayer.status === getRaidStatusStringFromKey("rotation")) {
           malusByDate[date] += 5;
-          if (player.name === "Myorekt") {
-            console.log(date, "+5");
-          }
         }
       }
     });
-    if (player.name === "Myorekt") {
-      console.log(player.name, malusByDate);
-    }
     Object.keys(malusByDate)
       .sort()
       .forEach(key => {
         playerScore.malus = capMalus(playerScore.malus + malusByDate[key]);
       });
-
-    if (player.name === "Myorekt") {
-      console.log(playerScore.malus);
-    }
 
     player.softResasByPlayerId.nodes.forEach(softResa => {
       if (!playerScore.bonus[softResa.itemId]) {

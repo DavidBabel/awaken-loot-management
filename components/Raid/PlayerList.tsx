@@ -85,10 +85,12 @@ function parseExorsus(content: string) {
   try {
     return (
       content
+        .trim()
         // @ts-ignore
         .replaceAll("\n", " ")
         .split(" ")
         .map(e => e.trim())
+        .filter(Boolean)
     );
   } catch (error) {
     return [];
@@ -305,7 +307,7 @@ export default function PlayerList({
                 >
                   Importer les joueurs dans ce raid
                 </Button>
-                {member.name === "Devilhunter" && (
+                {member.level === role.admin && (
                   <>
                     <br />
                     <Button
@@ -458,7 +460,7 @@ export default function PlayerList({
                 >
                   Importer les joueurs dans ce raid
                 </Button>
-                {member.name === "Devilhunter" && (
+                {member.level === role.admin && (
                   <>
                     <br />
                     <Button

@@ -398,7 +398,7 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
             <Table className={classes.table} size="small" stickyHeader={true}>
               <TableHead>
                 <TableRow>
-                  {member.name === "Devilhunter" && (
+                  {member.level === role.admin && (
                     <TableCell style={{ width: "20px", padding: "0 0 0 0" }} />
                   )}
                   <TableCell>Donjon</TableCell>
@@ -417,7 +417,7 @@ export default withWidth()(function PageIndex(props: WithWidthProps) {
                 {raids.map((raid: Raid) => {
                   return (
                     <TableRow key={`raid-${raid.id}`}>
-                      {member.name === "Devilhunter" && (
+                      {member.level === role.admin && (
                         <TableCell
                           style={{ width: "20px", padding: "0 0 0 0" }}
                         >

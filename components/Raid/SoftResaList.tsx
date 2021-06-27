@@ -1,11 +1,16 @@
 import { useMutation } from "@apollo/react-hooks";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  MenuItem,
+  Select
+} from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import { ApolloQueryResult } from "apollo-boost";
+import { useState } from "react";
 // import Link from "next/link";
 import { useMemberContext } from "../../lib/context/member";
 import {
@@ -146,6 +151,13 @@ export default function SoftResaList({
 
   const classes = useStyles("");
   const [displayImportSoftResa, toggleDisplayImportSoftResa] = useToggle(false);
+  const [
+    displayImportMonoSoftResa,
+    toggleDisplayImportMonoSoftResa
+  ] = useToggle(false);
+
+  const [resaUserId, setResaUserId] = useState(0);
+  const [resaItemId, setResaItemId] = useState(0);
 
   const hasSoftResa = softResas.length > 0;
 
@@ -226,7 +238,7 @@ export default function SoftResaList({
                       )
                     ).then(() => {
                       showSuccessMessage(
-                        `${softsToCreate.length} soft-résas correctement importés`
+                        `${softsToCreate.length} soft-résas correctement importées`
                       );
                       toggleDisplayImportSoftResa();
                       refetchOneRaid();
@@ -240,6 +252,62 @@ export default function SoftResaList({
               </Button>
             </div>
           )}
+          {displayImportMonoSoftResa && (
+            <div>
+              <Select
+                onChange={e => setResaUserId(Number(e.target.value))}
+                label="Joueur"
+                style={{ width: 150, textAlign: "left", margin: 3 }}
+              >
+                {allPlayers.map((player, id) => (
+                  <MenuItem value={player.id} key={`player-monosr-${id}`}>
+                    {player.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              <Select
+                onChange={e => setResaItemId(Number(e.target.value))}
+                label="Item"
+                style={{ width: 330, textAlign: "left", margin: 3 }}
+              >
+                {allItems
+                  .sort((item1, item2) => {
+                    if (item1 < item2) {
+                      return -1;
+                    } else if (item1 === item2) {
+                      return 0;
+                    } else {
+                      return 1;
+                    }
+                  })
+                  .map((item, id) => (
+                    <MenuItem value={item.id} key={`item-monosr-${id}`}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={resaUserId === 0 || resaItemId === 0}
+                onClick={async () => {
+                  createSoftResa({
+                    variables: {
+                      itemId: resaItemId,
+                      playerId: resaUserId,
+                      raidId
+                    }
+                  }).then(() => {
+                    showSuccessMessage(`Soft-résas correctement importée`);
+                    toggleDisplayImportMonoSoftResa();
+                    refetchOneRaid();
+                  });
+                }}
+              >
+                Ajouter
+              </Button>
+            </div>
+          )}
         </DialogContent>
         <DialogActions>
           {member.level >= role.officer && (
@@ -249,6 +317,15 @@ export default function SoftResaList({
                 : hasSoftResa
                 ? "⚠️ Ce raid a déjà des SoftRésas"
                 : "Importer depuis un .csv softres.it"}
+            </Button>
+          )}
+          {member.level >= role.admin && (
+            <Button onClick={toggleDisplayImportMonoSoftResa} color="primary">
+              {displayImportMonoSoftResa
+                ? "Fermer l‘import de Mono Soft-Resa"
+                : hasSoftResa
+                ? "⚠️ Ce raid a déjà des SoftRésas (mono)"
+                : "Ajouter une soft résa"}
             </Button>
           )}
           <Button onClick={handleClose} color="primary">
