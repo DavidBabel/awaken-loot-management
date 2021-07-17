@@ -27,13 +27,14 @@ const roster: Roster[] = [
     name: "Prêtre",
     shivtrIcon: "16",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/priest_holy.png"
+    speIcon: "https://i.imgur.com/pHUHFd9.png"
   },
   {
     name: "Prêtre",
     shivtrIcon: "16",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/priest_discipline.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_holy_wordfortitude.jpg"
   },
   {
     name: "Druide",
@@ -51,13 +52,15 @@ const roster: Roster[] = [
     name: "Druide",
     shivtrIcon: "22",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/druid_feral.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/ability_racial_bearform.jpg"
   },
   {
     name: "Druide",
     shivtrIcon: "22",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/druid_balance.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_nature_starfall.jpg"
   },
   {
     name: "Chaman",
@@ -68,13 +71,15 @@ const roster: Roster[] = [
     name: "Chaman",
     shivtrIcon: "18",
     prio: "prio",
-    speIcon: "https://raidplan.io/assets/img/icons/class/shaman_elemental.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_nature_lightning.jpg"
   },
   {
     name: "Chaman",
     shivtrIcon: "18",
     prio: "prio",
-    speIcon: "https://raidplan.io/assets/img/icons/class/shaman_restoration.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_nature_magicimmunity.jpg"
   },
   {
     name: "Chaman",
@@ -92,19 +97,22 @@ const roster: Roster[] = [
     name: "Mage",
     shivtrIcon: "19",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/mage_arcane.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_holy_magicalsentry.jpg"
   },
   {
     name: "Mage",
     shivtrIcon: "19",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/mage_fire.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_fire_firebolt02.jpg"
   },
   {
     name: "Mage",
     shivtrIcon: "19",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/mage_frost.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_frost_frostbolt02.jpg"
   },
   {
     name: "Démoniste",
@@ -115,20 +123,22 @@ const roster: Roster[] = [
     name: "Démoniste",
     shivtrIcon: "20",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warlock_affliction.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathcoil.jpg"
   },
   {
     name: "Démoniste",
     shivtrIcon: "20",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warlock_demonology.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_metamorphosis.jpg"
   },
   {
     name: "Démoniste",
     shivtrIcon: "20",
     prio: "",
     speIcon:
-      "https://raidplan.io/assets/img/icons/class/warlock_destruction.png"
+      "https://wow.zamimg.com/images/wow/icons/large/spell_shadow_rainoffire.jpg"
   },
   {
     name: "Voleur",
@@ -179,7 +189,7 @@ const roster: Roster[] = [
     shivtrIcon: "14",
     prio: "",
     speIcon:
-      "https://cdn.jsdelivr.net/gh/wowfanet/w/wdb/images/wow/icons/large/ability_rogue_findweakness.jpg"
+      "https://wow.zamimg.com/images/wow/icons/large/ability_rogue_findweakness.jpg"
   },
   {
     name: "Paladin",
@@ -191,19 +201,21 @@ const roster: Roster[] = [
     shivtrIcon: "3",
     prio: "caché",
     speIcon:
-      "https://raidplan.io/assets/img/icons/class/paladin_retribution.png"
+      "https://wow.zamimg.com/images/wow/icons/large/spell_holy_auraoflight.jpg"
   },
   {
     name: "Paladin",
     shivtrIcon: "3",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warrior_protection.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_holy_devotionaura.jpg"
   },
   {
     name: "Paladin",
     shivtrIcon: "3",
     prio: "caché",
-    speIcon: "https://raidplan.io/assets/img/icons/class/paladin_holy.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/spell_holy_holybolt.jpg"
   },
   {
     name: "Guerrier",
@@ -214,19 +226,22 @@ const roster: Roster[] = [
     name: "Guerrier",
     shivtrIcon: "12",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warrior_protection.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_defensivestance.jpg"
   },
   {
     name: "Guerrier",
     shivtrIcon: "12",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warrior_fury.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_innerrage.jpg"
   },
   {
     name: "Guerrier",
     shivtrIcon: "12",
     prio: "",
-    speIcon: "https://raidplan.io/assets/img/icons/class/warrior_arms.png"
+    speIcon:
+      "https://wow.zamimg.com/images/wow/icons/large/ability_warrior_savageblow.jpg"
   }
 ];
 

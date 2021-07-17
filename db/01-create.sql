@@ -86,7 +86,8 @@ CREATE TABLE "Items" (
   "name" varchar,
   "wowheadId" int,
   "lootLevel" int,
-  "doesNotCount" boolean
+  "doesNotCount" boolean,
+  "comment" varchar
 );
 comment on table "Items" is E'@omit create,update,delete';
 CREATE UNIQUE INDEX ON "Items" ("id");
